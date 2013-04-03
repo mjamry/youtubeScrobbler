@@ -6,12 +6,17 @@ function ytPlayer(configuration, playerContainer)
         {
             //0-9 - general events
             playerReady: 0,
+            error:1,
             
             //10-19 - video events
             videoLoaded:10,
             videoPaused:11,
+            videoPlay:12,
+            videoCue:13,
+            videoBuffering:14,
             
-            playlistReady:15
+            playlistReady:15,
+            beforePlaylistReady:16
         };
 
     this.eventHandler = new eventHandler(this.events);
@@ -19,11 +24,18 @@ function ytPlayer(configuration, playerContainer)
     //extends options by event handlers and default value
     this.config = $.extend(
         {
-    lol: "lol",
             //extends options by event handlers
-            onPlayerReady: function(){alert("plReadyy!");},
-            onVideoPlay: $.proxy(function(video){this.eventHandler.fireEventWithData(this.events.videoLoaded, video);}, this),
-            onVideoLoaded: function(video){this.eventHandler.fireEventWithData(this.events.videoLoaded, video);}
+            onReady:$.proxy(function(){this.eventHandler.fireEvent(this.events.playerReady);}, this),
+            onError: $.proxy(function(msg){this.eventHandler.fireEventWithData(this.events.error, msg);}, this),
+            
+            onVideoLoaded: $.proxy(function(video){this.eventHandler.fireEventWithData(this.events.videoLoaded, video);}, this),
+            onVideoPaused: $.proxy(function(){this.eventHandler.fireEvent(this.events.videoPaused);}, this),
+            onVideoPlay: $.proxy(function(video){this.eventHandler.fireEventWithData(this.events.videoPlay, video);}, this),
+            onVideoCue: $.proxy(function(video){this.eventHandler.fireEventWithData(this.events.videoCue, video);}, this),
+            onBuffer: $.proxy(function(){this.eventHandler.fireEvent(this.events.videoBuffering);}, this),
+
+            onAfterPlaylistLoaded: $.proxy(function(){this.eventHandler.fireEvent(this.events.playlistReady);}, this),
+            onBeforePlaylistLoaded: $.proxy(function(){this.eventHandler.fireEvent(this.events.beforePlaylistReady);}, this)
         }
         ,configuration
     );
