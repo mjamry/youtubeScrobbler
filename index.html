@@ -1,0 +1,87 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Youtube scrobbler</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab:400,700' rel='stylesheet' type='text/css'>
+        <link type="text/css" rel="stylesheet" href="css/general.css"/>
+        <script type="text/javascript" src="js/lib/jquery.min.js"></script>
+        <script type="text/javascript" src="js/lib/swfobject.js"></script>
+        <script type="text/javascript" src="js/lib/lastfm.api.js"></script>
+        <script type="text/javascript" src="js/lib/lastfm.api.md5.js"></script>
+        <script type="text/javascript" src="js/lib/jquery.youtube.player.js"></script>
+        
+        <script type="text/javascript" src="js/playlistLoader/playlistLoader.js"></script>
+        <script type="text/javascript" src="js/playlistLoader/urlParser.js"></script>
+        <script type="text/javascript" src="js/EventHandler.js"></script>
+        <script type="text/javascript" src="js/ytPlayer.js"></script>
+        <script type="text/javascript" src="js/player.js"></script>
+        <script type="text/javascript" src="js/viewUpdater.js"></script>
+    </head>
+    <body>
+        <div id="header">
+            header
+        </div>
+        <div id="player">
+            <div class="header">
+                <div class="title"></div>
+                <div class="time"></div>
+            </div>
+            <div class="content">
+                <div class="title"></div>
+                <div class="time"></div>
+                <div id="inputData">
+                    paste link from YT: <input type="text" id="videoUrl"/><input type="button" value="Load video" id="loadUrlButton"/>
+                    <div id="videoInfo"></div>
+                </div>
+                <div class="youtube-player">
+                    <div class="youtube-player-video">
+                        <div class="youtube-player-object">
+                            You need Flash player 8+ and JavaScript enabled to view this video.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="toolbar" class="section">
+            <div class="header">Toolbar</div>
+            <div class="content">
+                <ul id="toolbar_buttons">
+                    <li id="play_button"><a class="button" href="#">play</a></li>
+                    <li id="stop_button"><a class="button" href="#">stop</a></li>
+                    <li id="pause_button"><a class="button" href="#">pause</a></li>
+                    <li id="shuffle_button"><a class="button" href="#">shuffle</a></li>
+                    <li id="repeat_button"><a class="button" href="#">repeat</a></li>
+                    <li id="prev_button"><a class="button" href="#">prev</a></li>
+                    <li id="next_button"><a class="button" href="#">next</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="playlist">
+            <div class="header">Playlist</div>
+            <div class="content"></div>
+        </div>
+        <div id="song_info">
+            <div class="header">Song info</div>
+            <div class="content"></div>
+        </div>
+        <div id="artist_info">
+            <div class="header">artist info</div>
+            <div class="content"></div>
+        </div>
+        <div id="last_fm_data">
+            <div class="header">lastfm data</div>
+            <div class="content"></div>
+        </div>
+        
+        <div id="footer">
+            footer
+        </div>
+    </body>
+</html>

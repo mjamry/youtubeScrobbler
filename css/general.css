@@ -1,0 +1,75 @@
+body{
+    height: 600px;
+    padding:0;
+    margin:0;
+    font-family: 'Josefin Slab', serif;
+}
+
+#header{
+    height:120px;
+    width:100%;
+    background-color: #ddd;
+}
+
+#footer{
+    height:160px;
+    width:100%;
+    background-color: #ddd;
+}
+
+.header{
+    height: 60px;
+    width:100%;
+    margin:0 auto;
+    background-color: lightcoral;
+    cursor: pointer;
+    /*--test--*/
+    text-align: center;
+    font-weight: 700;
+    font-size: 20pt;
+    line-height: 60px;
+    
+}
+
+.content{
+    width:800px;
+    height:100%;
+    margin:0 auto;
+    border:1px solid #111;
+}
+
+#player, #toolbar, #playlist{
+    height:600px;
+    width:100%;
+    margin: 0 auto;
+    
+}
+
+/*----------------------TOOLBAR--------------*/
+#toolbar_buttons{
+    list-style-type: none;
+}
+
+#toolbar_buttons li{
+    float: left;
+    margin:0 auto;
+}
+
+.button{
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    font-size: 18pt;
+    background-color: lightblue;
+    line-height: 70px;
+    width:100px;
+}
+
+.button:hover{
+    background-color: lightsalmon;
+}
+
+.button_selected{
+    background-color: lightgreen;
+}
+
