@@ -84,27 +84,23 @@ playlistLoader.prototype =
     },
     
     //parses specified url addres (form YT). Depending on url structure it loads playlist or single video.
-    //when url is incorrect it returns empty object.
     //returns playlist object literal: playlist = {title:string, videos:[{id, title}]};
     loadPlaylistFromUrl : function(url, callback)
     {
-        var result;
         var parser = new urlParser();
         var playlistId = parser.getParameterValue(url, this.params.playlist);
         
         if(playlistId !== URL_PARSE_ERR)
         {
-            result = this._createPlaylist(playlistId, callback);
+            this._createPlaylist(playlistId, callback);
         }
         else
         {
             var videoId = parser.getParameterValue(url, this.params.video);
             if(videoId !== URL_PARSE_ERR)
             {
-                result = this.__loadVideo(videoId, callback);
+                this.loadVideo(videoId, callback);
             }
         }
-        
-        return result;
     }
 };

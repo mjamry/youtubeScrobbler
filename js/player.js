@@ -39,16 +39,14 @@ function InitialisePlayer()
     Player.addListener(Player.events.videoLoaded, VideoLoaded);
 
     Player.addListener(Player.events.playlistReady, function(){
-        console.log("playlist ready");
+        console.log("playlist ready "+Player.getPlaylistLength());
+		_viewUpdater.updatePlaylist(Player.getPlaylistLength());
     });
     Player.addListener(Player.events.error, function(){
         console.log("error");
     });
     Player.addListener(Player.events.playerReady, function(){
         console.log("plReady");
-    });
-    Player.addListener(Player.events.playlistReady, function(){
-        console.log("playlistReady");
     });
     Player.addListener(Player.events.videoBuffering, function(){
         console.log("buffering");

@@ -2,7 +2,7 @@
 function ytPlayer(configuration, playerContainer)
 {
 	//updates currentVideoDetails and fires videoLoaded event
-	updateVideoDetails = function(video)
+	onVideoLoaded = function(video)
 	{
 		var loader = new playlistLoader();
 		loader.loadVideo(video.id, $.proxy(
@@ -15,7 +15,9 @@ function ytPlayer(configuration, playerContainer)
 				, this));
 	};
 	
+	
     this.currentVideoDetails;
+	this.playlistLength;
     /*------------fields---------------*/
     this.events = 
         {
@@ -45,7 +47,7 @@ function ytPlayer(configuration, playerContainer)
             
             onVideoLoaded: $.proxy(function(video){this.eventHandler.fireEventWithData(this.events.videoLoaded, video);}, this),
             onVideoPaused: $.proxy(function(){this.eventHandler.fireEvent(this.events.videoPaused);}, this),
-            onVideoPlay: $.proxy(updateVideoDetails, this),
+            onVideoPlay: $.proxy(onVideoLoaded, this),
             onVideoCue: $.proxy(function(video){this.eventHandler.fireEventWithData(this.events.videoCue, video);}, this),
             onBuffer: $.proxy(function(){this.eventHandler.fireEvent(this.events.videoBuffering);}, this),
 
@@ -57,11 +59,6 @@ function ytPlayer(configuration, playerContainer)
         
     this.instance = playerContainer.player(this.config);
     console.log("instance "+this.instance);
-	
-	
-	
-	
-	
 }
 
 ytPlayer.prototype = 
@@ -75,6 +72,7 @@ ytPlayer.prototype =
     _onPlaylistReady:function(playlist)
     {
         this.instance.player("loadPlaylist", playlist);
+		this.playlistLength = playlist.videos.length;
         this.eventHandler.fireEvent(this.events.playlistReady);
     },
             
@@ -99,10 +97,18 @@ ytPlayer.prototype =
         );
     },
 	    
+		
     getCurrentVideo:function()
     {
 		return this.currentVideoDetails;
-    }
+    },
+			
+	getPlaylistLength:function()
+	{
+		return this.playlistLength;
+	}
+	
+	
 	   
     
 };
