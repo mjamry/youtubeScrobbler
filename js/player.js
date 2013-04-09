@@ -12,7 +12,7 @@ function InitialisePlayer()
 {
     var config = {
         highDef: 1,
-        width:700,
+        width:400,
         height:400,
         chromeless: 0,
         showTime: 1,
@@ -34,7 +34,7 @@ function InitialisePlayer()
                     ]
             }
     };
-    
+        _viewUpdater = new viewUpdater();
     Player = new ytPlayer(config, $(".youtube-player"));
     Player.addListener(Player.events.videoLoaded, VideoLoaded);
 
@@ -61,6 +61,7 @@ function InitialisePlayer()
     });
     Player.addListener(Player.events.videoPaused, function(){
         console.log("vid paused");
+		_viewUpdater.updateVideoTitle("Paused: "+Player.getCurrentVideo().title);
     });
     Player.addListener(Player.events.videoPlay, function(){
         console.log("vid play");
@@ -69,18 +70,10 @@ function InitialisePlayer()
         console.log("before playlist ready");
     });
     
-    
-    
-    
-    
-    
-    
-    
-    _viewUpdater = new viewUpdater();
+
     Player.addListener(Player.events.videoPlay, function(video)
     {
-        var text = "Playing: "+video.title;
-        _viewUpdater.updateVideoTitle(text);
+        _viewUpdater.updateVideoTitle("Playing: "+video.title+" ("+video.durationInMinutes+")");
     });
 }
 

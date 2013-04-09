@@ -1,6 +1,21 @@
 //jquery-youtube-player plugin decorator
 function ytPlayer(configuration, playerContainer)
 {
+	//updates currentVideoDetails and fires videoLoaded event
+	updateVideoDetails = function(video)
+	{
+		var loader = new playlistLoader();
+		loader.loadVideo(video.id, $.proxy(
+				function(videoDetails)
+				{
+					this.currentVideoDetails = videoDetails.videos[0];
+					console.log("videoLoaded");
+					this.eventHandler.fireEventWithData(this.events.videoPlay, this.currentVideoDetails);
+				}
+				, this));
+	};
+	
+    this.currentVideoDetails;
     /*------------fields---------------*/
     this.events = 
         {
@@ -30,7 +45,7 @@ function ytPlayer(configuration, playerContainer)
             
             onVideoLoaded: $.proxy(function(video){this.eventHandler.fireEventWithData(this.events.videoLoaded, video);}, this),
             onVideoPaused: $.proxy(function(){this.eventHandler.fireEvent(this.events.videoPaused);}, this),
-            onVideoPlay: $.proxy(function(video){this.eventHandler.fireEventWithData(this.events.videoPlay, video);}, this),
+            onVideoPlay: $.proxy(updateVideoDetails, this),
             onVideoCue: $.proxy(function(video){this.eventHandler.fireEventWithData(this.events.videoCue, video);}, this),
             onBuffer: $.proxy(function(){this.eventHandler.fireEvent(this.events.videoBuffering);}, this),
 
@@ -42,6 +57,11 @@ function ytPlayer(configuration, playerContainer)
         
     this.instance = playerContainer.player(this.config);
     console.log("instance "+this.instance);
+	
+	
+	
+	
+	
 }
 
 ytPlayer.prototype = 
@@ -72,12 +92,19 @@ ytPlayer.prototype =
     
     loadPlaylistFromUrl: function(url)
     {
-        var loader = new videoLoader();
+        var loader = new playlistLoader();
         loader.loadPlaylistFromUrl(
                 url, 
                 $.proxy(this._onPlaylistReady, this)
         );
+    },
+	    
+    getCurrentVideo:function()
+    {
+		return this.currentVideoDetails;
     }
+	   
+    
 };
 
 

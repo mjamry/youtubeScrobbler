@@ -1,5 +1,5 @@
 //Class used to create playlist depending upon specified url address.
-function videoLoader(){
+function playlistLoader(){
     this.params = {
         playlist : "list",
         video : "v"
@@ -9,31 +9,10 @@ function videoLoader(){
     this.ytFeedParams = "alt=jsonc&v=2";
  }
 
-videoLoader.prototype = 
+playlistLoader.prototype = 
 {
-    //gets video data using id. When finished it calls callback function to return data.
-    _loadVideo : function(id, callback)
-    {
-        var url = this.ytApiUrl+"videos/"+id+"?"+this.ytFeedParams;
-        $.getJSON(url, function(result)
-        {
-           var playlist = 
-           {
-               title: result.data.title,
-               videos: [
-                   {
-                       id: result.data.id, 
-                       title: result.data.title
-                   }
-               ]
-           };
-           callback(playlist);
-           
-        });
-    },
-       
     //gets playlist using playlist id. When finished it calls callback function to return data.
-    _loadPlaylist : function(id, callback)
+    _createPlaylist : function(id, callback)
     {
         var url = this.ytApiUrl+"playlists/"+id+"?"+this.ytFeedParams;
         $.getJSON(url, function(result)
@@ -47,11 +26,60 @@ videoLoader.prototype =
            
            var playlist = 
            {
-               title: result.data.tittle,
+               title: result.data.title,
                videos: videosList
            };
            
            callback(playlist);
+        });
+    },
+            
+    _createPlaylistFromVideo: function(id, callback)
+    {
+        var callb = function(params)
+        {
+            var playlist = {
+                title: params.title,
+                videos: [
+                    {
+                        id: params.id,
+                        title: params.title
+                    }
+            
+                ]
+            };
+            
+            return playlist;
+        };
+        
+        
+    },
+            
+    //gets video data using id. When finished it calls callback function to return data.
+    loadVideo : function(id, callback)
+    {
+        var url = this.ytApiUrl+"videos/"+id+"?"+this.ytFeedParams;
+        $.getJSON(url, function(result)
+        {
+			var minuteInSeconds = 60;
+			var min = parseInt(result.data.duration/minuteInSeconds);
+			var sec = result.data.duration%minuteInSeconds;
+			
+			var duration = min+":"+(sec < 10 ? "0"+sec : sec);
+			var playlist = 
+			{
+				title: result.data.title,
+				videos: [
+					{
+						id: result.data.id, 
+						title: result.data.title,
+						durationInSeconds: result.data.duration,
+						durationInMinutes: duration
+					}
+				]
+			};
+			callback(playlist);
+           
         });
     },
     
@@ -66,7 +94,7 @@ videoLoader.prototype =
         
         if(playlistId !== URL_PARSE_ERR)
         {
-            result = this._loadPlaylist(playlistId, callback);
+            result = this._createPlaylist(playlistId, callback);
         }
         else
         {

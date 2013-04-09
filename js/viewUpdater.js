@@ -9,9 +9,13 @@ viewUpdater.prototype =
         $("title").text(value);
     },
     
-    updateVideoTitle: function(value)
+    updateVideoTitle: function(video)
     {
-        this._updatePageTitle(value);
+        this._updatePageTitle(video);
         $("#player .title").text("Video: "+video.title);
+    },
+    
+    updatePlaylist: function(){
+
     }
 };
