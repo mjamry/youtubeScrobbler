@@ -12,7 +12,7 @@ viewUpdater.prototype =
     updateVideoTitle: function(video)
     {
         this._updatePageTitle(video);
-        $("#player .title").text("Video: "+video.title);
+        $("#player .title").text("Video: "+video);
     },
     
     updatePlaylist: function(numberOfItems)

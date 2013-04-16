@@ -59,7 +59,7 @@ function InitialisePlayer()
     });
     Player.addListener(Player.events.videoPaused, function(){
         console.log("vid paused");
-		_viewUpdater.updateVideoTitle("Paused: "+Player.getCurrentVideo().title);
+		_viewUpdater.updateVideoTitle("Paused: "+Player.getCurrentVideo().name);
     });
     Player.addListener(Player.events.videoPlay, function(){
         console.log("vid play");
@@ -71,7 +71,7 @@ function InitialisePlayer()
 
     Player.addListener(Player.events.videoPlay, function(video)
     {
-        _viewUpdater.updateVideoTitle("Playing: "+video.title+" ("+video.durationInMinutes+")");
+        _viewUpdater.updateVideoTitle("Playing: "+video.name+" ("+video.durationInMinutes+")");
     });
 }
 

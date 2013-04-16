@@ -27,8 +27,7 @@ body{
     text-align: center;
     font-weight: 700;
     font-size: 20pt;
-    line-height: 60px;
-    
+	display:inline-block;
 }
 
 .content{
@@ -37,6 +36,7 @@ body{
     margin:0 auto;
     border:1px solid #111;
 	padding: 0;
+	overflow:hidden;
 }
 
 #player, #toolbar, #playlist{
@@ -102,3 +102,10 @@ body{
     background-color: yellow;
 }
 
+/*-------------------------------PLAYER------------------------------------*/
+.title{
+	width:30%;
+}
+.time{
+width:40%;
+}

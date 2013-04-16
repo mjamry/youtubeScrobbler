@@ -11,6 +11,29 @@ function playlistLoader(){
 
 playlistLoader.prototype = 
 {
+	_formatTime: function(timeInSeconds)
+	{
+		var minuteInSeconds = 60;
+		var min = parseInt(timeInSeconds / minuteInSeconds);
+		var sec = timeInSeconds % minuteInSeconds;
+
+		return min+":"+(sec < 10 ? "0"+sec : sec);
+	},
+			
+	_getArtist: function(videoName)
+	{
+		var vidName = videoName.split("-");
+		vidName[0] = vidName[0].trim();
+		return vidName[0];
+	},
+			
+	_getTitle: function(videoName)
+	{
+		var vidName = videoName.split("-");
+		vidName[1] = vidName[1].trim();
+		return vidName[1];
+	},
+	
     //gets playlist using playlist id. When finished it calls callback function to return data.
     _createPlaylist : function(id, callback)
     {
@@ -45,34 +68,29 @@ playlistLoader.prototype =
                         id: params.id,
                         title: params.title
                     }
-            
                 ]
             };
             
             return playlist;
         };
-        
-        
     },
             
     //gets video data using id. When finished it calls callback function to return data.
     loadVideo : function(id, callback)
     {
         var url = this.ytApiUrl+"videos/"+id+"?"+this.ytFeedParams;
-        $.getJSON(url, function(result)
+        $.getJSON(url, $.proxy(function(result)
         {
-			var minuteInSeconds = 60;
-			var min = parseInt(result.data.duration/minuteInSeconds);
-			var sec = result.data.duration%minuteInSeconds;
-			
-			var duration = min+":"+(sec < 10 ? "0"+sec : sec);
+			var duration = this._formatTime(result.data.duration);
 			var playlist = 
 			{
 				title: result.data.title,
 				videos: [
 					{
 						id: result.data.id, 
-						title: result.data.title,
+						artist: this._getArtist(result.data.title),
+						title: this._getTitle(result.data.title),
+						name: result.data.title,
 						durationInSeconds: result.data.duration,
 						durationInMinutes: duration
 					}
@@ -80,7 +98,7 @@ playlistLoader.prototype =
 			};
 			callback(playlist);
            
-        });
+        }, this));
     },
     
     //parses specified url addres (form YT). Depending on url structure it loads playlist or single video.
