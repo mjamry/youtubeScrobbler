@@ -50,7 +50,12 @@ lastFmSession.prototype =
 	getSessionId: function(token, callback)
 	{
 		this.lastFmApi.auth.getSession({token:token}, callback);
-	}
+	},
+			
+			getRecommendedArtists: function(params, session, callback){
+				this.lastFmApi.user.getRecommendedArtists(params, session, callback);
+			}
+	
 };
 
 function scrobbler(){
@@ -58,25 +63,20 @@ function scrobbler(){
 }
 
 scrobbler.prototype = {
-	scrobble: function(track, callback){
-		this.lastFmApi.track.scrobble(
-			{
-				title: track.title,
-				artist: track.artist,
-				timestamp: new Date().getTime()
-			}, 
-			callback
-		);
+	scrobble: function(track, session, callback){
+		this.lastFmApi.track.scrobble(track, session, callback);
 	},
-	
+	updateNowPlaying: function(track, session, callback){
+		this.lastFmApi.track.updateNowPlaying(track, session, callback);
+	},
 	love: function(track, session, callback){
 		this.lastFmApi.track.love(
-			{
-				title: track.title,
-				artist: track.artist
-			},
+			track,
 			session, 
 			callback
 		);
-	}
+	},
+			getSimilar: function(params, session, callback){
+				this.lastFmApi.track.getSimilar(params, callback);
+			}
 };

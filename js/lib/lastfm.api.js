@@ -35,57 +35,35 @@ function LastFM(options){
 	var internalCall = function(params, callbacks, requestMethod){
 		/* Cross-domain POST request (doesn't return any data, always successful). */
 		if(requestMethod == 'POST'){
-			/* Create iframe element to post data. */
-			var html   = document.getElementsByTagName('html')[0];
-			var iframe = document.createElement('iframe');
-			var doc;
+			var http = new XMLHttpRequest();
+			
+			var array = [];
+			for(var param in params){
+			array.push(encodeURIComponent(param) + "=" + encodeURIComponent(params[param]));
+			}
 
-			/* Set iframe attributes. */
-			iframe.width        = 1;
-			iframe.height       = 1;
-			iframe.style.border = 'none';
-			iframe.onload       = function(){
-				/* Remove iframe element. */
-				//html.removeChild(iframe);
+			/* Set script source. */
+			var parameters = array.join('&').replace(/%20/g, '+');
+			
+			http.open("POST", apiUrl, true);
 
-				/* Call user callback. */
-				if(typeof(callbacks.success) != 'undefined'){
-					callbacks.success();
+			//Send the proper header information along with the request
+			http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			http.setRequestHeader("Content-length", parameters.length);
+			http.setRequestHeader("Connection", "close");
+
+			http.onreadystatechange = function() {//Call a function when the state changes.
+				if(http.readyState == 4 && http.status == 200)
+				{
+					callbacks.success(http.responseText);
+				}
+				else
+				{
+					callbacks.error(http.responseText);
 				}
 			};
-
-			/* Append iframe. */
-			html.appendChild(iframe);
-
-			/* Get iframe document. */
-			if(typeof(iframe.contentWindow) != 'undefined'){
-				doc = iframe.contentWindow.document;
-			}
-			else if(typeof(iframe.contentDocument.document) != 'undefined'){
-				doc = iframe.contentDocument.document.document;
-			}
-			else{
-				doc = iframe.contentDocument.document;
-			}
-
-			/* Open iframe document and write a form. */
-			doc.open();
-			doc.clear();
-			doc.write('<form method="post" action="' + apiUrl + '" id="form">');
-
-			/* Write POST parameters as input fields. */
-			for(var param in params){
-				doc.write('<input type="text" name="' + param + '" value="' + params[param] + '">');
-			}
-
-			/* Write automatic form submission code. */
-			doc.write('</form>');
-			doc.write('<script type="application/x-javascript">');
-			doc.write('document.getElementById("form").submit();');
-			doc.write('</script>');
-
-			/* Close iframe document. */
-			doc.close();
+			
+			http.send(parameters);
 		}
 		/* Cross-domain GET request (JSONP). */
 		else{
@@ -656,7 +634,7 @@ function LastFM(options){
 			signedCall('track.removeTag', params, session, callbacks, 'POST');
 		},
 
-		scrobble : function(params, callbacks){
+		scrobble : function(params, session, callbacks){
 			/* Flatten an array of multiple tracks into an object with "array notation". */
 			if(params.constructor.toString().indexOf("Array") != -1){
 				var p = {};

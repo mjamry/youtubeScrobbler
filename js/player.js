@@ -19,7 +19,7 @@ $(function()
 				_token,
 				{success: function(s){
 						console.log("success: "+s);
-						_sessionId = s.session.key;
+						_sessionId = s.session;
 						console.log(_sessionId);
 						
 				},
@@ -28,6 +28,10 @@ $(function()
 					}
 				}
 		);
+			
+			
+			
+			
 		
 		
 });
@@ -103,25 +107,60 @@ function InitialisePlayer()
         _viewUpdater.updateVideoTitle("Playing: "+video.name+" ("+video.durationInMinutes+")");
 		_scrobbler.getArtist(video.artist, _viewUpdater.updateArtistInfo);
 		var sc = new scrobbler();
-		sc.love(
+		sc.updateNowPlaying(
 			{
-				artist: video.artist,
-				title: video.title
+				track: video.title,
+				artist: video.artist
 			}, 
 			_sessionId,
 			{
 				success:  function(s)
 				{
-					console.log(s);
+					console.log("playing_Success: "+s);
 				}, 
 				error: function(e)
 				{
-					console.log(e);
+					console.log("playing_error: "+e);
 				}
 			}
 			
 			);
-
+		sc.scrobble(
+			{
+				track: video.title,
+				artist: video.artist,
+				//it is in ms so it must be divided by 1000, also need to be rounded to make an int value
+				timestamp:  Math.round((new Date()).getTime() / 1000)
+			}, 
+			_sessionId,
+			{
+				success:  function(s)
+				{
+					console.log("scrobble_Success: "+s);
+				}, 
+				error: function(e)
+				{
+					console.log("scrobble_error: "+e);
+				}
+			}
+			
+			);
+				
+				var session = new lastFmSession();
+				session.getRecommendedArtists({
+                    user: _sessionId.name,
+                    limit: 10
+                },
+                _sessionId,
+                {
+                    success: function(data_recs) {
+                        console.log("recommendedArtists: "+data_recs);
+                    },
+                    error: function(data_recs_error) {
+                        alert(data_recs_error.error + " : " + data_recs_error.message);
+                    }
+                });
+		
     });
 }
 
