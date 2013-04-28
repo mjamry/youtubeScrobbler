@@ -32,5 +32,12 @@ viewUpdater.prototype =
 		playlist.find(".youtube-player-playlist").css(size);
 		
 		
-    }
+    },
+			
+	updateArtistInfo: function(artistData)
+	{
+		var $artist = $("#artist_info");
+		$artist.find(".header").text(artistData.name);
+		$artist.find(".content").html(artistData.bio);
+	}
 };

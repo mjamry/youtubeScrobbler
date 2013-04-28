@@ -1,13 +1,42 @@
+var Player;
+var _viewUpdater;
+var _scrobbler;
+var _token;
+var _sessionId = "sessionKey";
+
 $(function()
 {
     InitialisePlayer(); 
+	InitialiseScrobbler();
     HookUpLoadUrlButtonAction();
     HookUpToolbarButtons();
     HeaderAction();
+	var urlPars = new urlParser();
+	_token = urlPars.getParameterValue(window.location.href, "token");
+	console.log("token: "+_token);
+			var session = new lastFmSession();
+		session.getSessionId(
+				_token,
+				{success: function(s){
+						console.log("success: "+s);
+						_sessionId = s.session.key;
+						console.log(_sessionId);
+						
+				},
+					error: function(e){
+						console.log("error: "+ e);
+					}
+				}
+		);
+		
+		
 });
 
-var Player;
-var _viewUpdater;
+
+
+function InitialiseScrobbler(){
+	_scrobbler = new artistInfo();
+}
 function InitialisePlayer()
 {
     var config = {
@@ -72,6 +101,27 @@ function InitialisePlayer()
     Player.addListener(Player.events.videoPlay, function(video)
     {
         _viewUpdater.updateVideoTitle("Playing: "+video.name+" ("+video.durationInMinutes+")");
+		_scrobbler.getArtist(video.artist, _viewUpdater.updateArtistInfo);
+		var sc = new scrobbler();
+		sc.love(
+			{
+				artist: video.artist,
+				title: video.title
+			}, 
+			_sessionId,
+			{
+				success:  function(s)
+				{
+					console.log(s);
+				}, 
+				error: function(e)
+				{
+					console.log(e);
+				}
+			}
+			
+			);
+
     });
 }
 
