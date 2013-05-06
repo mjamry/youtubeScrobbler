@@ -116,11 +116,11 @@ function InitialisePlayer()
 			{
 				success:  function(s)
 				{
-					console.log("playing_Success: "+s);
+					console.log("playing_Success: "+s.nowplaying.track);
 				}, 
 				error: function(e)
 				{
-					console.log("playing_error: "+e);
+					console.log("playing_error: "+e.message);
 				}
 			}
 			
@@ -136,30 +136,15 @@ function InitialisePlayer()
 			{
 				success:  function(s)
 				{
-					console.log("scrobble_Success: "+s);
+					console.log("scrobble_Success: "+s.scrobbles.scrobble);
 				}, 
 				error: function(e)
 				{
-					console.log("scrobble_error: "+e);
+					console.log("scrobble_error: "+e.message);
 				}
 			}
 			
 			);
-				
-				var session = new lastFmSession();
-				session.getRecommendedArtists({
-                    user: _sessionId.name,
-                    limit: 10
-                },
-                _sessionId,
-                {
-                    success: function(data_recs) {
-                        console.log("recommendedArtists: "+data_recs);
-                    },
-                    error: function(data_recs_error) {
-                        alert(data_recs_error.error + " : " + data_recs_error.message);
-                    }
-                });
 		
     });
 }
@@ -172,7 +157,7 @@ function VideoLoaded(video)
 }
 
 function HeaderAction(){
-    $(".header").bind("click", function()
+    $(".page-title").bind("click", function()
         {
             var item = $(this).parent();
             var content = item.find(".content");

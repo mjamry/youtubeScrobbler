@@ -33,16 +33,17 @@ function LastFM(options){
 
 	/* Internal call (POST, GET). */
 	var internalCall = function(params, callbacks, requestMethod){
-		/* Cross-domain POST request (doesn't return any data, always successful). */
-		if(requestMethod == 'POST'){
+		
+		if(requestMethod == 'POST')
+		{
+			params.format = "json";
 			var http = new XMLHttpRequest();
-			
+
 			var array = [];
 			for(var param in params){
-			array.push(encodeURIComponent(param) + "=" + encodeURIComponent(params[param]));
+				array.push(encodeURIComponent(param) + "=" + encodeURIComponent(params[param]));
 			}
-
-			/* Set script source. */
+			
 			var parameters = array.join('&').replace(/%20/g, '+');
 			
 			http.open("POST", apiUrl, true);
@@ -52,14 +53,19 @@ function LastFM(options){
 			http.setRequestHeader("Content-length", parameters.length);
 			http.setRequestHeader("Connection", "close");
 
-			http.onreadystatechange = function() {//Call a function when the state changes.
-				if(http.readyState == 4 && http.status == 200)
+			http.onreadystatechange = function() 
+			{
+				if(http.responseText !== "" && http.readyState == 4)
 				{
-					callbacks.success(http.responseText);
-				}
-				else
-				{
-					callbacks.error(http.responseText);
+					var response = JSON.parse(http.responseText);
+					if(typeof response.error === "undefined")
+					{
+						callbacks.success(response);
+					}
+					else
+					{
+						callbacks.error(response);
+					}
 				}
 			};
 			
