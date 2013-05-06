@@ -7,6 +7,7 @@
         
         <link href='http://fonts.googleapis.com/css?family=Josefin+Slab:400,700' rel='stylesheet' type='text/css'>
         <link type="text/css" rel="stylesheet" href="css/general.css"/>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
         <script type="text/javascript" src="js/lib/jquery.min.js"></script>
         <script type="text/javascript" src="js/lib/swfobject.js"></script>
         <script type="text/javascript" src="js/lib/lastfm.api.js"></script>
@@ -23,14 +24,14 @@
         <script type="text/javascript" src="js/lastFmScrobbler.js"></script>
     </head>
     <body>
-        <div id="header">
-            header
-        </div>
+        <header id="page-header">
+			<h1>online scrobbler - logo</h1>
+		</header>
         <div id="player">
-            <div class="header">
+            <header class="page-title">
                 <div class="title">tit</div>
                 <div class="time">time</div>
-            </div>
+            </header>
             <div class="content">
                 <div class="title"></div>
                 <div class="time"></div>
@@ -47,37 +48,38 @@
                 </div>
             </div>
         </div>
-        <div id="toolbar" class="section">
-            <div class="header">Toolbar</div>
-            <div class="content">
-                <ul id="toolbar_buttons">
-                    <li id="play_button"><a class="button" href="#">play</a></li>
-                    <li id="stop_button"><a class="button" href="#">stop</a></li>
-                    <li id="pause_button"><a class="button" href="#">pause</a></li>
-                    <li id="shuffle_button"><a class="button" href="#">shuffle</a></li>
-                    <li id="repeat_button"><a class="button" href="#">repeat</a></li>
-                    <li id="prev_button"><a class="button" href="#">prev</a></li>
-                    <li id="next_button"><a class="button" href="#">next</a></li>
-                </ul>
-            </div>
-        </div>
+        
         <div id="playlist">
-            <div class="header">Playlist</div>
+            <header class="page-title"><h1>playlist</h1></header>
             <div class="content"></div>
         </div>
         <div id="song_info">
-            <div class="header">Song info</div>
+            <header class="page-title"><h1>song info</h1></header>
             <div class="content"></div>
         </div>
         <div id="artist_info">
-            <div class="header">artist info</div>
+            <header class="page-title"><h1>artist info</h1></header>
             <div class="content"></div>
         </div>
         <div id="last_fm_data">
-            <div class="header">lastfm data</div>
+            <header class="page-title"><h1>last fm data</h1></header>
             <div class="content"></div>
         </div>
-        
+		
+        <div id="toolbar" class="section">
+            <header class="page-title"><h1>toolbar</h1></header>
+            <div class="content">
+                <ul id="toolbar-buttons">
+                    <li id="play_button"><a href="#">play</a></li>
+                    <li id="stop_button"><a href="#">stop</a></li>
+                    <li id="pause_button"><a href="#">pause</a></li>
+                    <li id="shuffle_button"><a href="#">shuffle</a></li>
+                    <li id="repeat_button"><a href="#">repeat</a></li>
+                    <li id="prev_button"><a href="#">prev</a></li>
+                    <li id="next_button"><a href="#">next</a></li>
+                </ul>
+            </div>
+        </div>
         <div id="footer">
             footer
         </div>

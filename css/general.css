@@ -5,29 +5,10 @@ body{
     font-family: 'Josefin Slab', serif;
 }
 
-#header{
-    height:120px;
-    width:100%;
-    background-color: #ddd;
-}
-
 #footer{
     height:160px;
     width:100%;
     background-color: #ddd;
-}
-
-.header{
-    height: 60px;
-    width:100%;
-    margin:0 auto;
-    background-color: lightcoral;
-    cursor: pointer;
-    /*--test--*/
-    text-align: center;
-    font-weight: 700;
-    font-size: 20pt;
-	display:inline-block;
 }
 
 .content{
@@ -46,20 +27,39 @@ body{
     
 }
 
+.page-title {
+	height: 60px;
+    width:100%;
+    margin:0 auto;
+    background-color: lightcoral;
+    cursor: pointer;
+    /*--test--*/
+    text-align: center;
+    font-weight: 700;
+    font-size: 20pt;
+	display:block;
+}
+
+.page-header{
+	    height:120px;
+    width:100%;
+    background-color: #ddd;
+}
+
 /*----------------------TOOLBAR--------------*/
 #toolbar{
     height:200px;
 }
-#toolbar_buttons{
+#toolbar-buttons{
     list-style-type: none;
 }
 
-#toolbar_buttons li{
+#toolbar-buttons li{
     float: left;
     margin:0 auto;
 }
 
-.button{
+#toolbar-buttons  a{
     display: inline-block;
     text-decoration: none;
     text-align: center;
