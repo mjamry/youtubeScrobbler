@@ -1,4 +1,7 @@
-var Player;
+//namespace
+window.Player = window.Player || {};
+
+var _player;
 var _viewUpdater;
 var _scrobbler;
 var _token;
@@ -68,41 +71,41 @@ function InitialisePlayer()
             }
     };
         _viewUpdater = new viewUpdater();
-    Player = new ytPlayer(config, $(".youtube-player"));
-    Player.addListener(Player.events.videoLoaded, VideoLoaded);
+    _player = new window.Player.YouTubePlayer(config, $(".youtube-player"));
+    _player.addListener(window.Player.Events.videoLoaded, VideoLoaded);
 
-    Player.addListener(Player.events.playlistReady, function(){
-        console.log("playlist ready "+Player.getPlaylistLength());
-		_viewUpdater.updatePlaylist(Player.getPlaylistLength());
+    _player.addListener(window.Player.Events.playlistReady, function(){
+        console.log("playlist ready "+_player.getPlaylistLength());
+		_viewUpdater.updatePlaylist(_player.getPlaylistLength());
     });
-    Player.addListener(Player.events.error, function(){
+    _player.addListener(window.Player.Events.error, function(){
         console.log("error");
     });
-    Player.addListener(Player.events.playerReady, function(){
+    _player.addListener(window.Player.Events.playerReady, function(){
         console.log("plReady");
     });
-    Player.addListener(Player.events.videoBuffering, function(){
+    _player.addListener(window.Player.Events.videoBuffering, function(){
         console.log("buffering");
     });
-    Player.addListener(Player.events.videoCue, function(){
+    _player.addListener(window.Player.Events.videoCue, function(){
         console.log("videoCue");
     });
-    Player.addListener(Player.events.videoLoaded, function(){
+    _player.addListener(window.Player.Events.videoLoaded, function(){
         console.log("vid loaded");
     });
-    Player.addListener(Player.events.videoPaused, function(){
+    _player.addListener(window.Player.Events.videoPaused, function(){
         console.log("vid paused");
-		_viewUpdater.updateVideoTitle("Paused: "+Player.getCurrentVideo().name);
+		_viewUpdater.updateVideoTitle("Paused: "+_player.getCurrentVideo().name);
     });
-    Player.addListener(Player.events.videoPlay, function(){
+    _player.addListener(window.Player.Events.videoPlay, function(){
         console.log("vid play");
     });
-    Player.addListener(Player.events.beforePlaylistReady, function(){
+    _player.addListener(window.Player.Events.beforePlaylistReady, function(){
         console.log("before playlist ready");
     });
-    
 
-    Player.addListener(Player.events.videoPlay, function(video)
+
+    _player.addListener(window.Player.Events.videoPlay, function(video)
     {
         _viewUpdater.updateVideoTitle("Playing: "+video.name+" ("+video.durationInMinutes+")");
 		_scrobbler.getArtist(video.artist, _viewUpdater.updateArtistInfo);
@@ -182,10 +185,10 @@ function HeaderAction(){
 
 function HookUpToolbarButtons()
 {
-    Player.hookUpButtonAction("play_button", "playVideo");
-    Player.hookUpButtonAction("pause_button", "pauseVideo");
-    Player.hookUpButtonAction("next_button", "nextVideo");
-    Player.hookUpButtonAction("prev_button", "prevVideo");
+    _player.hookUpButtonAction("play_button", "playVideo");
+    _player.hookUpButtonAction("pause_button", "pauseVideo");
+    _player.hookUpButtonAction("next_button", "nextVideo");
+    _player.hookUpButtonAction("prev_button", "prevVideo");
 }
 
 
@@ -194,7 +197,7 @@ function HookUpLoadUrlButtonAction(){
     $("#loadUrlButton").bind("click", function()
     {
         var url= $("#videoUrl").val();
-        
-        Player.loadPlaylistFromUrl(url);
+
+        _player.loadPlaylistFromUrl(url);
     });
 }

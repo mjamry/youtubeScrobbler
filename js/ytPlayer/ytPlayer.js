@@ -1,8 +1,33 @@
-//jquery-youtube-player plugin decorator
-function ytPlayer(configuration, playerContainer)
+//namespace
+window.Player = window.Player || {};
+
+window.Player.Events =
 {
+    //0-9 - general events
+    playerReady: 0,
+    error:1,
+
+    //10-19 - video events
+    videoLoaded:10,
+    videoPaused:11,
+    videoPlay:12,
+    videoCue:13,
+    videoBuffering:14,
+
+    playlistReady:15,
+    beforePlaylistReady:16
+};
+
+//jquery-youtube-player plugin decorator
+window.Player.YouTubePlayer = function(configuration, playerContainer)
+{
+    //stored video details
+    var currentVideoDetails;
+    this.playlistLength;
+
+
 	//updates currentVideoDetails and fires videoLoaded event
-	onVideoLoaded = function(video)
+	var onVideoLoaded = function(video)
 	{
 		var loader = new playlistLoader();
 		loader.loadVideo(video.id, $.proxy(
@@ -10,58 +35,41 @@ function ytPlayer(configuration, playerContainer)
 				{
 					this.currentVideoDetails = videoDetails.videos[0];
 					console.log("videoLoaded");
-					this.eventHandler.fireEventWithData(this.events.videoPlay, this.currentVideoDetails);
+					this.eventHandler.fireEventWithData(window.Player.Events.videoPlay, this.currentVideoDetails);
 				}
 				, this));
 	};
 	
-	
-    this.currentVideoDetails;
-	this.playlistLength;
-    /*------------fields---------------*/
-    this.events = 
-        {
-            //0-9 - general events
-            playerReady: 0,
-            error:1,
-            
-            //10-19 - video events
-            videoLoaded:10,
-            videoPaused:11,
-            videoPlay:12,
-            videoCue:13,
-            videoBuffering:14,
-            
-            playlistReady:15,
-            beforePlaylistReady:16
-        };
 
-    this.eventHandler = new eventHandler(this.events);
+    /*------------fields---------------*/
+
+
+    this.eventHandler = new eventHandler(window.Player.Events);
     
     //extends options by event handlers and default value
     this.config = $.extend(
         {
             //extends options by event handlers
-            onReady:$.proxy(function(){this.eventHandler.fireEvent(this.events.playerReady);}, this),
-            onError: $.proxy(function(msg){this.eventHandler.fireEventWithData(this.events.error, msg);}, this),
+            onReady:$.proxy(function(){this.eventHandler.fireEvent(window.Player.Events.playerReady);}, this),
+            onError: $.proxy(function(msg){this.eventHandler.fireEventWithData(window.Player.Events.error, msg);}, this),
             
-            onVideoLoaded: $.proxy(function(video){this.eventHandler.fireEventWithData(this.events.videoLoaded, video);}, this),
-            onVideoPaused: $.proxy(function(){this.eventHandler.fireEvent(this.events.videoPaused);}, this),
+            onVideoLoaded: $.proxy(function(video){this.eventHandler.fireEventWithData(window.Player.Events.videoLoaded, video);}, this),
+            onVideoPaused: $.proxy(function(){this.eventHandler.fireEvent(window.Player.Events.videoPaused);}, this),
             onVideoPlay: $.proxy(onVideoLoaded, this),
-            onVideoCue: $.proxy(function(video){this.eventHandler.fireEventWithData(this.events.videoCue, video);}, this),
-            onBuffer: $.proxy(function(){this.eventHandler.fireEvent(this.events.videoBuffering);}, this),
+            onVideoCue: $.proxy(function(video){this.eventHandler.fireEventWithData(window.Player.Events.videoCue, video);}, this),
+            onBuffer: $.proxy(function(){this.eventHandler.fireEvent(window.Player.Events.videoBuffering);}, this),
 
-            onAfterPlaylistLoaded: $.proxy(function(){this.eventHandler.fireEvent(this.events.playlistReady);}, this),
-            onBeforePlaylistLoaded: $.proxy(function(){this.eventHandler.fireEvent(this.events.beforePlaylistReady);}, this)
+            onAfterPlaylistLoaded: $.proxy(function(){this.eventHandler.fireEvent(window.Player.Events.playlistReady);}, this),
+            onBeforePlaylistLoaded: $.proxy(function(){this.eventHandler.fireEvent(window.Player.Events.beforePlaylistReady);}, this)
         }
         ,configuration
     );
         
     this.instance = playerContainer.player(this.config);
     console.log("instance "+this.instance);
-}
+};
 
-ytPlayer.prototype = 
+window.Player.YouTubePlayer.prototype =
 {
     _executeAction: function(action)
     {
@@ -73,7 +81,7 @@ ytPlayer.prototype =
     {
         this.instance.player("loadPlaylist", playlist);
 		this.playlistLength = playlist.videos.length;
-        this.eventHandler.fireEvent(this.events.playlistReady);
+        this.eventHandler.fireEvent(window.Player.Events.playlistReady);
     },
             
     hookUpButtonAction: function(button, action)
@@ -97,7 +105,6 @@ ytPlayer.prototype =
         );
     },
 	    
-		
     getCurrentVideo:function()
     {
 		return this.currentVideoDetails;
@@ -107,10 +114,6 @@ ytPlayer.prototype =
 	{
 		return this.playlistLength;
 	}
-	
-	
-	   
-    
 };
 
 

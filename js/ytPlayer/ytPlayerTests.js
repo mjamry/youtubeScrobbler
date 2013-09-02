@@ -11,7 +11,7 @@ function ytPlayerTests()
             }
     };
     
-    Player = new ytPlayer(config, $(".youtube-player"));
+    Player = new YouTubePlayer(config, $(".youtube-player"));
     Player.addListener(Player.events.videoLoaded, VideoLoaded);
 
     Player.addListener(Player.events.playlistReady, function(){
