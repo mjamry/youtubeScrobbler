@@ -1,24 +1,11 @@
 //namespace
 window.Player = window.Player || {};
 
-window.Player.Events =
-{
-    //0-9 - general events
-    playerReady: 0,
-    error:1,
+//using
+window.Common = window.Common || {};
 
-    //10-19 - video events
-    videoLoaded:10,
-    videoPaused:11,
-    videoPlay:12,
-    videoCue:13,
-    videoBuffering:14,
-
-    playlistReady:15,
-    beforePlaylistReady:16
-};
-
-//jquery-youtube-player plugin decorator
+//It is a facade for jquery-youtube-player library.
+//Provides possibility to attach to player events.
 window.Player.YouTubePlayer = function(configuration, playerContainer)
 {
     //stored video details
@@ -44,9 +31,9 @@ window.Player.YouTubePlayer = function(configuration, playerContainer)
     /*------------fields---------------*/
 
 
-    this.eventHandler = new eventHandler(window.Player.Events);
+    this.eventHandler = new window.Common.EventHandler(window.Player.Events);
     
-    //extends options by event handlers and default value
+    //extends jquery-youtube-player configuration by event handlers.
     this.config = $.extend(
         {
             //extends options by event handlers

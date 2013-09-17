@@ -1,8 +1,13 @@
-function eventHandler(events)
+//namespace
+window.Common = window.Common || {};
+
+//Provides possibility to register listeners for specified event.
+window.Common.EventHandler = function(events)
 {
     this.events = events;
     this.listeners = [];
-    
+
+    //creates empty listeners list
     for(var key in this.events)
     {
         var e = this.events[key];
@@ -10,16 +15,17 @@ function eventHandler(events)
     }
 }
 
-eventHandler.prototype = 
+window.Common.EventHandler.prototype =
 {
+    //Adds new listener for specified event.
     addListener: function(event, listener, data, context)
     {
-        var c = context || null;
+        var innerContext = context || null;
         this.listeners[event].push(
             {
                 method: listener,
                 args: data,
-                context: context
+                context: innerContext
             }
         );
     },
