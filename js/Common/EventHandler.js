@@ -4,19 +4,26 @@ window.Common = window.Common || {};
 //Provides possibility to register listeners for specified event.
 window.Common.EventHandler = function(events)
 {
-    this.events = events;
     this.listeners = [];
 
-    //creates empty listeners list
-    for(var key in this.events)
-    {
-        var e = this.events[key];
-        this.listeners[e] = [];
-    }
+    this.initialise(events);
 }
 
 window.Common.EventHandler.prototype =
 {
+    //initialises listeners array with empty values.
+    initialise: function(events)
+    {
+        //creates empty listeners list
+        for(var key in events)
+        {
+            if(events.hasOwnProperty(key)){
+                var e = events[key];
+                this.listeners[e] = [];
+            }
+        }
+    },
+
     //Adds new listener for specified event.
     addListener: function(event, listener, data, context)
     {

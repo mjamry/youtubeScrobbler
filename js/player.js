@@ -1,5 +1,6 @@
-//namespace
+//using
 window.Player = window.Player || {};
+window.Common = window.Common || {};
 
 var _player;
 var _viewUpdater;
@@ -14,7 +15,7 @@ $(function()
     HookUpLoadUrlButtonAction();
     HookUpToolbarButtons();
     HeaderAction();
-	var urlPars = new urlParser();
+	var urlPars = new window.Common.UrlParser();
 	_token = urlPars.getParameterValue(window.location.href, "token");
 	console.log("token: "+_token);
 			var session = new lastFmSession();

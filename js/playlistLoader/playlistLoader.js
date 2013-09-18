@@ -1,3 +1,6 @@
+//namespace
+window.Common = window.Common || {};
+
 //Class used to create playlist depending upon specified url address.
 function playlistLoader(){
     this.params = {
@@ -105,7 +108,7 @@ playlistLoader.prototype =
     //returns playlist object literal: playlist = {title:string, videos:[{id, title}]};
     loadPlaylistFromUrl : function(url, callback)
     {
-        var parser = new urlParser();
+        var parser = new window.Common.UrlParser();
         var playlistId = parser.getParameterValue(url, this.params.playlist);
         
         if(playlistId !== URL_PARSE_ERR)
