@@ -21,7 +21,7 @@ window.Player.YouTubePlayer = function(configuration, playerContainer)
 				function(videoDetails)
 				{
 					this.currentVideoDetails = videoDetails.videos[0];
-					console.log("videoLoaded");
+                    window.Common.Log.Instance().Debug("Video: \""+this.currentVideoDetails.name+"\" has been loaded.");
 					this.eventHandler.fireEventWithData(window.Player.Events.videoPlay, this.currentVideoDetails);
 				}
 				, this));
@@ -53,7 +53,7 @@ window.Player.YouTubePlayer = function(configuration, playerContainer)
     );
         
     this.instance = playerContainer.player(this.config);
-    console.log("instance "+this.instance);
+    window.Common.Log.Instance().Info("YouTube player has been configured and initialised.");
 };
 
 window.Player.YouTubePlayer.prototype =
@@ -66,8 +66,11 @@ window.Player.YouTubePlayer.prototype =
     
     _onPlaylistReady:function(playlist)
     {
+
         this.instance.player("loadPlaylist", playlist);
 		this.playlistLength = playlist.videos.length;
+
+        window.Common.Log.Instance().Info("Playlist has been loaded, contains "+this.playlistLength+" video(s).");
         this.eventHandler.fireEvent(window.Player.Events.playlistReady);
     },
             
@@ -85,6 +88,7 @@ window.Player.YouTubePlayer.prototype =
     
     loadPlaylistFromUrl: function(url)
     {
+        window.Common.Log.Instance().Debug("Try loading playlist using URL: "+url);
         var loader = new playlistLoader();
         loader.loadPlaylistFromUrl(
                 url, 

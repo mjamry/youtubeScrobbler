@@ -17,27 +17,21 @@ $(function()
     HeaderAction();
 	var urlPars = new window.Common.UrlParser();
 	_token = urlPars.getParameterValue(window.location.href, "token");
-	console.log("token: "+_token);
+    window.Common.Log.Instance().Debug("Token: "+_token+" has been obtained.");
 			var session = new lastFmSession();
 		session.getSessionId(
 				_token,
-				{success: function(s){
-						console.log("success: "+s);
-						_sessionId = s.session;
-						console.log(_sessionId);
-						
+				{
+                    success: function(s){
+					    _sessionId = s.session;
+                        window.Common.Log.Instance().Info("Session established.");
+                        window.Common.Log.Instance().Debug("Session details - id: "+_sessionId);
 				},
-					error: function(e){
-						console.log("error: "+ e);
+					error: function(err, msg){
+                        window.Common.Log.Instance().Error("Error ("+err+") while creating session: "+ msg);
 					}
 				}
 		);
-			
-			
-			
-			
-		
-		
 });
 
 
@@ -76,35 +70,12 @@ function InitialisePlayer()
     _player.addListener(window.Player.Events.videoLoaded, VideoLoaded);
 
     _player.addListener(window.Player.Events.playlistReady, function(){
-        console.log("playlist ready "+_player.getPlaylistLength());
 		_viewUpdater.updatePlaylist(_player.getPlaylistLength());
     });
-    _player.addListener(window.Player.Events.error, function(){
-        console.log("error");
-    });
-    _player.addListener(window.Player.Events.playerReady, function(){
-        console.log("plReady");
-    });
-    _player.addListener(window.Player.Events.videoBuffering, function(){
-        console.log("buffering");
-    });
-    _player.addListener(window.Player.Events.videoCue, function(){
-        console.log("videoCue");
-    });
-    _player.addListener(window.Player.Events.videoLoaded, function(){
-        console.log("vid loaded");
-    });
+
     _player.addListener(window.Player.Events.videoPaused, function(){
-        console.log("vid paused");
 		_viewUpdater.updateVideoTitle("Paused: "+_player.getCurrentVideo().name);
     });
-    _player.addListener(window.Player.Events.videoPlay, function(){
-        console.log("vid play");
-    });
-    _player.addListener(window.Player.Events.beforePlaylistReady, function(){
-        console.log("before playlist ready");
-    });
-
 
     _player.addListener(window.Player.Events.videoPlay, function(video)
     {
@@ -120,11 +91,11 @@ function InitialisePlayer()
 			{
 				success:  function(s)
 				{
-					console.log("playing_Success: "+s.nowplaying.track);
+                    window.Common.Log.Instance().Info("LastFm NowPlaying successfuly updated.");
 				}, 
 				error: function(e)
 				{
-					console.log("playing_error: "+e.message);
+                    window.Common.Log.Instance().Error("LastFm NowPlaying update failed: "+ e.message);
 				}
 			}
 			
@@ -140,11 +111,11 @@ function InitialisePlayer()
 			{
 				success:  function(s)
 				{
-					console.log("scrobble_Success: "+s.scrobbles.scrobble);
+                    window.Common.Log.Instance().Info("LastFm Scrobbling successfuly updated: "+ s.scrobbles.scrobble);
 				}, 
 				error: function(e)
 				{
-					console.log("scrobble_error: "+e.message);
+                    window.Common.Log.Instance().Error("LastFm Scrobbling update failed: "+ e.message);
 				}
 			}
 			

@@ -20,7 +20,7 @@ window.Common.UrlParser.prototype =
         }
         catch(ex)
         {
-            //TODO: log exception
+            window.Common.Log.Error("Url parsing has failed. Ex: "+ex);
             return URL_PARSE_ERR;
         }
 

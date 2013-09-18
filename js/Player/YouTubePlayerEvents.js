@@ -4,17 +4,17 @@ window.Player = window.Player || {};
 //Represents enumeration of events fired by YouTubePlayer
 window.Player.Events =
 {
-    //0-9 - general events
-    playerReady: 0,
-    error:1,
+    //general events
+    playerReady: "PlayerReady",
+    error: "PlayerError",
 
-    //10-19 - video events
-    videoLoaded:10,
-    videoPaused:11,
-    videoPlay:12,
-    videoCue:13,
-    videoBuffering:14,
+    //video events
+    videoLoaded: "VideoLoaded",
+    videoPaused: "VideoPaused",
+    videoPlay: "VideoStarted",
+    videoCue: "VideoCue",
+    videoBuffering: "VideoBuffering",
 
-    playlistReady:15,
-    beforePlaylistReady:16
+    playlistReady: "PlaylistReady",
+    beforePlaylistReady: "BeforePlaylistReady"
 };

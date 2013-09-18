@@ -57,6 +57,8 @@ window.Common.EventHandler.prototype =
             var listener = eventListeners[i];
             listener.method(listener.args);
         }
+
+        window.Common.Log.Instance().Debug("Event: "+event+" has been fired");
     },
     
     fireEventWithData: function(event, data)
@@ -67,5 +69,7 @@ window.Common.EventHandler.prototype =
             var listener = eventListeners[i];
             listener.method(data, listener.args);
         }
+
+        window.Common.Log.Instance().Debug("Event: "+event+" has been fired, data: "+data);
     }
 };
