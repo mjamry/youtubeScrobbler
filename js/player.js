@@ -126,7 +126,6 @@ function InitialisePlayer()
 
 function VideoLoaded(video)
 {
-    console.log("id: "+video.id+" title: "+video.title);
     $("#player .title").text("Video: "+video.title);
     $("title").text(video.title);
 }
