@@ -1,6 +1,7 @@
 //using
 window.Player = window.Player || {};
 window.Common = window.Common || {};
+window.LastFm = window.LastFm || {};
 
 var _player;
 var _viewUpdater;
@@ -8,8 +9,12 @@ var _scrobbler;
 var _token;
 var _sessionId = "sessionKey";
 
+var _lastFmFactory;
+
 $(function()
 {
+    _lastFmFactory = new window.LastFm.LastFmApiFactory();
+
     InitialisePlayer(); 
 	InitialiseScrobbler();
     HookUpLoadUrlButtonAction();
@@ -18,7 +23,9 @@ $(function()
 	var urlPars = new window.Common.UrlParser();
 	_token = urlPars.getParameterValue(window.location.href, "token");
     window.Common.Log.Instance().Debug("Token: "+_token+" has been obtained.");
-			var session = new lastFmSession();
+
+
+			var session = _lastFmFactory.createSessionHandler();
 		session.getSessionId(
 				_token,
 				{
@@ -36,8 +43,9 @@ $(function()
 
 
 
-function InitialiseScrobbler(){
-	_scrobbler = new artistInfo();
+function InitialiseScrobbler()
+{
+	_scrobbler = _lastFmFactory.createInformationProvider();
 }
 function InitialisePlayer()
 {
@@ -81,7 +89,7 @@ function InitialisePlayer()
     {
         _viewUpdater.updateVideoTitle("Playing: "+video.name+" ("+video.durationInMinutes+")");
 		_scrobbler.getArtist(video.artist, _viewUpdater.updateArtistInfo);
-		var sc = new scrobbler();
+		var sc = _lastFmFactory.createScrobbler();
 		sc.updateNowPlaying(
 			{
 				track: video.title,
