@@ -25,20 +25,8 @@ $(function()
     window.Common.Log.Instance().Debug("Token: "+_token+" has been obtained.");
 
 
-			var session = _lastFmFactory.createSessionHandler();
-		session.getSessionId(
-				_token,
-				{
-                    success: function(s){
-					    _sessionId = s.session;
-                        window.Common.Log.Instance().Info("Session established.");
-                        window.Common.Log.Instance().Debug("Session details - id: "+_sessionId);
-				},
-					error: function(err, msg){
-                        window.Common.Log.Instance().Error("Error ("+err+") while creating session: "+ msg);
-					}
-				}
-		);
+		var session = _lastFmFactory.createSessionHandler();
+		session.createNewSession(_token);
 });
 
 
