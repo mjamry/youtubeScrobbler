@@ -1,10 +1,14 @@
 //namespace
 window.LastFm = window.LastFm || {};
 
+//using
+window.Common = window.Common || {};
+
 //Provide easy way to get information about artist/track etc. from last.fm portal.
 window.LastFm.InformationProvider = function(lastFmDataProvider)
 {
     this.dataProvider = lastFmDataProvider;
+    window.Common.Log.Instance().Info("Last fm information provider has been created");
 }
 
 window.LastFm.InformationProvider.prototype =

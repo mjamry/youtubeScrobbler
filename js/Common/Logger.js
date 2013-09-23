@@ -27,24 +27,37 @@ Logger = function(){};
 
 Logger.prototype =
 {
+    _getFormatedTimestamp: function()
+    {
+        var date = new Date();
+        var outputData =
+            "[" +
+            date.getHours() + ":" +
+            date.getMinutes() + ":" +
+            date.getSeconds() + "." +
+            date.getMilliseconds() +
+            "] ";
+        return outputData;
+    },
+
     Info: function(message)
     {
-          console.info(message);
+          console.info(this._getFormatedTimestamp() + message);
     },
 
     Error: function(message)
     {
-        console.error(message);
+        console.error(this._getFormatedTimestamp()  +message);
     },
 
     Warning: function(message)
     {
-        console.warn(message);
+        console.warn(this._getFormatedTimestamp() + message);
     },
 
     Debug: function(message)
     {
-        console.debug(message);
+        console.debug(this._getFormatedTimestamp() + message);
     }
 }
 
