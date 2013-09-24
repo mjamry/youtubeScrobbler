@@ -16,10 +16,10 @@ window.Player.YouTubePlaylistConstant =
     VIDEO_TITLE_ID: 1,
     ARTIST_NAME_ID: 0,
     VIDEO_NAME_SEPARATOR: "-"
-}
+};
 
 //Main responsibility is to create playlists depending upon specified url address.
-window.Player.YouTubePlaylistLoader = function(){}
+window.Player.YouTubePlaylistLoader = function(){};
 
 window.Player.YouTubePlaylistLoader.prototype =
 {

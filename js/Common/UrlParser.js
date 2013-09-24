@@ -8,7 +8,7 @@ window.Common.UrlParserConstants =
       PARAMS_START_SIGN: "?",
       PARAMS_SEPARATOR: "&",
       PARAM_VALUE_INDICATOR: "="
-}
+};
 
 window.Common.UrlParser = function(){};
 

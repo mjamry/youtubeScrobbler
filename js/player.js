@@ -15,7 +15,7 @@ window.ApplicationCore.OnlineScrobbler = function()
     this._lastFmFactory = new window.LastFm.LastFmApiFactory();
     this._lastFmInformationProvider = this._lastFmFactory.createInformationProvider();
     this._scrobbler = this._lastFmFactory.createScrobbler();
-    this._player;
+    this._player = null;
 };
 
 window.ApplicationCore.OnlineScrobbler.prototype =
@@ -34,7 +34,6 @@ window.ApplicationCore.OnlineScrobbler.prototype =
 
     initialisePlayer: function()
     {
-        var a = this._lastFmFactory;
         var config = {
             highDef: 1,
             width:400,
@@ -91,9 +90,9 @@ window.ApplicationCore.OnlineScrobbler.prototype =
                     },
                     this._sessionObject,
                     {
-                        success:  function(s)
+                        success:  function(response)
                         {
-                            window.Common.Log.Instance().Info("LastFm NowPlaying successfuly updated.");
+                            window.Common.Log.Instance().Info("LastFm NowPlaying successfuly updated: "+ response.nowplaying.track);
                         },
                         error: function(e)
                         {
@@ -111,9 +110,9 @@ window.ApplicationCore.OnlineScrobbler.prototype =
                     },
                     this._sessionObject,
                     {
-                        success:  function(s)
+                        success:  function(response)
                         {
-                            window.Common.Log.Instance().Info("LastFm Scrobbling successfuly updated: "+ s.scrobbles.scrobble);
+                            window.Common.Log.Instance().Info("LastFm Scrobbling successfuly updated: "+ response.scrobbles.scrobble);
                         },
                         error: function(e)
                         {
@@ -126,7 +125,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
             }, this)
         );
     }
-}
+};
 
 $(function()
 {

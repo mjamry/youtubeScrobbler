@@ -9,8 +9,7 @@ window.Common = window.Common || {};
 window.Player.YouTubePlayer = function(configuration, playerContainer)
 {
     //stored video details
-    var currentVideoDetails;
-    this.playlistLength;
+    this.playlistLength = 0;
 
 
 	//updates currentVideoDetails and fires videoLoaded event
