@@ -1,54 +1,52 @@
+//namespace
+window.ApplicationCore = window.ApplicationCore || {};
+
 //using
 window.Player = window.Player || {};
 window.Common = window.Common || {};
 window.LastFm = window.LastFm || {};
 
-var _player;
-var _viewUpdater;
-var _scrobbler;
-var _token;
-var _sessionId = "sessionKey";
+var onlineScrobbler;
 
-var _lastFmFactory;
-
-$(function()
+window.ApplicationCore.OnlineScrobbler = function()
 {
-    _lastFmFactory = new window.LastFm.LastFmApiFactory();
+    this._sessionObject = null;
+    this._player = null;
+    this._lastFmFactory = new window.LastFm.LastFmApiFactory();
+    this._lastFmInformationProvider = this._lastFmFactory.createInformationProvider();
+    this._scrobbler = this._lastFmFactory.createScrobbler();
+    this._player;
+};
 
-    InitialisePlayer(); 
-	InitialiseScrobbler();
-    HookUpLoadUrlButtonAction();
-    HookUpToolbarButtons();
-    HeaderAction();
-	var urlPars = new window.Common.UrlParser();
-	_token = urlPars.getParameterValue(window.location.href, "token");
-    window.Common.Log.Instance().Debug("Token: "+_token+" has been obtained.");
-
-
-		var session = _lastFmFactory.createSessionHandler();
-		session.createNewSession(_token);
-});
-
-
-
-function InitialiseScrobbler()
+window.ApplicationCore.OnlineScrobbler.prototype =
 {
-	_scrobbler = _lastFmFactory.createInformationProvider();
-}
-function InitialisePlayer()
-{
-    var config = {
-        highDef: 1,
-        width:400,
-        height:400,
-        chromeless: 0,
-        showTime: 1,
-        showToolbar: false,
-        autoPlay: 1,
-        repeatPlaylist: 1,
-        playlistAppendTo: $("#playlist .content"),
-        timeAppendTo: $("#player .time"),
-        playlist: 
+    createSession: function(token)
+    {
+        var sessionHandler = this._lastFmFactory.createSessionHandler();
+        sessionHandler.createNewSession(
+            token,
+            $.proxy(function(sessionObject)
+            {
+                this._sessionObject = sessionObject;
+            }, this)
+        )
+    },
+
+    initialisePlayer: function()
+    {
+        var a = this._lastFmFactory;
+        var config = {
+            highDef: 1,
+            width:400,
+            height:400,
+            chromeless: 0,
+            showTime: 1,
+            showToolbar: false,
+            autoPlay: 1,
+            repeatPlaylist: 1,
+            playlistAppendTo: $("#playlist .content"),
+            timeAppendTo: $("#player .time"),
+            playlist:
             {
                 title: 'Random videos',
                 videos: [
@@ -58,67 +56,94 @@ function InitialisePlayer()
                     { id: 'Kv6Ewqx3PMs', title: 'Mr. Oizo Flat Beat' },
                     { id: 'IAxj2ob_JoU', title: 'Most incredible volcano footage ever' },
                     { id: '3ycBGkLkEkg', title: 'Wingsuit BASE jumping in Baffin Island' }
-                    ]
+                ]
             }
-    };
+        };
         _viewUpdater = new viewUpdater();
-    _player = new window.Player.YouTubePlayer(config, $(".youtube-player"));
-    _player.addListener(window.Player.Events.videoLoaded, VideoLoaded);
+        this._player = new window.Player.YouTubePlayer(config, $(".youtube-player"));
+        this._player.addListener(window.Player.Events.videoLoaded, VideoLoaded);
 
-    _player.addListener(window.Player.Events.playlistReady, function(){
-		_viewUpdater.updatePlaylist(_player.getPlaylistLength());
-    });
+        this._player.addListener(
+            window.Player.Events.playlistReady,
+            $.proxy(function()
+            {
+                _viewUpdater.updatePlaylist(this._player.getPlaylistLength());
+            }, this)
+        );
 
-    _player.addListener(window.Player.Events.videoPaused, function(){
-		_viewUpdater.updateVideoTitle("Paused: "+_player.getCurrentVideo().name);
-    });
+        this._player.addListener(window.Player.Events.videoPaused, function(){
+            _viewUpdater.updateVideoTitle("Paused: "+_player.getCurrentVideo().name);
+        });
+        window.Common.Log.Instance().Info("Last fm "+this._lastFmInformationProvider);
+        this._player.addListener(
+            window.Player.Events.videoPlay,
+            $.proxy(function(video)
+            {
+                _viewUpdater.updateVideoTitle("Playing: "+video.name+" ("+video.durationInMinutes+")");
+                this._lastFmInformationProvider.getArtist(video.artist, _viewUpdater.updateArtistInfo);
+                this._scrobbler.updateNowPlaying(
+                    {
+                        track: video.title,
+                        artist: video.artist
+                    },
+                    this._sessionObject,
+                    {
+                        success:  function(s)
+                        {
+                            window.Common.Log.Instance().Info("LastFm NowPlaying successfuly updated.");
+                        },
+                        error: function(e)
+                        {
+                            window.Common.Log.Instance().Error("LastFm NowPlaying update failed: "+ e.message);
+                        }
+                    }
 
-    _player.addListener(window.Player.Events.videoPlay, function(video)
-    {
-        _viewUpdater.updateVideoTitle("Playing: "+video.name+" ("+video.durationInMinutes+")");
-		_scrobbler.getArtist(video.artist, _viewUpdater.updateArtistInfo);
-		var sc = _lastFmFactory.createScrobbler();
-		sc.updateNowPlaying(
-			{
-				track: video.title,
-				artist: video.artist
-			}, 
-			_sessionId,
-			{
-				success:  function(s)
-				{
-                    window.Common.Log.Instance().Info("LastFm NowPlaying successfuly updated.");
-				}, 
-				error: function(e)
-				{
-                    window.Common.Log.Instance().Error("LastFm NowPlaying update failed: "+ e.message);
-				}
-			}
-			
-			);
-		sc.scrobble(
-			{
-				track: video.title,
-				artist: video.artist,
-				//it is in ms so it must be divided by 1000, also need to be rounded to make an int value
-				timestamp:  Math.round((new Date()).getTime() / 1000)
-			}, 
-			_sessionId,
-			{
-				success:  function(s)
-				{
-                    window.Common.Log.Instance().Info("LastFm Scrobbling successfuly updated: "+ s.scrobbles.scrobble);
-				}, 
-				error: function(e)
-				{
-                    window.Common.Log.Instance().Error("LastFm Scrobbling update failed: "+ e.message);
-				}
-			}
-			
-			);
-		
-    });
+                );
+                this._scrobbler.scrobble(
+                    {
+                        track: video.title,
+                        artist: video.artist,
+                        //it is in ms so it must be divided by 1000, also need to be rounded to make an int value
+                        timestamp:  Math.round((new Date()).getTime() / 1000)
+                    },
+                    this._sessionObject,
+                    {
+                        success:  function(s)
+                        {
+                            window.Common.Log.Instance().Info("LastFm Scrobbling successfuly updated: "+ s.scrobbles.scrobble);
+                        },
+                        error: function(e)
+                        {
+                            window.Common.Log.Instance().Error("LastFm Scrobbling update failed: "+ e.message);
+                        }
+                    }
+
+                );
+
+            }, this)
+        );
+    }
 }
+
+$(function()
+{
+    onlineScrobbler = new window.ApplicationCore.OnlineScrobbler();
+    onlineScrobbler.initialisePlayer();
+
+    //_lastFmFactory = new window.LastFm.LastFmApiFactory();
+
+   // InitialisePlayer();
+	//InitialiseScrobbler();
+    HookUpLoadUrlButtonAction();
+    HookUpToolbarButtons();
+    HeaderAction();
+	var urlPars = new window.Common.UrlParser();
+	_token = urlPars.getParameterValue(window.location.href, "token");
+    window.Common.Log.Instance().Debug("Token: "+_token+" has been obtained.");
+
+
+    onlineScrobbler.createSession(_token);
+});
 
 function VideoLoaded(video)
 {
@@ -152,10 +177,10 @@ function HeaderAction(){
 
 function HookUpToolbarButtons()
 {
-    _player.hookUpButtonAction("play_button", "playVideo");
-    _player.hookUpButtonAction("pause_button", "pauseVideo");
-    _player.hookUpButtonAction("next_button", "nextVideo");
-    _player.hookUpButtonAction("prev_button", "prevVideo");
+    onlineScrobbler._player.hookUpButtonAction("play_button", "playVideo");
+    onlineScrobbler._player.hookUpButtonAction("pause_button", "pauseVideo");
+    onlineScrobbler._player.hookUpButtonAction("next_button", "nextVideo");
+    onlineScrobbler._player.hookUpButtonAction("prev_button", "prevVideo");
 }
 
 
@@ -165,6 +190,6 @@ function HookUpLoadUrlButtonAction(){
     {
         var url= $("#videoUrl").val();
 
-        _player.loadPlaylistFromUrl(url);
+        onlineScrobbler._player.loadPlaylistFromUrl(url);
     });
 }
