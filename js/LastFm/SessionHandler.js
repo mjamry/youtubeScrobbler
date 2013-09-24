@@ -16,12 +16,12 @@ window.LastFm.SessionHandler = function(lastFmApi)
 
 window.LastFm.SessionHandler.prototype =
 {
-    createNewSession: function(token)
+    createNewSession: function(token, callback)
     {
         window.Common.Log.Instance().Debug("Last fm - new session requested using token: " + token);
         this.lastFmApi.auth.getSession({token:token},
             {
-                success: function(s)
+                success: function(response)
                 {
                     //Response structure:
                     //<session>
@@ -29,14 +29,16 @@ window.LastFm.SessionHandler.prototype =
                     //  <key>d580d57f32848f5dcf574d1ce18d78b2</key>
                     //  <subscriber>0</subscriber>
                     //</session>
-                    this.sessionDetails = s.session;
+                    this.sessionDetails = response.session;
                     window.Common.Log.Instance().Info("Session established.");
                     window.Common.Log.Instance().Debug("Session details - user: " + this.sessionDetails.name + ", key: "+ this.sessionDetails.key);
+                    callback(this.sessionDetails);
                 },
                 error: function(err, msg)
                 {
                     this.sessionDetails = UNDEFINED_SESSION_ID;
                     window.Common.Log.Instance().Error("Error ("+ err +") while creating session: " + msg);
+                    callback(UNDEFINED_SESSION_ID);
                 }
             });
     },
