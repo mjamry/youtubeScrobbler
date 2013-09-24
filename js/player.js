@@ -71,15 +71,18 @@ window.ApplicationCore.OnlineScrobbler.prototype =
             }, this)
         );
 
-        this._player.addListener(window.Player.Events.videoPaused, function(){
-            _viewUpdater.updateVideoTitle("Paused: "+_player.getCurrentVideo().name);
-        });
-        window.Common.Log.Instance().Info("Last fm "+this._lastFmInformationProvider);
+        this._player.addListener(window.Player.Events.videoPaused,
+            $.proxy(function()
+            {
+                _viewUpdater.updateVideoTitle("Paused: "+this._player.getCurrentVideo().name);
+            }, this)
+       );
+
         this._player.addListener(
             window.Player.Events.videoPlay,
             $.proxy(function(video)
             {
-                _viewUpdater.updateVideoTitle("Playing: "+video.name+" ("+video.durationInMinutes+")");
+                _viewUpdater.updateVideoTitle("Playing: " + video.name + " (" + video.durationInMinutes + ")");
                 this._lastFmInformationProvider.getArtist(video.artist, _viewUpdater.updateArtistInfo);
                 this._scrobbler.updateNowPlaying(
                     {

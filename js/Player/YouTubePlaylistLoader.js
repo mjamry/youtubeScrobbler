@@ -1,7 +1,10 @@
 //namespace
+window.Player = window.Player || {};
+
+//using
 window.Common = window.Common || {};
 
-YouTubePlaylistConstant =
+window.Player.YouTubePlaylistConstant =
 {
     API_URL: "https://gdata.youtube.com/feeds/api/",
     API_VERSION: 2,
@@ -16,9 +19,9 @@ YouTubePlaylistConstant =
 }
 
 //Main responsibility is to create playlists depending upon specified url address.
-window.Common.YouTubePlaylistLoader = function(){}
+window.Player.YouTubePlaylistLoader = function(){}
 
-window.Common.YouTubePlaylistLoader.prototype =
+window.Player.YouTubePlaylistLoader.prototype =
 {
     ///change length in seconds to human readible format, containing minutes and seconds.
 	_getHumanReadibleTimeFormat: function(timeInSeconds)
@@ -32,22 +35,29 @@ window.Common.YouTubePlaylistLoader.prototype =
 			
 	_getArtist: function(videoName)
 	{
-		var vidName = videoName.split(YouTubePlaylistConstant.VIDEO_NAME_SEPARATOR);
-		vidName[YouTubePlaylistConstant.ARTIST_NAME_ID] = vidName[YouTubePlaylistConstant.ARTIST_NAME_ID].trim();
-		return vidName[YouTubePlaylistConstant.ARTIST_NAME_ID];
+        var index = window.Player.YouTubePlaylistConstant.ARTIST_NAME_ID;
+		var vidName = videoName.split(window.Player.YouTubePlaylistConstant.VIDEO_NAME_SEPARATOR);
+		vidName[index] = vidName[index].trim();
+		return vidName[index];
 	},
 			
 	_getTitle: function(videoName)
 	{
-		var vidName = videoName.split(YouTubePlaylistConstant.VIDEO_NAME_SEPARATOR);
-		vidName[YouTubePlaylistConstant.VIDEO_TITLE_ID] = vidName[YouTubePlaylistConstant.VIDEO_TITLE_ID].trim();
-		return vidName[YouTubePlaylistConstant.VIDEO_TITLE_ID];
+        var index = window.Player.YouTubePlaylistConstant.VIDEO_TITLE_ID;
+		var vidName = videoName.split(window.Player.YouTubePlaylistConstant.VIDEO_NAME_SEPARATOR);
+		vidName[index] = vidName[index].trim();
+		return vidName[index];
 	},
 	
     //gets playlist using playlist id. When finished it calls callback function to return data.
     _createPlaylist : function(id, callback)
     {
-        var url = YouTubePlaylistConstant.API_URL + YouTubePlaylistConstant.PLAYLIST_API_VALUE + id + UrlParserConstants.PARAMS_START_SIGN +YouTubePlaylistConstant.FEED_PARAMS;
+        var url = window.Player.YouTubePlaylistConstant.API_URL +
+            window.Player.YouTubePlaylistConstant.PLAYLIST_API_VALUE +
+            id +
+            window.Common.UrlParserConstants.PARAMS_START_SIGN +
+            window.Player.YouTubePlaylistConstant.FEED_PARAMS;
+
         window.Common.Log.Instance().Debug("Sending playlist load request: "+url);
         $.getJSON(url, function(result)
         {
@@ -71,7 +81,12 @@ window.Common.YouTubePlaylistLoader.prototype =
     //gets video data using id. When finished it calls callback function to return data.
     loadVideo : function(id, callback)
     {
-        var url = YouTubePlaylistConstant.API_URL + YouTubePlaylistConstant.VIDEOS_API_VALUE + id + UrlParserConstants.PARAMS_START_SIGN + YouTubePlaylistConstant.FEED_PARAMS;
+        var url = window.Player.YouTubePlaylistConstant.API_URL +
+            window.Player.YouTubePlaylistConstant.VIDEOS_API_VALUE +
+            id +
+            window.Common.UrlParserConstants.PARAMS_START_SIGN +
+            window.Player.YouTubePlaylistConstant.FEED_PARAMS;
+
         window.Common.Log.Instance().Debug("Sending video load request: "+url);
         $.getJSON(url, $.proxy(function(result)
         {
@@ -100,16 +115,16 @@ window.Common.YouTubePlaylistLoader.prototype =
     loadPlaylistFromUrl : function(url, callback)
     {
         var parser = new window.Common.UrlParser();
-        var playlistId = parser.getParameterValue(url, YouTubePlaylistConstant.PLAYLIST_PARAMETER_NAME);
+        var playlistId = parser.getParameterValue(url, window.Player.YouTubePlaylistConstant.PLAYLIST_PARAMETER_NAME);
         
-        if(playlistId !== UrlParserConstants.URL_PARSE_ERR)
+        if(playlistId !== window.Common.UrlParserConstants.URL_PARSE_ERR)
         {
             this._createPlaylist(playlistId, callback);
         }
         else
         {
-            var videoId = parser.getParameterValue(url, YouTubePlaylistConstant.VIDEO_PARAMETER_NAME);
-            if(videoId !== UrlParserConstants.URL_PARSE_ERR)
+            var videoId = parser.getParameterValue(url, window.Player.YouTubePlaylistConstant.VIDEO_PARAMETER_NAME);
+            if(videoId !== window.Common.UrlParserConstants.URL_PARSE_ERR)
             {
                 this.loadVideo(videoId, callback);
             }

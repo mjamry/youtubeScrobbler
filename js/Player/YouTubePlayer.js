@@ -16,7 +16,7 @@ window.Player.YouTubePlayer = function(configuration, playerContainer)
 	//updates currentVideoDetails and fires videoLoaded event
 	var onVideoLoaded = function(video)
 	{
-		var loader = new window.Common.YouTubePlaylistLoader();
+		var loader = new window.Player.YouTubePlaylistLoader();
 		loader.loadVideo(video.id, $.proxy(
 				function(videoDetails)
 				{
@@ -89,7 +89,7 @@ window.Player.YouTubePlayer.prototype =
     loadPlaylistFromUrl: function(url)
     {
         window.Common.Log.Instance().Debug("Try loading playlist using URL: "+url);
-        var loader = new window.Common.YouTubePlaylistLoader();
+        var loader = new window.Player.YouTubePlaylistLoader();
         loader.loadPlaylistFromUrl(
                 url, 
                 $.proxy(this._onPlaylistReady, this)
