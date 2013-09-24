@@ -18,6 +18,11 @@ window.ApplicationCore.OnlineScrobbler = function()
 
 window.ApplicationCore.OnlineScrobbler.prototype =
 {
+    getPlayer: function()
+    {
+        return this._player;
+    },
+
     createNewSession: function(token)
     {
         var sessionHandler = this._lastFmFactory.createSessionHandler();

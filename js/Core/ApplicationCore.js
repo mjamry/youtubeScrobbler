@@ -12,8 +12,7 @@ window.ApplicationCore.AppCore.prototype =
 {
     getPlayer: function()
     {
-        //TODO expose player instance by function
-        return this._onlineScrobbler._player;
+        return this._onlineScrobbler.getPlayer();
     },
 
     createNewSession: function(token)
