@@ -1,12 +1,16 @@
 //namespace
 window.Common = window.Common || {};
 
+//TODO add possibility to set logging level
 window.Common.Log = function(){};
 
 window.Common.Log.SetInsance = function(instance)
 {
-    this.instance = instance;
-    this.instance.Info("Logger has been initialised.");
+    if(this.instance !== "undefined")
+    {
+        this.instance = instance;
+        this.instance.Info("Logger has been initialised.");
+    }
 }
 
 window.Common.Log.Instance = function()
@@ -21,6 +25,7 @@ window.Common.Log.Instance = function()
     }
 }
 
+//TODO move it to common namespace
 //simple implementation of Logger
 //it just write to console window.
 Logger = function(){};
@@ -60,6 +65,3 @@ Logger.prototype =
         console.debug(this._getFormatedTimestamp() + message);
     }
 }
-
-//TODO: need to be moved to more apropriate place
-window.Common.Log.SetInsance(new Logger());

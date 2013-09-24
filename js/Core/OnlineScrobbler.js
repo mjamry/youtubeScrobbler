@@ -18,7 +18,7 @@ window.ApplicationCore.OnlineScrobbler = function()
 
 window.ApplicationCore.OnlineScrobbler.prototype =
 {
-    createSession: function(token)
+    createNewSession: function(token)
     {
         var sessionHandler = this._lastFmFactory.createSessionHandler();
         sessionHandler.createNewSession(
