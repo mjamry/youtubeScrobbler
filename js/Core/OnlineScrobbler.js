@@ -35,7 +35,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         )
     },
 
-    initialisePlayer: function()
+    initialisePlayer: function(playerContainer, playlistContainer, timeElapsedContainer)
     {
         var config = {
             highDef: 1,
@@ -46,8 +46,8 @@ window.ApplicationCore.OnlineScrobbler.prototype =
             showToolbar: false,
             autoPlay: 1,
             repeatPlaylist: 1,
-            playlistAppendTo: $("#playlist .content"),
-            timeAppendTo: $("#player .time"),
+            playlistAppendTo: playlistContainer,
+            timeAppendTo: timeElapsedContainer,
             playlist:
             {
                 title: 'Random videos',
@@ -63,7 +63,8 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         };
 
         _viewUpdater = new viewUpdater();
-        this._player = new window.Player.YouTubePlayer(config, $(".youtube-player"));
+
+        this._player = new window.Player.YouTubePlayer(config, playerContainer);
         this._player.addListener(window.Player.Events.videoLoaded, VideoLoaded);
 
         this._player.addListener(
