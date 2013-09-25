@@ -16,8 +16,6 @@ window.ApplicationCore.AppCore.prototype =
 {
     initialise: function()
     {
-        //TODO: move here initialisation of services
-
         this._onlineScrobbler.initialisePlayer
             (
                 window.Player.Configuration,

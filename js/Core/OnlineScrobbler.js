@@ -18,40 +18,8 @@ window.ApplicationCore.OnlineScrobbler = function()
 
 window.ApplicationCore.OnlineScrobbler.prototype =
 {
-    getPlayer: function()
+    _initialiseScrobbler: function()
     {
-        return this._player;
-    },
-
-    createNewSession: function(token)
-    {
-        var sessionHandler = this._lastFmFactory.createSessionHandler();
-        sessionHandler.createNewSession(
-            token,
-            $.proxy(function(sessionObject)
-            {
-                this._sessionObject = sessionObject;
-            }, this)
-        )
-    },
-
-    attachToEvent: function(event, callback)
-    {
-        this._player.addListener(event, callback);
-    },
-
-    initialisePlayer: function(playerConfiguration, playerContainer, playlistContainer, timeElapsedContainer)
-    {
-        var configuration = $.extend(
-            {
-                playlistAppendTo: playlistContainer,
-                timeAppendTo: timeElapsedContainer
-            },
-            playerConfiguration
-        );
-
-        this._player = new window.Player.YouTubePlayer(configuration, playerContainer);
-
         this._player.addListener(
             window.Player.Events.videoPlay,
             $.proxy(function(video)
@@ -97,5 +65,42 @@ window.ApplicationCore.OnlineScrobbler.prototype =
 
             }, this)
         );
+    },
+
+    getPlayer: function()
+    {
+        return this._player;
+    },
+
+    createNewSession: function(token)
+    {
+        var sessionHandler = this._lastFmFactory.createSessionHandler();
+        sessionHandler.createNewSession(
+            token,
+            $.proxy(function(sessionObject)
+            {
+                this._sessionObject = sessionObject;
+            }, this)
+        )
+    },
+
+    attachToEvent: function(event, callback)
+    {
+        this._player.addListener(event, callback);
+    },
+
+    initialisePlayer: function(playerConfiguration, playerContainer, playlistContainer, timeElapsedContainer)
+    {
+        var configuration = $.extend(
+            {
+                playlistAppendTo: playlistContainer,
+                timeAppendTo: timeElapsedContainer
+            },
+            playerConfiguration
+        );
+
+        this._player = new window.Player.YouTubePlayer(configuration, playerContainer);
+
+        this._initialiseScrobbler();
     }
 };
