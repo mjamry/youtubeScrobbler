@@ -3,6 +3,7 @@ window.ApplicationCore = window.ApplicationCore || {};
 
 //using
 window.UI = window.UI || {};
+window.Player = window.Player || {};
 
 window.ApplicationCore.AppCore = function(factory)
 {
@@ -10,6 +11,7 @@ window.ApplicationCore.AppCore = function(factory)
     this._onlineScrobbler = factory.createOnlineScrobbler();
     this._onlineScrobbler.initialisePlayer
     (
+        window.Player.Configuration,
         this._uiCore.getPlayerContainer(),
         this._uiCore.getPlaylistContainer(),
         this._uiCore.getTimeElapsedContainer()
