@@ -35,6 +35,11 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         )
     },
 
+    attachToEvent: function(event, callback)
+    {
+        this._player.addListener(event, callback);
+    },
+
     initialisePlayer: function(playerConfiguration, playerContainer, playlistContainer, timeElapsedContainer)
     {
         var configuration = $.extend(
@@ -45,32 +50,12 @@ window.ApplicationCore.OnlineScrobbler.prototype =
             playerConfiguration
         );
 
-        _viewUpdater = new viewUpdater();
-
         this._player = new window.Player.YouTubePlayer(configuration, playerContainer);
-        this._player.addListener(window.Player.Events.videoLoaded, VideoLoaded);
-
-        this._player.addListener(
-            window.Player.Events.playlistReady,
-            $.proxy(function()
-            {
-                _viewUpdater.updatePlaylist(this._player.getPlaylistLength());
-            }, this)
-        );
-
-        this._player.addListener(window.Player.Events.videoPaused,
-            $.proxy(function()
-            {
-                _viewUpdater.updateVideoTitle("Paused: "+this._player.getCurrentVideo().name);
-            }, this)
-       );
 
         this._player.addListener(
             window.Player.Events.videoPlay,
             $.proxy(function(video)
             {
-                _viewUpdater.updateVideoTitle("Playing: " + video.name + " (" + video.durationInMinutes + ")");
-                this._lastFmInformationProvider.getArtist(video.artist, _viewUpdater.updateArtistInfo);
                 this._scrobbler.updateNowPlaying(
                     {
                         track: video.title,
