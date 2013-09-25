@@ -13,6 +13,7 @@ $(function()
     window.Common.Log.Instance().Info("Application initialisation started.");
 
     var applicationCore = new window.ApplicationCore.AppCore(coreServicesFactory);
+    applicationCore.initialise();
 
     var token = GetToken();
     applicationCore.createNewSession(token);

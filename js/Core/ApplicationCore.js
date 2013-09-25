@@ -9,13 +9,7 @@ window.ApplicationCore.AppCore = function(factory)
 {
     this._uiCore = new window.UI.UICore();
     this._onlineScrobbler = factory.createOnlineScrobbler();
-    this._onlineScrobbler.initialisePlayer
-    (
-        window.Player.Configuration,
-        this._uiCore.getPlayerContainer(),
-        this._uiCore.getPlaylistContainer(),
-        this._uiCore.getTimeElapsedContainer()
-    );
+
 };
 
 window.ApplicationCore.AppCore.prototype =
@@ -24,6 +18,14 @@ window.ApplicationCore.AppCore.prototype =
     {
         //TODO: move here initialisation of services
 
+        this._onlineScrobbler.initialisePlayer
+            (
+                window.Player.Configuration,
+                this._uiCore.getPlayerContainer(),
+                this._uiCore.getPlaylistContainer(),
+                this._uiCore.getTimeElapsedContainer()
+            );
+
         this._viewUpdater = new viewUpdater();
         this._onlineScrobbler.attachToEvent(window.Player.Events.videoLoaded, VideoLoaded);
 
@@ -31,14 +33,14 @@ window.ApplicationCore.AppCore.prototype =
             window.Player.Events.playlistReady,
             $.proxy(function()
             {
-                this._viewUpdater.updatePlaylist(this._player.getPlaylistLength());
+                this._viewUpdater.updatePlaylist(this.getPlayer().getPlaylistLength());
             }, this)
         );
 
         this._onlineScrobbler.attachToEvent(window.Player.Events.videoPaused,
             $.proxy(function()
             {
-                this._viewUpdater.updateVideoTitle("Paused: "+this._player.getCurrentVideo().name);
+                this._viewUpdater.updateVideoTitle("Paused: "+this.getPlayer().getCurrentVideo().name);
             }, this)
         );
 
