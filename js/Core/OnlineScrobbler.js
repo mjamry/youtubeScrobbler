@@ -29,18 +29,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
                         track: video.title,
                         artist: video.artist
                     },
-                    this._sessionObject,
-                    {
-                        success:  function(response)
-                        {
-                            window.Common.Log.Instance().Info("LastFm NowPlaying successfuly updated: "+ response.nowplaying.track);
-                        },
-                        error: function(e)
-                        {
-                            window.Common.Log.Instance().Error("LastFm NowPlaying update failed: "+ e.message);
-                        }
-                    }
-
+                    this._sessionObject
                 );
                 this._scrobbler.scrobble(
                     {
@@ -49,18 +38,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
                         //it is in ms so it must be divided by 1000, also need to be rounded to make an int value
                         timestamp:  Math.round((new Date()).getTime() / 1000)
                     },
-                    this._sessionObject,
-                    {
-                        success:  function(response)
-                        {
-                            window.Common.Log.Instance().Info("LastFm Scrobbling successfuly updated: "+ response.scrobbles.scrobble);
-                        },
-                        error: function(e)
-                        {
-                            window.Common.Log.Instance().Error("LastFm Scrobbling update failed: "+ e.message);
-                        }
-                    }
-
+                    this._sessionObject
                 );
 
             }, this)

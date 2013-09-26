@@ -56,7 +56,16 @@ window.LastFm.Scrobbler.prototype =
         this.lastFmApi.track.updateNowPlaying(
             trackDetails,
             session,
-            callback);
+            {
+                success:  function(response)
+                {
+                    window.Common.Log.Instance().Info("LastFm NowPlaying successfuly updated: "+ response.nowplaying.track);
+                },
+                error: function(e)
+                {
+                    window.Common.Log.Instance().Error("LastFm NowPlaying update failed: "+ e.message);
+                }
+            });
     },
 
     love: function(trackDetails, session, callback)
