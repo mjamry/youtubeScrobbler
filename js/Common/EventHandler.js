@@ -22,32 +22,22 @@ window.Common.EventBrokerSingleton.instance = function()
 }
 
 //Provides possibility to register listeners for specified event.
-window.Common.EventBroker = function(events)
+window.Common.EventBroker = function()
 {
-    this.listeners = [];
-
-    this.initialise(events);
+    this.listeners = {};
 }
 
 window.Common.EventBroker.prototype =
 {
-    //initialises listeners array with empty values.
-    initialise: function(events)
-    {
-        //creates empty listeners list
-        for(var key in events)
-        {
-            if(events.hasOwnProperty(key)){
-                var e = events[key];
-                this.listeners[e] = [];
-            }
-        }
-    },
-
     //Adds new listener for specified event.
     addListener: function(event, listener, data, context)
     {
         var innerContext = context || null;
+        if( !this.listeners[event] )
+        {
+            this.listeners[event] = [];
+        }
+
         this.listeners[event].push(
             {
                 method: listener,
@@ -71,25 +61,33 @@ window.Common.EventBroker.prototype =
             
     fireEvent: function(event)
     {
-        var eventListeners = this.listeners[event];
-        for(var i = 0;i<eventListeners.length;i++)
+        if(this.listeners[event])
         {
-            var listener = eventListeners[i];
-            listener.method(listener.args);
-        }
+            for(var i = 0;i<this.listeners[event].length;i++)
+            {
+                var listener = this.listeners[event][i];
+                listener.method(listener.args);
+            }
 
-        window.Common.Log.Instance().Debug("Event: "+event+" has been fired");
+            window.Common.Log.Instance().Debug("Event: "+event+" has been fired");
+        }
+        else
+        {
+            window.Common.Log.Instance().Debug("Event: "+event+" hasn't got any listeners.");
+        }
     },
     
     fireEventWithData: function(event, data)
     {
-        var eventListeners = this.listeners[event];
-        for(var i = 0;i<eventListeners.length;i++)
+        if(this.listeners[event])
         {
-            var listener = eventListeners[i];
-            listener.method(data, listener.args);
-        }
+            for(var i = 0;i<this.listeners[event].length;i++)
+            {
+                var listener = this.listeners[event][i];
+                listener.method(data, listener.args);
+            }
 
-        window.Common.Log.Instance().Debug("Event: "+event+" has been fired, data: "+data);
+            window.Common.Log.Instance().Debug("Event: "+event+" has been fired, data: "+data);
+        }
     }
 };

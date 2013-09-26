@@ -84,11 +84,6 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         )
     },
 
-    attachToEvent: function(event, callback)
-    {
-        window.Common.EventBrokerSingleton.instance().addListener(event, callback);
-    },
-
     initialisePlayer: function(playerConfiguration, playerContainer, playlistContainer, timeElapsedContainer)
     {
         var configuration = $.extend(

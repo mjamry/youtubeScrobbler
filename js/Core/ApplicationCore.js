@@ -27,9 +27,9 @@ window.ApplicationCore.AppCore.prototype =
             );
 
         this._viewUpdater = new viewUpdater();
-        this._onlineScrobbler.attachToEvent(window.Player.Events.videoLoaded, VideoLoaded);
+        this._eventBroker.addListener(window.Player.Events.videoLoaded, VideoLoaded);
 
-        this._onlineScrobbler.attachToEvent(
+        this._eventBroker.addListener(
             window.Player.Events.playlistReady,
             $.proxy(function()
             {
@@ -37,14 +37,14 @@ window.ApplicationCore.AppCore.prototype =
             }, this)
         );
 
-        this._onlineScrobbler.attachToEvent(window.Player.Events.videoPaused,
+        this._eventBroker.addListener(window.Player.Events.videoPaused,
             $.proxy(function()
             {
                 this._viewUpdater.updateVideoTitle("Paused: "+this.getPlayer().getCurrentVideo().name);
             }, this)
         );
 
-        this._onlineScrobbler.attachToEvent(
+        this._eventBroker.addListener(
             window.Player.Events.videoPlay,
             $.proxy(function(video)
                 {

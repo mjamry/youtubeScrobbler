@@ -7,7 +7,7 @@ window.ApplicationCore.CoreServicesFactory.prototype =
 {
     createBrokerHandler: function()
     {
-        return new window.Common.EventBroker(window.Player.Events);
+        return new window.Common.EventBroker();
     },
 
     createLoggerService: function()
