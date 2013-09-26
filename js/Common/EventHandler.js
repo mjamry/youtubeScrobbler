@@ -89,5 +89,9 @@ window.Common.EventBroker.prototype =
 
             window.Common.Log.Instance().Debug("Event: "+event+" has been fired, data: "+data);
         }
+        else
+        {
+            window.Common.Log.Instance().Debug("Event: "+event+" hasn't got any listeners.");
+        }
     }
 };

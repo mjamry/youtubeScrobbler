@@ -8,6 +8,7 @@ window.Common = window.Common || {};
 window.LastFm.Scrobbler = function(lastFmApi)
 {
     this.lastFmApi = lastFmApi;
+    this._eventBroker = window.Common.EventBrokerSingleton.instance();
     window.Common.Log.Instance().Info("Last fm scrobbler has been created.");
 }
 
@@ -34,17 +35,20 @@ window.LastFm.Scrobbler.prototype =
                 //    <ignoredMessage code="0"></ignoredMessage>
                 //  </scrobble>
                 //</scrobbles>
-                success:  function(response)
-                {
-                    window.Common.Log.Instance().Info("Scrobbling new track.");
-                    window.Common.Log.Instance().Debug("LastFm Scrobbling details: "+ response.scrobbles.scrobble.track);
-                    return { isSuccessful: true };
-                },
-                error: function(response)
-                {
-                    window.Common.Log.Instance().Error("LastFm Scrobbling update failed: "+ response.message);
-                    return {isSuccessful: false, err: response.message};
-                }
+                success: $.proxy(
+                    function(response)
+                    {
+                        this._eventBroker.fireEventWithData(window.LastFm.Events.ScrobbleUpdated, response);
+                        window.Common.Log.Instance().Info("Scrobbling new track.");
+                        window.Common.Log.Instance().Debug("LastFm Scrobbling details: "+ response.scrobbles.scrobble.track);
+                        return { isSuccessful: true };
+                    }, this),
+                error: $.proxy(
+                    function(response)
+                    {
+                        window.Common.Log.Instance().Error("LastFm Scrobbling update failed: "+ response.message);
+                        return {isSuccessful: false, err: response.message};
+                    }, this)
             });
     },
 
