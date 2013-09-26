@@ -14,16 +14,24 @@ window.ApplicationCore.OnlineScrobbler = function()
     this._lastFmInformationProvider = this._lastFmFactory.createInformationProvider();
     this._scrobbler = this._lastFmFactory.createScrobbler();
     this._player = null;
+
+    this._trackStartedTimestamp = null;
 };
 
 window.ApplicationCore.OnlineScrobbler.prototype =
 {
+    _generateTimestamp: function()
+    {
+        return Math.round((new Date()).getTime() / 1000);
+    },
+
     _initialiseScrobbler: function()
     {
         window.Common.EventBrokerSingleton.instance().addListener(
             window.Player.Events.videoPlay,
             $.proxy(function(video)
             {
+                this._trackStartedTimestamp = this._generateTimestamp();
                 this._scrobbler.updateNowPlaying(
                     {
                         track: video.title,
@@ -43,7 +51,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
                         track: video.title,
                         artist: video.artist,
                         //it is in ms so it must be divided by 1000, also need to be rounded to make an int value
-                        timestamp:  Math.round((new Date()).getTime() / 1000)
+                        timestamp: this._trackStartedTimestamp
                     },
                     this._sessionObject
                 );
