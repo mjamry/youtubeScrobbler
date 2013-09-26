@@ -24,31 +24,38 @@ window.LastFm.Scrobbler.prototype =
             session,
             {
 
-                //Sample response:
-                //<scrobbles accepted="1" ignored="0">
-                //  <scrobble>
-                //    <track corrected="0">Test Track</track>
-                //    <artist corrected="0">Test Artist</artist>
-                //    <album corrected="0"></album>
-                //    <albumArtist corrected="0"></albumArtist>
-                //    <timestamp>1287140447</timestamp>
-                //    <ignoredMessage code="0"></ignoredMessage>
-                //  </scrobble>
-                //</scrobbles>
-                success: $.proxy(
-                    function(response)
+                /*Sample response:
+                <scrobbles accepted="1" ignored="0">
+                  <scrobble>
+                    <track corrected="0">Test Track</track>
+                    <artist corrected="0">Test Artist</artist>
+                    <album corrected="0"></album>
+                    <albumArtist corrected="0"></albumArtist>
+                    <timestamp>1287140447</timestamp>
+                    <ignoredMessage code="0"></ignoredMessage>
+                  </scrobble>
+                </scrobbles>*/
+                success:
+                $.proxy(function(response)
                     {
-                        this._eventBroker.fireEventWithData(window.LastFm.Events.ScrobbleUpdated, response);
-                        window.Common.Log.Instance().Info("Scrobbling new track.");
+                        //fire event
+                        this._eventBroker.fireEventWithData(window.LastFm.Events.TrackScrobbled, response);
+
+                        window.Common.Log.Instance().Info("Track has been successfuly scrobbled.");
                         window.Common.Log.Instance().Debug("LastFm Scrobbling details: "+ response.scrobbles.scrobble.track);
-                        return { isSuccessful: true };
-                    }, this),
-                error: $.proxy(
-                    function(response)
+                    },
+                    this
+                ),
+                error:
+                $.proxy(function(response)
                     {
+                        //fire event
                         window.Common.Log.Instance().Error("LastFm Scrobbling update failed: "+ response.message);
+
                         return {isSuccessful: false, err: response.message};
-                    }, this)
+                    },
+                    this
+                )
             });
     },
 
@@ -61,24 +68,45 @@ window.LastFm.Scrobbler.prototype =
             trackDetails,
             session,
             {
-                success:  function(response)
-                {
-                    window.Common.Log.Instance().Info("LastFm NowPlaying successfuly updated: "+ response.nowplaying.track);
-                },
-                error: function(e)
-                {
-                    window.Common.Log.Instance().Error("LastFm NowPlaying update failed: "+ e.message);
-                }
+                /*example response:
+                <nowplaying>
+                    <track corrected="0">Test Track</track>
+                    <artist corrected="0">Test Artist</artist>
+                    <album corrected="0"></album>
+                    <albumArtist corrected="0"></albumArtist>
+                    <ignoredMessage code="0"></ignoredMessage>
+                </nowplaying>*/
+                success:
+                $.proxy(function(response)
+                    {
+                        //fire event
+                        this._eventBroker.fireEventWithData(window.LastFm.Events.NowPlayingUpdated, response);
+
+                        window.Common.Log.Instance().Info("Now playing has been successfuly updated.");
+                        window.Common.Log.Instance().Debug("LastFm NowPlaying successfuly updated: "+ response.nowplaying.track);
+                    },
+                    this
+                ),
+                error:
+                $.proxy(function(response)
+                    {
+                        //fire event
+                        this._eventBroker.fireEventWithData(window.LastFm.Events.NowPlayingUpdateFailed, response);
+
+                        window.Common.Log.Instance().Error("LastFm NowPlaying update failed: "+ response.message);
+                    },
+                    this
+                )
             });
     },
 
-    love: function(trackDetails, session, callback)
+    love: function(trackDetails, session)
     {
         window.Common.Log.Instance().Debug("Last fm scrobbler - love request with track: "+trackDetails.artist+" - "+trackDetails.track);
         this.lastFmApi.track.love(
             trackDetails,
-            session,
-            callback
+            session
+            //TODO callbacks
         );
     }
 };
