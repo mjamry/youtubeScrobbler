@@ -20,7 +20,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
 {
     _initialiseScrobbler: function()
     {
-        this._player.addListener(
+        window.Common.EventBrokerSingleton.instance().addListener(
             window.Player.Events.videoPlay,
             $.proxy(function(video)
             {
@@ -86,7 +86,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
 
     attachToEvent: function(event, callback)
     {
-        this._player.addListener(event, callback);
+        window.Common.EventBrokerSingleton.instance().addListener(event, callback);
     },
 
     initialisePlayer: function(playerConfiguration, playerContainer, playlistContainer, timeElapsedContainer)

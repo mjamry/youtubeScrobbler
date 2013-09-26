@@ -1,15 +1,35 @@
 //namespace
 window.Common = window.Common || {};
 
+//singleton pattern for event broaker
+window.Common.EventBrokerSingleton = function()
+{
+    this._instance = null;
+};
+
+window.Common.EventBrokerSingleton.setInstance = function(instance)
+{
+    //TODO maybe better validation here or just lazy loading instead.
+    if(this._instance == null)
+    {
+        this._instance = instance;
+    }
+}
+
+window.Common.EventBrokerSingleton.instance = function()
+{
+    return this._instance;
+}
+
 //Provides possibility to register listeners for specified event.
-window.Common.EventHandler = function(events)
+window.Common.EventBroker = function(events)
 {
     this.listeners = [];
 
     this.initialise(events);
 }
 
-window.Common.EventHandler.prototype =
+window.Common.EventBroker.prototype =
 {
     //initialises listeners array with empty values.
     initialise: function(events)

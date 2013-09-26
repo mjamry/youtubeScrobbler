@@ -5,6 +5,11 @@ window.ApplicationCore.CoreServicesFactory = function(){}
 
 window.ApplicationCore.CoreServicesFactory.prototype =
 {
+    createBrokerHandler: function()
+    {
+        return new window.Common.EventBroker(window.Player.Events);
+    },
+
     createLoggerService: function()
     {
         return new Logger();

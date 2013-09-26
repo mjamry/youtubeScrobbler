@@ -14,7 +14,7 @@ function ytPlayerTests()
             }
     };
     
-    Player = new window.Player.YouTubePlayer(config, $(".youtube-player"));
+   /* Player = new window.Player.YouTubePlayer(config, $(".youtube-player"));
     Player.addListener(Player.events.videoLoaded, VideoLoaded);
 
     Player.addListener(Player.events.playlistReady, function(){
@@ -46,5 +46,5 @@ function ytPlayerTests()
     });
     Player.addListener(Player.events.beforePlaylistReady, function(){
         console.log("before playlist ready");
-    });
+    });*/
 }

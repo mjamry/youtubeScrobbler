@@ -8,10 +8,11 @@ window.Common = window.Common || {};
 //Provides possibility to attach to player events.
 window.Player.YouTubePlayer = function(configuration, playerContainer)
 {
+    this.eventBroker = window.Common.EventBrokerSingleton.instance();
     //stored video details
     this.playlistLength = 0;
 
-
+    //TODO it should be changed, i have to think about that...
 	//updates currentVideoDetails and fires videoLoaded event
 	var onVideoLoaded = function(video)
 	{
@@ -21,32 +22,26 @@ window.Player.YouTubePlayer = function(configuration, playerContainer)
 				{
 					this.currentVideoDetails = videoDetails.videos[0];
                     window.Common.Log.Instance().Debug("Video: \""+this.currentVideoDetails.name+"\" has been loaded.");
-					this.eventHandler.fireEventWithData(window.Player.Events.videoPlay, this.currentVideoDetails);
+					this.eventBroker.fireEventWithData(window.Player.Events.videoPlay, this.currentVideoDetails);
 				}
 				, this));
 	};
-	
 
-    /*------------fields---------------*/
-
-
-    this.eventHandler = new window.Common.EventHandler(window.Player.Events);
-    
     //extends jquery-youtube-player configuration by event handlers.
     this.config = $.extend(
         {
             //extends options by event handlers
-            onReady:$.proxy(function(){this.eventHandler.fireEvent(window.Player.Events.playerReady);}, this),
-            onError: $.proxy(function(msg){this.eventHandler.fireEventWithData(window.Player.Events.error, msg);}, this),
+            onReady:$.proxy(function(){this.eventBroker.fireEvent(window.Player.Events.playerReady);}, this),
+            onError: $.proxy(function(msg){this.eventBroker.fireEventWithData(window.Player.Events.error, msg);}, this),
             
-            onVideoLoaded: $.proxy(function(video){this.eventHandler.fireEventWithData(window.Player.Events.videoLoaded, video);}, this),
-            onVideoPaused: $.proxy(function(){this.eventHandler.fireEvent(window.Player.Events.videoPaused);}, this),
+            onVideoLoaded: $.proxy(function(video){this.eventBroker.fireEventWithData(window.Player.Events.videoLoaded, video);}, this),
+            onVideoPaused: $.proxy(function(){this.eventBroker.fireEvent(window.Player.Events.videoPaused);}, this),
             onVideoPlay: $.proxy(onVideoLoaded, this),
-            onVideoCue: $.proxy(function(video){this.eventHandler.fireEventWithData(window.Player.Events.videoCue, video);}, this),
-            onBuffer: $.proxy(function(){this.eventHandler.fireEvent(window.Player.Events.videoBuffering);}, this),
+            onVideoCue: $.proxy(function(video){this.eventBroker.fireEventWithData(window.Player.Events.videoCue, video);}, this),
+            onBuffer: $.proxy(function(){this.eventBroker.fireEvent(window.Player.Events.videoBuffering);}, this),
 
-            onAfterPlaylistLoaded: $.proxy(function(){this.eventHandler.fireEvent(window.Player.Events.playlistReady);}, this),
-            onBeforePlaylistLoaded: $.proxy(function(){this.eventHandler.fireEvent(window.Player.Events.beforePlaylistReady);}, this)
+            onAfterPlaylistLoaded: $.proxy(function(){this.eventBroker.fireEvent(window.Player.Events.playlistReady);}, this),
+            onBeforePlaylistLoaded: $.proxy(function(){this.eventBroker.fireEvent(window.Player.Events.beforePlaylistReady);}, this)
         }
         ,configuration
     );
@@ -70,7 +65,7 @@ window.Player.YouTubePlayer.prototype =
 		this.playlistLength = playlist.videos.length;
 
         window.Common.Log.Instance().Info("Playlist has been loaded, contains "+this.playlistLength+" video(s).");
-        this.eventHandler.fireEvent(window.Player.Events.playlistReady);
+        this.eventBroker.fireEvent(window.Player.Events.playlistReady);
     },
             
     hookUpButtonAction: function(button, action)
@@ -79,12 +74,7 @@ window.Player.YouTubePlayer.prototype =
             $.proxy(this._executeAction, this, action)
         );
     },
-    
-    addListener: function(event, listener)
-    {
-        this.eventHandler.addListener(event, listener);
-    },
-    
+
     loadPlaylistFromUrl: function(url)
     {
         window.Common.Log.Instance().Debug("Try loading playlist using URL: "+url);

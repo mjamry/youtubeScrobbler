@@ -7,9 +7,11 @@ window.Player = window.Player || {};
 
 window.ApplicationCore.AppCore = function(factory)
 {
-    this._uiCore = new window.UI.UICore();
-    this._onlineScrobbler = factory.createOnlineScrobbler();
+    this._eventBroker = factory.createBrokerHandler();
 
+    window.Common.EventBrokerSingleton.setInstance(this._eventBroker);
+    this._uiCore = new window.UI.UICore();
+    this._onlineScrobbler = factory.createOnlineScrobbler(this._eventHandler);
 };
 
 window.ApplicationCore.AppCore.prototype =
