@@ -63,13 +63,13 @@ window.Common.EventBroker.prototype =
     {
         if(this.listeners[event])
         {
+            window.Common.Log.Instance().Debug("Event: "+event+" has been fired");
+
             for(var i = 0;i<this.listeners[event].length;i++)
             {
                 var listener = this.listeners[event][i];
                 listener.method(listener.args);
             }
-
-            window.Common.Log.Instance().Debug("Event: "+event+" has been fired");
         }
         else
         {
@@ -81,13 +81,13 @@ window.Common.EventBroker.prototype =
     {
         if(this.listeners[event])
         {
+            window.Common.Log.Instance().Debug("Event: "+event+" has been fired, data: "+data);
+
             for(var i = 0;i<this.listeners[event].length;i++)
             {
                 var listener = this.listeners[event][i];
                 listener.method(data, listener.args);
             }
-
-            window.Common.Log.Instance().Debug("Event: "+event+" has been fired, data: "+data);
         }
         else
         {

@@ -12,6 +12,7 @@ window.Player.Events =
     videoLoaded: "VideoLoaded",
     videoPaused: "VideoPaused",
     videoPlay: "VideoStarted",
+    videoStoped: "VideoStoped",
     videoCue: "VideoCue",
     videoBuffering: "VideoBuffering",
 

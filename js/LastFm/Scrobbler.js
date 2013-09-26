@@ -18,7 +18,7 @@ window.LastFm.Scrobbler.prototype =
     //Details are passed as literal: {track, artist, timestamp}.
     scrobble: function(trackDetails, session)
     {
-        window.Common.Log.Instance().Debug("Last fm scrobbler - scrobble request track: "+trackDetails.artist+" - "+trackDetails.track);
+        window.Common.Log.Instance().Debug("LastFm Scrobbling request track: "+trackDetails.artist+" - "+trackDetails.track);
         this.lastFmApi.track.scrobble(
             trackDetails,
             session,
@@ -50,9 +50,9 @@ window.LastFm.Scrobbler.prototype =
                 $.proxy(function(response)
                     {
                         //fire event
-                        window.Common.Log.Instance().Error("LastFm Scrobbling update failed: "+ response.message);
+                        this._eventBroker.fireEventWithData(window.LastFm.Events.ScrobblingFailed, response);
 
-                        return {isSuccessful: false, err: response.message};
+                        window.Common.Log.Instance().Error("LastFm Scrobbling update failed: "+ response.message);
                     },
                     this
                 )
@@ -63,7 +63,7 @@ window.LastFm.Scrobbler.prototype =
     //Details are passed as literal: {track, artist}.
     updateNowPlaying: function(trackDetails, session, callback)
     {
-        window.Common.Log.Instance().Debug("Last fm scrobbler - update request with track: "+trackDetails.artist+" - "+trackDetails.track);
+        window.Common.Log.Instance().Debug("LastFm NowPlaying update request with track: "+trackDetails.artist+" - "+trackDetails.track);
         this.lastFmApi.track.updateNowPlaying(
             trackDetails,
             session,

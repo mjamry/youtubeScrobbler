@@ -31,6 +31,13 @@ window.ApplicationCore.OnlineScrobbler.prototype =
                     },
                     this._sessionObject
                 );
+            }, this)
+        );
+
+        window.Common.EventBrokerSingleton.instance().addListener(
+            window.Player.Events.videoStoped,
+            $.proxy(function(video)
+            {
                 this._scrobbler.scrobble(
                     {
                         track: video.title,
@@ -40,9 +47,8 @@ window.ApplicationCore.OnlineScrobbler.prototype =
                     },
                     this._sessionObject
                 );
-
             }, this)
-        );
+        )
     },
 
     getPlayer: function()

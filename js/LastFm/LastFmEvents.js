@@ -7,5 +7,5 @@ window.LastFm.Events =
     NowPlayingUpdateFailed: "NowPlayingUpdateFailed",
 
     TrackScrobbled: "TrackScrobbled",
-    ScrobbleUpdateFailed: "ScrobbleUpdateFailed"
+    ScrobblingFailed: "ScrobblingFailed"
 }

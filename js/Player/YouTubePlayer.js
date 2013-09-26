@@ -11,6 +11,7 @@ window.Player.YouTubePlayer = function(configuration, playerContainer)
     this.eventBroker = window.Common.EventBrokerSingleton.instance();
     //stored video details
     this.playlistLength = 0;
+    this.currentVideoDetails = null;
 
     //TODO it should be changed, i have to think about that...
 	//updates currentVideoDetails and fires videoLoaded event
@@ -20,9 +21,17 @@ window.Player.YouTubePlayer = function(configuration, playerContainer)
 		loader.loadVideo(video.id, $.proxy(
 				function(videoDetails)
 				{
-					this.currentVideoDetails = videoDetails.videos[0];
-                    window.Common.Log.Instance().Debug("Video: \""+this.currentVideoDetails.name+"\" has been loaded.");
-					this.eventBroker.fireEventWithData(window.Player.Events.videoPlay, this.currentVideoDetails);
+                    //TODO improve equals validation
+                    if(!this.currentVideoDetails || this.currentVideoDetails.id !== videoDetails.videos[0].id)
+                    {
+                        if(this.currentVideoDetails != null)
+                        {
+                            this.eventBroker.fireEventWithData(window.Player.Events.videoStoped, this.currentVideoDetails);
+                        }
+                        this.currentVideoDetails = videoDetails.videos[0];
+                        window.Common.Log.Instance().Debug("Video: \""+this.currentVideoDetails.name+"\" has been loaded.");
+                        this.eventBroker.fireEventWithData(window.Player.Events.videoPlay, this.currentVideoDetails);
+                    }
 				}
 				, this));
 	};
