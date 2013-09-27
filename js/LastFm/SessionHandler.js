@@ -31,7 +31,7 @@ window.LastFm.SessionHandler.prototype =
         window.Common.Log.Instance().Debug("Last fm - new session requested using token: " + token);
         this.lastFmApi.auth.getSession({token:token},
             {
-                success: function(response)
+                success: $.proxy(function(response)
                 {
                     //Response structure:
                     //<session>
@@ -42,13 +42,14 @@ window.LastFm.SessionHandler.prototype =
 
                     this._setSession(response.session);
                     callback(this.sessionDetails);
-                },
-                error: function(err, msg)
+                }, this),
+
+                error: $.proxy(function(err, msg)
                 {
                     this.sessionDetails = UNDEFINED_SESSION_ID;
                     window.Common.Log.Instance().Error("Error ("+ err +") while creating session: " + msg);
                     callback(UNDEFINED_SESSION_ID);
-                }
+                }, this)
             });
     },
 
