@@ -18,6 +18,11 @@ window.ApplicationCore.CoreServicesFactory.prototype =
     createOnlineScrobbler: function()
     {
         return new window.ApplicationCore.OnlineScrobbler();
+    },
+
+    createCookieHandler: function()
+    {
+        return new window.Common.CookieHandler();
     }
 }
 

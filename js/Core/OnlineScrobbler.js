@@ -59,21 +59,31 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         )
     },
 
+    //gets player instance
     getPlayer: function()
     {
         return this._player;
     },
 
+    //try to restore last session if it does not exist creates new one.
     createNewSession: function(token)
     {
         var sessionHandler = this._lastFmFactory.createSessionHandler();
-        sessionHandler.createNewSession(
-            token,
-            $.proxy(function(sessionObject)
-            {
-                this._sessionObject = sessionObject;
-            }, this)
-        )
+
+        if(!sessionHandler.isSessionAlreadyCreated())
+        {
+            sessionHandler.createNewSession(
+                token,
+                $.proxy(function(sessionObject)
+                {
+                    this._sessionObject = sessionObject;
+                }, this)
+            )
+        }
+        else
+        {
+            this._sessionObject = sessionHandler.getCurrentSessionKey();
+        }
     },
 
     initialisePlayer: function(playerConfiguration, playerContainer, playlistContainer, timeElapsedContainer)

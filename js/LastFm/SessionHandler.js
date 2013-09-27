@@ -16,6 +16,16 @@ window.LastFm.SessionHandler = function(lastFmApi)
 
 window.LastFm.SessionHandler.prototype =
 {
+    _setSession: function(sessionDetails)
+    {
+        this.sessionDetails = sessionDetails;
+        //stores session details
+        window.Common.Cookie.instance().setCookie(window.Common.CookiesNames.sessionCookie, this.sessionDetails);
+
+        window.Common.Log.Instance().Info("Session established.");
+        window.Common.Log.Instance().Debug("Session details - user: " + this.sessionDetails.name + ", key: "+ this.sessionDetails.key);
+    },
+
     createNewSession: function(token, callback)
     {
         window.Common.Log.Instance().Debug("Last fm - new session requested using token: " + token);
@@ -29,9 +39,8 @@ window.LastFm.SessionHandler.prototype =
                     //  <key>d580d57f32848f5dcf574d1ce18d78b2</key>
                     //  <subscriber>0</subscriber>
                     //</session>
-                    this.sessionDetails = response.session;
-                    window.Common.Log.Instance().Info("Session established.");
-                    window.Common.Log.Instance().Debug("Session details - user: " + this.sessionDetails.name + ", key: "+ this.sessionDetails.key);
+
+                    this._setSession(response.session);
                     callback(this.sessionDetails);
                 },
                 error: function(err, msg)
@@ -43,11 +52,23 @@ window.LastFm.SessionHandler.prototype =
             });
     },
 
+    isSessionAlreadyCreated: function()
+    {
+        var lastSession = window.Common.Cookie.instance().getCookie(window.Common.CookiesNames.sessionCookie);
+        if(lastSession)
+        {
+            this._setSession(lastSession);
+            return true;
+        }
+
+        return false;
+    },
+
     getCurrentSessionKey: function()
     {
-        if(this.sessionDetails.key !== UNDEFINED_SESSION_ID)
+        if(this.sessionDetails)
         {
-            return this.sessionDetails.key;
+            return this.sessionDetails;
         }
 
         return "Session has not been established."

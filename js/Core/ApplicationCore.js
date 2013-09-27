@@ -10,6 +10,7 @@ window.ApplicationCore.AppCore = function(factory)
     this._eventBroker = factory.createBrokerHandler();
 
     window.Common.EventBrokerSingleton.setInstance(this._eventBroker);
+    window.Common.Cookie.setInstance(factory.createCookieHandler());
     this._uiCore = new window.UI.UICore();
     this._onlineScrobbler = factory.createOnlineScrobbler(this._eventHandler);
 };
