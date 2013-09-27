@@ -24,6 +24,7 @@ window.LastFm.SessionHandler.prototype =
 
         window.Common.Log.Instance().Info("Session established.");
         window.Common.Log.Instance().Debug("Session details - user: " + this.sessionDetails.name + ", key: "+ this.sessionDetails.key);
+        window.Common.EventBrokerSingleton.instance().fireEventWithData(window.LastFm.Events.SessionEstablished, this.sessionDetails.name);
     },
 
     createNewSession: function(token, callback)
