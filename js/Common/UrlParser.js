@@ -23,7 +23,7 @@ window.Common.UrlParser.prototype =
         }
         catch(ex)
         {
-            window.Common.Log.Error("Url parsing has failed. Ex: "+ex);
+            window.Common.Log.Instance().Error("Url parsing has failed. Ex: "+ex);
             return window.Common.UrlParserConstants.URL_PARSE_ERR;
         }
 
