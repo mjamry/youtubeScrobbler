@@ -1,100 +1,107 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>YT_Scrobbler</title>
+<head>
+    <title>YT_Scrobbler</title>
 
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
-        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab:400,700' rel='stylesheet' type='text/css'>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
+    <link href='http://fonts.googleapis.com/css?family=Josefin+Slab:400,700' rel='stylesheet' type='text/css'>
 
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="js/lib/jquery.min.js"></script>
-        <script type="text/javascript" src="js/lib/swfobject.js"></script>
-        <script type="text/javascript" src="js/lib/lastfm.api.js"></script>
-        <script type="text/javascript" src="js/lib/lastfm.api.cache.js"></script>
-        <script type="text/javascript" src="js/lib/lastfm.api.md5.js"></script>
-        <script type="text/javascript" src="js/lib/jquery.youtube.player.js"></script>
-        <script type="text/javascript" src="js/lib/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" >
 
-        <script type="text/javascript" src="js/UICore/UIConstants.js"></script>
-        <script type="text/javascript" src="js/UICore/UICore.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="js/lib/swfobject.js"></script>
+    <script type="text/javascript" src="js/lib/lastfm.api.js"></script>
+    <script type="text/javascript" src="js/lib/lastfm.api.cache.js"></script>
+    <script type="text/javascript" src="js/lib/lastfm.api.md5.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.youtube.player.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.cookie.js"></script>
 
-        <script type="text/javascript" src="js/Core/Main.js"></script>
-        <script type="text/javascript" src="js/Core/CoreServicesFactory.js"></script>
-        <script type="text/javascript" src="js/Core/ApplicationCore.js"></script>
-        <script type="text/javascript" src="js/Core/OnlineScrobbler.js"></script>
+    <script type="text/javascript" src="js/UICore/UIConstants.js"></script>
+    <script type="text/javascript" src="js/UICore/UICore.js"></script>
 
-        <script type="text/javascript" src="js/Common/Logger.js"></script>
-        <script type="text/javascript" src="js/Common/UrlParser.js"></script>
-        <script type="text/javascript" src="js/Common/EventHandler.js"></script>
-        <script type="text/javascript" src="js/Common/CookieHandler.js"></script>
-        <script type="text/javascript" src="js/Common/CookieConstants.js"></script>
+    <script type="text/javascript" src="js/Core/Main.js"></script>
+    <script type="text/javascript" src="js/Core/CoreServicesFactory.js"></script>
+    <script type="text/javascript" src="js/Core/ApplicationCore.js"></script>
+    <script type="text/javascript" src="js/Core/OnlineScrobbler.js"></script>
 
-        <script type="text/javascript" src="js/Player/YouTubePlaylistLoader.js"></script>
-        <script type="text/javascript" src="js/Player/YouTubePlayerEvents.js"></script>
-        <script type="text/javascript" src="js/Player/YouTubePlayer.js"></script>
-        <script type="text/javascript" src="js/Player/YouTubePlayerConfiguration.js"></script>
+    <script type="text/javascript" src="js/Common/Logger.js"></script>
+    <script type="text/javascript" src="js/Common/UrlParser.js"></script>
+    <script type="text/javascript" src="js/Common/EventHandler.js"></script>
+    <script type="text/javascript" src="js/Common/CookieHandler.js"></script>
+    <script type="text/javascript" src="js/Common/CookieConstants.js"></script>
 
-        <script type="text/javascript" src="js/viewUpdater.js"></script>
+    <script type="text/javascript" src="js/Player/YouTubePlaylistLoader.js"></script>
+    <script type="text/javascript" src="js/Player/YouTubePlayerEvents.js"></script>
+    <script type="text/javascript" src="js/Player/YouTubePlayer.js"></script>
+    <script type="text/javascript" src="js/Player/YouTubePlayerConfiguration.js"></script>
 
-        <script type="text/javascript" src="js/LastFm/LastFmEvents.js"></script>
-        <script type="text/javascript" src="js/LastFm/Common.js"></script>
-        <script type="text/javascript" src="js/LastFm/LastFmApiFactory.js"></script>
-        <script type="text/javascript" src="js/LastFm/Scrobbler.js"></script>
-        <script type="text/javascript" src="js/LastFm/InformationProvider.js"></script>
-        <script type="text/javascript" src="js/LastFm/SessionHandler.js"></script>
-    </head>
-    <body>
-        <header id="page-header">
-			<h1>YouTubeScrobbler - logo</h1>
-            <div id="sessionDetails">
-                <div id="authentication">
-                    <a href="http://www.last.fm/api/auth/?api_key=ed21aeb031f9999c1fd0f92510b84364&cb=http://85.198.205.88/michal/public_html/webstorm/youtubeScrobbler/index.html">Log in in lastfm</a>
-                </div>
-                <div id="current">
-                </div>
+    <script type="text/javascript" src="js/viewUpdater.js"></script>
+
+    <script type="text/javascript" src="js/LastFm/LastFmEvents.js"></script>
+    <script type="text/javascript" src="js/LastFm/Common.js"></script>
+    <script type="text/javascript" src="js/LastFm/LastFmApiFactory.js"></script>
+    <script type="text/javascript" src="js/LastFm/Scrobbler.js"></script>
+    <script type="text/javascript" src="js/LastFm/InformationProvider.js"></script>
+    <script type="text/javascript" src="js/LastFm/SessionHandler.js"></script>
+</head>
+<body>
+<header id="page-header">
+    <h1>YouTubeScrobbler - logo</h1>
+    <div id="sessionDetails">
+        <div id="authentication">
+            <a href="http://www.last.fm/api/auth/?api_key=ed21aeb031f9999c1fd0f92510b84364&cb=http://85.198.205.88/michal/public_html/webstorm/youtubeScrobbler/index.html" class="pure-button pure-button-primary">Log in in lastfm</a>
+        </div>
+        <div id="current" class="pure-button pure-button-primary">
+
+        </div>
+    </div>
+</header>
+<div id="player">
+    <header class="page-title">
+    </header>
+    <div class="content">
+        <div class="title"></div>
+        <div class="time"></div>
+        <div id="inputData">
+            <form class=pure-form>
+                <input type="text" id="videoUrl" placeholder="paste you YT link here"/> <input type="button" value="Load video" id="loadUrlButton" class="pure-button pure-button-primary"/>
+            </form>
+
+            <div id="videoInfo"></div>
+            <div class="pure-g">
             </div>
-		</header>
-        <div id="player">
-            <header class="page-title">
-                <div class="title">tit</div>
-                <div class="time">time</div>
-            </header>
-            <div class="content">
-                <div class="title"></div>
-                <div class="time"></div>
-                <div id="inputData">
-                    <form class=pure-form>
-                        <input type="text" id="videoUrl" placeholder="paste you YT link here"/> <input type="button" value="Load video" id="loadUrlButton" class="pure-button pure-button-primary"/>
-                    </form>
-                    <br>
-                    <div id="videoInfo"></div>
-                </div>
-                <div class="youtube-player">
-                    <div class="youtube-player-video">
-                        <div class="youtube-player-object">
-                            You need Flash player 8+ and JavaScript enabled to view this video.
-                        </div>
+            <div class="youtube-player pure-u-1-2">
+                <br>
+                <div class="youtube-player-video">
+                    <div class="youtube-player-object">
+                        You need Flash player 8+ and JavaScript enabled to view this video.
                     </div>
                 </div>
-
-                            <a href="#" id="play_button" class="pure-button pure-button-primary">play</a>
-                            <a href="#" id="pause_button" class="pure-button pure-button-primary">pause</a>
-                            <a href="#" id="next_button" class="pure-button pure-button-primary">prev</a>
-                            <a href="#" id="prev_button" class="pure-button pure-button-primary">next</a>
-
+                <br>
+            </div>
+            <div id="playlist" class="pure-u-1-2">
+                <header class="page-title"><h1>playlist</h1></header>
+                <div class="content"></div>
             </div>
         </div>
-        
-        <div id="playlist">
-            <header class="page-title"><h1>playlist</h1></header>
-            <div class="content"></div>
-        </div>
 
-        <div id="footer">
-            footer
-        </div>
-    </body>
+        <a href="#" id="prev_button" class="pure-button pure-button-primary"><i class="icon-step-backward"></i></a>
+        <a href="#" id="play_button" class="pure-button pure-button-primary"><i class="icon-play"></i></a>
+        <a href="#" id="pause_button" class="pure-button pure-button-primary"><i class="icon-pause"></i></a>
+        <a href="#" id="next_button" class="pure-button pure-button-primary"><i class="icon-step-forward"></i></a>
+
+
+    </div>
+</div>
+
+
+
+<div id="footer">
+    footer
+</div>
+</body>
 </html>
