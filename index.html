@@ -10,15 +10,17 @@
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" >
+    <!--videojs css file - required-->
+    <link rel="stylesheet" href="css/video-js.css" >
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/lib/jquery.min.js"></script>
-    <script type="text/javascript" src="js/lib/swfobject.js"></script>
     <script type="text/javascript" src="js/lib/lastfm.api.js"></script>
     <script type="text/javascript" src="js/lib/lastfm.api.cache.js"></script>
     <script type="text/javascript" src="js/lib/lastfm.api.md5.js"></script>
-    <script type="text/javascript" src="js/lib/jquery.youtube.player.js"></script>
     <script type="text/javascript" src="js/lib/jquery.cookie.js"></script>
+
+    <script type="text/javascript" src="js/lib/video.js"></script>
 
     <script type="text/javascript" src="js/UICore/UIConstants.js"></script>
     <script type="text/javascript" src="js/UICore/UICore.js"></script>
@@ -75,13 +77,14 @@
             <div class="pure-g">
             </div>
             <div class="youtube-player pure-u-1-2">
-                <br>
-                <div class="youtube-player-video">
-                    <div class="youtube-player-object">
-                        You need Flash player 8+ and JavaScript enabled to view this video.
-                    </div>
-                </div>
-                <br>
+                <video id="example_video_1" class="video-js vjs-default-skin"
+                       controls preload="auto" width="640" height="264"
+                       poster="http://video-js.zencoder.com/oceans-clip.png"
+                       data-setup='{"example_option":true}'>
+                    <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />
+                    <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
+                    <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
+                </video>
             </div>
             <div id="playlist" class="pure-u-1-2">
                 <header class="page-title"><h1>playlist</h1></header>
