@@ -14,9 +14,10 @@ $(function()
 
     var applicationCore = new window.ApplicationCore.AppCore(coreServicesFactory);
     applicationCore.initialise();
-
+    HandleSession();
     var token = GetToken();
     applicationCore.createNewSession(token);
+
 
     HookUpLoadUrlButtonAction(applicationCore.getPlayer());
     HookUpToolbarButtons(applicationCore.getPlayer());
@@ -24,6 +25,17 @@ $(function()
 
     window.Common.Log.Instance().Info("Application initialisation ended.");
 });
+
+function HandleSession()
+{
+    window.Common.EventBrokerSingleton.instance().addListener(window.LastFm.Events.SessionEstablished,
+        function(userName)
+        {
+            $("#authentication").hide();
+            $("#current").html("Hello! <a href=\"http:\/\/www.lastfm.pl\/user\">"+userName+"<\/a>").show();
+        }
+    )
+}
 
 function GetToken()
 {

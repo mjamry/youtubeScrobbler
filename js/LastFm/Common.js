@@ -2,8 +2,8 @@ window.LastFm = window.LastFm || {};
 
 LastFmConstants =
 {
-    API_KEY: 'f21088bf9097b49ad4e7f487abab981e',
-    API_SECRET: '7ccaec2093e33cded282ec7bc81c6fca'
+    API_KEY: 'ed21aeb031f9999c1fd0f92510b84364',
+    API_SECRET: 'c234b6bf6b9f738748ce92391f0b0846'
 }
 
 LastFmApiCommon =
