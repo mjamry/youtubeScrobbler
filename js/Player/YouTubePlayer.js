@@ -79,7 +79,7 @@ window.Player.YouTubePlayer.prototype =
             
     hookUpButtonAction: function(button, action)
     {
-        $("#"+button).find("a").click(
+        $("#"+button).click(
             $.proxy(this._executeAction, this, action)
         );
     },

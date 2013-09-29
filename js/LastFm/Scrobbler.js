@@ -42,7 +42,7 @@ window.LastFm.Scrobbler.prototype =
                         this._eventBroker.fireEventWithData(window.LastFm.Events.TrackScrobbled, response);
 
                         window.Common.Log.Instance().Info("Track has been successfuly scrobbled.");
-                        window.Common.Log.Instance().Debug("LastFm Scrobbling details: "+ response.scrobbles.scrobble.track.toSource());
+                        window.Common.Log.Instance().Debug("LastFm Scrobbling details: "+ response.scrobbles.toSource());
                     },
                     this
                 ),
@@ -83,7 +83,7 @@ window.LastFm.Scrobbler.prototype =
                         this._eventBroker.fireEventWithData(window.LastFm.Events.NowPlayingUpdated, response);
 
                         window.Common.Log.Instance().Info("Now playing has been successfuly updated.");
-                        window.Common.Log.Instance().Debug("LastFm NowPlaying successfuly updated: "+ response.nowplaying.track.toSource());
+                        window.Common.Log.Instance().Debug("LastFm NowPlaying successfuly updated: "+ response.nowplaying.toSource());
                     },
                     this
                 ),

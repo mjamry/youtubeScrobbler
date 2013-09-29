@@ -6,7 +6,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
         <link href='http://fonts.googleapis.com/css?family=Josefin+Slab:400,700' rel='stylesheet' type='text/css'>
-        <link type="text/css" rel="stylesheet" href="css/general.css"/>
+
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
+
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
         <script type="text/javascript" src="js/lib/jquery.min.js"></script>
         <script type="text/javascript" src="js/lib/swfobject.js"></script>
@@ -64,7 +66,10 @@
                 <div class="title"></div>
                 <div class="time"></div>
                 <div id="inputData">
-                    paste link from YT: <input type="text" id="videoUrl"/><input type="button" value="Load video" id="loadUrlButton"/>
+                    <form class=pure-form>
+                        <input type="text" id="videoUrl" placeholder="paste you YT link here"/> <input type="button" value="Load video" id="loadUrlButton" class="pure-button pure-button-primary"/>
+                    </form>
+                    <br>
                     <div id="videoInfo"></div>
                 </div>
                 <div class="youtube-player">
@@ -74,15 +79,12 @@
                         </div>
                     </div>
                 </div>
-                        <ul id="toolbar-buttons">
-                            <li id="play_button"><a href="#">play</a></li>
-                            <li id="stop_button"><a href="#">stop</a></li>
-                            <li id="pause_button"><a href="#">pause</a></li>
-                            <li id="shuffle_button"><a href="#">shuffle</a></li>
-                            <li id="repeat_button"><a href="#">repeat</a></li>
-                            <li id="prev_button"><a href="#">prev</a></li>
-                            <li id="next_button"><a href="#">next</a></li>
-                        </ul>
+
+                            <a href="#" id="play_button" class="pure-button pure-button-primary">play</a>
+                            <a href="#" id="pause_button" class="pure-button pure-button-primary">pause</a>
+                            <a href="#" id="next_button" class="pure-button pure-button-primary">prev</a>
+                            <a href="#" id="prev_button" class="pure-button pure-button-primary">next</a>
+
             </div>
         </div>
         
@@ -90,19 +92,6 @@
             <header class="page-title"><h1>playlist</h1></header>
             <div class="content"></div>
         </div>
-        <div id="song_info">
-            <header class="page-title"><h1>song info</h1></header>
-            <div class="content"></div>
-        </div>
-        <div id="artist_info">
-            <header class="page-title"><h1>artist info</h1></header>
-            <div class="content"></div>
-        </div>
-        <div id="last_fm_data">
-            <header class="page-title"><h1>last fm data</h1></header>
-            <div class="content"></div>
-        </div>
-		
 
         <div id="footer">
             footer
