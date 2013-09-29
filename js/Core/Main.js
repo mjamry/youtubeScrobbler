@@ -84,8 +84,6 @@ function HookUpToolbarButtons(player)
     player.hookUpButtonAction("prev_button", "prevVideo");
 }
 
-
-
 function HookUpLoadUrlButtonAction(player){
     $("#loadUrlButton").bind("click", function()
     {

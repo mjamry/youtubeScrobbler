@@ -1,82 +1,8 @@
-body{
-    height: 600px;
-    padding:0;
-    margin:0;
-    font-family: 'Josefin Slab', serif;
-}
-
 #footer{
     height:160px;
     width:100%;
     background-color: #ddd;
 }
-
-.content{
-    width:800px;
-    height:100%;
-    margin:0 auto;
-    border:1px solid #111;
-	padding: 0;
-	overflow:hidden;
-}
-
-#player, #toolbar, #playlist{
-    height:600px;
-    width:100%;
-    margin: 0 auto;
-    
-}
-
-.page-title {
-	height: 60px;
-    width:100%;
-    margin:0 auto;
-    background-color: lightcoral;
-    cursor: pointer;
-    /*--test--*/
-    text-align: center;
-    font-weight: 700;
-    font-size: 20pt;
-	display:block;
-}
-
-.page-header{
-	    height:120px;
-    width:100%;
-    background-color: #ddd;
-}
-
-/*----------------------TOOLBAR--------------*/
-#toolbar{
-    height:200px;
-}
-#toolbar-buttons{
-    list-style-type: none;
-}
-
-#toolbar-buttons li{
-    float: left;
-    margin:0 auto;
-}
-
-#toolbar-buttons  a{
-    display: inline-block;
-    text-decoration: none;
-    text-align: center;
-    font-size: 18pt;
-    background-color: lightblue;
-    line-height: 70px;
-    width:100px;
-}
-
-.button:hover{
-    background-color: lightsalmon;
-}
-
-.button_selected{
-    background-color: lightgreen;
-}
-
 /*-----------------------------PLAYLIST---------------------*/
 .youtube-player-playlist{
     height:100%;
@@ -84,8 +10,6 @@ body{
 	margin:0;
 	padding:0;
 }
-
-
 
 .ui-state-default, .ui-state-active{
     height:30px;
@@ -102,10 +26,3 @@ body{
     background-color: yellow;
 }
 
-/*-------------------------------PLAYER------------------------------------*/
-.title{
-	width:30%;
-}
-.time{
-width:40%;
-}
