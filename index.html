@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" >
     <!--videojs css file - required-->
-    <link rel="stylesheet" href="css/video-js.css" >
+    <link rel="stylesheet" href="css/mediaelementplayer.css" >
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/lib/jquery.min.js"></script>
@@ -20,7 +20,7 @@
     <script type="text/javascript" src="js/lib/lastfm.api.md5.js"></script>
     <script type="text/javascript" src="js/lib/jquery.cookie.js"></script>
 
-    <script type="text/javascript" src="js/lib/video.js"></script>
+    <script type="text/javascript" src="js/lib/mediaelement-and-player.min.js"></script>
 
     <script type="text/javascript" src="js/UICore/UIConstants.js"></script>
     <script type="text/javascript" src="js/UICore/UICore.js"></script>
@@ -36,10 +36,10 @@
     <script type="text/javascript" src="js/Common/CookieHandler.js"></script>
     <script type="text/javascript" src="js/Common/CookieConstants.js"></script>
 
-    <script type="text/javascript" src="js/Player/YouTubePlaylistLoader.js"></script>
-    <script type="text/javascript" src="js/Player/YouTubePlayerEvents.js"></script>
-    <script type="text/javascript" src="js/Player/YouTubePlayer.js"></script>
-    <script type="text/javascript" src="js/Player/YouTubePlayerConfiguration.js"></script>
+    <script type="text/javascript" src="js/Player/MediaPlayer.js"></script>
+    <script type="text/javascript" src="js/Player/Media/MediaDetails.js"></script>
+    <script type="text/javascript" src="js/Player/MediaPlayerConfiguration.js"></script>
+    <script type="text/javascript" src="js/Player/PlayerEvents.js"></script>
 
     <script type="text/javascript" src="js/viewUpdater.js"></script>
 
@@ -76,14 +76,9 @@
             <div id="videoInfo"></div>
             <div class="pure-g">
             </div>
-            <div class="youtube-player pure-u-1-2">
-                <video id="example_video_1" class="video-js vjs-default-skin"
-                       controls preload="auto" width="640" height="264"
-                       poster="http://video-js.zencoder.com/oceans-clip.png"
-                       data-setup='{"example_option":true}'>
-                    <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />
-                    <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
-                    <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
+            <div class="media-element pure-u-1-2">
+                <video id="media_player" width="520" height="240" controls="control">
+                    <source type="video/webm" src="media/big_buck_bunny.webm" />
                 </video>
             </div>
             <div id="playlist" class="pure-u-1-2">

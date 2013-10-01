@@ -96,7 +96,8 @@ window.ApplicationCore.OnlineScrobbler.prototype =
             playerConfiguration
         );
 
-        this._player = new window.Player.YouTubePlayer(configuration, playerContainer);
+        //this._player = new window.Player.YouTubePlayer(configuration, playerContainer);
+        this._player = new window.Player.MediaPlayer();
 
         this._initialiseScrobbler();
     }

@@ -19,9 +19,9 @@ $(function()
     applicationCore.createNewSession(token);
 
 
-    HookUpLoadUrlButtonAction(applicationCore.getPlayer());
-    HookUpToolbarButtons(applicationCore.getPlayer());
-    HeaderAction();
+   // HookUpLoadUrlButtonAction(applicationCore.getPlayer());
+   // HookUpToolbarButtons(applicationCore.getPlayer());
+   // HeaderAction();
 
     window.Common.Log.Instance().Info("Application initialisation ended.");
 });
