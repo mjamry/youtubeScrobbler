@@ -7,12 +7,22 @@ window.Player.MediaPlayerConfig =
     // shows debug errors on screen
     enablePluginDebug: true,
     alwaysShowControls: true,
+    // remove or reorder to change plugin priority
+    plugins: ['flash','silverlight'],
+    // specify to force MediaElement to use a particular video or audio type
+   // type: ['video/youtube', 'video/webm'],
+    // path to Flash and Silverlight plugins
+    pluginPath: 'media/',
+    // name of flash file
+    flashName: 'flashmediaelement.swf',
+    // name of silverlight file
+    silverlightName: 'silverlightmediaelement.xap',
     // the order of controls you want on the control bar (and other plugins below)
-    features: ['playpause','progress','current','duration','tracks','volume'],
+    features: ['playpause','progress','current'],
     // default if the <video width> is not specified
-    defaultVideoWidth: 100,
+    defaultVideoWidth: 600,
     // default if the <video height> is not specified
-    defaultVideoHeight: 100,
+    defaultVideoHeight: 400,
     // overrides <video width>
     pluginWidth: 600,
     // overrides <video height>

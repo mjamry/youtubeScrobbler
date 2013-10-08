@@ -7,7 +7,7 @@ window,UI.UICore.prototype =
 {
     getPlayerContainer: function()
     {
-        return $(window.UI.UIConstants.PlayerContainer);
+        return window.UI.UIConstants.PlayerContainer;
     },
 
     getPlaylistContainer: function()

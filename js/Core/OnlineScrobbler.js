@@ -20,6 +20,7 @@ window.ApplicationCore.OnlineScrobbler = function()
 
 window.ApplicationCore.OnlineScrobbler.prototype =
 {
+    //TODO this value should be stored as time and formated only on demand.
     _generateTimestamp: function()
     {
         return Math.round((new Date()).getTime() / 1000);
@@ -27,6 +28,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
 
     _initialiseScrobbler: function()
     {
+        //TODO change names from video to media
         window.Common.EventBrokerSingleton.instance().addListener(
             window.Player.Events.videoPlay,
             $.proxy(function(video)
@@ -59,6 +61,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         )
     },
 
+    //TODO remove it!
     //gets player instance
     getPlayer: function()
     {
@@ -86,18 +89,9 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         }
     },
 
-    initialisePlayer: function(playerConfiguration, playerContainer, playlistContainer, timeElapsedContainer)
+    initialise: function(configuration, playerContainer)
     {
-        var configuration = $.extend(
-            {
-                playlistAppendTo: playlistContainer,
-                timeAppendTo: timeElapsedContainer
-            },
-            playerConfiguration
-        );
-
-        //this._player = new window.Player.YouTubePlayer(configuration, playerContainer);
-        this._player = new window.Player.MediaPlayer();
+        this._player = new window.Player.MediaPlayer(configuration, playerContainer);
 
         this._initialiseScrobbler();
     }

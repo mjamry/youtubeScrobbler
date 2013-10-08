@@ -19,12 +19,10 @@ window.ApplicationCore.AppCore.prototype =
 {
     initialise: function()
     {
-        this._onlineScrobbler.initialisePlayer
+        this._onlineScrobbler.initialise
             (
-                window.Player.Configuration,
-                this._uiCore.getPlayerContainer(),
-                this._uiCore.getPlaylistContainer(),
-                this._uiCore.getTimeElapsedContainer()
+                window.Player.MediaPlayerConfig,
+                this._uiCore.getPlayerContainer()
             );
 
         this._viewUpdater = new viewUpdater();
@@ -53,6 +51,8 @@ window.ApplicationCore.AppCore.prototype =
 
                 },  this)
         );
+
+
     },
 
     getPlayer: function()
@@ -63,5 +63,14 @@ window.ApplicationCore.AppCore.prototype =
     createNewSession: function(token)
     {
         this._onlineScrobbler.createNewSession(token);
+    },
+
+    play: function(url)
+    {
+        var mediaDetails = new window.Player.MediaDetails();
+        mediaDetails.url = url;
+        mediaDetails.title = "Test track";
+        mediaDetails.artist = "Dj Maslo";
+        this._onlineScrobbler.getPlayer().load(mediaDetails);
     }
 }

@@ -17,7 +17,7 @@ $(function()
     HandleSession();
     var token = GetToken();
     applicationCore.createNewSession(token);
-
+    HookUpLoadUrlButtonAction(applicationCore);
 
    // HookUpLoadUrlButtonAction(applicationCore.getPlayer());
    // HookUpToolbarButtons(applicationCore.getPlayer());
@@ -89,6 +89,7 @@ function HookUpLoadUrlButtonAction(player){
     {
         var url= $("#videoUrl").val();
 
-        player.loadPlaylistFromUrl(url);
+        //player.loadPlaylistFromUrl(url);
+         player.play(url);
     });
 }

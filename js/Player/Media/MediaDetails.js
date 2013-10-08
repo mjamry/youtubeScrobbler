@@ -6,7 +6,10 @@ window.Player.MediaDetails = function(){};
 
 window.Player.MediaDetails.prototype =
 {
-    author: "",
+    artist: "",
     title: "",
-    duration: "" //new Time(...)
+    duration: "", //new Time(...)
+    url: "",
+    mediaType: "",
+    cover: ""
 }

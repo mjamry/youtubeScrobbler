@@ -3,7 +3,7 @@ window.UI = window.UI || {};
 
 window.UI.UIConstants =
 {
-    PlayerContainer: ".youtube-player",
+    PlayerContainer: "media_player",
     PlaylistContainer: "#playlist .content",
     TimeElapsedContainer: "#player .time"
 }
