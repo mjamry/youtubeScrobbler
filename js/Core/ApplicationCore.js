@@ -71,7 +71,9 @@ window.ApplicationCore.AppCore.prototype =
         var playlist = plLoader.loadPlaylistFromUrl(
             url,
             $.proxy(function(playlist){
-                this._onlineScrobbler.getPlayer().load(playlist.first());
+                playlist.next();
+                playlist.next();
+                this._onlineScrobbler.getPlayer().load(playlist.next());
             }, this)
         );
 

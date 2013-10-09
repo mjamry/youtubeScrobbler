@@ -59,8 +59,8 @@ window.Player.Playlist.prototype =
         return this.mediaList[this.indexOfCurrentlySelectedMediaElement];
     },
 
-    lenght: function()
+    length: function()
     {
-          this.mediaList.length;
+          return this.mediaList.length;
     }
 }
