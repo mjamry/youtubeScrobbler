@@ -8,8 +8,9 @@ window.Player.MediaDetails.prototype =
 {
     artist: "",
     title: "",
-    duration: "", //new Time(...)
+    duration: "", //new Druation()
     url: "",
-    mediaType: "",
-    cover: ""
+    mediaType: "",//type of media e.g. "video/youtube"
+    id: "",       //media id from portal e.g YT or vimeo
+    cover: ""     //link to cover - from LastFm
 }

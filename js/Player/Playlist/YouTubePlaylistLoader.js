@@ -15,7 +15,8 @@ window.Player.YouTubePlaylistConstant =
     VIDEOS_API_VALUE: "videos/",
     VIDEO_TITLE_ID: 1,
     ARTIST_NAME_ID: 0,
-    VIDEO_NAME_SEPARATOR: "-"
+    VIDEO_NAME_SEPARATOR: "-",
+    MEDIA_TYPE: "video/youtube"
 };
 
 //Main responsibility is to create playlists depending upon specified url address.
@@ -23,16 +24,6 @@ window.Player.YouTubePlaylistLoader = function(){};
 
 window.Player.YouTubePlaylistLoader.prototype =
 {
-    ///change length in seconds to human readible format, containing minutes and seconds.
-	_getHumanReadibleTimeFormat: function(timeInSeconds)
-	{
-		var minuteInSeconds = 60;
-		var min = parseInt(timeInSeconds / minuteInSeconds);
-		var sec = timeInSeconds % minuteInSeconds;
-
-		return min + ":" + (sec < 10 ? "0" + sec : sec);
-	},
-			
 	_getArtist: function(videoName)
 	{
         var index = window.Player.YouTubePlaylistConstant.ARTIST_NAME_ID;
@@ -59,27 +50,30 @@ window.Player.YouTubePlaylistLoader.prototype =
             window.Player.YouTubePlaylistConstant.FEED_PARAMS;
 
         window.Common.Log.Instance().Debug("Sending playlist load request: "+url);
-        $.getJSON(url, function(result)
+        $.getJSON(url, $.proxy(function(result)
         {
-           var videosList = [];
+           var playlist = new window.Player.Playlist();
            var list = result.data.items;
            for(var i=0;i<list.length;i++)
            {
-               videosList.push({id:list[i].video.id, title:list[i].video.title});
+               var mediaDetails = new window.Player.MediaDetails();
+               mediaDetails.artist = this._getArtist(list[i].video.title);
+               mediaDetails.title = this._getTitle(list[i].video.title);
+               mediaDetails.id = list[i].video.id;
+               mediaDetails.url = list[i].video.player.default;
+               mediaDetails.mediaType = window.Player.YouTubePlaylistConstant.MEDIA_TYPE;
+               mediaDetails.duration = new window.Player.Duration(list[i].video.duration);
+
+               playlist.add(mediaDetails);
            }
-           
-           var playlist = 
-           {
-               title: result.data.title,
-               videos: videosList
-           };
-           
+
+           window.Common.Log.Instance().Info("Playlist loaded, has "+playlist.lenght()+" objects.");
            callback(playlist);
-        });
+        }, this));
     },
             
     //gets video data using id. When finished it calls callback function to return data.
-    loadVideo : function(id, callback)
+    _loadVideo : function(id, callback)
     {
         var url = window.Player.YouTubePlaylistConstant.API_URL +
             window.Player.YouTubePlaylistConstant.VIDEOS_API_VALUE +
@@ -90,21 +84,17 @@ window.Player.YouTubePlaylistLoader.prototype =
         window.Common.Log.Instance().Debug("Sending video load request: "+url);
         $.getJSON(url, $.proxy(function(result)
         {
-			var duration = this._getHumanReadibleTimeFormat(result.data.duration);
-			var playlist = 
-			{
-				title: result.data.title,
-				videos: [
-					{
-						id: result.data.id, 
-						artist: this._getArtist(result.data.title),
-						title: this._getTitle(result.data.title),
-						name: result.data.title,
-						durationInSeconds: result.data.duration,
-						durationInMinutes: duration
-					}
-				]
-			};
+            var mediaDetails = new window.Player.MediaDetails();
+            mediaDetails.artist = this._getArtist(result.data.title);
+            mediaDetails.title = this._getTitle(result.data.title);
+            mediaDetails.id = result.data.id;
+            mediaDetails.url = result.data.player.default;
+            mediaDetails.mediaType = window.Player.YouTubePlaylistConstant.MEDIA_TYPE;
+            mediaDetails.duration = new window.Player.Duration(result.data.duration);
+
+            var playlist = new window.Player.Playlist();
+            playlist.add(mediaDetails);
+
 			callback(playlist);
            
         }, this));
@@ -126,7 +116,7 @@ window.Player.YouTubePlaylistLoader.prototype =
             var videoId = parser.getParameterValue(url, window.Player.YouTubePlaylistConstant.VIDEO_PARAMETER_NAME);
             if(videoId !== window.Common.UrlParserConstants.URL_PARSE_ERR)
             {
-                this.loadVideo(videoId, callback);
+                this._loadVideo(videoId, callback);
             }
         }
     }

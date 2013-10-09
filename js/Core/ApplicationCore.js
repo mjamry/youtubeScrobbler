@@ -67,10 +67,14 @@ window.ApplicationCore.AppCore.prototype =
 
     play: function(url)
     {
-        var mediaDetails = new window.Player.MediaDetails();
-        mediaDetails.url = url;
-        mediaDetails.title = "Test track";
-        mediaDetails.artist = "Dj Maslo";
-        this._onlineScrobbler.getPlayer().load(mediaDetails);
+        var plLoader = new window.Player.YouTubePlaylistLoader();
+        var playlist = plLoader.loadPlaylistFromUrl(
+            url,
+            $.proxy(function(playlist){
+                this._onlineScrobbler.getPlayer().load(playlist.first());
+            }, this)
+        );
+
+
     }
 }
