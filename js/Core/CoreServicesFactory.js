@@ -1,6 +1,9 @@
 //namespace
 window.ApplicationCore = window.ApplicationCore || {};
 
+//using
+window.Player = window.Player || {};
+
 window.ApplicationCore.CoreServicesFactory = function(){}
 
 window.ApplicationCore.CoreServicesFactory.prototype =
@@ -23,6 +26,16 @@ window.ApplicationCore.CoreServicesFactory.prototype =
     createCookieHandler: function()
     {
         return new window.Common.CookieHandler();
+    },
+
+    createMediaPlayer: function(container)
+    {
+        return new window.Player.MediaPlayer(window.Player.MediaPlayerConfig, container);
+    },
+
+    createPlaylistService: function(player)
+    {
+        return new window.Player.PlaylistService(player);
     }
 }
 

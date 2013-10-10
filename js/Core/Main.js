@@ -9,11 +9,16 @@ $(function()
     //logger should be created at the begining
     var logger = coreServicesFactory.createLoggerService();
     window.Common.Log.SetInsance(logger);
-
     window.Common.Log.Instance().Info("Application initialisation started.");
 
+    //creating event broker service
+    this._eventBroker = coreServicesFactory.createBrokerHandler();
+    window.Common.EventBrokerSingleton.setInstance(this._eventBroker);
+
+    //creating application core
     var applicationCore = new window.ApplicationCore.AppCore(coreServicesFactory);
     applicationCore.initialise();
+
     HandleSession();
     var token = GetToken();
     applicationCore.createNewSession(token);

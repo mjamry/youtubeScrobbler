@@ -15,9 +15,9 @@ window.Player.Playlist.prototype =
          this.mediaList.push(mediaDetails);
     },
 
-    remove: function(mediaDetails)
+    remove: function(index)
     {
-          //TODO: remove media element from the list
+          this.mediaList.splice(index, 1);
     },
 
     first: function()
@@ -28,6 +28,18 @@ window.Player.Playlist.prototype =
     last: function()
     {
         return this.mediaList[this.lenght() -1];
+    },
+
+    getItem: function(index)
+    {
+        if(index > 0 && index < this.length() - 1)
+        {
+            return this.mediaList[index];
+        }
+        else
+        {
+            return null;
+        }
     },
 
     next: function()

@@ -74,7 +74,7 @@ window.Player.YouTubePlaylistLoader.prototype =
 
         if(mediaDetails.artist == "" || mediaDetails.title == "")
         {
-            return "undefined";
+            return null;
         }
 
         return mediaDetails;
@@ -98,7 +98,7 @@ window.Player.YouTubePlaylistLoader.prototype =
            {
                 var mediaDetails = this._getMediaDetails(list[i].video);
 
-                if(mediaDetails !== "undefined")
+                if(mediaDetails !== null)
                 {
                     playlist.add(mediaDetails);
                 }
@@ -125,11 +125,12 @@ window.Player.YouTubePlaylistLoader.prototype =
 
             var playlist = new window.Player.Playlist();
 
-            if(mediaDetails !== "undefined")
+            if(mediaDetails !== null)
             {
                 playlist.add(mediaDetails);
             }
 
+            //TODO what if playlist is empty?
 			callback(playlist);
            
         }, this));

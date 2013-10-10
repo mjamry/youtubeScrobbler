@@ -7,62 +7,23 @@ window.Player = window.Player || {};
 
 window.ApplicationCore.AppCore = function(factory)
 {
-    this._eventBroker = factory.createBrokerHandler();
-
-    window.Common.EventBrokerSingleton.setInstance(this._eventBroker);
     window.Common.Cookie.setInstance(factory.createCookieHandler());
-    this._uiCore = new window.UI.UICore();
-    this._onlineScrobbler = factory.createOnlineScrobbler(this._eventHandler);
+    this.uiCore = new window.UI.UICore();
+    this.onlineScrobbler = factory.createOnlineScrobbler(window.Common.EventBrokerSingleton.instance());
+    this.player = factory.createMediaPlayer(this.uiCore.getPlayerContainer());
+    this.playlistService = factory.createPlaylistService(this.player);
 };
 
 window.ApplicationCore.AppCore.prototype =
 {
     initialise: function()
     {
-        this._onlineScrobbler.initialise
-            (
-                window.Player.MediaPlayerConfig,
-                this._uiCore.getPlayerContainer()
-            );
-
-        this._viewUpdater = new viewUpdater();
-        this._eventBroker.addListener(window.Player.Events.videoLoaded, VideoLoaded);
-
-        this._eventBroker.addListener(
-            window.Player.Events.playlistReady,
-            $.proxy(function()
-            {
-                this._viewUpdater.updatePlaylist(this.getPlayer().getPlaylistLength());
-            }, this)
-        );
-
-        this._eventBroker.addListener(window.Player.Events.videoPaused,
-            $.proxy(function()
-            {
-                this._viewUpdater.updateVideoTitle("Paused: "+this.getPlayer().getCurrentVideo().name);
-            }, this)
-        );
-
-        this._eventBroker.addListener(
-            window.Player.Events.videoPlay,
-            $.proxy(function(video)
-                {
-                    this._viewUpdater.updateVideoTitle("Playing: " + video.name + " (" + video.durationInMinutes + ")");
-
-                },  this)
-        );
-
-
-    },
-
-    getPlayer: function()
-    {
-        return this._onlineScrobbler.getPlayer();
+        this.onlineScrobbler.initialise();
     },
 
     createNewSession: function(token)
     {
-        this._onlineScrobbler.createNewSession(token);
+        this.onlineScrobbler.createNewSession(token);
     },
 
     play: function(url)
@@ -73,7 +34,7 @@ window.ApplicationCore.AppCore.prototype =
             $.proxy(function(playlist){
                 playlist.next();
                 playlist.next();
-                this._onlineScrobbler.getPlayer().load(playlist.next());
+                this.player.load(playlist.next());
             }, this)
         );
 

@@ -41,6 +41,7 @@
     <script type="text/javascript" src="js/Player/Media/Duration.js"></script>
     <script type="text/javascript" src="js/Player/Playlist/Playlist.js"></script>
     <script type="text/javascript" src="js/Player/Playlist/YouTubePlaylistLoader.js"></script>
+    <script type="text/javascript" src="js/Player/Playlist/PlaylistService.js"></script>
     <script type="text/javascript" src="js/Player/MediaPlayerConfiguration.js"></script>
     <script type="text/javascript" src="js/Player/PlayerEvents.js"></script>
 
@@ -79,10 +80,8 @@
             <div id="videoInfo"></div>
             <div class="pure-g">
             </div>
-            <div class="media-element pure-u-1-2">
-                <video id="media_player" width="520" height="240" controls="control">
-                    <source type="video/youtube" src="https://www.youtube.com/watch?v=8zwTEKY4meE" />
-                </video>
+            <div class="media-element pure-u-1-2" style="width:400;height:500">
+
             </div>
             <div id="playlist" class="pure-u-1-2">
                 <header class="page-title"><h1>playlist</h1></header>
@@ -95,7 +94,9 @@
         <a href="#" id="pause_button" class="pure-button pure-button-primary"><i class="icon-pause"></i></a>
         <a href="#" id="next_button" class="pure-button pure-button-primary"><i class="icon-step-forward"></i></a>
 
-
+        <video id="media_player" width="520" height="440" controls="control">
+            <source type="video/youtube" src="https://www.youtube.com/watch?v=8zwTEKY4meE" />
+        </video>
     </div>
 </div>
 

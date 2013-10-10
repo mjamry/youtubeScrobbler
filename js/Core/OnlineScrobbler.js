@@ -9,11 +9,9 @@ window.LastFm = window.LastFm || {};
 window.ApplicationCore.OnlineScrobbler = function()
 {
     this._sessionObject = null;
-    this._player = null;
     this._lastFmFactory = new window.LastFm.LastFmApiFactory();
     this._lastFmInformationProvider = this._lastFmFactory.createInformationProvider();
     this._scrobbler = this._lastFmFactory.createScrobbler();
-    this._player = null;
 
     this._trackStartedTimestamp = null;
 };
@@ -26,7 +24,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         return Math.round((new Date()).getTime() / 1000);
     },
 
-    _initialiseScrobbler: function()
+    initialise: function()
     {
         //TODO change names from video to media
         window.Common.EventBrokerSingleton.instance().addListener(
@@ -61,13 +59,6 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         )
     },
 
-    //TODO remove it!
-    //gets player instance
-    getPlayer: function()
-    {
-        return this._player;
-    },
-
     //try to restore last session if it does not exist creates new one.
     createNewSession: function(token)
     {
@@ -87,12 +78,5 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         {
             this._sessionObject = sessionHandler.getCurrentSessionKey();
         }
-    },
-
-    initialise: function(configuration, playerContainer)
-    {
-        this._player = new window.Player.MediaPlayer(configuration, playerContainer);
-
-        this._initialiseScrobbler();
     }
 };
