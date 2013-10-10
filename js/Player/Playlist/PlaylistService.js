@@ -4,7 +4,7 @@ window.Player = window.Player || {};
 window.Player.PlaylistService = function(player, playlist)
 {
     this.player = player;
-    this.playlist = playlist || null;
+    this.playlist = playlist || {};
 };
 
 window.Player.PlaylistService.prototype =

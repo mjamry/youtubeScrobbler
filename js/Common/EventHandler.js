@@ -68,7 +68,7 @@ window.Common.EventBroker.prototype =
             for(var i = 0;i<this.listeners[event].length;i++)
             {
                 var listener = this.listeners[event][i];
-                listener.method(listener.args);
+                listener.method.apply(listener.context, listener.args);
             }
         }
         else

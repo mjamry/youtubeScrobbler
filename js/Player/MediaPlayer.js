@@ -18,10 +18,6 @@ window.Player.MediaPlayer = function(configuration, container)
                 window.Common.Log.Instance().Debug("Media playes has been initialised");
 
                 var mediaDetails = new window.Player.MediaDetails();
-                mediaDetails.url = "media/big_buck_bunny.webm";
-                mediaDetails.title = "Test track";
-                mediaDetails.artist = "Dj Maslo";
-                this.load(mediaDetails);
 
             }, this),
 

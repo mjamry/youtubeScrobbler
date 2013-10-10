@@ -19,6 +19,10 @@ window.ApplicationCore.AppCore.prototype =
     initialise: function()
     {
         this.onlineScrobbler.initialise();
+        //hook up to UI events - mainly to control player/playlist
+        var eventBroker = window.Common.EventBrokerSingleton.instance();
+        eventBroker.addListener(window.UI.Events.playNextRequested, this.playlistService.playNext, null, this.playlistService);
+        eventBroker.addListener(window.UI.Events.playPreviousRequested, this.playlistService.playPrevious, null, this.playlistService);
     },
 
     createNewSession: function(token)
@@ -29,15 +33,13 @@ window.ApplicationCore.AppCore.prototype =
     play: function(url)
     {
         var plLoader = new window.Player.YouTubePlaylistLoader();
-        var playlist = plLoader.loadPlaylistFromUrl(
+        plLoader.loadPlaylistFromUrl(
             url,
             $.proxy(function(playlist){
                 playlist.next();
                 playlist.next();
-                this.player.load(playlist.next());
+                this.playlistService.setUpPlaylist(playlist);
             }, this)
         );
-
-
     }
 }

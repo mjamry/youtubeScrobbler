@@ -24,6 +24,8 @@ $(function()
     applicationCore.createNewSession(token);
     HookUpLoadUrlButtonAction(applicationCore);
 
+    HookUpToolbarButtons();
+
    // HookUpLoadUrlButtonAction(applicationCore.getPlayer());
    // HookUpToolbarButtons(applicationCore.getPlayer());
    // HeaderAction();
@@ -81,12 +83,25 @@ function HeaderAction(){
     });
 }
 
-function HookUpToolbarButtons(player)
+function HookUpToolbarButtons()
 {
-    player.hookUpButtonAction("play_button", "playVideo");
+   /* player.hookUpButtonAction("play_button", "playVideo");
     player.hookUpButtonAction("pause_button", "pauseVideo");
     player.hookUpButtonAction("next_button", "nextVideo");
-    player.hookUpButtonAction("prev_button", "prevVideo");
+    player.hookUpButtonAction("prev_button", "prevVideo");*/
+
+    var eventBroker = window.Common.EventBrokerSingleton.instance();
+
+    $("#prev_button").bind("click", function()
+    {
+        eventBroker.fireEvent(window.UI.Events.playPreviousRequested);
+    });
+
+    $("#next_button").bind("click", function()
+    {
+        eventBroker.fireEvent(window.UI.Events.playNextRequested);
+    });
+
 }
 
 function HookUpLoadUrlButtonAction(player){
