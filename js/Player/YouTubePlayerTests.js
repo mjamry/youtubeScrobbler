@@ -41,7 +41,7 @@ function ytPlayerTests()
     Player.addListener(Player.events.videoPaused, function(){
         console.log("vid paused");
     });
-    Player.addListener(Player.events.videoPlay, function(){
+    Player.addListener(Player.events.VideoPlay, function(){
         console.log("vid play");
     });
     Player.addListener(Player.events.beforePlaylistReady, function(){

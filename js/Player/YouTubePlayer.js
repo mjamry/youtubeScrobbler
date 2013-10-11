@@ -30,7 +30,7 @@ window.Player.YouTubePlayer = function(configuration, playerContainer)
                         }
                         this.currentVideoDetails = videoDetails.videos[0];
                         window.Common.Log.Instance().Debug("Video: \""+this.currentVideoDetails.name+"\" has been loaded.");
-                        this.eventBroker.fireEventWithData(window.Player.Events.videoPlay, this.currentVideoDetails);
+                        this.eventBroker.fireEventWithData(window.Player.Events.VideoPlay, this.currentVideoDetails);
                     }
 				}
 				, this));
@@ -44,7 +44,7 @@ window.Player.YouTubePlayer = function(configuration, playerContainer)
             onError: $.proxy(function(msg){this.eventBroker.fireEventWithData(window.Player.Events.error, msg);}, this),
             
             onVideoLoaded: $.proxy(function(video){this.eventBroker.fireEventWithData(window.Player.Events.videoLoaded, video);}, this),
-            onVideoPaused: $.proxy(function(){this.eventBroker.fireEvent(window.Player.Events.videoPaused);}, this),
+            onVideoPaused: $.proxy(function(){this.eventBroker.fireEvent(window.Player.Events.VideoPaused);}, this),
             onVideoPlay: $.proxy(onVideoLoaded, this),
             onVideoCue: $.proxy(function(video){this.eventBroker.fireEventWithData(window.Player.Events.videoCue, video);}, this),
             onBuffer: $.proxy(function(){this.eventBroker.fireEvent(window.Player.Events.videoBuffering);}, this),

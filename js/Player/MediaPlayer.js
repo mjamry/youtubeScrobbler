@@ -40,7 +40,7 @@ window.Player.MediaPlayer.prototype =
     {
         mediaElement.addEventListener(
             window.Player.LibraryEventsNames.play,
-            $.proxy(function(){this._eventBroker.fireEventWithData(window.Player.Events.videoPlay, this.currentlyLoadedMediaDetails);}, this),
+            $.proxy(function(){this._eventBroker.fireEventWithData(window.Player.Events.VideoPlay, this.currentlyLoadedMediaDetails);}, this),
             false
         );
 
@@ -52,7 +52,7 @@ window.Player.MediaPlayer.prototype =
 
         mediaElement.addEventListener(
             window.Player.LibraryEventsNames.pause,
-            $.proxy(function(){this._eventBroker.fireEventWithData(window.Player.Events.videoPaused, this.currentlyLoadedMediaDetails);}, this),
+            $.proxy(function(){this._eventBroker.fireEventWithData(window.Player.Events.VideoPaused, this.currentlyLoadedMediaDetails);}, this),
             false
         );
     },

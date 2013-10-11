@@ -62,17 +62,20 @@ window.Player.YouTubePlaylistLoader.prototype =
 
     //gets details for specified clip.
     //if cannot retrieve details returns "undefined";
+    //TODO - handle errors while parsing video details recieved from YT. It is possible that video has been deleted.
     _getMediaDetails: function(media)
     {
+        window.Common.Log.Instance().Debug("Recieved details for media: "+media.title);
         var mediaDetails = new window.Player.MediaDetails();
         mediaDetails.artist = this._getArtist(media.title);
         mediaDetails.title = this._getTitle(media.title);
         mediaDetails.id = media.id;
-        mediaDetails.url = media.player.default;
+        //sometime it is empty - do not know why...
+        mediaDetails.url = media.player.default || "";
         mediaDetails.mediaType = window.Player.YouTubePlaylistConstant.MEDIA_TYPE;
         mediaDetails.duration = new window.Player.Duration(media.duration);
 
-        if(mediaDetails.artist == "" || mediaDetails.title == "")
+        if(mediaDetails.artist == "" || mediaDetails.title == "" || mediaDetails.url == "")
         {
             return null;
         }

@@ -22,7 +22,7 @@ window.ApplicationCore.AppCore.prototype =
         //hook up to UI events - mainly to control player/playlist
         var eventBroker = window.Common.EventBrokerSingleton.instance();
         eventBroker.addListener(window.UI.Events.playNextRequested, this.playlistService.playNext, null, this.playlistService);
-        eventBroker.addListener(window.UI.Events.playPreviousRequested, this.playlistService.playPrevious, null, this.playlistService);
+        eventBroker.addListener(window.UI.Events.PlayPreviousRequested, this.playlistService.playPrevious, null, this.playlistService);
     },
 
     createNewSession: function(token)

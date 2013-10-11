@@ -28,7 +28,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
     {
         //TODO change names from video to media
         window.Common.EventBrokerSingleton.instance().addListener(
-            window.Player.Events.videoPlay,
+            window.Player.Events.VideoPlay,
             $.proxy(function(video)
             {
                 this._trackStartedTimestamp = this._generateTimestamp();

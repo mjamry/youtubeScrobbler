@@ -94,7 +94,7 @@ function HookUpToolbarButtons()
 
     $("#prev_button").bind("click", function()
     {
-        eventBroker.fireEvent(window.UI.Events.playPreviousRequested);
+        eventBroker.fireEvent(window.UI.Events.PlayPreviousRequested);
     });
 
     $("#next_button").bind("click", function()

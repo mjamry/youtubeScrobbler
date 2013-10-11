@@ -5,7 +5,10 @@ window.Player = window.Player || {};
 window.Player.Events =
 {
     //video events
-    videoPaused: "VideoPaused",
-    videoPlay: "VideoStarted",
-    videoStoped: "VideoStoped"
+    VideoPaused: "VideoPaused",
+    VideoPlay: "VideoStarted",
+    videoStoped: "VideoStoped",
+
+    //playlist events
+    PlaylistUpdated: "PlaylistUpdated"
 };
