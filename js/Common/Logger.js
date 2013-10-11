@@ -35,12 +35,18 @@ Logger.prototype =
     _getFormatedTimestamp: function()
     {
         var date = new Date();
+        var ms = date.getMilliseconds();
+        var s = date.getSeconds();
+
+        s = s < 10 ? "0" + s : s;
+        ms = ms < 100 ? (ms < 10 ? "00" + ms : "0" + ms) : ms;
+
         var outputData =
             "[" +
             date.getHours() + ":" +
             date.getMinutes() + ":" +
-            date.getSeconds() + "." +
-            date.getMilliseconds() +
+            s + "." +
+            ms +
             "] ";
         return outputData;
     },
