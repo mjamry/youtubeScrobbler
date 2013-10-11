@@ -99,7 +99,7 @@ function HookUpToolbarButtons()
 
     $("#next_button").bind("click", function()
     {
-        eventBroker.fireEvent(window.UI.Events.playNextRequested);
+        eventBroker.fireEvent(window.UI.Events.PlayNextRequested);
     });
 
 }

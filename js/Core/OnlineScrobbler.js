@@ -14,6 +14,8 @@ window.ApplicationCore.OnlineScrobbler = function()
     this._scrobbler = this._lastFmFactory.createScrobbler();
 
     this._trackStartedTimestamp = null;
+
+    this._currentlyLoaded = null;
 };
 
 window.ApplicationCore.OnlineScrobbler.prototype =
@@ -24,37 +26,52 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         return Math.round((new Date()).getTime() / 1000);
     },
 
+    _updateScrobbling: function(mediaDetails)
+    {
+        //validate if track was played longer than 30 seconds.
+        this._scrobbler.scrobble(
+            {
+                track: mediaDetails.title,
+                artist: mediaDetails.artist,
+                //it is in ms so it must be divided by 1000, also need to be rounded to make an int value
+                timestamp: this._trackStartedTimestamp
+            },
+            this._sessionObject
+        );
+    },
+
+    _updateNowPlaying: function(mediaDetails)
+    {
+        //update now playing only when new track is loaded - it prevents before reaction on pause/play events
+        if(this._currentlyLoaded != mediaDetails)
+        {
+            this._currentlyLoaded = mediaDetails;
+            this._trackStartedTimestamp = this._generateTimestamp();
+            this._scrobbler.updateNowPlaying(
+                {
+                    track: mediaDetails.title,
+                    artist: mediaDetails.artist
+                },
+                this._sessionObject
+            );
+        }
+    },
+
     initialise: function()
     {
-        //TODO change names from video to media
         window.Common.EventBrokerSingleton.instance().addListener(
             window.Player.Events.VideoPlay,
-            $.proxy(function(video)
+            $.proxy(function(mediaDetails)
             {
-                this._trackStartedTimestamp = this._generateTimestamp();
-                this._scrobbler.updateNowPlaying(
-                    {
-                        track: video.title,
-                        artist: video.artist
-                    },
-                    this._sessionObject
-                );
+                this._updateNowPlaying(mediaDetails);
             }, this)
         );
 
         window.Common.EventBrokerSingleton.instance().addListener(
             window.Player.Events.videoStoped,
-            $.proxy(function(video)
+            $.proxy(function(mediaDetails)
             {
-                this._scrobbler.scrobble(
-                    {
-                        track: video.title,
-                        artist: video.artist,
-                        //it is in ms so it must be divided by 1000, also need to be rounded to make an int value
-                        timestamp: this._trackStartedTimestamp
-                    },
-                    this._sessionObject
-                );
+                this._updateScrobbling(mediaDetails);
             }, this)
         )
     },

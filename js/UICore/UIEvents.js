@@ -3,7 +3,7 @@ window.UI = window.UI || {};
 
 window.UI.Events =
 {
-    PlayNextReRquestedquested: "PlayNextRequested",
+    PlayNextRequested: "PlayNextRequested",
     PlayPreviousRequested: "PlayPreviousRequested",
-    PlaylistLoadRequRestedested: "PlaylistLoadRequested"
+    PlaylistLoadRequested: "PlaylistLoadRequested"
 }

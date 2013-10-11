@@ -21,7 +21,7 @@ window.ApplicationCore.AppCore.prototype =
         this.onlineScrobbler.initialise();
         //hook up to UI events - mainly to control player/playlist
         var eventBroker = window.Common.EventBrokerSingleton.instance();
-        eventBroker.addListener(window.UI.Events.playNextRequested, this.playlistService.playNext, null, this.playlistService);
+        eventBroker.addListener(window.UI.Events.PlayNextRequested, this.playlistService.playNext, null, this.playlistService);
         eventBroker.addListener(window.UI.Events.PlayPreviousRequested, this.playlistService.playPrevious, null, this.playlistService);
     },
 
