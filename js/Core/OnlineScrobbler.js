@@ -13,7 +13,7 @@ window.ApplicationCore.OnlineScrobbler = function()
     this._lastFmInformationProvider = this._lastFmFactory.createInformationProvider();
     this._scrobbler = this._lastFmFactory.createScrobbler();
 
-    this._trackStartedTimestamp = null;
+    this._trackStartPlayingTime = null;
 
     this._currentlyLoaded = null;
 };
@@ -21,23 +21,59 @@ window.ApplicationCore.OnlineScrobbler = function()
 window.ApplicationCore.OnlineScrobbler.prototype =
 {
     //TODO this value should be stored as time and formated only on demand.
-    _generateTimestamp: function()
+    _getTimeInSeconds: function(timeInMs)
     {
-        return Math.round((new Date()).getTime() / 1000);
+        //it is in ms so it must be divided by 1000, also need to be rounded to make an int value
+        return Math.round(timeInMs / 1000);
     },
 
+    _getTimeInMinutes: function(timeInMs)
+    {
+        return Math.round(this._getTimeInSeconds(timeInMs)/60);
+    },
+
+    //Checks if all requirements has been resolved to scrobble the track.
+    _trackCanBeScrobbled: function(mediaDetails, playingTime)
+    {
+        //is track longer than 30s
+
+        if(mediaDetails.duration && mediaDetails.duration.getInSeconds() > 30)
+        {
+            //if played for 4 minutes or at least hals of its duration
+            var timeInSeconds = this._getTimeInSeconds(playingTime);
+            var timeInMinutes = this._getTimeInMinutes(playingTime);
+            if(
+                timeInMinutes > 4 ||
+                (timeInSeconds > mediaDetails.duration.getInSeconds() / 2))
+            {
+                return true;
+            }
+
+            return false;
+        }
+    },
+
+    //Updates scrobbling info on last fm portal.
+    //
+    //A track should only be scrobbled when the following conditions have been met:
+    //The track must be longer than 30 seconds.
+    //And the track has been played for at least half its duration, or for 4 minutes (whichever occurs earlier.)
     _updateScrobbling: function(mediaDetails)
     {
-        //validate if track was played longer than 30 seconds.
-        this._scrobbler.scrobble(
-            {
-                track: mediaDetails.title,
-                artist: mediaDetails.artist,
-                //it is in ms so it must be divided by 1000, also need to be rounded to make an int value
-                timestamp: this._trackStartedTimestamp
-            },
-            this._sessionObject
-        );
+        var playingTime = (new Date().getTime() - this._trackStartPlayingTime);
+
+        if(this._trackCanBeScrobbled(mediaDetails, playingTime))
+        {
+            this._scrobbler.scrobble(
+                {
+                    track: mediaDetails.title,
+                    artist: mediaDetails.artist,
+
+                    timestamp: this._getTimeInSeconds(this._trackStartPlayingTime)
+                },
+                this._sessionObject
+            );
+        }
     },
 
     _updateNowPlaying: function(mediaDetails)
@@ -46,7 +82,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         if(this._currentlyLoaded != mediaDetails)
         {
             this._currentlyLoaded = mediaDetails;
-            this._trackStartedTimestamp = this._generateTimestamp();
+            this._trackStartPlayingTime = new Date().getTime();
             this._scrobbler.updateNowPlaying(
                 {
                     track: mediaDetails.title,
@@ -68,7 +104,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         );
 
         window.Common.EventBrokerSingleton.instance().addListener(
-            window.Player.Events.videoStopped,
+            window.Player.Events.VideoChanged,
             $.proxy(function(mediaDetails)
             {
                 this._updateScrobbling(mediaDetails);

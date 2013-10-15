@@ -68,7 +68,7 @@ window.Common.EventBroker.prototype =
             for(var i = 0;i<this.listeners[event].length;i++)
             {
                 var listener = this.listeners[event][i];
-                listener.method.apply(listener.context, listener.args);
+                listener.method.call(listener.context);
             }
         }
         else
@@ -81,12 +81,12 @@ window.Common.EventBroker.prototype =
     {
         if(this.listeners[event])
         {
-            window.Common.Log.Instance().Debug("Event: "+event+" has been fired, data: "+data);
+            window.Common.Log.Instance().Debug("Event: "+event+" has been fired, data: "+data.toSource());
 
             for(var i = 0;i<this.listeners[event].length;i++)
             {
                 var listener = this.listeners[event][i];
-                listener.method(data, listener.args);
+                listener.method.call(listener.context, data);
             }
         }
         else

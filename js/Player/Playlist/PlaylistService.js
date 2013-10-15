@@ -5,11 +5,17 @@ window.Player.PlaylistService = function(player, playlist)
 {
     this.player = player;
     this.playlist = playlist || {};
+    //TODO: for future purposes - will be configurable
     this._autoplay = true;
 };
 
 window.Player.PlaylistService.prototype =
 {
+    _handleMediaStopped: function()
+    {
+        this.playNext();
+    },
+
     _loadMedia: function(mediaDetails)
     {
         this.player.load(mediaDetails);
@@ -17,6 +23,11 @@ window.Player.PlaylistService.prototype =
         {
             this.player.play();
         }
+    },
+
+    initialise: function()
+    {
+        window.Common.EventBrokerSingleton.instance().addListener(window.Player.Events.VideoStopped, this._handleMediaStopped, null, this);
     },
 
     //initialises playlist object, or overwrite existing one.

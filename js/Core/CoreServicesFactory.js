@@ -35,7 +35,9 @@ window.ApplicationCore.CoreServicesFactory.prototype =
 
     createPlaylistService: function(player)
     {
-        return new window.Player.PlaylistService(player);
+        var playlistService = new window.Player.PlaylistService(player);
+        playlistService.initialise();
+        return playlistService;
     }
 }
 

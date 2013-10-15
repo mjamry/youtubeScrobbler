@@ -26,7 +26,7 @@ window.Player.YouTubePlayer = function(configuration, playerContainer)
                     {
                         if(this.currentVideoDetails != null)
                         {
-                            this.eventBroker.fireEventWithData(window.Player.Events.videoStopped, this.currentVideoDetails);
+                            this.eventBroker.fireEventWithData(window.Player.Events.VideoStopped, this.currentVideoDetails);
                         }
                         this.currentVideoDetails = videoDetails.videos[0];
                         window.Common.Log.Instance().Debug("Video: \""+this.currentVideoDetails.name+"\" has been loaded.");

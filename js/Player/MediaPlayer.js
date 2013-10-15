@@ -46,7 +46,7 @@ window.Player.MediaPlayer.prototype =
 
         mediaElement.addEventListener(
             window.Player.LibraryEventsNames.ended,
-            $.proxy(function(){this._eventBroker.fireEventWithData(window.Player.Events.videoStopped, this.currentlyLoadedMediaDetails);}, this),
+            $.proxy(function(){this._eventBroker.fireEventWithData(window.Player.Events.VideoStopped, this.currentlyLoadedMediaDetails);}, this),
             false
         );
 
@@ -59,9 +59,11 @@ window.Player.MediaPlayer.prototype =
 
     load: function(mediaDetails)
     {
+        this._eventBroker.fireEventWithData(window.Player.Events.VideoChanged, this.currentlyLoadedMediaDetails);
         this.currentlyLoadedMediaDetails = mediaDetails;
         this.instance.setSrc(mediaDetails.url);
         this.instance.load();
+
     },
 
     play: function()
