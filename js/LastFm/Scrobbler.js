@@ -52,7 +52,8 @@ window.LastFm.Scrobbler.prototype =
                         //fire event
                         this._eventBroker.fireEventWithData(window.LastFm.Events.ScrobblingFailed, response);
 
-                        window.Common.Log.Instance().Error("LastFm Scrobbling update failed: "+ response.message);
+                        window.Common.Log.Instance().Warning("LastFm Scrobbling update failed: "+ response.message);
+                        window.Common.Log.Instance().Debug("LastFm Scrobbling failed for: "+ trackDetails.toSource());
                     },
                     this
                 )
@@ -93,7 +94,8 @@ window.LastFm.Scrobbler.prototype =
                         //fire event
                         this._eventBroker.fireEventWithData(window.LastFm.Events.NowPlayingUpdateFailed, response);
 
-                        window.Common.Log.Instance().Error("LastFm NowPlaying update failed: "+ response.message);
+                        window.Common.Log.Instance().Warning("LastFm NowPlaying update failed: "+ response.message);
+                        window.Common.Log.Instance().Debug("LastFm NowPlaying failed for: "+ trackDetails.toSource());
                     },
                     this
                 )

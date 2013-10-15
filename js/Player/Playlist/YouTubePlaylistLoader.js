@@ -37,7 +37,7 @@ window.Player.YouTubePlaylistLoader.prototype =
         }
         catch(e)
         {
-            window.Common.Log.Instance().Error("Error occurs while parsing artist.");
+            window.Common.Log.Instance().Warning("Error occurs while parsing artist.");
             window.Common.Log.Instance().Debug("Incorrect naming pattern: "+videoName);
         }
         return result;
@@ -54,7 +54,7 @@ window.Player.YouTubePlaylistLoader.prototype =
         }
         catch(e)
         {
-            window.Common.Log.Instance().Error("Error occurs while parsing title.");
+            window.Common.Log.Instance().Warning("Error occurs while parsing title.");
             window.Common.Log.Instance().Debug("Incorrect naming pattern: "+videoName);
         }
 		return result;
