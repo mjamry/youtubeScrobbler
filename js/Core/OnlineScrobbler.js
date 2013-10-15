@@ -96,7 +96,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
     initialise: function()
     {
         window.Common.EventBrokerSingleton.instance().addListener(
-            window.Player.Events.VideoPlay,
+            window.Player.Events.MediaPlay,
             $.proxy(function(mediaDetails)
             {
                 this._updateNowPlaying(mediaDetails);
@@ -104,7 +104,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         );
 
         window.Common.EventBrokerSingleton.instance().addListener(
-            window.Player.Events.VideoChanged,
+            window.Player.Events.MediaChanged,
             $.proxy(function(mediaDetails)
             {
                 this._updateScrobbling(mediaDetails);

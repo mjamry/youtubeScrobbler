@@ -40,26 +40,26 @@ window.Player.MediaPlayer.prototype =
     {
         mediaElement.addEventListener(
             window.Player.LibraryEventsNames.play,
-            $.proxy(function(){this._eventBroker.fireEventWithData(window.Player.Events.VideoPlay, this.currentlyLoadedMediaDetails);}, this),
+            $.proxy(function(){this._eventBroker.fireEventWithData(window.Player.Events.MediaPlay, this.currentlyLoadedMediaDetails);}, this),
             false
         );
 
         mediaElement.addEventListener(
             window.Player.LibraryEventsNames.ended,
-            $.proxy(function(){this._eventBroker.fireEventWithData(window.Player.Events.VideoStopped, this.currentlyLoadedMediaDetails);}, this),
+            $.proxy(function(){this._eventBroker.fireEventWithData(window.Player.Events.MediaStopped, this.currentlyLoadedMediaDetails);}, this),
             false
         );
 
         mediaElement.addEventListener(
             window.Player.LibraryEventsNames.pause,
-            $.proxy(function(){this._eventBroker.fireEventWithData(window.Player.Events.VideoPaused, this.currentlyLoadedMediaDetails);}, this),
+            $.proxy(function(){this._eventBroker.fireEventWithData(window.Player.Events.MediaPaused, this.currentlyLoadedMediaDetails);}, this),
             false
         );
     },
 
     load: function(mediaDetails)
     {
-        this._eventBroker.fireEventWithData(window.Player.Events.VideoChanged, this.currentlyLoadedMediaDetails);
+        this._eventBroker.fireEventWithData(window.Player.Events.MediaChanged, this.currentlyLoadedMediaDetails);
         this.currentlyLoadedMediaDetails = mediaDetails;
         this.instance.setSrc(mediaDetails.url);
         this.instance.load();

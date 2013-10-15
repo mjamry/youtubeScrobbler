@@ -27,7 +27,7 @@ window.Player.PlaylistService.prototype =
 
     initialise: function()
     {
-        window.Common.EventBrokerSingleton.instance().addListener(window.Player.Events.VideoStopped, this._handleMediaStopped, null, this);
+        window.Common.EventBrokerSingleton.instance().addListener(window.Player.Events.MediaStopped, this._handleMediaStopped, null, this);
     },
 
     //initialises playlist object, or overwrite existing one.
