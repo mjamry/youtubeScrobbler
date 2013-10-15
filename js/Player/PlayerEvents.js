@@ -7,7 +7,8 @@ window.Player.Events =
     //video events
     VideoPaused: "VideoPaused",
     VideoPlay: "VideoStarted",
-    videoStoped: "VideoStoped",
+    videoStopped: "VideoStopped",
+
 
     //playlist events
     PlaylistUpdated: "PlaylistUpdated"

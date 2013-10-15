@@ -46,7 +46,7 @@ window.Player.MediaPlayer.prototype =
 
         mediaElement.addEventListener(
             window.Player.LibraryEventsNames.ended,
-            $.proxy(function(){this._eventBroker.fireEventWithData(window.Player.Events.videoStoped, this.currentlyLoadedMediaDetails);}, this),
+            $.proxy(function(){this._eventBroker.fireEventWithData(window.Player.Events.videoStopped, this.currentlyLoadedMediaDetails);}, this),
             false
         );
 

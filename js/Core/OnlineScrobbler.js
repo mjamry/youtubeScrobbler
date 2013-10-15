@@ -68,7 +68,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         );
 
         window.Common.EventBrokerSingleton.instance().addListener(
-            window.Player.Events.videoStoped,
+            window.Player.Events.videoStopped,
             $.proxy(function(mediaDetails)
             {
                 this._updateScrobbling(mediaDetails);
