@@ -1,10 +1,15 @@
 //namespace
 window.Player = window.Player || {};
 
+//using
+window.Common = window.Common || {};
+
+
 window.Player.PlaylistService = function(player, playlist)
 {
     this.player = player;
     this.playlist = playlist || {};
+    this._eventBroker = window.Common.EventBrokerSingleton.instance();
     //TODO: for future purposes - will be configurable
     this._autoplay = true;
 };
@@ -27,13 +32,14 @@ window.Player.PlaylistService.prototype =
 
     initialise: function()
     {
-        window.Common.EventBrokerSingleton.instance().addListener(window.Player.Events.MediaStopped, this._handleMediaStopped, null, this);
+        this._eventBroker.addListener(window.Player.Events.MediaStopped, this._handleMediaStopped, null, this);
     },
 
     //initialises playlist object, or overwrite existing one.
     setUpPlaylist: function(playlist)
     {
         this.playlist = playlist;
+        this._eventBroker.fireEventWithData(window.Player.Events.PlaylistUpdated, this.playlist);
     },
 
     //plays next media item from playlist

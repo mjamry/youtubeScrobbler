@@ -26,12 +26,16 @@ $(function()
 
     HookUpToolbarButtons();
 
+    var playlist = new window.UI.PlaylistViewController("playlist");
+    playlist.initialise();
+
    // HookUpLoadUrlButtonAction(applicationCore.getPlayer());
    // HookUpToolbarButtons(applicationCore.getPlayer());
    // HeaderAction();
 
     window.Common.Log.Instance().Info("Application initialisation ended.");
 });
+
 
 function HandleSession()
 {

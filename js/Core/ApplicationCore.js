@@ -16,13 +16,19 @@ window.ApplicationCore.AppCore = function(factory)
 
 window.ApplicationCore.AppCore.prototype =
 {
+    _handlePlaySpecificRequest: function(index)
+    {
+        this.playlistService.playSpecific(index);
+    },
+
     initialise: function()
     {
         this.onlineScrobbler.initialise();
         //hook up to UI events - mainly to control player/playlist
         var eventBroker = window.Common.EventBrokerSingleton.instance();
-        eventBroker.addListener(window.UI.Events.PlayNextRequested, this.playlistService.playNext, null, this.playlistService);
-        eventBroker.addListener(window.UI.Events.PlayPreviousRequested, this.playlistService.playPrevious, null, this.playlistService);
+        eventBroker.addListener(window.UI.Events.PlayNextRequested, this.playlistService.playNext, null, this);
+        eventBroker.addListener(window.UI.Events.PlayPreviousRequested, this.playlistService.playPrevious, null, this);
+        eventBroker.addListener(window.UI.Events.PlaySpecificRequested, this._handlePlaySpecificRequest, null, this);
     },
 
     createNewSession: function(token)

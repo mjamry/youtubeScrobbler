@@ -32,7 +32,7 @@ window.Player.Playlist.prototype =
 
     getItem: function(index)
     {
-        if(index > 0 && index < this.length() - 1)
+        if(index >= 0 && index < this.length())
         {
             return this.mediaList[index];
         }

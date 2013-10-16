@@ -49,6 +49,8 @@ window.ApplicationCore.OnlineScrobbler.prototype =
                 return true;
             }
 
+            window.Common.Log.Instance().Warning("Cannot scrobble track.");
+            window.Common.Log.Instance().Debug("Track cannot be scrobble because playing time is to short: " + timeInSeconds + "s.");
             return false;
         }
     },
