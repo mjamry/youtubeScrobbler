@@ -1,5 +1,6 @@
 //using
 window.ApplicationCore = window.ApplicationCore || {};
+window.UI = window.UI || {};
 
 //main
 $(function()
@@ -26,7 +27,7 @@ $(function()
 
     HookUpToolbarButtons();
 
-    var playlist = new window.UI.PlaylistViewController("playlist");
+    var playlist = new window.UI.PlaylistViewController("playlist", window.UI.PlaylistUIConfig);
     playlist.initialise();
 
    // HookUpLoadUrlButtonAction(applicationCore.getPlayer());

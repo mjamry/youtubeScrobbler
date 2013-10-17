@@ -4,6 +4,25 @@
     background-color: #ddd;
 }
 /*-----------------------------PLAYLIST---------------------*/
+.playlist_evenElement
+{
+    background-color: lightblue;
+    height:25px;
+}
+
+.playlist_oddElement
+{
+    background-color: lightskyblue;
+}
+
+.playlist_hoverElement
+{
+    background-color: lightgreen;
+}
+
+
+
+
 .youtube-player-playlist{
     height:100%;
     background:green;
