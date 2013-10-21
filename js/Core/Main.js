@@ -44,7 +44,7 @@ function HandleSession()
         function(userName)
         {
             $("#authentication").hide();
-            $("#current").html("Hello! <a href=\"http:\/\/www.lastfm.pl\/user\">"+userName+"<\/a>").show();
+            $("#current").html('Hello! <a target="blank" href="http://www.lastfm.pl/user/'+userName+'">'+userName+'<\/a>').show();
         }
     )
 }

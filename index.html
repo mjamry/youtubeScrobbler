@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>YT_Scrobbler</title>
+    <title>Online Scrobbler</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -59,15 +59,29 @@
 </head>
 <body>
 <header id="page-header">
-    <h1>YouTubeScrobbler - logo</h1>
-    <div id="sessionDetails">
-        <div id="authentication">
-            <a href="http://www.last.fm/api/auth/?api_key=ed21aeb031f9999c1fd0f92510b84364&cb=http://85.198.205.88/michal/public_html/webstorm/youtubeScrobbler/index.html" class="pure-button pure-button-primary">Log in in lastfm</a>
+    <div class="pure-g">
+        <div class="pure-u-1-5">
         </div>
-        <div id="current" class="pure-button pure-button-primary">
+        <div class="pure-u-1-5">
+            <h1>Online Scrobbler</h1>
+        </div>
+        <div class="pure-u-1-5">
+        </div>
+        <div class="pure-u-1-5">
+            <div id="sessionDetails">
+                <div id="authentication">
+                    <a href="http://www.last.fm/api/auth/?api_key=ed21aeb031f9999c1fd0f92510b84364&cb=http://85.198.205.88/michal/public_html/webstorm/youtubeScrobbler/index.html" class="pure-button pure-button-primary">Log in in lastfm</a>
+                </div>
+                <div id="current" class="pure-button pure-button-primary">
 
+                </div>
+            </div>
+        </div>
+        <div class="pure-u-1-5">
         </div>
     </div>
+
+
 </header>
 <div class="content">
     <div id="input-form">
@@ -83,7 +97,7 @@
 
             <div class="pure-u-1-2">
                 <div id="media-element">
-                    <video id="media_player" style="height:100%;width:100%;" controls="control">
+                    <video id="media_player">
                         <source type="video/x-youtube" src="https://www.youtube.com/watch?v=8zwTEKY4meE" />
                     </video>
                 </div>

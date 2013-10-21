@@ -15,7 +15,7 @@ window.Player.MediaPlayerConfig =
     enableAutosize: false,
     // shows debug errors on screen
     enablePluginDebug: true,
-    alwaysShowControls: true,
+    alwaysShowControls: false,
     // remove or reorder to change plugin priority
     plugins: ['flash'],
     // specify to force MediaElement to use a particular video or audio type
