@@ -1,13 +1,54 @@
-#footer{
+#body
+{
+    padding:0;
+    margin:0;
+}
+
+#footer
+{
     height:160px;
     width:100%;
     background-color: #ddd;
 }
+
+#page-header
+{
+    width: 100%;
+    height: 100px;
+    background-color: #ddd;
+    margin:0;
+    padding:0;
+}
+/*-----------------------------INPUT------------------------*/
+#input-form
+{
+    width: 800px;
+    height: 70px;
+    margin:auto;
+}
+
+#media-location
+{
+    width: 400px;
+    height: 40px;
+    padding:0;
+}
+
+.playlist-button
+{
+    height: 40px;
+}
+
 /*-----------------------------PLAYLIST---------------------*/
+#playlist
+{
+    width:450px;
+    height:400px;
+
+}
 .playlist_evenElement
 {
     background-color: lightblue;
-    height:25px;
 }
 
 .playlist_oddElement
@@ -19,29 +60,28 @@
 {
     background-color: lightgreen;
 }
-
-
-
-
-.youtube-player-playlist{
-    height:100%;
-    background:green;
-	margin:0;
-	padding:0;
+/*------------------------------MEDIA------------------*/
+#media-content
+{
+    /*---FOR TESTS ONLY---*/
+    background-color: green;
+    width:900px;
+    margin:auto;
 }
 
-.ui-state-default, .ui-state-active{
-    height:30px;
-    font-size: 18pt;
-    background-color: gold;
-    cursor:pointer;
+#media-element
+{
+    width: 450px;
+    height: 338px;
+    background-color: lightcoral;
+    display: block;
 }
 
-.ui-state-active{
-    background-color: orange;
+#playback-control
+{
+    width: 450px;
+    height: 42px;
+    background-color: lightsalmon;
 }
 
-.ui-state-default:hover{
-    background-color: yellow;
-}
 

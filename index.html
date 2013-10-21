@@ -69,38 +69,38 @@
         </div>
     </div>
 </header>
-<div id="player">
-    <header class="page-title">
-    </header>
-    <div class="content">
-        <div class="title"></div>
-        <div class="time"></div>
-        <div id="inputData">
-            <form class=pure-form>
-                <input type="text" id="videoUrl" placeholder="paste you YT link here"/> <input type="button" value="Load video" id="loadUrlButton" class="pure-button pure-button-primary"/>
-            </form>
-        </div>
-            <div id="videoInfo"></div>
-            <div class="pure-g">
-            </div>
-            <div class="media-element pure-u-1-2" style="width:400;height:500">
-
-            </div>
-            <div id="playlist" class="pure-u-1-2">
-                <header class="page-title"><h1>playlist</h1></header>
-                <div class="content"></div>
-            </div>
-
-
-        <a href="#" id="prev_button" class="pure-button pure-button-primary"><i class="icon-step-backward"></i></a>
-        <a href="#" id="play_button" class="pure-button pure-button-primary"><i class="icon-play"></i></a>
-        <a href="#" id="pause_button" class="pure-button pure-button-primary"><i class="icon-pause"></i></a>
-        <a href="#" id="next_button" class="pure-button pure-button-primary"><i class="icon-step-forward"></i></a>
-
-        <video id="media_player" width="520" height="440" controls="control">
-            <source type="video/youtube" src="https://www.youtube.com/watch?v=8zwTEKY4meE" />
-        </video>
+<div class="content">
+    <div id="input-form">
+        <form class=pure-form>
+            <input type="text" id="media-location" placeholder="paste you YT link here"/>
+            <input type="button" value="add to playlist" id="" class="pure-button pure-button-primary playlist-button"/>
+            <input type="button" value="create new playlist" id="load-media-location" class="pure-button pure-button-primary playlist-button"/>
+        </form>
     </div>
+
+    <div id="media-content">
+        <div class="pure-g">
+
+            <div class="pure-u-1-2">
+                <div id="media-element">
+                    <video id="media_player" style="height:100%;width:100%;" controls="control">
+                        <source type="video/x-youtube" src="https://www.youtube.com/watch?v=8zwTEKY4meE" />
+                    </video>
+                </div>
+                <div id="media-control">
+                    <a href="#" id="prev_button" class="pure-button pure-button-primary"><i class="icon-step-backward"></i></a>
+                    <a href="#" id="play_button" class="pure-button pure-button-primary"><i class="icon-play"></i></a>
+                    <a href="#" id="pause_button" class="pure-button pure-button-primary"><i class="icon-pause"></i></a>
+                    <a href="#" id="next_button" class="pure-button pure-button-primary"><i class="icon-step-forward"></i></a>
+                </div>
+            </div>
+            <div class="pure-u-1-2">
+                <div id="playlist"></div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 
 

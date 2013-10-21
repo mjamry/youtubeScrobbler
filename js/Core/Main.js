@@ -110,9 +110,9 @@ function HookUpToolbarButtons()
 }
 
 function HookUpLoadUrlButtonAction(player){
-    $("#loadUrlButton").bind("click", function()
+    $("#load-media-location").bind("click", function()
     {
-        var url= $("#videoUrl").val();
+        var url= $("#media-location").val();
 
         //player.loadPlaylistFromUrl(url);
          player.play(url);

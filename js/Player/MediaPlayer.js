@@ -17,7 +17,8 @@ window.Player.MediaPlayer = function(configuration, container)
                 this._initialise(mediaElement);
                 window.Common.Log.Instance().Debug("Media playes has been initialised");
 
-                var mediaDetails = new window.Player.MediaDetails();
+                window.Common.Log.Instance().Debug(this.instance.options.height);
+                this.instance.setVideoSize(300, 300);
 
             }, this),
 
