@@ -8,7 +8,7 @@ window.Common = window.Common || {};
 window.Player.PlaylistService = function(player, playlist)
 {
     this.player = player;
-    this.playlist = playlist || {};
+    this.playlist = playlist || new window.Player.Playlist();
     this._eventBroker = window.Common.EventBrokerSingleton.instance();
     //TODO: for future purposes - will be configurable
     this._autoplay = true;
@@ -36,9 +36,21 @@ window.Player.PlaylistService.prototype =
     },
 
     //initialises playlist object, or overwrite existing one.
-    setUpPlaylist: function(playlist)
+    createPlaylist: function(playlist)
     {
         this.playlist = playlist;
+        this._eventBroker.fireEventWithData(window.Player.Events.PlaylistUpdated, this.playlist);
+    },
+
+    //adds new playlist (or single media) to existing playlist.
+    addToPlaylist: function(playlist)
+    {
+        //TODO: consider moving this loop to playlist implementation
+        for(var i=0;i<playlist.length();i++)
+        {
+            this.playlist.add(playlist.getItem(i));
+        }
+
         this._eventBroker.fireEventWithData(window.Player.Events.PlaylistUpdated, this.playlist);
     },
 

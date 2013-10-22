@@ -116,11 +116,15 @@ function HookUpToolbarButtons()
 }
 
 function HookUpLoadUrlButtonAction(player){
-    $("#load-media-location").bind("click", function()
+    $("#create-new-playlist").bind("click", function()
     {
-        var url= $("#media-location").val();
+        var mediaLocation= $("#media-location").val();
+        player.createNewPlaylist(mediaLocation);
+    });
 
-        //player.loadPlaylistFromUrl(url);
-         player.play(url);
+    $("#add-to-playlist").bind("click", function()
+    {
+        var mediaLocation = $("#media-location").val();
+        player.addToPlaylist(mediaLocation);
     });
 }

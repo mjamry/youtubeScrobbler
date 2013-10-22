@@ -36,15 +36,26 @@ window.ApplicationCore.AppCore.prototype =
         this.onlineScrobbler.createNewSession(token);
     },
 
-    play: function(url)
+    createNewPlaylist: function(url)
     {
         var plLoader = new window.Player.YouTubePlaylistLoader();
         plLoader.loadPlaylistFromUrl(
             url,
-            $.proxy(function(playlist){
-                playlist.next();
-                playlist.next();
-                this.playlistService.setUpPlaylist(playlist);
+            $.proxy(function(playlist)
+            {
+                this.playlistService.createPlaylist(playlist);
+            }, this)
+        );
+    },
+
+    addToPlaylist: function(url)
+    {
+        var plLoader = new window.Player.YouTubePlaylistLoader();
+        plLoader.loadPlaylistFromUrl(
+            url,
+            $.proxy(function(playlist)
+            {
+                this.playlistService.addToPlaylist(playlist)
             }, this)
         );
     }
