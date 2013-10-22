@@ -16,6 +16,8 @@ $(function()
     this._eventBroker = coreServicesFactory.createBrokerHandler();
     window.Common.EventBrokerSingleton.setInstance(this._eventBroker);
 
+    logger.initialise(this._eventBroker);
+
     //creating application core
     var applicationCore = new window.ApplicationCore.AppCore(coreServicesFactory);
     applicationCore.initialise();
@@ -29,6 +31,10 @@ $(function()
 
     var playlist = new window.UI.PlaylistViewController("playlist", window.UI.PlaylistUIConfig);
     playlist.initialise();
+
+    var logger = new window.UI.LoggerViewControler("logger", window.UI.LoggerConfig);
+    logger.initialise();
+    logger.isLoggingAllowed = true;
 
    // HookUpLoadUrlButtonAction(applicationCore.getPlayer());
    // HookUpToolbarButtons(applicationCore.getPlayer());

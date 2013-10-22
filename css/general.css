@@ -93,4 +93,24 @@
     background-color: lightsalmon;
 }
 
+/*----------------------------LOGGER----------------------*/
+.logger-info
+{
+    background-color: lightyellow;
+}
+
+.logger-error
+{
+    background-color: lightcoral;
+}
+
+.logger-debug
+{
+    background-color: lightblue;
+}
+
+.logger-warning
+{
+    background-color: lightpink;
+}
 

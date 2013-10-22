@@ -28,7 +28,10 @@ window.Common.Log.Instance = function()
 //TODO move it to common namespace
 //simple implementation of Logger
 //it just write to console window.
-Logger = function(){};
+Logger = function()
+{
+    this._eventBroker = null;
+};
 
 Logger.prototype =
 {
@@ -51,23 +54,48 @@ Logger.prototype =
         return outputData;
     },
 
+    initialise: function()
+    {
+        this._eventBroker = window.Common.EventBrokerSingleton.instance();
+    },
+
     Info: function(message)
     {
-          console.info(this._getFormatedTimestamp() + message);
+        message = "[INF]" + this._getFormatedTimestamp() + message;
+        console.info(message);
+        if(this._eventBroker)
+        {
+            this._eventBroker.fireEventWithData(window.Common.LoggerEvents.LoggedInfo, message);
+        }
     },
 
     Error: function(message)
     {
-        console.error(this._getFormatedTimestamp()  +message);
+        message = "[ERR]" + this._getFormatedTimestamp() + message;
+        console.error(message);
+        if(this._eventBroker)
+        {
+            this._eventBroker.fireEventWithData(window.Common.LoggerEvents.LoggerError, message);
+        }
     },
 
     Warning: function(message)
     {
-        console.warn(this._getFormatedTimestamp() + message);
+        message = "[WRN]" + this._getFormatedTimestamp() + message;
+        console.warn(message);
+        if(this._eventBroker)
+        {
+            this._eventBroker.fireEventWithData(window.Common.LoggerEvents.LoggerWarning, message);
+        }
     },
 
     Debug: function(message)
     {
-        console.debug(this._getFormatedTimestamp() + message);
+        message = "[DBG]" + this._getFormatedTimestamp() + message;
+        console.debug(message);
+        if(this._eventBroker)
+        {
+            this._eventBroker.fireEventWithData(window.Common.LoggerEvents.LoggerDebug, message);
+        }
     }
 }

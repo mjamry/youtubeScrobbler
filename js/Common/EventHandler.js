@@ -63,7 +63,7 @@ window.Common.EventBroker.prototype =
     {
         if(this.listeners[event])
         {
-            window.Common.Log.Instance().Debug("Event: "+event+" has been fired");
+            //window.Common.Log.Instance().Debug("Event: "+event+" has been fired");
 
             for(var i = 0;i<this.listeners[event].length;i++)
             {
@@ -73,7 +73,7 @@ window.Common.EventBroker.prototype =
         }
         else
         {
-            window.Common.Log.Instance().Debug("Event: "+event+" hasn't got any listeners.");
+            //window.Common.Log.Instance().Debug("Event: "+event+" hasn't got any listeners.");
         }
     },
     
@@ -81,7 +81,7 @@ window.Common.EventBroker.prototype =
     {
         if(this.listeners[event])
         {
-            window.Common.Log.Instance().Debug("Event: "+event+" has been fired, data: "+data.toSource());
+           // window.Common.Log.Instance().Debug("Event: "+event+" has been fired, data: "+data);
 
             for(var i = 0;i<this.listeners[event].length;i++)
             {
@@ -91,7 +91,7 @@ window.Common.EventBroker.prototype =
         }
         else
         {
-            window.Common.Log.Instance().Debug("Event: "+event+" hasn't got any listeners.");
+            //window.Common.Log.Instance().Debug("Event: "+event+" hasn't got any listeners.");
         }
     }
 };
