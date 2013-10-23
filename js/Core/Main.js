@@ -1,6 +1,7 @@
 //using
 window.ApplicationCore = window.ApplicationCore || {};
 window.UI = window.UI || {};
+window.LastFm = window.LastFm || {};
 
 //main
 $(function()
@@ -46,6 +47,11 @@ $(function()
 
 function HandleSession()
 {
+    $("#authentication-link").bind("click", function()
+    {
+        window.location = "http://www.last.fm/api/auth/?api_key="+window.LastFm.LastFmConstants.API_KEY+"&cb="+document.URL;
+    })
+
     window.Common.EventBrokerSingleton.instance().addListener(window.LastFm.Events.SessionEstablished,
         function(userName)
         {
