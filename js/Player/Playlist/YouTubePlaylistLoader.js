@@ -71,12 +71,16 @@ window.Player.YouTubePlaylistLoader.prototype =
         mediaDetails.title = this._getTitle(media.title);
         mediaDetails.id = media.id;
         //sometime it is empty - do not know why...
-        mediaDetails.url = media.player.default || "";
+        if(media.player)
+        {
+            mediaDetails.url = media.player.default || "";
+        }
         mediaDetails.mediaType = window.Player.YouTubePlaylistConstant.MEDIA_TYPE;
         mediaDetails.duration = new window.Player.Duration(media.duration);
 
         if(mediaDetails.artist == "" || mediaDetails.title == "" || mediaDetails.url == "")
         {
+            window.Common.Log.Instance().Warning("Cannot read media details.");
             return null;
         }
 

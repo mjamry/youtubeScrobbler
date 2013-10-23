@@ -94,6 +94,13 @@
 }
 
 /*----------------------------LOGGER----------------------*/
+.logger-info, .logger-error, .logger-warning, .logger-debug
+{
+    font-size: 9pt;
+    width:800px;
+    margin: auto;
+}
+
 .logger-info
 {
     background-color: lightyellow;

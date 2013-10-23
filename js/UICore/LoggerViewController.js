@@ -23,10 +23,10 @@ window.UI.LoggerViewControler.prototype =
             if(this._container.children().length + 1 > this._config.maxNumberOfLogs)
             {
                 //remove first element if limit has been reached.
-                this._container.find(this._config.singleElementType+':first').remove();
+                this._container.find(this._config.singleElementType+':last').remove();
             }
 
-            this._container.append(newLog);
+            this._container.prepend(newLog);
         }
     },
 
