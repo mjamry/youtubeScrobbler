@@ -81,6 +81,7 @@ window.Player.YouTubePlaylistLoader.prototype =
         if(mediaDetails.artist == "" || mediaDetails.title == "" || mediaDetails.url == "")
         {
             window.Common.Log.Instance().Warning("Cannot read media details.");
+            window.Common.Log.Instance().Debug("Probably file does not exist anymore: "+media.title);
             return null;
         }
 

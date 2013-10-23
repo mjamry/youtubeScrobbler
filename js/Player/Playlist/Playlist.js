@@ -22,18 +22,21 @@ window.Player.Playlist.prototype =
 
     first: function()
     {
-        return this.mediaList[0];
+        this.indexOfCurrentlySelectedMediaElement = 0;
+        return this.mediaList[this.indexOfCurrentlySelectedMediaElement];
     },
 
     last: function()
     {
-        return this.mediaList[this.lenght() -1];
+        this.indexOfCurrentlySelectedMediaElement = this.length() -1;
+        return this.mediaList[this.indexOfCurrentlySelectedMediaElement];
     },
 
     getItem: function(index)
     {
         if(index >= 0 && index < this.length())
         {
+            this.indexOfCurrentlySelectedMediaElement = index;
             return this.mediaList[index];
         }
         else
