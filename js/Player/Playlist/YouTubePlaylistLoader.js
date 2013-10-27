@@ -34,6 +34,7 @@ window.Player.YouTubePlaylistLoader.prototype =
         try
         {
             result = vidName[index].trim();
+            result = result.toLowerCase().capitalise();
         }
         catch(e)
         {
@@ -51,6 +52,7 @@ window.Player.YouTubePlaylistLoader.prototype =
         try
         {
             result = vidName[index].trim();
+            result = result.toLowerCase().capitalise();
         }
         catch(e)
         {

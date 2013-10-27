@@ -15,7 +15,7 @@ window.Player.MediaPlayerConfig =
     enableAutosize: false,
     // shows debug errors on screen
     enablePluginDebug: true,
-    alwaysShowControls: false,
+    alwaysShowControls: true,
     // remove or reorder to change plugin priority
     plugins: ['flash'],
     // specify to force MediaElement to use a particular video or audio type
@@ -24,7 +24,7 @@ window.Player.MediaPlayerConfig =
     // name of flash file
     flashName: 'flashmediaelement.swf',
     // the order of controls you want on the control bar (and other plugins below)
-    features: ['playpause','progress','current'],
+    features: ['playpause','current'],
 
     // rate in milliseconds for Flash and Silverlight to fire the timeupdate event
     // larger number is less accurate, but less strain on plugin->JavaScript bridge
