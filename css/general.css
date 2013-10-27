@@ -53,6 +53,8 @@
 {
     width:450px;
     height:400px;
+    /*TODO do it with JS*/
+    overflow: auto;
 
 }
 .playlist_evenElement
@@ -68,6 +70,7 @@
 .playlist_hoverElement
 {
     background-color: lightgreen;
+    cursor: crosshair;
 }
 /*------------------------------MEDIA------------------*/
 #media-content
