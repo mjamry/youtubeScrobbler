@@ -7,6 +7,9 @@ window.UI.LoggerConfig =
     errorStyle: "logger-error",
     warningStyle: "logger-warning",
     debugStyle: "logger-debug",
-    maxNumberOfLogs: 100,
-    singleElementType: "div"
+    maxNumberOfLogs: 400,
+    singleElementType: "div",
+    clearLogsButtonId: "clear-logs",
+    isLoggerEnabledCheckboxId: "enable-logger",
+    loggerLevelComboBox: "logger-level"
 }

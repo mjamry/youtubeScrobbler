@@ -161,14 +161,14 @@
         <form class="pure-form">
             <fieldset>
                 <legend>Logger options:</legend>
-                <input type="checkbox" value="display-log" id="show-log" disabled="disabled" checked>
-                <label for="show-log">Show logs</label>
+                <input type="checkbox" id="enable-logger" checked>
+                <label for="enable-logger">Logger enabled</label>
                 | Log level:
-                <select id="log-level">
-                    <option selected>Info</option>
-                    <option>Warning</option>
-                    <option>Error</option>
-                    <option>Debug</option>
+                <select id="logger-level">
+                    <option selected value="0">Info</option>
+                    <option value="1">Warning</option>
+                    <option value="2">Error</option>
+                    <option value="3">Debug</option>
                 </select>
                 | <input type="button" id="clear-logs" value="Clear logs" class="pure-button"/>
             </fieldset>
