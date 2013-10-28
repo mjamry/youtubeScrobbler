@@ -34,6 +34,7 @@ window.UI.LoggerViewControler.prototype =
         this.isLoggingAllowed = true;
     },
 
+    //disables logger
     _disableLogger: function()
     {
         this.isLoggingAllowed = false;
