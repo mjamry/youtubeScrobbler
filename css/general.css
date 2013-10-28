@@ -7,9 +7,21 @@
 
 #footer
 {
-    height:160px;
     width:100%;
     background-color: #ddd;
+    padding:10px;
+    font-size: 9pt;
+    color: gray;
+}
+
+#footer A
+{
+    color: gray;
+}
+
+#footer A:hover
+{
+    color: darkslategray;
 }
 
 #footer-content
@@ -107,6 +119,7 @@
 {
     width:500px;
     margin: auto;
+    font-size: 10pt;
 }
 
 .logger-info, .logger-error, .logger-warning, .logger-debug
@@ -141,5 +154,6 @@
 {
     width:500px;
     margin: auto;
+    font-size: 10pt;
 }
 

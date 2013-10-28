@@ -122,6 +122,7 @@
 <div id="footer">
     <div id="footer-content">
         <div class="pure-g">
+            <div class="pure-u-1-5"></div>
             <div class="pure-u-1-5">
                 Resources:
                 <dl>
@@ -131,46 +132,47 @@
                 </dl>
 
             </div>
-            <div class="pure-u-1-5"></div>
-            <div class="pure-u-1-5"></div>
-            <div class="pure-u-1-5"></div>
+            <div class="pure-u-1-5">
+                <br><br><br><br><br>
+                <div>All rights reserved.</div>
+            </div>
             <div class="pure-u-1-5">
                 Contact:
                 <a href="mailto:onlinescrobbler@gmail.com">onlinescrobbler@gmail.com</a>
             </div>
+            <div class="pure-u-1-5"></div>
         </div>
-        <div>All rights reserved.</div>
+
     </div>
 </div>
 
 <div id="testing-helper">
-    <fieldset>
-        <legend>Tester helper:</legend>
     <form class="pure-form">
-        <input type="button" value="Report bug" id="report-bug"/>
-        <input type="button" value="Request feature" id="request-feature"/>
+        <fieldset>
+            <legend>Tester helper:</legend>
+            <input type="button" value="Report bug" id="report-bug" class="pure-button"/>
+            <input type="button" value="Request feature" id="request-feature" class="pure-button"/>
+        </fieldset>
     </form>
-    </fieldset>
 </div>
 
 <div id="logger">
     <div id="logger-header">
-       <fieldset>
-           <legend>Logger options:</legend>
         <form class="pure-form">
-            <input type="checkbox" value="display-log" id="show-log" disabled="disabled" checked>
-            <label for="show-log">Show logs</label>
-            | Log level:
-            <select id="log-level">
-                <option selected>Info</option>
-                <option>Warning</option>
-                <option>Error</option>
-                <option>Debug</option>
-            </select>
-            | <input type="button" id="clear-logs" value="Clear logs"/>
-
+            <fieldset>
+                <legend>Logger options:</legend>
+                <input type="checkbox" value="display-log" id="show-log" disabled="disabled" checked>
+                <label for="show-log">Show logs</label>
+                | Log level:
+                <select id="log-level">
+                    <option selected>Info</option>
+                    <option>Warning</option>
+                    <option>Error</option>
+                    <option>Debug</option>
+                </select>
+                | <input type="button" id="clear-logs" value="Clear logs" class="pure-button"/>
+            </fieldset>
         </form>
-       </fieldset>
     </div>
     <div id="logger-content"></div>
 </div>
