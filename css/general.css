@@ -12,6 +12,12 @@
     background-color: #ddd;
 }
 
+#footer-content
+{
+    width: 70%;
+    margin:auto;
+}
+
 #page-header
 {
     width: 100%;
@@ -97,6 +103,12 @@
 }
 
 /*----------------------------LOGGER----------------------*/
+#logger-header
+{
+    width:500px;
+    margin: auto;
+}
+
 .logger-info, .logger-error, .logger-warning, .logger-debug
 {
     font-size: 9pt;
@@ -122,5 +134,12 @@
 .logger-warning
 {
     background-color: lightpink;
+}
+
+/*--------------------------------TESTS---------------------------*/
+#testing-helper
+{
+    width:500px;
+    margin: auto;
 }
 

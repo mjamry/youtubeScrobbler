@@ -119,12 +119,60 @@
     </div>
 </div>
 
-<div id="logger"></div>
-
-
-
 <div id="footer">
-    footer
+    <div id="footer-content">
+        <div class="pure-g">
+            <div class="pure-u-1-5">
+                Resources:
+                <dl>
+                    <dd><a target="_blank" href="www.github.com">github</a></dd>
+                    <dd><a target="_blank" href="www.youtube.com">youtube</a></dd>
+                    <dd><a target="_blank" href="www.last.fm">last.fm</a></dd>
+                </dl>
+
+            </div>
+            <div class="pure-u-1-5"></div>
+            <div class="pure-u-1-5"></div>
+            <div class="pure-u-1-5"></div>
+            <div class="pure-u-1-5">
+                Contact:
+                <a href="mailto:onlinescrobbler@gmail.com">onlinescrobbler@gmail.com</a>
+            </div>
+        </div>
+        <div>All rights reserved.</div>
+    </div>
+</div>
+
+<div id="testing-helper">
+    <fieldset>
+        <legend>Tester helper:</legend>
+    <form class="pure-form">
+        <input type="button" value="Report bug" id="report-bug"/>
+        <input type="button" value="Request feature" id="request-feature"/>
+    </form>
+    </fieldset>
+</div>
+
+<div id="logger">
+    <div id="logger-header">
+       <fieldset>
+           <legend>Logger options:</legend>
+        <form class="pure-form">
+            <input type="checkbox" value="display-log" id="show-log" disabled="disabled" checked>
+            <label for="show-log">Show logs</label>
+            | Log level:
+            <select id="log-level">
+                <option selected>Info</option>
+                <option>Warning</option>
+                <option>Error</option>
+                <option>Debug</option>
+            </select>
+            | <input type="button" id="clear-logs" value="Clear logs"/>
+
+        </form>
+       </fieldset>
+    </div>
+    <div id="logger-content"></div>
 </div>
 </body>
 </html>

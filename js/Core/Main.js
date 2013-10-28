@@ -33,7 +33,7 @@ $(function()
     var playlist = new window.UI.PlaylistViewController("playlist", window.UI.PlaylistUIConfig);
     playlist.initialise();
 
-    var logger = new window.UI.LoggerViewControler("logger", window.UI.LoggerConfig);
+    var logger = new window.UI.LoggerViewControler("logger-content", window.UI.LoggerConfig);
     logger.initialise();
     logger.isLoggingAllowed = true;
 
