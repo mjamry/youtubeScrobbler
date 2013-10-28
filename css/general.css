@@ -157,3 +157,9 @@
     font-size: 10pt;
 }
 
+#error-report
+{
+    font-size: 11pt;
+    background-color: lightsalmon;
+}
+

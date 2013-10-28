@@ -27,8 +27,8 @@
     <script type="text/javascript" src="js/UICore/UIEvents.js"></script>
     <script type="text/javascript" src="js/UICore/PlaylistViewController.js"></script>
     <script type="text/javascript" src="js/UICore/PlaylistUIConfiguration.js"></script>
-    <script type="text/javascript" src="js/UICore/LoggerViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/LoggerUIConfiguration.js"></script>
+    <script type="text/javascript" src="js/UICore/Logger/LoggerViewController.js"></script>
+    <script type="text/javascript" src="js/UICore/Logger/LoggerUIConfiguration.js"></script>
 
     <script type="text/javascript" src="js/Core/Main.js"></script>
     <script type="text/javascript" src="js/Core/CoreServicesFactory.js"></script>
@@ -152,6 +152,35 @@
             <legend>Tester helper:</legend>
             <input type="button" value="Report bug" id="report-bug" class="pure-button"/>
             <input type="button" value="Request feature" id="request-feature" class="pure-button"/>
+        </fieldset>
+    </form>
+    <form class="pure-form pure-form-aligned" id="error-report">
+        <fieldset>
+            <legend>Bug report</legend>
+            Thank you for your time and engagement :).<br>
+            This form will send an email with attached:
+            <ul>
+                <li>bug description,</li>
+                <li>logs (visible below),</li>
+                <li>screen shot (only page view),</li>
+                <li>browser and OS versions you are using,</li>
+                <li>your email address - to send you feedback/questions (it is optional).</li>
+            </ul>
+            <div class="pure-control-group">
+                <label for="bug-title">sender:</label>
+                <input type="email" id="bug-email" placeholder="write your email here"/>
+            </div>
+            <div class="pure-control-group">
+                <label for="bug-title">title:</label>
+                <input type="text" id="bug-title" placeholder="write bug title"/>
+            </div>
+            <div class="pure-control-group">
+                <label for="bug-description">description:</label>
+                <textarea id="bug-description" placeholder="write here bug's description/steps to reproduce - basically how you managed to get this bug"></textarea>
+            </div>
+            <div class="pure-controls">
+                <input type="submit" value="send" class="pure-button"/>
+            </div>
         </fieldset>
     </form>
 </div>
