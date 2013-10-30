@@ -40,6 +40,7 @@ $(function()
     logger.isLoggingAllowed = true;
 
     var testReport = uiFactory.createTestReportViewController();
+    testReport.initialise();
 
    // HookUpLoadUrlButtonAction(applicationCore.getPlayer());
    // HookUpToolbarButtons(applicationCore.getPlayer());

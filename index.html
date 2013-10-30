@@ -27,8 +27,12 @@
     <script type="text/javascript" src="js/UICore/UIEvents.js"></script>
     <script type="text/javascript" src="js/UICore/PlaylistViewController.js"></script>
     <script type="text/javascript" src="js/UICore/PlaylistUIConfiguration.js"></script>
+    <script type="text/javascript" src="js/UI/UIControllersFactory.js"></script>
     <script type="text/javascript" src="js/UI/Logger/LoggerViewController.js"></script>
     <script type="text/javascript" src="js/UI/Logger/LoggerUIConfiguration.js"></script>
+    <script type="text/javascript" src="js/UI/TestReports/TestReportsUIConfiguration.js"></script>
+    <script type="text/javascript" src="js/UI/TestReports/TestReportsViewController.js"></script>
+    <script type="text/javascript" src="js/UI/TestReports/ReportSender.js"></script>
 
     <script type="text/javascript" src="js/Core/Main.js"></script>
     <script type="text/javascript" src="js/Core/CoreServicesFactory.js"></script>
@@ -150,8 +154,8 @@
     <form class="pure-form">
         <fieldset>
             <legend>Tester helper:</legend>
-            <input type="button" value="Report bug" id="report-bug" class="pure-button"/>
-            <input type="button" value="Request feature" id="request-feature" class="pure-button"/>
+            <input type="button" value="Report bug" id="report-bug-btn" class="pure-button"/>
+            <input type="button" value="Request feature" id="report-feature-btn" class="pure-button"/>
         </fieldset>
     </form>
     <form class="pure-form pure-form-aligned" id="error-report">
@@ -164,10 +168,10 @@
                 <li>logs (visible below),</li>
                 <li>screen shot (only page view),</li>
                 <li>browser and OS versions you are using,</li>
-                <li>your email address - to send you feedback/questions (it is optional).</li>
+                <li>your email address - to send you feedback/questions.</li>
             </ul>
             <div class="pure-control-group">
-                <label for="bug-title">sender:</label>
+                <label for="bug-email">sender:</label>
                 <input type="email" id="bug-email" placeholder="write your email here"/>
             </div>
             <div class="pure-control-group">

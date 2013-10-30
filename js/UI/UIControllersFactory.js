@@ -7,16 +7,16 @@ window.UI.UIControllersFactory.prototype =
 {
     createLoggerViewController: function()
     {
-        return new window.UI.LoggerViewControler(window.UI.LoggerUIConfig);
+        return new window.UI.LoggerViewControler("logger", window.UI.LoggerUIConfig);
     },
 
     createTestReportViewController: function()
     {
-        return new window.UI.TestReportsViewController(window.UI.TestReportUIConfig);
+        return new window.UI.TestReportsViewController(new window.UI.ReportSender(), window.UI.TestReportUIConfig);
     },
 
     createPlaylistViewController: function()
     {
-        return new window.UI.PlaylistViewController(window.UI.PlaylistUIConfig);
+        return new window.UI.PlaylistViewController("playlist", window.UI.PlaylistUIConfig);
     }
 }
