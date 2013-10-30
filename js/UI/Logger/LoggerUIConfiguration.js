@@ -1,7 +1,7 @@
 //namespace
 window.UI = window.UI || {};
 
-window.UI.LoggerConfig =
+window.UI.LoggerUIConfig =
 {
     infoStyle: "logger-info",
     errorStyle: "logger-error",

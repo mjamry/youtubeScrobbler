@@ -30,12 +30,16 @@ $(function()
 
     HookUpToolbarButtons();
 
-    var playlist = new window.UI.PlaylistViewController("playlist", window.UI.PlaylistUIConfig);
+    var uiFactory = new window.UI.UIControllersFactory();
+
+    var playlist = uiFactory.createPlaylistViewController();
     playlist.initialise();
 
-    var logger = new window.UI.LoggerViewControler("logger-content", window.UI.LoggerConfig);
+    var logger = uiFactory.createLoggerViewController();
     logger.initialise();
     logger.isLoggingAllowed = true;
+
+    var testReport = uiFactory.createTestReportViewController();
 
    // HookUpLoadUrlButtonAction(applicationCore.getPlayer());
    // HookUpToolbarButtons(applicationCore.getPlayer());
