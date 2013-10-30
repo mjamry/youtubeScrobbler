@@ -14,58 +14,27 @@ window.UI.PlaylistViewController = function(playlistContainer, config)
 
 window.UI.PlaylistViewController.prototype =
 {
-    _onMouseEnter: function(config)
+    _createNewElement: function(mediaDetails, index)
     {
-        return function()
-        {
-            $(this).addClass(config.hoverElementStyle);
-        }
-    },
+        var builder = new window.UI.PlaylistUIItemBuilder(index);
+        builder.initialise(this._config.singleElementType);
 
-    _onMouseLeave: function(config)
-    {
-        return function()
-        {
-            $(this).removeClass(config.hoverElementStyle);
-        }
-    },
-
-    _onClick: function(eventBroker, index)
-    {
-        return function()
-        {
-            //TODO add new style and remove from previous element.
-            eventBroker.fireEventWithData(window.UI.Events.PlaySpecificRequested, index);
-        }
-    },
-
-    _createNewElement: function(item, index)
-    {
-        var newElement = document.createElement(this._config.singleElementType);
         var isIndexEven = index%2 == 0;
 
         //add style
         if(isIndexEven)
         {
-            newElement.className += this._config.evenElementStyle;
+            builder.setUpStyles(this._config.evenElementStyle, this._config.hoverElementStyle);
         }
         else
         {
-            newElement.className += this._config.oddElementStyle;
+            builder.setUpStyles(this._config.oddElementStyle, this._config.hoverElementStyle);
         }
 
-        //fill body
-        newElement.innerHTML = item.artist + " - " + item.title + " [" + item.duration.getHumanReadable() + "]";
+        builder.fillBody(mediaDetails);
+        builder.hookUpToEvents();
 
-        //hook up on to events
-        var onClickHandler = this._onClick(this._eventBroker, index);
-        var onMouseEnterHandler = this._onMouseEnter(this._config);
-        var onMouseLeaveHandler = this._onMouseLeave(this._config);
-        newElement.onclick = onClickHandler;
-        newElement.onmouseenter = onMouseEnterHandler;
-        newElement.onmouseleave = onMouseLeaveHandler;
-
-        return newElement;
+        return builder.build();
     },
 
     _handlePlaylistUpdated: function(playlist)
