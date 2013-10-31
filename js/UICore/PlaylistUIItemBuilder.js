@@ -1,9 +1,10 @@
 //using
 window.UI = window.UI || {};
 
-window.UI.PlaylistUIItemBuilder = function(index)
+window.UI.PlaylistUIItemBuilder = function(index, config)
 {
     this._index = index;
+    this._config = config;
     this._item = null;
     this._likeButton = null;
     this._hoverStyle = null;
@@ -44,33 +45,37 @@ window.UI.PlaylistUIItemBuilder.prototype =
         }
     },
 
-    _createLikeButton: function(elementType)
+    _createIcon: function(style)
+    {
+        var icon = document.createElement("i");
+        icon.className = style;
+        return icon;
+    },
+
+    _createLikeButton: function(elementType, style, iconStyle)
     {
         var likeBtn = document.createElement(elementType);
-
-        //TODO add specific style instead of below...
-        likeBtn.width = 20;
-        likeBtn.height = 20;
-        likeBtn.innerHTML = "likeMe";
+        likeBtn.className += style;
         $(likeBtn).hide();
+
+        var innerIcon = this._createIcon(iconStyle);
+        likeBtn.appendChild(innerIcon);
 
         return likeBtn;
     },
 
-    initialise: function(elementType)
+    initialise: function()
     {
-        this._item = document.createElement(elementType);
+        this._item = document.createElement(this._config.singleElementType);
 
-        //TODO add separate element type to config
-        this._likeButton = this._createLikeButton(elementType);
+        this._likeButton = this._createLikeButton(this._config.likeButtonElementType, this._config.likeButtonStyle, this._config.likeButtonIconStyle);
         this._item.appendChild(this._likeButton);
-
     },
 
-    setUpStyles: function(style, hoverStyle)
+    setUpStyles: function(style)
     {
         this._item.className += style;
-        this._hoverStyle = hoverStyle;
+        this._hoverStyle = this._config.hoverElementStyle;
     },
 
     fillBody: function(mediaDetails)

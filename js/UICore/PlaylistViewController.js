@@ -16,19 +16,19 @@ window.UI.PlaylistViewController.prototype =
 {
     _createNewElement: function(mediaDetails, index)
     {
-        var builder = new window.UI.PlaylistUIItemBuilder(index);
-        builder.initialise(this._config.singleElementType);
+        var builder = new window.UI.PlaylistUIItemBuilder(index, this._config);
+        builder.initialise();
 
         var isIndexEven = index%2 == 0;
 
         //add style
         if(isIndexEven)
         {
-            builder.setUpStyles(this._config.evenElementStyle, this._config.hoverElementStyle);
+            builder.setUpStyles(this._config.evenElementStyle);
         }
         else
         {
-            builder.setUpStyles(this._config.oddElementStyle, this._config.hoverElementStyle);
+            builder.setUpStyles(this._config.oddElementStyle);
         }
 
         builder.fillBody(mediaDetails);
