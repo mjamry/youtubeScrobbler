@@ -12,6 +12,8 @@ window.Player.PlaylistService = function(player, playlist)
     this._eventBroker = window.Common.EventBrokerSingleton.instance();
     //TODO: for future purposes - will be configurable
     this._autoplay = true;
+
+    window.Common.Log.Instance().Info("Playlist service has been created.");
 };
 
 window.Player.PlaylistService.prototype =

@@ -13,6 +13,7 @@ window.Common.EventBrokerSingleton.setInstance = function(instance)
     if(this._instance == null)
     {
         this._instance = instance;
+        window.Common.Log.Instance().Info("Events broker instance has been set.");
     }
 }
 
@@ -25,6 +26,7 @@ window.Common.EventBrokerSingleton.instance = function()
 window.Common.EventBroker = function()
 {
     this.listeners = {};
+    window.Common.Log.Instance().Info("Event broker has been created.");
 }
 
 window.Common.EventBroker.prototype =

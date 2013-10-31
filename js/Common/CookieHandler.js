@@ -11,6 +11,7 @@ window.Common.Cookie.setInstance = function(instance)
     if(this._instance == null)
     {
         this._instance = instance;
+        window.Common.Log.Instance().Info("Cookies service instance has been set.");
     }
 }
 
@@ -27,6 +28,8 @@ window.Common.CookieHandler = function()
 {
     //configuration
     $.cookie.json = true;
+
+    window.Common.Log.Instance().Info("Cookies handler has been created.");
 };
 
 window.Common.CookieHandler.prototype =

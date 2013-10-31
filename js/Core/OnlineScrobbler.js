@@ -16,6 +16,7 @@ window.ApplicationCore.OnlineScrobbler = function()
     this._trackStartPlayingTime = null;
 
     this._currentlyLoaded = null;
+    window.Common.Log.Instance().Info("Online scrobbler has been created.");
 };
 
 window.ApplicationCore.OnlineScrobbler.prototype =

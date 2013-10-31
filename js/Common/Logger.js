@@ -9,7 +9,7 @@ window.Common.Log.SetInsance = function(instance)
     if(this.instance !== "undefined")
     {
         this.instance = instance;
-        this.instance.Info("Logger has been initialised.");
+        this.instance.Info("Logger instance has been set.");
     }
 }
 

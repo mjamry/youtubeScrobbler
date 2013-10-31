@@ -10,13 +10,13 @@ window.UI.LoggerLevels =
 }
 
 
-window.UI.LoggerViewControler = function(container, config)
+window.UI.LoggerViewController = function(container, config)
 {
     this._config = config;
     this._container = $("#"+container);
 }
 
-window.UI.LoggerViewControler.prototype =
+window.UI.LoggerViewController.prototype =
 {
     isLoggingAllowed: false,
 

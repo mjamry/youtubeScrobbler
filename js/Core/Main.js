@@ -7,6 +7,7 @@ window.LastFm = window.LastFm || {};
 $(function()
 {
     var coreServicesFactory = new window.ApplicationCore.CoreServicesFactory();
+    var uiFactory = new window.UI.UIControllersFactory();
 
     //logger should be created at the begining
     var logger = coreServicesFactory.createLoggerService();
@@ -19,6 +20,10 @@ $(function()
 
     logger.initialise(this._eventBroker);
 
+    var uilogger = uiFactory.createLoggerViewController();
+    uilogger.initialise();
+    uilogger.isLoggingAllowed = true;
+
     //creating application core
     var applicationCore = new window.ApplicationCore.AppCore(coreServicesFactory);
     applicationCore.initialise();
@@ -30,14 +35,8 @@ $(function()
 
     HookUpToolbarButtons();
 
-    var uiFactory = new window.UI.UIControllersFactory();
-
     var playlist = uiFactory.createPlaylistViewController();
     playlist.initialise();
-
-    var logger = uiFactory.createLoggerViewController();
-    logger.initialise();
-    logger.isLoggingAllowed = true;
 
     var testReport = uiFactory.createTestReportViewController();
     testReport.initialise();
