@@ -100,17 +100,16 @@
     cursor: crosshair;
 }
 
-.like-button
+.like-button, .remove-from-playlist-button
 {
     float: right;
-    background-color: lightcoral;
     height:40px;
     width:40px;
 }
 
-.like-button-icon
+.like-button:hover, .remove-from-playlist-button:hover
 {
-    margin:auto;
+    background-color: #aaa;
 }
 
 /*------------------------------MEDIA------------------*/

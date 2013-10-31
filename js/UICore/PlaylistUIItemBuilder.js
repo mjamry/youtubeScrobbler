@@ -7,6 +7,7 @@ window.UI.PlaylistUIItemBuilder = function(index, config)
     this._config = config;
     this._item = null;
     this._likeButton = null;
+    this._removeButton = null;
     this._hoverStyle = null;
 };
 
@@ -59,16 +60,16 @@ window.UI.PlaylistUIItemBuilder.prototype =
     },
 
     //creates like button which is reponsible for "like" current element.
-    _createLikeButton: function(elementType, style, iconStyle)
+    _createButton: function(elementType, iconStyle)
     {
         //style will be applied in separated method
-        var likeBtn = document.createElement(elementType);
-        $(likeBtn).hide();
+        var newButton = document.createElement(elementType);
+        $(newButton).hide();
 
         var innerIcon = this._createIcon(iconStyle);
-        likeBtn.appendChild(innerIcon);
+        newButton.appendChild(innerIcon);
 
-        return likeBtn;
+        return newButton;
     },
 
     //initialises current element
@@ -77,7 +78,10 @@ window.UI.PlaylistUIItemBuilder.prototype =
     {
         this._item = document.createElement(this._config.singleElementType);
 
-        this._likeButton = this._createLikeButton(this._config.likeButtonElementType, this._config.likeButtonStyle, this._config.likeButtonIconStyle);
+        this._likeButton = this._createButton(this._config.likeButtonElementType, this._config.likeButtonIconStyle);
+        this._removeButton = this._createButton(this._config.removeButtonElementType, this._config.removeButtonIconStyle);
+
+        this._item.appendChild(this._removeButton);
         this._item.appendChild(this._likeButton);
     },
 
@@ -88,6 +92,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
         this._hoverStyle = this._config.hoverElementStyle;
 
         this._likeButton.className += this._config.likeButtonStyle;
+        this._removeButton.className += this._config.removeButtonStyle;
     },
 
     //fills element body with media details information.
