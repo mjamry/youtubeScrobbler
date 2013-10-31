@@ -47,6 +47,7 @@ window.UI.PlaylistViewController.prototype =
             {
                 var newElement = this._createNewElement(item, i);
                 this._container.append(newElement);
+
             }
         }
     },
