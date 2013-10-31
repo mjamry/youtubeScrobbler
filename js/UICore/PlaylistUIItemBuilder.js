@@ -12,6 +12,8 @@ window.UI.PlaylistUIItemBuilder = function(index, config)
 
 window.UI.PlaylistUIItemBuilder.prototype =
 {
+    //handles mouse over event on base item.
+    //mainly shows hidden elements such as additional buttons.
     _onMouseEnter: function(style, that)
     {
         return function()
@@ -24,6 +26,8 @@ window.UI.PlaylistUIItemBuilder.prototype =
         }
     },
 
+    //handles mouse leave event on base item.
+    //mainly hides previously shown elements such as additional buttons.
     _onMouseLeave: function(style, that)
     {
         return function()
@@ -36,6 +40,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
         }
     },
 
+    //handles click event.
     _onClick: function(eventBroker, index)
     {
         return function()
@@ -45,6 +50,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
         }
     },
 
+    //creates icon that will be a part of additional button.
     _createIcon: function(style)
     {
         var icon = document.createElement("i");
@@ -52,10 +58,11 @@ window.UI.PlaylistUIItemBuilder.prototype =
         return icon;
     },
 
+    //creates like button which is reponsible for "like" current element.
     _createLikeButton: function(elementType, style, iconStyle)
     {
+        //style will be applied in separated method
         var likeBtn = document.createElement(elementType);
-        likeBtn.className += style;
         $(likeBtn).hide();
 
         var innerIcon = this._createIcon(iconStyle);
@@ -64,6 +71,8 @@ window.UI.PlaylistUIItemBuilder.prototype =
         return likeBtn;
     },
 
+    //initialises current element
+    //creates inner elements.
     initialise: function()
     {
         this._item = document.createElement(this._config.singleElementType);
@@ -72,17 +81,22 @@ window.UI.PlaylistUIItemBuilder.prototype =
         this._item.appendChild(this._likeButton);
     },
 
+    //add styles to current element and its inner elements.
     setUpStyles: function(style)
     {
         this._item.className += style;
         this._hoverStyle = this._config.hoverElementStyle;
+
+        this._likeButton.className += this._config.likeButtonStyle;
     },
 
+    //fills element body with media details information.
     fillBody: function(mediaDetails)
     {
         this._item.innerHTML += mediaDetails.artist + " - " + mediaDetails.title + " [" + mediaDetails.duration.getHumanReadable() + "]";
     },
 
+    //hooks up to UI events such as clock, mouse enter, mouse leave.
     hookUpToEvents: function()
     {
         //hook up on to events
@@ -94,6 +108,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
         this._item.onmouseleave = onMouseLeaveHandler;
     },
 
+    //builds fully initialised playlist item.
     build: function()
     {
         return this._item;
