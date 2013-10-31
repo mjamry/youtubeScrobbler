@@ -41,6 +41,7 @@ window.Player.PlaylistService.prototype =
     createPlaylist: function(playlist)
     {
         this.playlist = playlist;
+        window.Common.Log.Instance().Info("New playlist has been created, it contains "+this.playlist.length()+" elements.");
         this._eventBroker.fireEventWithData(window.Player.Events.PlaylistUpdated, this.playlist);
     },
 
@@ -52,6 +53,8 @@ window.Player.PlaylistService.prototype =
         {
             this.playlist.add(playlist.getItem(i));
         }
+
+        window.Common.Log.Instance().Info(playlist.length()+" new element(s) has been added to current playlist. It has now "+this.playlist.length()+" elements.")
 
         this._eventBroker.fireEventWithData(window.Player.Events.PlaylistUpdated, this.playlist);
     },

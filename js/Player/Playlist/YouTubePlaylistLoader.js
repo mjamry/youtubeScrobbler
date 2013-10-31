@@ -114,7 +114,6 @@ window.Player.YouTubePlaylistLoader.prototype =
                 }
            }
 
-           window.Common.Log.Instance().Info("Playlist loaded, has "+playlist.length()+" objects.");
            callback(playlist);
         }, this));
     },

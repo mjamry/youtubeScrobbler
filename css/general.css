@@ -105,11 +105,12 @@
     float: right;
     height:40px;
     width:40px;
+    color: #aaa;
 }
 
 .like-button:hover, .remove-from-playlist-button:hover
 {
-    background-color: #aaa;
+    color: red;
 }
 
 /*------------------------------MEDIA------------------*/
