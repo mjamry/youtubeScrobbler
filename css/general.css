@@ -75,14 +75,23 @@
     overflow: auto;
 
 }
+
+.playlist_evenElement, .playlist_oddElement
+{
+    height:40px;
+    font-size: 10pt;
+    padding:5px;
+    border-bottom: 1px solid darkgray;
+}
+
 .playlist_evenElement
 {
-    background-color: lightblue;
+    background-color: #eee;
 }
 
 .playlist_oddElement
 {
-    background-color: lightskyblue;
+    background-color: #ccc;
 }
 
 .playlist_hoverElement
@@ -90,6 +99,20 @@
     background-color: lightgreen;
     cursor: crosshair;
 }
+
+.like-button
+{
+    float: right;
+    background-color: lightcoral;
+    height:40px;
+    width:40px;
+}
+
+.like-button-icon
+{
+    margin:auto;
+}
+
 /*------------------------------MEDIA------------------*/
 #media-content
 {

@@ -11,8 +11,9 @@ window.UI.PlaylistUIConfig =
 
     likeButtonElementType: "div",
     likeButtonStyle: "like-button",
-    likeButtonIconStyle: "like-button-icon",
+    likeButtonIconStyle: "like-button-icon fa fa-heart fa-3x",
 
     removeButtonElementType: "div",
-    removeButtonStyle: "remove-from-playlist-button"
+    removeButtonStyle: "remove-from-playlist-button",
+    removeButtonIconStyle: "remove-button-icon fa fa-trash-o fa-3x"
 }
