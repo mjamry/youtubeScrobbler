@@ -54,7 +54,7 @@ function HandleSession()
     $("#authentication-link").bind("click", function()
     {
         window.location = "http://www.last.fm/api/auth/?api_key="+window.LastFm.LastFmConstants.API_KEY+"&cb="+document.URL;
-    })
+    });
 
     window.Common.EventBrokerSingleton.instance().addListener(window.LastFm.Events.SessionEstablished,
         function(userName)
@@ -72,36 +72,6 @@ function GetToken()
     window.Common.Log.Instance().Debug("Token: "+_token+" has been obtained.");
 
     return _token;
-}
-
-function VideoLoaded(video)
-{
-    $("#player .title").text("Video: "+video.title);
-    $("title").text(video.title);
-}
-
-function HeaderAction(){
-    $(".page-title").bind("click", function()
-    {
-        var item = $(this).parent();
-        var content = item.find(".content");
-        if(content.css("display") === "none")
-        {
-            content.fadeIn();
-            item.animate(
-                {
-                    height: "100%"
-                });
-        }
-        else
-        {
-            content.fadeOut();
-            item.animate(
-                {
-                    height: "50px"
-                });
-        }
-    });
 }
 
 function HookUpToolbarButtons()

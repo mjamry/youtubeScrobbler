@@ -79,4 +79,4 @@ window.Player.PlaylistService.prototype =
             this._loadMedia(item);
         }
     }
-}
+};

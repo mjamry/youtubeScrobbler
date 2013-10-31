@@ -11,7 +11,7 @@ window.Common.Log.SetInsance = function(instance)
         this.instance = instance;
         this.instance.Info("Logger instance has been set.");
     }
-}
+};
 
 window.Common.Log.Instance = function()
 {
@@ -23,7 +23,7 @@ window.Common.Log.Instance = function()
     {
         return this.instance;
     }
-}
+};
 
 //TODO move it to common namespace
 //simple implementation of Logger
@@ -44,14 +44,13 @@ Logger.prototype =
         s = s < 10 ? "0" + s : s;
         ms = ms < 100 ? (ms < 10 ? "00" + ms : "0" + ms) : ms;
 
-        var outputData =
+        return (
             "[" +
             date.getHours() + ":" +
             date.getMinutes() + ":" +
             s + "." +
             ms +
-            "] ";
-        return outputData;
+            "] ");
     },
 
     initialise: function()
@@ -98,4 +97,4 @@ Logger.prototype =
             this._eventBroker.fireEventWithData(window.Common.LoggerEvents.LoggerDebug, message);
         }
     }
-}
+};

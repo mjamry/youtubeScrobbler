@@ -10,7 +10,6 @@ window.ApplicationCore.OnlineScrobbler = function()
 {
     this._sessionObject = null;
     this._lastFmFactory = new window.LastFm.LastFmApiFactory();
-    this._lastFmInformationProvider = this._lastFmFactory.createInformationProvider();
     this._scrobbler = this._lastFmFactory.createScrobbler();
 
     this._trackStartPlayingTime = null;
@@ -49,11 +48,11 @@ window.ApplicationCore.OnlineScrobbler.prototype =
             {
                 return true;
             }
-
-            window.Common.Log.Instance().Warning("Cannot scrobble track.");
-            window.Common.Log.Instance().Debug("Track cannot be scrobble because playing time is to short: " + timeInSeconds + "s.");
-            return false;
         }
+
+        window.Common.Log.Instance().Warning("Cannot scrobble track.");
+        window.Common.Log.Instance().Debug("Track cannot be scrobble because playing time is to short: " + timeInSeconds + "s.");
+        return false;
     },
 
     //Updates scrobbling info on last fm portal.

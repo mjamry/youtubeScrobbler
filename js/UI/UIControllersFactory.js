@@ -19,4 +19,4 @@ window.UI.UIControllersFactory.prototype =
     {
         return new window.UI.PlaylistViewController("playlist", window.UI.PlaylistUIConfig);
     }
-}
+};

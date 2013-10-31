@@ -13,7 +13,7 @@ window.Common.Cookie.setInstance = function(instance)
         this._instance = instance;
         window.Common.Log.Instance().Info("Cookies service instance has been set.");
     }
-}
+};
 
 window.Common.Cookie.instance = function()
 {
@@ -22,7 +22,7 @@ window.Common.Cookie.instance = function()
         return this._instance;
     }
     else throw "NonInitialisedException";
-}
+};
 
 window.Common.CookieHandler = function()
 {
@@ -42,8 +42,8 @@ window.Common.CookieHandler.prototype =
 
     getCookie: function(name)
     {
-        var value = $.cookie(name)
-        window.Common.Log.Instance().Debug("Cookie: " + name + " has been read and has value: " + value)
+        var value = $.cookie(name);
+        window.Common.Log.Instance().Debug("Cookie: " + name + " has been read and has value: " + value);
         return value;
     },
 
@@ -53,4 +53,4 @@ window.Common.CookieHandler.prototype =
         $.removeCookie(name);
     }
 
-}
+};

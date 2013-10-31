@@ -11,7 +11,7 @@ window.Player.MediaPlayer = function(configuration, container)
 
     var config = $.extend(
         {
-            success: $.proxy(function (mediaElement, domObject) {
+            success: $.proxy(function (mediaElement) {
 
                 this.instance = mediaElement;
                 this._initialise(mediaElement);
@@ -71,5 +71,5 @@ window.Player.MediaPlayer.prototype =
     {
         this.instance.play();
     }
-}
+};
 

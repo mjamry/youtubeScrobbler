@@ -7,14 +7,14 @@ window.UI.LoggerLevels =
     Warning: 1,
     Error: 2,
     Debug: 3
-}
+};
 
 
 window.UI.LoggerViewController = function(container, config)
 {
     this._config = config;
     this._container = $("#"+container);
-}
+};
 
 window.UI.LoggerViewController.prototype =
 {
@@ -166,4 +166,4 @@ window.UI.LoggerViewController.prototype =
         this));
 
     }
-}
+};
