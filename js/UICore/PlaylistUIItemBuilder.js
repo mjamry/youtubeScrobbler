@@ -51,6 +51,24 @@ window.UI.PlaylistUIItemBuilder.prototype =
         }
     },
 
+    _like: function(index)
+    {
+        return function(e)
+        {
+            e.stopPropagation();
+            alert("liked! "+index);
+        }
+    },
+
+    _remove: function(index)
+    {
+        return function(e)
+        {
+            e.stopPropagation();
+            alert("removed! "+index);
+        }
+    },
+
     //creates icon that will be a part of additional button.
     _createIcon: function(style)
     {
@@ -98,7 +116,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
     //fills element body with media details information.
     fillBody: function(mediaDetails)
     {
-        this._item.innerHTML += mediaDetails.artist + " - " + mediaDetails.title + " [" + mediaDetails.duration.getHumanReadable() + "]";
+        $(this._item).append(mediaDetails.artist + " - " + mediaDetails.title + " [" + mediaDetails.duration.getHumanReadable() + "]");
     },
 
     //hooks up to UI events such as clock, mouse enter, mouse leave.
@@ -111,6 +129,12 @@ window.UI.PlaylistUIItemBuilder.prototype =
         this._item.onclick = onClickHandler;
         this._item.onmouseenter = onMouseEnterHandler;
         this._item.onmouseleave = onMouseLeaveHandler;
+
+        var onLiked = this._like(this._index);
+        var onRemoved = this._remove(this._index);
+
+        this._likeButton.onclick = onLiked;
+        this._removeButton.onclick = onRemoved;
     },
 
     //builds fully initialised playlist item.
@@ -118,4 +142,4 @@ window.UI.PlaylistUIItemBuilder.prototype =
     {
         return this._item;
     }
-}
+};
