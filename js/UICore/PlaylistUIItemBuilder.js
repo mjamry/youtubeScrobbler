@@ -51,20 +51,24 @@ window.UI.PlaylistUIItemBuilder.prototype =
         }
     },
 
+    //handles "like" for current media element event.
     _like: function(index)
     {
         return function(e)
         {
             e.stopPropagation();
+            //TODO do some more appropriate actions
             alert("liked! "+index);
         }
     },
 
+    //handler "remove" from playlist event.
     _remove: function(index)
     {
         return function(e)
         {
             e.stopPropagation();
+            //TODO do some more appropriate actions.
             alert("removed! "+index);
         }
     },
