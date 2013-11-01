@@ -1,6 +1,15 @@
 //using
 window.UI = window.UI || {};
 
+window.UI.ReportSenderConstants =
+{
+    destinationEmail: "onlinescrobbler@gmail.com",
+    emailScriptLocation: "php/EmailSender.php",
+    errorTag: "[Error]",
+
+    logsContainer: "logger-content"
+};
+
 window.UI.ReportSender = function(){};
 
 window.UI.ReportSender.prototype =
@@ -20,43 +29,57 @@ window.UI.ReportSender.prototype =
         return navigator.userAgent;
     },
 
-    send: function(sender, title, description)
+    _getLogs: function()
     {
-        var logsContainer = "logger-content";
-        var logEntries = $("#"+logsContainer).children();
+        var logEntries = $("#"+window.UI.ReportSenderConstants.logsContainer).children();
         var logs = "";
-
-        title = "[Error] "+title;
 
         for(var i=0;i<logEntries.length;i++)
         {
             logs += logEntries[i].innerHTML + "<br>";
         }
 
-        var content =
+        return logs;
+    },
+
+    _generateErrorReportContent: function(sender, description)
+    {
+        return (
             "<h2>Test report from: "+sender+"</h2>" +
-            "<h4>Environment details:</h4>" +
-            "<ul>" +
-                "<li>OS: "+this._getOperatingSystem()+"</li>"+
-                "<li>Browser: "+this._getBrowser()+"</li>"+
-                "<li>User Agent: "+this._getUserAgent()+"</li>"+
-            "</ul>" +
-            "<h4>Error description:</h4>"+
-            description +
-            "<h4>Logs:</h4>"+
-            logs;
+                "<h4>Environment details:</h4>" +
+                "<ul>" +
+                    "<li>OS: "+this._getOperatingSystem()+"</li>"+
+                    "<li>Browser: "+this._getBrowser()+"</li>"+
+                    "<li>User Agent: "+this._getUserAgent()+"</li>"+
+                "</ul>" +
+                "<h4>Error description:</h4>"+
+                description +
+                "<h4>Logs:</h4>"+
+                this._getLogs());
+    },
 
+    send: function(sender, title, description)
+    {
+        title = window.UI.ReportSenderConstants.errorTag+" "+title;
+        var content = this._generateErrorReportContent(sender, description);
 
-        $.post("php/EmailSender.php",
+        $.post(window.UI.ReportSenderConstants.emailScriptLocation,
             {
-                recipient: "onlinescrobbler@gmail.com",
+                recipient: window.UI.ReportSenderConstants.destinationEmail,
                 sender: sender,
                 subject: title,
                 content: content
-            }).fail(function(){
-                alert("error report error :(");
-            }).done(function(){
-                alert("error reported!")
+            })
+            .fail(function()
+            {
+                window.Common.Log.Instance().Info("Error occurs while sending error report.");
+                alert("Failure.\r\n\r\nSorry cannot send your error report.\r\n\r\nPleas try again.");
+            })
+            .done(function()
+            {
+                window.Common.Log.Instance().Info("Error report has been sent.");
+                window.Common.Log.Instance().Debug("Error title: "+title);
+                alert("Success.\r\n\r\nError report has been sent.\r\nThank you for your effort.\r\n\r\nWe will stay in touch.")
             })
     }
 };
