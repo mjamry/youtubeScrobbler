@@ -7,7 +7,7 @@ window.UI.UIControllersFactory.prototype =
 {
     createLoggerViewController: function()
     {
-        return new window.UI.LoggerViewController("logger", window.UI.LoggerUIConfig);
+        return new window.UI.LoggerViewController("logger-content", window.UI.LoggerUIConfig);
     },
 
     createTestReportViewController: function()
