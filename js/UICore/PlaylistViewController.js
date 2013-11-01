@@ -59,7 +59,7 @@ window.UI.PlaylistViewController.prototype =
 
     initialise: function()
     {
-        this._eventBroker.addListener(window.Player.Events.PlaylistUpdated, this._handlePlaylistUpdated, null, this);
+        this._eventBroker.addListener(window.Player.PlaylistEvents.PlaylistUpdated, this._handlePlaylistUpdated, null, this);
         this._eventBroker.addListener(window.Player.Events.MediaChanged, this._handleMediaChanged, null, this);
     }
 }

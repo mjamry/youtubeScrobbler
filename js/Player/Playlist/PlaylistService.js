@@ -32,31 +32,46 @@ window.Player.PlaylistService.prototype =
         }
     },
 
+    _updatePlaylist: function(playlist)
+    {
+        this.playlist = playlist;
+        this._eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistUpdated, this.playlist);
+    },
+
+    _handleItemRemoved: function(index)
+    {
+        var tempPlaylist = this.playlist;
+        tempPlaylist.remove(index);
+        window.Common.Log.Instance().Debug("Element has been removed from playlist, now it contains "+tempPlaylist.length()+" elements.");
+        this._updatePlaylist(tempPlaylist);
+    },
+
     initialise: function()
     {
         this._eventBroker.addListener(window.Player.Events.MediaStopped, this._handleMediaStopped, null, this);
+        this._eventBroker.addListener(window.Player.PlaylistEvents.PlaylistRemoveItemRequested, this._handleItemRemoved, null, this);
     },
 
     //initialises playlist object, or overwrite existing one.
     createPlaylist: function(playlist)
     {
-        this.playlist = playlist;
-        window.Common.Log.Instance().Info("New playlist has been created, it contains "+this.playlist.length()+" elements.");
-        this._eventBroker.fireEventWithData(window.Player.Events.PlaylistUpdated, this.playlist);
+        window.Common.Log.Instance().Info("New playlist has been created, it contains "+playlist.length()+" elements.");
+        this._updatePlaylist(playlist);
     },
 
     //adds new playlist (or single media) to existing playlist.
     addToPlaylist: function(playlist)
     {
+        var tempPlaylist = this.playlist;
         //TODO: consider moving this loop to playlist implementation
         for(var i=0;i<playlist.length();i++)
         {
-            this.playlist.add(playlist.getItem(i));
+            tempPlaylist.add(playlist.getItem(i));
         }
 
-        window.Common.Log.Instance().Info(playlist.length()+" new element(s) has been added to current playlist. It has now "+this.playlist.length()+" elements.")
+        window.Common.Log.Instance().Info(playlist.length()+" new element(s) has been added to current playlist. It has now "+tempPlaylist.length()+" elements.")
 
-        this._eventBroker.fireEventWithData(window.Player.Events.PlaylistUpdated, this.playlist);
+        this._updatePlaylist(tempPlaylist);
     },
 
     //plays next media item from playlist

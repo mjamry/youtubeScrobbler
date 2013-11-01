@@ -3,6 +3,8 @@ window.UI = window.UI || {};
 
 window.UI.PlaylistUIItemBuilder = function(index, config)
 {
+    this._eventBroker = window.Common.EventBrokerSingleton.instance();
+
     this._index = index;
     this._config = config;
     this._item = null;
@@ -63,13 +65,12 @@ window.UI.PlaylistUIItemBuilder.prototype =
     },
 
     //handler "remove" from playlist event.
-    _remove: function(index)
+    _remove: function(eventBroker, index)
     {
         return function(e)
         {
             e.stopPropagation();
-            //TODO do some more appropriate actions.
-            alert("removed! "+index);
+            eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistRemoveItemRequested, index);
         }
     },
 
@@ -127,7 +128,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
     hookUpToEvents: function()
     {
         //hook up on to events
-        var onClickHandler = this._onClick(this._eventBroker = window.Common.EventBrokerSingleton.instance(), this._index);
+        var onClickHandler = this._onClick(this._eventBroker, this._index);
         var onMouseEnterHandler = this._onMouseEnter(this._hoverStyle, this._item);
         var onMouseLeaveHandler = this._onMouseLeave(this._hoverStyle, this._item);
         this._item.onclick = onClickHandler;
@@ -135,7 +136,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
         this._item.onmouseleave = onMouseLeaveHandler;
 
         var onLiked = this._like(this._index);
-        var onRemoved = this._remove(this._index);
+        var onRemoved = this._remove(this._eventBroker, this._index);
 
         this._likeButton.onclick = onLiked;
         this._removeButton.onclick = onRemoved;
