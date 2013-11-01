@@ -81,12 +81,15 @@
     height:40px;
     font-size: 10pt;
     padding:5px;
-    border-bottom: 1px solid darkgray;
+    border-bottom: 1px solid #aaa;
+    border-top:  1px solid #eee;
+    color: #444;
+    vertical-align: middle;
 }
 
 .playlist_evenElement
 {
-    background-color: #eee;
+    background-color: #ccc;
 }
 
 .playlist_oddElement
