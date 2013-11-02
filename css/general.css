@@ -75,6 +75,14 @@
     overflow: auto;
 }
 
+.playlist-item-details, .playlist-item-time, .playlist-item-icons
+{
+    height:20px;
+    margin-top:5px;
+    font-size: 12pt;
+    color:#777;
+}
+
 .playlist-item-icons
 {
     color: #444;
@@ -83,16 +91,19 @@
 .playlist-item-time
 {
     float:left;
+    font-size: 10pt;
 }
 
 .playlist-item-details
 {
     float:left;
+    color: #444;
 }
 
 .playlist-item-like, .playlist-item-remove
 {
     color: #aaa;
+    margin-top:10px;
 }
 
 .playlist-item-like:hover, .playlist-item-remove:hover
@@ -103,8 +114,8 @@
 .playlist-item-even, .playlist-item-odd
 {
     height:50px;
-    font-size: 12pt;
-    padding:5px;
+
+    padding-left:10px;
     border-bottom: 1px solid #aaa;
     border-top:  1px solid #eee;
     color: #444;
