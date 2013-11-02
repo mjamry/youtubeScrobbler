@@ -100,7 +100,7 @@
     color: red;
 }
 
-.playlist_evenElement, .playlist_oddElement
+.playlist-item-even, .playlist-item-odd
 {
     height:50px;
     font-size: 12pt;
@@ -110,17 +110,17 @@
     color: #444;
 }
 
-.playlist_evenElement
+.playlist-item-even
 {
     background-color: #ccc;
 }
 
-.playlist_oddElement
+.playlist-item-odd
 {
     background-color: #ccc;
 }
 
-.playlist_hoverElement
+.playlist-item-odd:hover, .playlist-item-even:hover
 {
     background-color: lightgreen;
     cursor: crosshair;

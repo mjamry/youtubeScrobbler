@@ -80,37 +80,29 @@ window.UI.PlaylistUIItemBuilder.prototype =
     {
         var newItem = $("#controls-schemes .playlist-item");
         this._item = newItem.clone();
-        this._item.find(".playlist-item-buttons").hide();
+        this._item.find(this._config.additionalButtonsContainer).hide();
 
 
-        this._likeButton = this._item.find(".playlist-item-like");
-        this._removeButton = this._item.find(".playlist-item-remove");
-//        this._item = document.createElement(this._config.singleElementType);
-//
-//        this._likeButton = this._createButton(this._config.innerButtonElementType, this._config.likeButtonIconStyle);
-//        this._removeButton = this._createButton(this._config.innerButtonElementType, this._config.removeButtonIconStyle);
-//
-//        this._item.appendChild(this._removeButton);
-//        this._item.appendChild(this._likeButton);
+        this._likeButton = this._item.find(this._config.likeButtonContainer);
+        this._removeButton = this._item.find(this._config.removeButtonContainer);
     },
 
     //add styles to current element and its inner elements.
     setUpStyles: function(style)
     {
         this._item.addClass(style);
-        this._hoverStyle = this._config.hoverElementStyle;
     },
 
     //fills element body with media details information.
     fillBody: function(mediaDetails)
     {
-        this._item.find(".playlist-item-time").append(mediaDetails.duration.getHumanReadable());
+        this._item.find(this._config.timeContainer).append(mediaDetails.duration.getHumanReadable());
         var details = mediaDetails.artist + " - " + mediaDetails.title;
         if(details.length > 35)
         {
-            details = details.substring(0, 33)+("...");
+            details = details.substring(0, 32)+("...");
         }
-        this._item.find(".playlist-item-details").append(details);
+        this._item.find(this._config.detailsContainer).append(details);
     },
 
     //hooks up to UI events such as clock, mouse enter, mouse leave.
