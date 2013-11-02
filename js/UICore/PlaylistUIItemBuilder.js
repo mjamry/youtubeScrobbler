@@ -105,8 +105,12 @@ window.UI.PlaylistUIItemBuilder.prototype =
     fillBody: function(mediaDetails)
     {
         this._item.find(".playlist-item-time").append(mediaDetails.duration.getHumanReadable());
-        //TODO show only x chars
-        this._item.find(".playlist-item-details").append(mediaDetails.artist + " - " + mediaDetails.title);
+        var details = mediaDetails.artist + " - " + mediaDetails.title;
+        if(details.length > 35)
+        {
+            details = details.substring(0, 33)+("...");
+        }
+        this._item.find(".playlist-item-details").append(details);
     },
 
     //hooks up to UI events such as clock, mouse enter, mouse leave.
