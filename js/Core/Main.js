@@ -6,6 +6,9 @@ window.LastFm = window.LastFm || {};
 //main
 $(function()
 {
+    //hised controls
+    $("#controls-schemes").hide();
+
     var coreServicesFactory = new window.ApplicationCore.CoreServicesFactory();
     var uiFactory = new window.UI.UIControllersFactory();
 

@@ -9,11 +9,10 @@ window.UI.PlaylistUIConfig =
     selectedElementStyle: "playlist_selectedElem",
     hoverElementStyle: "playlist_hoverElement",
 
-    likeButtonElementType: "div",
+    innerButtonElementType: "div",
     likeButtonStyle: "like-button",
-    likeButtonIconStyle: "like-button-icon fa fa-heart fa-3x",
+    likeButtonIconStyle: "like-button-icon fa fa-heart fa-2x",
 
-    removeButtonElementType: "div",
     removeButtonStyle: "remove-from-playlist-button",
-    removeButtonIconStyle: "remove-button-icon fa fa-trash-o fa-3x"
-}
+    removeButtonIconStyle: "remove-button-icon fa fa-trash-o fa-2x"
+};

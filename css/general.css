@@ -73,18 +73,41 @@
     height:400px;
     /*TODO do it with JS*/
     overflow: auto;
+}
 
+.playlist-item-icons
+{
+    color: #444;
+}
+
+.playlist-item-time
+{
+    float:left;
+}
+
+.playlist-item-details
+{
+    float:left;
+}
+
+.playlist-item-like, .playlist-item-remove
+{
+    color: #aaa;
+}
+
+.playlist-item-like:hover, .playlist-item-remove:hover
+{
+    color: red;
 }
 
 .playlist_evenElement, .playlist_oddElement
 {
-    height:40px;
-    font-size: 10pt;
+    height:50px;
+    font-size: 12pt;
     padding:5px;
     border-bottom: 1px solid #aaa;
     border-top:  1px solid #eee;
     color: #444;
-    vertical-align: middle;
 }
 
 .playlist_evenElement
@@ -101,19 +124,6 @@
 {
     background-color: lightgreen;
     cursor: crosshair;
-}
-
-.like-button, .remove-from-playlist-button
-{
-    float: right;
-    height:40px;
-    width:40px;
-    color: #aaa;
-}
-
-.like-button:hover, .remove-from-playlist-button:hover
-{
-    color: red;
 }
 
 /*------------------------------MEDIA------------------*/

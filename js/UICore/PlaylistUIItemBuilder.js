@@ -22,7 +22,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
         return function()
         {
             $(this).addClass(style);
-            $(that).children().each(function()
+            $(that).children().find(".playlist-item-buttons").each(function()
             {
                 $(this).show();
             })
@@ -36,7 +36,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
         return function()
         {
             $(this).removeClass(style);
-            $(that).children().each(function()
+            $(that).children().find(".playlist-item-buttons").each(function()
             {
                 $(this).hide();
             })
@@ -74,54 +74,39 @@ window.UI.PlaylistUIItemBuilder.prototype =
         }
     },
 
-    //creates icon that will be a part of additional button.
-    _createIcon: function(style)
-    {
-        var icon = document.createElement("i");
-        icon.className = style;
-        return icon;
-    },
-
-    //creates like button which is reponsible for "like" current element.
-    _createButton: function(elementType, iconStyle)
-    {
-        //style will be applied in separated method
-        var newButton = document.createElement(elementType);
-        $(newButton).hide();
-
-        var innerIcon = this._createIcon(iconStyle);
-        newButton.appendChild(innerIcon);
-
-        return newButton;
-    },
-
     //initialises current element
     //creates inner elements.
     initialise: function()
     {
-        this._item = document.createElement(this._config.singleElementType);
+        var newItem = $("#controls-schemes .playlist-item");
+        this._item = newItem.clone();
+        this._item.find(".playlist-item-buttons").hide();
 
-        this._likeButton = this._createButton(this._config.likeButtonElementType, this._config.likeButtonIconStyle);
-        this._removeButton = this._createButton(this._config.removeButtonElementType, this._config.removeButtonIconStyle);
 
-        this._item.appendChild(this._removeButton);
-        this._item.appendChild(this._likeButton);
+        this._likeButton = this._item.find(".playlist-item-like");
+        this._removeButton = this._item.find(".playlist-item-remove");
+//        this._item = document.createElement(this._config.singleElementType);
+//
+//        this._likeButton = this._createButton(this._config.innerButtonElementType, this._config.likeButtonIconStyle);
+//        this._removeButton = this._createButton(this._config.innerButtonElementType, this._config.removeButtonIconStyle);
+//
+//        this._item.appendChild(this._removeButton);
+//        this._item.appendChild(this._likeButton);
     },
 
     //add styles to current element and its inner elements.
     setUpStyles: function(style)
     {
-        this._item.className += style;
+        this._item.addClass(style);
         this._hoverStyle = this._config.hoverElementStyle;
-
-        this._likeButton.className += this._config.likeButtonStyle;
-        this._removeButton.className += this._config.removeButtonStyle;
     },
 
     //fills element body with media details information.
     fillBody: function(mediaDetails)
     {
-        $(this._item).append(mediaDetails.artist + " - " + mediaDetails.title + " [" + mediaDetails.duration.getHumanReadable() + "]");
+        this._item.find(".playlist-item-time").append(mediaDetails.duration.getHumanReadable());
+        //TODO show only x chars
+        this._item.find(".playlist-item-details").append(mediaDetails.artist + " - " + mediaDetails.title);
     },
 
     //hooks up to UI events such as clock, mouse enter, mouse leave.
@@ -131,15 +116,15 @@ window.UI.PlaylistUIItemBuilder.prototype =
         var onClickHandler = this._onClick(this._eventBroker, this._index);
         var onMouseEnterHandler = this._onMouseEnter(this._hoverStyle, this._item);
         var onMouseLeaveHandler = this._onMouseLeave(this._hoverStyle, this._item);
-        this._item.onclick = onClickHandler;
-        this._item.onmouseenter = onMouseEnterHandler;
-        this._item.onmouseleave = onMouseLeaveHandler;
+        this._item.click(onClickHandler);
+        this._item.mouseenter(onMouseEnterHandler);
+        this._item.mouseleave(onMouseLeaveHandler);
 
         var onLiked = this._like(this._index);
         var onRemoved = this._remove(this._eventBroker, this._index);
 
-        this._likeButton.onclick = onLiked;
-        this._removeButton.onclick = onRemoved;
+        this._likeButton.click(onLiked);
+        this._removeButton.click(onRemoved);
     },
 
     //builds fully initialised playlist item.
