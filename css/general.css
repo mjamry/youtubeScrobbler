@@ -80,12 +80,12 @@
     height:20px;
     margin-top:5px;
     font-size: 12pt;
-    color:#777;
+    color:#999;
 }
 
 .playlist-item-icons
 {
-    color: #444;
+    margin-top:2px;
 }
 
 .playlist-item-time
@@ -114,27 +114,27 @@
 .playlist-item-even, .playlist-item-odd
 {
     height:50px;
-
     padding-left:10px;
-    border-bottom: 1px solid #aaa;
-    border-top:  1px solid #eee;
+    border-bottom: 1px solid #999;
+    border-top:  1px solid #fff;
+    border-left: 5px solid #888;
     color: #444;
 }
 
 .playlist-item-even
 {
-    background-color: #ccc;
+    background-color: #eee;
 }
 
 .playlist-item-odd
 {
-    background-color: #ccc;
+    background-color: #eee;
 }
 
 .playlist-item-odd:hover, .playlist-item-even:hover
 {
-    background-color: lightgreen;
-    cursor: crosshair;
+    background-color: #ccc;
+    cursor: pointer;
 }
 
 /*------------------------------MEDIA------------------*/
