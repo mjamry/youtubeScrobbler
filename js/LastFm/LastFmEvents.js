@@ -9,5 +9,9 @@ window.LastFm.Events =
     TrackScrobbled: "TrackScrobbled",
     ScrobblingFailed: "ScrobblingFailed",
 
+    TrackLoveStateChanged: "TrackLoveStateChanged",
+    TrackLoved: "TrackLoved",
+    TrackUnloved: "TrackUnloved",
+
     SessionEstablished: "SessionEstablished"
-}
+};

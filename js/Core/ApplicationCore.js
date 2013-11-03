@@ -16,6 +16,13 @@ window.ApplicationCore.AppCore = function(factory)
 
 window.ApplicationCore.AppCore.prototype =
 {
+    //TODO move it to more appropriate service/class
+    _changeTrackLoveState: function(index)
+    {
+        var mediaDetails = this.playlistService.getTrackDetails(index);
+        window.Common.EventBrokerSingleton.instance().fireEventWithData(window.LastFm.Events.TrackLoveStateChanged, mediaDetails);
+    },
+
     _handlePlaySpecificRequest: function(index)
     {
         this.playlistService.playSpecific(index);
@@ -29,6 +36,7 @@ window.ApplicationCore.AppCore.prototype =
         eventBroker.addListener(window.UI.Events.PlayNextRequested, this.playlistService.playNext, null, this);
         eventBroker.addListener(window.UI.Events.PlayPreviousRequested, this.playlistService.playPrevious, null, this);
         eventBroker.addListener(window.UI.Events.PlaySpecificRequested, this._handlePlaySpecificRequest, null, this);
+        eventBroker.addListener(window.UI.Events.TrackLikeStateChangeRequested, this._changeTrackLoveState, null, this);
     },
 
     createNewSession: function(token)
@@ -59,4 +67,4 @@ window.ApplicationCore.AppCore.prototype =
             }, this)
         );
     }
-}
+};

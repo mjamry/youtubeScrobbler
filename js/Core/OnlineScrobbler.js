@@ -95,6 +95,31 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         }
     },
 
+    //changes track love state.
+    _changeTrackLoveState: function(mediaDetails)
+    {
+        if(mediaDetails.loved)
+        {
+            this._scrobbler.unLove(
+                {
+                    track: mediaDetails.title,
+                    artist: mediaDetails.artist
+                },
+                this._sessionObject
+            )
+        }
+        else
+        {
+            this._scrobbler.love(
+                {
+                    track: mediaDetails.title,
+                    artist: mediaDetails.artist
+                },
+                this._sessionObject
+            )
+        }
+    },
+
     initialise: function()
     {
         window.Common.EventBrokerSingleton.instance().addListener(
@@ -111,7 +136,15 @@ window.ApplicationCore.OnlineScrobbler.prototype =
             {
                 this._updateScrobbling(mediaDetails);
             }, this)
-        )
+        );
+
+        window.Common.EventBrokerSingleton.instance().addListener(
+            window.LastFm.Events.TrackLoveStateChanged,
+            $.proxy(function(mediaDetails)
+            {
+                this._changeTrackLoveState(mediaDetails);
+            }, this)
+        );
     },
 
     //try to restore last session if it does not exist creates new one.

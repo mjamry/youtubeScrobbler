@@ -54,13 +54,12 @@ window.UI.PlaylistUIItemBuilder.prototype =
     },
 
     //handles "like" for current media element event.
-    _like: function(index)
+    _like: function(eventBroker, index)
     {
         return function(e)
         {
             e.stopPropagation();
-            //TODO do some more appropriate actions
-            alert("liked! "+index);
+            eventBroker.fireEventWithData(window.UI.Events.TrackLikeStateChangeRequested, index);
         }
     },
 
@@ -116,7 +115,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
         this._item.mouseenter(onMouseEnterHandler);
         this._item.mouseleave(onMouseLeaveHandler);
 
-        var onLiked = this._like(this._index);
+        var onLiked = this._like(this._eventBroker, this._index);
         var onRemoved = this._remove(this._eventBroker, this._index);
 
         this._likeButton.click(onLiked);

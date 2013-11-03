@@ -10,7 +10,7 @@ window.LastFm.Scrobbler = function(lastFmApi)
     this.lastFmApi = lastFmApi;
     this._eventBroker = window.Common.EventBrokerSingleton.instance();
     window.Common.Log.Instance().Info("Last fm scrobbler has been created.");
-}
+};
 
 window.LastFm.Scrobbler.prototype =
 {
@@ -41,7 +41,7 @@ window.LastFm.Scrobbler.prototype =
                         //fire event
                         this._eventBroker.fireEventWithData(window.LastFm.Events.TrackScrobbled, response);
 
-                        window.Common.Log.Instance().Info("Track has been successfuly scrobbled.");
+                        window.Common.Log.Instance().Info("Track has been successfully scrobbled.");
                         window.Common.Log.Instance().Debug("LastFm Scrobbling details: "+ response.scrobbles.toSource());
                     },
                     this
@@ -62,7 +62,7 @@ window.LastFm.Scrobbler.prototype =
 
     //Updates now playing info.
     //Details are passed as literal: {track, artist}.
-    updateNowPlaying: function(trackDetails, session, callback)
+    updateNowPlaying: function(trackDetails, session)
     {
         window.Common.Log.Instance().Debug("LastFm NowPlaying update request with track: "+trackDetails.artist+" - "+trackDetails.track);
         this.lastFmApi.track.updateNowPlaying(
@@ -83,8 +83,8 @@ window.LastFm.Scrobbler.prototype =
                         //fire event
                         this._eventBroker.fireEventWithData(window.LastFm.Events.NowPlayingUpdated, response);
 
-                        window.Common.Log.Instance().Info("Now playing has been successfuly updated.");
-                        window.Common.Log.Instance().Debug("LastFm NowPlaying successfuly updated: "+ response.nowplaying.toSource());
+                        window.Common.Log.Instance().Info("Now playing has been successfully updated.");
+                        window.Common.Log.Instance().Debug("LastFm NowPlaying details: "+ response.nowplaying.toSource());
                     },
                     this
                 ),
@@ -107,8 +107,56 @@ window.LastFm.Scrobbler.prototype =
         window.Common.Log.Instance().Debug("Last fm scrobbler - love request with track: "+trackDetails.artist+" - "+trackDetails.track);
         this.lastFmApi.track.love(
             trackDetails,
-            session
-            //TODO callbacks
+            session,
+            {
+                success:
+                    $.proxy(function(response)
+                    {
+                        //fire event
+                        this._eventBroker.fireEventWithData(window.LastFm.Events.TrackLoved, response);
+
+                        window.Common.Log.Instance().Info("Track successfully loved.");
+                        window.Common.Log.Instance().Debug("LastFm Love details: "+ trackDetails.artist+" - "+trackDetails.track);
+                    },
+                    this),
+
+                error:
+                    $.proxy(function(response)
+                    {
+                        window.Common.Log.Instance().Warning("LastFm Love update failed: "+ response.message);
+                        window.Common.Log.Instance().Debug("LastFm Love failed for: "+ trackDetails.artist+" - "+trackDetails.track);
+                    },
+                    this)
+            }
+        );
+    },
+
+    unLove: function(trackDetails, session)
+    {
+        window.Common.Log.Instance().Debug("Last fm scrobbler - unlove request with track: "+trackDetails.artist+" - "+trackDetails.track);
+        this.lastFmApi.track.unlove(
+            trackDetails,
+            session,
+            {
+                success:
+                    $.proxy(function(response)
+                        {
+                            //fire event
+                            this._eventBroker.fireEventWithData(window.LastFm.Events.TrackUnloved, response);
+
+                            window.Common.Log.Instance().Info("Track successfully unloved.");
+                            window.Common.Log.Instance().Debug("LastFm UnLove details: "+ trackDetails.artist+" - "+trackDetails.track);
+                        },
+                        this),
+
+                error:
+                    $.proxy(function(response)
+                        {
+                            window.Common.Log.Instance().Warning("LastFm UnLove update failed: "+ response.message);
+                            window.Common.Log.Instance().Debug("LastFm UnLove failed for: "+ trackDetails.artist+" - "+trackDetails.track);
+                        },
+                        this)
+            }
         );
     }
 };

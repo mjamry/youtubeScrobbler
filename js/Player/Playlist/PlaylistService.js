@@ -69,7 +69,7 @@ window.Player.PlaylistService.prototype =
             tempPlaylist.add(playlist.getItem(i));
         }
 
-        window.Common.Log.Instance().Info(playlist.length()+" new element(s) has been added to current playlist. It has now "+tempPlaylist.length()+" elements.")
+        window.Common.Log.Instance().Info(playlist.length()+" new element(s) has been added to current playlist. It has now "+tempPlaylist.length()+" elements.");
 
         this._updatePlaylist(tempPlaylist);
     },
@@ -96,5 +96,11 @@ window.Player.PlaylistService.prototype =
         {
             this._loadMedia(item);
         }
+    },
+
+    //gets track details used passed index
+    getTrackDetails: function(index)
+    {
+        return this.playlist.getItem(index);
     }
 };

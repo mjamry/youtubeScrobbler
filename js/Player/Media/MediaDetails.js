@@ -12,5 +12,6 @@ window.Player.MediaDetails.prototype =
     url: "",
     mediaType: "",//type of media e.g. "video/youtube"
     id: "",       //media id from portal e.g YT or vimeo
-    cover: ""     //link to cover - from LastFm
-}
+    cover: "",     //link to cover - from LastFm
+    loved: ""       //determine if track has been loved already
+};
