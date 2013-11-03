@@ -81,6 +81,7 @@
     margin-top:5px;
     font-size: 12pt;
     color:#999;
+
 }
 
 .playlist-item-icons
@@ -98,6 +99,7 @@
 {
     float:left;
     color: #444;
+    width:100%;
 }
 
 .playlist-item-like, .playlist-item-remove
