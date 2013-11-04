@@ -35,7 +35,9 @@ window.ApplicationCore.CoreServicesFactory.prototype =
 
     createPlaylistService: function(player)
     {
-        var playlistService = new window.Player.PlaylistService(player);
+        var lastFmFactory = new window.LastFm.LastFmApiFactory();
+        var detailsProvider = new window.Player.PlaylistElementDetailsProvider(lastFmFactory.createInformationProvider());
+        var playlistService = new window.Player.PlaylistService(player, detailsProvider);
         playlistService.initialise();
         return playlistService;
     }

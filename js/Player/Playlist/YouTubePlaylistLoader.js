@@ -67,11 +67,10 @@ window.Player.YouTubePlaylistLoader.prototype =
     //TODO - handle errors while parsing video details recieved from YT. It is possible that video has been deleted.
     _getMediaDetails: function(media)
     {
-        window.Common.Log.Instance().Debug("Recieved details for media: "+media.title);
+        window.Common.Log.Instance().Debug("Recieved YouTube details for media: "+media.title);
         var mediaDetails = new window.Player.MediaDetails();
         mediaDetails.artist = this._getArtist(media.title);
         mediaDetails.title = this._getTitle(media.title);
-        mediaDetails.id = media.id;
         //sometime it is empty - do not know why...
         if(media.player)
         {

@@ -5,5 +5,9 @@ window.Player.PlaylistEvents =
 {
     //playlist events
     PlaylistUpdated: "PlaylistUpdated",
-    PlaylistRemoveItemRequested: "PlaylistRemoveItemRequested"
+    PlaylistRemoveItemRequested: "PlaylistRemoveItemRequested",
+
+    //carry item index and obtained details.
+    PlaylistElementDetailsObtained: "PlaylistElementDetailsObtained",
+    PlaylistItemUpdateRequested: "PlaylistItemUpdateRequested"
 }

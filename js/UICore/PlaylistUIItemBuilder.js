@@ -73,6 +73,14 @@ window.UI.PlaylistUIItemBuilder.prototype =
         }
     },
 
+    _createIcon: function(style)
+    {
+        var icon = document.createElement("i");
+        icon.className += style;
+
+        return icon;
+    },
+
     //initialises current element
     //creates inner elements.
     initialise: function()
@@ -100,6 +108,16 @@ window.UI.PlaylistUIItemBuilder.prototype =
         if(details.length > 35)
         {
             details = details.substring(0, 32)+("...");
+        }
+
+        if(mediaDetails.loved == "1")
+        {
+            this._item.find(this._config.iconsContainer).append(this._createIcon("fa fa-heart"));
+        }
+
+        if(mediaDetails.mediaType == "video/youtube")
+        {
+            this._item.find(this._config.iconsContainer).append(this._createIcon("fa fa-youtube"));
         }
         this._item.find(this._config.detailsContainer).append(details);
     },

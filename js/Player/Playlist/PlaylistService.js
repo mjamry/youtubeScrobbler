@@ -5,9 +5,10 @@ window.Player = window.Player || {};
 window.Common = window.Common || {};
 
 
-window.Player.PlaylistService = function(player, playlist)
+window.Player.PlaylistService = function(player, playlistElementDetailsProvider, playlist)
 {
     this.player = player;
+    this._detailsProvider = playlistElementDetailsProvider;
     this.playlist = playlist || new window.Player.Playlist();
     this._eventBroker = window.Common.EventBrokerSingleton.instance();
     //TODO: for future purposes - will be configurable
@@ -32,10 +33,14 @@ window.Player.PlaylistService.prototype =
         }
     },
 
-    _updatePlaylist: function(playlist)
+    _updatePlaylist: function(playlist, startIndex)
     {
         this.playlist = playlist;
         this._eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistUpdated, this.playlist);
+        if(startIndex != null)
+        {
+            this._detailsProvider.provideDetails(this.playlist, startIndex);
+        }
     },
 
     _handleItemRemoved: function(index)
@@ -46,22 +51,40 @@ window.Player.PlaylistService.prototype =
         this._updatePlaylist(tempPlaylist);
     },
 
+    _handleItemUpdated: function(eventArgs)
+    {
+        var newItem = eventArgs.details;
+
+        var item = this.playlist.getItem(eventArgs.index);
+        newItem.url = item.url;
+        newItem.mediaType = item.mediaType;
+        newItem.duration = item.duration;
+
+        this.playlist.replace(eventArgs.index, newItem);
+
+        this._updatePlaylist(this.playlist);
+    },
+
     initialise: function()
     {
         this._eventBroker.addListener(window.Player.Events.MediaStopped, this._handleMediaStopped, null, this);
         this._eventBroker.addListener(window.Player.PlaylistEvents.PlaylistRemoveItemRequested, this._handleItemRemoved, null, this);
+        this._eventBroker.addListener(window.Player.PlaylistEvents.PlaylistItemUpdateRequested, this._handleItemUpdated, null, this);
+
+        this._detailsProvider.initialise();
     },
 
     //initialises playlist object, or overwrite existing one.
     createPlaylist: function(playlist)
     {
         window.Common.Log.Instance().Info("New playlist has been created, it contains "+playlist.length()+" elements.");
-        this._updatePlaylist(playlist);
+        this._updatePlaylist(playlist, 0);
     },
 
     //adds new playlist (or single media) to existing playlist.
     addToPlaylist: function(playlist)
     {
+        //TODO here is copied reference not value! to be resolved... :)
         var tempPlaylist = this.playlist;
         //TODO: consider moving this loop to playlist implementation
         for(var i=0;i<playlist.length();i++)
@@ -71,7 +94,7 @@ window.Player.PlaylistService.prototype =
 
         window.Common.Log.Instance().Info(playlist.length()+" new element(s) has been added to current playlist. It has now "+tempPlaylist.length()+" elements.");
 
-        this._updatePlaylist(tempPlaylist);
+        this._updatePlaylist(tempPlaylist, this.playlist.length() - playlist.length());
     },
 
     //plays next media item from playlist

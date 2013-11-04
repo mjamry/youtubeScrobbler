@@ -45,6 +45,11 @@ window.Player.Playlist.prototype =
         }
     },
 
+    replace: function(index, mediaDetails)
+    {
+        this.mediaList[index] = mediaDetails;
+    },
+
     next: function()
     {
         if(this.indexOfCurrentlySelectedMediaElement + 1 < this.length() - 1)
