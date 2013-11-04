@@ -31,9 +31,32 @@ window.LastFm.InformationProvider.prototype =
         );
     },
 
-    getTack: function(trackName)
+    getTrackDetails: function(mediaDetails, session)
     {
+        window.Common.Log.Instance().Debug("Track details requested for: "+mediaDetails.toSource());
+        this.dataProvider.track.getInfo(
+            {
+                track: mediaDetails.title,
+                artist: mediaDetails.artist,
+                username: session.user,
+                autocorrect: 1,
+                api_key: window.LastFm.LastFmConstants.API_KEY
+            },
+            {
+                success: $.proxy(function(response)
+                {
+                    window.Common.Log.Instance().Debug("Track details has been obtained: "+response.toSource());
+                },
+                this),
 
+                error: $.proxy(function(response)
+                {
+                    window.Common.Log.Instance().Debug("Track details obtaining error: "+response.toSource());
+                },
+                this)
+            }
+
+        )
     },
 
     getRecommendedArtists: function(params, session, callback){
