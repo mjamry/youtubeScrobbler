@@ -16,7 +16,8 @@ window.Player.YouTubePlaylistConstant =
     VIDEO_TITLE_ID: 1,
     ARTIST_NAME_ID: 0,
     VIDEO_NAME_SEPARATOR: "-",
-    MEDIA_TYPE: "video/youtube"
+    MEDIA_TYPE: "video/youtube",
+    REGEX_NAMING_PATTERN: "([^\\-]*)-\\s?((?:[^\\(\\)\\[\\]]?)*)(.*)"
 };
 
 //Main responsibility is to create playlists depending upon specified url address.
@@ -24,43 +25,25 @@ window.Player.YouTubePlaylistLoader = function(){};
 
 window.Player.YouTubePlaylistLoader.prototype =
 {
-    //TODO use regex instead
-	_getArtist: function(videoName)
-	{
-        var index = window.Player.YouTubePlaylistConstant.ARTIST_NAME_ID;
-		var vidName = videoName.split(window.Player.YouTubePlaylistConstant.VIDEO_NAME_SEPARATOR);
+    _splitTitle: function(details)
+    {
+        var namePattern = RegExp(window.Player.YouTubePlaylistConstant.REGEX_NAMING_PATTERN);
+        var names = namePattern.exec(details);
 
-        var result = "";
-        try
+        if(names)
         {
-            result = vidName[index].trim();
-            result = result.toLowerCase().capitalise();
+            var result =
+            {
+                artist: names[1],
+                title: names[2]
+            }
+            return result;
         }
-        catch(e)
-        {
-            window.Common.Log.Instance().Warning("Error occurs while parsing artist.");
-            window.Common.Log.Instance().Debug("Incorrect naming pattern: "+videoName);
-        }
-        return result;
-	},
-			
-	_getTitle: function(videoName)
-	{
-        var index = window.Player.YouTubePlaylistConstant.VIDEO_TITLE_ID;
-		var vidName = videoName.split(window.Player.YouTubePlaylistConstant.VIDEO_NAME_SEPARATOR);
-        var result = "";
-        try
-        {
-            result = vidName[index].trim();
-            result = result.toLowerCase().capitalise();
-        }
-        catch(e)
-        {
-            window.Common.Log.Instance().Warning("Error occurs while parsing title.");
-            window.Common.Log.Instance().Debug("Incorrect naming pattern: "+videoName);
-        }
-		return result;
-	},
+
+        window.Common.Log.Instance().Warning("Error occurs while parsing title.");
+        window.Common.Log.Instance().Debug("Incorrect naming pattern: "+details);
+        return null;
+    },
 
     //gets details for specified clip.
     //if cannot retrieve details returns "undefined";
@@ -69,22 +52,23 @@ window.Player.YouTubePlaylistLoader.prototype =
     {
         window.Common.Log.Instance().Debug("Recieved YouTube details for media: "+media.title);
         var mediaDetails = new window.Player.MediaDetails();
-        mediaDetails.artist = this._getArtist(media.title);
-        mediaDetails.title = this._getTitle(media.title);
-        //sometime it is empty - do not know why...
-        if(media.player)
-        {
-            mediaDetails.url = media.player.default || "";
-        }
+
         mediaDetails.mediaType = window.Player.YouTubePlaylistConstant.MEDIA_TYPE;
         mediaDetails.duration = new window.Player.Duration(media.duration);
 
-        if(mediaDetails.artist == "" || mediaDetails.title == "" || mediaDetails.url == "")
+        var trackName = this._splitTitle(media.title);
+
+        //sometime media.player is empty - do not know why...
+        if(!media.player || !trackName)
         {
             window.Common.Log.Instance().Warning("Cannot read media details.");
             window.Common.Log.Instance().Debug("Probably file does not exist anymore: "+media.title);
             return null;
         }
+
+        mediaDetails.artist = trackName.artist;
+        mediaDetails.title = trackName.title;
+        mediaDetails.url = media.player.default;
 
         return mediaDetails;
     },
