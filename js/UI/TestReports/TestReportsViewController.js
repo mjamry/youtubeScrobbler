@@ -44,9 +44,11 @@ window.UI.TestReportsViewController.prototype =
         var description = document.getElementById(this._config.error_description).value;
         var email = document.getElementById(this._config.error_email).value;
 
-        this._reportSender.send(email, title, description);
-
-        this._errorContainer.hide();
+        if(title && description && email)
+        {
+            this._reportSender.send(email, title, description);
+            this._errorContainer.hide();
+        }
     },
 
     initialise: function()
