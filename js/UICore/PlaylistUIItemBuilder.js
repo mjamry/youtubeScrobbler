@@ -110,7 +110,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
             details = details.substring(0, 32)+("...");
         }
 
-        if(mediaDetails.loved == "1")
+        if(mediaDetails.loved)
         {
             this._item.find(this._config.iconsContainer).append(this._createIcon("fa fa-heart"));
         }
