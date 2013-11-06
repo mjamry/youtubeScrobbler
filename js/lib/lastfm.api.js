@@ -38,14 +38,12 @@ function LastFM(options){
 		{
 			params.format = "json";
 			var http = new XMLHttpRequest();
-
 			var array = [];
 			for(var param in params){
-				array.push(encodeURIComponent(param) + "=" + encodeURIComponent(params[param]));
+				array.push((param) + "=" + (params[param]));
 			}
-			
+
 			var parameters = array.join('&').replace(/%20/g, '+');
-			
 			http.open("POST", apiUrl, true);
 
 			//Send the proper header information along with the request
@@ -822,7 +820,7 @@ function LastFM(options){
 			string += apiSecret;
 
 			/* Needs lastfm.api.md5.js. */
-			return md5(string);
+			return md5(unescape(encodeURIComponent(string)));
 		}
 	};
 }
