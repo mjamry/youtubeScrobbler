@@ -84,6 +84,13 @@
 
 }
 
+#playlist-progressbar
+{
+    height:5px;
+    background-color:red;
+    z-index: 999;
+}
+
 .playlist-item-icons
 {
     margin-top:2px;
