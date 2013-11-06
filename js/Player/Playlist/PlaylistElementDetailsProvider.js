@@ -15,6 +15,10 @@ window.Player.PlaylistElementDetailsProvider.prototype =
     {
         var progressBarPercentValue = ((this._itemsToGetDetails - (this._playlist.length() - this._currentItemIndex))/this._itemsToGetDetails)*100;
         $("#playlist-progressbar").css({width:progressBarPercentValue+"%"});
+        if(progressBarPercentValue == 100)
+        {
+            $("#playlist-progressbar").hide();
+        }
     },
 
     _provideDetails: function(mediaDetails)
@@ -58,6 +62,7 @@ window.Player.PlaylistElementDetailsProvider.prototype =
         this._playlist = playlist;
         this._currentItemIndex = startingIndex;
         this._itemsToGetDetails = playlist.length() - startingIndex;
+        $("#playlist-progressbar").show();
 
         this._provideDetails(this._playlist.getItem(this._currentItemIndex));
     }

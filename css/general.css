@@ -87,8 +87,8 @@
 #playlist-progressbar
 {
     height:5px;
-    background-color:red;
-    z-index: 999;
+    background-color:#999;
+    display: none;
 }
 
 .playlist-item-icons
