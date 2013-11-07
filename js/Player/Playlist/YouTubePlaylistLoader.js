@@ -17,7 +17,7 @@ window.Player.YouTubePlaylistConstant =
     ARTIST_NAME_ID: 0,
     VIDEO_NAME_SEPARATOR: "-",
     MEDIA_TYPE: "video/youtube",
-    REGEX_NAMING_PATTERN: "([^\\-]*)-\\s?((?:[^\\(\\)\\[\\]]?)*)(.*)"
+    REGEX_NAMING_PATTERN: "([^\\-]*)-\\s?((?:[^\\{\\}\\(\\)\\[\\]]?)*)(.*)"
 };
 
 //Main responsibility is to create playlists depending upon specified url address.
