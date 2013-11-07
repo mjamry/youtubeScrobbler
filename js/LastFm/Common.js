@@ -1,5 +1,6 @@
 window.LastFm = window.LastFm || {};
 
+//TODO move to server side.
 window.LastFm.LastFmConstants =
 {
     API_KEY: 'ed21aeb031f9999c1fd0f92510b84364',
