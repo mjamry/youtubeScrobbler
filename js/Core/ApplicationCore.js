@@ -8,13 +8,15 @@ window.Player = window.Player || {};
 window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory)
 {
     this.uiCore = uiFactory.createUICore();
-    var playlist = uiFactory.createPlaylistViewController();
-    playlist.initialise();
+
 
     window.Common.Cookie.setInstance(coreServicesFactory.createCookieHandler());
     this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler(window.Common.EventBrokerSingleton.instance());
     this.player = coreServicesFactory.createMediaPlayer(this.uiCore.getPlayerContainer());
     this.playlistService = coreServicesFactory.createPlaylistService(this.player);
+
+    var playlist = uiFactory.createPlaylistViewController(this.playlistService);
+    playlist.initialise();
 };
 
 window.ApplicationCore.AppCore.prototype =
