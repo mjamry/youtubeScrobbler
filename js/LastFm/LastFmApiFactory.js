@@ -21,8 +21,8 @@ window.LastFm.LastFmApiFactory.prototype =
         return new window.LastFm.Scrobbler(LastFmApiCommon.DATA_PROVIDER);
     },
 
-    createLoveChangeSwitch: function()
+    createLoveChangeSwitch: function(sessionHandler)
     {
-        return new window.LastFm.TrackLikeStateChangeRequested(this.createScrobbler);
+        return new window.LastFm.TrackLoveChangeHandler(this.createScrobbler(), sessionHandler);
     }
 };

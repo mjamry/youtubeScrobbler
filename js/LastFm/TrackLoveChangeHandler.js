@@ -7,7 +7,7 @@ window.LastFm.TrackLoveChangeHandler = function(stateChangeExecutor, sessionProv
     this._sessionProvider = sessionProvider;
 };
 
-window.LastFm.TrackLoveChangeHandler =
+window.LastFm.TrackLoveChangeHandler.prototype =
 {
     changeLoveState: function(mediaDetails)
     {

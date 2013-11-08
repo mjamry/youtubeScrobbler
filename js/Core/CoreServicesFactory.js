@@ -4,10 +4,24 @@ window.ApplicationCore = window.ApplicationCore || {};
 //using
 window.Player = window.Player || {};
 
-window.ApplicationCore.CoreServicesFactory = function(){};
+window.ApplicationCore.CoreServicesFactory = function()
+{
+    this._sessionProvider = null;
+};
 
 window.ApplicationCore.CoreServicesFactory.prototype =
 {
+    _getSessionProvider: function()
+    {
+        if(!this._sessionProvider)
+        {
+            var factory = new window.LastFm.LastFmApiFactory();
+            this._sessionProvider = factory.createSessionProvider();
+        }
+
+        return this._sessionProvider;
+    },
+
     createBrokerHandler: function()
     {
         return new window.Common.EventBroker();
@@ -18,9 +32,9 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new Logger();
     },
 
-    createOnlineScrobbler: function(sessionHandler)
+    createOnlineScrobbler: function()
     {
-        return new window.ApplicationCore.OnlineScrobbler(sessionHandler);
+        return new window.ApplicationCore.OnlineScrobbler(this._getSessionProvider());
     },
 
     createCookieHandler: function()
@@ -30,10 +44,7 @@ window.ApplicationCore.CoreServicesFactory.prototype =
 
     createSessionHandler: function()
     {
-        var factory = new window.LastFm.LastFmApiFactory();
-        var sessionProvider = factory.createSessionProvider();
-
-        return new window.ApplicationCore.SessionHandler(sessionProvider);
+        return new window.ApplicationCore.SessionHandler(this._getSessionProvider());
     },
 
     createMediaPlayer: function(container)
@@ -45,8 +56,12 @@ window.ApplicationCore.CoreServicesFactory.prototype =
     {
         var lastFmFactory = new window.LastFm.LastFmApiFactory();
         var detailsProvider = new window.Player.PlaylistElementDetailsProvider(lastFmFactory.createInformationProvider());
-        var playlistService = new window.Player.PlaylistService(player, detailsProvider);
+        var loveStateSwitch = lastFmFactory.createLoveChangeSwitch(this._getSessionProvider());
+
+
+        var playlistService = new window.Player.PlaylistService(player, detailsProvider, loveStateSwitch);
         playlistService.initialise();
+
         return playlistService;
     }
 };

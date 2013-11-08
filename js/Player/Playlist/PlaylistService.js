@@ -130,6 +130,6 @@ window.Player.PlaylistService.prototype =
     changeLoveState: function(index)
     {
         var item = this.getTrackDetails(index);
-        this._loveStateSwitch.changeLoveState(index);
+        this._loveStateSwitch.changeLoveState(item);
     }
 };
