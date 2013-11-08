@@ -9,27 +9,22 @@ window.LastFm.TrackLoveChangeHandler = function(stateChangeExecutor, sessionProv
 
 window.LastFm.TrackLoveChangeHandler.prototype =
 {
-    changeLoveState: function(mediaDetails)
+    changeLoveState: function(mediaDetails, index)
     {
+        var details =
+        {
+            track: mediaDetails.title,
+            artist: mediaDetails.artist,
+            index: index
+        }
+
         if(mediaDetails.loved)
         {
-            this._stateChangeExecutor.unLove(
-                {
-                    track: mediaDetails.title,
-                    artist: mediaDetails.artist
-                },
-                this._sessionProvider.getSession()
-            )
+            this._stateChangeExecutor.unLove(details, this._sessionProvider.getSession());
         }
         else
         {
-            this._stateChangeExecutor.love(
-                {
-                    track: mediaDetails.title,
-                    artist: mediaDetails.artist
-                },
-                this._sessionProvider.getSession()
-            )
+            this._stateChangeExecutor.love(details, this._sessionProvider.getSession());
         }
     }
 };

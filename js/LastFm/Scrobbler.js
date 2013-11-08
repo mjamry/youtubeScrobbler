@@ -102,21 +102,32 @@ window.LastFm.Scrobbler.prototype =
             });
     },
 
-    love: function(trackDetails, session)
+    //loves passed track using artist name and title.
+    //details should contains:
+    //      {
+    //        artist,
+    //        title,
+    //        index
+    //      }
+    love: function(loveRequestDetails, session)
     {
-        window.Common.Log.Instance().Debug("Last fm scrobbler - love request with track: "+trackDetails.artist+" - "+trackDetails.track);
+
+        window.Common.Log.Instance().Debug("Last fm scrobbler - love request with track: "+loveRequestDetails.artist+" - "+loveRequestDetails.track);
         this.lastFmApi.track.love(
-            trackDetails,
+            {
+                track: loveRequestDetails.track,
+                artist: loveRequestDetails.artist
+            },
             session,
             {
                 success:
                     $.proxy(function(response)
                     {
                         //fire event
-                        this._eventBroker.fireEventWithData(window.LastFm.Events.TrackLoved, response);
+                        this._eventBroker.fireEventWithData(window.LastFm.Events.TrackLoved, loveRequestDetails.index);
 
                         window.Common.Log.Instance().Info("Track successfully loved.");
-                        window.Common.Log.Instance().Debug("LastFm Love details: "+ trackDetails.artist+" - "+trackDetails.track);
+                        window.Common.Log.Instance().Debug("LastFm Love details: "+ loveRequestDetails.artist+" - "+loveRequestDetails.track);
                     },
                     this),
 
@@ -124,28 +135,38 @@ window.LastFm.Scrobbler.prototype =
                     $.proxy(function(response)
                     {
                         window.Common.Log.Instance().Warning("LastFm Love update failed: "+ response.message);
-                        window.Common.Log.Instance().Debug("LastFm Love failed for: "+ trackDetails.artist+" - "+trackDetails.track);
+                        window.Common.Log.Instance().Debug("LastFm Love failed for: "+ loveRequestDetails.artist+" - "+loveRequestDetails.track);
                     },
                     this)
             }
         );
     },
 
-    unLove: function(trackDetails, session)
+    //loves passed track using artist name and title.
+    //details should contains:
+    //      {
+    //        artist,
+    //        title,
+    //        index
+    //      }
+    unLove: function(loveRequestDetails, session)
     {
-        window.Common.Log.Instance().Debug("Last fm scrobbler - unlove request with track: "+trackDetails.artist+" - "+trackDetails.track);
+        window.Common.Log.Instance().Debug("Last fm scrobbler - unlove request with track: "+loveRequestDetails.artist+" - "+loveRequestDetails.track);
         this.lastFmApi.track.unlove(
-            trackDetails,
+            {
+                track: loveRequestDetails.track,
+                artist: loveRequestDetails.artist
+            },
             session,
             {
                 success:
                     $.proxy(function(response)
                         {
                             //fire event
-                            this._eventBroker.fireEventWithData(window.LastFm.Events.TrackUnloved, response);
+                            this._eventBroker.fireEventWithData(window.LastFm.Events.TrackUnloved, loveRequestDetails.index);
 
                             window.Common.Log.Instance().Info("Track successfully unloved.");
-                            window.Common.Log.Instance().Debug("LastFm UnLove details: "+ trackDetails.artist+" - "+trackDetails.track);
+                            window.Common.Log.Instance().Debug("LastFm UnLove details: "+ loveRequestDetails.artist+" - "+loveRequestDetails.track);
                         },
                         this),
 
@@ -153,7 +174,7 @@ window.LastFm.Scrobbler.prototype =
                     $.proxy(function(response)
                         {
                             window.Common.Log.Instance().Warning("LastFm UnLove update failed: "+ response.message);
-                            window.Common.Log.Instance().Debug("LastFm UnLove failed for: "+ trackDetails.artist+" - "+trackDetails.track);
+                            window.Common.Log.Instance().Debug("LastFm UnLove failed for: "+ loveRequestDetails.artist+" - "+loveRequestDetails.track);
                         },
                         this)
             }

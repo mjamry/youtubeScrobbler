@@ -68,6 +68,12 @@ window.UI.PlaylistViewController.prototype =
         }
     },
 
+    _handleItemUpdated: function(eventArgs)
+    {
+        var newItem = this._createNewElement(eventArgs.mediaDetails, eventArgs.index);
+        this._container.children("div").eq(eventArgs.index).replaceWith(newItem);
+    },
+
     _handleMediaChanged: function(mediaDetails)
     {
 
@@ -77,5 +83,7 @@ window.UI.PlaylistViewController.prototype =
     {
         this._eventBroker.addListener(window.Player.PlaylistEvents.PlaylistUpdated, this._handlePlaylistUpdated, null, this);
         this._eventBroker.addListener(window.Player.Events.MediaChanged, this._handleMediaChanged, null, this);
+
+        this._eventBroker.addListener(window.Player.PlaylistEvents.PlaylistItemUpdated, this._handleItemUpdated, null, this);
     }
 };

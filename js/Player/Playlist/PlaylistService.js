@@ -58,10 +58,40 @@ window.Player.PlaylistService.prototype =
         this._updatePlaylist(this.playlist);
     },
 
+    //TODO this should works in more clever way.
+    _handleLoved: function(index)
+    {
+        var item = this.getTrackDetails(index);
+        item.loved = true;
+
+        this._eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistItemUpdated,
+            {
+                mediaDetails: item,
+                index: index
+            }
+        );
+    },
+
+    _handleUnLoved: function(index)
+    {
+        var item = this.getTrackDetails(index);
+        item.loved = false;
+
+        this._eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistItemUpdated,
+            {
+                mediaDetails: item,
+                index: index
+            }
+        );
+    },
+
     initialise: function()
     {
         this._eventBroker.addListener(window.Player.Events.MediaStopped, this._handleMediaStopped, null, this);
         this._eventBroker.addListener(window.Player.PlaylistEvents.PlaylistItemUpdateRequested, this._handleItemUpdated, null, this);
+
+        this._eventBroker.addListener(window.LastFm.Events.TrackUnloved, this._handleUnLoved, null, this);
+        this._eventBroker.addListener(window.LastFm.Events.TrackLoved, this._handleLoved, null, this);
 
         this._detailsProvider.initialise();
     },
@@ -130,6 +160,6 @@ window.Player.PlaylistService.prototype =
     changeLoveState: function(index)
     {
         var item = this.getTrackDetails(index);
-        this._loveStateSwitch.changeLoveState(item);
+        this._loveStateSwitch.changeLoveState(item, index);
     }
 };
