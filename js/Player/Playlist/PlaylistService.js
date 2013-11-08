@@ -5,10 +5,11 @@ window.Player = window.Player || {};
 window.Common = window.Common || {};
 
 
-window.Player.PlaylistService = function(player, playlistElementDetailsProvider, playlist)
+window.Player.PlaylistService = function(player, playlistElementDetailsProvider, loveStateSwitch, playlist)
 {
     this.player = player;
     this._detailsProvider = playlistElementDetailsProvider;
+    this._loveStateSwitch = loveStateSwitch;
     this.playlist = playlist || new window.Player.Playlist();
     this._eventBroker = window.Common.EventBrokerSingleton.instance();
     //TODO: for future purposes - will be configurable
@@ -43,14 +44,6 @@ window.Player.PlaylistService.prototype =
         }
     },
 
-    _handleItemRemoved: function(index)
-    {
-        var tempPlaylist = this.playlist;
-        tempPlaylist.remove(index);
-        window.Common.Log.Instance().Debug("Element has been removed from playlist, now it contains "+tempPlaylist.length()+" elements.");
-        this._updatePlaylist(tempPlaylist);
-    },
-
     _handleItemUpdated: function(eventArgs)
     {
         var newItem = eventArgs.details;
@@ -68,7 +61,6 @@ window.Player.PlaylistService.prototype =
     initialise: function()
     {
         this._eventBroker.addListener(window.Player.Events.MediaStopped, this._handleMediaStopped, null, this);
-        this._eventBroker.addListener(window.Player.PlaylistEvents.PlaylistRemoveItemRequested, this._handleItemRemoved, null, this);
         this._eventBroker.addListener(window.Player.PlaylistEvents.PlaylistItemUpdateRequested, this._handleItemUpdated, null, this);
 
         this._detailsProvider.initialise();
@@ -125,5 +117,19 @@ window.Player.PlaylistService.prototype =
     getTrackDetails: function(index)
     {
         return this.playlist.getItem(index);
+    },
+
+    removeItem: function(index)
+    {
+        var tempPlaylist = this.playlist;
+        tempPlaylist.remove(index);
+        window.Common.Log.Instance().Debug("Element has been removed from playlist, now it contains "+tempPlaylist.length()+" elements.");
+        this._updatePlaylist(tempPlaylist);
+    },
+
+    changeLoveState: function(index)
+    {
+        var item = this.getTrackDetails(index);
+        this._loveStateSwitch.changeLoveState(index);
     }
 };

@@ -7,14 +7,14 @@ window.Common = window.Common || {};
 var UNDEFINED_SESSION_ID = "-1";
 
 //Handles sessions on last.fm portal.
-window.LastFm.SessionHandler = function(lastFmApi)
+window.LastFm.LastFmSessionProvider = function(lastFmApi)
 {
     this.lastFmApi = lastFmApi;
     this.sessionDetails = UNDEFINED_SESSION_ID;
     window.Common.Log.Instance().Info("Last fm session handler has been created.");
-}
+};
 
-window.LastFm.SessionHandler.prototype =
+window.LastFm.LastFmSessionProvider.prototype =
 {
     _setSession: function(sessionDetails)
     {
@@ -27,7 +27,7 @@ window.LastFm.SessionHandler.prototype =
         window.Common.EventBrokerSingleton.instance().fireEventWithData(window.LastFm.Events.SessionEstablished, this.sessionDetails.name);
     },
 
-    createNewSession: function(token, callback)
+    create: function(token, callback)
     {
         window.Common.Log.Instance().Debug("Last fm - new session requested using token: " + token);
         this.lastFmApi.auth.getSession({token:token},

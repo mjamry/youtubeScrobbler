@@ -6,9 +6,9 @@ window.Player = window.Player || {};
 window.Common = window.Common || {};
 window.LastFm = window.LastFm || {};
 
-window.ApplicationCore.OnlineScrobbler = function()
+window.ApplicationCore.OnlineScrobbler = function(sessionHandler)
 {
-    this._sessionObject = null;
+    this._sessionHandler = sessionHandler;
     this._lastFmFactory = new window.LastFm.LastFmApiFactory();
     this._scrobbler = this._lastFmFactory.createScrobbler();
 
@@ -73,7 +73,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
 
                     timestamp: this._getTimeInSeconds(this._trackStartPlayingTime)
                 },
-                this._sessionObject
+                this._sessionHandler.getSession()
             );
         }
     },
@@ -90,33 +90,8 @@ window.ApplicationCore.OnlineScrobbler.prototype =
                     track: mediaDetails.title,
                     artist: mediaDetails.artist
                 },
-                this._sessionObject
+                this._sessionHandler.getSession()
             );
-        }
-    },
-
-    //changes track love state.
-    _changeTrackLoveState: function(mediaDetails)
-    {
-        if(mediaDetails.loved)
-        {
-            this._scrobbler.unLove(
-                {
-                    track: mediaDetails.title,
-                    artist: mediaDetails.artist
-                },
-                this._sessionObject
-            )
-        }
-        else
-        {
-            this._scrobbler.love(
-                {
-                    track: mediaDetails.title,
-                    artist: mediaDetails.artist
-                },
-                this._sessionObject
-            )
         }
     },
 
@@ -137,34 +112,5 @@ window.ApplicationCore.OnlineScrobbler.prototype =
                 this._updateScrobbling(mediaDetails);
             }, this)
         );
-
-        window.Common.EventBrokerSingleton.instance().addListener(
-            window.LastFm.Events.TrackLoveStateChanged,
-            $.proxy(function(mediaDetails)
-            {
-                this._changeTrackLoveState(mediaDetails);
-            }, this)
-        );
-    },
-
-    //try to restore last session if it does not exist creates new one.
-    createNewSession: function(token)
-    {
-        var sessionHandler = this._lastFmFactory.createSessionHandler();
-
-        if(!sessionHandler.isSessionAlreadyCreated())
-        {
-            sessionHandler.createNewSession(
-                token,
-                $.proxy(function(sessionObject)
-                {
-                    this._sessionObject = sessionObject;
-                }, this)
-            )
-        }
-        else
-        {
-            this._sessionObject = sessionHandler.getCurrentSessionKey();
-        }
     }
 };

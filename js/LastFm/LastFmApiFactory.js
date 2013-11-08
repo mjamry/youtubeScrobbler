@@ -11,13 +11,18 @@ window.LastFm.LastFmApiFactory.prototype =
         return new window.LastFm.InformationProvider(LastFmApiCommon.DATA_PROVIDER);
     },
 
-    createSessionHandler: function()
+    createSessionProvider: function()
     {
-        return new window.LastFm.SessionHandler(LastFmApiCommon.DATA_PROVIDER);
+        return new window.LastFm.LastFmSessionProvider(LastFmApiCommon.DATA_PROVIDER);
     },
 
     createScrobbler: function()
     {
         return new window.LastFm.Scrobbler(LastFmApiCommon.DATA_PROVIDER);
+    },
+
+    createLoveChangeSwitch: function()
+    {
+        return new window.LastFm.TrackLikeStateChangeRequested(this.createScrobbler);
     }
-}
+};

@@ -9,11 +9,12 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory)
 {
     this.uiCore = uiFactory.createUICore();
 
-
+    this.sessionHandler = coreServicesFactory.createSessionHandler();
     window.Common.Cookie.setInstance(coreServicesFactory.createCookieHandler());
-    this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler(window.Common.EventBrokerSingleton.instance());
+    this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler(this.sessionHandler);
     this.player = coreServicesFactory.createMediaPlayer(this.uiCore.getPlayerContainer());
     this.playlistService = coreServicesFactory.createPlaylistService(this.player);
+
 
     var playlist = uiFactory.createPlaylistViewController(this.playlistService);
     playlist.initialise();
@@ -46,7 +47,7 @@ window.ApplicationCore.AppCore.prototype =
 
     createNewSession: function(token)
     {
-        this.onlineScrobbler.createNewSession(token);
+        this.sessionHandler.createNewSession(token);
     },
 
     createNewPlaylist: function(url)

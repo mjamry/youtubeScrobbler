@@ -4,7 +4,7 @@ window.ApplicationCore = window.ApplicationCore || {};
 //using
 window.Player = window.Player || {};
 
-window.ApplicationCore.CoreServicesFactory = function(){}
+window.ApplicationCore.CoreServicesFactory = function(){};
 
 window.ApplicationCore.CoreServicesFactory.prototype =
 {
@@ -18,14 +18,22 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new Logger();
     },
 
-    createOnlineScrobbler: function()
+    createOnlineScrobbler: function(sessionHandler)
     {
-        return new window.ApplicationCore.OnlineScrobbler();
+        return new window.ApplicationCore.OnlineScrobbler(sessionHandler);
     },
 
     createCookieHandler: function()
     {
         return new window.Common.CookieHandler();
+    },
+
+    createSessionHandler: function()
+    {
+        var factory = new window.LastFm.LastFmApiFactory();
+        var sessionProvider = factory.createSessionProvider();
+
+        return new window.ApplicationCore.SessionHandler(sessionProvider);
     },
 
     createMediaPlayer: function(container)
@@ -41,5 +49,5 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         playlistService.initialise();
         return playlistService;
     }
-}
+};
 

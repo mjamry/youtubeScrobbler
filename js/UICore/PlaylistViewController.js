@@ -17,12 +17,12 @@ window.UI.PlaylistViewController.prototype =
 {
     _like: function(index)
     {
-
+        this._model.changeLoveState(index);
     },
 
     _remove: function(index)
     {
-
+        this._model.removeItem(index);
     },
 
     _play: function(index)
