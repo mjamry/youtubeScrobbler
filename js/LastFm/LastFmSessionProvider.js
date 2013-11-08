@@ -4,13 +4,11 @@ window.LastFm = window.LastFm || {};
 //using
 window.Common = window.Common || {};
 
-var UNDEFINED_SESSION_ID = "-1";
-
 //Handles sessions on last.fm portal.
 window.LastFm.LastFmSessionProvider = function(lastFmApi)
 {
     this.lastFmApi = lastFmApi;
-    this.sessionDetails = UNDEFINED_SESSION_ID;
+    this.sessionDetails = null;
     window.Common.Log.Instance().Info("Last fm session handler has been created.");
 };
 
@@ -27,7 +25,7 @@ window.LastFm.LastFmSessionProvider.prototype =
         window.Common.EventBrokerSingleton.instance().fireEventWithData(window.LastFm.Events.SessionEstablished, this.sessionDetails.name);
     },
 
-    create: function(token, callback)
+    create: function(token)
     {
         window.Common.Log.Instance().Debug("Last fm - new session requested using token: " + token);
         this.lastFmApi.auth.getSession({token:token},
@@ -42,14 +40,12 @@ window.LastFm.LastFmSessionProvider.prototype =
                     //</session>
 
                     this._setSession(response.session);
-                    callback(this.sessionDetails);
                 }, this),
 
                 error: $.proxy(function(err, msg)
                 {
-                    this.sessionDetails = UNDEFINED_SESSION_ID;
+                    this.sessionDetails = null;
                     window.Common.Log.Instance().Error("Error ("+ err +") while creating session: " + msg);
-                    callback(UNDEFINED_SESSION_ID);
                 }, this)
             });
     },
@@ -66,13 +62,8 @@ window.LastFm.LastFmSessionProvider.prototype =
         return false;
     },
 
-    getCurrentSessionKey: function()
+    getSession: function()
     {
-        if(this.sessionDetails)
-        {
-            return this.sessionDetails;
-        }
-
-        return "Session has not been established."
+        return this.sessionDetails;
     }
 };

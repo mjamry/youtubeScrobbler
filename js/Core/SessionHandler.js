@@ -3,7 +3,6 @@ window.ApplicationCore = window.ApplicationCore || {};
 
 window.ApplicationCore.SessionHandler = function(sessionProvider)
 {
-    this._sessionObject = null;
     this._sessionProvider = sessionProvider;
 };
 
@@ -14,23 +13,19 @@ window.ApplicationCore.SessionHandler.prototype =
     {
         if(!this._sessionProvider.isSessionAlreadyCreated())
         {
-            this._sessionProvider.create(
-                token,
-                $.proxy(function(sessionObject)
-                {
-                    this._sessionObject = sessionObject;
-                }, this)
-            )
-        }
-        else
-        {
-            this._sessionObject = this._sessionProvider.getCurrentSessionKey();
+            this._sessionProvider.create(token);
         }
     },
 
     getSession: function()
     {
-        return this._sessionObject;
+        var session = this._sessionProvider.getSession();
+        if(session)
+        {
+            return session;
+        }
+
+        window.Common.Log.Instance().Error("Session has not been established yet.");
     }
 };
 
