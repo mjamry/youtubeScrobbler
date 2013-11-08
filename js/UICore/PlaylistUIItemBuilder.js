@@ -43,36 +43,6 @@ window.UI.PlaylistUIItemBuilder.prototype =
         }
     },
 
-    //handles click event.
-    _onClick: function(eventBroker, index)
-    {
-        return function()
-        {
-            //TODO add new style and remove from previous element.
-            eventBroker.fireEventWithData(window.UI.Events.PlaySpecificRequested, index);
-        }
-    },
-
-    //handles "like" for current media element event.
-    _like: function(eventBroker, index)
-    {
-        return function(e)
-        {
-            e.stopPropagation();
-            eventBroker.fireEventWithData(window.UI.Events.TrackLikeStateChangeRequested, index);
-        }
-    },
-
-    //handler "remove" from playlist event.
-    _remove: function(eventBroker, index)
-    {
-        return function(e)
-        {
-            e.stopPropagation();
-            eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistRemoveItemRequested, index);
-        }
-    },
-
     _createIcon: function(style)
     {
         var icon = document.createElement("i");
@@ -123,18 +93,28 @@ window.UI.PlaylistUIItemBuilder.prototype =
     },
 
     //hooks up to UI events such as clock, mouse enter, mouse leave.
-    hookUpToEvents: function()
+    hookUpToEvents: function(callbackContext, clickHandler, likeHandler, removeHandler)
     {
-        //hook up on to events
-        var onClickHandler = this._onClick(this._eventBroker, this._index);
+        //event handler
+        var handleEvent = function(context, handler, index)
+        {
+            function handlePlaylistItemEvent(e)
+            {
+                e.stopPropagation();
+                handler.call(context, index);
+            }
+            return handlePlaylistItemEvent;
+        };
+
+        var onClickHandler = handleEvent(callbackContext, clickHandler, this._index);
         var onMouseEnterHandler = this._onMouseEnter(this._hoverStyle, this._item);
         var onMouseLeaveHandler = this._onMouseLeave(this._hoverStyle, this._item);
         this._item.click(onClickHandler);
         this._item.mouseenter(onMouseEnterHandler);
         this._item.mouseleave(onMouseLeaveHandler);
 
-        var onLiked = this._like(this._eventBroker, this._index);
-        var onRemoved = this._remove(this._eventBroker, this._index);
+        var onLiked = handleEvent(callbackContext, likeHandler, this._index);
+        var onRemoved = handleEvent(callbackContext, removeHandler, this._index);
 
         this._likeButton.click(onLiked);
         this._removeButton.click(onRemoved);

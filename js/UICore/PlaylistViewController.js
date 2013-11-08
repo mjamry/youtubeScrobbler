@@ -15,6 +15,21 @@ window.UI.PlaylistViewController = function(model, view, config)
 
 window.UI.PlaylistViewController.prototype =
 {
+    _like: function(index)
+    {
+
+    },
+
+    _remove: function(index)
+    {
+
+    },
+
+    _play: function(index)
+    {
+        this._model.playSpecific(index);
+    },
+
     _createNewElement: function(mediaDetails, index)
     {
         var builder = new window.UI.PlaylistUIItemBuilder(index, this._config);
@@ -33,7 +48,7 @@ window.UI.PlaylistViewController.prototype =
         }
 
         builder.fillBody(mediaDetails);
-        builder.hookUpToEvents();
+        builder.hookUpToEvents(this, this._play, this._like, this._remove);
 
         return builder.build();
     },
@@ -63,4 +78,4 @@ window.UI.PlaylistViewController.prototype =
         this._eventBroker.addListener(window.Player.PlaylistEvents.PlaylistUpdated, this._handlePlaylistUpdated, null, this);
         this._eventBroker.addListener(window.Player.Events.MediaChanged, this._handleMediaChanged, null, this);
     }
-}
+};
