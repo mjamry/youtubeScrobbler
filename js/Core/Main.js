@@ -28,7 +28,7 @@ $(function()
     uilogger.isLoggingAllowed = true;
 
     //creating application core
-    var applicationCore = new window.ApplicationCore.AppCore(coreServicesFactory);
+    var applicationCore = new window.ApplicationCore.AppCore(coreServicesFactory, uiFactory);
     applicationCore.initialise();
 
     HandleSession();
@@ -37,9 +37,6 @@ $(function()
     HookUpLoadUrlButtonAction(applicationCore);
 
     HookUpToolbarButtons();
-
-    var playlist = uiFactory.createPlaylistViewController();
-    playlist.initialise();
 
     var testReport = uiFactory.createTestReportViewController();
     testReport.initialise();

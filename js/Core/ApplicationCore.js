@@ -5,13 +5,16 @@ window.ApplicationCore = window.ApplicationCore || {};
 window.UI = window.UI || {};
 window.Player = window.Player || {};
 
-window.ApplicationCore.AppCore = function(factory)
+window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory)
 {
-    window.Common.Cookie.setInstance(factory.createCookieHandler());
-    this.uiCore = new window.UI.UICore();
-    this.onlineScrobbler = factory.createOnlineScrobbler(window.Common.EventBrokerSingleton.instance());
-    this.player = factory.createMediaPlayer(this.uiCore.getPlayerContainer());
-    this.playlistService = factory.createPlaylistService(this.player);
+    this.uiCore = uiFactory.createUICore();
+    var playlist = uiFactory.createPlaylistViewController();
+    playlist.initialise();
+
+    window.Common.Cookie.setInstance(coreServicesFactory.createCookieHandler());
+    this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler(window.Common.EventBrokerSingleton.instance());
+    this.player = coreServicesFactory.createMediaPlayer(this.uiCore.getPlayerContainer());
+    this.playlistService = coreServicesFactory.createPlaylistService(this.player);
 };
 
 window.ApplicationCore.AppCore.prototype =

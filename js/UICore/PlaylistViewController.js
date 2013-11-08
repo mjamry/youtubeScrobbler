@@ -5,9 +5,10 @@ window.UI = window.UI || {};
 window.Player = window.Player || {};
 
 
-window.UI.PlaylistViewController = function(playlistContainer, config)
+window.UI.PlaylistViewController = function(model, view, config)
 {
-    this._container = $("#"+playlistContainer);
+    this._model = model;
+    this._container = $("#"+view);
     this._config = config;
     this._eventBroker = window.Common.EventBrokerSingleton.instance();
 };

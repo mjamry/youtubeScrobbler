@@ -5,6 +5,11 @@ window.UI.UIControllersFactory = function(){};
 
 window.UI.UIControllersFactory.prototype =
 {
+    createUICore: function()
+    {
+        return new window.UI.UICore();
+    },
+
     createLoggerViewController: function()
     {
         return new window.UI.LoggerViewController("logger-content", window.UI.LoggerUIConfig);
@@ -15,8 +20,8 @@ window.UI.UIControllersFactory.prototype =
         return new window.UI.TestReportsViewController(new window.UI.ReportSender(), window.UI.TestReportUIConfig);
     },
 
-    createPlaylistViewController: function()
+    createPlaylistViewController: function(model)
     {
-        return new window.UI.PlaylistViewController("playlist-container", window.UI.PlaylistUIConfig);
+        return new window.UI.PlaylistViewController(model, "playlist-container", window.UI.PlaylistUIConfig);
     }
 };
