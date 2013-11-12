@@ -82,7 +82,6 @@ window.Player.YouTubePlaylistLoader.prototype =
             window.Common.UrlParserConstants.PARAMS_START_SIGN +
             window.Player.YouTubePlaylistConstant.FEED_PARAMS;
 
-        window.Common.Log.Instance().Debug("Sending playlist load request: "+url);
         $.getJSON(url, $.proxy(function(result)
         {
            var playlist = new window.Player.Playlist();
@@ -110,7 +109,6 @@ window.Player.YouTubePlaylistLoader.prototype =
             window.Common.UrlParserConstants.PARAMS_START_SIGN +
             window.Player.YouTubePlaylistConstant.FEED_PARAMS;
 
-        window.Common.Log.Instance().Debug("Sending video load request: "+url);
         $.getJSON(url, $.proxy(function(result)
         {
             var mediaDetails = this._getMediaDetails(result.data);
@@ -132,6 +130,7 @@ window.Player.YouTubePlaylistLoader.prototype =
     //returns playlist object literal: playlist = {title:string, videos:[{id, title}]};
     loadPlaylistFromUrl : function(url, callback)
     {
+        window.Common.Log.Instance().Debug("Sending request to YouTube. Url: "+url);
         var parser = new window.Common.UrlParser();
         var playlistId = parser.getParameterValue(url, window.Player.YouTubePlaylistConstant.PLAYLIST_PARAMETER_NAME);
         
