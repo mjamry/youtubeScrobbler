@@ -90,6 +90,18 @@ window.UI.PlaylistUIItemBuilder.prototype =
             details = details.substring(0, 32)+("...");
         }
 
+        var titleContent = "Debug details:"+
+            "\n\nArtist: "+mediaDetails.artist+
+            "\nTitle: "+mediaDetails.title+
+            "\nDuration: "+mediaDetails.duration.toSource()+
+            "\nUrl: "+mediaDetails.url+
+            "\nMediaType: "+mediaDetails.mediaType+
+            "\nID: "+mediaDetails.id+
+            "\nAlbumCover: "+mediaDetails.albumCover+
+            "\nTags: "+mediaDetails.tags+
+            "\nLove: "+mediaDetails.loved;
+        this._item.attr("title", titleContent);
+
         this._cover.attr("src", mediaDetails.albumCover);
 
         if(mediaDetails.loved)
