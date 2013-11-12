@@ -14,6 +14,14 @@ window.UI.ReportSender = function(){};
 
 window.UI.ReportSender.prototype =
 {
+    _handleError: function(message)
+    {
+        this.send(
+            window.UI.ReportSenderConstants.destinationEmail,
+            window.UI.ReportSenderConstants.errorTag + "Automatically generated report",
+            message)
+    },
+
     _getBrowser: function()
     {
         return navigator.appCodeName +" "+ navigator.appVersion;
@@ -58,8 +66,19 @@ window.UI.ReportSender.prototype =
                 this._getLogs());
     },
 
-    send: function(sender, title, description)
+    send: function(sender, title, description, callbacks)
     {
+        callbacks = callbacks || {
+            success: function()
+            {
+                window.Common.Log.Instance().Debug("Error report has been sent.");
+            },
+            fail: function()
+            {
+                window.Common.Log.Instance().Debug("Error occurs while sending error report.");
+            }
+        };
+
         title = window.UI.ReportSenderConstants.errorTag+" "+title;
         var content = this._generateErrorReportContent(sender, description);
 
@@ -70,16 +89,12 @@ window.UI.ReportSender.prototype =
                 subject: title,
                 content: content
             })
-            .fail(function()
-            {
-                window.Common.Log.Instance().Info("Error occurs while sending error report.");
-                alert("Failure.\r\n\r\nSorry cannot send your error report.\r\n\r\nPleas try again.");
-            })
-            .done(function()
-            {
-                window.Common.Log.Instance().Info("Error report has been sent.");
-                window.Common.Log.Instance().Debug("Error title: "+title);
-                alert("Success.\r\n\r\nError report has been sent.\r\nThank you for your effort.\r\n\r\nWe will stay in touch.")
-            })
+            .fail(callbacks.fail)
+            .done(callbacks.success)
+    },
+
+    initialise: function()
+    {
+        window.Common.EventBrokerSingleton.instance().addListener(window.Common.LoggerEvents.LoggerError, this._handleError, null, this);
     }
 };

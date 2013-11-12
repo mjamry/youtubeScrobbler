@@ -46,7 +46,21 @@ window.UI.TestReportsViewController.prototype =
 
         if(title && description && email)
         {
-            this._reportSender.send(email, title, description);
+            var callbacks =
+            {
+                success: function()
+                {
+                    window.Common.Log.Instance().Info("Error report has been sent.");
+                    window.Common.Log.Instance().Debug("Error title: "+title);
+                    alert("Success.\r\n\r\nError report has been sent.\r\nThank you for your effort.\r\n\r\nWe will stay in touch.")
+                },
+                fail: function()
+                {
+                    window.Common.Log.Instance().Info("Error occurs while sending error report.");
+                    alert("Failure.\r\n\r\nSorry cannot send your error report.\r\n\r\nPleas try again.");
+                }
+            };
+            this._reportSender.send(email, title, description, callbacks);
             this._errorContainer.hide();
         }
     },
@@ -59,4 +73,4 @@ window.UI.TestReportsViewController.prototype =
 
         this._hookUpFormsActions();
     }
-}
+};
