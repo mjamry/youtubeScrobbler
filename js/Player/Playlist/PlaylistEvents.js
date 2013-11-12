@@ -9,5 +9,6 @@ window.Player.PlaylistEvents =
 
     //carry item index and obtained details.
     PlaylistElementDetailsObtained: "PlaylistElementDetailsObtained",
+    PlaylistElementDetailsObtainingFailed : "PlaylistElementDetailsObtainingFailed",
     PlaylistItemUpdateRequested: "PlaylistItemUpdateRequested"
 };

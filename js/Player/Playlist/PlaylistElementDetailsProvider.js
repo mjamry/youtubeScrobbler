@@ -28,11 +28,8 @@ window.Player.PlaylistElementDetailsProvider.prototype =
         this._detailsProvider.getTrackDetails(mediaDetails,{user: "onlinescrobbler"});
     },
 
-    _handleDetailsObtained: function(mediaDetails)
+    _getNextItemDetails: function()
     {
-        //informs rest of the system that element has been updated.
-        window.Common.EventBrokerSingleton.instance().fireEventWithData(window.Player.PlaylistEvents.PlaylistItemUpdateRequested, {index: this._currentItemIndex, details: mediaDetails});
-        //update next item
         this._currentItemIndex++;
 
         this._updateProgressbar();
@@ -50,10 +47,26 @@ window.Player.PlaylistElementDetailsProvider.prototype =
         }
     },
 
+    _handleDetailsObtained: function(mediaDetails)
+    {
+        //informs rest of the system that element has been updated.
+        window.Common.EventBrokerSingleton.instance().fireEventWithData(window.Player.PlaylistEvents.PlaylistItemUpdateRequested, {index: this._currentItemIndex, details: mediaDetails});
+        //update next item
+        this._getNextItemDetails();
+    },
+
+    _handleError: function(response)
+    {
+        //for no - just skip to next element
+        //TODO in future error handling should be improved - i.e. try once again with changed media details
+        this._getNextItemDetails();
+    },
+
     //TODO pass here a session identifier.
     initialise: function()
     {
         window.Common.EventBrokerSingleton.instance().addListener(window.Player.PlaylistEvents.PlaylistElementDetailsObtained, $.proxy(this._handleDetailsObtained, this));
+        window.Common.EventBrokerSingleton.instance().addListener(window.Player.PlaylistEvents.PlaylistElementDetailsObtainingFailed, $.proxy(this._handleError, this));
         //TODO handle unsuccessful details obtaining
     },
 

@@ -93,7 +93,7 @@ window.LastFm.InformationProvider.prototype =
                         mediaDetails.albumCover = response.track.album.image[0]["#text"];
                     }
 
-                    mediaDetails.loved = response.track.userloved == "1" ? true:false;
+                    mediaDetails.loved = response.track.userloved != "0";
 
                     window.Common.Log.Instance().Info("Track details from LastFm has been obtained.");
                     window.Common.Log.Instance().Debug("Track details: "+mediaDetails.toSource());
@@ -105,6 +105,7 @@ window.LastFm.InformationProvider.prototype =
                 error: $.proxy(function(response)
                 {
                     window.Common.Log.Instance().Error("Track details obtaining error: "+response.toSource());
+                    window.Common.EventBrokerSingleton.instance().fireEventWithData(window.Player.PlaylistEvents.PlaylistElementDetailsObtainingFailed, response)
                 },
                 this)
             }
