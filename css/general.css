@@ -84,6 +84,15 @@
 
 }
 
+.playlist-item-cover
+{
+    height: 40px;
+    width: 40px;
+    float: right;
+    margin-top:5px;
+    margin-right:5px;
+}
+
 #playlist-progressbar
 {
     height:5px;

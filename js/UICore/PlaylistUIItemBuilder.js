@@ -11,6 +11,7 @@ window.UI.PlaylistUIItemBuilder = function(index, config)
     this._likeButton = null;
     this._removeButton = null;
     this._hoverStyle = null;
+    this._cover = null;
 };
 
 window.UI.PlaylistUIItemBuilder.prototype =
@@ -25,7 +26,12 @@ window.UI.PlaylistUIItemBuilder.prototype =
             $(that).children().find(".playlist-item-buttons").each(function()
             {
                 $(this).show();
+            });
+            $(that).children().find(".playlist-item-cover").each(function()
+            {
+                $(this).hide();
             })
+
         }
     },
 
@@ -39,7 +45,11 @@ window.UI.PlaylistUIItemBuilder.prototype =
             $(that).children().find(".playlist-item-buttons").each(function()
             {
                 $(this).hide();
-            })
+            });
+            $(that).children().find(".playlist-item-cover").each(function()
+            {
+                $(this).show();
+            });
         }
     },
 
@@ -59,7 +69,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
         this._item = newItem.clone();
         this._item.find(this._config.additionalButtonsContainer).hide();
 
-
+        this._cover = this._item.find(this._config.coverContainer);
         this._likeButton = this._item.find(this._config.likeButtonContainer);
         this._removeButton = this._item.find(this._config.removeButtonContainer);
     },
@@ -79,6 +89,8 @@ window.UI.PlaylistUIItemBuilder.prototype =
         {
             details = details.substring(0, 32)+("...");
         }
+
+        this._cover.attr("src", mediaDetails.albumCover);
 
         if(mediaDetails.loved)
         {

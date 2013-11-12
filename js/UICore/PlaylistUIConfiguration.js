@@ -10,6 +10,7 @@ window.UI.PlaylistUIConfig =
     iconsContainer: ".playlist-item-icons",
 
     additionalButtonsContainer: ".playlist-item-buttons",
+    coverContainer: ".playlist-item-cover",
 
     evenElementStyle: "playlist-item-even",
     oddElementStyle: "playlist-item-odd"
