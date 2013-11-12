@@ -93,7 +93,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
         var titleContent = "Debug details:"+
             "\n\nArtist: "+mediaDetails.artist+
             "\nTitle: "+mediaDetails.title+
-            "\nDuration: "+mediaDetails.duration.toSource()+
+            "\nDuration: "+mediaDetails.duration.getHumanReadable()+
             "\nUrl: "+mediaDetails.url+
             "\nMediaType: "+mediaDetails.mediaType+
             "\nID: "+mediaDetails.id+
