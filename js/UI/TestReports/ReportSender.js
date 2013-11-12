@@ -16,9 +16,9 @@ window.UI.ReportSender.prototype =
 {
     _handleError: function(message)
     {
-        this.send(
+        this.sendErrorReport(
             window.UI.ReportSenderConstants.destinationEmail,
-            window.UI.ReportSenderConstants.errorTag + "Automatically generated report",
+            "Automatically generated report",
             message)
     },
 
@@ -66,7 +66,7 @@ window.UI.ReportSender.prototype =
                 this._getLogs());
     },
 
-    send: function(sender, title, description, callbacks)
+    sendErrorReport: function(sender, title, description, callbacks)
     {
         callbacks = callbacks || {
             success: function()

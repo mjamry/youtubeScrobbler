@@ -60,7 +60,7 @@ window.UI.TestReportsViewController.prototype =
                     alert("Failure.\r\n\r\nSorry cannot send your error report.\r\n\r\nPleas try again.");
                 }
             };
-            this._reportSender.send(email, title, description, callbacks);
+            this._reportSender.sendErrorReport(email, title, description, callbacks);
             this._errorContainer.hide();
         }
     },
