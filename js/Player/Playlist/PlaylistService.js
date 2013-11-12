@@ -55,7 +55,12 @@ window.Player.PlaylistService.prototype =
 
         this.playlist.replace(eventArgs.index, newItem);
 
-        this._updatePlaylist(this.playlist);
+        this._eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistItemUpdated,
+            {
+                mediaDetails: newItem,
+                index: eventArgs.index
+            }
+        );
     },
 
     //TODO this should works in more clever way.
