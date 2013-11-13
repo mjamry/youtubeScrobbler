@@ -63,6 +63,11 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         playlistService.initialise();
 
         return playlistService;
+    },
+
+    createPlaybackDetailsService: function()
+    {
+        return new window.Player.PlaybackDetailsService();
     }
 };
 

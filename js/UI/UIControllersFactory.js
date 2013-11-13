@@ -25,5 +25,10 @@ window.UI.UIControllersFactory.prototype =
     createPlaylistViewController: function(model)
     {
         return new window.UI.PlaylistViewController(model, "playlist-container", window.UI.PlaylistUIConfig);
+    },
+
+    createPlaybackDetailsViewController: function(model)
+    {
+        return new window.UI.PlaybackDetailsViewController(model, "playback-details-container");
     }
 };

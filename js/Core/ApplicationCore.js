@@ -14,10 +14,14 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory)
     this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler(this.sessionHandler);
     this.player = coreServicesFactory.createMediaPlayer(this.uiCore.getPlayerContainer());
     this.playlistService = coreServicesFactory.createPlaylistService(this.player);
-
+    this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService();
+    this.playbackDetailsService.initialise();
 
     var playlist = uiFactory.createPlaylistViewController(this.playlistService);
     playlist.initialise();
+
+    var playbackDetails = uiFactory.createPlaybackDetailsViewController(this.playbackDetailsService);
+    playbackDetails.initialise();
 };
 
 window.ApplicationCore.AppCore.prototype =
