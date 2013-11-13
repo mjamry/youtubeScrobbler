@@ -88,7 +88,8 @@ window.ApplicationCore.OnlineScrobbler.prototype =
             this._scrobbler.updateNowPlaying(
                 {
                     track: mediaDetails.title,
-                    artist: mediaDetails.artist
+                    artist: mediaDetails.artist,
+                    duration: mediaDetails.duration.getInSeconds()
                 },
                 this._sessionHandler.getSession()
             );
