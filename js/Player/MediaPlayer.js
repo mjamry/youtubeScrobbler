@@ -31,7 +31,6 @@ window.Player.MediaPlayer = function(configuration, container)
 
     //instance is set when player loading is finished
     this.instance = new MediaElement(container, config);
-
 };
 
 window.Player.MediaPlayer.prototype =
@@ -65,15 +64,12 @@ window.Player.MediaPlayer.prototype =
 
     },
 
-
-
     load: function(mediaDetails)
     {
         this._eventBroker.fireEventWithData(window.Player.Events.MediaChanged, this.currentlyLoadedMediaDetails);
         this.currentlyLoadedMediaDetails = mediaDetails;
         this.instance.setSrc(mediaDetails.url);
         this.instance.load();
-
     },
 
     play: function()
