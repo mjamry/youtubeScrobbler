@@ -35,6 +35,11 @@ window.Player.MediaPlayer = function(configuration, container)
 
 window.Player.MediaPlayer.prototype =
 {
+    _handleTimeUpdated: function(timeDetails)
+    {
+        window.Common.EventBrokerSingleton.instance().fireEventWithData(window.Player.Events.TimeUpdated, timeDetails);
+    },
+
     //initialises events for player
     _initialise: function(mediaElement)
     {
@@ -57,10 +62,7 @@ window.Player.MediaPlayer.prototype =
         );
 
         mediaElement.addEventListener(
-            window.Player.LibraryEventsNames.timeupdate,
-            $.proxy(function(){this._eventBroker.fireEventWithData(window.Player.Events.TimeUpdated, this.currentlyLoadedMediaDetails);}, this),
-            false
-        );
+            window.Player.LibraryEventsNames.timeupdate, this._handleTimeUpdated, null, this);
 
     },
 
