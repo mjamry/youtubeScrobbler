@@ -56,7 +56,16 @@ window.Player.MediaPlayer.prototype =
             $.proxy(function(){this._eventBroker.fireEventWithData(window.Player.Events.MediaPaused, this.currentlyLoadedMediaDetails);}, this),
             false
         );
+
+        mediaElement.addEventListener(
+            window.Player.LibraryEventsNames.timeupdate,
+            $.proxy(function(){this._eventBroker.fireEventWithData(window.Player.Events.TimeUpdated, this.currentlyLoadedMediaDetails);}, this),
+            false
+        );
+
     },
+
+
 
     load: function(mediaDetails)
     {

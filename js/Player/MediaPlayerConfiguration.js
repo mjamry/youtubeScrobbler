@@ -24,12 +24,12 @@ window.Player.MediaPlayerConfig =
     // name of flash file
     flashName: 'flashmediaelement.swf',
     // the order of controls you want on the control bar (and other plugins below)
-    features: ['playpause','current'],
+    features: ['progress'],
 
     // rate in milliseconds for Flash and Silverlight to fire the timeupdate event
     // larger number is less accurate, but less strain on plugin->JavaScript bridge
-    timerRate: 250
-}
+    timerRate: 1000
+};
 
 window.Player.LibraryEventsNames =
 {
@@ -44,4 +44,4 @@ window.Player.LibraryEventsNames =
     loadedmetadata: 'loadedmetadata',
     ended: 'ended',
     volumechange: 'volumechange'
-}
+};
