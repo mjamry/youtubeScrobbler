@@ -30,28 +30,46 @@ TimeParser.setInstance = function(instance)
     this._instance = instance;
 };
 
-window.Common.TimeParserImpl = function(){};
+window.Common.TimeParserImpl = function()
+{
+    this.MinutesInHour = 60;
+    this.SecondsInMinute = 60;
+    this.MsInSecond = 1000;
+};
 
 window.Common.TimeParserImpl.prototype =
 {
+    _timeCorrection: function(time)
+    {
+        return (time < 10 ? "0" + time : time);
+    },
+
     getMinutes: function(timeInMs)
     {
-        //it is in ms so it must be divided by 1000, also need to be rounded to make an int value
-       return Math.round(timeInMs / 1000);
+       return Math.round(timeInMs / this.MsInSecond);
     },
 
     getSeconds: function(timeInMs)
     {
-        return Math.round(timeInMs/60);
+        return Math.round(timeInMs / this.SecondsInMinute);
     },
 
-    getHumanReadibleFormat: function(timeInSeconds)
+    getHumanReadableFormat: function(timeInSeconds)
     {
-       var minuteInSeconds = 60;
-       var min = parseInt(timeInSeconds / minuteInSeconds);
-       var sec = timeInSeconds % minuteInSeconds;
+       timeInSeconds = Math.round(timeInSeconds);
 
-       return min + ":" + (sec < 10 ? "0" + sec : sec);
+       var secs = timeInSeconds % this.SecondsInMinute;
+       var mins = parseInt(timeInSeconds / this.SecondsInMinute);
+
+       if(mins > this.MinutesInHour)
+       {
+           var hours = parseInt(mins / this.MinutesInHour);
+           mins = mins - hours * this.MinutesInHour;
+
+           return hours + ":" + this._timeCorrection(mins) + ":" + this._timeCorrection(secs);
+       }
+
+       return mins + ":" + this._timeCorrection(secs);
     }
 };
 

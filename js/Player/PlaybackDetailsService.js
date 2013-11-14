@@ -77,11 +77,11 @@ window.Player.PlaybackDetailsService.prototype =
 
     getPlaybackTime: function()
     {
-        return TimeParser.getInstance().getHumanReadibleFormat(this.playbackDetails.currentTime);
+        return TimeParser.getInstance().getHumanReadableFormat(this.playbackDetails.currentTime);
     },
 
     getDuration: function()
     {
-        return TimeParser.getInstance().getHumanReadibleFormat(this.playbackDetails.duration);
+        return TimeParser.getInstance().getHumanReadableFormat(this.playbackDetails.duration);
     }
 };

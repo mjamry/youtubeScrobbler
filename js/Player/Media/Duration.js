@@ -16,6 +16,6 @@ window.Player.Duration.prototype =
     ///change length in seconds to human readable format, containing minutes and seconds.
     getHumanReadable: function()
     {
-        return TimeParser.getInstance().getHumanReadibleFormat(this.duration);
+        return TimeParser.getInstance().getHumanReadableFormat(this.duration);
     }
 };
