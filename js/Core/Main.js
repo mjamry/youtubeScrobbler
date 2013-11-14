@@ -16,6 +16,7 @@ $(function()
     var logger = coreServicesFactory.createLoggerService();
     window.Common.Log.SetInsance(logger);
     window.Common.Log.Instance().Info("Application initialisation started.");
+    TimeParser.setInstance(new window.Common.TimeParserImpl());
 
     //creating event broker service
     this._eventBroker = coreServicesFactory.createBrokerHandler();

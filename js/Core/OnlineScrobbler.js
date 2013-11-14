@@ -20,18 +20,6 @@ window.ApplicationCore.OnlineScrobbler = function(sessionHandler)
 
 window.ApplicationCore.OnlineScrobbler.prototype =
 {
-    //TODO this value should be stored as time and formated only on demand.
-    _getTimeInSeconds: function(timeInMs)
-    {
-        //it is in ms so it must be divided by 1000, also need to be rounded to make an int value
-        return Math.round(timeInMs / 1000);
-    },
-
-    _getTimeInMinutes: function(timeInMs)
-    {
-        return Math.round(this._getTimeInSeconds(timeInMs)/60);
-    },
-
     //Checks if all requirements has been resolved to scrobble the track.
     _trackCanBeScrobbled: function(mediaDetails, playingTime)
     {
@@ -40,8 +28,8 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         if(mediaDetails.duration && mediaDetails.duration.getInSeconds() > 30)
         {
             //if played for 4 minutes or at least hals of its duration
-            var timeInSeconds = this._getTimeInSeconds(playingTime);
-            var timeInMinutes = this._getTimeInMinutes(playingTime);
+            var timeInSeconds = TimeParser.getInstance().getSeconds(playingTime);
+            var timeInMinutes = TimeParser.getInstance().getMinutes(playingTime);
             if(
                 timeInMinutes > 4 ||
                 (timeInSeconds > mediaDetails.duration.getInSeconds() / 2))
@@ -71,7 +59,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
                     track: mediaDetails.title,
                     artist: mediaDetails.artist,
 
-                    timestamp: this._getTimeInSeconds(this._trackStartPlayingTime)
+                    timestamp: TimeParser.getInstance().getSeconds(this._trackStartPlayingTime)
                 },
                 this._sessionHandler.getSession()
             );

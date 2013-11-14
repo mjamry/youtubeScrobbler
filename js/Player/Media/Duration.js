@@ -4,7 +4,7 @@ window.Player = window.Player || {};
 window.Player.Duration = function(durationInSeconds)
 {
     this.duration = durationInSeconds;
-}
+};
 
 window.Player.Duration.prototype =
 {
@@ -16,10 +16,6 @@ window.Player.Duration.prototype =
     ///change length in seconds to human readable format, containing minutes and seconds.
     getHumanReadable: function()
     {
-        var minuteInSeconds = 60;
-        var min = parseInt(this.duration / minuteInSeconds);
-        var sec = this.duration % minuteInSeconds;
-
-        return min + ":" + (sec < 10 ? "0" + sec : sec);
+        return TimeParser.getInstance().getHumanReadibleFormat(this.duration);
     }
-}
+};

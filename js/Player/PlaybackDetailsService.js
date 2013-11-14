@@ -77,13 +77,11 @@ window.Player.PlaybackDetailsService.prototype =
 
     getPlaybackTime: function()
     {
-        //TODO use timeFormatService to get human readible value
-        return this.playbackDetails.currentTime;
+        return TimeParser.getInstance().getHumanReadibleFormat(this.playbackDetails.currentTime);
     },
 
     getDuration: function()
     {
-        //TODO use timeFormatService to get human readible value
-        return this.playbackDetails.duration;
+        return TimeParser.getInstance().getHumanReadibleFormat(this.playbackDetails.duration);
     }
 };
