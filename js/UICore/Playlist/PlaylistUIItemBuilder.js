@@ -3,7 +3,7 @@ window.UI = window.UI || {};
 
 window.UI.PlaylistUIItemBuilder = function(index, config)
 {
-    this._eventBroker = window.Common.EventBrokerSingleton.instance();
+    this._eventBroker = EventBroker.getInstance();
 
     this._index = index;
     this._config = config;

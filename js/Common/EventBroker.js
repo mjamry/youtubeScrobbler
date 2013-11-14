@@ -1,35 +1,43 @@
 //namespace
 window.Common = window.Common || {};
 
-//singleton pattern for event broaker
-window.Common.EventBrokerSingleton = function()
+EventBroker = function()
 {
     this._instance = null;
 };
 
-window.Common.EventBrokerSingleton.setInstance = function(instance)
+EventBroker.setInstance = function(instance)
 {
-    //TODO maybe better validation here or just lazy loading instead.
-    if(this._instance == null)
+    if(this._instance != null)
     {
-        this._instance = instance;
-        Logger.getInstance().Info("Events broker instance has been set.");
+        var errorMsg = "Instance of EventBroker has been already set!";
+        Logger.getInstance().Error(errorMsg);
+        throw errorMsg;
     }
+
+    this._instance = instance;
 };
 
-window.Common.EventBrokerSingleton.instance = function()
+EventBroker.getInstance = function()
 {
+    if(this._instance == null)
+    {
+        var errorMsg = "Instance of EventBroker has not been set yet!";
+        Logger.getInstance().Error(errorMsg);
+        throw errorMsg;
+    }
+
     return this._instance;
 };
 
 //Provides possibility to register listeners for specified event.
-window.Common.EventBroker = function()
+window.Common.EventBrokerImpl = function()
 {
     this.listeners = {};
     Logger.getInstance().Info("Event broker has been created.");
 };
 
-window.Common.EventBroker.prototype =
+window.Common.EventBrokerImpl.prototype =
 {
     //Adds new listener for specified event.
     addListener: function(event, listener, data, context)

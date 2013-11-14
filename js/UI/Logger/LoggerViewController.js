@@ -105,7 +105,7 @@ window.UI.LoggerViewController.prototype =
 
     initialise: function()
     {
-        var eventBroker = window.Common.EventBrokerSingleton.instance();
+        var eventBroker = EventBroker.getInstance();
 
         eventBroker.addListener(window.Common.LoggerEvents.LoggedInfo,
             $.proxy(function(message)

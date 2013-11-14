@@ -39,6 +39,6 @@ window.UI.PlaybackDetailsViewController.prototype =
 
     initialise: function()
     {
-        window.Common.EventBrokerSingleton.instance().addListener(window.Player.Events.PlaybackDetailsUpdateRequested, this._handleDetailsUpdateRequest, null, this);
+        EventBroker.getInstance().addListener(window.Player.Events.PlaybackDetailsUpdateRequested, this._handleDetailsUpdateRequest, null, this);
     }
 };

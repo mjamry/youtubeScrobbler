@@ -20,7 +20,7 @@ $(function()
 
     //creating event broker service
     this._eventBroker = coreServicesFactory.createBrokerHandler();
-    window.Common.EventBrokerSingleton.setInstance(this._eventBroker);
+    EventBroker.setInstance(this._eventBroker);
 
     logger.initialise(this._eventBroker);
 
@@ -57,7 +57,7 @@ function HandleSession()
         window.location = "http://www.last.fm/api/auth/?api_key="+window.LastFm.LastFmConstants.API_KEY+"&cb="+document.URL;
     });
 
-    window.Common.EventBrokerSingleton.instance().addListener(window.LastFm.Events.SessionEstablished,
+    EventBroker.getInstance().addListener(window.LastFm.Events.SessionEstablished,
         function(userName)
         {
             $("#authentication").hide();
@@ -82,7 +82,7 @@ function HookUpToolbarButtons()
     player.hookUpButtonAction("next_button", "nextVideo");
     player.hookUpButtonAction("prev_button", "prevVideo");*/
 
-    var eventBroker = window.Common.EventBrokerSingleton.instance();
+    var eventBroker = EventBroker.getInstance();
 
     $("#prev_button").bind("click", function()
     {

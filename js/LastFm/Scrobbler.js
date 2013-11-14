@@ -8,7 +8,7 @@ window.Common = window.Common || {};
 window.LastFm.Scrobbler = function(lastFmApi)
 {
     this.lastFmApi = lastFmApi;
-    this._eventBroker = window.Common.EventBrokerSingleton.instance();
+    this._eventBroker = EventBroker.getInstance();
     Logger.getInstance().Info("Last fm scrobbler has been created.");
 };
 

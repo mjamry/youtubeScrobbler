@@ -10,7 +10,7 @@ window.UI.PlaylistViewController = function(model, view, config)
     this._model = model;
     this._container = $("#"+view);
     this._config = config;
-    this._eventBroker = window.Common.EventBrokerSingleton.instance();
+    this._eventBroker = EventBroker.getInstance();
 };
 
 window.UI.PlaylistViewController.prototype =

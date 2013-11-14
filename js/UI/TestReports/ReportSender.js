@@ -95,6 +95,6 @@ window.UI.ReportSender.prototype =
 
     initialise: function()
     {
-        window.Common.EventBrokerSingleton.instance().addListener(window.Common.LoggerEvents.LoggerError, this._handleError, null, this);
+        EventBroker.getInstance().addListener(window.Common.LoggerEvents.LoggerError, this._handleError, null, this);
     }
 };

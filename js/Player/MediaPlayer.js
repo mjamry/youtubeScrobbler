@@ -6,7 +6,7 @@ window.Common = window.Common || {};
 window.Player.MediaPlayer = function(configuration, container)
 {
     this.instance = null;
-    this._eventBroker = window.Common.EventBrokerSingleton.instance();
+    this._eventBroker = EventBroker.getInstance();
     this.currentlyLoadedMediaDetails = new window.Player.MediaDetails();
 
     var config = $.extend(
@@ -36,7 +36,7 @@ window.Player.MediaPlayer.prototype =
 {
     _handleTimeUpdated: function(timeDetails)
     {
-        window.Common.EventBrokerSingleton.instance().fireEventWithData(window.Player.Events.TimeUpdated, timeDetails);
+        EventBroker.getInstance().fireEventWithData(window.Player.Events.TimeUpdated, timeDetails);
     },
 
     //initialises events for player

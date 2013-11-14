@@ -50,12 +50,12 @@ window.Player.PlaybackDetailsService.prototype =
 
     _updatePlaybackDetails: function()
     {
-        window.Common.EventBrokerSingleton.instance().fireEvent(window.Player.Events.PlaybackDetailsUpdateRequested);
+        EventBroker.getInstance().fireEvent(window.Player.Events.PlaybackDetailsUpdateRequested);
     },
 
     initialise: function()
     {
-        var eventBroker = window.Common.EventBrokerSingleton.instance();
+        var eventBroker = EventBroker.getInstance();
 
         eventBroker.addListener(window.Player.Events.TimeUpdated, this._handleTimeUpdated, null, this);
 

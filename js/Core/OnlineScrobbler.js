@@ -86,7 +86,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
 
     initialise: function()
     {
-        window.Common.EventBrokerSingleton.instance().addListener(
+        EventBroker.getInstance().addListener(
             window.Player.Events.MediaPlay,
             $.proxy(function(mediaDetails)
             {
@@ -94,7 +94,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
             }, this)
         );
 
-        window.Common.EventBrokerSingleton.instance().addListener(
+        EventBroker.getInstance().addListener(
             window.Player.Events.MediaChanged,
             $.proxy(function(mediaDetails)
             {

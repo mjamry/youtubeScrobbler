@@ -80,14 +80,14 @@ window.LastFm.InformationProvider.prototype =
                     Logger.getInstance().Info("Track details from LastFm has been obtained.");
                     Logger.getInstance().Debug("Track details: "+mediaDetails.toSource());
 
-                    window.Common.EventBrokerSingleton.instance().fireEventWithData(window.Player.PlaylistEvents.PlaylistElementDetailsObtained, mediaDetails);
+                    EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistElementDetailsObtained, mediaDetails);
                 },
                 this),
 
                 error: $.proxy(function(response)
                 {
                     Logger.getInstance().Error("Track details obtaining error: "+response.toSource());
-                    window.Common.EventBrokerSingleton.instance().fireEventWithData(window.Player.PlaylistEvents.PlaylistElementDetailsObtainingFailed, response)
+                    EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistElementDetailsObtainingFailed, response)
                 },
                 this)
             }

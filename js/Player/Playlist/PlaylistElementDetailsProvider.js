@@ -50,7 +50,7 @@ window.Player.PlaylistElementDetailsProvider.prototype =
     _handleDetailsObtained: function(mediaDetails)
     {
         //informs rest of the system that element has been updated.
-        window.Common.EventBrokerSingleton.instance().fireEventWithData(window.Player.PlaylistEvents.PlaylistItemUpdateRequested, {index: this._currentItemIndex, details: mediaDetails});
+        EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistItemUpdateRequested, {index: this._currentItemIndex, details: mediaDetails});
         //update next item
         this._getNextItemDetails();
     },
@@ -65,8 +65,8 @@ window.Player.PlaylistElementDetailsProvider.prototype =
     //TODO pass here a session identifier.
     initialise: function()
     {
-        window.Common.EventBrokerSingleton.instance().addListener(window.Player.PlaylistEvents.PlaylistElementDetailsObtained, $.proxy(this._handleDetailsObtained, this));
-        window.Common.EventBrokerSingleton.instance().addListener(window.Player.PlaylistEvents.PlaylistElementDetailsObtainingFailed, $.proxy(this._handleError, this));
+        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistElementDetailsObtained, $.proxy(this._handleDetailsObtained, this));
+        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistElementDetailsObtainingFailed, $.proxy(this._handleError, this));
         //TODO handle unsuccessful details obtaining
     },
 

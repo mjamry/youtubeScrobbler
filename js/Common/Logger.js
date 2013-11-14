@@ -56,7 +56,7 @@ LoggerImpl.prototype =
 
     initialise: function()
     {
-        this._eventBroker = window.Common.EventBrokerSingleton.instance();
+        this._eventBroker = EventBroker.getInstance();
     },
 
     Info: function(message)

@@ -22,7 +22,7 @@ window.LastFm.LastFmSessionProvider.prototype =
 
         Logger.getInstance().Info("Session established.");
         Logger.getInstance().Debug("Session details - user: " + this.sessionDetails.name + ", key: "+ this.sessionDetails.key);
-        window.Common.EventBrokerSingleton.instance().fireEventWithData(window.LastFm.Events.SessionEstablished, this.sessionDetails.name);
+        EventBroker.getInstance().fireEventWithData(window.LastFm.Events.SessionEstablished, this.sessionDetails.name);
     },
 
     create: function(token)
