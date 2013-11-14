@@ -9,28 +9,10 @@ window.LastFm.InformationProvider = function(lastFmDataProvider)
 {
     this.dataProvider = lastFmDataProvider;
     Logger.getInstance().Info("Last fm information provider has been created");
-}
+};
 
 window.LastFm.InformationProvider.prototype =
 {
-    getArtist: function(artistName, callback)
-    {
-        this.dataProvider.artist.getInfo(
-            {artist: artistName},
-            {success:function(data)
-            {
-                var artistData =
-                {
-                    name: data.artist.name,
-                    bio: data.artist.bio.content
-                };
-
-                callback(artistData);
-            }
-            }
-        );
-    },
-
     getTrackDetails: function(mediaDetails, session)
     {
         Logger.getInstance().Debug("Track details requested for: "+mediaDetails.toSource());

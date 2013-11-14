@@ -20,12 +20,13 @@ window.ApplicationCore.SessionHandler.prototype =
     getSession: function()
     {
         var session = this._sessionProvider.getSession();
-        if(session)
+        if(session != null)
         {
             return session;
         }
-
-        Logger.getInstance().Error("Session has not been established yet.");
+        var errorMsg = "Session has not been established yet.";
+        Logger.getInstance().Error(errorMsg);
+        throw errorMsg;
     }
 };
 

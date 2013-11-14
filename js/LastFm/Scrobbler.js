@@ -121,7 +121,7 @@ window.LastFm.Scrobbler.prototype =
             session,
             {
                 success:
-                    $.proxy(function(response)
+                    $.proxy(function()
                     {
                         //fire event
                         this._eventBroker.fireEventWithData(window.LastFm.Events.TrackLoved, loveRequestDetails.index);
@@ -160,7 +160,7 @@ window.LastFm.Scrobbler.prototype =
             session,
             {
                 success:
-                    $.proxy(function(response)
+                    $.proxy(function()
                         {
                             //fire event
                             this._eventBroker.fireEventWithData(window.LastFm.Events.TrackUnloved, loveRequestDetails.index);

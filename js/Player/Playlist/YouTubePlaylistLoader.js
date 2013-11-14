@@ -32,12 +32,10 @@ window.Player.YouTubePlaylistLoader.prototype =
 
         if(names)
         {
-            var result =
-            {
+            return {
                 artist: names[1],
                 title: names[2]
-            }
-            return result;
+            };
         }
 
         Logger.getInstance().Warning("Error occurs while parsing title.");
