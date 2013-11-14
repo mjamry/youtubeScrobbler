@@ -40,8 +40,8 @@ window.Player.YouTubePlaylistLoader.prototype =
             return result;
         }
 
-        window.Common.Log.Instance().Warning("Error occurs while parsing title.");
-        window.Common.Log.Instance().Debug("Incorrect naming pattern: "+details);
+        Logger.getInstance().Warning("Error occurs while parsing title.");
+        Logger.getInstance().Debug("Incorrect naming pattern: "+details);
         return null;
     },
 
@@ -50,7 +50,7 @@ window.Player.YouTubePlaylistLoader.prototype =
     //TODO - handle errors while parsing video details recieved from YT. It is possible that video has been deleted.
     _getMediaDetails: function(media)
     {
-        window.Common.Log.Instance().Debug("Recieved YouTube details for media: "+media.title);
+        Logger.getInstance().Debug("Recieved YouTube details for media: "+media.title);
         var mediaDetails = new window.Player.MediaDetails();
 
         mediaDetails.mediaType = window.Player.YouTubePlaylistConstant.MEDIA_TYPE;
@@ -61,8 +61,8 @@ window.Player.YouTubePlaylistLoader.prototype =
         //sometime media.player is empty - do not know why...
         if(!media.player || !trackName)
         {
-            window.Common.Log.Instance().Warning("Cannot read media details.");
-            window.Common.Log.Instance().Debug("Probably file does not exist anymore: "+media.title);
+            Logger.getInstance().Warning("Cannot read media details.");
+            Logger.getInstance().Debug("Probably file does not exist anymore: "+media.title);
             return null;
         }
 
@@ -130,7 +130,7 @@ window.Player.YouTubePlaylistLoader.prototype =
     //returns playlist object literal: playlist = {title:string, videos:[{id, title}]};
     loadPlaylistFromUrl : function(url, callback)
     {
-        window.Common.Log.Instance().Debug("Sending request to YouTube. Url: "+url);
+        Logger.getInstance().Debug("Sending request to YouTube. Url: "+url);
         var parser = new window.Common.UrlParser();
         var playlistId = parser.getParameterValue(url, window.Player.YouTubePlaylistConstant.PLAYLIST_PARAMETER_NAME);
         

@@ -15,7 +15,7 @@ window.Player.PlaylistService = function(player, playlistElementDetailsProvider,
     //TODO: for future purposes - will be configurable
     this._autoplay = true;
 
-    window.Common.Log.Instance().Info("Playlist service has been created.");
+    Logger.getInstance().Info("Playlist service has been created.");
 };
 
 window.Player.PlaylistService.prototype =
@@ -104,7 +104,7 @@ window.Player.PlaylistService.prototype =
     //initialises playlist object, or overwrite existing one.
     createPlaylist: function(playlist)
     {
-        window.Common.Log.Instance().Info("New playlist has been created, it contains "+playlist.length()+" elements.");
+        Logger.getInstance().Info("New playlist has been created, it contains "+playlist.length()+" elements.");
         this._updatePlaylist(playlist, 0);
     },
 
@@ -119,7 +119,7 @@ window.Player.PlaylistService.prototype =
             tempPlaylist.add(playlist.getItem(i));
         }
 
-        window.Common.Log.Instance().Info(playlist.length()+" new element(s) has been added to current playlist. It has now "+tempPlaylist.length()+" elements.");
+        Logger.getInstance().Info(playlist.length()+" new element(s) has been added to current playlist. It has now "+tempPlaylist.length()+" elements.");
 
         this._updatePlaylist(tempPlaylist, this.playlist.length() - playlist.length());
     },
@@ -158,7 +158,7 @@ window.Player.PlaylistService.prototype =
     {
         var tempPlaylist = this.playlist;
         tempPlaylist.remove(index);
-        window.Common.Log.Instance().Debug("Element has been removed from playlist, now it contains "+tempPlaylist.length()+" elements.");
+        Logger.getInstance().Debug("Element has been removed from playlist, now it contains "+tempPlaylist.length()+" elements.");
         this._updatePlaylist(tempPlaylist);
     },
 

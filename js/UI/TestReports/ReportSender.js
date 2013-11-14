@@ -71,11 +71,11 @@ window.UI.ReportSender.prototype =
         callbacks = callbacks || {
             success: function()
             {
-                window.Common.Log.Instance().Debug("Error report has been sent.");
+                Logger.getInstance().Debug("Error report has been sent.");
             },
             fail: function()
             {
-                window.Common.Log.Instance().Debug("Error occurs while sending error report.");
+                Logger.getInstance().Debug("Error occurs while sending error report.");
             }
         };
 

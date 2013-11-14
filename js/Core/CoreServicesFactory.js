@@ -29,7 +29,7 @@ window.ApplicationCore.CoreServicesFactory.prototype =
 
     createLoggerService: function()
     {
-        return new Logger();
+        return new LoggerImpl();
     },
 
     createOnlineScrobbler: function()

@@ -50,13 +50,13 @@ window.UI.TestReportsViewController.prototype =
             {
                 success: function()
                 {
-                    window.Common.Log.Instance().Info("Error report has been sent.");
-                    window.Common.Log.Instance().Debug("Error title: "+title);
+                    Logger.getInstance().Info("Error report has been sent.");
+                    Logger.getInstance().Debug("Error title: "+title);
                     alert("Success.\r\n\r\nError report has been sent.\r\nThank you for your effort.\r\n\r\nWe will stay in touch.")
                 },
                 fail: function()
                 {
-                    window.Common.Log.Instance().Info("Error occurs while sending error report.");
+                    Logger.getInstance().Info("Error occurs while sending error report.");
                     alert("Failure.\r\n\r\nSorry cannot send your error report.\r\n\r\nPleas try again.");
                 }
             };

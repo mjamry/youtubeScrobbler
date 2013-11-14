@@ -1,39 +1,40 @@
 //namespace
 window.Common = window.Common || {};
 
-//TODO add possibility to set logging level
-window.Common.Log = function(){};
-
-window.Common.Log.SetInsance = function(instance)
+Logger = function()
 {
-    if(this.instance !== "undefined")
-    {
-        this.instance = instance;
-        this.instance.Info("Logger instance has been set.");
-    }
+    this._instance = null;
 };
 
-window.Common.Log.Instance = function()
+Logger.getInstance = function()
 {
-    if(this.instance === 'undefined')
+    if(this._instance == null)
     {
-        throw "Logger has not been initialised  yet."
+        throw "Instance of Logger has not been set yet!";
     }
-    else
+
+    return this._instance;
+};
+
+Logger.setInstance = function(instance)
+{
+    if(this._instance != null)
     {
-        return this.instance;
+        throw "Instance of Logger has been already set!";
     }
+
+    this._instance = instance;
 };
 
 //TODO move it to common namespace
 //simple implementation of Logger
 //it just write to console window.
-Logger = function()
+LoggerImpl = function()
 {
     this._eventBroker = null;
 };
 
-Logger.prototype =
+LoggerImpl.prototype =
 {
     _getFormatedTimestamp: function()
     {

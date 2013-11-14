@@ -13,7 +13,7 @@ window.Common.EventBrokerSingleton.setInstance = function(instance)
     if(this._instance == null)
     {
         this._instance = instance;
-        window.Common.Log.Instance().Info("Events broker instance has been set.");
+        Logger.getInstance().Info("Events broker instance has been set.");
     }
 };
 
@@ -26,7 +26,7 @@ window.Common.EventBrokerSingleton.instance = function()
 window.Common.EventBroker = function()
 {
     this.listeners = {};
-    window.Common.Log.Instance().Info("Event broker has been created.");
+    Logger.getInstance().Info("Event broker has been created.");
 };
 
 window.Common.EventBroker.prototype =
@@ -65,7 +65,7 @@ window.Common.EventBroker.prototype =
     {
         if(this.listeners[event])
         {
-            //window.Common.Log.Instance().Debug("Event: "+event+" has been fired");
+            //Logger.Instance().Debug("Event: "+event+" has been fired");
 
             for(var i = 0;i<this.listeners[event].length;i++)
             {
@@ -75,7 +75,7 @@ window.Common.EventBroker.prototype =
         }
         else
         {
-            //window.Common.Log.Instance().Debug("Event: "+event+" hasn't got any listeners.");
+            //Logger.Instance().Debug("Event: "+event+" hasn't got any listeners.");
         }
     },
     
@@ -83,7 +83,7 @@ window.Common.EventBroker.prototype =
     {
         if(this.listeners[event])
         {
-           // window.Common.Log.Instance().Debug("Event: "+event+" has been fired, data: "+data);
+           // Logger.Instance().Debug("Event: "+event+" has been fired, data: "+data);
 
             for(var i = 0;i<this.listeners[event].length;i++)
             {
@@ -93,7 +93,7 @@ window.Common.EventBroker.prototype =
         }
         else
         {
-            //window.Common.Log.Instance().Debug("Event: "+event+" hasn't got any listeners.");
+            //Logger.Instance().Debug("Event: "+event+" hasn't got any listeners.");
         }
     }
 };

@@ -8,7 +8,7 @@ window.Common = window.Common || {};
 window.LastFm.InformationProvider = function(lastFmDataProvider)
 {
     this.dataProvider = lastFmDataProvider;
-    window.Common.Log.Instance().Info("Last fm information provider has been created");
+    Logger.getInstance().Info("Last fm information provider has been created");
 }
 
 window.LastFm.InformationProvider.prototype =
@@ -33,7 +33,7 @@ window.LastFm.InformationProvider.prototype =
 
     getTrackDetails: function(mediaDetails, session)
     {
-        window.Common.Log.Instance().Debug("Track details requested for: "+mediaDetails.toSource());
+        Logger.getInstance().Debug("Track details requested for: "+mediaDetails.toSource());
         this.dataProvider.track.getInfo(
             {
                 track: mediaDetails.title,
@@ -95,8 +95,8 @@ window.LastFm.InformationProvider.prototype =
 
                     mediaDetails.loved = response.track.userloved != "0";
 
-                    window.Common.Log.Instance().Info("Track details from LastFm has been obtained.");
-                    window.Common.Log.Instance().Debug("Track details: "+mediaDetails.toSource());
+                    Logger.getInstance().Info("Track details from LastFm has been obtained.");
+                    Logger.getInstance().Debug("Track details: "+mediaDetails.toSource());
 
                     window.Common.EventBrokerSingleton.instance().fireEventWithData(window.Player.PlaylistEvents.PlaylistElementDetailsObtained, mediaDetails);
                 },
@@ -104,7 +104,7 @@ window.LastFm.InformationProvider.prototype =
 
                 error: $.proxy(function(response)
                 {
-                    window.Common.Log.Instance().Error("Track details obtaining error: "+response.toSource());
+                    Logger.getInstance().Error("Track details obtaining error: "+response.toSource());
                     window.Common.EventBrokerSingleton.instance().fireEventWithData(window.Player.PlaylistEvents.PlaylistElementDetailsObtainingFailed, response)
                 },
                 this)

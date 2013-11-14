@@ -14,8 +14,8 @@ $(function()
 
     //logger should be created at the begining
     var logger = coreServicesFactory.createLoggerService();
-    window.Common.Log.SetInsance(logger);
-    window.Common.Log.Instance().Info("Application initialisation started.");
+    Logger.setInstance(logger);
+    Logger.getInstance().Info("Application initialisation started.");
     TimeParser.setInstance(new window.Common.TimeParserImpl());
 
     //creating event broker service
@@ -46,7 +46,7 @@ $(function()
    // HookUpToolbarButtons(applicationCore.getPlayer());
    // HeaderAction();
 
-    window.Common.Log.Instance().Info("Application initialisation ended.");
+    Logger.getInstance().Info("Application initialisation ended.");
 });
 
 
@@ -70,7 +70,7 @@ function GetToken()
 {
     var urlPars = new window.Common.UrlParser();
     var _token = urlPars.getParameterValue(window.location.href, "token");
-    window.Common.Log.Instance().Debug("Token: "+_token+" has been obtained.");
+    Logger.getInstance().Debug("Token: "+_token+" has been obtained.");
 
     return _token;
 }

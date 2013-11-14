@@ -17,14 +17,13 @@ window.Player.MediaPlayer = function(configuration, container)
                 this._initialise(mediaElement);
                 window.Common.Log.Instance().Info("Media player has been initialised");
 
-                window.Common.Log.Instance().Debug(this.instance.options.height);
                 this.instance.setVideoSize(300, 300);
 
             }, this),
 
             error: function ()
             {
-                window.Common.Log.Instance().Error("MediaElement initialisation failed.");
+                Logger.getInstance().Error("MediaElement initialisation failed.");
             }
         }, configuration
     );

@@ -9,7 +9,7 @@ window.LastFm.Scrobbler = function(lastFmApi)
 {
     this.lastFmApi = lastFmApi;
     this._eventBroker = window.Common.EventBrokerSingleton.instance();
-    window.Common.Log.Instance().Info("Last fm scrobbler has been created.");
+    Logger.getInstance().Info("Last fm scrobbler has been created.");
 };
 
 window.LastFm.Scrobbler.prototype =
@@ -18,7 +18,7 @@ window.LastFm.Scrobbler.prototype =
     //Details are passed as literal: {track, artist, timestamp}.
     scrobble: function(trackDetails, session)
     {
-        window.Common.Log.Instance().Debug("LastFm Scrobbling request track: "+trackDetails.artist+" - "+trackDetails.track);
+        Logger.getInstance().Debug("LastFm Scrobbling request track: "+trackDetails.artist+" - "+trackDetails.track);
         this.lastFmApi.track.scrobble(
             trackDetails,
             session,
@@ -41,8 +41,8 @@ window.LastFm.Scrobbler.prototype =
                         //fire event
                         this._eventBroker.fireEventWithData(window.LastFm.Events.TrackScrobbled, response);
 
-                        window.Common.Log.Instance().Info("Track has been successfully scrobbled.");
-                        window.Common.Log.Instance().Debug("LastFm Scrobbling details: "+ response.scrobbles.toSource());
+                        Logger.getInstance().Info("Track has been successfully scrobbled.");
+                        Logger.getInstance().Debug("LastFm Scrobbling details: "+ response.scrobbles.toSource());
                     },
                     this
                 ),
@@ -52,8 +52,8 @@ window.LastFm.Scrobbler.prototype =
                         //fire event
                         this._eventBroker.fireEventWithData(window.LastFm.Events.ScrobblingFailed, response);
 
-                        window.Common.Log.Instance().Warning("LastFm Scrobbling update failed: "+ response.message);
-                        window.Common.Log.Instance().Debug("LastFm Scrobbling failed for: "+ trackDetails.toSource());
+                        Logger.getInstance().Warning("LastFm Scrobbling update failed: "+ response.message);
+                        Logger.getInstance().Debug("LastFm Scrobbling failed for: "+ trackDetails.toSource());
                     },
                     this
                 )
@@ -64,7 +64,7 @@ window.LastFm.Scrobbler.prototype =
     //Details are passed as literal: {track, artist}.
     updateNowPlaying: function(trackDetails, session)
     {
-        window.Common.Log.Instance().Debug("LastFm NowPlaying update request with track: "+trackDetails.artist+" - "+trackDetails.track);
+        Logger.getInstance().Debug("LastFm NowPlaying update request with track: "+trackDetails.artist+" - "+trackDetails.track);
         this.lastFmApi.track.updateNowPlaying(
             trackDetails,
             session,
@@ -83,8 +83,8 @@ window.LastFm.Scrobbler.prototype =
                         //fire event
                         this._eventBroker.fireEventWithData(window.LastFm.Events.NowPlayingUpdated, response);
 
-                        window.Common.Log.Instance().Info("Now playing has been successfully updated.");
-                        window.Common.Log.Instance().Debug("LastFm NowPlaying details: "+ response.nowplaying.toSource());
+                        Logger.getInstance().Info("Now playing has been successfully updated.");
+                        Logger.getInstance().Debug("LastFm NowPlaying details: "+ response.nowplaying.toSource());
                     },
                     this
                 ),
@@ -94,8 +94,8 @@ window.LastFm.Scrobbler.prototype =
                         //fire event
                         this._eventBroker.fireEventWithData(window.LastFm.Events.NowPlayingUpdateFailed, response);
 
-                        window.Common.Log.Instance().Warning("LastFm NowPlaying update failed: "+ response.message);
-                        window.Common.Log.Instance().Debug("LastFm NowPlaying failed for: "+ trackDetails.toSource());
+                        Logger.getInstance().Warning("LastFm NowPlaying update failed: "+ response.message);
+                        Logger.getInstance().Debug("LastFm NowPlaying failed for: "+ trackDetails.toSource());
                     },
                     this
                 )
@@ -112,7 +112,7 @@ window.LastFm.Scrobbler.prototype =
     love: function(loveRequestDetails, session)
     {
 
-        window.Common.Log.Instance().Debug("Last fm scrobbler - love request with track: "+loveRequestDetails.artist+" - "+loveRequestDetails.track);
+        Logger.getInstance().Debug("Last fm scrobbler - love request with track: "+loveRequestDetails.artist+" - "+loveRequestDetails.track);
         this.lastFmApi.track.love(
             {
                 track: loveRequestDetails.track,
@@ -126,16 +126,16 @@ window.LastFm.Scrobbler.prototype =
                         //fire event
                         this._eventBroker.fireEventWithData(window.LastFm.Events.TrackLoved, loveRequestDetails.index);
 
-                        window.Common.Log.Instance().Info("Track successfully loved.");
-                        window.Common.Log.Instance().Debug("LastFm Love details: "+ loveRequestDetails.artist+" - "+loveRequestDetails.track);
+                        Logger.getInstance().Info("Track successfully loved.");
+                        Logger.getInstance().Debug("LastFm Love details: "+ loveRequestDetails.artist+" - "+loveRequestDetails.track);
                     },
                     this),
 
                 error:
                     $.proxy(function(response)
                     {
-                        window.Common.Log.Instance().Warning("LastFm Love update failed: "+ response.message);
-                        window.Common.Log.Instance().Debug("LastFm Love failed for: "+ loveRequestDetails.artist+" - "+loveRequestDetails.track);
+                        Logger.getInstance().Warning("LastFm Love update failed: "+ response.message);
+                        Logger.getInstance().Debug("LastFm Love failed for: "+ loveRequestDetails.artist+" - "+loveRequestDetails.track);
                     },
                     this)
             }
@@ -151,7 +151,7 @@ window.LastFm.Scrobbler.prototype =
     //      }
     unLove: function(loveRequestDetails, session)
     {
-        window.Common.Log.Instance().Debug("Last fm scrobbler - unlove request with track: "+loveRequestDetails.artist+" - "+loveRequestDetails.track);
+        Logger.getInstance().Debug("Last fm scrobbler - unlove request with track: "+loveRequestDetails.artist+" - "+loveRequestDetails.track);
         this.lastFmApi.track.unlove(
             {
                 track: loveRequestDetails.track,
@@ -165,16 +165,16 @@ window.LastFm.Scrobbler.prototype =
                             //fire event
                             this._eventBroker.fireEventWithData(window.LastFm.Events.TrackUnloved, loveRequestDetails.index);
 
-                            window.Common.Log.Instance().Info("Track successfully unloved.");
-                            window.Common.Log.Instance().Debug("LastFm UnLove details: "+ loveRequestDetails.artist+" - "+loveRequestDetails.track);
+                            Logger.getInstance().Info("Track successfully unloved.");
+                            Logger.getInstance().Debug("LastFm UnLove details: "+ loveRequestDetails.artist+" - "+loveRequestDetails.track);
                         },
                         this),
 
                 error:
                     $.proxy(function(response)
                         {
-                            window.Common.Log.Instance().Warning("LastFm UnLove update failed: "+ response.message);
-                            window.Common.Log.Instance().Debug("LastFm UnLove failed for: "+ loveRequestDetails.artist+" - "+loveRequestDetails.track);
+                            Logger.getInstance().Warning("LastFm UnLove update failed: "+ response.message);
+                            Logger.getInstance().Debug("LastFm UnLove failed for: "+ loveRequestDetails.artist+" - "+loveRequestDetails.track);
                         },
                         this)
             }

@@ -15,7 +15,7 @@ window.ApplicationCore.OnlineScrobbler = function(sessionHandler)
     this._trackStartPlayingTime = null;
 
     this._currentlyLoaded = null;
-    window.Common.Log.Instance().Info("Online scrobbler has been created.");
+    Logger.getInstance().Info("Online scrobbler has been created.");
 };
 
 window.ApplicationCore.OnlineScrobbler.prototype =
@@ -38,8 +38,8 @@ window.ApplicationCore.OnlineScrobbler.prototype =
             }
         }
 
-        window.Common.Log.Instance().Warning("Cannot scrobble track.");
-        window.Common.Log.Instance().Debug("Track cannot be scrobble because playing time is to short: " + timeInSeconds + "s.");
+        Logger.getInstance().Warning("Cannot scrobble track.");
+        Logger.getInstance().Debug("Track cannot be scrobble because playing time is to short: " + timeInSeconds + "s.");
         return false;
     },
 
