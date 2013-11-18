@@ -175,8 +175,32 @@
 #playback-control
 {
     width: 450px;
-    height: 42px;
+    height: 50px;
     background-color: lightsalmon;
+}
+
+#media-player-container
+{
+    position:relative;
+    height:400px;
+}
+
+#media-player
+{
+    position:absolute;
+    bottom:0px;
+}
+
+#media-player-playback
+{
+    position:absolute;
+    bottom:50px;
+}
+
+#media-player-controls
+{
+    position:absolute;
+    bottom:0px;
 }
 /*----------------------------PROGRESS---BARS----------*/
 #playback-progress-container
