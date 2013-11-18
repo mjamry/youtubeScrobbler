@@ -178,6 +178,41 @@
     height: 42px;
     background-color: lightsalmon;
 }
+/*----------------------------PLAYBACK---DETAILS----------*/
+#playback-progress-container
+{
+    position: relative;
+    height:40px;
+    width:450px;
+}
+
+.playback-progress-bar, .playback-data-bar, .playback-details-container
+{
+    position: absolute;
+    bottom:0;
+    left:0;
+    height:40px;
+    width: 100%;
+}
+
+.playback-progress-bar
+{
+    background-color: lightseagreen;
+}
+
+.playback-data-bar
+{
+    background-color: yellow;
+    height:10px;
+}
+
+.playback-details-container
+{
+    font-size: 9pt;
+}
+
+
+
 
 /*----------------------------LOGGER----------------------*/
 #logger-header

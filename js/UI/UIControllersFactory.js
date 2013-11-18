@@ -29,6 +29,6 @@ window.UI.UIControllersFactory.prototype =
 
     createPlaybackDetailsViewController: function(model)
     {
-        return new window.UI.PlaybackDetailsViewController(model, "playback-details-container");
+        return new window.UI.PlaybackDetailsViewController(model, "playback-progress-container", window.UI.PLaybackDetailsViewConfiguration);
     }
 };
