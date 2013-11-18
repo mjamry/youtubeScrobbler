@@ -181,6 +181,7 @@
 /*----------------------------PROGRESS---BARS----------*/
 #playback-progress-container
 {
+    top:0;
     position: relative;
     height:20px;
     width:450px;

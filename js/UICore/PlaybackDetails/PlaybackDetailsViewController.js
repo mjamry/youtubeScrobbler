@@ -10,14 +10,46 @@ window.UI.PlaybackDetailsViewController = function(model, view, config)
 
 window.UI.PlaybackDetailsViewController.prototype =
 {
-    _handleMouseEnter: function(config)
+    _resizeProgressBar: function(size)
     {
-
+        this.view.find(this.config.PlaybackProgressBarContainer).css("height", size);
+        this.view.find(this.config.PlaybackProgressBar).css("height", size);
     },
 
-    _handleMouseLeave: function(config)
+    _resizeDataBar: function(size)
     {
+        this.view.find(this.config.PlaybackDataBarContainer).css("height", size);
+        this.view.find(this.config.PlaybackDataBar).css("height", size);
+    },
 
+    _handleMouseEnter: function(that)
+    {
+        var mouseEnterHandler = function()
+        {
+            that.view.css("height", that.config.MouseOverProgressBarSize);
+            that.view.find(that.config.PlaybackDetailsContainer).css("height", that.config.MouseOverProgressBarSize);
+
+            that._resizeProgressBar(that.config.MouseOverProgressBarSize);
+            that._resizeDataBar(that.config.MouseOverDataBarSize);
+
+            that.view.find(that.config.PlaybackTime).show();
+        };
+        return mouseEnterHandler;
+    },
+
+    _handleMouseLeave: function(that)
+    {
+        var mouseLeaveHandler = function()
+        {
+            that.view.css("height", that.config.MouseOutProgressBarSize);
+            that.view.find(that.config.PlaybackDetailsContainer).css("height", that.config.MouseOutProgressBarSize);
+
+            that._resizeProgressBar(that.config.MouseOutProgressBarSize);
+            that._resizeDataBar(that.config.MouseOutDataBarSize);
+
+            that.view.find(that.config.PlaybackTime).hide();
+        };
+        return mouseLeaveHandler;
     },
 
     _handleDetailsUpdateRequest: function()
@@ -33,12 +65,12 @@ window.UI.PlaybackDetailsViewController.prototype =
 
     _updatePlaybackProgress: function()
     {
-        this.view.find(this.config.PlaybackProgress).css("width", this.model.getPlaybackProgress()+"%");
+        this.view.find(this.config.PlaybackProgressBar).css("width", this.model.getPlaybackProgress()+"%");
     },
 
     _updateDataProgress: function()
     {
-        this.view.find(this.config.PlaybackData).css("width", this.model.getDataProgress()+"%");
+        this.view.find(this.config.PlaybackDataBar).css("width", this.model.getDataProgress()+"%");
     },
 
     _updateView: function(state, title, time)
@@ -56,7 +88,10 @@ window.UI.PlaybackDetailsViewController.prototype =
     {
         EventBroker.getInstance().addListener(window.Player.Events.PlaybackDetailsUpdated, this._handleDetailsUpdateRequest, null, this);
         //bind to mouse events
-        this.view.mouseenter(this._handleMouseEnter);
-        this.view.mouseleave(this._handleMouseLeave);
+        var mouseEnterHandler = this._handleMouseEnter(this);
+        var mouseLeaveHandler = this._handleMouseLeave(this);
+
+        this.view.mouseenter(mouseEnterHandler);
+        this.view.mouseleave(mouseLeaveHandler);
     }
 };

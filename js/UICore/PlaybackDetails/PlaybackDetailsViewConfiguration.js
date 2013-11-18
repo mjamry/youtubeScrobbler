@@ -3,11 +3,19 @@ window.UI = window.UI || {};
 
 window.UI.PLaybackDetailsViewConfiguration =
 {
-    PlaybackProgress: ".playback-progress-bar",
-    PlaybackData: ".playback-data-bar",
+    PlaybackProgressBarContainer: ".playback-progress-bar-container",
+    PlaybackProgressBar: ".playback-progress-bar",
+    PlaybackDataBarContainer: ".playback-data-bar-container",
+    PlaybackDataBar: ".playback-data-bar",
+
+    PlaybackDetailsContainer: ".playback-details-container",
     PlaybackDetails: ".playback-details",
     PlaybackTime: ".playback-time",
 
-    PlaybackDetails: ".playback-details",
-    PlaybackTime: ".playback-time"
+
+    MouseOverProgressBarSize: "40px",
+    MouseOutProgressBarSize: "20px",
+
+    MouseOverDataBarSize: "5px",
+    MouseOutDataBarSize: "2px"
 };
