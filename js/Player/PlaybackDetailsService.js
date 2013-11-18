@@ -5,11 +5,7 @@ window.Player.PlaybackDetailsService = function()
 {
     this.state = new window.Player.PlaybackState();
     this.currentMediaDetails = null;
-    this.playbackDetails =
-    {
-        currentTime:0,
-        duration:0
-    };
+    this.playbackDetails = null;
 };
 
 window.Player.PlaybackDetailsService.prototype =
@@ -50,7 +46,10 @@ window.Player.PlaybackDetailsService.prototype =
 
     _updatePlaybackDetails: function()
     {
-        EventBroker.getInstance().fireEvent(window.Player.Events.PlaybackDetailsUpdateRequested);
+        if(this.currentMediaDetails && this.playbackDetails && this.playbackDetails.duration > 0)
+        {
+            EventBroker.getInstance().fireEvent(window.Player.Events.PlaybackDetailsUpdated);
+        }
     },
 
     initialise: function()
@@ -94,6 +93,4 @@ window.Player.PlaybackDetailsService.prototype =
     {
         return (( this.playbackDetails.bufferedBytes / this.playbackDetails.bytesTotal ) * 100);
     }
-
-
 };

@@ -178,21 +178,52 @@
     height: 42px;
     background-color: lightsalmon;
 }
-/*----------------------------PLAYBACK---DETAILS----------*/
+/*----------------------------PROGRESS---BARS----------*/
 #playback-progress-container
 {
     position: relative;
-    height:40px;
+    height:20px;
     width:450px;
 }
 
-.playback-progress-bar, .playback-data-bar, .playback-details-container
+.playback-progress-bar-container,
+.playback-data-bar-container,
+.playback-details-container
 {
     position: absolute;
     bottom:0;
     left:0;
-    height:40px;
+    height:20px;
     width: 100%;
+}
+
+.playback-progress-bar-container,
+.playback-data-bar-container
+{
+    background-color: darkslategray;
+    width:100%;
+}
+
+.playback-data-bar-container
+{
+    background-color: #222222;
+}
+
+.playback-progress-bar-container
+{
+    background-color: #2d2d2d;
+}
+
+.playback-data-bar-container,
+.playback-data-bar
+{
+    height:2px;
+}
+
+.playback-progress-bar-container,
+.playback-progress-bar
+{
+    height:20px;
 }
 
 .playback-progress-bar
@@ -202,13 +233,33 @@
 
 .playback-data-bar
 {
-    background-color: yellow;
-    height:10px;
+    background-color: lightgreen;
 }
 
+
+/*---PROGRESS-DETAILS----*/
 .playback-details-container
 {
     font-size: 9pt;
+    display: block;
+}
+
+.playback-time,
+.playback-details
+{
+    height:20px;
+    width:100%;
+    margin: auto;
+}
+
+.playback-details
+{
+
+}
+
+.playback-time
+{
+    display:none;
 }
 
 

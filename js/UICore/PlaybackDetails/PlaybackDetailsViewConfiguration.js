@@ -5,5 +5,9 @@ window.UI.PLaybackDetailsViewConfiguration =
 {
     PlaybackProgress: ".playback-progress-bar",
     PlaybackData: ".playback-data-bar",
-    PlaybackDetailsContainer: ".playback-details-container"
+    PlaybackDetails: ".playback-details",
+    PlaybackTime: ".playback-time",
+
+    PlaybackDetails: ".playback-details",
+    PlaybackTime: ".playback-time"
 };
