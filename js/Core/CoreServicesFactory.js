@@ -68,6 +68,11 @@ window.ApplicationCore.CoreServicesFactory.prototype =
     createPlaybackDetailsService: function()
     {
         return new window.Player.PlaybackDetailsService();
+    },
+
+    createPlaybackControlService: function(player, playlistService)
+    {
+        return new window.Player.PlaybackControlService(player, playlistService);
     }
 };
 

@@ -76,6 +76,11 @@ window.Player.MediaPlayer.prototype =
     play: function()
     {
         this.instance.play();
+    },
+
+    pause: function()
+    {
+        this.instance.pause();
     }
 };
 

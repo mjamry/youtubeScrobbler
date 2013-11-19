@@ -17,11 +17,16 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory)
     this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService();
     this.playbackDetailsService.initialise();
 
+    this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistService);
+
     var playlist = uiFactory.createPlaylistViewController(this.playlistService);
     playlist.initialise();
 
     var playbackDetails = uiFactory.createPlaybackDetailsViewController(this.playbackDetailsService);
     playbackDetails.initialise();
+
+    var playbackControl = uiFactory.createPlaybackControlViewController(this.playbackControlService);
+    playbackControl.initialise();
 };
 
 window.ApplicationCore.AppCore.prototype =
