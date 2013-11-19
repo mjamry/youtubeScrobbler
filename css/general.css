@@ -158,49 +158,42 @@
 /*------------------------------MEDIA------------------*/
 #media-content
 {
-    /*---FOR TESTS ONLY---*/
-    background-color: green;
     width:900px;
     margin:auto;
 }
 
-#media-element
-{
-    width: 450px;
-    height: 338px;
-    background-color: lightcoral;
-    display: block;
-}
-
-#playback-control
-{
-    width: 450px;
-    height: 50px;
-    background-color: lightsalmon;
-}
-
-#media-player-container
-{
-    position:relative;
-    height:400px;
-}
-
 #media-player
 {
-    position:absolute;
-    bottom:0px;
+    width: 450px;
+    height: 390px;
 }
 
 #media-player-playback
 {
     position:absolute;
-    bottom:50px;
+    bottom:35px;
 }
 
+#media-player-playback-controls-container
+{
+    /*--default value--*/
+    position: relative;
+}
+/*----------------------------PLAYBACK---CONTROLS-------*/
 #media-player-controls
 {
+    background-color: #88c6d3;
+    width: 450px;
     position:absolute;
     bottom:0px;
+}
+
+#playback-control
+{
+    width: 350px;
+    height: 35px;
+    margin-left: auto;
+    margin-right: auto;
 }
 /*----------------------------PROGRESS---BARS----------*/
 #playback-progress-container
@@ -265,7 +258,8 @@
 /*---PROGRESS-DETAILS----*/
 .playback-details-container
 {
-    font-size: 9pt;
+    font-size: 10pt;
+    color:lightgrey;
     display: block;
 }
 

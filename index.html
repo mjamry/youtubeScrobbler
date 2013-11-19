@@ -113,38 +113,40 @@
 
     <div id="media-content">
         <div class="pure-g">
-            <div id="media-player-container" class="pure-u-1-2">
+            <div class="pure-u-1-2">
 
                 <div id="media-player">
-                    <div id="media-element">
                         <video id="media_player" preload="none">
                             <source type="video/x-youtube" src="https://www.youtube.com/watch?v=8zwTEKY4meE" />
                         </video>
-                    </div>
                 </div>
 
-                <div id="media-player-playback">
-                    <div id="playback-progress-container">
-                        <div class="playback-progress-bar-container">
-                            <div class="playback-progress-bar"></div>
-                        </div>
-                        <div class="playback-data-bar-container">
-                            <div class="playback-data-bar"></div>
-                        </div>
-                        <div class="playback-details-container">
-                            <div class="playback-details"></div>
-                            <div class="playback-time"></div>
+                <div id="media-player-playback-controls-container">
+                    <div id="media-player-playback">
+                        <div id="playback-progress-container">
+                            <div class="playback-progress-bar-container">
+                                <div class="playback-progress-bar"></div>
+                            </div>
+                            <div class="playback-data-bar-container">
+                                <div class="playback-data-bar"></div>
+                            </div>
+                            <div class="playback-details-container">
+                                <div class="playback-details"></div>
+                                <div class="playback-time"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div id="media-player-controls">
-                    <div id="playback-control">
-                        <a href="#" id="prev_button" class="pure-button pure-button-primary"><i class="fa fa-step-backward"></i></a>
-                        <a href="#" id="play_button" class="pure-button pure-button-primary"><i class="fa fa-play"></i></a>
-                        <a href="#" id="pause_button" class="pure-button pure-button-primary"><i class="fa fa-pause"></i></a>
-                        <a href="#" id="next_button" class="pure-button pure-button-primary"><i class="fa fa-step-forward"></i></a>
+                    <div id="media-player-controls">
+                        <div id="playback-control">
+                            <button id="playback-control-previous" class="pure-button"><i class="fa fa-step-backward"></i></button>
+                            <button id="playback-control-play" class="pure-button"><i class="fa fa-play"></i></button>
+                            <button id="playback-control-pause" class="pure-button"><i class="fa fa-pause"></i></button>
+                            <button id="playback-control-next" class="pure-button"><i class="fa fa-step-forward"></i></button>
+                            <button id="playback-control-volume" class="pure-button"><i class="fa fa-volume-up"></i></button>
+                        </div>
                     </div>
+
                 </div>
             </div>
             <div class="pure-u-1-2">
