@@ -70,7 +70,7 @@
 #playlist
 {
     width:450px;
-    height:400px;
+    height:355px;
     /*TODO do it with JS*/
     overflow: auto;
 }
@@ -195,6 +195,21 @@
     margin-left: auto;
     margin-right: auto;
 }
+/*---------------------------PLAYLIST----CONTROLS--------*/
+#media-playlist-controls
+{
+    width:450px;
+    background-color: #88c6d3;
+}
+
+#playlist-controls
+{
+    width:300px;
+    height:35px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
 /*----------------------------PROGRESS---BARS----------*/
 #playback-progress-container
 {
