@@ -27,6 +27,9 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory)
 
     var playbackControl = uiFactory.createPlaybackControlViewController(this.playbackControlService);
     playbackControl.initialise();
+
+    var playlistControl = uiFactory.createPlaylistControlViewController(this.playlistService);
+    playlistControl.initialise();
 };
 
 window.ApplicationCore.AppCore.prototype =
