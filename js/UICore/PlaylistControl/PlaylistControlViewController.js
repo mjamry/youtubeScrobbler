@@ -26,11 +26,21 @@ window.UI.PlaylistControlViewController.prototype =
         }
     },
 
-    _changeRepeatState: function(model)
+    _changeRepeatState: function(that)
     {
         return function()
         {
-            //model.repeat...
+            var currentState = that.model.getPlaylistLoop();
+            if(currentState)
+            {
+                that.view.find(that.config.RepeatButton).addClass(that.config.SelectedButtonClass);
+            }
+            else
+            {
+                that.view.find(that.config.RepeatButton).removeClass(that.config.SelectedButtonClass);
+            }
+
+            that.model.setPlaylistLoop(!currentState);
         }
     },
 
@@ -48,6 +58,6 @@ window.UI.PlaylistControlViewController.prototype =
         this.view.find(this.config.ClearButton).click(this._clearPlaylist(this.model));
         this.view.find(this.config.SaveButton).click(this._savePlaylist(this.model));
         this.view.find(this.config.ShuffleButton).click(this._shufflePlaylist(this.model));
-        this.view.find(this.config.RepeatButton).click(this._changeRepeatState(this.model));
+        this.view.find(this.config.RepeatButton).click(this._changeRepeatState(this));
     }
 };

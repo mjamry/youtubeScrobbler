@@ -183,5 +183,15 @@ window.Player.PlaylistService.prototype =
     {
         var item = this.getTrackDetails(index);
         this._loveStateSwitch.changeLoveState(item, index);
+    },
+
+    setPlaylistLoop: function(value)
+    {
+        this.playlist.isPlaylistLoop = value;
+    },
+
+    getPlaylistLoop: function()
+    {
+        return this.playlist.isPlaylistLoop;
     }
 };

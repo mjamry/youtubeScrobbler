@@ -69,8 +69,11 @@ window.Player.MediaPlayer.prototype =
     {
         this._eventBroker.fireEventWithData(window.Player.Events.MediaChanged, this.currentlyLoadedMediaDetails);
         this.currentlyLoadedMediaDetails = mediaDetails;
-        this.instance.setSrc(mediaDetails.url);
-        this.instance.load();
+        if(this.currentlyLoadedMediaDetails)
+        {
+            this.instance.setSrc(mediaDetails.url);
+            this.instance.load();
+        }
     },
 
     play: function()

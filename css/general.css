@@ -210,6 +210,11 @@
     margin-right:auto;
 }
 
+.playlist-control-selected
+{
+    color: white;
+}
+
 /*----------------------------PROGRESS---BARS----------*/
 #playback-progress-container
 {

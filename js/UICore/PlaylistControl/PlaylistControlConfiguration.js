@@ -7,5 +7,7 @@ window.UI.PlaylistControlConfiguration =
     SaveButton: ".playlist-control-save",
 
     ShuffleButton: ".playlist-control-shuffle",
-    RepeatButton: ".playlist-control-repeat"
+    RepeatButton: ".playlist-control-repeat",
+
+    SelectedButtonClass: "playlist-control-selected"
 };

@@ -10,6 +10,8 @@ window.Player.Playlist = function()
 
 window.Player.Playlist.prototype =
 {
+    isPlaylistLoop: true,
+
     add: function(mediaDetails)
     {
          this.mediaList.push(mediaDetails);
@@ -39,10 +41,8 @@ window.Player.Playlist.prototype =
             this.currentItemIndex = index;
             return this.mediaList[index];
         }
-        else
-        {
-            return null;
-        }
+
+        return null;
     },
 
     replace: function(index, mediaDetails)
@@ -55,6 +55,11 @@ window.Player.Playlist.prototype =
         this.currentItemIndex++;
         if(this.currentItemIndex == this.length())
         {
+
+            if( !this.isPlaylistLoop)
+            {
+                return null;
+            }
             //jump to the first one
             this.currentItemIndex = 0;
         }
@@ -67,6 +72,10 @@ window.Player.Playlist.prototype =
         this.currentItemIndex--;
         if(this.currentItemIndex < 0)
         {
+            if( !this.isPlaylistLoop)
+            {
+                return null;
+            }
             //jump to the last one
             this.currentItemIndex = this.length() - 1;
         }
