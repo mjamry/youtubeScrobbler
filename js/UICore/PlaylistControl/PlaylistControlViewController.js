@@ -14,7 +14,7 @@ window.UI.PlaylistControlViewController.prototype =
     {
         return function()
         {
-            //model.createPlaylist(new window.Player.Playlist());
+            model.clearPlaylist();
         }
     },
 
@@ -38,7 +38,7 @@ window.UI.PlaylistControlViewController.prototype =
     {
         return function()
         {
-            //model.shuffle...
+            model.shuffle();
         }
     },
 

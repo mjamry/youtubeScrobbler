@@ -108,6 +108,15 @@ window.Player.PlaylistService.prototype =
         this._updatePlaylist(playlist, 0);
     },
 
+    //creates new empty playlist replacing existing one.
+    clearPlaylist: function()
+    {
+        Logger.getInstance().Info("Playlist has been cleared. "+ this.playlist.length() +" items removed.");
+        this.playlist = new window.Player.Playlist();
+
+        this._updatePlaylist(this.playlist);
+    },
+
     //adds new playlist (or single media) to existing playlist.
     addToPlaylist: function(playlist)
     {
@@ -146,6 +155,14 @@ window.Player.PlaylistService.prototype =
         {
             this._loadMedia(item);
         }
+    },
+
+    //changes order of elements in playlist
+    shuffle: function()
+    {
+        this.playlist.shuffle();
+
+        this._updatePlaylist(this.playlist);
     },
 
     //gets track details used passed index

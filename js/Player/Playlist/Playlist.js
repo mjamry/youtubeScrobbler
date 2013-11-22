@@ -5,7 +5,7 @@ window.Player = window.Player || {};
 window.Player.Playlist = function()
 {
     this.mediaList = [];
-    this.indexOfCurrentlySelectedMediaElement = 0;
+    this.currentItemIndex = 0;
 };
 
 window.Player.Playlist.prototype =
@@ -22,21 +22,21 @@ window.Player.Playlist.prototype =
 
     first: function()
     {
-        this.indexOfCurrentlySelectedMediaElement = 0;
-        return this.mediaList[this.indexOfCurrentlySelectedMediaElement];
+        this.currentItemIndex = 0;
+        return this.mediaList[this.currentItemIndex];
     },
 
     last: function()
     {
-        this.indexOfCurrentlySelectedMediaElement = this.length() -1;
-        return this.mediaList[this.indexOfCurrentlySelectedMediaElement];
+        this.currentItemIndex = this.length() -1;
+        return this.mediaList[this.currentItemIndex];
     },
 
     getItem: function(index)
     {
         if(index >= 0 && index < this.length())
         {
-            this.indexOfCurrentlySelectedMediaElement = index;
+            this.currentItemIndex = index;
             return this.mediaList[index];
         }
         else
@@ -52,35 +52,47 @@ window.Player.Playlist.prototype =
 
     next: function()
     {
-        if(this.indexOfCurrentlySelectedMediaElement + 1 < this.length() - 1)
+        this.currentItemIndex++;
+        if(this.currentItemIndex == this.length())
         {
-              this.indexOfCurrentlySelectedMediaElement++;
-        }
-        else
-        {
-            //jump to last one
-            this.indexOfCurrentlySelectedMediaElement = this.length() - 1;
+            //jump to the first one
+            this.currentItemIndex = 0;
         }
 
-        return this.mediaList[this.indexOfCurrentlySelectedMediaElement];
+        return this.mediaList[this.currentItemIndex];
     },
 
     previous: function()
     {
-        if(this.indexOfCurrentlySelectedMediaElement - 1 < 0)
+        this.currentItemIndex--;
+        if(this.currentItemIndex < 0)
         {
-            this.indexOfCurrentlySelectedMediaElement = this.length() -1;
-        }
-        else
-        {
-            this.indexOfCurrentlySelectedMediaElement--;
+            //jump to the last one
+            this.currentItemIndex = this.length() - 1;
         }
 
-        return this.mediaList[this.indexOfCurrentlySelectedMediaElement];
+        return this.mediaList[this.currentItemIndex];
     },
 
     length: function()
     {
           return this.mediaList.length;
+    },
+
+    shuffle: function()
+    {
+        //implementation of Fisher-Yates shuffle algorithm
+        //http://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+
+        for(var i = this.length() - 1; i >= 0; i--)
+        {
+            //0 ≤ j ≤ i
+            var j = Math.floor(Math.random() * i);
+
+            //exchange [j] <-> [i]
+            var temp = this.mediaList[i];
+            this.mediaList[i] = this.mediaList[j];
+            this.mediaList[j] = temp;
+        }
     }
-}
+};
