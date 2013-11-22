@@ -10,7 +10,7 @@ window.UI.PlaylistControlViewController = function(model, view, config)
 
 window.UI.PlaylistControlViewController.prototype =
 {
-    _clear: function(model)
+    _clearPlaylist: function(model)
     {
         return function()
         {
@@ -18,7 +18,7 @@ window.UI.PlaylistControlViewController.prototype =
         }
     },
 
-    _save: function(model)
+    _savePlaylist: function(model)
     {
         return function()
         {
@@ -34,7 +34,7 @@ window.UI.PlaylistControlViewController.prototype =
         }
     },
 
-    _changeShuffleState: function(model)
+    _shufflePlaylist: function(model)
     {
         return function()
         {
@@ -45,9 +45,9 @@ window.UI.PlaylistControlViewController.prototype =
     initialise: function()
     {
         //bind to Ui events
-        this.view.find(this.config.ClearButton).click(this._clear(this.model));
-        this.view.find(this.config.SaveButton).click(this._save(this.model));
-        this.view.find(this.config.ShuffleButton).click(this._changeShuffleState(this.model));
+        this.view.find(this.config.ClearButton).click(this._clearPlaylist(this.model));
+        this.view.find(this.config.SaveButton).click(this._savePlaylist(this.model));
+        this.view.find(this.config.ShuffleButton).click(this._shufflePlaylist(this.model));
         this.view.find(this.config.RepeatButton).click(this._changeRepeatState(this.model));
     }
 };
