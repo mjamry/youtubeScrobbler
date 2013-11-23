@@ -95,7 +95,7 @@ function HookUpToolbarButtons()
     });
 
 }
-
+//TODO move to ViewController
 function HookUpLoadUrlButtonAction(player){
     $("#create-new-playlist").bind("click", function()
     {

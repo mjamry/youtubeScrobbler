@@ -31,7 +31,7 @@ window.UI.PlaybackControlViewController.prototype =
     {
         return function ()
         {
-            model.next();
+            model.playNext();
         };
     },
 
@@ -39,7 +39,7 @@ window.UI.PlaybackControlViewController.prototype =
     {
         return function ()
         {
-            model.previous();
+            model.playPrevious();
         };
     },
 

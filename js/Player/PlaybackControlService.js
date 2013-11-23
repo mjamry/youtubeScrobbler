@@ -9,26 +9,6 @@ window.Player.PlaybackControlService = function(player, playlistController)
 
 window.Player.PlaybackControlService.prototype =
 {
-    play: function()
-    {
-        this.player.play();
-    },
-
-    pause: function()
-    {
-        this.player.pause();
-    },
-
-    next: function()
-    {
-        this.playNext();
-    },
-
-    previous: function()
-    {
-        this.playPrevious();
-    },
-
     _loadMedia: function(mediaDetails)
     {
         this.player.load(mediaDetails);
@@ -40,13 +20,26 @@ window.Player.PlaybackControlService.prototype =
 
     _handleMediaStopped: function()
     {
+        //if track is stopped it means that is has been finished - so lets play next one.
         this.playNext();
     },
 
     initialise: function()
     {
-
+        //bind to player events
         this._eventBroker.addListener(window.Player.Events.MediaStopped, this._handleMediaStopped, null, this);
+    },
+
+    //plays current track
+    play: function()
+    {
+        this.player.play();
+    },
+
+    //pauses current track
+    pause: function()
+    {
+        this.player.pause();
     },
 
     //plays next media item from playlist
