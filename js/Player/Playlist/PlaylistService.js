@@ -20,6 +20,20 @@ window.Player.PlaylistService = function(player, playlistElementDetailsProvider,
 
 window.Player.PlaylistService.prototype =
 {
+    _handleMediaStopped: function()
+    {
+        this.playNext();
+    },
+
+    _loadMedia: function(mediaDetails)
+    {
+        this.player.load(mediaDetails);
+        if(this._autoplay)
+        {
+            this.player.play();
+        }
+    },
+
     _updatePlaylist: function(playlist, startIndex)
     {
         this.playlist = playlist;
@@ -34,7 +48,7 @@ window.Player.PlaylistService.prototype =
     {
         var newItem = eventArgs.details;
 
-        var item = this.playlist.get(eventArgs.index);
+        var item = this.playlist.getItem(eventArgs.index);
         newItem.url = item.url;
         newItem.mediaType = item.mediaType;
         newItem.duration = item.duration;
@@ -78,6 +92,7 @@ window.Player.PlaylistService.prototype =
 
     initialise: function()
     {
+        this._eventBroker.addListener(window.Player.Events.MediaStopped, this._handleMediaStopped, null, this);
         this._eventBroker.addListener(window.Player.PlaylistEvents.PlaylistItemUpdateRequested, this._handleItemUpdated, null, this);
 
         this._eventBroker.addListener(window.LastFm.Events.TrackUnloved, this._handleUnLoved, null, this);
@@ -110,12 +125,50 @@ window.Player.PlaylistService.prototype =
         //TODO: consider moving this loop to playlist implementation
         for(var i=0;i<playlist.length();i++)
         {
-            tempPlaylist.add(playlist.get(i));
+            tempPlaylist.add(playlist.getItem(i));
         }
 
         Logger.getInstance().Info(playlist.length()+" new element(s) has been added to current playlist. It has now "+tempPlaylist.length()+" elements.");
 
         this._updatePlaylist(tempPlaylist, this.playlist.length() - playlist.length());
+    },
+
+    //plays next media item from playlist
+    playNext: function()
+    {
+        var nextItem = this.playlist.next();
+        this._loadMedia(nextItem);
+    },
+
+    //plays previous media item from playlist
+    playPrevious: function()
+    {
+        var previousItem = this.playlist.previous();
+        this._loadMedia(previousItem);
+    },
+
+    //plays item with given index from playlist
+    playSpecific: function(index)
+    {
+        var item = this.playlist.getItem(index);
+        if(item != null)
+        {
+            this._loadMedia(item);
+        }
+    },
+
+    //changes order of elements in playlist
+    shuffle: function()
+    {
+        this.playlist.shuffle();
+
+        this._updatePlaylist(this.playlist);
+    },
+
+    //gets track details used passed index
+    getTrackDetails: function(index)
+    {
+        return this.playlist.getItem(index);
     },
 
     removeItem: function(index)
@@ -132,9 +185,13 @@ window.Player.PlaylistService.prototype =
         this._loveStateSwitch.changeLoveState(item, index);
     },
 
-    getPlaylist: function()
+    setPlaylistLoop: function(value)
     {
-        //TODO return playlistController instead of playlist - so playlist can be modified only by this service
-        return this.playlist;
+        this.playlist.isPlaylistLoop = value;
+    },
+
+    getPlaylistLoop: function()
+    {
+        return this.playlist.isPlaylistLoop;
     }
 };

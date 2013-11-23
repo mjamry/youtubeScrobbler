@@ -19,7 +19,7 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory)
 
     this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistService);
 
-    var playlist = uiFactory.createPlaylistViewController(this.playlistService, this.playbackControlService);
+    var playlist = uiFactory.createPlaylistViewController(this.playlistService);
     playlist.initialise();
 
     var playbackDetails = uiFactory.createPlaybackDetailsViewController(this.playbackDetailsService);
