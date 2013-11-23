@@ -36,7 +36,7 @@ window.Player.PlaylistElementDetailsProvider.prototype =
         //if there is still something to update
         if(this._currentItemIndex < this._playlist.length())
         {
-            this._provideDetails(this._playlist.getItem(this._currentItemIndex));
+            this._provideDetails(this._playlist.get(this._currentItemIndex));
         }
         else
         {
@@ -77,6 +77,6 @@ window.Player.PlaylistElementDetailsProvider.prototype =
         this._itemsToGetDetails = playlist.length() - startingIndex;
         $("#playlist-progressbar").show();
 
-        this._provideDetails(this._playlist.getItem(this._currentItemIndex));
+        this._provideDetails(this._playlist.get(this._currentItemIndex));
     }
 };

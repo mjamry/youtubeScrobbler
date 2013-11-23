@@ -22,9 +22,9 @@ window.UI.UIControllersFactory.prototype =
         return new window.UI.TestReportsViewController(reportSender, window.UI.TestReportUIConfig);
     },
 
-    createPlaylistViewController: function(model)
+    createPlaylistViewController: function(playlistService, playbackControlService)
     {
-        return new window.UI.PlaylistViewController(model, "playlist-container", window.UI.PlaylistUIConfig);
+        return new window.UI.PlaylistViewController(playlistService, playbackControlService, "playlist-container", window.UI.PlaylistUIConfig);
     },
 
     createPlaybackDetailsViewController: function(model)
@@ -32,9 +32,9 @@ window.UI.UIControllersFactory.prototype =
         return new window.UI.PlaybackDetailsViewController(model, "playback-progress-container", window.UI.PLaybackDetailsViewConfiguration);
     },
 
-    createPlaybackControlViewController: function(model)
+    createPlaybackControlViewController: function(playbackControlService)
     {
-        return new window.UI.PlaybackControlViewController(model, "playback-control", window.UI.PlaybackControlConfiguration);
+        return new window.UI.PlaybackControlViewController(playbackControlService, "playback-control", window.UI.PlaybackControlConfiguration);
     },
 
     createPlaylistControlViewController: function(model)
