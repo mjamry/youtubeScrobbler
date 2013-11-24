@@ -42,11 +42,11 @@ window.UI.PlaylistViewController.prototype =
         //add style
         if(isIndexEven)
         {
-            builder.setUpStyles(this.config.evenElementStyle);
+            builder.setUpStyles(this.config.EvenElementStyle);
         }
         else
         {
-            builder.setUpStyles(this.config.oddElementStyle);
+            builder.setUpStyles(this.config.OddElementStyle);
         }
 
         builder.fillBody(mediaDetails);
@@ -60,7 +60,7 @@ window.UI.PlaylistViewController.prototype =
         this.numberOfNewItems = numberOfNewItems;
         if(this.numberOfNewItems > 0)
         {
-            $("#playlist-progressbar").show();
+            $(this.config.PlaylistProgressBar).show();
         }
         //clear view
         this.view.empty();
@@ -96,10 +96,11 @@ window.UI.PlaylistViewController.prototype =
     _updateProgressbar: function(itemIndex)
     {
         var progressBarPercentValue = ((this.numberOfNewItems - (this.playlistService.getPlaylist().length() - 1 - itemIndex))/this.numberOfNewItems)*100;
-        $("#playlist-progressbar").css({width:progressBarPercentValue+"%"});
+        $(this.config.PlaylistProgressBar).css({width:progressBarPercentValue+"%"});
         if(progressBarPercentValue == 100)
         {
-            $("#playlist-progressbar").hide();
+            $(this.config.PlaylistProgressBar).hide();
+            this.numberOfNewItems = 0;
         }
     },
 

@@ -23,14 +23,8 @@ window.UI.PlaylistUIItemBuilder.prototype =
         return function()
         {
             $(this).addClass(style);
-            $(that).children().find(".playlist-item-buttons").each(function()
-            {
-                $(this).show();
-            });
-            $(that).children().find(".playlist-item-cover").each(function()
-            {
-                $(this).hide();
-            })
+            $(that._item).children().find(that._config.AdditionalButtonsContainer).show();
+            $(that._item).children().find(that._config.CoverContainer).hide();
 
         }
     },
@@ -42,14 +36,8 @@ window.UI.PlaylistUIItemBuilder.prototype =
         return function()
         {
             $(this).removeClass(style);
-            $(that).children().find(".playlist-item-buttons").each(function()
-            {
-                $(this).hide();
-            });
-            $(that).children().find(".playlist-item-cover").each(function()
-            {
-                $(this).show();
-            });
+            $(that._item).children().find(that._config.AdditionalButtonsContainer).hide();
+            $(that._item).children().find(that._config.CoverContainer).show();
         }
     },
 
@@ -67,11 +55,11 @@ window.UI.PlaylistUIItemBuilder.prototype =
     {
         var newItem = $("#controls-schemes .playlist-item");
         this._item = newItem.clone();
-        this._item.find(this._config.additionalButtonsContainer).hide();
+        this._item.find(this._config.AdditionalButtonsContainer).hide();
 
-        this._cover = this._item.find(this._config.coverContainer);
-        this._likeButton = this._item.find(this._config.likeButtonContainer);
-        this._removeButton = this._item.find(this._config.removeButtonContainer);
+        this._cover = this._item.find(this._config.CoverContainer);
+        this._likeButton = this._item.find(this._config.LikeButtonContainer);
+        this._removeButton = this._item.find(this._config.RemoveButtonContainer);
     },
 
     //add styles to current element and its inner elements.
@@ -83,7 +71,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
     //fills element body with media details information.
     fillBody: function(mediaDetails)
     {
-        this._item.find(this._config.timeContainer).append(mediaDetails.duration.getHumanReadable());
+        this._item.find(this._config.TimeContainer).append(mediaDetails.duration.getHumanReadable());
         var details = mediaDetails.artist + " - " + mediaDetails.title;
         if(details.length > 35)
         {
@@ -106,14 +94,14 @@ window.UI.PlaylistUIItemBuilder.prototype =
 
         if(mediaDetails.loved)
         {
-            this._item.find(this._config.iconsContainer).append(this._createIcon("fa fa-heart"));
+            this._item.find(this._config.IconsContainer).append(this._createIcon("fa fa-heart"));
         }
 
         if(mediaDetails.mediaType == "video/youtube")
         {
-            this._item.find(this._config.iconsContainer).append(this._createIcon("fa fa-youtube"));
+            this._item.find(this._config.IconsContainer).append(this._createIcon("fa fa-youtube"));
         }
-        this._item.find(this._config.detailsContainer).append(details);
+        this._item.find(this._config.DetailsContainer).append(details);
     },
 
     //hooks up to UI events such as clock, mouse enter, mouse leave.
@@ -131,8 +119,8 @@ window.UI.PlaylistUIItemBuilder.prototype =
         };
 
         var onClickHandler = handleEvent(callbackContext, clickHandler, this._index);
-        var onMouseEnterHandler = this._onMouseEnter(this._hoverStyle, this._item);
-        var onMouseLeaveHandler = this._onMouseLeave(this._hoverStyle, this._item);
+        var onMouseEnterHandler = this._onMouseEnter(this._hoverStyle, this);
+        var onMouseLeaveHandler = this._onMouseLeave(this._hoverStyle, this);
         this._item.click(onClickHandler);
         this._item.mouseenter(onMouseEnterHandler);
         this._item.mouseleave(onMouseLeaveHandler);

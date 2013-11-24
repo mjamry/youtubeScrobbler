@@ -3,15 +3,17 @@ window.UI = window.UI || {};
 
 window.UI.PlaylistUIConfig =
 {
-    likeButtonContainer: ".playlist-item-like",
-    removeButtonContainer: ".playlist-item-remove",
-    detailsContainer: ".playlist-item-details",
-    timeContainer: ".playlist-item-time",
-    iconsContainer: ".playlist-item-icons",
+    LikeButtonContainer: ".playlist-item-like",
+    RemoveButtonContainer: ".playlist-item-remove",
+    DetailsContainer: ".playlist-item-details",
+    TimeContainer: ".playlist-item-time",
+    IconsContainer: ".playlist-item-icons",
 
-    additionalButtonsContainer: ".playlist-item-buttons",
-    coverContainer: ".playlist-item-cover",
+    AdditionalButtonsContainer: ".playlist-item-buttons",
+    CoverContainer: ".playlist-item-cover",
 
-    evenElementStyle: "playlist-item-even",
-    oddElementStyle: "playlist-item-odd"
+    EvenElementStyle: "playlist-item-even",
+    OddElementStyle: "playlist-item-odd",
+
+    PlaylistProgressBar: "#playlist-progressbar"
 };
