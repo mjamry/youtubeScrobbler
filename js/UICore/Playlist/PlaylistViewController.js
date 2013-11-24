@@ -53,7 +53,7 @@ window.UI.PlaylistViewController.prototype =
         return builder.build();
     },
 
-    _handlePlaylistUpdated: function(playlist)
+    _handlePlaylistUpdated: function()
     {
         //clear view
         this.view.empty();

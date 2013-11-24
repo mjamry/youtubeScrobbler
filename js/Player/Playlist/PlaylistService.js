@@ -5,10 +5,9 @@ window.Player = window.Player || {};
 window.Common = window.Common || {};
 
 
-window.Player.PlaylistService = function(player, playlistElementDetailsProvider, loveStateSwitch, playlist)
+window.Player.PlaylistService = function(player, loveStateSwitch)
 {
     this.player = player;
-    this._detailsProvider = playlistElementDetailsProvider;
     this._loveStateSwitch = loveStateSwitch;
     this.playlist = playlist || new window.Player.Playlist();
     this._eventBroker = EventBroker.getInstance();
@@ -20,33 +19,10 @@ window.Player.PlaylistService = function(player, playlistElementDetailsProvider,
 
 window.Player.PlaylistService.prototype =
 {
-    _updatePlaylist: function(playlist, startIndex)
+    _updatePlaylist: function(numberOfNewItems)
     {
-        this.playlist = playlist;
-        this._eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistUpdated, this.playlist);
-        if(startIndex != null)
-        {
-            this._detailsProvider.provideDetails(this.playlist, startIndex);
-        }
-    },
-
-    _handleItemUpdated: function(eventArgs)
-    {
-        var newItem = eventArgs.details;
-
-        var item = this.playlist.get(eventArgs.index);
-        newItem.url = item.url;
-        newItem.mediaType = item.mediaType;
-        newItem.duration = item.duration;
-
-        this.playlist.replace(eventArgs.index, newItem);
-
-        this._eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistItemUpdated,
-            {
-                mediaDetails: newItem,
-                index: eventArgs.index
-            }
-        );
+        numberOfNewItems = numberOfNewItems || 0;
+        this._eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistUpdated, numberOfNewItems);
     },
 
     //TODO this should works in more clever way.
@@ -78,19 +54,17 @@ window.Player.PlaylistService.prototype =
 
     initialise: function()
     {
-        this._eventBroker.addListener(window.Player.PlaylistEvents.PlaylistItemUpdateRequested, this._handleItemUpdated, null, this);
-
         this._eventBroker.addListener(window.LastFm.Events.TrackUnloved, this._handleUnLoved, null, this);
         this._eventBroker.addListener(window.LastFm.Events.TrackLoved, this._handleLoved, null, this);
-
-        this._detailsProvider.initialise();
     },
 
+    //TOOD it should be deleted
     //initialises playlist object, or overwrite existing one.
     createPlaylist: function(playlist)
     {
-        Logger.getInstance().Info("New playlist has been created, it contains "+playlist.length()+" elements.");
-        this._updatePlaylist(playlist, 0);
+        this.playlist = playlist;
+        Logger.getInstance().Info("New playlist has been created, it contains "+ this.playlist.length() +" elements.");
+        this._updatePlaylist(this.playlist.length());
     },
 
     //creates new empty playlist replacing existing one.
@@ -99,31 +73,46 @@ window.Player.PlaylistService.prototype =
         Logger.getInstance().Info("Playlist has been cleared. "+ this.playlist.length() +" items removed.");
         this.playlist = new window.Player.Playlist();
 
-        this._updatePlaylist(this.playlist);
+        this._updatePlaylist();
     },
 
     //adds new playlist (or single media) to existing playlist.
     addToPlaylist: function(playlist)
     {
-        //TODO here is copied reference not value! to be resolved... :)
-        var tempPlaylist = this.playlist;
         //TODO: consider moving this loop to playlist implementation
         for(var i=0;i<playlist.length();i++)
         {
-            tempPlaylist.add(playlist.get(i));
+            this.playlist.add(playlist.get(i));
         }
 
-        Logger.getInstance().Info(playlist.length()+" new element(s) has been added to current playlist. It has now "+tempPlaylist.length()+" elements.");
+        Logger.getInstance().Info(playlist.length()+" new element(s) has been added to current playlist. It has now "+this.playlist.length()+" elements.");
 
-        this._updatePlaylist(tempPlaylist, this.playlist.length() - playlist.length());
+        this._updatePlaylist(playlist.length());
+    },
+
+    updateItem: function(index, updatedMediaDetails)
+    {
+        var item = this.playlist.get(index);
+        //overwrite some of properties
+        updatedMediaDetails.url = item.url;
+        updatedMediaDetails.mediaType = item.mediaType;
+        updatedMediaDetails.duration = item.duration;
+
+        this.playlist.replace(index, updatedMediaDetails);
+
+        this._eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistItemUpdated,
+            {
+                mediaDetails: updatedMediaDetails,
+                index: index
+            }
+        );
     },
 
     removeItem: function(index)
     {
-        var tempPlaylist = this.playlist;
-        tempPlaylist.remove(index);
-        Logger.getInstance().Debug("Element has been removed from playlist, now it contains "+tempPlaylist.length()+" elements.");
-        this._updatePlaylist(tempPlaylist);
+        this.playlist.remove(index);
+        Logger.getInstance().Debug("Element has been removed from playlist, now it contains "+this.playlist.length()+" elements.");
+        this._updatePlaylist();
     },
 
     changeLoveState: function(index)

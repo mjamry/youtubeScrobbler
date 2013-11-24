@@ -1,10 +1,10 @@
 //namespace
 window.Player = window.Player || {};
 
-window.Player.PlaylistElementDetailsProvider = function(detailsProvider)
+window.Player.PlaylistElementDetailsProvider = function(playlistProvider, detailsProvider)
 {
+    this.playlistProvider = playlistProvider;
     this._detailsProvider = detailsProvider;
-    this._playlist = null;
     this._currentItemIndex = 0;
     this._itemsToGetDetails = 0;
 };
@@ -13,7 +13,7 @@ window.Player.PlaylistElementDetailsProvider.prototype =
 {
     _updateProgressbar: function()
     {
-        var progressBarPercentValue = ((this._itemsToGetDetails - (this._playlist.length() - this._currentItemIndex))/this._itemsToGetDetails)*100;
+        var progressBarPercentValue = ((this._itemsToGetDetails - (this.playlistProvider.getPlaylist().length() - this._currentItemIndex))/this._itemsToGetDetails)*100;
         $("#playlist-progressbar").css({width:progressBarPercentValue+"%"});
         if(progressBarPercentValue == 100)
         {
@@ -34,14 +34,13 @@ window.Player.PlaylistElementDetailsProvider.prototype =
 
         this._updateProgressbar();
         //if there is still something to update
-        if(this._currentItemIndex < this._playlist.length())
+        if(this._currentItemIndex < this.playlistProvider.getPlaylist().length())
         {
-            this._provideDetails(this._playlist.get(this._currentItemIndex));
+            this._provideDetails(this.playlistProvider.getPlaylist().get(this._currentItemIndex));
         }
         else
         {
             //clear temp playlist
-            this._playlist = null;
             this._currentItemIndex = 0;
             this._itemsToGetDetails = 0;
         }
@@ -49,8 +48,7 @@ window.Player.PlaylistElementDetailsProvider.prototype =
 
     _handleDetailsObtained: function(mediaDetails)
     {
-        //informs rest of the system that element has been updated.
-        EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistItemUpdateRequested, {index: this._currentItemIndex, details: mediaDetails});
+        this.playlistProvider.updateItem(this._currentItemIndex, mediaDetails);
         //update next item
         this._getNextItemDetails();
     },
@@ -62,9 +60,17 @@ window.Player.PlaylistElementDetailsProvider.prototype =
         this._getNextItemDetails();
     },
 
-    //TODO pass here a session identifier.
+    _handlePlaylistUpdated: function(numberOfNewItems)
+    {
+        var playlist = this.playlistProvider.getPlaylist();
+        this.provideDetails(playlist, playlist.length() - numberOfNewItems);
+    },
+
+    //TODO pass here a session provider
     initialise: function()
     {
+        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistUpdated, this._handlePlaylistUpdated, null, this);
+
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistElementDetailsObtained, $.proxy(this._handleDetailsObtained, this));
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistElementDetailsObtainingFailed, $.proxy(this._handleError, this));
         //TODO handle unsuccessful details obtaining
@@ -72,11 +78,10 @@ window.Player.PlaylistElementDetailsProvider.prototype =
 
     provideDetails: function(playlist, startingIndex)
     {
-        this._playlist = playlist;
         this._currentItemIndex = startingIndex;
         this._itemsToGetDetails = playlist.length() - startingIndex;
         $("#playlist-progressbar").show();
 
-        this._provideDetails(this._playlist.get(this._currentItemIndex));
+        this._provideDetails(this.playlistProvider.getPlaylist().get(this._currentItemIndex));
     }
 };
