@@ -10,16 +10,6 @@ window.Player.PlaylistElementDetailsProvider = function(playlistProvider, detail
 
 window.Player.PlaylistElementDetailsProvider.prototype =
 {
-    _updateProgressbar: function()
-    {
-        var progressBarPercentValue = ((this._itemsToGetDetails - (this.playlistProvider.getPlaylist().length() - this._currentItemIndex))/this._itemsToGetDetails)*100;
-        $("#playlist-progressbar").css({width:progressBarPercentValue+"%"});
-        if(progressBarPercentValue == 100)
-        {
-            $("#playlist-progressbar").hide();
-        }
-    },
-
     _handleDetailsObtained: function(itemIndex, that)
     {
         return function(mediaDetails)

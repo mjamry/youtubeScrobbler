@@ -11,6 +11,8 @@ window.UI.PlaylistViewController = function(playlistService, playlistControlServ
     this.playlistControlService = playlistControlService;
     this.view = $("#"+view);
     this.config = config;
+
+    this.numberOfNewItems = 0;
 };
 
 window.UI.PlaylistViewController.prototype =
@@ -53,8 +55,13 @@ window.UI.PlaylistViewController.prototype =
         return builder.build();
     },
 
-    _handlePlaylistUpdated: function()
+    _handlePlaylistUpdated: function(numberOfNewItems)
     {
+        this.numberOfNewItems = numberOfNewItems;
+        if(this.numberOfNewItems > 0)
+        {
+            $("#playlist-progressbar").show();
+        }
         //clear view
         this.view.empty();
         var playlist = this.playlistService.getPlaylist();
@@ -73,6 +80,10 @@ window.UI.PlaylistViewController.prototype =
     //pass only index - details can be obtained
     _handleItemUpdated: function(eventArgs)
     {
+        if(this.numberOfNewItems > 0)
+        {
+            this._updateProgressbar(eventArgs.index);
+        }
         var newItem = this._createNewElement(eventArgs.mediaDetails, eventArgs.index);
         this.view.children("div").eq(eventArgs.index).replaceWith(newItem);
     },
@@ -80,6 +91,16 @@ window.UI.PlaylistViewController.prototype =
     _handleMediaChanged: function(mediaDetails)
     {
 
+    },
+
+    _updateProgressbar: function(itemIndex)
+    {
+        var progressBarPercentValue = ((this.numberOfNewItems - (this.playlistService.getPlaylist().length() - 1 - itemIndex))/this.numberOfNewItems)*100;
+        $("#playlist-progressbar").css({width:progressBarPercentValue+"%"});
+        if(progressBarPercentValue == 100)
+        {
+            $("#playlist-progressbar").hide();
+        }
     },
 
     initialise: function()
