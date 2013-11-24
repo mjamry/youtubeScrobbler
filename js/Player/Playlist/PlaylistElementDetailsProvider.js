@@ -1,6 +1,7 @@
 //namespace
 window.Player = window.Player || {};
 
+//TODO pass here a session provider
 window.Player.PlaylistElementDetailsProvider = function(playlistProvider, detailsProvider)
 {
     this.playlistProvider = playlistProvider;
@@ -21,67 +22,44 @@ window.Player.PlaylistElementDetailsProvider.prototype =
         }
     },
 
-    _provideDetails: function(mediaDetails)
+    _handleDetailsObtained: function(itemIndex, that)
     {
-        //TODO get session while initialisation or while getting details (in case of changes user second option will be better).
-        //it fires an PlaylistElementDetailsObtained event
-        this._detailsProvider.getTrackDetails(mediaDetails,{user: "onlinescrobbler"});
-    },
-
-    _getNextItemDetails: function()
-    {
-        this._currentItemIndex++;
-
-        this._updateProgressbar();
-        //if there is still something to update
-        if(this._currentItemIndex < this.playlistProvider.getPlaylist().length())
+        return function(mediaDetails)
         {
-            this._provideDetails(this.playlistProvider.getPlaylist().get(this._currentItemIndex));
-        }
-        else
-        {
-            //clear temp playlist
-            this._currentItemIndex = 0;
-            this._itemsToGetDetails = 0;
+            that.playlistProvider.updateItem(itemIndex, mediaDetails);
+            itemIndex++;
+            that._getDetails(itemIndex, that);
         }
     },
 
-    _handleDetailsObtained: function(mediaDetails)
+    _handleObtainingError: function(itemIndex, that)
     {
-        this.playlistProvider.updateItem(this._currentItemIndex, mediaDetails);
-        //update next item
-        this._getNextItemDetails();
+        return function()
+        {
+            itemIndex++;
+            that._getDetails(itemIndex, that);
+        }
     },
 
-    _handleError: function(response)
+    _getDetails: function(itemIndex, that)
     {
-        //for no - just skip to next element
-        //TODO in future error handling should be improved - i.e. try once again with changed media details
-        this._getNextItemDetails();
+        if(itemIndex < that.playlistProvider.getPlaylist().length())
+        {
+            var done = that._handleDetailsObtained(itemIndex, that);
+            var fail = that._handleObtainingError(itemIndex, that);
+
+            this._detailsProvider.getTrackDetails(that.playlistProvider.getPlaylist().get(itemIndex),{user: "onlinescrobbler"}, {done: done, fail: fail});
+        }
     },
 
     _handlePlaylistUpdated: function(numberOfNewItems)
     {
-        var playlist = this.playlistProvider.getPlaylist();
-        this.provideDetails(playlist, playlist.length() - numberOfNewItems);
+        var itemIndex = this.playlistProvider.getPlaylist().length() - numberOfNewItems;
+        this._getDetails(itemIndex, this);
     },
 
-    //TODO pass here a session provider
     initialise: function()
     {
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistUpdated, this._handlePlaylistUpdated, null, this);
-
-        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistElementDetailsObtained, $.proxy(this._handleDetailsObtained, this));
-        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistElementDetailsObtainingFailed, $.proxy(this._handleError, this));
-        //TODO handle unsuccessful details obtaining
-    },
-
-    provideDetails: function(playlist, startingIndex)
-    {
-        this._currentItemIndex = startingIndex;
-        this._itemsToGetDetails = playlist.length() - startingIndex;
-        $("#playlist-progressbar").show();
-
-        this._provideDetails(this.playlistProvider.getPlaylist().get(this._currentItemIndex));
     }
 };

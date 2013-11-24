@@ -13,7 +13,7 @@ window.LastFm.InformationProvider = function(lastFmDataProvider)
 
 window.LastFm.InformationProvider.prototype =
 {
-    getTrackDetails: function(mediaDetails, session)
+    getTrackDetails: function(mediaDetails, session, callbacks)
     {
         Logger.getInstance().Debug("Track details requested for: "+mediaDetails.toSource());
         this.dataProvider.track.getInfo(
@@ -80,14 +80,14 @@ window.LastFm.InformationProvider.prototype =
                     Logger.getInstance().Info("Track details from LastFm has been obtained.");
                     Logger.getInstance().Debug("Track details: "+mediaDetails.toSource());
 
-                    EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistElementDetailsObtained, mediaDetails);
+                    callbacks.done(mediaDetails);
                 },
                 this),
 
                 error: $.proxy(function(response)
                 {
-                    Logger.getInstance().Error("Track details obtaining error: "+response.toSource());
-                    EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistElementDetailsObtainingFailed, response)
+                    Logger.getInstance().Warning("Track details obtaining error: "+response);
+                    callbacks.fail();
                 },
                 this)
             }
