@@ -61,8 +61,7 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         var playlistService = new window.Player.PlaylistService(player, loveStateSwitch);
         playlistService.initialise();
 
-
-        var detailsProvider = new window.Player.PlaylistElementDetailsProvider(playlistService, lastFmFactory.createInformationProvider());
+        var detailsProvider = new window.Player.PlaylistElementDetailsProvider(playlistService, lastFmFactory.createInformationProvider(), this._getSessionProvider());
         detailsProvider.initialise();
 
         return playlistService;

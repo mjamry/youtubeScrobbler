@@ -2,8 +2,9 @@
 window.Player = window.Player || {};
 
 //TODO pass here a session provider
-window.Player.PlaylistElementDetailsProvider = function(playlistProvider, detailsProvider)
+window.Player.PlaylistElementDetailsProvider = function(playlistProvider, detailsProvider, sessionProvider)
 {
+    this.sessionProvider = sessionProvider;
     this.playlistProvider = playlistProvider;
     this._detailsProvider = detailsProvider;
     this._currentItemIndex = 0;
@@ -48,7 +49,16 @@ window.Player.PlaylistElementDetailsProvider.prototype =
             var done = that._handleDetailsObtained(itemIndex, that);
             var fail = that._handleObtainingError(itemIndex, that);
 
-            this._detailsProvider.getTrackDetails(that.playlistProvider.getPlaylist().get(itemIndex),{user: "onlinescrobbler"}, {done: done, fail: fail});
+            this._detailsProvider.getTrackDetails(
+                that.playlistProvider.getPlaylist().get(itemIndex),
+                {
+                    user: this.sessionProvider.getSession().name
+                },
+                {
+                    done: done,
+                    fail: fail
+                }
+            );
         }
     },
 
