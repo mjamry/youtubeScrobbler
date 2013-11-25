@@ -5,10 +5,9 @@ window.Player = window.Player || {};
 window.Common = window.Common || {};
 
 
-window.Player.PlaylistService = function(player, loveStateSwitch)
+window.Player.PlaylistService = function(player)
 {
     this.player = player;
-    this._loveStateSwitch = loveStateSwitch;
     this.playlist = playlist || new window.Player.Playlist();
     this._eventBroker = EventBroker.getInstance();
     //TODO: for future purposes - will be configurable
@@ -23,39 +22,6 @@ window.Player.PlaylistService.prototype =
     {
         numberOfNewItems = numberOfNewItems || 0;
         this._eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistUpdated, numberOfNewItems);
-    },
-
-    //TODO this should works in more clever way.
-    _handleLoved: function(index)
-    {
-        var item = this.getTrackDetails(index);
-        item.loved = true;
-
-        this._eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistItemUpdated,
-            {
-                mediaDetails: item,
-                index: index
-            }
-        );
-    },
-
-    _handleUnLoved: function(index)
-    {
-        var item = this.getTrackDetails(index);
-        item.loved = false;
-
-        this._eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistItemUpdated,
-            {
-                mediaDetails: item,
-                index: index
-            }
-        );
-    },
-
-    initialise: function()
-    {
-        this._eventBroker.addListener(window.LastFm.Events.TrackUnloved, this._handleUnLoved, null, this);
-        this._eventBroker.addListener(window.LastFm.Events.TrackLoved, this._handleLoved, null, this);
     },
 
     //TOOD it should be deleted
@@ -113,12 +79,6 @@ window.Player.PlaylistService.prototype =
         this.playlist.remove(index);
         Logger.getInstance().Debug("Element has been removed from playlist, now it contains "+this.playlist.length()+" elements.");
         this._updatePlaylist();
-    },
-
-    changeLoveState: function(index)
-    {
-        var item = this.getTrackDetails(index);
-        this._loveStateSwitch.changeLoveState(item, index);
     },
 
     getPlaylist: function()

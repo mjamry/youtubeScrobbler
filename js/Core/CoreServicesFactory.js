@@ -54,17 +54,7 @@ window.ApplicationCore.CoreServicesFactory.prototype =
 
     createPlaylistService: function(player)
     {
-        var lastFmFactory = new window.LastFm.LastFmApiFactory();
-        var loveStateSwitch = lastFmFactory.createLoveChangeSwitch(this._getSessionProvider());
-
-
-        var playlistService = new window.Player.PlaylistService(player, loveStateSwitch);
-        playlistService.initialise();
-
-        var detailsProvider = new window.Player.PlaylistElementDetailsProvider(playlistService, lastFmFactory.createInformationProvider(), this._getSessionProvider());
-        detailsProvider.initialise();
-
-        return playlistService;
+        return new window.Player.PlaylistService(player);
     },
 
     createPlaybackDetailsService: function()

@@ -5,7 +5,7 @@ window.ApplicationCore = window.ApplicationCore || {};
 window.UI = window.UI || {};
 window.Player = window.Player || {};
 
-window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory)
+window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, playerServicesFactory)
 {
     this.uiCore = uiFactory.createUICore();
 
@@ -19,7 +19,12 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory)
 
     this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistService);
 
-    var playlist = uiFactory.createPlaylistViewController(this.playlistService, this.playbackControlService);
+    var playlistElementDetailsProvider = playerServicesFactory.createPlaylistElementDetailsProvider(this.playlistService, this.sessionHandler);
+    playlistElementDetailsProvider.initialise();
+
+    var playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.sessionHandler);
+
+    var playlist = uiFactory.createPlaylistViewController(this.playlistService, this.playbackControlService, playlistElementLoveStateModifier);
     playlist.initialise();
 
     var playbackDetails = uiFactory.createPlaybackDetailsViewController(this.playbackDetailsService);

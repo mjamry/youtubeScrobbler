@@ -11,6 +11,7 @@ $(function()
 
     var coreServicesFactory = new window.ApplicationCore.CoreServicesFactory();
     var uiFactory = new window.UI.UIControllersFactory();
+    var playerServicesFactory = new window.Player.PlayerServicesFactory();
 
     //logger should be created at the begining
     var logger = coreServicesFactory.createLoggerService();
@@ -29,7 +30,7 @@ $(function()
     uilogger.isLoggingAllowed = true;
 
     //creating application core
-    var applicationCore = new window.ApplicationCore.AppCore(coreServicesFactory, uiFactory);
+    var applicationCore = new window.ApplicationCore.AppCore(coreServicesFactory, uiFactory, playerServicesFactory);
     applicationCore.initialise();
 
     HandleSession();

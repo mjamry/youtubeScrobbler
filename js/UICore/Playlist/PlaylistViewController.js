@@ -5,10 +5,11 @@ window.UI = window.UI || {};
 window.Player = window.Player || {};
 
 
-window.UI.PlaylistViewController = function(playlistService, playlistControlService, view, config)
+window.UI.PlaylistViewController = function(playlistService, playlistControlService,loveStateModifier, view, config)
 {
     this.playlistService = playlistService;
     this.playlistControlService = playlistControlService;
+    this.loveStateModifier = loveStateModifier;
     this.view = $("#"+view);
     this.config = config;
 
@@ -17,8 +18,24 @@ window.UI.PlaylistViewController = function(playlistService, playlistControlServ
 
 window.UI.PlaylistViewController.prototype =
 {
-    _like: function(index)
+    changeLoveState: function(index)
     {
+        var mediaElement = this.playlistService.getPlaylist().get(index);
+        var that = this;
+        var done = function trackLoveStateChanged(index, mediaDetails)
+        {
+            that.playlistService.updateItem(index, mediaDetails);
+        };
+
+        if(mediaElement.loved)
+        {
+            this.loveStateModifier.unlove(mediaElement, index, {done:done});
+        }
+        else
+        {
+            this.loveStateModifier.love(mediaElement, index, {done:done});
+        }
+
         this.playlistService.changeLoveState(index);
     },
 
@@ -50,7 +67,7 @@ window.UI.PlaylistViewController.prototype =
         }
 
         builder.fillBody(mediaDetails);
-        builder.hookUpToEvents(this, this._play, this._like, this._remove);
+        builder.hookUpToEvents(this, this._play, this.changeLoveState, this._remove);
 
         return builder.build();
     },
