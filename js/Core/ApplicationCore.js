@@ -59,6 +59,7 @@ window.ApplicationCore.AppCore.prototype =
         this.sessionHandler.createNewSession(token);
     },
 
+    //TODO move to ViewController
     createNewPlaylist: function(url)
     {
         var plLoader = new window.Player.YouTubePlaylistLoader();
@@ -71,6 +72,7 @@ window.ApplicationCore.AppCore.prototype =
         );
     },
 
+    //TODO move to ViewController
     addToPlaylist: function(url)
     {
         var plLoader = new window.Player.YouTubePlaylistLoader();

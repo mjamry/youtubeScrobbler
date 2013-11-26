@@ -5,21 +5,30 @@ window.Player = window.Player || {};
 window.Player.Playlist = function()
 {
     this.mediaList = [];
-    this.currentItemIndex = 0;
 };
 
 window.Player.Playlist.prototype =
 {
-    isPlaylistLoop: true,
+    currentItemIndex: 0,
 
     add: function(mediaDetails)
     {
          this.mediaList.push(mediaDetails);
     },
 
+    get: function(index)
+    {
+        return this.mediaList[index];
+    },
+
     remove: function(index)
     {
           this.mediaList.splice(index, 1);
+    },
+
+    replace: function(index, mediaDetails)
+    {
+        this.mediaList[index] = mediaDetails;
     },
 
     first: function()
@@ -34,60 +43,12 @@ window.Player.Playlist.prototype =
         return this.mediaList[this.currentItemIndex];
     },
 
-    getItem: function(index)
-    {
-        if(index >= 0 && index < this.length())
-        {
-            this.currentItemIndex = index;
-            return this.mediaList[index];
-        }
-
-        return null;
-    },
-
-    replace: function(index, mediaDetails)
-    {
-        this.mediaList[index] = mediaDetails;
-    },
-
-    next: function()
-    {
-        this.currentItemIndex++;
-        if(this.currentItemIndex == this.length())
-        {
-
-            if( !this.isPlaylistLoop)
-            {
-                return null;
-            }
-            //jump to the first one
-            this.currentItemIndex = 0;
-        }
-
-        return this.mediaList[this.currentItemIndex];
-    },
-
-    previous: function()
-    {
-        this.currentItemIndex--;
-        if(this.currentItemIndex < 0)
-        {
-            if( !this.isPlaylistLoop)
-            {
-                return null;
-            }
-            //jump to the last one
-            this.currentItemIndex = this.length() - 1;
-        }
-
-        return this.mediaList[this.currentItemIndex];
-    },
-
     length: function()
     {
-          return this.mediaList.length;
+        return this.mediaList.length;
     },
 
+    //TODO remember to update currentIndex after changing playlist items order
     shuffle: function()
     {
         //implementation of Fisher-Yates shuffle algorithm
