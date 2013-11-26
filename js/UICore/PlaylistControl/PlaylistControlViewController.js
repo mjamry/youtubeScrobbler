@@ -1,9 +1,10 @@
 //namespace
 window.UI = window.UI || {};
 
-window.UI.PlaylistControlViewController = function(model, view, config)
+window.UI.PlaylistControlViewController = function(playlistService, playlistController, view, config)
 {
-    this.model = model;
+    this.playlistController = playlistController;
+    this.playlistService = playlistService;
     this.config = config;
     this.view = $("#"+view);
 };
@@ -30,7 +31,9 @@ window.UI.PlaylistControlViewController.prototype =
     {
         return function()
         {
-            var currentState = that.model.getPlaylistLoop();
+            var currentState = that.playlistController.isLoop;
+            that.playlistController.isLoop = !currentState;
+
             if(currentState)
             {
                 that.view.find(that.config.RepeatButton).addClass(that.config.SelectedButtonClass);
@@ -39,8 +42,6 @@ window.UI.PlaylistControlViewController.prototype =
             {
                 that.view.find(that.config.RepeatButton).removeClass(that.config.SelectedButtonClass);
             }
-
-            that.model.setPlaylistLoop(!currentState);
         }
     },
 
@@ -55,9 +56,9 @@ window.UI.PlaylistControlViewController.prototype =
     initialise: function()
     {
         //bind to Ui events
-        this.view.find(this.config.ClearButton).click(this._clearPlaylist(this.model));
-        this.view.find(this.config.SaveButton).click(this._savePlaylist(this.model));
-        this.view.find(this.config.ShuffleButton).click(this._shufflePlaylist(this.model));
+        this.view.find(this.config.ClearButton).click(this._clearPlaylist(this.playlistService));
+        this.view.find(this.config.SaveButton).click(this._savePlaylist(this.playlistController));
+        this.view.find(this.config.ShuffleButton).click(this._shufflePlaylist(this.playlistController));
         this.view.find(this.config.RepeatButton).click(this._changeRepeatState(this));
     }
 };

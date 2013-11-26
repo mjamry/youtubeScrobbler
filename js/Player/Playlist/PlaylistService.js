@@ -24,6 +24,11 @@ window.Player.PlaylistService.prototype =
         this._eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistUpdated, numberOfNewItems);
     },
 
+    refreshPlaylist: function()
+    {
+        this._updatePlaylist();
+    },
+
     //TOOD it should be deleted
     //initialises playlist object, or overwrite existing one.
     createPlaylist: function(playlist)

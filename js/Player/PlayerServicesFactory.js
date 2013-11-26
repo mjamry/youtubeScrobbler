@@ -14,5 +14,10 @@ window.Player.PlayerServicesFactory.prototype =
     {
         var factory = new window.LastFm.LastFmApiFactory();
         return new window.Playlist.PlaylistElementLoveStateModifier(factory.createTrackLoveStateModifier(), sessionProvider);
+    },
+
+    createPlaylistFlowController: function(playlistService)
+    {
+        return new window.Playlist.PlaylistFlowController(playlistService);
     }
 };

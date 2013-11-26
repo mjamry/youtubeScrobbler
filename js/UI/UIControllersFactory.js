@@ -37,10 +37,8 @@ window.UI.UIControllersFactory.prototype =
         return new window.UI.PlaybackControlViewController(playbackControlService, "playback-control", window.UI.PlaybackControlConfiguration);
     },
 
-    createPlaylistControlViewController: function(model)
+    createPlaylistControlViewController: function(playlistService, playlistFlowController)
     {
-        return new window.UI.PlaylistControlViewController(model, "playlist-control", window.UI.PlaylistControlConfiguration);
+        return new window.UI.PlaylistControlViewController(playlistService, playlistFlowController, "playlist-control", window.UI.PlaylistControlConfiguration);
     }
-
-
 };

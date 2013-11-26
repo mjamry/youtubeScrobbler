@@ -17,7 +17,9 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
     this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService();
     this.playbackDetailsService.initialise();
 
-    this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistService);
+    var playlistFlowController = playerServicesFactory.createPlaylistFlowController(this.playlistService);
+
+    this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistService, playlistFlowController);
 
     var playlistElementDetailsProvider = playerServicesFactory.createPlaylistElementDetailsProvider(this.playlistService, this.sessionHandler);
     playlistElementDetailsProvider.initialise();
@@ -33,7 +35,7 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
     var playbackControl = uiFactory.createPlaybackControlViewController(this.playbackControlService);
     playbackControl.initialise();
 
-    var playlistControl = uiFactory.createPlaylistControlViewController(this.playlistService);
+    var playlistControl = uiFactory.createPlaylistControlViewController(this.playlistService, playlistFlowController);
     playlistControl.initialise();
 };
 

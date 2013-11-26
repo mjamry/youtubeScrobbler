@@ -56,6 +56,7 @@ window.Playlist.PlaylistFlowController.prototype =
     shuffle: function()
     {
         this.playlistProvider.getPlaylist().shuffle();
+        this.playlistProvider.refreshPlaylist();
     },
 
     getSpecific: function(index)

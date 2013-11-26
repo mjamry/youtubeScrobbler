@@ -25,7 +25,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
     {
         //is track longer than 30s
 
-        if(mediaDetails.duration && mediaDetails.duration.getInSeconds() > 30)
+        if(mediaDetails && mediaDetails.duration && mediaDetails.duration.getInSeconds() > 30)
         {
             //if played for 4 minutes or at least hals of its duration
             var timeInSeconds = TimeParser.getInstance().getSeconds(playingTime);

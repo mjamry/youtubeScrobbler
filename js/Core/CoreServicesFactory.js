@@ -62,9 +62,8 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new window.Player.PlaybackDetailsService();
     },
 
-    createPlaybackControlService: function(player, playlistProvider)
+    createPlaybackControlService: function(player, playlistProvider, playlistController)
     {
-        var playlistController = new window.Playlist.PlaylistFlowController(playlistProvider);
         return new window.Player.PlaybackControlService(player, playlistController);
     }
 };
