@@ -75,7 +75,7 @@ window.LastFm.InformationProvider.prototype =
                         mediaDetails.albumCover = response.track.album.image[0]["#text"];
                     }
 
-                    mediaDetails.loved = response.track.userloved != "0";
+                    mediaDetails.loved = response.track.userloved == "1";
 
                     Logger.getInstance().Info("Track details from LastFm has been obtained.");
                     Logger.getInstance().Debug("Track details: "+mediaDetails.toSource());

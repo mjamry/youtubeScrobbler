@@ -25,8 +25,8 @@ window.ApplicationCore.SessionHandler.prototype =
             return session;
         }
         var errorMsg = "Session has not been established yet.";
-        Logger.getInstance().Error(errorMsg);
-        throw errorMsg;
+        Logger.getInstance().Warning(errorMsg);
+        return {name:""}
     }
 };
 
