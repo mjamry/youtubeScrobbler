@@ -19,7 +19,8 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     var playlistFlowController = playerServicesFactory.createPlaylistFlowController(this.playlistService);
 
-    this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistService, playlistFlowController);
+    this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, playlistFlowController);
+    this.playbackControlService.initialise();
 
     var playlistElementDetailsProvider = playerServicesFactory.createPlaylistElementDetailsProvider(this.playlistService, this.sessionHandler);
     playlistElementDetailsProvider.initialise();

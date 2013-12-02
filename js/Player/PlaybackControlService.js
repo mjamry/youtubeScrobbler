@@ -27,7 +27,7 @@ window.Player.PlaybackControlService.prototype =
     initialise: function()
     {
         //bind to player events
-        this._eventBroker.addListener(window.Player.Events.MediaStopped, this._handleMediaStopped, null, this);
+        EventBroker.getInstance().addListener(window.Player.Events.MediaStopped, this._handleMediaStopped, null, this);
     },
 
     //plays current track
