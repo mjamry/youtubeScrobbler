@@ -46,12 +46,12 @@ window.Common.TimeParserImpl.prototype =
 
     getMinutes: function(timeInMs)
     {
-       return Math.round(timeInMs / this.MsInSecond);
+       return Math.round(timeInMs / this.MsInSecond / this.SecondsInMinute);
     },
 
     getSeconds: function(timeInMs)
     {
-        return Math.round(timeInMs / this.SecondsInMinute);
+        return Math.round(timeInMs / this.MsInSecond);
     },
 
     getHumanReadableFormat: function(timeInSeconds)
