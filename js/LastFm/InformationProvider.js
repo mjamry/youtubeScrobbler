@@ -15,7 +15,7 @@ window.LastFm.InformationProvider.prototype =
 {
     getTrackDetails: function(mediaDetails, session, callbacks)
     {
-        Logger.getInstance().Debug("Track details requested for: "+mediaDetails.toSource());
+        Logger.getInstance().Debug("Track details requested for: "+mediaDetails.artist +" - "+mediaDetails.title);
         this.dataProvider.track.getInfo(
             {
                 track: mediaDetails.title,
@@ -78,7 +78,7 @@ window.LastFm.InformationProvider.prototype =
                     mediaDetails.loved = response.track.userloved == "1";
 
                     Logger.getInstance().Info("Track details from LastFm has been obtained.");
-                    Logger.getInstance().Debug("Track details: "+mediaDetails.toSource());
+                    Logger.getInstance().Debug("Track details: "+mediaDetails.artist +" - "+mediaDetails.title);
 
                     callbacks.done(mediaDetails);
                 },
