@@ -84,6 +84,16 @@ window.Player.MediaPlayer.prototype =
     pause: function()
     {
         this.instance.pause();
+    },
+
+    setVolume: function(value)
+    {
+        this.instance.setVolume(value);
+    },
+
+    getVolume: function()
+    {
+        return this.instance.volume;
     }
 };
 

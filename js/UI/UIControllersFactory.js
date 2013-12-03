@@ -32,9 +32,10 @@ window.UI.UIControllersFactory.prototype =
         return new window.UI.PlaybackDetailsViewController(model, "playback-progress-container", window.UI.PLaybackDetailsViewConfiguration);
     },
 
-    createPlaybackControlViewController: function(playbackControlService)
+    createPlaybackControlViewController: function(player, playbackControlService)
     {
-        return new window.UI.PlaybackControlViewController(playbackControlService, "playback-control", window.UI.PlaybackControlConfiguration);
+        var volumeControlService = new window.Player.VolumeControlService(player);
+        return new window.UI.PlaybackControlViewController(playbackControlService, volumeControlService, "playback-control", window.UI.PlaybackControlConfiguration);
     },
 
     createPlaylistControlViewController: function(playlistService, playlistFlowController)

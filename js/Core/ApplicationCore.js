@@ -33,7 +33,7 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
     var playbackDetails = uiFactory.createPlaybackDetailsViewController(this.playbackDetailsService);
     playbackDetails.initialise();
 
-    var playbackControl = uiFactory.createPlaybackControlViewController(this.playbackControlService);
+    var playbackControl = uiFactory.createPlaybackControlViewController(this.player, this.playbackControlService);
     playbackControl.initialise();
 
     var playlistControl = uiFactory.createPlaylistControlViewController(this.playlistService, playlistFlowController);

@@ -185,7 +185,7 @@
     background-color: #88c6d3;
     width: 450px;
     position:absolute;
-    bottom:0px;
+    bottom:0;
 }
 
 #playback-control
@@ -194,6 +194,23 @@
     height: 35px;
     margin-left: auto;
     margin-right: auto;
+}
+/*---------------------------VOLUME---CONTROL------------*/
+.volume-control-indicator-container
+{
+    margin-top:30px;
+    height:100px;
+    width:20px;
+    background-color:#88c6d3;
+    position: relative;
+}
+
+.volume-control-indicator
+{
+    background-color: #129FEA;
+    width:20px;
+    position:absolute;
+    bottom:0;
 }
 /*---------------------------PLAYLIST----CONTROLS--------*/
 #media-playlist-control

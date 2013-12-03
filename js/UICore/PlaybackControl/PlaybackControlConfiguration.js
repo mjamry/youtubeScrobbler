@@ -9,5 +9,5 @@ window.UI.PlaybackControlConfiguration =
     NextButton: ".playback-control-next",
     PreviousButton: ".playback-control-previous",
 
-    VolumeButton: "#.playback-control-volume"
+    VolumeButton: ".playback-control-volume"
 };

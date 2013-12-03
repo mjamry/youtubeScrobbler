@@ -1,54 +1,83 @@
 //namespace
 window.UI = window.UI || {};
 
-window.UI.PlaybackControlViewController = function(model, view, config)
+window.UI.PlaybackControlViewController = function(playbackControl, volumeControlService, view, config)
 {
     this.view = $("#"+view);
-    this.model = model;
+    this.playbackControl = playbackControl;
+    this.volumeControlService = volumeControlService;
     this.config = config;
+
+    this.volumeControl = null;
 };
 
 //TODO add volume control.
 window.UI.PlaybackControlViewController.prototype =
 {
-    _play: function(model)
+    _play: function(playbackControl)
     {
         return function ()
         {
-            model.play();
+            playbackControl.play();
         };
     },
 
-    _pause: function(model)
+    _pause: function(playbackControl)
     {
         return function ()
         {
-            model.pause();
+            playbackControl.pause();
         };
     },
 
-    _next: function(model)
+    _next: function(playbackControl)
     {
         return function ()
         {
-            model.playNext();
+            playbackControl.playNext();
         };
     },
 
-    _previous: function(model)
+    _previous: function(playbackControl)
     {
         return function ()
         {
-            model.playPrevious();
+            playbackControl.playPrevious();
         };
+    },
+
+    _showVolumeControl: function(volumeControlService, volumeControl)
+    {
+        return function()
+        {
+            volumeControl.show(volumeControlService.getVolumeLevel());
+        }
+    },
+
+    _handleVolumeLevelChanged: function(volumeControlService)
+    {
+        return function(newVolumeLevel)
+        {
+            volumeControlService.setVolumeLevel(newVolumeLevel);
+        }
     },
 
     initialise: function()
     {
+        this.volumeControl = new window.UI.VolumeControl("playback-control-volume-container");
+
+        var volumeLevelChangedHandler = this._handleVolumeLevelChanged(this.volumeControlService);
+        this.volumeControl.bindToVolumeSet(volumeLevelChangedHandler);
+
+        this.volumeControl.initialise();
+
         //bind to ui events
-        this.view.find(this.config.PlayButton).click(this._play(this.model));
-        this.view.find(this.config.PauseButton).click(this._pause(this.model));
-        this.view.find(this.config.NextButton).click(this._next(this.model));
-        this.view.find(this.config.PreviousButton).click(this._previous(this.model));
+        this.view.find(this.config.PlayButton).click(this._play(this.playbackControl));
+        this.view.find(this.config.PauseButton).click(this._pause(this.playbackControl));
+        this.view.find(this.config.NextButton).click(this._next(this.playbackControl));
+        this.view.find(this.config.PreviousButton).click(this._previous(this.playbackControl));
+        this.view.find(this.config.VolumeButton).click(this._showVolumeControl(this.volumeControlService, this.volumeControl));
+
+
     }
 };
