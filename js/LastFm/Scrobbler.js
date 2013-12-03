@@ -42,7 +42,7 @@ window.LastFm.Scrobbler.prototype =
                         this._eventBroker.fireEventWithData(window.LastFm.Events.TrackScrobbled, response);
 
                         Logger.getInstance().Info("Track has been successfully scrobbled.");
-                        Logger.getInstance().Debug("LastFm Scrobbling details: "+ response.scrobbles.toSource());
+                        Logger.getInstance().Debug("LastFm Scrobbling details: "+ trackDetails.artist+" - "+trackDetails.track);
                     },
                     this
                 ),
@@ -53,7 +53,7 @@ window.LastFm.Scrobbler.prototype =
                         this._eventBroker.fireEventWithData(window.LastFm.Events.ScrobblingFailed, response);
 
                         Logger.getInstance().Warning("LastFm Scrobbling update failed: "+ response.message);
-                        Logger.getInstance().Debug("LastFm Scrobbling failed for: "+ trackDetails.toSource());
+                        Logger.getInstance().Debug("LastFm Scrobbling failed for: "+ trackDetails.artist+" - "+trackDetails.track);
                     },
                     this
                 )
@@ -84,7 +84,7 @@ window.LastFm.Scrobbler.prototype =
                         this._eventBroker.fireEventWithData(window.LastFm.Events.NowPlayingUpdated, response);
 
                         Logger.getInstance().Info("Now playing has been successfully updated.");
-                        Logger.getInstance().Debug("LastFm NowPlaying details: "+ response.nowplaying.toSource());
+                        Logger.getInstance().Debug("LastFm NowPlaying details: "+ trackDetails.artist+" - "+trackDetails.track);
                     },
                     this
                 ),
@@ -95,7 +95,7 @@ window.LastFm.Scrobbler.prototype =
                         this._eventBroker.fireEventWithData(window.LastFm.Events.NowPlayingUpdateFailed, response);
 
                         Logger.getInstance().Warning("LastFm NowPlaying update failed: "+ response.message);
-                        Logger.getInstance().Debug("LastFm NowPlaying failed for: "+ trackDetails.toSource());
+                        Logger.getInstance().Debug("LastFm NowPlaying failed for: "+ trackDetails.artist+" - "+trackDetails.track);
                     },
                     this
                 )
