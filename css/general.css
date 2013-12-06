@@ -30,13 +30,33 @@
     margin:auto;
 }
 
-#page-header
+#page-header-container
 {
     width: 100%;
-    height: 100px;
+    height: 50px;
     background-color: #ddd;
     margin:0;
     padding:0;
+    border-bottom:1px solid darkgray;
+}
+
+#header-content
+{
+    width:800px;
+    height:100%;
+    margin:auto;
+}
+
+#header-content-logo
+{
+    width:200px;
+    float:left;
+}
+
+#header-session-details
+{
+    width:300px;
+    float:right;
 }
 
 #page-content
