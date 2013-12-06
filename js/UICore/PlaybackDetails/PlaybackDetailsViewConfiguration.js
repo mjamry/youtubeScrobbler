@@ -13,8 +13,8 @@ window.UI.PLaybackDetailsViewConfiguration =
     PlaybackTime: ".playback-time",
 
 
-    MouseOverProgressBarSize: "40px",
-    MouseOutProgressBarSize: "20px",
+    MouseOverProgressBarSize: "35px",
+    MouseOutProgressBarSize: "35px",
 
     MouseOverDataBarSize: "5px",
     MouseOutDataBarSize: "2px"

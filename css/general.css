@@ -240,8 +240,8 @@
 {
     top:0;
     position: relative;
-    height:20px;
     width:500px;
+    height:35px;
 }
 
 .playback-progress-bar-container,
@@ -251,7 +251,6 @@
     position: absolute;
     bottom:0;
     left:0;
-    height:20px;
     width: 100%;
 }
 
@@ -281,7 +280,7 @@
 .playback-progress-bar-container,
 .playback-progress-bar
 {
-    height:20px;
+    height:35px;
 }
 
 .playback-progress-bar
