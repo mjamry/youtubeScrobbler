@@ -46,14 +46,6 @@ window.UI.PlaybackControlViewController.prototype =
         };
     },
 
-    _showVolumeControl: function(volumeControlService, volumeControl)
-    {
-        return function()
-        {
-            volumeControl.show(volumeControlService.getVolumeLevel());
-        }
-    },
-
     _handleVolumeLevelChanged: function(volumeControlService)
     {
         return function(newVolumeLevel)
@@ -69,15 +61,12 @@ window.UI.PlaybackControlViewController.prototype =
         var volumeLevelChangedHandler = this._handleVolumeLevelChanged(this.volumeControlService);
         this.volumeControl.bindToVolumeSet(volumeLevelChangedHandler);
 
-        this.volumeControl.initialise();
+        this.volumeControl.initialise(this.volumeControlService.getVolumeLevel());
 
         //bind to ui events
         this.view.find(this.config.PlayButton).click(this._play(this.playbackControl));
         this.view.find(this.config.PauseButton).click(this._pause(this.playbackControl));
         this.view.find(this.config.NextButton).click(this._next(this.playbackControl));
         this.view.find(this.config.PreviousButton).click(this._previous(this.playbackControl));
-        this.view.find(this.config.VolumeButton).click(this._showVolumeControl(this.volumeControlService, this.volumeControl));
-
-
     }
 };

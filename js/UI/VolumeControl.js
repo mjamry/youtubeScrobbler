@@ -4,7 +4,6 @@ window.UI = window.UI || {};
 window.UI.VolumeControl = function(view)
 {
     this.view = $("#"+view);
-    this.view.hide();
     this.volumeSetCallback = null;
 };
 
@@ -18,28 +17,23 @@ window.UI.VolumeControl.prototype =
             //calculate offset
             var target = eventArgs.target || eventArgs.srcElement,
                 rect = target.getBoundingClientRect(),
-                offsetY = eventArgs.clientY - rect.top;
+                offsetX = eventArgs.clientX - rect.left;
 
 
-            var height = eventArgs.currentTarget.clientHeight;
+            var width = eventArgs.currentTarget.clientWidth;
 
-            var newVolumeLvlInPercent = ((height - offsetY) / height)*100;
-            that.view.find(".volume-control-indicator").css("height", newVolumeLvlInPercent+"%");
-            that.view.hide();
+            var newVolumeLvlInPercent = ((offsetX) / width)*100;
+            that.view.find(".volume-control-indicator").css("width", newVolumeLvlInPercent+"%");
             //this requires normalized value
             that.volumeSetCallback(newVolumeLvlInPercent/100);
         }
     },
 
-    initialise: function()
+    initialise: function(currentVolumeLevel)
     {
         this.view.find(".volume-control-indicator-container").click(this._handleNewVolumeLevelSet(this));
-    },
-
-    show: function(currentVolumeLevel)
-    {
-        this.view.show();
-        this.view.find(".volume-control-indicator").css("height", (currentVolumeLevel*100)+"%");
+        //initialise startup value
+        this.view.find(".volume-control-indicator").css("width", (currentVolumeLevel*100)+"%");
     },
 
     //bind to event
