@@ -75,13 +75,19 @@
     overflow: auto;
 }
 
-.playlist-item-details, .playlist-item-time, .playlist-item-icons
+.playlist-item-name, .playlist-item-details
 {
     height:20px;
-    margin-top:5px;
+    margin-top:3px;
     font-size: 12pt;
-    color:#999;
+    float:left;
+    color: #444;
+    width:100%;
+}
 
+.playlist-item-details
+{
+    color:#777;
 }
 
 .playlist-item-cover
@@ -91,6 +97,7 @@
     float: right;
     margin-top:5px;
     margin-right:5px;
+    border:0;
 }
 
 #playlist-progressbar
@@ -107,15 +114,10 @@
 
 .playlist-item-time
 {
+    margin-top:4px;
     float:left;
     font-size: 10pt;
-}
-
-.playlist-item-details
-{
-    float:left;
-    color: #444;
-    width:100%;
+    width:100px;
 }
 
 .playlist-item-like, .playlist-item-remove
