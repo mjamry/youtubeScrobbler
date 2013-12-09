@@ -26,7 +26,7 @@
 
 #footer-content
 {
-    width: 70%;
+    width: 800px;
     margin:auto;
 }
 
@@ -55,13 +55,13 @@
 
 #header-session-details
 {
-    width:300px;
+    width:200px;
     float:right;
 }
 
 #page-content
 {
-    width: 950px;
+    width: 900px;
     margin:auto;
     background-color: white;
     border: #ddd solid 1px;
@@ -193,12 +193,13 @@
 #media-player-playback
 {
     float:left;
+    width:500px;
 }
 
 #media-player-playback-controls-container
 {
     height:50px;
-    width:1000px;
+    width:900px;
     margin:auto;
 }
 /*----------------------------PLAYBACK---CONTROLS-------*/
@@ -206,7 +207,7 @@
 {
     background-color: #88c6d3;
     float:left;
-    width:300px;
+    width:270px;
 }
 
 #playback-control
@@ -219,7 +220,7 @@
 #playback-control-volume-container
 {
     float:left;
-    width:200px;
+    width:130px;
 }
 
 .volume-control-indicator-container
