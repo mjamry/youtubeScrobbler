@@ -126,7 +126,7 @@
     <div id="playback-control-volume-container">
         <div class="volume-control-indicator-container">
             <div class="volume-control-indicator">
-
+                volume
             </div>
         </div>
     </div>
@@ -153,11 +153,6 @@
 
             </div>
             <div class="pure-u-1-2">
-                <div id="playlist">
-                    <div id="playlist-progressbar"></div>
-                    <div id="playlist-container"></div>
-                </div>
-
                 <div id="media-playlist-control">
                     <div id="playlist-control">
                         <button class="playlist-control-repeat pure-button"><i class="fa fa-repeat"></i></button>
@@ -165,6 +160,11 @@
                         <button class="playlist-control-save pure-button"><i class="fa fa-save"></i></button>
                         <button class="playlist-control-clear pure-button"><i class="fa fa-times"></i></button>
                     </div>
+                </div>
+
+                <div id="playlist-progressbar"></div>
+                <div id="playlist">
+                    <div id="playlist-container"></div>
                 </div>
             </div>
         </div>
@@ -188,13 +188,17 @@
             </div>
             <div class="pure-u-1-5">
                 <h4>About:</h4>
-                <dd>licence</dd>
-                <dd>changelog</dd>
+                <dl>
+                    <dd>licence</dd>
+                    <dd>changelog</dd>
+                </dl>
             </div>
             <div class="pure-u-1-5">
                 <h4>Contact:</h4>
-                <dd><a href="mailto:onlinescrobbler@gmail.com">email</a></dd>
-                <dd><a target="_blank" href="http://www.last.fm/user/onlinescrobbler">last.fm account</a></dd>
+                <dl>
+                    <dd><a href="mailto:onlinescrobbler@gmail.com">email</a></dd>
+                    <dd><a target="_blank" href="http://www.last.fm/user/onlinescrobbler">last.fm account</a></dd>
+                </dl>
             </div>
             <div class="pure-u-1-5"></div>
         </div>
@@ -208,7 +212,7 @@
 <div id="testing-environment">
 
     <div id="testing-helper">
-        <button class="testing-environment-hide-button"><icon class="fa fa-times-circle fa-2x"></icon></button>
+        <button class="testing-environment-hide-button"><i class="fa fa-times-circle fa-2x"></i></button>
         <form class="pure-form">
             <fieldset>
                 <legend>Tester helper:</legend>

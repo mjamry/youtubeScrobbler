@@ -106,7 +106,7 @@
 #playlist
 {
     width:450px;
-    height:355px;
+    height:303px;
     /*TODO do it with JS*/
     overflow: auto;
 }
