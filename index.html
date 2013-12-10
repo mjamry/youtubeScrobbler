@@ -174,86 +174,100 @@
 <div id="footer">
     <div id="footer-content">
         <div class="pure-g">
-            <div class="pure-u-1-5"></div>
             <div class="pure-u-1-5">
-                Resources:
+                <h4 class="test-environment-color">TESTING - BETA VERSION</h4>
+                <button class="testing-environment-show-button test-environment-color">SHOW TEST FORM</button>
+            </div>
+            <div class="pure-u-1-5">
+                <h4>Resources:</h4>
                 <dl>
-                    <dd><i class="fa fa-github fa-2x"></i> <a target="_blank" href="http://www.github.com">github</a></dd>
-                    <dd><i class="fa fa-youtube fa-2x"></i> <a target="_blank" href="http://www.youtube.com">youtube</a></dd>
-                    <dd><i class="fa fa-square fa-2x"></i> <a target="_blank" href="http://www.last.fm">last.fm</a></dd>
+                    <dd><a target="_blank" href="http://www.github.com">github</a></dd>
+                    <dd><a target="_blank" href="http://www.youtube.com">youtube</a></dd>
+                    <dd><a target="_blank" href="http://www.last.fm">last.fm</a></dd>
                 </dl>
             </div>
             <div class="pure-u-1-5">
-                <br><br><br><br><br>
-                <div>All rights reserved.</div>
+                <h4>About:</h4>
+                <dd>licence</dd>
+                <dd>changelog</dd>
             </div>
             <div class="pure-u-1-5">
-                Contact:<br>
-                <i class="fa fa-pencil fa-2x"></i> <a href="mailto:onlinescrobbler@gmail.com">onlinescrobbler@gmail.com</a>
+                <h4>Contact:</h4>
+                <dd><a href="mailto:onlinescrobbler@gmail.com">email</a></dd>
+                <dd><a target="_blank" href="http://www.last.fm/user/onlinescrobbler">last.fm account</a></dd>
             </div>
             <div class="pure-u-1-5"></div>
         </div>
+        <hr class="footer-line"/>
+        <div class="footer-licencing">
+            &copy; copyright onlinescrobbler 2013
+        </div>
+        <hr class="footer-line"/>
     </div>
 </div>
+<div id="testing-environment">
 
-<div id="testing-helper">
-    <form class="pure-form">
-        <fieldset>
-            <legend>Tester helper:</legend>
-            <input type="button" value="Report bug" id="report-bug-btn" class="pure-button"/>
-            <input type="button" value="Request feature" id="report-feature-btn" class="pure-button"/>
-        </fieldset>
-    </form>
-    <form class="pure-form pure-form-aligned" id="error-report">
-        <fieldset>
-            <legend>Bug report</legend>
-            Thank you for your time and engagement :).<br>
-            This form will send an email with attached:
-            <ul>
-                <li>bug description,</li>
-                <li>logs (visible below),</li>
-                <li>screen shot (TODO),</li>
-                <li>browser and OS versions you are using,</li>
-                <li>your email address - to send you feedback/questions.</li>
-            </ul>
-            <div class="pure-control-group">
-                <label for="bug-email">sender:</label>
-                <input type="email" id="bug-email" placeholder="write your email here"/>
-            </div>
-            <div class="pure-control-group">
-                <label for="bug-title">title:</label>
-                <input type="text" id="bug-title" placeholder="write bug title"/>
-            </div>
-            <div class="pure-control-group">
-                <label for="bug-description">description:</label>
-                <textarea id="bug-description" placeholder="write here bug's description/steps to reproduce - basically how you managed to get this bug"></textarea>
-            </div>
-            <div class="pure-controls">
-                <input type="submit" value="send" class="pure-button"/>
-            </div>
-        </fieldset>
-    </form>
-</div>
-
-<div id="logger">
-    <div id="logger-header">
+    <div id="testing-helper">
+        <button class="testing-environment-hide-button"><icon class="fa fa-times-circle fa-2x"></icon></button>
         <form class="pure-form">
             <fieldset>
-                <legend>Logger options:</legend>
-                <input type="checkbox" id="enable-logger" checked>
-                <label for="enable-logger">Logger enabled</label>
-                | <label for="logger-level">Logger level</label>
-                <select id="logger-level">
-                    <option selected value="0">Info</option>
-                    <option value="1">Warning</option>
-                    <option value="2">Error</option>
-                    <option value="3">Debug</option>
-                </select>
-                | <input type="button" id="clear-logs" value="Clear logs" class="pure-button"/>
+                <legend>Tester helper:</legend>
+                <input type="button" value="Report bug" id="report-bug-btn" class="pure-button"/>
+                <input type="button" value="Request feature" id="report-feature-btn" class="pure-button"/>
             </fieldset>
         </form>
+        <form class="pure-form pure-form-aligned" id="error-report">
+            <fieldset>
+                <legend>Bug report</legend>
+                Thank you for your time and engagement :).<br>
+                This form will send an email with attached:
+                <ul>
+                    <li>bug description,</li>
+                    <li>logs (visible below),</li>
+                    <li>screen shot (TODO),</li>
+                    <li>browser and OS versions you are using,</li>
+                    <li>your email address - to send you feedback/questions.</li>
+                </ul>
+                <div class="pure-control-group">
+                    <label for="bug-email">sender:</label>
+                    <input type="email" id="bug-email" placeholder="write your email here"/>
+                </div>
+                <div class="pure-control-group">
+                    <label for="bug-title">title:</label>
+                    <input type="text" id="bug-title" placeholder="write bug title"/>
+                </div>
+                <div class="pure-control-group">
+                    <label for="bug-description">description:</label>
+                    <textarea id="bug-description" placeholder="write here bug's description/steps to reproduce - basically how you managed to get this bug"></textarea>
+                </div>
+                <div class="pure-controls">
+                    <input type="submit" value="send" class="pure-button"/>
+                </div>
+            </fieldset>
+        </form>
+
     </div>
-    <div id="logger-content"></div>
+
+    <div id="logger-container">
+        <div id="logger-header">
+            <form class="pure-form">
+                <fieldset>
+                    <legend>Logger options:</legend>
+                    <input type="checkbox" id="enable-logger" checked>
+                    <label for="enable-logger">Logger enabled</label>
+                    | <label for="logger-level">Logger level</label>
+                    <select id="logger-level">
+                        <option selected value="0">Info</option>
+                        <option value="1">Warning</option>
+                        <option value="2">Error</option>
+                        <option value="3">Debug</option>
+                    </select>
+                    | <input type="button" id="clear-logs" value="Clear logs" class="pure-button"/>
+                </fieldset>
+            </form>
+        </div>
+        <div id="logger-content"></div>
+    </div>
 </div>
 </body>
 

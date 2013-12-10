@@ -16,14 +16,28 @@ window.UI.TestReportsViewController.prototype =
         var errorBtn = $("#"+this._config.errorButton);
         errorBtn.click($.proxy(function()
         {
-            this._errorContainer.show();
+            if(this._errorContainer.is(':visible'))
+            {
+                this._errorContainer.hide();
+            }
+            else
+            {
+                this._errorContainer.show();
+            }
         },
         this));
 
         var featureBtn = $("#"+this._config.featureButton);
         featureBtn.click($.proxy(function()
         {
-            this._featureContainer.show();
+            if(this._featureContainer.is(':visible'))
+            {
+                this._featureContainer.hide();
+            }
+            else
+            {
+                this._featureContainer.show();
+            }
         },
         this));
     },
@@ -65,6 +79,22 @@ window.UI.TestReportsViewController.prototype =
         }
     },
 
+    _showForm: function(config)
+    {
+        return function()
+        {
+            $(config.testingFormContainer).show();
+        }
+    },
+
+    _hideForm: function(config)
+    {
+        return function()
+        {
+            $(config.testingFormContainer).hide();
+        }
+    },
+
     initialise: function()
     {
         this._errorContainer.hide();
@@ -72,5 +102,10 @@ window.UI.TestReportsViewController.prototype =
         this._hookUpToButtonsEvents();
 
         this._hookUpFormsActions();
+
+        $(this._config.showFormButton).click(this._showForm(this._config));
+        $(this._config.hideFormButton).click(this._hideForm(this._config));
+
+        this._hideForm(this._config)();
     }
 };

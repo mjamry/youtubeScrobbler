@@ -7,11 +7,14 @@
 
 #footer
 {
-    width:100%;
     background-color: #ddd;
-    padding:10px;
     font-size: 9pt;
     color: gray;
+    border-top:1px solid darkgray;
+    width:100%;
+    position:fixed;
+    bottom:0;
+    padding:10px;
 }
 
 #footer A
@@ -28,6 +31,19 @@
 {
     width: 800px;
     margin:auto;
+}
+
+.footer-line
+{
+    border:0;
+    height:1px;
+    color:darkgray;
+    background-color: darkgray;
+}
+
+.footer-licencing
+{
+    text-align: center;
 }
 
 #page-header-container
@@ -343,6 +359,13 @@
 
 
 /*----------------------------LOGGER----------------------*/
+#logger-content
+{
+    height:430px;
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+
 #logger-header
 {
     width:500px;
@@ -378,16 +401,38 @@
 }
 
 /*--------------------------------TESTS---------------------------*/
+#testing-environment
+{
+    width:800px;
+    position:fixed;
+    top:150px;
+    left:50%;
+    margin-left:-400px;
+    border:1px solid darkgray;
+    background-color: gray;
+}
+
 #testing-helper
 {
     width:500px;
     margin: auto;
-    font-size: 10pt;
+    font-size: 9pt;
 }
 
 #error-report
 {
-    font-size: 11pt;
+    font-size: 9pt;
     background-color: lightsalmon;
+}
+
+.testing-environment-hide-button
+{
+    float: right;
+    color: darkred;
+}
+
+.test-environment-color
+{
+    color:darkred;
 }
 
