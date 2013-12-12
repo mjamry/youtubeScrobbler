@@ -415,10 +415,8 @@ body{
 #testing-environment
 {
     width:800px;
-    position:fixed;
-    top:150px;
-    left:50%;
-    margin-left:-400px;
+    margin-left:auto;
+    margin-right:auto;
     border:1px solid darkgray;
     background-color: gray;
 }
@@ -434,6 +432,12 @@ body{
 {
     font-size: 9pt;
     background-color: lightsalmon;
+}
+
+#feature-report
+{
+    font-size:9pt;
+    background-color: mediumseagreen;
 }
 
 .testing-environment-hide-button

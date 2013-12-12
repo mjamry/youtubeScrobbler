@@ -168,8 +168,8 @@
         <div id="footer-content">
             <div class="pure-g">
                 <div class="pure-u-1-5">
-                    <h4 class="test-environment-color">TESTING - BETA VERSION</h4>
-                    <button class="testing-environment-show-button test-environment-color">SHOW TEST FORM</button>
+                    <h4 class="test-environment-color">QA HELPER</h4>
+                    <button class="testing-environment-show-button test-environment-color">SHOW <br>QA FORM</button>
                 </div>
                 <div class="pure-u-1-5">
                     <h4>Resources:</h4>
@@ -206,25 +206,23 @@
 </body>
 </html>
 <div id="testing-environment">
-
     <div id="testing-helper">
         <button class="testing-environment-hide-button"><i class="fa fa-times-circle fa-2x"></i></button>
         <form class="pure-form">
             <fieldset>
                 <legend>Tester helper:</legend>
                 <input type="button" value="Report bug" id="report-bug-btn" class="pure-button"/>
-                <input type="button" value="Request feature" id="report-feature-btn" class="pure-button"/>
+                <input type="button" value="Send feedback" id="report-feature-btn" class="pure-button"/>
             </fieldset>
         </form>
         <form class="pure-form pure-form-aligned" id="error-report">
             <fieldset>
-                <legend>Bug report</legend>
+                <legend>Bug reporting</legend>
                 Thank you for your time and engagement :).<br>
-                This form will send an email with attached:
+                This form will send us an email with attached:
                 <ul>
                     <li>bug description,</li>
-                    <li>logs (visible below),</li>
-                    <li>screen shot (TODO),</li>
+                    <li>logs in debug level (visible below),</li>
                     <li>browser and OS versions you are using,</li>
                     <li>your email address - to send you feedback/questions.</li>
                 </ul>
@@ -239,6 +237,29 @@
                 <div class="pure-control-group">
                     <label for="bug-description">description:</label>
                     <textarea id="bug-description" placeholder="write here bug's description/steps to reproduce - basically how you managed to get this bug"></textarea>
+                </div>
+                <div class="pure-controls">
+                    <input type="submit" value="send" class="pure-button"/>
+                </div>
+            </fieldset>
+            </form>
+            <form class="pure-form pure-form-aligned" id="feature-report">
+            <fieldset>
+                <legend>Feedback sending</legend>
+                Here you can send us your thoughts about this app.<br>
+                You can also share your ideas and ask for new features.<br><br>
+
+                <div class="pure-control-group">
+                    <label for="feedback-email">sender:</label>
+                    <input type="email" id="feedback-email" placeholder="write your email here"/>
+                </div>
+                <div class="pure-control-group">
+                    <label for="feedback-title">title:</label>
+                    <input type="text" id="feedback-title" placeholder="write title"/>
+                </div>
+                <div class="pure-control-group">
+                    <label for="feedback-description">description:</label>
+                    <textarea id="feedback-description" placeholder="here you can put your thoughts"></textarea>
                 </div>
                 <div class="pure-controls">
                     <input type="submit" value="send" class="pure-button"/>
