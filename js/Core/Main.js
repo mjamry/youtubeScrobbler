@@ -53,6 +53,7 @@ $(function()
 
 function HandleSession()
 {
+    $("#authentication-current-session").hide();
     $("#authentication-link").bind("click", function()
     {
         window.location = "http://www.last.fm/api/auth/?api_key="+window.LastFm.LastFmConstants.API_KEY+"&cb="+document.URL;
@@ -62,7 +63,7 @@ function HandleSession()
         function(userName)
         {
             $("#authentication").hide();
-            $("#current").html('Hello! <a target="blank" href="http://www.lastfm.pl/user/'+userName+'">'+userName+'<\/a>').show();
+            $("#authentication-current-session").html('Hello! <a target="blank" href="http://www.lastfm.pl/user/'+userName+'">'+userName+'<\/a>').show();
         }
     )
 }

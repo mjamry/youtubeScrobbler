@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
     <title>Online Scrobbler</title>
@@ -85,7 +84,8 @@
     <script type="text/javascript" src="js/LastFm/TrackLoveStateModifier.js"></script>
 </head>
 <body class="pure-skin-sc">
-<header id="page-header-container">
+<div id="page">
+    <div id="header">
     <div id="header-content">
         <div id="header-content-logo">
             Online Scrobbler v0.1.8
@@ -94,12 +94,11 @@
             <div id="authentication">
                 <a href="#" id="authentication-link" class="pure-button">Log in to Last.fm</a>
             </div>
-            <div id="current" class="pure-button">
-
+                <div id="authentication-current-session" class="pure-button"></div>
             </div>
         </div>
     </div>
-</header>
+    <div id="page-content">
 <div id="media-player-playback-controls-container">
     <div id="media-player-controls">
         <div id="playback-control">
@@ -131,7 +130,7 @@
         </div>
     </div>
 </div>
-<div id="page-content">
+
     <div id="input-form">
         <form class=pure-form>
             <input type="text" id="media-location" placeholder="paste you YT link here"/>
@@ -170,7 +169,6 @@
         </div>
     </div>
 </div>
-
 <div id="footer">
     <div id="footer-content">
         <div class="pure-g">
@@ -209,6 +207,10 @@
         <hr class="footer-line"/>
     </div>
 </div>
+</div>
+</body>
+</html>
+
 <div id="testing-environment">
 
     <div id="testing-helper">
@@ -273,9 +275,6 @@
         <div id="logger-content"></div>
     </div>
 </div>
-</body>
-
-</html>
 <div id="controls-schemes">
     <div class="playlist-item pure-g">
         <div class="pure-u-3-4">
