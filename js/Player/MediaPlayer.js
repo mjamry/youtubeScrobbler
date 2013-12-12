@@ -6,7 +6,6 @@ window.Common = window.Common || {};
 window.Player.MediaPlayer = function(configuration, container)
 {
     this.instance = null;
-    this._eventBroker = EventBroker.getInstance();
     this.currentlyLoadedMediaDetails = new window.Player.MediaDetails();
 
     var config = $.extend(
@@ -15,15 +14,16 @@ window.Player.MediaPlayer = function(configuration, container)
 
                 this.instance = mediaElement;
                 this._initialise(mediaElement);
-                window.Common.Log.Instance().Info("Media player has been initialised");
 
-                this.instance.setVideoSize(300, 300);
+                Logger.getInstance().Info("Media player has been initialised");
+
+               // this.instance.setVideoSize(300, 300);
 
             }, this),
 
             error: function ()
             {
-                Logger.getInstance().Error("MediaElement initialisation failed.");
+                Logger.getInstance().Error("Media player initialisation failed.");
             }
         }, configuration
     );
@@ -44,30 +44,41 @@ window.Player.MediaPlayer.prototype =
     {
         mediaElement.addEventListener(
             window.Player.LibraryEventsNames.play,
-            $.proxy(function(){this._eventBroker.fireEventWithData(window.Player.Events.MediaPlay, this.currentlyLoadedMediaDetails);}, this),
+            $.proxy(function()
+                {
+                    EventBroker.getInstance().fireEventWithData(window.Player.Events.MediaPlay, this.currentlyLoadedMediaDetails);
+                },
+                this),
             false
         );
 
         mediaElement.addEventListener(
             window.Player.LibraryEventsNames.ended,
-            $.proxy(function(){this._eventBroker.fireEventWithData(window.Player.Events.MediaStopped, this.currentlyLoadedMediaDetails);}, this),
+            $.proxy(function()
+                {
+                    EventBroker.getInstance().fireEventWithData(window.Player.Events.MediaStopped, this.currentlyLoadedMediaDetails);
+                },
+                this),
             false
         );
 
         mediaElement.addEventListener(
             window.Player.LibraryEventsNames.pause,
-            $.proxy(function(){this._eventBroker.fireEventWithData(window.Player.Events.MediaPaused, this.currentlyLoadedMediaDetails);}, this),
+            $.proxy(function()
+                {
+                    EventBroker.getInstance().fireEventWithData(window.Player.Events.MediaPaused, this.currentlyLoadedMediaDetails);
+                },
+                this),
             false
         );
 
-        mediaElement.addEventListener(
-            window.Player.LibraryEventsNames.timeupdate, this._handleTimeUpdated, null, this);
+        mediaElement.addEventListener(window.Player.LibraryEventsNames.timeupdate, this._handleTimeUpdated, null, this);
 
     },
 
     load: function(mediaDetails)
     {
-        this._eventBroker.fireEventWithData(window.Player.Events.MediaChanged, this.currentlyLoadedMediaDetails);
+        EventBroker.getInstance().fireEventWithData(window.Player.Events.MediaChanged, this.currentlyLoadedMediaDetails);
         this.currentlyLoadedMediaDetails = mediaDetails;
         if(this.currentlyLoadedMediaDetails)
         {
