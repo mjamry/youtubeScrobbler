@@ -86,131 +86,125 @@
 <body class="pure-skin-sc">
 <div id="page">
     <div id="header">
-    <div id="header-content">
-        <div id="header-content-logo">
-            Online Scrobbler v0.1.8
-        </div>
-        <div id="header-session-details">
-            <div id="authentication">
-                <a href="#" id="authentication-link" class="pure-button">Log in to Last.fm</a>
+        <div id="header-content">
+            <div id="header-content-logo">
+                Online Scrobbler v0.1.8
             </div>
+            <div id="header-session-details">
+                <div id="authentication">
+                    <a href="#" id="authentication-link" class="pure-button">Log in to Last.fm</a>
+                </div>
                 <div id="authentication-current-session" class="pure-button"></div>
             </div>
         </div>
     </div>
     <div id="page-content">
-<div id="media-player-playback-controls-container">
-    <div id="media-player-controls">
-        <div id="playback-control">
-            <button class="playback-control-previous pure-button"><i class="fa fa-step-backward"></i></button>
-            <button class="playback-control-play pure-button"><i class="fa fa-play"></i></button>
-            <button class="playback-control-pause pure-button"><i class="fa fa-pause"></i></button>
-            <button class="playback-control-next pure-button"><i class="fa fa-step-forward"></i></button>
+        <div id="media-player-playback-controls-container">
+            <div id="media-player-controls">
+                <div id="playback-control">
+                    <button class="playback-control-previous pure-button"><i class="fa fa-step-backward"></i></button>
+                    <button class="playback-control-play pure-button"><i class="fa fa-play"></i></button>
+                    <button class="playback-control-pause pure-button"><i class="fa fa-pause"></i></button>
+                    <button class="playback-control-next pure-button"><i class="fa fa-step-forward"></i></button>
+                </div>
+            </div>
+            <div id="media-player-playback">
+                <div id="playback-progress-container">
+                    <div class="playback-progress-bar-container">
+                        <div class="playback-progress-bar"></div>
+                    </div>
+                    <div class="playback-data-bar-container">
+                        <div class="playback-data-bar"></div>
+                    </div>
+                    <div class="playback-details-container">
+                        <div class="playback-details"></div>
+                        <div class="playback-time"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="playback-control-volume-container">
+                <div class="volume-control-indicator-container">
+                    <div class="volume-control-indicator">
+                        volume
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div id="media-player-playback">
-        <div id="playback-progress-container">
-            <div class="playback-progress-bar-container">
-                <div class="playback-progress-bar"></div>
-            </div>
-            <div class="playback-data-bar-container">
-                <div class="playback-data-bar"></div>
-            </div>
-            <div class="playback-details-container">
-                <div class="playback-details"></div>
-                <div class="playback-time"></div>
-            </div>
+        <div id="input-form">
+            <form class=pure-form>
+                <input type="text" id="media-location" placeholder="paste you YT link here"/>
+                <input type="button" value="add to playlist" id="add-to-playlist" class="pure-button playlist-button"/>
+                <input type="button" value="create new playlist" id="create-new-playlist" class="pure-button playlist-button"/>
+            </form>
         </div>
-    </div>
-    <div id="playback-control-volume-container">
-        <div class="volume-control-indicator-container">
-            <div class="volume-control-indicator">
-                volume
-            </div>
-        </div>
-    </div>
-</div>
+        <div id="media-content">
+            <div class="pure-g">
+                <div class="pure-u-1-2">
 
-    <div id="input-form">
-        <form class=pure-form>
-            <input type="text" id="media-location" placeholder="paste you YT link here"/>
-            <input type="button" value="add to playlist" id="add-to-playlist" class="pure-button playlist-button"/>
-            <input type="button" value="create new playlist" id="create-new-playlist" class="pure-button playlist-button"/>
-        </form>
-    </div>
-
-    <div id="media-content">
-        <div class="pure-g">
-            <div class="pure-u-1-2">
-
-                <div id="media-player">
+                    <div id="media-player">
                         <video id="media_player" preload="none">
                             <source type="video/x-youtube" src="https://www.youtube.com/watch?v=8zwTEKY4meE" />
                         </video>
-                </div>
-
-
-            </div>
-            <div class="pure-u-1-2">
-                <div id="media-playlist-control">
-                    <div id="playlist-control">
-                        <button class="playlist-control-repeat pure-button"><i class="fa fa-repeat"></i></button>
-                        <button class="playlist-control-shuffle pure-button"><i class="fa fa-random"></i></button>
-                        <button class="playlist-control-save pure-button"><i class="fa fa-save"></i></button>
-                        <button class="playlist-control-clear pure-button"><i class="fa fa-times"></i></button>
                     </div>
                 </div>
-
-                <div id="playlist-progressbar"></div>
-                <div id="playlist">
-                    <div id="playlist-container"></div>
+                <div class="pure-u-1-2">
+                    <div id="media-playlist-control">
+                        <div id="playlist-control">
+                            <button class="playlist-control-repeat pure-button"><i class="fa fa-repeat"></i></button>
+                            <button class="playlist-control-shuffle pure-button"><i class="fa fa-random"></i></button>
+                            <button class="playlist-control-save pure-button"><i class="fa fa-save"></i></button>
+                            <button class="playlist-control-clear pure-button"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div id="playlist-progressbar"></div>
+                    <div id="playlist">
+                        <div id="playlist-container"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div id="footer">
-    <div id="footer-content">
-        <div class="pure-g">
-            <div class="pure-u-1-5">
-                <h4 class="test-environment-color">TESTING - BETA VERSION</h4>
-                <button class="testing-environment-show-button test-environment-color">SHOW TEST FORM</button>
+    <div id="footer">
+        <div id="footer-content">
+            <div class="pure-g">
+                <div class="pure-u-1-5">
+                    <h4 class="test-environment-color">TESTING - BETA VERSION</h4>
+                    <button class="testing-environment-show-button test-environment-color">SHOW TEST FORM</button>
+                </div>
+                <div class="pure-u-1-5">
+                    <h4>Resources:</h4>
+                    <dl>
+                        <dd><a target="_blank" href="http://www.github.com">github</a></dd>
+                        <dd><a target="_blank" href="http://www.youtube.com">youtube</a></dd>
+                        <dd><a target="_blank" href="http://www.last.fm">last.fm</a></dd>
+                    </dl>
+                </div>
+                <div class="pure-u-1-5">
+                    <h4>About:</h4>
+                    <dl>
+                        <dd>licence</dd>
+                        <dd>changelog</dd>
+                    </dl>
+                </div>
+                <div class="pure-u-1-5">
+                    <h4>Contact:</h4>
+                    <dl>
+                        <dd><a href="mailto:onlinescrobbler@gmail.com">email</a></dd>
+                        <dd><a target="_blank" href="http://www.last.fm/user/onlinescrobbler">last.fm account</a></dd>
+                    </dl>
+                </div>
+                <div class="pure-u-1-5"></div>
             </div>
-            <div class="pure-u-1-5">
-                <h4>Resources:</h4>
-                <dl>
-                    <dd><a target="_blank" href="http://www.github.com">github</a></dd>
-                    <dd><a target="_blank" href="http://www.youtube.com">youtube</a></dd>
-                    <dd><a target="_blank" href="http://www.last.fm">last.fm</a></dd>
-                </dl>
+            <hr class="footer-line"/>
+            <div class="footer-licencing">
+                &copy; copyright onlinescrobbler 2013
             </div>
-            <div class="pure-u-1-5">
-                <h4>About:</h4>
-                <dl>
-                    <dd>licence</dd>
-                    <dd>changelog</dd>
-                </dl>
-            </div>
-            <div class="pure-u-1-5">
-                <h4>Contact:</h4>
-                <dl>
-                    <dd><a href="mailto:onlinescrobbler@gmail.com">email</a></dd>
-                    <dd><a target="_blank" href="http://www.last.fm/user/onlinescrobbler">last.fm account</a></dd>
-                </dl>
-            </div>
-            <div class="pure-u-1-5"></div>
+            <hr class="footer-line"/>
         </div>
-        <hr class="footer-line"/>
-        <div class="footer-licencing">
-            &copy; copyright onlinescrobbler 2013
-        </div>
-        <hr class="footer-line"/>
     </div>
-</div>
 </div>
 </body>
 </html>
-
 <div id="testing-environment">
 
     <div id="testing-helper">
@@ -251,9 +245,7 @@
                 </div>
             </fieldset>
         </form>
-
     </div>
-
     <div id="logger-container">
         <div id="logger-header">
             <form class="pure-form">
@@ -298,6 +290,4 @@
             </div>
         </div>
     </div>
-
-
 </div>
