@@ -17,8 +17,6 @@ window.Player.MediaPlayer = function(configuration, container)
 
                 Logger.getInstance().Info("Media player has been initialised");
 
-               // this.instance.setVideoSize(300, 300);
-
             }, this),
 
             error: function ()
