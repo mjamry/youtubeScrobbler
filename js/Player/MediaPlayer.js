@@ -18,15 +18,13 @@ window.Player.MediaPlayer.prototype =
         {
             var successCallback = function(that, mediaDetails)
             {
-                return function successCallback(mediaElement)
+                return function mediaPlayerInitialisationSuccessCallback(mediaElement)
                 {
                     that.instance = mediaElement;
                     that._initialise(mediaElement);
 
                     Logger.getInstance().Info("Media player has been initialised");
                     that._load(mediaDetails);
-                    that.play();
-
                 }
             };
 
@@ -39,7 +37,8 @@ window.Player.MediaPlayer.prototype =
                 }
             }, this.config
         );
-        //instance is set when player loading is finished
+
+        //create new player - instance is set in success callback
         new MediaElement(this.container, config);
     },
 
@@ -83,6 +82,16 @@ window.Player.MediaPlayer.prototype =
 
         mediaElement.addEventListener(window.Player.LibraryEventsNames.timeupdate, this._handleTimeUpdated, null, this);
 
+        //this is needed to force autoplay after player initialisation.
+        mediaElement.addEventListener(
+            window.Player.LibraryEventsNames.canplay,
+            $.proxy(function()
+                {
+                    this.play();
+                },
+                this),
+            false
+        );
     },
 
     _load: function(mediaDetails)
@@ -98,6 +107,13 @@ window.Player.MediaPlayer.prototype =
     {
         if(mediaDetails != null)
         {
+            //when media type has been changed - recreate plugin
+            if(this.currentlyLoadedMediaDetails.mediaType != mediaDetails.mediaType && this.instance != null)
+            {
+                this.instance.remove();
+                this.instance = null;
+            }
+
             if(this.instance == null)
             {
                 this._createPlayerInstance(mediaDetails);
