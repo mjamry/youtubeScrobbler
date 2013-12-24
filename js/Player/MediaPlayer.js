@@ -8,30 +8,41 @@ window.Player.MediaPlayer = function(configuration, container)
     this.instance = null;
     this.currentlyLoadedMediaDetails = new window.Player.MediaDetails();
 
-    var config = $.extend(
-        {
-            success: $.proxy(function (mediaElement) {
-
-                this.instance = mediaElement;
-                this._initialise(mediaElement);
-
-                Logger.getInstance().Info("Media player has been initialised");
-
-            }, this),
-
-            error: function ()
-            {
-                Logger.getInstance().Error("Media player initialisation failed.");
-            }
-        }, configuration
-    );
-
-    //instance is set when player loading is finished
-    this.instance = new MediaElement(container, config);
+    this.container = container;
+    this.config = configuration;
 };
 
 window.Player.MediaPlayer.prototype =
 {
+    _createPlayerInstance: function(mediaDetails)
+        {
+            var successCallback = function(that, mediaDetails)
+            {
+                return function successCallback(mediaElement)
+                {
+                    that.instance = mediaElement;
+                    that._initialise(mediaElement);
+
+                    Logger.getInstance().Info("Media player has been initialised");
+                    that._load(mediaDetails);
+                    that.play();
+
+                }
+            };
+
+            var config = $.extend(
+            {
+                success: successCallback(this, mediaDetails),
+                error: function ()
+                {
+                    Logger.getInstance().Error("Media player initialisation failed.");
+                }
+            }, this.config
+        );
+        //instance is set when player loading is finished
+        new MediaElement(this.container, config);
+    },
+
     _handleTimeUpdated: function(timeDetails)
     {
         EventBroker.getInstance().fireEventWithData(window.Player.Events.TimeUpdated, timeDetails);
@@ -74,14 +85,27 @@ window.Player.MediaPlayer.prototype =
 
     },
 
-    load: function(mediaDetails)
+    _load: function(mediaDetails)
     {
         EventBroker.getInstance().fireEventWithData(window.Player.Events.MediaChanged, this.currentlyLoadedMediaDetails);
         this.currentlyLoadedMediaDetails = mediaDetails;
-        if(this.currentlyLoadedMediaDetails)
+
+        this.instance.setSrc(mediaDetails.url);
+        this.instance.load();
+    },
+
+    load: function(mediaDetails)
+    {
+        if(mediaDetails != null)
         {
-            this.instance.setSrc(mediaDetails.url);
-            this.instance.load();
+            if(this.instance == null)
+            {
+                this._createPlayerInstance(mediaDetails);
+            }
+            else
+            {
+                this._load(mediaDetails);
+            }
         }
     },
 
@@ -97,12 +121,15 @@ window.Player.MediaPlayer.prototype =
 
     setVolume: function(value)
     {
-        this.instance.setVolume(value);
+        if(this.instance != null)
+            this.instance.setVolume(value);
     },
 
     getVolume: function()
-    {
-        return this.instance.volume;
+    {   if(this.instance != null)
+            return this.instance.volume;
+        //TODO should return more appropriate value - e.g. default one from configuration
+        return 1;
     }
 };
 
