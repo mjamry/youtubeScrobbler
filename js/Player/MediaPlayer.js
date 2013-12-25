@@ -99,7 +99,12 @@ window.Player.MediaPlayer.prototype =
         EventBroker.getInstance().fireEventWithData(window.Player.Events.MediaChanged, this.currentlyLoadedMediaDetails);
         this.currentlyLoadedMediaDetails = mediaDetails;
 
-        this.instance.setSrc(mediaDetails.url);
+        var source =
+        [{
+            src: mediaDetails.url,
+            type: mediaDetails.mediaType
+        }];
+        this.instance.setSrc(source);
         this.instance.load();
     },
 

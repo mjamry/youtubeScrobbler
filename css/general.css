@@ -215,7 +215,8 @@ body{
 #media-player
 {
     width: 450px;
-    height: 390px;
+    height: 338px;
+    background-image:url('../media/online_scrobbler_test_screen.png');
 }
 
 #media-player-playback
