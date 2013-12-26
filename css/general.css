@@ -231,7 +231,7 @@ body{
 {
     background-color: #88c6d3;
     float:left;
-    width:270px;
+    width:200px;
 }
 
 #playback-control
@@ -284,7 +284,7 @@ body{
 #media-player-playback
 {
     float:left;
-    min-width:300px;
+    min-width:570px;
 }
 
 #playback-progress-container
