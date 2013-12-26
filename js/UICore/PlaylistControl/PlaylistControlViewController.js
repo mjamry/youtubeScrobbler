@@ -32,15 +32,16 @@ window.UI.PlaylistControlViewController.prototype =
         return function()
         {
             var currentState = that.playlistController.isLoop;
-            that.playlistController.isLoop = !currentState;
 
-            if(currentState)
+            if(!currentState)
             {
                 that.view.find(that.config.RepeatButton).addClass(that.config.SelectedButtonClass);
+                that.playlistController.isLoop = true;
             }
             else
             {
                 that.view.find(that.config.RepeatButton).removeClass(that.config.SelectedButtonClass);
+                that.playlistController.isLoop = false;
             }
         }
     },

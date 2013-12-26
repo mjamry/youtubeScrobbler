@@ -313,6 +313,12 @@ body{
 {
     background-color: black;
 }
+
+.playlist-control-button-selected
+{
+    color: red;
+}
+
 /*----------------------------PROGRESS---BARS----------*/
 #media-player-playback
 {

@@ -9,5 +9,5 @@ window.UI.PlaylistControlConfiguration =
     ShuffleButton: ".playlist-control-shuffle",
     RepeatButton: ".playlist-control-repeat",
 
-    SelectedButtonClass: "playlist-control-selected"
+    SelectedButtonClass: "playlist-control-button-selected"
 };
