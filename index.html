@@ -92,9 +92,9 @@
             </div>
             <div id="header-session-details">
                 <div id="authentication">
-                    <a href="#" id="authentication-link" class="pure-button">Log in to Last.fm</a>
+                    <a href="#" id="authentication-link" class="pure-button" title="start scrobbling using your last.fm account">Log in to Last.fm</a>
                 </div>
-                <div id="authentication-current-session" class="pure-button"></div>
+                <div id="authentication-current-session" class="pure-button" title="you are loged in using your last.fm account"></div>
             </div>
         </div>
     </div>
@@ -102,10 +102,10 @@
         <div id="media-player-playback-controls-container">
             <div id="media-player-controls">
                 <div id="playback-control">
-                    <button class="playback-control-previous playback-control-button"><i class="fa fa-step-backward"></i></button>
-                    <button class="playback-control-play playback-control-button"><i class="fa fa-play fa-2x"></i></button>
-                    <button class="playback-control-pause playback-control-button"><i class="fa fa-pause fa-2x"></i></button>
-                    <button class="playback-control-next playback-control-button"><i class="fa fa-step-forward"></i></button>
+                    <button class="playback-control-previous playback-control-button" title="play previous track"><i class="fa fa-step-backward"></i></button>
+                    <button class="playback-control-play playback-control-button" title="play current track"><i class="fa fa-play fa-2x"></i></button>
+                    <button class="playback-control-pause playback-control-button" title="pause current track"><i class="fa fa-pause fa-2x"></i></button>
+                    <button class="playback-control-next playback-control-button" title="play next track"><i class="fa fa-step-forward"></i></button>
                 </div>
             </div>
             <div id="media-player-playback">
@@ -124,17 +124,16 @@
             </div>
             <div id="playback-control-volume-container">
                 <div class="volume-control-indicator-container">
-                    <div class="volume-control-indicator">
-                        volume
+                    <div class="volume-control-indicator" title="change volume level">
                     </div>
                 </div>
             </div>
             <div id="media-playlist-control">
                 <div id="playlist-control">
-                    <button class="playlist-control-repeat playlist-control-button"><i class="fa fa-repeat"></i></button>
-                    <button class="playlist-control-shuffle playlist-control-button"><i class="fa fa-random"></i></button>
-                    <button class="playlist-control-save playlist-control-button"><i class="fa fa-save"></i></button>
-                    <button class="playlist-control-clear playlist-control-button"><i class="fa fa-times"></i></button>
+                    <button class="playlist-control-repeat playlist-control-button" title="repeat playlist"><i class="fa fa-repeat"></i></button>
+                    <button class="playlist-control-shuffle playlist-control-button" title="shuffle playlist"><i class="fa fa-random"></i></button>
+                    <button class="playlist-control-save playlist-control-button" title="save current playlist - NOT WORKING YET"><i class="fa fa-save"></i></button>
+                    <button class="playlist-control-clear playlist-control-button" title="clear playlist"><i class="fa fa-times"></i></button>
                 </div>
             </div>
         </div>
@@ -166,7 +165,7 @@
     <div id="footer">
         <div id="footer-content">
             <div class="pure-g">
-                <div class="pure-u-1-5">
+                <div class="pure-u-1-5" title="click on button to show logs and bug/feature forms">
                     <h4 class="test-environment-color">QA HELPER</h4>
                     <button class="testing-environment-show-button test-environment-color">SHOW <br>QA FORM</button>
                 </div>
