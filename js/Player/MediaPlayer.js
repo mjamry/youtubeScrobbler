@@ -88,6 +88,8 @@ window.Player.MediaPlayer.prototype =
             $.proxy(function()
                 {
                     this.play();
+                    //needed by UI controllers to refresh its states
+                    EventBroker.getInstance().fireEventWithData(window.Player.Events.MediaPlay, this.currentlyLoadedMediaDetails);
                 },
                 this),
             false
@@ -96,7 +98,6 @@ window.Player.MediaPlayer.prototype =
 
     _load: function(mediaDetails)
     {
-        EventBroker.getInstance().fireEventWithData(window.Player.Events.MediaChanged, this.currentlyLoadedMediaDetails);
         this.currentlyLoadedMediaDetails = mediaDetails;
 
         var source =
@@ -126,6 +127,7 @@ window.Player.MediaPlayer.prototype =
             else
             {
                 this._load(mediaDetails);
+                EventBroker.getInstance().fireEventWithData(window.Player.Events.MediaChanged, this.currentlyLoadedMediaDetails);
             }
         }
     },
