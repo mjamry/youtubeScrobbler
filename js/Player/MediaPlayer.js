@@ -82,11 +82,13 @@ window.Player.MediaPlayer.prototype =
 
         mediaElement.addEventListener(window.Player.LibraryEventsNames.timeupdate, this._handleTimeUpdated, null, this);
 
-        //this is needed to force autoplay after player initialisation.
+        //this is needed to force auto play after player initialisation.
         mediaElement.addEventListener(
             window.Player.LibraryEventsNames.canplay,
             $.proxy(function()
                 {
+                    //this has to be done here as changing volume before full initialisation does not work
+                    this.setVolume(this.config.startVolume);
                     this.play();
                     //needed by UI controllers to refresh its states
                     EventBroker.getInstance().fireEventWithData(window.Player.Events.MediaPlay, this.currentlyLoadedMediaDetails);
@@ -145,12 +147,22 @@ window.Player.MediaPlayer.prototype =
     setVolume: function(value)
     {
         if(this.instance != null)
+        {
             this.instance.setVolume(value);
+        }
+        else
+        {
+            this.config.startVolume = value;
+        }
     },
 
     getVolume: function()
-    {   if(this.instance != null)
+    {
+        if(this.instance != null)
+        {
             return this.instance.volume;
+        }
+
         return this.config.startVolume;
     }
 };
