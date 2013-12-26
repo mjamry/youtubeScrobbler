@@ -151,8 +151,7 @@ window.Player.MediaPlayer.prototype =
     getVolume: function()
     {   if(this.instance != null)
             return this.instance.volume;
-        //TODO should return more appropriate value - e.g. default one from configuration
-        return 1;
+        return this.config.startVolume;
     }
 };
 

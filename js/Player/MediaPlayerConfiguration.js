@@ -4,6 +4,8 @@ window.Player = window.Player || {};
 //namespace
 window.Player.MediaPlayerConfig =
 {
+    // initial volume when the player starts
+    startVolume: 0.5,
     // default if the <video width> is not specified
     defaultVideoWidth: 450,
     // default if the <video height> is not specified
