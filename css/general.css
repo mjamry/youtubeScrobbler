@@ -118,7 +118,7 @@ body{
 #playlist
 {
     width:450px;
-    height:303px;
+    height:338px;
     /*TODO do it with JS*/
     overflow: auto;
 }
@@ -150,7 +150,7 @@ body{
 
 #playlist-progressbar
 {
-    height:5px;
+    height:2px;
     background-color:#999;
     display: none;
 }
