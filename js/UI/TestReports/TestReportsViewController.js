@@ -50,6 +50,13 @@ window.UI.TestReportsViewController.prototype =
             this._handleErrorReport();
         },
         this));
+
+        this._featureContainer.submit($.proxy(function(e)
+        {
+            e.preventDefault();
+            this._handleFeatureRequest();
+        },
+        this));
     },
 
     _handleErrorReport: function()
@@ -79,6 +86,32 @@ window.UI.TestReportsViewController.prototype =
         }
     },
 
+    _handleFeatureRequest: function()
+    {
+        var title = document.getElementById(this._config.feature_title).value;
+        var description = document.getElementById(this._config.feature_description).value;
+        var email = document.getElementById(this._config.feature_email).value;
+
+        if(title && description && email)
+        {
+            var callbacks =
+            {
+                success: function()
+                {
+                    Logger.getInstance().Info("Feature request has been sent.");
+                    alert("Success.\r\n\r\nFeature request has been sent.\r\nThank you for your effort.\r\n\r\nWe will stay in touch.")
+                },
+                fail: function()
+                {
+                    Logger.getInstance().Info("Error occurs while sending feature request.");
+                    alert("Failure.\r\n\r\nSorry cannot send your feature request.\r\n\r\nPleas try again.");
+                }
+            };
+            this._reportSender.sendFeatureRequest(email, title, description, callbacks);
+            this._featureContainer.hide();
+        }
+    },
+
     _showForm: function(config)
     {
         return function()
@@ -98,6 +131,7 @@ window.UI.TestReportsViewController.prototype =
     initialise: function()
     {
         this._errorContainer.hide();
+        this._featureContainer.hide();
 
         this._hookUpToButtonsEvents();
 

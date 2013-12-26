@@ -10,6 +10,9 @@ window.UI.TestReportUIConfig =
     error_email: "bug-email",
     featureFormContainer: "feature-report",
     featureButton: "report-feature-btn",
+    feature_title: "feedback-title",
+    feature_description: "feedback-description",
+    feature_email: "feedback-email",
 
     showFormButton: ".testing-environment-show-button",
     hideFormButton: ".testing-environment-hide-button",

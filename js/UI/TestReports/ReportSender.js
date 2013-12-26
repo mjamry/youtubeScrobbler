@@ -6,6 +6,7 @@ window.UI.ReportSenderConstants =
     destinationEmail: "onlinescrobbler@gmail.com",
     emailScriptLocation: "php/EmailSender.php",
     errorTag: "[Error]",
+    featureTag: "[FeatureRequest]",
 
     logsContainer: "logger-content"
 };
@@ -88,6 +89,32 @@ window.UI.ReportSender.prototype =
                 sender: sender,
                 subject: title,
                 content: content
+            })
+            .fail(callbacks.fail)
+            .done(callbacks.success)
+    },
+
+    sendFeatureRequest: function(sender, title, description, callbacks)
+    {
+        callbacks = callbacks || {
+            success: function()
+            {
+                Logger.getInstance().Debug("Feature request has been sent.");
+            },
+            fail: function()
+            {
+                Logger.getInstance().Debug("Error occurs while sending feature request.");
+            }
+        };
+
+        title = window.UI.ReportSenderConstants.featureTag+" "+title;
+
+        $.post(window.UI.ReportSenderConstants.emailScriptLocation,
+            {
+                recipient: window.UI.ReportSenderConstants.destinationEmail,
+                sender: sender,
+                subject: title,
+                content: description
             })
             .fail(callbacks.fail)
             .done(callbacks.success)
