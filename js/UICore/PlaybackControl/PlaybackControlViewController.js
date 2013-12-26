@@ -55,6 +55,15 @@ window.UI.PlaybackControlViewController.prototype =
         }
     },
 
+    _handlePlaybackProgressChanged: function(playbackControl)
+    {
+        //playback progress value as percentage value
+        return function changePlaybackProgress(newPlaybackProgressValue)
+        {
+           playbackControl.setPlaybackProgress(newPlaybackProgressValue);
+        }
+    },
+
     _showPlayButton: function()
     {
         $(this.config.PlayButton).show();
@@ -71,11 +80,16 @@ window.UI.PlaybackControlViewController.prototype =
     {
         //create volume level change handler
         this.volumeControl = new window.UI.VolumeControl("playback-control-volume-container");
-
         var volumeLevelChangedHandler = this._handleVolumeLevelChanged(this.volumeControlService);
         this.volumeControl.bindToVolumeSet(volumeLevelChangedHandler);
-
         this.volumeControl.initialise(this.volumeControlService.getVolumeLevel());
+
+        //create playback progress change handler
+        this.playbackProgressControl = new window.UI.PlaybackProgressControl($("#playback-progress-container"));
+        var playbackProgressValueChangedHandler = this._handlePlaybackProgressChanged(this.playbackControl);
+        this.playbackProgressControl.bindToPlaybackProgressChangedEvent(playbackProgressValueChangedHandler);
+
+        this.playbackProgressControl.initialise();
 
         //bind to ui events
         this.view.find(this.config.PlayButton).click(this._play(this.playbackControl, this));

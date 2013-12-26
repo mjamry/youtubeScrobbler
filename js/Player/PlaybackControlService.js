@@ -78,6 +78,12 @@ window.Player.PlaybackControlService.prototype =
     getTrackDetails: function(index)
     {
         return this.playlistController.getSpecific(index);
+    },
+
+    //progress as a percentage value
+    setPlaybackProgress: function(progressValue)
+    {
+        this.player.setPlaybackProgress(progressValue);
     }
 };
 

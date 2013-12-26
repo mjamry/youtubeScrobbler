@@ -144,6 +144,17 @@ window.Player.MediaPlayer.prototype =
         this.instance.pause();
     },
 
+    //progress as a percentage value
+    setPlaybackProgress: function(progressValue)
+    {
+        if(this.currentlyLoadedMediaDetails)
+        {
+            var newProgressValueInSeconds = (this.currentlyLoadedMediaDetails.duration.getInSeconds() * progressValue)/100;
+            this.instance.setCurrentTime(newProgressValueInSeconds);
+            EventBroker.getInstance().fireEventWithData(window.Player.Events.TimeUpdated, newProgressValueInSeconds);
+        }
+    },
+
     setVolume: function(value)
     {
         if(this.instance != null)

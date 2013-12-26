@@ -324,6 +324,11 @@ body{
 {
     float:left;
     min-width:450px;
+    cursor: default;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 #playback-progress-container
@@ -386,8 +391,10 @@ body{
 /*---PROGRESS-DETAILS----*/
 .playback-details-container
 {
-    font-size: 10pt;
-    color:lightgrey;
+    text-align: center;
+    font-weight: bold;
+    font-size: 12pt;
+    color:white;
     display: block;
 }
 
