@@ -229,9 +229,9 @@ body{
 /*----------------------------PLAYBACK---CONTROLS-------*/
 #media-player-controls
 {
-    background-color: #88c6d3;
     float:left;
-    width:200px;
+    width:180px;
+    display:block;
 }
 
 #playback-control
@@ -239,6 +239,22 @@ body{
     height: 35px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.playback-control-button
+{
+    height:35px;
+    width:60px;
+    background-color:darkslategray;
+    color:white;
+    text-align: center;
+    float:left;
+    border-style: none;
+}
+
+.playback-control-button:hover
+{
+    background-color: black;
 }
 /*---------------------------VOLUME---CONTROL------------*/
 #playback-control-volume-container
@@ -265,9 +281,9 @@ body{
 #media-playlist-control
 {
     float:left;
-    background-color: #88c6d3;
-    width:300px;
+    width:140px;
     height:35px;
+    display:block;
 }
 
 #playlist-control
@@ -281,11 +297,27 @@ body{
     color: white;
 }
 
+.playlist-control-button
+{
+    float:left;
+    height:35px;
+    width:35px;
+    background-color:darkslategray;
+    color:white;
+    text-align: center;
+    border-style: none;
+    padding:0;
+}
+
+.playlist-control-button:hover
+{
+    background-color: black;
+}
 /*----------------------------PROGRESS---BARS----------*/
 #media-player-playback
 {
     float:left;
-    min-width:270px;
+    min-width:450px;
 }
 
 #playback-progress-container
