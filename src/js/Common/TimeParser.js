@@ -61,7 +61,7 @@ window.Common.TimeParserImpl.prototype =
        var secs = timeInSeconds % this.SecondsInMinute;
        var mins = parseInt(timeInSeconds / this.SecondsInMinute);
 
-       if(mins > this.MinutesInHour)
+       if(mins >= this.MinutesInHour)
        {
            var hours = parseInt(mins / this.MinutesInHour);
            mins = mins - hours * this.MinutesInHour;
