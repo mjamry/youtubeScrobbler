@@ -3,7 +3,7 @@ window.UI = window.UI || {};
 
 window.UI.UICore = function(){};
 
-window,UI.UICore.prototype =
+window.UI.UICore.prototype =
 {
     getPlayerContainer: function()
     {
@@ -19,4 +19,4 @@ window,UI.UICore.prototype =
     {
         return $(window.UI.UIConstants.TimeElapsedContainer);
     }
-}
+};

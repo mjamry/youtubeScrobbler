@@ -12,4 +12,4 @@ window.UI.LoggerUIConfig =
     clearLogsButtonId: "clear-logs",
     isLoggerEnabledCheckboxId: "enable-logger",
     loggerLevelComboBox: "logger-level"
-}
+};

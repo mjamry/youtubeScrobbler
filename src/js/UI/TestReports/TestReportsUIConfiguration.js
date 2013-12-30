@@ -17,4 +17,4 @@ window.UI.TestReportUIConfig =
     showFormButton: ".testing-environment-show-button",
     hideFormButton: ".testing-environment-hide-button",
     testingFormContainer: "#testing-environment"
-}
+};

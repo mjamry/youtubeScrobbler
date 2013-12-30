@@ -7,4 +7,4 @@ window.Common.LoggerEvents =
     LoggerError: "LoggedError",
     LoggerWarning: "LoggedWarning",
     LoggerDebug: "LoggedDebug"
-}
+};

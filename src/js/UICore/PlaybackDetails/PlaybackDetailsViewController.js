@@ -24,7 +24,7 @@ window.UI.PlaybackDetailsViewController.prototype =
 
     _handleMouseEnter: function(that)
     {
-        var mouseEnterHandler = function()
+        return function mouseEnterHandler()
         {
             that.view.css("height", that.config.MouseOverProgressBarSize);
             that.view.find(that.config.PlaybackDetailsContainer).css("height", that.config.MouseOverProgressBarSize);
@@ -34,12 +34,11 @@ window.UI.PlaybackDetailsViewController.prototype =
 
             that.view.find(that.config.PlaybackTime).show();
         };
-        return mouseEnterHandler;
     },
 
     _handleMouseLeave: function(that)
     {
-        var mouseLeaveHandler = function()
+        return function mouseLeaveHandler()
         {
             that.view.css("height", that.config.MouseOutProgressBarSize);
             that.view.find(that.config.PlaybackDetailsContainer).css("height", that.config.MouseOutProgressBarSize);
@@ -49,7 +48,6 @@ window.UI.PlaybackDetailsViewController.prototype =
 
             that.view.find(that.config.PlaybackTime).hide();
         };
-        return mouseLeaveHandler;
     },
 
     _handleDetailsUpdateRequest: function()
