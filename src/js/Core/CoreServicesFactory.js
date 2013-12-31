@@ -52,9 +52,9 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new window.Player.MediaPlayer(window.Player.MediaPlayerConfig, container);
     },
 
-    createPlaylistService: function(player)
+    createPlaylistService: function()
     {
-        return new window.Player.PlaylistService(player);
+        return new window.Player.PlaylistService();
     },
 
     createPlaybackDetailsService: function()

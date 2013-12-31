@@ -13,7 +13,7 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
     window.Common.Cookie.setInstance(coreServicesFactory.createCookieHandler());
     this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler(this.sessionHandler);
     this.player = coreServicesFactory.createMediaPlayer(this.uiCore.getPlayerContainer());
-    this.playlistService = coreServicesFactory.createPlaylistService(this.player);
+    this.playlistService = coreServicesFactory.createPlaylistService();
     this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService();
     this.playbackDetailsService.initialise();
 
