@@ -25,8 +25,7 @@ window.UI.PlaylistViewController.prototype =
     },
 
     //removes "selection" class from all items.
-    //it is a little bit tricky to get previously played item index without storing it.
-    //
+    //it is a little bit tricky to get previously played item index without storing it - which is not what we want here - so it is a good idea to just remove selection from all items.
     _deselectAllItems: function()
     {
         this.view.find(this.config.PlaylistItem).removeClass(this.config.CurrentElementStyle);
@@ -120,16 +119,6 @@ window.UI.PlaylistViewController.prototype =
         this.view.find(this.config.PlaylistItem).eq(eventArgs.index).replaceWith(newItem);
     },
 
-    _handleMediaChanged: function()
-    {
-        this._deselectAllItems();
-    },
-
-    _handleMediaStopped: function()
-    {
-        this._deselectAllItems();
-    },
-
     _handleMediaPlayed: function()
     {
         this._selectItem(this.playlistFlowController.getCurrentItemIndex());
@@ -149,8 +138,8 @@ window.UI.PlaylistViewController.prototype =
     initialise: function()
     {
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistUpdated, this._handlePlaylistUpdated, null, this);
-        EventBroker.getInstance().addListener(window.Player.Events.MediaChanged, this._handleMediaChanged, null, this);
-        EventBroker.getInstance().addListener(window.Player.Events.MediaStopped, this._handleMediaStopped, null, this);
+        EventBroker.getInstance().addListener(window.Player.Events.MediaChanged, this._deselectAllItems, null, this);
+        EventBroker.getInstance().addListener(window.Player.Events.MediaStopped, this._deselectAllItems, null, this);
         EventBroker.getInstance().addListener(window.Player.Events.MediaPlay, this._handleMediaPlayed, null, this);
 
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistItemUpdated, this._handleItemUpdated, null, this);
