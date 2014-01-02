@@ -133,6 +133,12 @@ body{
     width:100%;
 }
 
+.playlist-item-current
+{
+    background-color: #fff !important;
+    border-left: 5px solid #333 !important;
+}
+
 .playlist-item-details
 {
     color:#777;
@@ -191,12 +197,12 @@ body{
 
 .playlist-item-even
 {
-    background-color: #eee;
+    background-color: #ddd;
 }
 
 .playlist-item-odd
 {
-    background-color: #eee;
+    background-color: #ddd;
 }
 
 .playlist-item-odd:hover, .playlist-item-even:hover

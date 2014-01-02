@@ -5,9 +5,10 @@ window.UI = window.UI || {};
 window.Player = window.Player || {};
 
 
-window.UI.PlaylistViewController = function(playlistService, playlistControlService,loveStateModifier, view, config)
+window.UI.PlaylistViewController = function(playlistService, playlistControlService, playlistFlowController, loveStateModifier, view, config)
 {
     this.playlistService = playlistService;
+    this.playlistFlowController = playlistFlowController;
     this.playlistControlService = playlistControlService;
     this.loveStateModifier = loveStateModifier;
     this.view = $("#"+view);
@@ -18,6 +19,19 @@ window.UI.PlaylistViewController = function(playlistService, playlistControlServ
 
 window.UI.PlaylistViewController.prototype =
 {
+    _selectItem: function(index)
+    {
+        this.view.find(this.config.PlaylistItem).eq(index).addClass(this.config.CurrentElementStyle);
+    },
+
+    //removes "selection" class from all items.
+    //it is a little bit tricky to get previously played item index without storing it.
+    //
+    _deselectAllItems: function()
+    {
+        this.view.find(this.config.PlaylistItem).removeClass(this.config.CurrentElementStyle);
+    },
+
     changeLoveState: function(index)
     {
         var mediaElement = this.playlistService.getPlaylist().get(index);
@@ -46,6 +60,7 @@ window.UI.PlaylistViewController.prototype =
 
     _play: function(index)
     {
+        this._deselectAllItems();
         this.playlistControlService.playSpecific(index);
     },
 
@@ -102,12 +117,22 @@ window.UI.PlaylistViewController.prototype =
             this._updateProgressbar(eventArgs.index);
         }
         var newItem = this._createNewElement(eventArgs.mediaDetails, eventArgs.index);
-        this.view.children("div").eq(eventArgs.index).replaceWith(newItem);
+        this.view.find(this.config.PlaylistItem).eq(eventArgs.index).replaceWith(newItem);
     },
 
-    _handleMediaChanged: function(mediaDetails)
+    _handleMediaChanged: function()
     {
+        this._deselectAllItems();
+    },
 
+    _handleMediaStopped: function()
+    {
+        this._deselectAllItems();
+    },
+
+    _handleMediaPlayed: function()
+    {
+        this._selectItem(this.playlistFlowController.getCurrentItemIndex());
     },
 
     _updateProgressbar: function(itemIndex)
@@ -125,6 +150,8 @@ window.UI.PlaylistViewController.prototype =
     {
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistUpdated, this._handlePlaylistUpdated, null, this);
         EventBroker.getInstance().addListener(window.Player.Events.MediaChanged, this._handleMediaChanged, null, this);
+        EventBroker.getInstance().addListener(window.Player.Events.MediaStopped, this._handleMediaStopped, null, this);
+        EventBroker.getInstance().addListener(window.Player.Events.MediaPlay, this._handleMediaPlayed, null, this);
 
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistItemUpdated, this._handleItemUpdated, null, this);
     }

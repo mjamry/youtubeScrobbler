@@ -1,8 +1,9 @@
 //using
 window.Player = window.Player || {};
 
-window.Player.PlaybackDetailsService = function()
+window.Player.PlaybackDetailsService = function(mediaDetailsProvider)
 {
+    this.mediaDetailsProvider = mediaDetailsProvider;
     this.state = new window.Player.PlaybackState();
     this.currentMediaDetails = null;
     this.playbackDetails = null;
@@ -19,34 +20,30 @@ window.Player.PlaybackDetailsService.prototype =
     _handleMediaPaused: function(details)
     {
         this.state.changeState(this.state.paused);
-        this.currentMediaDetails = details;
         this._updatePlaybackDetails();
     },
 
     _handleMediaChanged: function(details)
     {
         this.state.changeState(this.state.playing);
-        this.currentMediaDetails = details;
         this._updatePlaybackDetails();
     },
 
     _handleMediaStopped: function(details)
     {
         this.state.changeState(this.state.stoped);
-        this.currentMediaDetails = details;
         this._updatePlaybackDetails();
     },
 
     _handleMediaPlay: function(details)
     {
         this.state.changeState(this.state.playing);
-        this.currentMediaDetails = details;
         this._updatePlaybackDetails();
     },
 
     _updatePlaybackDetails: function()
     {
-        if(this.currentMediaDetails && this.playbackDetails && this.playbackDetails.duration > 0)
+        if(this.playbackDetails && this.playbackDetails.duration > 0)
         {
             EventBroker.getInstance().fireEvent(window.Player.Events.PlaybackDetailsUpdated);
         }
@@ -60,7 +57,7 @@ window.Player.PlaybackDetailsService.prototype =
 
         eventBroker.addListener(window.Player.Events.MediaPaused, this._handleMediaPaused, null, this);
         eventBroker.addListener(window.Player.Events.MediaStopped, this._handleMediaStopped, null, this);
-        eventBroker.addListener(window.Player.Events.MediaChanged, this._handleMediaChanged, null, this);
+        eventBroker.addListener(window.Player.Events.MediaChanged, this._handleMediaStopped, null, this);
         eventBroker.addListener(window.Player.Events.MediaPlay, this._handleMediaPlay, null, this);
     },
 
@@ -71,7 +68,7 @@ window.Player.PlaybackDetailsService.prototype =
 
     getMediaDetails: function()
     {
-        return this.currentMediaDetails;
+        return this.mediaDetailsProvider.getCurrentMediaDetails();
     },
 
     getPlaybackTime: function()

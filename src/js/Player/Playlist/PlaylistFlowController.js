@@ -69,5 +69,10 @@ window.Playlist.PlaylistFlowController.prototype =
         }
 
         return null;
+    },
+
+    getCurrentItemIndex: function()
+    {
+        return this.playlistProvider.getPlaylist().currentItemIndex;
     }
 };

@@ -14,7 +14,7 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
     this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler(this.sessionHandler);
     this.player = coreServicesFactory.createMediaPlayer(this.uiCore.getPlayerContainer());
     this.playlistService = coreServicesFactory.createPlaylistService();
-    this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService();
+    this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService(this.player);
     this.playbackDetailsService.initialise();
 
     var playlistFlowController = playerServicesFactory.createPlaylistFlowController(this.playlistService);
@@ -27,7 +27,7 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     var playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.sessionHandler);
 
-    var playlist = uiFactory.createPlaylistViewController(this.playlistService, this.playbackControlService, playlistElementLoveStateModifier);
+    var playlist = uiFactory.createPlaylistViewController(this.playlistService, this.playbackControlService, playlistFlowController, playlistElementLoveStateModifier);
     playlist.initialise();
 
     var playbackDetails = uiFactory.createPlaybackDetailsViewController(this.playbackDetailsService);

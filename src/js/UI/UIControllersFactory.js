@@ -22,9 +22,9 @@ window.UI.UIControllersFactory.prototype =
         return new window.UI.TestReportsViewController(reportSender, window.UI.TestReportUIConfig);
     },
 
-    createPlaylistViewController: function(playlistService, playbackControlService, loveStateModifier)
+    createPlaylistViewController: function(playlistService, playbackControlService, playlistFlowController, loveStateModifier)
     {
-        return new window.UI.PlaylistViewController(playlistService, playbackControlService, loveStateModifier, "playlist-container", window.UI.PlaylistUIConfig);
+        return new window.UI.PlaylistViewController(playlistService, playbackControlService, playlistFlowController, loveStateModifier, "playlist-container", window.UI.PlaylistUIConfig);
     },
 
     createPlaybackDetailsViewController: function(model)

@@ -175,6 +175,11 @@ window.Player.MediaPlayer.prototype =
         }
 
         return this.config.startVolume;
+    },
+
+    getCurrentMediaDetails: function()
+    {
+        return this.currentlyLoadedMediaDetails;
     }
 };
 
