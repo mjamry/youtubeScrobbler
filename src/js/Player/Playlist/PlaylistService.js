@@ -5,7 +5,7 @@ window.Player = window.Player || {};
 window.Common = window.Common || {};
 
 
-window.Player.PlaylistService = function()
+window.Player.PlaylistService = function(playlist)
 {
     this.playlist = playlist || new window.Player.Playlist();
     this._eventBroker = EventBroker.getInstance();

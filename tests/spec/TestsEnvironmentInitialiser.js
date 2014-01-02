@@ -5,4 +5,7 @@
 
     var timeParser = new window.Common.TimeParserImpl();
     TimeParser.setInstance(timeParser);
+
+    var eventBroker = new window.Common.EventBrokerImpl();
+    EventBroker.setInstance(eventBroker);
 })();
