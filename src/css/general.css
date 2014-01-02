@@ -269,11 +269,26 @@ body{
     width:130px;
 }
 
+.volume-control-description
+{
+    height:33px;
+    position:absolute;
+    bottom:0;
+    width:100%;
+    text-align: center;
+    color:#fff;
+}
+
 .volume-control-indicator-container
 {
     height:35px;
     background-color:#88c6d3;
     position: relative;
+    cursor:ew-resize;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .volume-control-indicator
@@ -330,7 +345,7 @@ body{
 {
     float:left;
     min-width:450px;
-    cursor: default;
+    cursor: ew-resize;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
