@@ -16,9 +16,9 @@ describe("PlaylistService", function(){
 
     playlist = new window.Player.Playlist();
 
-    playlist.add(mediaDetails_1);
-    playlist.add(mediaDetails_2);
-    playlist.add(mediaDetails_3);
+    playlist.addItem(mediaDetails_1);
+    playlist.addItem(mediaDetails_2);
+    playlist.addItem(mediaDetails_3);
 
     beforeEach(function()
     {

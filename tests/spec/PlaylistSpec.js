@@ -16,9 +16,9 @@ describe("Playlist", function(){
     beforeEach(function(){
         playlist = new window.Player.Playlist();
 
-        playlist.add(mediaDetails_1);
-        playlist.add(mediaDetails_2);
-        playlist.add(mediaDetails_3);
+        playlist.addItem(mediaDetails_1);
+        playlist.addItem(mediaDetails_2);
+        playlist.addItem(mediaDetails_3);
     });
 
     it("should contain three items", function(){
@@ -60,6 +60,18 @@ describe("Playlist", function(){
         expect(playlist.get(0)).toEqual(mediaDetails_3);
         expect(playlist.get(1)).toEqual(mediaDetails_2);
         expect(playlist.get(2)).toEqual(mediaDetails_3);
+    });
+
+    it("should contain six elements (in correct order) after merging with another playlist", function(){
+        playlist.addPlaylist(playlist);
+
+        expect(playlist.length()).toEqual(6);
+        expect(playlist.get(0)).toEqual(mediaDetails_1);
+        expect(playlist.get(1)).toEqual(mediaDetails_2);
+        expect(playlist.get(2)).toEqual(mediaDetails_3);
+        expect(playlist.get(3)).toEqual(mediaDetails_1);
+        expect(playlist.get(4)).toEqual(mediaDetails_2);
+        expect(playlist.get(5)).toEqual(mediaDetails_3);
     });
 
 

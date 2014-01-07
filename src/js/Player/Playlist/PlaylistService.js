@@ -52,7 +52,7 @@ window.Player.PlaylistService.prototype =
         //TODO: consider moving this loop to playlist implementation
         for(var i=0;i<playlist.length();i++)
         {
-            this.playlist.add(playlist.get(i));
+            this.playlist.addItem(playlist.get(i));
         }
 
         Logger.getInstance().Info(playlist.length()+" new element(s) has been added to current playlist. It has now "+this.playlist.length()+" elements.");

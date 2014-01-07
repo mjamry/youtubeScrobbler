@@ -11,9 +11,14 @@ window.Player.Playlist.prototype =
 {
     currentItemIndex: 0,
 
-    add: function(mediaDetails)
+    addItem: function(mediaDetails)
     {
          this.mediaList.push(mediaDetails);
+    },
+
+    addPlaylist: function(playlist)
+    {
+        this.mediaList = this.mediaList.concat(playlist.mediaList);
     },
 
     get: function(index)
