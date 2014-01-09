@@ -278,6 +278,10 @@ body{
     text-align: center;
     color:#fff;
 }
+.volume-control-description i
+{
+    width:100%;
+}
 
 .volume-control-indicator-container
 {
