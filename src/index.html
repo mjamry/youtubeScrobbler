@@ -13,8 +13,7 @@
     <!--videojs css file - required-->
     <link rel="stylesheet" href="css/mediaelementplayer.css" >
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/lib/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
     <script type="text/javascript" src="js/lib/lastfm.api.js"></script>
     <script type="text/javascript" src="js/lib/lastfm.api.cache.js"></script>
     <script type="text/javascript" src="js/lib/lastfm.api.md5.js"></script>
@@ -150,10 +149,9 @@
             </div>
         </div>
         <div id="input-form">
-            <form class=pure-form>
-                <input type="text" id="media-location" placeholder="paste you YT link here"/>
-                <input type="button" value="add to playlist" id="add-to-playlist" class="pure-button playlist-button"/>
-                <input type="button" value="create new playlist" id="create-new-playlist" class="pure-button playlist-button"/>
+            <form class="playlist-add-container">
+                <input class="playlist-add-input" type="text" id="media-location" placeholder="paste you YT link here"/>
+                <button id="add-to-playlist" class="playlist-add-button" title="add new items to playlist"><i class="fa fa-plus fa-2x"></i></button>
             </form>
         </div>
         <div id="media-content">

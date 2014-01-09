@@ -99,14 +99,9 @@ function HookUpToolbarButtons()
 }
 //TODO move to ViewController
 function HookUpLoadUrlButtonAction(player){
-    $("#create-new-playlist").bind("click", function()
+    $("#add-to-playlist").bind("click", function(e)
     {
-        var mediaLocation= $("#media-location").val();
-        player.createNewPlaylist(mediaLocation);
-    });
-
-    $("#add-to-playlist").bind("click", function()
-    {
+        e.preventDefault();
         var mediaLocation = $("#media-location").val();
         player.addToPlaylist(mediaLocation);
     });

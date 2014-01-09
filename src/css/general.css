@@ -343,6 +343,32 @@ body{
 {
     color: red;
 }
+/*----------------------------PLAYLIST--ADD---------------*/
+.playlist-add-container
+{
+    height:40px;
+    width:550px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.playlist-add-input
+{
+    border:1px solid darkslategray;
+    height:35px;
+    font-size: 9pt;
+    vertical-align: top;
+}
+
+.playlist-add-button
+{
+    height:40px;
+    width:70px;
+    padding-top:5px;
+    background-color:darkslategray;
+    color:white;
+    border-style:none;
+}
 
 /*----------------------------PROGRESS---BARS----------*/
 #media-player-playback

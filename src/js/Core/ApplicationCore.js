@@ -63,19 +63,6 @@ window.ApplicationCore.AppCore.prototype =
     },
 
     //TODO move to ViewController
-    createNewPlaylist: function(url)
-    {
-        var plLoader = new window.Player.YouTubePlaylistLoader();
-        plLoader.loadPlaylistFromUrl(
-            url,
-            $.proxy(function(playlist)
-            {
-                this.playlistService.createPlaylist(playlist);
-            }, this)
-        );
-    },
-
-    //TODO move to ViewController
     addToPlaylist: function(url)
     {
         var plLoader = new window.Player.YouTubePlaylistLoader();
