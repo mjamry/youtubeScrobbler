@@ -1,0 +1,199 @@
+body
+{
+    color: #D9CB9E;
+}
+
+
+body A
+{
+    color: #D9CB9E;
+}
+
+body A:hover
+{
+    color: #DC3522;
+}
+
+/*--------FOOTER----------*/
+#footer
+{
+    color: gray;
+    border-top:1px solid #374140;
+    background-color: #1E1E20;
+}
+
+.footer-line
+{
+    color:#374140;
+    background-color: #374140;
+}
+
+
+/*-------HEADER-----------*/
+#header
+{
+    border-bottom:1px solid #374140;
+    background-color: #1E1E20;
+}
+
+/*------------------*/
+.playlist-item-current
+{
+    background-color: #374140 !important;
+    border-left:5px solid #DC3522;
+}
+
+.playlist-item-cover
+{
+    border:1px solid #1E1E20;
+    background-color: #2A2C2B;
+}
+
+#playlist-progressbar
+{
+    background-color: #DC3522;
+}
+
+.playlist-item-name, .playlist-item-details, .playlist-item-time, .playlist-item-icons
+{
+    color: #D9CB9E;
+}
+
+.playlist-item-like, .playlist-item-remove
+{
+    color: #D9CB9E;
+}
+
+.playlist-item-like:hover, .playlist-item-remove:hover
+{
+    color: red;
+}
+
+.playlist-item-even, .playlist-item-odd
+{
+    border-bottom: 1px solid #1E1E20;
+    border-top:  1px solid #374140;
+}
+
+.playlist-item-even
+{
+    background-color: #2A2C2B;
+}
+
+.playlist-item-odd
+{
+    background-color: #2A2C2B;
+}
+
+.playlist-item-odd:hover, .playlist-item-even:hover
+{
+    background-color: #1E1E20;
+}
+/*--------BUTTONS----------*/
+.playback-control-button,
+.playlist-control-button,
+.playlist-add-button
+{
+
+    background-color:#374140;
+    color:#DC3522;
+}
+
+.playback-control-button:hover,
+.playlist-control-button:hover,
+.playlist-add-button:hover
+{
+    background-color: #1E1E20;
+}
+
+.playlist-control-button-selected
+{
+    color: #D9CB9E;
+}
+/*--------VOLUME--CONTROL----------*/
+.volume-control-description
+{
+
+    color:#DC3522;
+}
+
+.volume-control-description i
+{
+    width:100%;
+}
+
+.volume-control-indicator-container
+{
+    background-color:#1E1E20;
+}
+
+.volume-control-indicator
+{
+    background-color: #D9CB9E;
+}
+
+/*------------------*/
+
+.playlist-add-input
+{
+    border:1px solid #1E1E20;
+    color: #1E1E20;
+    background-color: #D9CB9E;
+}
+
+/*--------PLAYBACK--PROGRESS----------*/
+.playback-progress-bar-container,
+.playback-data-bar-container
+{
+    background-color: #374140;
+}
+
+.playback-data-bar-container
+{
+    background-color: #374140;
+}
+
+.playback-progress-bar-container
+{
+    background-color: #374140;
+}
+
+.playback-progress-bar
+{
+    background-color: #1E1E20;
+}
+
+.playback-data-bar
+{
+    background-color: #DC3522;
+}
+
+.playback-details-container
+{
+
+    color:#D9CB9E;
+}
+
+
+/*--------LOGGER----------*/
+.logger-info
+{
+    background-color: lightyellow;
+}
+
+.logger-error
+{
+    background-color: lightcoral;
+}
+
+.logger-debug
+{
+    background-color: lightblue;
+}
+
+.logger-warning
+{
+    background-color: lightpink;
+}
+
+/*--------TESTER----------*/

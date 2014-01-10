@@ -3,7 +3,6 @@ body,
 .pure-g-r [class *= "pure-u"]
 {
     font-family: 'Lato', sans-serif;
-    color: #D9CB9E;
 }
 
 body
@@ -11,17 +10,6 @@ body
     margin:0;
     padding:0;
     height:100%;
-}
-
-
-body A
-{
-    color: #D9CB9E;
-}
-
-body A:hover
-{
-    color: #DC3522;
 }
 
 #page
@@ -34,10 +22,7 @@ body A:hover
 
 #footer
 {
-    background-color: #1E1E20;
     font-size: 9pt;
-    color: gray;
-    border-top:1px solid #374140;
     width:100%;
     position:absolute;
     bottom:0;
@@ -54,8 +39,6 @@ body A:hover
 {
     border:0;
     height:1px;
-    color:#374140;
-    background-color: #374140;
 }
 
 .footer-licencing
@@ -69,9 +52,7 @@ body A:hover
 {
     width: 100%;
     height: 70px;
-    background-color: #1E1E20;
     margin:0;
-    border-bottom:1px solid #374140;
 }
 
 #header-content
@@ -140,11 +121,7 @@ body A:hover
     width:100%;
 }
 
-.playlist-item-current
-{
-    background-color: #374140 !important;
-    border-left:5px solid #DC3522;
-}
+
 
 .playlist-item-cover
 {
@@ -153,15 +130,12 @@ body A:hover
     float: right;
     margin-top:5px;
     margin-right:5px;
-    border:1px solid #1E1E20;
     border-radius: 100%;
-    background-color: #2A2C2B;
 }
 
 #playlist-progressbar
 {
     height:2px;
-    background-color:#999;
     display: none;
 }
 
@@ -178,43 +152,19 @@ body A:hover
     width:100px;
 }
 
-.playlist-item-name, .playlist-item-details, .playlist-item-time, .playlist-item-icons
-{
-    color: #D9CB9E;
-}
-
 .playlist-item-like, .playlist-item-remove
 {
-    color: #aaa;
     margin-top:10px;
-}
-
-.playlist-item-like:hover, .playlist-item-remove:hover
-{
-    color: red;
 }
 
 .playlist-item-even, .playlist-item-odd
 {
     height:50px;
     padding-left:10px;
-    border-bottom: 1px solid #1E1E20;
-    border-top:  1px solid #374140;
-}
-
-.playlist-item-even
-{
-    background-color: #2A2C2B;
-}
-
-.playlist-item-odd
-{
-    background-color: #2A2C2B;
 }
 
 .playlist-item-odd:hover, .playlist-item-even:hover
 {
-    background-color: #1E1E20;
     cursor: pointer;
 }
 
@@ -260,17 +210,11 @@ body A:hover
 {
     height:35px;
     width:60px;
-    background-color:#374140;
-    color:#DC3522;
     text-align: center;
     float:left;
     border-style: none;
 }
 
-.playback-control-button:hover
-{
-    background-color: #1E1E20;
-}
 /*---------------------------VOLUME---CONTROL------------*/
 #playback-control-volume-container
 {
@@ -285,17 +229,11 @@ body A:hover
     bottom:0;
     width:100%;
     text-align: center;
-    color:#DC3522;
-}
-.volume-control-description i
-{
-    width:100%;
 }
 
 .volume-control-indicator-container
 {
     height:35px;
-    background-color:#1E1E20;
     position: relative;
     cursor:ew-resize;
     -webkit-user-select: none;
@@ -306,7 +244,6 @@ body A:hover
 
 .volume-control-indicator
 {
-    background-color: #D9CB9E;
     height:100%;
     position:absolute;
     bottom:0;
@@ -326,32 +263,16 @@ body A:hover
     margin-right:auto;
 }
 
-.playlist-control-selected
-{
-    color: white;
-}
-
 .playlist-control-button
 {
     float:left;
     height:35px;
     width:35px;
-    background-color:#374140;
-    color:#DC3522;
     text-align: center;
     border-style: none;
     padding:0;
 }
 
-.playlist-control-button:hover
-{
-    background-color: #1E1E20;
-}
-
-.playlist-control-button-selected
-{
-    color: #D9CB9E;
-}
 /*----------------------------PLAYLIST--ADD---------------*/
 .playlist-add-container
 {
@@ -363,9 +284,7 @@ body A:hover
 
 .playlist-add-input
 {
-    border:1px solid #1E1E20;
-    color: #1E1E20;
-    background-color: #D9CB9E;
+
     height:35px;
     font-size: 9pt;
     vertical-align: top;
@@ -376,14 +295,7 @@ body A:hover
     height:40px;
     width:70px;
     padding-top:5px;
-    background-color:#374140;
-    color:#DC3522;
     border-style:none;
-}
-
-.playlist-add-button:hover
-{
-    background-color: #1E1E20;
 }
 
 /*----------------------------PROGRESS---BARS----------*/
@@ -418,18 +330,7 @@ body A:hover
 .playback-progress-bar-container,
 .playback-data-bar-container
 {
-    background-color: #374140;
     width:100%;
-}
-
-.playback-data-bar-container
-{
-    background-color: #374140;
-}
-
-.playback-progress-bar-container
-{
-    background-color: #374140;
 }
 
 .playback-data-bar-container,
@@ -444,24 +345,12 @@ body A:hover
     height:35px;
 }
 
-.playback-progress-bar
-{
-    background-color: #1E1E20;
-}
-
-.playback-data-bar
-{
-    background-color: #DC3522;
-}
-
-
 /*---PROGRESS-DETAILS----*/
 .playback-details-container
 {
     text-align: center;
     font-weight: bold;
     font-size: 12pt;
-    color:white;
     display: block;
 }
 
@@ -473,17 +362,10 @@ body A:hover
     margin: auto;
 }
 
-.playback-details
-{
-
-}
-
 .playback-time
 {
     display:none;
 }
-
-
 /*----------------------------LOGGER----------------------*/
 #logger-content
 {
@@ -505,27 +387,6 @@ body A:hover
     width:800px;
     margin: auto;
 }
-
-.logger-info
-{
-    background-color: lightyellow;
-}
-
-.logger-error
-{
-    background-color: lightcoral;
-}
-
-.logger-debug
-{
-    background-color: lightblue;
-}
-
-.logger-warning
-{
-    background-color: lightpink;
-}
-
 /*--------------------------------TESTS---------------------------*/
 #testing-environment
 {
