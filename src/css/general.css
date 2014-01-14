@@ -33,6 +33,7 @@ body
     width: 800px;
     margin:auto;
     padding:10px;
+    text-align:center;
 }
 
 .footer-line
@@ -44,6 +45,7 @@ body
 .footer-licencing
 {
     text-align: center;
+    padding-top:15px;
 }
 
 /*------------------------------------------------HEADER------------------------------------------*/

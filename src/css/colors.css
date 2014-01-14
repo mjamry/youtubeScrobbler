@@ -17,17 +17,9 @@ body A:hover
 /*--------FOOTER----------*/
 #footer
 {
-    color: gray;
     border-top:1px solid #374140;
     background-color: #1E1E20;
 }
-
-.footer-line
-{
-    color:#374140;
-    background-color: #374140;
-}
-
 
 /*-------HEADER-----------*/
 #header
