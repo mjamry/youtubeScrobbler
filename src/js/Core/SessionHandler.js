@@ -3,29 +3,90 @@ window.ApplicationCore = window.ApplicationCore || {};
 
 window.ApplicationCore.SessionHandler = function(sessionProvider)
 {
+    this.currentSession = null;
     this._sessionProvider = sessionProvider;
 };
 
 window.ApplicationCore.SessionHandler.prototype =
 {
-    //try to restore last session if it does not exist creates new one.
-    createNewSession: function(token)
+    _postSessionObtained: function()
     {
-        if(!this._sessionProvider.isSessionAlreadyCreated())
+        Logger.getInstance().Info("Session has been established.");
+        Logger.getInstance().Debug("Session details - user: " + this.currentSession.name + ", key: "+ this.currentSession.key);
+        EventBroker.getInstance().fireEventWithData(window.LastFm.Events.SessionEstablished, this.currentSession.name);
+    },
+
+    _handleSessionObtained: function(that)
+    {
+        return function(session)
         {
-            this._sessionProvider.create(token);
+            that.currentSession = session;
+            that._setSessionCookie(session);
+
+            that._postSessionObtained();
         }
     },
 
+    _handleSessionObtainingFailed: function()
+    {
+        EventBroker.getInstance().fireEvent(window.LastFm.Events.SessionEstablishmentFailed);
+    },
+
+    _setSessionCookie: function(session)
+    {
+        window.Common.Cookie.instance().setCookie(window.Common.CookiesNames.sessionCookie, session);
+    },
+
+    _getSessionCookie: function()
+    {
+        var lastSession = window.Common.Cookie.instance().getCookie(window.Common.CookiesNames.sessionCookie);
+        if(!lastSession)
+        {
+            lastSession = null;
+        }
+
+        return lastSession;
+    },
+
+    //closes current session
+    closeSession: function()
+    {
+        window.Common.Cookie.instance().removeCookie(window.Common.CookiesNames.sessionCookie);
+    },
+
+    //try to restore last session if it does not exist creates new one.
+    createNewSession: function(token)
+    {
+        //get stored session
+        this.currentSession = this._getSessionCookie();
+
+        //if there is no session stored establish new one
+        if(this.currentSession == null)
+        {
+            this._sessionProvider.create(
+                token,
+                {
+                    success: this._handleSessionObtained(this),
+                    error: this._handleSessionObtainingFailed
+                }
+            );
+        }
+        else
+        {
+            this._postSessionObtained();
+        }
+    },
+
+    //returns current session
     getSession: function()
     {
-        var session = this._sessionProvider.getSession();
-        if(session != null)
+        if(this.currentSession != null)
         {
-            return session;
+            return this.currentSession;
         }
-        var errorMsg = "Session has not been established yet.";
-        Logger.getInstance().Warning(errorMsg);
+
+        Logger.getInstance().Warning("Session has not been established yet.");
+        //TODO - change it to null
         return {name:""}
     }
 };

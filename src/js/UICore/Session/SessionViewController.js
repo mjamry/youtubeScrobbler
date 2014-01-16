@@ -38,7 +38,7 @@ window.UI.SessionViewController.prototype =
             that.view.unbind("click");
             that.view.click(function()
             {
-                window.open(""+userDetails, "_blank");
+                window.open(that.config.LinkToPortal+userDetails, "_blank");
             });
 
             that.view.html('<div class="authentication-button">Hello! '+userDetails+'</div>');

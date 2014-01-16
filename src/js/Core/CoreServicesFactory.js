@@ -11,17 +11,6 @@ window.ApplicationCore.CoreServicesFactory = function()
 
 window.ApplicationCore.CoreServicesFactory.prototype =
 {
-    _getSessionProvider: function()
-    {
-        if(!this._sessionProvider)
-        {
-            var factory = new window.LastFm.LastFmApiFactory();
-            this._sessionProvider = factory.createSessionProvider();
-        }
-
-        return this._sessionProvider;
-    },
-
     createBrokerHandler: function()
     {
         return new window.Common.EventBrokerImpl();
@@ -32,9 +21,9 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new LoggerImpl();
     },
 
-    createOnlineScrobbler: function()
+    createOnlineScrobbler: function(sessionProvider)
     {
-        return new window.ApplicationCore.OnlineScrobbler(this._getSessionProvider());
+        return new window.ApplicationCore.OnlineScrobbler(sessionProvider);
     },
 
     createCookieHandler: function()
@@ -44,7 +33,8 @@ window.ApplicationCore.CoreServicesFactory.prototype =
 
     createSessionHandler: function()
     {
-        return new window.ApplicationCore.SessionHandler(this._getSessionProvider());
+        var factory = new window.LastFm.LastFmApiFactory();
+        return new window.ApplicationCore.SessionHandler(factory.createSessionProvider());
     },
 
     createMediaPlayer: function(container)
