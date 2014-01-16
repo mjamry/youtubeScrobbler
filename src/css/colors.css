@@ -102,6 +102,22 @@ body A:hover
 {
     color: #D9CB9E;
 }
+
+.authentication-button
+{
+    color: #1E1E20;
+    background-color:#DC3522;
+}
+
+.authentication-button a
+{
+    color:#1E1E20;
+}
+
+.authentication-button a:hover
+{
+    color:#D9CB9E;
+}
 /*--------VOLUME--CONTROL----------*/
 .volume-control-description
 {

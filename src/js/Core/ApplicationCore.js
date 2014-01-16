@@ -11,7 +11,7 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     this.sessionHandler = coreServicesFactory.createSessionHandler();
     window.Common.Cookie.setInstance(coreServicesFactory.createCookieHandler());
-    this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler(this.sessionHandler);
+    this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler();
     this.player = coreServicesFactory.createMediaPlayer(this.uiCore.getPlayerContainer());
     this.playlistService = coreServicesFactory.createPlaylistService();
     this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService(this.player);
@@ -38,6 +38,9 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     var playlistControl = uiFactory.createPlaylistControlViewController(this.playlistService, playlistFlowController);
     playlistControl.initialise();
+
+    var sessionViewController = uiFactory.createSessionViewController(this.sessionHandler);
+    sessionViewController.initialise();
 };
 
 window.ApplicationCore.AppCore.prototype =
@@ -55,11 +58,6 @@ window.ApplicationCore.AppCore.prototype =
         eventBroker.addListener(window.UI.Events.PlayNextRequested, this.playlistService.playNext, null, this);
         eventBroker.addListener(window.UI.Events.PlayPreviousRequested, this.playlistService.playPrevious, null, this);
         eventBroker.addListener(window.UI.Events.PlaySpecificRequested, this._handlePlaySpecificRequest, null, this);
-    },
-
-    createNewSession: function(token)
-    {
-        this.sessionHandler.createNewSession(token);
     },
 
     //TODO move to ViewController

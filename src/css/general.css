@@ -85,6 +85,14 @@ body
     margin-left:auto;
     margin-right:auto;
 }
+
+.authentication-button
+{
+    padding:10px;
+    cursor:pointer;
+    text-align: center;
+}
+
 /*-----------------------------INPUT------------------------*/
 #input-form
 {

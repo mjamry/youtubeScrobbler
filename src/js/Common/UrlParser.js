@@ -24,6 +24,7 @@ window.Common.UrlParser.prototype =
         catch(ex)
         {
             Logger.getInstance().Warning("Url parsing has failed. Ex: "+ex);
+            //TODO return null
             return window.Common.UrlParserConstants.URL_PARSE_ERR;
         }
 

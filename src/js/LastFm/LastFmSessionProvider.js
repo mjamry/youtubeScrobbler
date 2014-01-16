@@ -45,7 +45,9 @@ window.LastFm.LastFmSessionProvider.prototype =
                 error: $.proxy(function(err, msg)
                 {
                     this.sessionDetails = null;
-                    Logger.getInstance().Warning("Error ("+ err +") while creating session: " + msg);
+                    Logger.getInstance().Warning("Cannot establish session: " + msg);
+
+                    EventBroker.getInstance().fireEvent(window.LastFm.Events.SessionEstablishmentFailed);
                 }, this)
             });
     },

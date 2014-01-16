@@ -41,5 +41,10 @@ window.UI.UIControllersFactory.prototype =
     createPlaylistControlViewController: function(playlistService, playlistFlowController)
     {
         return new window.UI.PlaylistControlViewController(playlistService, playlistFlowController, "playlist-control", window.UI.PlaylistControlConfiguration);
+    },
+
+    createSessionViewController: function(sessionHandler)
+    {
+        return new window.UI.SessionViewController(sessionHandler, window.UI.SessionUIConfiguration);
     }
 };
