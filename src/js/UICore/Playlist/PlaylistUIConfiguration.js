@@ -19,5 +19,8 @@ window.UI.PlaylistUIConfig =
     CurrentElementStyle: "playlist-item-current",
     SelectedItemStyle: "playlist-item-selected",
 
+    IndexContainer: ".playlist-item-index-container",
+    IndexStyle:  ".playlist-item-index",
+
     PlaylistProgressBar: "#playlist-progressbar"
 };

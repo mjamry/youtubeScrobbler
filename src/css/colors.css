@@ -28,7 +28,7 @@ body A:hover
     background-color: #1E1E20;
 }
 
-/*------------------*/
+/*--------PLAYLIST----------*/
 .playlist-item-current
 {
     background-color: #374140 !important;
@@ -81,6 +81,14 @@ body A:hover
 {
     background-color: #1E1E20;
 }
+
+.playlist-item-index
+{
+    background:#374140;
+    color: #D9CB9E;
+    border:2px solid #2A2C2B;
+}
+
 /*--------BUTTONS----------*/
 .playback-control-button,
 .playlist-control-button,

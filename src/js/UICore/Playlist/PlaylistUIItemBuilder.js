@@ -23,8 +23,8 @@ window.UI.PlaylistUIItemBuilder.prototype =
         return function()
         {
             $(this).addClass(style);
-            $(that._item).children().find(that._config.AdditionalButtonsContainer).show();
-            $(that._item).children().find(that._config.CoverContainer).hide();
+            $(that._item).children().find(that._config.AdditionalButtonsContainer).slideDown();
+            $(that._item).children().find(that._config.CoverContainer).slideUp();
 
         }
     },
@@ -36,8 +36,8 @@ window.UI.PlaylistUIItemBuilder.prototype =
         return function()
         {
             $(this).removeClass(style);
-            $(that._item).children().find(that._config.AdditionalButtonsContainer).hide();
-            $(that._item).children().find(that._config.CoverContainer).show();
+            $(that._item).children().find(that._config.AdditionalButtonsContainer).slideUp();
+            $(that._item).children().find(that._config.CoverContainer).slideDown();
         }
     },
 
@@ -73,10 +73,6 @@ window.UI.PlaylistUIItemBuilder.prototype =
     {
         this._item.find(this._config.TimeContainer).append(mediaDetails.duration.getHumanReadable());
         var details = mediaDetails.artist + " - " + mediaDetails.title;
-        if(details.length > 35)
-        {
-            details = details.substring(0, 32)+("...");
-        }
 
         var titleContent = "Debug details:"+
             "\n\nArtist: "+mediaDetails.artist+
@@ -91,6 +87,9 @@ window.UI.PlaylistUIItemBuilder.prototype =
         this._item.attr("title", titleContent);
 
         this._cover.attr("src", mediaDetails.albumCover);
+
+        //show item index (+1 to avoid index=0)
+        this._item.find(this._config.IndexStyle).append(this._index+1);
 
         if(mediaDetails.loved)
         {
