@@ -40,17 +40,15 @@ window.Player.YouTubePlaylistLoader.prototype =
             };
         }
 
-        Logger.getInstance().Warning("Error occurs while parsing title.");
-        Logger.getInstance().Debug("Incorrect naming pattern: "+details);
-        return null;
+        throw("[YT] Error occurs while parsing title. Incorrect naming pattern: "+details);
     },
 
     //gets details for specified clip.
     //if cannot retrieve details returns "undefined";
-    //TODO - handle errors while parsing video details recieved from YT. It is possible that video has been deleted.
+    //TODO - handle errors while parsing video details received from YT. It is possible that video has been deleted.
     _getMediaDetails: function(media)
     {
-        Logger.getInstance().Debug("Recieved YouTube details for media: "+media.title);
+        Logger.getInstance().Debug("[YT] Received details for media: "+media.title);
         var mediaDetails = new window.Player.MediaDetails();
 
         mediaDetails.mediaType = window.Player.YouTubePlaylistConstant.MEDIA_TYPE;
@@ -59,11 +57,9 @@ window.Player.YouTubePlaylistLoader.prototype =
         var trackName = this._splitTitle(media.title);
 
         //sometime media.player is empty - do not know why...
-        if(!media.player || !trackName)
+        if(!media.player)
         {
-            Logger.getInstance().Warning("Cannot read media details.");
-            Logger.getInstance().Debug("Probably file does not exist anymore: "+media.title);
-            return null;
+            throw("[YT] Cannot read media details. Probably file does not exist anymore: "+media.title);
         }
 
         mediaDetails.artist.name = trackName.artist;
@@ -79,7 +75,15 @@ window.Player.YouTubePlaylistLoader.prototype =
         var playlist = new window.Player.Playlist();
         for (var i = 0; i < list.length; i++)
         {
-            var mediaDetails = this._getMediaDetails(list[i].video);
+            var mediaDetails = null;
+            try
+            {
+                mediaDetails = this._getMediaDetails(list[i].video);
+            }
+            catch(e)
+            {
+                Logger.getInstance().Warning(e);
+            }
 
             if (mediaDetails !== null)
             {
@@ -106,6 +110,9 @@ window.Player.YouTubePlaylistLoader.prototype =
         {
             return function getPlaylistFromYoutube(startingIndex)
             {
+                var endIndex = startingIndex + window.Player.YouTubePlaylistConstant.MAX_NUMBER_OF_RESULTS;
+                //startingIndex++;
+                Logger.getInstance().Debug("[YT] Playlist details request for items in range: "+startingIndex+" - "+endIndex);
                 $.getJSON(url+startingIndex, function(result)
                 {
                     if(result.data.items)
@@ -117,7 +124,7 @@ window.Player.YouTubePlaylistLoader.prototype =
                         //at the end call callback passing created playlist
                         if(result.data.items.length >= window.Player.YouTubePlaylistConstant.MAX_NUMBER_OF_RESULTS)
                         {
-                            getPlaylistFromYoutube(startingIndex + window.Player.YouTubePlaylistConstant.MAX_NUMBER_OF_RESULTS);
+                            getPlaylistFromYoutube(endIndex);
                         }
                         else
                         {
@@ -139,6 +146,7 @@ window.Player.YouTubePlaylistLoader.prototype =
             window.Common.UrlParserConstants.PARAMS_START_SIGN +
             window.Player.YouTubePlaylistConstant.FEED_PARAMS;
 
+        Logger.getInstance().Debug("[YT] Video details request");
         $.getJSON(url, $.proxy(function(result)
         {
             //create a table from result
@@ -154,7 +162,7 @@ window.Player.YouTubePlaylistLoader.prototype =
     //playlist is returned via callback function
     loadPlaylistFromUrl : function(url, callback)
     {
-        Logger.getInstance().Debug("Sending request to YouTube. Url: "+url);
+        Logger.getInstance().Debug("[YT] Sending data request for url: "+url);
         var parser = new window.Common.UrlParser();
         var playlistId = parser.getParameterValue(url, window.Player.YouTubePlaylistConstant.PLAYLIST_PARAMETER_NAME);
         
