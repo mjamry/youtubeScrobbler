@@ -78,17 +78,21 @@ window.UI.PlaylistUIItemBuilder.prototype =
             "\n\nArtist_name: "+mediaDetails.artist.name+
             "\nArtist_mbid: "+mediaDetails.artist.mbid+
             "\nArtist_url: "+mediaDetails.artist.url+
-            "\nTitle: "+mediaDetails.title+
+            "\n\nTitle: "+mediaDetails.title+
             "\nDuration: "+mediaDetails.duration.getHumanReadable()+
             "\nUrl: "+mediaDetails.url+
             "\nMediaType: "+mediaDetails.mediaType+
             "\nID: "+mediaDetails.id+
-            "\nAlbumCover: "+mediaDetails.albumCover+
-            "\nTags: "+mediaDetails.tags+
+            "\nmbid: "+mediaDetails.mbid+
+            "\n\nAlbum_name: "+mediaDetails.album.name+
+            "\nAlbum_mbid: "+mediaDetails.album.mbid+
+            "\nAlbum_url: "+mediaDetails.album.url+
+            "\nAlbum_cover: "+mediaDetails.album.cover+
+            "\n\nTags: "+mediaDetails.tags+
             "\nLove: "+mediaDetails.loved;
         this._item.attr("title", titleContent);
 
-        this._cover.attr("src", mediaDetails.albumCover);
+        this._cover.attr("src", mediaDetails.album.cover);
 
         //show item index (+1 to avoid index=0)
         this._item.find(this._config.IndexStyle).append(this._index+1);

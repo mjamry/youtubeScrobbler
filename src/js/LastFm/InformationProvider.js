@@ -64,10 +64,11 @@ window.LastFm.InformationProvider.prototype =
             //        </track>
                 success: $.proxy(function(response)
                 {
-
                     var mediaDetails = new window.Player.MediaDetails();
 
                     mediaDetails.title = response.track.name;
+                    mediaDetails.mbid = response.track.mbid;
+
                     mediaDetails.artist =
                     {
                         name: response.track.artist.name,
@@ -77,7 +78,13 @@ window.LastFm.InformationProvider.prototype =
                     mediaDetails.id = response.track.id;
                     if(response.track.album)
                     {
-                        mediaDetails.albumCover = response.track.album.image[0]["#text"];
+                        mediaDetails.album =
+                        {
+                            name: response.track.album.title,
+                            mbid: response.track.album.mbid,
+                            url: response.track.album.url,
+                            cover: response.track.album.image[0]["#text"]
+                        };
                     }
 
                     mediaDetails.loved = response.track.userloved == "1";

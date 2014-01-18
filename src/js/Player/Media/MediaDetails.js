@@ -13,11 +13,18 @@ window.Player.MediaDetails.prototype =
         url: ""
     },
     title: "",
+    mbid: "",
     duration: "", //new Druation()
     url: "",
     mediaType: "",//type of media e.g. "video/youtube"
     id: "",       //media id from portal e.g lastFm - used to indicate if details has been already obtained
-    albumCover: "",     //link to cover - from LastFm
+    album:
+    {
+        name: "",
+        mbid: "",
+        url: "",
+        cover: ""
+    },
     loved: "",       //determine if track has been loved already
     tags: ""
 };
