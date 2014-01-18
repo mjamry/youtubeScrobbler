@@ -8,14 +8,14 @@ window.Common = window.Common || {};
 window.LastFm.InformationProvider = function(lastFmDataProvider)
 {
     this.dataProvider = lastFmDataProvider;
-    Logger.getInstance().Info("Last fm information provider has been created");
+    Logger.getInstance().Info("LastFm Information provider has been created");
 };
 
 window.LastFm.InformationProvider.prototype =
 {
     getTrackDetails: function(mediaDetails, session, callbacks)
     {
-        Logger.getInstance().Debug("Track details requested for: "+mediaDetails.artist.name +" - "+mediaDetails.title);
+        Logger.getInstance().Debug("[LastFm] Track details requested for: "+mediaDetails.artist.name +" - "+mediaDetails.title);
         this.dataProvider.track.getInfo(
             {
                 track: mediaDetails.title,
@@ -68,6 +68,7 @@ window.LastFm.InformationProvider.prototype =
 
                     mediaDetails.title = response.track.name;
                     mediaDetails.mbid = response.track.mbid;
+                    mediaDetails.id = response.track.id;
 
                     mediaDetails.artist =
                     {
@@ -75,7 +76,7 @@ window.LastFm.InformationProvider.prototype =
                         mbid: response.track.artist.mbid,
                         url: response.track.artist.url
                     };
-                    mediaDetails.id = response.track.id;
+
                     if(response.track.album)
                     {
                         mediaDetails.album =
@@ -89,16 +90,14 @@ window.LastFm.InformationProvider.prototype =
 
                     mediaDetails.loved = response.track.userloved == "1";
 
-                    Logger.getInstance().Info("Track details from LastFm has been obtained.");
-                    Logger.getInstance().Debug("Track details: "+mediaDetails.artist +" - "+mediaDetails.title);
-
+                    Logger.getInstance().Info("[LastFm] Track details has been obtained: "+mediaDetails.artist.name +" - "+mediaDetails.title);
                     callbacks.done(mediaDetails);
                 },
                 this),
 
                 error: $.proxy(function(response)
                 {
-                    Logger.getInstance().Warning("Track details obtaining error: "+response);
+                    Logger.getInstance().Warning("[LastFm] Track details obtaining error: " +window.LastFm.Errors[response]);
                     callbacks.fail();
                 },
                 this)

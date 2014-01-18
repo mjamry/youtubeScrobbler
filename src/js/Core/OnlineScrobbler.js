@@ -15,7 +15,7 @@ window.ApplicationCore.OnlineScrobbler = function(sessionHandler)
     this._trackStartPlayingTime = null;
 
     this._currentlyLoaded = null;
-    Logger.getInstance().Info("Online scrobbler has been created.");
+    Logger.getInstance().Info("Scrobbler has been created.");
 };
 
 window.ApplicationCore.OnlineScrobbler.prototype =
@@ -38,8 +38,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
             }
         }
 
-        Logger.getInstance().Warning("Cannot scrobble track.");
-        Logger.getInstance().Debug("Track cannot be scrobble because playing time is to short: " + timeInSeconds + "s.");
+        Logger.getInstance().Warning("[Scrobbler] Cannot scrobble track, because playing time was to short: " + timeInSeconds + "s.");
         return false;
     },
 
