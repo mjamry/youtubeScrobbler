@@ -28,15 +28,6 @@ window.Player.PlaylistService.prototype =
         this._updatePlaylist();
     },
 
-    //TOOD it should be deleted
-    //initialises playlist object, or overwrite existing one.
-    createPlaylist: function(playlist)
-    {
-        this.playlist = playlist;
-        Logger.getInstance().Info("New playlist has been created, it contains "+ this.playlist.length() +" elements.");
-        this._updatePlaylist(this.playlist.length());
-    },
-
     //creates new empty playlist replacing existing one.
     clearPlaylist: function()
     {
@@ -82,6 +73,7 @@ window.Player.PlaylistService.prototype =
     {
         this.playlist.remove(index);
         Logger.getInstance().Debug("Element has been removed from playlist, now it contains "+this.playlist.length()+" elements.");
+        this._eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistItemRemoved, index);
         this._updatePlaylist();
     },
 

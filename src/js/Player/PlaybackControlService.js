@@ -24,10 +24,16 @@ window.Player.PlaybackControlService.prototype =
         this.playNext();
     },
 
+    _handlePlaylistItemRemoved: function(index)
+    {
+        this.playSpecific(index);
+    },
+
     initialise: function()
     {
         //bind to player events
         EventBroker.getInstance().addListener(window.Player.Events.MediaStopped, this._handleMediaStopped, null, this);
+        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistItemRemoved, this._handlePlaylistItemRemoved, null, this);
     },
 
     //plays current track
