@@ -15,11 +15,11 @@ window.LastFm.InformationProvider.prototype =
 {
     getTrackDetails: function(mediaDetails, session, callbacks)
     {
-        Logger.getInstance().Debug("Track details requested for: "+mediaDetails.artist +" - "+mediaDetails.title);
+        Logger.getInstance().Debug("Track details requested for: "+mediaDetails.artist.name +" - "+mediaDetails.title);
         this.dataProvider.track.getInfo(
             {
                 track: mediaDetails.title,
-                artist: mediaDetails.artist,
+                artist: mediaDetails.artist.name,
                 username: session.user,
                 autocorrect: 1,
                 api_key: window.LastFm.LastFmConstants.API_KEY
@@ -68,7 +68,12 @@ window.LastFm.InformationProvider.prototype =
                     var mediaDetails = new window.Player.MediaDetails();
 
                     mediaDetails.title = response.track.name;
-                    mediaDetails.artist = response.track.artist.name;
+                    mediaDetails.artist =
+                    {
+                        name: response.track.artist.name,
+                        mbid: response.track.artist.mbid,
+                        url: response.track.artist.url
+                    };
                     mediaDetails.id = response.track.id;
                     if(response.track.album)
                     {

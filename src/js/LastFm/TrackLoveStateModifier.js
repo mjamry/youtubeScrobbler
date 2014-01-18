@@ -17,12 +17,12 @@ window.LastFm.TrackLoveStateModifier.prototype =
     //      }
     love: function(loveRequestDetails, session, callbacks)
     {
-        var name = loveRequestDetails.details.artist+" - "+loveRequestDetails.details.track;
+        var name = loveRequestDetails.details.artist.name+" - "+loveRequestDetails.details.track;
         Logger.getInstance().Debug("Last fm scrobbler - love request with track: " + name);
         this.lastFmApi.track.love(
             {
                 track: loveRequestDetails.details.title,
-                artist: loveRequestDetails.details.artist
+                artist: loveRequestDetails.details.artist.name
             },
             session,
             {

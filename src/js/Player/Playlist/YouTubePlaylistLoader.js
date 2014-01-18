@@ -66,7 +66,7 @@ window.Player.YouTubePlaylistLoader.prototype =
             return null;
         }
 
-        mediaDetails.artist = trackName.artist;
+        mediaDetails.artist.name = trackName.artist;
         mediaDetails.title = trackName.title;
         mediaDetails.url = media.player.default;
 

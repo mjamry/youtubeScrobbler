@@ -6,7 +6,12 @@ window.Player.MediaDetails = function(){};
 
 window.Player.MediaDetails.prototype =
 {
-    artist: "",
+    artist:
+    {
+        name: "",
+        mbid: "",
+        url: ""
+    },
     title: "",
     duration: "", //new Druation()
     url: "",

@@ -72,10 +72,12 @@ window.UI.PlaylistUIItemBuilder.prototype =
     fillBody: function(mediaDetails)
     {
         this._item.find(this._config.TimeContainer).append(mediaDetails.duration.getHumanReadable());
-        var details = mediaDetails.artist + " - " + mediaDetails.title;
+        var details = mediaDetails.artist.name + " - " + mediaDetails.title;
 
         var titleContent = "Debug details:"+
-            "\n\nArtist: "+mediaDetails.artist+
+            "\n\nArtist_name: "+mediaDetails.artist.name+
+            "\nArtist_mbid: "+mediaDetails.artist.mbid+
+            "\nArtist_url: "+mediaDetails.artist.url+
             "\nTitle: "+mediaDetails.title+
             "\nDuration: "+mediaDetails.duration.getHumanReadable()+
             "\nUrl: "+mediaDetails.url+

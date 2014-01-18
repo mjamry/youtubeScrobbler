@@ -52,7 +52,7 @@ window.UI.PlaybackDetailsViewController.prototype =
 
     _handleDetailsUpdateRequest: function()
     {
-        var title = this.model.getMediaDetails().artist + " - " + this.model.getMediaDetails().title;
+        var title = this.model.getMediaDetails().artist.name + " - " + this.model.getMediaDetails().title;
         var time = this.model.getPlaybackTime() + "/" + this.model.getDuration();
 
         this._updateView(this.model.getPlaybackState(), title, time);
