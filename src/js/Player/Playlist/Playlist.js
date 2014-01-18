@@ -64,6 +64,16 @@ window.Player.Playlist.prototype =
             //0 ≤ j ≤ i
             var j = Math.floor(Math.random() * i);
 
+            //need to update current item index after shuffling
+            if(this.currentItemIndex == i)
+            {
+                this.currentItemIndex = j;
+            }
+            else if(this.currentItemIndex == j)
+            {
+                this.currentItemIndex = i;
+            }
+
             //exchange [j] <-> [i]
             var temp = this.mediaList[i];
             this.mediaList[i] = this.mediaList[j];

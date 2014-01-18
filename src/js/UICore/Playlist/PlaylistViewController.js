@@ -106,6 +106,8 @@ window.UI.PlaylistViewController.prototype =
                 this.view.append(newElement);
             }
         }
+
+        this._selectItem(this.playlistFlowController.getCurrentItemIndex());
     },
 
     //pass only index - details can be obtained
