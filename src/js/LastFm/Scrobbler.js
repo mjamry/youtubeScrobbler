@@ -52,7 +52,7 @@ window.LastFm.Scrobbler.prototype =
                         this._eventBroker.fireEventWithData(window.LastFm.Events.ScrobblingFailed, response);
 
                         Logger.getInstance().Warning("[LastFm] Scrobbling update failed for: "+trackDetails.artist+" - "+trackDetails.track);
-                        Logger.getInstance().Debug("[LastFm] Scrobbling failed: "+ window.LastFm.Errors(response.error)+" with message: "+response.message);
+                        Logger.getInstance().Debug("[LastFm] Scrobbling failed: "+ window.LastFm.Errors[response.error]+" with message: "+response.message);
                     },
                     this
                 )
@@ -93,7 +93,7 @@ window.LastFm.Scrobbler.prototype =
                         this._eventBroker.fireEventWithData(window.LastFm.Events.NowPlayingUpdateFailed, response);
 
                         Logger.getInstance().Warning("[LastFm] NowPlaying update failed for: "+trackDetails.artist+" - "+trackDetails.track);
-                        Logger.getInstance().Debug("[LastFm] NowPlaying failed: "+ window.LastFm.Errors(response.error)+" with message: "+response.message);
+                        Logger.getInstance().Debug("[LastFm] NowPlaying failed: "+ window.LastFm.Errors[response.error]+" with message: "+response.message);
                     },
                     this
                 )
