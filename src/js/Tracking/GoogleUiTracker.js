@@ -85,6 +85,26 @@ window.Tracking.GoogleUiTracker.prototype =
 
     hookUpToLoggerControlEvents: function(loggerConfig)
     {
+        $(loggerConfig.ClearLogsButtonId).click($.proxy(function handleLogsClear()
+        {
+            GoogleTracker.getInstance().trackUiAction(this.config.ClickAction, this.config.LoggerControl+"_clear");
+        },
+        this));
+
+        $(loggerConfig.LoggerLevelComboBox).change($.proxy(function handleLoggerLevelChange()
+        {
+            GoogleTracker.getInstance().trackUiAction(this.config.ClickAction, this.config.LoggerControl+"_clear", $(loggerConfig.LoggerLevelComboBox).val());
+        },
+        this));
+    },
+
+    hookUpToPlaylistItemEvents: function(playlistitemConfig)
+    {
+
+    },
+
+    hookUpToSessionControlEvents: function(sessionConfig)
+    {
 
     }
 };
