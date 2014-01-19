@@ -15,51 +15,41 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
     this.player = coreServicesFactory.createMediaPlayer(this.uiCore.getPlayerContainer());
     this.playlistService = coreServicesFactory.createPlaylistService();
     this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService(this.player);
-    this.playbackDetailsService.initialise();
 
-    var playlistFlowController = playerServicesFactory.createPlaylistFlowController(this.playlistService);
+    this.playlistFlowController = playerServicesFactory.createPlaylistFlowController(this.playlistService);
 
-    this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, playlistFlowController);
-    this.playbackControlService.initialise();
+    this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistFlowController);
 
-    var playlistElementDetailsProvider = playerServicesFactory.createPlaylistElementDetailsProvider(this.playlistService, this.sessionHandler);
-    playlistElementDetailsProvider.initialise();
+    this.playlistElementDetailsProvider = playerServicesFactory.createPlaylistElementDetailsProvider(this.playlistService, this.sessionHandler);
 
     var playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.sessionHandler);
 
-    var playlist = uiFactory.createPlaylistViewController(this.playlistService, this.playbackControlService, playlistFlowController, playlistElementLoveStateModifier);
-    playlist.initialise();
+    this.playlistViewController = uiFactory.createPlaylistViewController(this.playlistService, this.playbackControlService, this.playlistFlowController, playlistElementLoveStateModifier);
 
-    var playbackDetails = uiFactory.createPlaybackDetailsViewController(this.playbackDetailsService);
-    playbackDetails.initialise();
+    this.playbackDetailsViewController = uiFactory.createPlaybackDetailsViewController(this.playbackDetailsService);
 
-    var playbackControl = uiFactory.createPlaybackControlViewController(this.player, this.playbackControlService);
-    playbackControl.initialise();
+    this.playbackControlViewController = uiFactory.createPlaybackControlViewController(this.player, this.playbackControlService);
 
-    var playlistControl = uiFactory.createPlaylistControlViewController(this.playlistService, playlistFlowController);
-    playlistControl.initialise();
+    this.playlistControlViewController = uiFactory.createPlaylistControlViewController(this.playlistService, this.playlistFlowController);
 
-    var sessionViewController = uiFactory.createSessionViewController(this.sessionHandler);
-    sessionViewController.initialise();
+    this.sessionViewController = uiFactory.createSessionViewController(this.sessionHandler);
 
-    var mediaLoad = uiFactory.createMediaLoadViewController(this.playlistService);
-    mediaLoad.initialise();
+    this.mediaLoadViewController = uiFactory.createMediaLoadViewController(this.playlistService);
 };
 
 window.ApplicationCore.AppCore.prototype =
 {
-    _handlePlaySpecificRequest: function(index)
-    {
-        this.playlistService.playSpecific(index);
-    },
-
     initialise: function()
     {
+        this.playbackDetailsService.initialise();
+        this.playbackControlService.initialise();
+        this.playlistViewController.initialise();
+        this.playbackDetailsViewController.initialise();
+        this.playbackControlViewController.initialise();
+        this.playlistControlViewController.initialise();
+        this.playlistElementDetailsProvider.initialise();
+        this.mediaLoadViewController.initialise();
+        this.sessionViewController.initialise();
         this.onlineScrobbler.initialise();
-        //hook up to UI events - mainly to control player/playlist
-        var eventBroker = EventBroker.getInstance();
-        eventBroker.addListener(window.UI.Events.PlayNextRequested, this.playlistService.playNext, null, this);
-        eventBroker.addListener(window.UI.Events.PlayPreviousRequested, this.playlistService.playPrevious, null, this);
-        eventBroker.addListener(window.UI.Events.PlaySpecificRequested, this._handlePlaySpecificRequest, null, this);
     }
 };
