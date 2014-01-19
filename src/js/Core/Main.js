@@ -13,11 +13,9 @@ $(function()
     var uiFactory = new window.UI.UIControllersFactory();
     var playerServicesFactory = new window.Player.PlayerServicesFactory();
 
-    //logger should be created at the begining
+    //logger should be created at the beginning
     var logger = coreServicesFactory.createLoggerService();
     Logger.setInstance(logger);
-    Logger.getInstance().Info("Application initialisation started.");
-    TimeParser.setInstance(new window.Common.TimeParserImpl());
 
     //creating event broker service
     this._eventBroker = coreServicesFactory.createBrokerHandler();
@@ -28,6 +26,11 @@ $(function()
     var uilogger = uiFactory.createLoggerViewController();
     uilogger.initialise();
     uilogger.isLoggingAllowed = true;
+
+    Logger.getInstance().Info("Application initialisation started.");
+    TimeParser.setInstance(new window.Common.TimeParserImpl());
+
+    Cookie.setInstance(coreServicesFactory.createCookieHandler());
 
     //creating application core
     var applicationCore = new window.ApplicationCore.AppCore(coreServicesFactory, uiFactory, playerServicesFactory);

@@ -34,12 +34,12 @@ window.ApplicationCore.SessionHandler.prototype =
 
     _setSessionCookie: function(session)
     {
-        window.Common.Cookie.instance().setCookie(window.Common.CookiesNames.sessionCookie, session);
+        Cookie.getInstance().setCookie(window.Common.CookiesNames.sessionCookie, session);
     },
 
     _getSessionCookie: function()
     {
-        var lastSession = window.Common.Cookie.instance().getCookie(window.Common.CookiesNames.sessionCookie);
+        var lastSession = Cookie.getInstance().getCookie(window.Common.CookiesNames.sessionCookie);
         if(!lastSession)
         {
             lastSession = null;
@@ -51,7 +51,7 @@ window.ApplicationCore.SessionHandler.prototype =
     //closes current session
     closeSession: function()
     {
-        window.Common.Cookie.instance().removeCookie(window.Common.CookiesNames.sessionCookie);
+        Cookie.getInstance().removeCookie(window.Common.CookiesNames.sessionCookie);
     },
 
     //try to restore last session if it does not exist creates new one.

@@ -28,7 +28,7 @@ window.ApplicationCore.CoreServicesFactory.prototype =
 
     createCookieHandler: function()
     {
-        return new window.Common.CookieHandler();
+        return new window.Common.CookieImpl();
     },
 
     createSessionHandler: function()

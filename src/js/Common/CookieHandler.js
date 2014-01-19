@@ -1,30 +1,36 @@
 //namespace
 window.Common = window.Common || {};
 
-window.Common.Cookie = function()
+Cookie = function()
 {
     this._instance = null;
 };
 
-window.Common.Cookie.setInstance = function(instance)
+Cookie.setInstance = function(instance)
+{
+    if(this._instance != null)
+    {
+        var errorMsg = "Instance of Cookie has been already set!";
+        Logger.getInstance().Error(errorMsg);
+        throw errorMsg;
+    }
+
+    this._instance = instance;
+};
+
+Cookie.getInstance = function()
 {
     if(this._instance == null)
     {
-        this._instance = instance;
-        Logger.getInstance().Info("Cookies service instance has been set.");
+        var errorMsg = "Instance of Cookie has not been set yet!";
+        Logger.getInstance().Error(errorMsg);
+        throw errorMsg;
     }
+
+    return this._instance;
 };
 
-window.Common.Cookie.instance = function()
-{
-    if(this._instance)
-    {
-        return this._instance;
-    }
-    else throw "NonInitialisedException";
-};
-
-window.Common.CookieHandler = function()
+window.Common.CookieImpl = function()
 {
     //configuration
     $.cookie.json = true;
@@ -32,25 +38,32 @@ window.Common.CookieHandler = function()
     Logger.getInstance().Info("Cookies handler has been created.");
 };
 
-window.Common.CookieHandler.prototype =
+window.Common.CookieImpl.prototype =
 {
     setCookie: function(name, value, expiryTime)
     {
-        Logger.getInstance().Debug("Cookie has been created - " + name + " : "+ value);
         $.cookie(name, value, expiryTime);
+        Logger.getInstance().Debug("[Cookie] It has been created - '" + name + "' : "+ value);
     },
 
     getCookie: function(name)
     {
         var value = $.cookie(name);
-        Logger.getInstance().Debug("Cookie: " + name + " has been read and has value: " + value);
+        if(value)
+        {
+            Logger.getInstance().Debug("[Cookie] '" + name + "' has been read and has value: " + value);
+        }
+        else
+        {
+            Logger.getInstance().Warning("[Cookie] '"+name+"' does not exist");
+        }
+
         return value;
     },
 
     removeCookie: function(name)
     {
-        Logger.getInstance().Debug("Cookie: "+ name +" has been removed.");
         $.removeCookie(name);
+        Logger.getInstance().Debug("[Cookie] '"+ name +"' has been removed.");
     }
-
 };
