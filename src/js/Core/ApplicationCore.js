@@ -41,6 +41,9 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     var sessionViewController = uiFactory.createSessionViewController(this.sessionHandler);
     sessionViewController.initialise();
+
+    var mediaLoad = uiFactory.createMediaLoadViewController(this.playlistService);
+    mediaLoad.initialise();
 };
 
 window.ApplicationCore.AppCore.prototype =
@@ -58,18 +61,5 @@ window.ApplicationCore.AppCore.prototype =
         eventBroker.addListener(window.UI.Events.PlayNextRequested, this.playlistService.playNext, null, this);
         eventBroker.addListener(window.UI.Events.PlayPreviousRequested, this.playlistService.playPrevious, null, this);
         eventBroker.addListener(window.UI.Events.PlaySpecificRequested, this._handlePlaySpecificRequest, null, this);
-    },
-
-    //TODO move to ViewController
-    addToPlaylist: function(url)
-    {
-        var plLoader = new window.Player.YouTubePlaylistLoader();
-        plLoader.loadPlaylistFromUrl(
-            url,
-            $.proxy(function(playlist)
-            {
-                this.playlistService.addToPlaylist(playlist)
-            }, this)
-        );
     }
 };

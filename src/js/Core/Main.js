@@ -33,8 +33,6 @@ $(function()
     var applicationCore = new window.ApplicationCore.AppCore(coreServicesFactory, uiFactory, playerServicesFactory);
     applicationCore.initialise();
 
-    HookUpLoadUrlButtonAction(applicationCore);
-
     //creating google tracker
     var tracker = new window.Tracking.GoogleEventTrackerImpl(window.Tracking.GoogleTrackerConfig);
     GoogleTracker.setInstance(tracker);
@@ -51,13 +49,3 @@ $(function()
 
     Logger.getInstance().Info("Application initialisation ended.");
 });
-
-//TODO move to ViewController
-function HookUpLoadUrlButtonAction(player){
-    $("#add-to-playlist").bind("click", function(e)
-    {
-        e.preventDefault();
-        var mediaLocation = $("#media-location").val();
-        player.addToPlaylist(mediaLocation);
-    });
-}

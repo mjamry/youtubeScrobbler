@@ -46,5 +46,10 @@ window.UI.UIControllersFactory.prototype =
     createSessionViewController: function(sessionHandler)
     {
         return new window.UI.SessionViewController(sessionHandler, window.UI.SessionUIConfiguration);
+    },
+
+    createMediaLoadViewController: function(playlistService)
+    {
+        return new window.UI.MediaLoadViewController(playlistService, window.UI.MediaLoadConfig);
     }
 };
