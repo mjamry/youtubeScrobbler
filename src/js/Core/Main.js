@@ -35,6 +35,17 @@ $(function()
 
     HookUpLoadUrlButtonAction(applicationCore);
 
+    //creating google tracker
+    var tracker = new window.Tracking.GoogleEventTrackerImpl(window.Tracking.GoogleTrackerConfig);
+    GoogleTracker.setInstance(tracker);
+
+    //hook to ui events
+    var uiTracker = new window.Tracking.GoogleUiTracker(window.Tracking.GoogleTrackerConfig);
+    uiTracker.hookUpToPlaybackControlEvents(window.UI.PlaybackControlConfiguration);
+    uiTracker.hookUpToPlaylistControlEvents(window.UI.PlaylistControlConfiguration);
+    uiTracker.hookUpToTestControlEvents(window.UI.TestReportUIConfig);
+    uiTracker.hookUpToLoggerControlEvents(window.UI.LoggerUIConfig);
+
     var testReport = uiFactory.createTestReportViewController();
     testReport.initialise();
 
