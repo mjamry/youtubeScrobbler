@@ -21,12 +21,14 @@ window.ApplicationCore.OnlineScrobbler = function(sessionHandler)
 window.ApplicationCore.OnlineScrobbler.prototype =
 {
     //Checks if all requirements has been resolved to scrobble the track.
-    _trackCanBeScrobbled: function(mediaDetails, playingTime)
+    _trackCanBeScrobbled: function(mediaDetails, startTime)
     {
         //is track longer than 30s
-
         if(mediaDetails && mediaDetails.duration && mediaDetails.duration.getInSeconds() > 30)
         {
+            //calculate playing time
+            var playingTime = (new Date().getTime() - startTime);
+
             //if played for 4 minutes or at least hals of its duration
             var timeInSeconds = TimeParser.getInstance().getSeconds(playingTime);
             var timeInMinutes = TimeParser.getInstance().getMinutes(playingTime);
@@ -49,9 +51,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
     //And the track has been played for at least half its duration, or for 4 minutes (whichever occurs earlier.)
     _updateScrobbling: function(mediaDetails)
     {
-        var playingTime = (new Date().getTime() - this._trackStartPlayingTime);
-
-        if(this._trackCanBeScrobbled(mediaDetails, playingTime))
+        if(this._trackCanBeScrobbled(mediaDetails, this._trackStartPlayingTime))
         {
             this._scrobbler.scrobble(
                 {
@@ -83,6 +83,12 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         }
     },
 
+    _handleMediaStopped: function()
+    {
+        //clear this value to avoid unwanted scrobbling of (broken) track
+        this._trackStartPlayingTime = null;
+    },
+
     initialise: function()
     {
         EventBroker.getInstance().addListener(
@@ -100,5 +106,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
                 this._updateScrobbling(mediaDetails);
             }, this)
         );
+
+        EventBroker.getInstance().addListener(window.Player.Events.MediaStopped, $.proxy(this._handleMediaStopped, this));
     }
 };
