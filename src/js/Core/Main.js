@@ -43,6 +43,7 @@ $(function()
     uiTracker.hookUpToPlaylistControlEvents(window.UI.PlaylistControlConfiguration);
     uiTracker.hookUpToTestControlEvents(window.UI.TestReportUIConfig);
     uiTracker.hookUpToLoggerControlEvents(window.UI.LoggerUIConfig);
+    uiTracker.hookUpToMediaLoadEvents(window.UI.MediaLoadConfig);
 
     var testReport = uiFactory.createTestReportViewController();
     testReport.initialise();

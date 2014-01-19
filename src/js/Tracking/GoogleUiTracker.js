@@ -110,6 +110,15 @@ window.Tracking.GoogleUiTracker.prototype =
         this));
     },
 
+    hookUpToMediaLoadEvents: function(mediaLoadConfig)
+    {
+        $(mediaLoadConfig.AddNewMediaButton).click($.proxy(function handleNewMediaAdded()
+        {
+            GoogleTracker.getInstance().trackUiAction(this.config.MediaLoadControl, "add_new_media_"+$(mediaLoadConfig.MediaLocationInput).val());
+        }
+        , this));
+    },
+
     hookUpToPlaylistItemEvents: function(playlistitemConfig)
     {
 
