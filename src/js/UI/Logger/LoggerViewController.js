@@ -13,7 +13,7 @@ window.UI.LoggerLevels =
 window.UI.LoggerViewController = function(container, config)
 {
     this._config = config;
-    this._container = $("#"+container);
+    this._container = $(container);
 };
 
 window.UI.LoggerViewController.prototype =
@@ -46,15 +46,15 @@ window.UI.LoggerViewController.prototype =
         switch(level)
         {
             case window.UI.LoggerLevels.Info:
-                return this._config.infoStyle;
+                return this._config.InfoStyle;
             case window.UI.LoggerLevels.Warning:
-                return this._config.warningStyle;
+                return this._config.WarningStyle;
             case window.UI.LoggerLevels.Error:
-                return this._config.errorStyle;
+                return this._config.ErrorStyle;
             case window.UI.LoggerLevels.Debug:
-                return this._config.debugStyle;
+                return this._config.DebugStyle;
             default:
-                return this._config.infoStyle;
+                return this._config.InfoStyle;
         }
     },
 
@@ -83,15 +83,15 @@ window.UI.LoggerViewController.prototype =
         {
             var style = this._getStyleForLevel(level);
 
-            var newLog = document.createElement(this._config.singleElementType);
+            var newLog = document.createElement(this._config.SingleElementType);
             newLog.className = style;
             newLog.innerHTML = message;
             newLog.setAttribute("level", level);
 
-            if(this._container.children().length + 1 > this._config.maxNumberOfLogs)
+            if(this._container.children().length + 1 > this._config.MaxNumberOfLogs)
             {
                 //remove first element if limit has been reached.
-                this._container.find(this._config.singleElementType+':last').remove();
+                this._container.find(this._config.SingleElementType+':last').remove();
             }
 
             this._container.prepend(newLog);
@@ -137,13 +137,13 @@ window.UI.LoggerViewController.prototype =
 
 
         //attach to UI actions
-        $("#"+this._config.clearLogsButtonId).bind("click", $.proxy(function()
+        $(this._config.ClearLogsButtonId).bind("click", $.proxy(function()
         {
             this._clearLogs();
         },
         this));
 
-        var checkbox = $("#"+this._config.isLoggerEnabledCheckboxId);
+        var checkbox = $(this._config.IsLoggerEnabledCheckboxId);
         checkbox.bind("change", $.proxy(function()
         {
             if(checkbox.prop("checked"))
@@ -157,7 +157,7 @@ window.UI.LoggerViewController.prototype =
         },
         this));
 
-        var comboBox =  $("#"+this._config.loggerLevelComboBox);
+        var comboBox =  $(this._config.LoggerLevelComboBox);
         comboBox.bind("change", $.proxy(function()
         {
             this.currentLoggerLevel = comboBox.val();

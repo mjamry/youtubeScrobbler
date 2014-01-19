@@ -3,13 +3,15 @@ window.UI = window.UI || {};
 
 window.UI.LoggerUIConfig =
 {
-    infoStyle: "logger-info",
-    errorStyle: "logger-error",
-    warningStyle: "logger-warning",
-    debugStyle: "logger-debug",
-    maxNumberOfLogs: 400,
-    singleElementType: "div",
-    clearLogsButtonId: "clear-logs",
-    isLoggerEnabledCheckboxId: "enable-logger",
-    loggerLevelComboBox: "logger-level"
+    InfoStyle: "logger-info",
+    ErrorStyle: "logger-error",
+    WarningStyle: "logger-warning",
+    DebugStyle: "logger-debug",
+
+    MaxNumberOfLogs: 400,
+    SingleElementType: "div",
+
+    ClearLogsButtonId: "#clear-logs",
+    IsLoggerEnabledCheckboxId: "#enable-logger",
+    LoggerLevelComboBox: "#logger-level"
 };
