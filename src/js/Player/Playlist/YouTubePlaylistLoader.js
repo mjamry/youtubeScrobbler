@@ -75,6 +75,12 @@ window.Player.YouTubePlaylistLoader.prototype =
         var playlist = new window.Player.Playlist();
         for (var i = 0; i < list.length; i++)
         {
+            //TODO - it is only temporary needed for debugging
+            if(list[i].video.restrictions)
+            {
+                var restr = list[i].video.restrictions;
+                Logger.getInstance().Debug("[YT] Playback restrictions: "+restr.length+" | relationship: "+restr[0].relationship+" | type: "+restr[0].type+" | countries: "+restr[0].countries);
+            }
             var mediaDetails = null;
             try
             {
