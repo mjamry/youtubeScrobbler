@@ -70,7 +70,17 @@ window.Tracking.GoogleUiTracker.prototype =
 
     hookUpToTestControlEvents: function(testConfig)
     {
+        $(testConfig.ErrorButton).click($.proxy(function handleErrorReportOpen()
+        {
+            GoogleTracker.getInstance().trackUiAction(this.config.ClickAction, this.config.TestEnvironment+"_error_report");
+        },
+        this));
 
+        $(testConfig.FeatureButton).click($.proxy(function handleFeatureRequestOpen()
+        {
+            GoogleTracker.getInstance().trackUiAction(this.config.ClickAction, this.config.TestEnvironment+"_feature_request");
+        },
+        this));
     },
 
     hookUpToLoggerControlEvents: function(loggerConfig)

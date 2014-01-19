@@ -14,5 +14,6 @@ window.Tracking.GoogleTrackerConfig =
 
     //labels
     PlaybackControl: "playback_control",
-    PlaylistControl: "playlist_control"
+    PlaylistControl: "playlist_control",
+    TestEnvironment: "test_environment"
 };
