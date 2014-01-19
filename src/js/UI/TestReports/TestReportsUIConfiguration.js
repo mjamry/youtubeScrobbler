@@ -3,18 +3,18 @@ window.UI = window.UI || {};
 
 window.UI.TestReportUIConfig =
 {
-    errorFormContainer: "error-report",
-    errorButton: "report-bug-btn",
-    error_title: "bug-title",
-    error_description: "bug-description",
-    error_email: "bug-email",
-    featureFormContainer: "feature-report",
-    featureButton: "report-feature-btn",
-    feature_title: "feedback-title",
-    feature_description: "feedback-description",
-    feature_email: "feedback-email",
+    ErrorFormContainer: "#error-report",
+    ErrorButton: "#report-bug-btn",
+    ErrorTitle: "#bug-title",
+    ErrorDescription: "#bug-description",
+    ErrorEmail: "#bug-email",
+    FeatureFormContainer: "#feature-report",
+    FeatureButton: "#report-feature-btn",
+    FeatureTitle: "#feedback-title",
+    FeatureDescription: "#feedback-description",
+    FeatureEmail: "#feedback-email",
 
-    showFormButton: ".testing-environment-show-button",
-    hideFormButton: ".testing-environment-hide-button",
-    testingFormContainer: "#testing-environment"
+    ShowFormButton: ".testing-environment-show-button",
+    HideFormButton: ".testing-environment-hide-button",
+    TestingFormContainer: "#testing-environment"
 };

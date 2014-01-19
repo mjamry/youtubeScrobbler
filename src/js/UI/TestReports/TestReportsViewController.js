@@ -5,15 +5,15 @@ window.UI.TestReportsViewController = function(reportSender, config)
 {
     this._reportSender = reportSender || new window.UI.ReportSender();
     this._config = config;
-    this._errorContainer = $("#"+config.errorFormContainer);
-    this._featureContainer = $("#"+config.featureFormContainer);
+    this._errorContainer = $(config.ErrorFormContainer);
+    this._featureContainer = $(config.FeatureFormContainer);
 };
 
 window.UI.TestReportsViewController.prototype =
 {
     _hookUpToButtonsEvents: function()
     {
-        var errorBtn = $("#"+this._config.errorButton);
+        var errorBtn = $(this._config.ErrorButton);
         errorBtn.click($.proxy(function()
         {
             if(this._errorContainer.is(':visible'))
@@ -27,7 +27,7 @@ window.UI.TestReportsViewController.prototype =
         },
         this));
 
-        var featureBtn = $("#"+this._config.featureButton);
+        var featureBtn = $(this._config.FeatureButton);
         featureBtn.click($.proxy(function()
         {
             if(this._featureContainer.is(':visible'))
@@ -61,9 +61,9 @@ window.UI.TestReportsViewController.prototype =
 
     _handleErrorReport: function()
     {
-        var title = document.getElementById(this._config.error_title).value;
-        var description = document.getElementById(this._config.error_description).value;
-        var email = document.getElementById(this._config.error_email).value;
+        var title = $(this._config.ErrorTitle).val();
+        var description = $(this._config.ErrorDescription).val();
+        var email = $(this._config.ErrorEmail).val();
 
         if(title && description && email)
         {
@@ -88,9 +88,9 @@ window.UI.TestReportsViewController.prototype =
 
     _handleFeatureRequest: function()
     {
-        var title = document.getElementById(this._config.feature_title).value;
-        var description = document.getElementById(this._config.feature_description).value;
-        var email = document.getElementById(this._config.feature_email).value;
+        var title = $(this._config.FeatureTitle).val();
+        var description = $(this._config.FeatureDescription).val();
+        var email = $(this._config.FeatureEmail).val();
 
         if(title && description && email)
         {
@@ -116,7 +116,7 @@ window.UI.TestReportsViewController.prototype =
     {
         return function()
         {
-            $(config.testingFormContainer).show();
+            $(config.TestingFormContainer).show();
         }
     },
 
@@ -124,7 +124,7 @@ window.UI.TestReportsViewController.prototype =
     {
         return function()
         {
-            $(config.testingFormContainer).hide();
+            $(config.TestingFormContainer).hide();
         }
     },
 
@@ -137,8 +137,8 @@ window.UI.TestReportsViewController.prototype =
 
         this._hookUpFormsActions();
 
-        $(this._config.showFormButton).click(this._showForm(this._config));
-        $(this._config.hideFormButton).click(this._hideForm(this._config));
+        $(this._config.ShowFormButton).click(this._showForm(this._config));
+        $(this._config.HideFormButton).click(this._hideForm(this._config));
 
         this._hideForm(this._config)();
     }
