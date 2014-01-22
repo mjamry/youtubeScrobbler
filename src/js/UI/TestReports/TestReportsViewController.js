@@ -71,9 +71,9 @@ window.UI.TestReportsViewController.prototype =
             {
                 success: function()
                 {
-                    Logger.getInstance().Info("Error report has been sent.");
-                    Logger.getInstance().Debug("Error title: "+title);
-                    alert("Success.\r\n\r\nError report has been sent.\r\nThank you for your effort.\r\n\r\nWe will stay in touch.")
+                    Logger.getInstance().Info("Bug report has been sent.");
+                    Logger.getInstance().Debug("Bug title: "+title);
+                    alert("Success.\r\n\r\Bug report has been sent.\r\nThank you for your effort.\r\n\r\nWe will stay in touch.")
                 },
                 fail: function()
                 {
