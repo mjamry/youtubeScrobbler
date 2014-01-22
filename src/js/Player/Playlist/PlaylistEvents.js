@@ -6,5 +6,7 @@ window.Player.PlaylistEvents =
      //eventArgs - numberOfNewItems
     PlaylistUpdated: "PlaylistUpdated",
     PlaylistItemUpdated: "PlaylistItemUpdated",
-    PlaylistItemRemoved: "PlaylistItemRemoved"
+    PlaylistItemRemoved: "PlaylistItemRemoved",
+
+    PlaylistItemEditionRequested: "PlaylistItemEditionRequested"
 };

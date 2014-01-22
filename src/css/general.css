@@ -197,12 +197,33 @@ body
     font-weight: bold;
     line-height:20px;
 }
+/*------------------------------PLAYLIST--ITEM--EDITOR------------------*/
+#playlist-item-editor-container
+{
+    width:450px;
+    height:338px;
+    position: absolute;
+    top:0;
+    left:0;
+    /*-it is displayed on demand, but by default should be hidden-*/
+    display: none;
+}
+
+#playlist-item-editor
+{
+    position:relative;
+    margin-left:auto;
+    margin-right:auto;
+    width:350px;
+
+}
 
 /*------------------------------MEDIA------------------*/
 #media-content
 {
     width:900px;
     margin:auto;
+    position:relative;
 }
 
 #media-player

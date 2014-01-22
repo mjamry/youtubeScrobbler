@@ -34,6 +34,8 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
     this.sessionViewController = uiFactory.createSessionViewController(this.sessionHandler);
 
     this.mediaLoadViewController = uiFactory.createMediaLoadViewController(this.playlistService);
+
+    this.playlistItemEditorViewController = uiFactory.createPlaylistItemEditorViewController(this.playlistService);
 };
 
 window.ApplicationCore.AppCore.prototype =
@@ -49,6 +51,7 @@ window.ApplicationCore.AppCore.prototype =
         this.playlistElementDetailsProvider.initialise();
         this.mediaLoadViewController.initialise();
         this.sessionViewController.initialise();
+        this.playlistItemEditorViewController.initialise();
         this.onlineScrobbler.initialise();
     }
 };

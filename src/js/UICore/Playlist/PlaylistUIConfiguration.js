@@ -7,6 +7,8 @@ window.UI.PlaylistUIConfig =
 
     LikeButtonContainer: ".playlist-item-like",
     RemoveButtonContainer: ".playlist-item-remove",
+    EditButtonContainer: ".playlist-item-edit",
+
     DetailsContainer: ".playlist-item-name",
     TimeContainer: ".playlist-item-time",
     IconsContainer: ".playlist-item-icons",

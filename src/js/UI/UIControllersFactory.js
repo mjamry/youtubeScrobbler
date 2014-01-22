@@ -51,5 +51,11 @@ window.UI.UIControllersFactory.prototype =
     createMediaLoadViewController: function(playlistService)
     {
         return new window.UI.MediaLoadViewController(playlistService, window.UI.MediaLoadConfig);
+    },
+
+    createPlaylistItemEditorViewController: function(playlistProvider)
+    {
+        var detailsProvider = new window.LastFm.LastFmApiFactory().createInformationProvider();
+        return new window.UI.PlaylistItemDetailsEditorViewController(detailsProvider, playlistProvider, window.UI.PlaylistItemDetailsEditorConfig)
     }
 };

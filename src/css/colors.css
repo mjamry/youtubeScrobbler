@@ -89,6 +89,14 @@ body A:hover
     border:2px solid #2A2C2B;
 }
 
+/*--------PLAYLIST_ITEM_EDITOR----------*/
+
+#playlist-item-editor-container
+{
+    background-color: #2A2C2B;
+    color:#DC3522;
+}
+
 /*--------BUTTONS----------*/
 .playback-control-button,
 .playlist-control-button,
