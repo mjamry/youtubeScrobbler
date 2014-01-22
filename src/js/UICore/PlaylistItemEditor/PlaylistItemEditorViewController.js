@@ -122,8 +122,9 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         }
         , this));
 
-        $(this.config.CloseButton).click($.proxy(function closePlaylistItemEditor()
+        $(this.config.CloseButton).click($.proxy(function closePlaylistItemEditor(e)
         {
+            e.preventDefault();
             this._hide();
         }
         , this));
