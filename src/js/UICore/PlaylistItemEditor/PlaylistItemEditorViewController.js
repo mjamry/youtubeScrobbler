@@ -92,20 +92,24 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
     {
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistItemEditionRequested, $.proxy(this._onItemEditionRequested, this));
 
-        $(this.config.SwapButton).click($.proxy(function swapItemDetails()
+        $(this.config.SwapButton).click($.proxy(function swapItemDetails(e)
         {
-
+            e.preventDefault();
         }
         ,this));
 
-        $(this.config.SaveButton).click($.proxy(function saveEditedItem()
+        $(this.config.SaveButton).click($.proxy(function saveEditedItem(e)
         {
+            e.preventDefault();
+
             this._savePlaylistItemDetails(this);
         }
         , this));
 
-        $(this.config.CheckButton).click($.proxy(function()
+        $(this.config.CheckButton).click($.proxy(function(e)
         {
+            e.preventDefault();
+
             var mediaDetails = this._retrieveMediaDetails();
             this.detailsProvider.getTrackDetails(
                 mediaDetails,
