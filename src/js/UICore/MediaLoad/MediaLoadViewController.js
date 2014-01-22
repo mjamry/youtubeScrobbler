@@ -24,8 +24,9 @@ window.UI.MediaLoadViewController.prototype =
 
     initialise: function initialise()
     {
-        $(this.config.AddNewMediaButton).click($.proxy(function handleAddMediaClicked()
+        $(this.config.AddNewMediaButton).click($.proxy(function handleAddMediaClicked(e)
         {
+            e.preventDefault();
             this._addNewMedia($(this.config.MediaLocationInput).val());
         },
         this));
