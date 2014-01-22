@@ -121,7 +121,23 @@ window.Tracking.GoogleUiTracker.prototype =
 
     hookUpToPlaylistItemEvents: function(playlistitemConfig)
     {
+        $(playlistitemConfig.PlaylistItem).click($.proxy(function handlePlaylistItemClicked()
+        {
+            GoogleTracker.getInstance().trackUiAction(this.config.PlaylistItem, "select");
+        },
+        this));
 
+        $(playlistitemConfig.RemoveButtonContainer).click($.proxy(function handlePlaylistItemRemoved()
+        {
+            GoogleTracker.getInstance().trackUiAction(this.config.PlaylistItem, "remove");
+        },
+        this));
+
+        $(playlistitemConfig.LikeButtonContainer).click($.proxy(function handlePlaylistItemLicked()
+        {
+            GoogleTracker.getInstance().trackUiAction(this.config.PlaylistItem, "licked");
+        },
+        this));
     },
 
     hookUpToSessionControlEvents: function(sessionConfig)

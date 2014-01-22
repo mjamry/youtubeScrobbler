@@ -17,5 +17,6 @@ window.Tracking.GoogleTrackerConfig =
     PlaylistControl: "playlist_control",
     TestEnvironment: "test_environment",
     LoggerControl: "logger_control",
-    MediaLoadControl: "media_load"
+    MediaLoadControl: "media_load",
+    PlaylistItem: "playlist_item"
 };
