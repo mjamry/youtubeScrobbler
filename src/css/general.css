@@ -169,9 +169,16 @@ body
     width:100px;
 }
 
-.playlist-item-like, .playlist-item-remove
+.playlist-item-button
 {
+    margin-right:10px;
     margin-top:10px;
+    width:30px;
+}
+
+.playlist-item-buttons
+{
+    float:right;
 }
 
 .playlist-item-even, .playlist-item-odd
@@ -294,7 +301,7 @@ body
 #media-player-controls
 {
     float:left;
-    width:180px;
+    width:240px;
     display:block;
 }
 
@@ -401,7 +408,7 @@ body
 #media-player-playback
 {
     float:left;
-    min-width:450px;
+    min-width:390px;
     cursor: ew-resize;
     -webkit-user-select: none;
     -moz-user-select: none;
