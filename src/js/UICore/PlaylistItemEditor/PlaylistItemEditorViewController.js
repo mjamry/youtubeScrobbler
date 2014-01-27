@@ -13,6 +13,40 @@ window.UI.PlaylistItemDetailsEditorViewController = function(detailsProvider, pl
 
 window.UI.PlaylistItemDetailsEditorViewController.prototype =
 {
+    _setVerificationCorrectStatus: function(item)
+    {
+        $(item).children(this.config.VerificationOk).show();
+        $(item).children(this.config.VerificationError).hide();
+    },
+
+    _setVerificationErrorStatus: function(item)
+    {
+        $(item).children(this.config.VerificationOk).hide();
+        $(item).children(this.config.VerificationError).show();
+    },
+
+    _verifyItems: function()
+    {
+        this._setVerificationErrorStatus(this.config.ArtistVerification);
+        this._setVerificationErrorStatus(this.config.TitleVerification);
+        this._setVerificationErrorStatus(this.config.AlbumVerification);
+
+        if(this.mediaDetails.artist.mbid)
+        {
+            this._setVerificationCorrectStatus(this.config.ArtistVerification);
+        }
+
+        if(this.mediaDetails.mbid)
+        {
+            this._setVerificationCorrectStatus(this.config.TitleVerification);
+        }
+
+        if(this.mediaDetails.album.mbid)
+        {
+            this._setVerificationCorrectStatus(this.config.AlbumVerification);
+        }
+    },
+
     _onItemEditionRequested: function(args)
     {
         this._show(args.mediaDetails, args.index);
@@ -36,6 +70,15 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         mediaDetails.album.name = $(this.config.AlbumInput).val();
 
         return mediaDetails;
+    },
+
+    _swapArtistNameAndTitle: function(that)
+    {
+        var title = that.mediaDetails.title;
+        that.mediaDetails.title = that.mediaDetails.artist.name;
+        that.mediaDetails.artist.name = title;
+
+        that.updateView();
     },
 
     _savePlaylistItemDetails: function _saveEditedPlaylistItem(that)
@@ -79,6 +122,8 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         {
             $(this.config.AlbumInput).val(this.mediaDetails.album.name);
         }
+
+        this._verifyItems();
     },
 
     _show: function showPlaylistItemEditor(mediaDetails, index)
@@ -95,6 +140,7 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         $(this.config.SwapButton).click($.proxy(function swapItemDetails(e)
         {
             e.preventDefault();
+            this._swapArtistNameAndTitle(this);
         }
         ,this));
 

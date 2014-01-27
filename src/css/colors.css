@@ -94,13 +94,33 @@ body A:hover
 #playlist-item-editor-container
 {
     background-color: #2A2C2B;
-    color:#DC3522;
+    color:#D9CB9E;
+    border-right:2px solid #374140;
 }
+
+.playlist-item-editor-form input
+{
+    background-color: #D9CB9E;
+    border:2px solid #374140;
+    color:#374140;
+}
+
+.playlist-editor-verification-ok
+{
+    color:green;
+}
+
+.playlist-editor-verification-err
+{
+    color:yellow;
+}
+
 
 /*--------BUTTONS----------*/
 .playback-control-button,
 .playlist-control-button,
-.playlist-add-button
+.playlist-add-button,
+.playlist-editor-button
 {
 
     background-color:#374140;
@@ -109,7 +129,8 @@ body A:hover
 
 .playback-control-button:hover,
 .playlist-control-button:hover,
-.playlist-add-button:hover
+.playlist-add-button:hover,
+.playlist-editor-button:hover
 {
     background-color: #1E1E20;
 }

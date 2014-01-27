@@ -186,21 +186,43 @@
                 <div class="pure-u-1-2">
                     <div id="playlist-item-editor-container">
                         <div id="playlist-item-editor">
-                            <form class="pure-form pure-form-stacked">
+                            <form class="playlist-item-editor-form">
                                 <legend>playlist item editor</legend>
 
-                                <label for="playlist-item-editor-artist">artist</label>
-                                <input id="playlist-item-editor-artist" class="pure-input-2-3" type="text" placeholder="artist name">
+                                <label for="playlist-item-editor-artist">artist:</label>
 
-                                <label for="playlist-item-editor-title">title</label>
-                                <input id="playlist-item-editor-title" class="pure-input-2-3" type="text" placeholder="track title">
+                                <div class="playlist-editor-line">
+                                    <input id="playlist-item-editor-artist" type="text" placeholder="artist name">
+                                    <div class="playlist-editor-artist-check playlist-editor-verification">
+                                        <i class="playlist-editor-verification-ok fa fa-check-square"></i>
+                                        <i class="playlist-editor-verification-err fa fa-exclamation-triangle"></i>
+                                    </div>
+                                </div>
 
-                                <label for="playlist-item-editor-album">album</label>
-                                <input id="playlist-item-editor-album" class="pure-input-2-3" type="text" placeholder="album name">
+                                <label for="playlist-item-editor-title">title:</label>
 
-                                <button class="playlist-item-editor-button-check playlist-add-button" title="validate details via LastFm portal"><i class="fa fa-refresh"></i></button>
-                                <button class="playlist-item-editor-button-save playlist-add-button" title="save details"><i class="fa fa-save"></i></button>
-                                <button class="playlist-item-editor-button-close playlist-add-button" title="close without saving"><i class="fa fa-times"></i></button>
+                                <div class="playlist-editor-line">
+                                    <input id="playlist-item-editor-title" type="text" placeholder="track title">
+                                    <div class="playlist-editor-title-check playlist-editor-verification">
+                                        <i class="playlist-editor-verification-ok fa fa-check-square"></i>
+                                        <i class="playlist-editor-verification-err fa fa-exclamation-triangle"></i>
+                                    </div>
+                                </div>
+
+                                <label for="playlist-item-editor-album">album:</label>
+
+                                <div class="playlist-editor-line">
+                                    <input id="playlist-item-editor-album" type="text" placeholder="album name">
+                                    <div class="playlist-editor-album-check playlist-editor-verification">
+                                        <i class="playlist-editor-verification-ok fa fa-check-square"></i>
+                                        <i class="playlist-editor-verification-err fa fa-exclamation-triangle"></i>
+                                    </div>
+                                </div>
+
+                                <button class="playlist-item-editor-button-check playlist-editor-button" title="validate details via LastFm portal"><i class="fa fa-refresh"></i></button>
+                                <button class="playlist-item-editor-button-swap playlist-editor-button" title="swap title and artist name"><i class="fa fa-exchange"></i></button>
+                                <button class="playlist-item-editor-button-save playlist-editor-button" title="save details"><i class="fa fa-save"></i></button>
+                                <button class="playlist-item-editor-button-close playlist-editor-button" title="close without saving"><i class="fa fa-times"></i></button>
                             </form>
                         </div>
                     </div>
