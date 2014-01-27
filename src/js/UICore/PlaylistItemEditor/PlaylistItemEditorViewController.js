@@ -147,7 +147,6 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         $(this.config.SaveButton).click($.proxy(function saveEditedItem(e)
         {
             e.preventDefault();
-
             this._savePlaylistItemDetails(this);
         }
         , this));

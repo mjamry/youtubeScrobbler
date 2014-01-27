@@ -205,8 +205,8 @@ body
     position: absolute;
     top:0;
     left:0;
-    /*-it is displayed on demand, but by default should be hidden-
-    display: none;                */
+    /*-it is displayed on demand, but by default should be hidden-*/
+    display: none;
 }
 
 #playlist-item-editor
