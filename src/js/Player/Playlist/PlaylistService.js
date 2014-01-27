@@ -71,9 +71,16 @@ window.Player.PlaylistService.prototype =
 
     removeItem: function(index)
     {
+        var currentItem = this.playlist.currentItemIndex;
         this.playlist.remove(index);
         Logger.getInstance().Debug("Element has been removed from playlist, now it contains "+this.playlist.length()+" elements.");
-        this._eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistItemRemoved, index);
+        this._eventBroker.fireEventWithData(
+            window.Player.PlaylistEvents.PlaylistItemRemoved,
+            {
+                index: index,
+                isCurrentlyPlayingItemRemoved: index == currentItem
+            }
+        );
         this._updatePlaylist();
     },
 

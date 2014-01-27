@@ -28,7 +28,12 @@ window.Player.Playlist.prototype =
 
     remove: function(index)
     {
-          this.mediaList.splice(index, 1);
+        if(index < this.currentItemIndex)
+        {
+            this.currentItemIndex--;
+        }
+
+        this.mediaList.splice(index, 1);
     },
 
     replace: function(index, mediaDetails)

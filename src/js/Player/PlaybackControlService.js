@@ -24,9 +24,12 @@ window.Player.PlaybackControlService.prototype =
         this.playNext();
     },
 
-    _handlePlaylistItemRemoved: function(index)
+    _handlePlaylistItemRemoved: function(eventArgs)
     {
-        this.playSpecific(index);
+        if(eventArgs.isCurrentlyPlayingItemRemoved)
+        {
+            this.playSpecific(eventArgs.index);
+        }
     },
 
     initialise: function()
