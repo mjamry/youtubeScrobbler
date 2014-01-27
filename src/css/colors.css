@@ -46,22 +46,29 @@ body A:hover
     background-color: #DC3522;
 }
 
-.playlist-item-name, .playlist-item-details, .playlist-item-time, .playlist-item-icons
+.playlist-item-name,
+.playlist-item-details,
+.playlist-item-time,
+.playlist-item-icons
 {
     color: #D9CB9E;
 }
 
-.playlist-item-like, .playlist-item-remove
+.playlist-item-like,
+.playlist-item-remove
 {
     color: #D9CB9E;
 }
 
-.playlist-item-like:hover, .playlist-item-remove:hover
+.playlist-item-like:hover,
+.playlist-item-remove:hover,
+.playlist-item-edit:hover
 {
     color: red;
 }
 
-.playlist-item-even, .playlist-item-odd
+.playlist-item-even,
+.playlist-item-odd
 {
     border-bottom: 1px solid #1E1E20;
     border-top:  1px solid #374140;
@@ -77,7 +84,8 @@ body A:hover
     background-color: #2A2C2B;
 }
 
-.playlist-item-odd:hover, .playlist-item-even:hover
+.playlist-item-odd:hover,
+.playlist-item-even:hover
 {
     background-color: #1E1E20;
 }
