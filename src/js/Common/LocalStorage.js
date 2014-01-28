@@ -37,7 +37,7 @@ window.Common.LocalStorageImpl.prototype =
     setData: function(name, value)
     {
         Logger.getInstance().Info("[LocalStorage] "+name+" has been saved.");
-        Logger.getInstance().Debug("[LocalStorage] Saced value: "+JSON.stringify(value));
+        Logger.getInstance().Debug("[LocalStorage] Saved value: "+JSON.stringify(value));
         localStorage.setItem(name, JSON.stringify(value));
     },
 
@@ -47,7 +47,7 @@ window.Common.LocalStorageImpl.prototype =
         if(value)
         {
             Logger.getInstance().Info("[LocalStorage] "+name+" has been read.");
-            Logger.getInstance().Debug("[LocalStorage] Saced value: "+JSON.stringify(value));
+            Logger.getInstance().Debug("[LocalStorage] Read value: "+JSON.stringify(value));
         }
         return value;
     },

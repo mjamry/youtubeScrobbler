@@ -42,14 +42,19 @@ window.Player.PlaylistService.prototype =
     {
         var storedData = LocalStorage.getInstance().getData("tempPl");
         var playlist = new window.Player.Playlist();
+        if(storedData)
+        {
+            playlist.deserialize(storedData.mediaList);
+            Logger.getInstance().Info("Playlist has been restored with "+playlist.length()+" elements.");
+        }
 
-        playlist.deserialize(storedData.mediaList);
         this.playlist = playlist;
     },
 
     savePlaylist: function()
     {
         LocalStorage.getInstance().setData("tempPl", this.playlist);
+        Logger.getInstance().Info("Playlist has been saved with "+this.playlist.length()+" elements.");
     },
 
     //adds new playlist (or single media) to existing playlist.
