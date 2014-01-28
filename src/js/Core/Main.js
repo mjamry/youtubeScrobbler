@@ -30,6 +30,8 @@ $(function()
     Logger.getInstance().Info("Application initialisation started.");
     TimeParser.setInstance(new window.Common.TimeParserImpl());
 
+    LocalStorage.setInstance(new window.Common.LocalStorageImpl());
+
     Cookie.setInstance(coreServicesFactory.createCookieHandler());
 
     //creating application core

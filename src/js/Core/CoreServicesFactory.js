@@ -44,7 +44,9 @@ window.ApplicationCore.CoreServicesFactory.prototype =
 
     createPlaylistService: function()
     {
-        return new window.Player.PlaylistService();
+        //TODO - use real name for playlist, and store it in config
+        var lastPlaylist = LocalStorage.getInstance().getData("tempPl");
+        return new window.Player.PlaylistService(lastPlaylist);
     },
 
     createPlaybackDetailsService: function(player)
