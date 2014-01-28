@@ -36,16 +36,25 @@ window.Common.LocalStorageImpl.prototype =
 {
     setData: function(name, value)
     {
+        Logger.getInstance().Info("[LocalStorage] "+name+" has been saved.");
+        Logger.getInstance().Debug("[LocalStorage] Saced value: "+JSON.stringify(value));
         localStorage.setItem(name, JSON.stringify(value));
     },
 
     getData: function(name)
     {
-        return JSON.parse(localStorage.getItem(name));
+        var value = JSON.parse(localStorage.getItem(name));
+        if(value)
+        {
+            Logger.getInstance().Info("[LocalStorage] "+name+" has been read.");
+            Logger.getInstance().Debug("[LocalStorage] Saced value: "+JSON.stringify(value));
+        }
+        return value;
     },
 
     removeData: function(name)
     {
+        Logger.getInstance().Info("[LocalStorage] "+name+" has been removed.");
         localStorage.removeItem(name);
     }
 };

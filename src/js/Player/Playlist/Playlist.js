@@ -84,5 +84,26 @@ window.Player.Playlist.prototype =
             this.mediaList[i] = this.mediaList[j];
             this.mediaList[j] = temp;
         }
+    },
+
+    //read passed data and fill current playlist
+    deserialize: function(data)
+    {
+        for(var i=0;i<data.length;i++)
+        {
+            var mediaDetails = new window.Player.MediaDetails();
+            mediaDetails.artist = data[i].artist;
+            mediaDetails.album = data[i].album;
+            mediaDetails.title = data[i].title;
+            mediaDetails.mbid = data[i].mbid;
+            mediaDetails.duration = new window.Player.Duration(data[i].duration.duration);
+            mediaDetails.url = data[i].url;
+            mediaDetails.mediaType = data[i].mediaType;
+            mediaDetails.id = data[i].id;
+            mediaDetails.loved = data[i].loved;
+            mediaDetails.tags = data[i].tags;
+
+            this.addItem(mediaDetails);
+        }
     }
 };

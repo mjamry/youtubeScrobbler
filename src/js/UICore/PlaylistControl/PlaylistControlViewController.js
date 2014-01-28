@@ -84,7 +84,7 @@ window.UI.PlaylistControlViewController.prototype =
     {
         return function()
         {
-            //model.save();
+            model.savePlaylist();
         }
     },
 
@@ -120,7 +120,7 @@ window.UI.PlaylistControlViewController.prototype =
         //bind to Ui events
         this.view.find(this.config.LoveButton).click(this._changeLoveStateForCurrentTrack(this));
         this.view.find(this.config.ClearButton).click(this._clearPlaylist(this.playlistService));
-        this.view.find(this.config.SaveButton).click(this._savePlaylist(this.playlistController));
+        this.view.find(this.config.SaveButton).click(this._savePlaylist(this.playlistService));
         this.view.find(this.config.ShuffleButton).click(this._shufflePlaylist(this.playlistController));
         this.view.find(this.config.RepeatButton).click(this._changeRepeatState(this));
 

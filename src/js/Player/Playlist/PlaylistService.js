@@ -5,7 +5,7 @@ window.Player = window.Player || {};
 window.Common = window.Common || {};
 
 
-window.Player.PlaylistService = function(playlist)
+window.Player.PlaylistService = function()
 {
     this.playlist = playlist || new window.Player.Playlist();
     this._eventBroker = EventBroker.getInstance();
@@ -13,6 +13,7 @@ window.Player.PlaylistService = function(playlist)
     this._autoplay = true;
 
     Logger.getInstance().Info("Playlist service has been created.");
+    this.restorePlaylist();
 };
 
 window.Player.PlaylistService.prototype =
@@ -35,6 +36,20 @@ window.Player.PlaylistService.prototype =
         this.playlist = new window.Player.Playlist();
 
         this._updatePlaylist();
+    },
+
+    restorePlaylist: function()
+    {
+        var storedData = LocalStorage.getInstance().getData("tempPl");
+        var playlist = new window.Player.Playlist();
+
+        playlist.deserialize(storedData.mediaList);
+        this.playlist = playlist;
+    },
+
+    savePlaylist: function()
+    {
+        LocalStorage.getInstance().setData("tempPl", this.playlist);
     },
 
     //adds new playlist (or single media) to existing playlist.

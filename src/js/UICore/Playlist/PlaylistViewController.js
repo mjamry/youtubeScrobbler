@@ -135,5 +135,7 @@ window.UI.PlaylistViewController.prototype =
         EventBroker.getInstance().addListener(window.Player.Events.MediaPlay, this._handleMediaPlayed, null, this);
 
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistItemUpdated, this._handleItemUpdated, null, this);
+
+        this.playlistService.refreshPlaylist();
     }
 };
