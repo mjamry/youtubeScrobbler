@@ -301,7 +301,7 @@ body
 #media-player-controls
 {
     float:left;
-    width:240px;
+    width:180px;
     display:block;
 }
 
@@ -358,7 +358,7 @@ body
 #media-playlist-control
 {
     float:left;
-    width:140px;
+    width:175px;
     height:35px;
     display:block;
 }
@@ -408,7 +408,7 @@ body
 #media-player-playback
 {
     float:left;
-    min-width:390px;
+    min-width:415px;
     cursor: ew-resize;
     -webkit-user-select: none;
     -moz-user-select: none;

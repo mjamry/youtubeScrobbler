@@ -63,7 +63,7 @@ window.LastFm.TrackLoveStateModifier.prototype =
         this.lastFmApi.track.unlove(
             {
                 track: loveRequestDetails.details.title,
-                artist: loveRequestDetails.details.artist
+                artist: loveRequestDetails.details.artist.name
             },
             session,
             {
@@ -81,7 +81,7 @@ window.LastFm.TrackLoveStateModifier.prototype =
                     $.proxy(function(response)
                         {
                             Logger.getInstance().Warning("LastFm UnLove update failed: "+ response.message);
-                            Logger.getInstance().Debug("LastFm UnLove failed for: "+ neme);
+                            Logger.getInstance().Debug("LastFm UnLove failed for: "+ name);
 
                             callbacks.fail();
                         },

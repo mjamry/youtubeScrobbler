@@ -5,12 +5,11 @@ window.UI = window.UI || {};
 window.Player = window.Player || {};
 
 
-window.UI.PlaylistViewController = function(playlistService, playlistControlService, playlistFlowController, loveStateModifier, view, config)
+window.UI.PlaylistViewController = function(playlistService, playlistControlService, playlistFlowController, view, config)
 {
     this.playlistService = playlistService;
     this.playlistFlowController = playlistFlowController;
     this.playlistControlService = playlistControlService;
-    this.loveStateModifier = loveStateModifier;
     this.view = $("#"+view);
     this.config = config;
 
@@ -29,27 +28,6 @@ window.UI.PlaylistViewController.prototype =
     _deselectAllItems: function()
     {
         this.view.find(this.config.PlaylistItem).removeClass(this.config.CurrentElementStyle);
-    },
-
-    changeLoveState: function(index)
-    {
-        var mediaElement = this.playlistService.getPlaylist().get(index);
-        var that = this;
-        var done = function trackLoveStateChanged(index, mediaDetails)
-        {
-            that.playlistService.updateItem(index, mediaDetails);
-        };
-
-        if(mediaElement.loved)
-        {
-            this.loveStateModifier.unlove(mediaElement, index, {done:done});
-        }
-        else
-        {
-            this.loveStateModifier.love(mediaElement, index, {done:done});
-        }
-
-        this.playlistService.changeLoveState(index);
     },
 
     _remove: function(index)
@@ -93,7 +71,7 @@ window.UI.PlaylistViewController.prototype =
         }
 
         builder.fillBody(mediaDetails);
-        builder.hookUpToEvents(this, this._play, this.changeLoveState, this._remove, this._edit);
+        builder.hookUpToEvents(this, this._play, this._remove, this._edit);
 
         return builder.build();
     },

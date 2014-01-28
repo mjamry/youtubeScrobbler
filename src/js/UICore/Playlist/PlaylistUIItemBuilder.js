@@ -8,7 +8,6 @@ window.UI.PlaylistUIItemBuilder = function(index, config)
     this._index = index;
     this._config = config;
     this._item = null;
-    this._likeButton = null;
     this._removeButton = null;
     this._editButton = null;
     this._hoverStyle = null;
@@ -59,7 +58,6 @@ window.UI.PlaylistUIItemBuilder.prototype =
         this._item.find(this._config.AdditionalButtonsContainer).hide();
 
         this._cover = this._item.find(this._config.CoverContainer);
-        this._likeButton = this._item.find(this._config.LikeButtonContainer);
         this._removeButton = this._item.find(this._config.RemoveButtonContainer);
         this._editButton = this._item.find(this._config.EditButtonContainer);
     },
@@ -112,7 +110,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
     },
 
     //hooks up to UI events such as clock, mouse enter, mouse leave.
-    hookUpToEvents: function(callbackContext, clickHandler, likeHandler, removeHandler, editHanlder)
+    hookUpToEvents: function(callbackContext, clickHandler, removeHandler, editHanlder)
     {
         //event handler
         var handleEvent = function(context, handler, index)
@@ -132,11 +130,9 @@ window.UI.PlaylistUIItemBuilder.prototype =
         this._item.mouseenter(onMouseEnterHandler);
         this._item.mouseleave(onMouseLeaveHandler);
 
-        var onLike = handleEvent(callbackContext, likeHandler, this._index);
         var onRemove = handleEvent(callbackContext, removeHandler, this._index);
         var onEdit = handleEvent(callbackContext, editHanlder, this._index);
 
-        this._likeButton.click(onLike);
         this._removeButton.click(onRemove);
         this._editButton.click(onEdit);
     },

@@ -22,9 +22,9 @@ window.UI.UIControllersFactory.prototype =
         return new window.UI.TestReportsViewController(reportSender, window.UI.TestReportUIConfig);
     },
 
-    createPlaylistViewController: function(playlistService, playbackControlService, playlistFlowController, loveStateModifier)
+    createPlaylistViewController: function(playlistService, playbackControlService, playlistFlowController)
     {
-        return new window.UI.PlaylistViewController(playlistService, playbackControlService, playlistFlowController, loveStateModifier, "playlist-container", window.UI.PlaylistUIConfig);
+        return new window.UI.PlaylistViewController(playlistService, playbackControlService, playlistFlowController, "playlist-container", window.UI.PlaylistUIConfig);
     },
 
     createPlaybackDetailsViewController: function(model)
@@ -38,9 +38,9 @@ window.UI.UIControllersFactory.prototype =
         return new window.UI.PlaybackControlViewController(playbackControlService, volumeControlService, "playback-control", window.UI.PlaybackControlConfiguration);
     },
 
-    createPlaylistControlViewController: function(playlistService, playlistFlowController)
+    createPlaylistControlViewController: function(playlistService, playlistFlowController, loveStateModifier)
     {
-        return new window.UI.PlaylistControlViewController(playlistService, playlistFlowController, "playlist-control", window.UI.PlaylistControlConfiguration);
+        return new window.UI.PlaylistControlViewController(playlistService, playlistFlowController, loveStateModifier, "playlist-control", window.UI.PlaylistControlConfiguration);
     },
 
     createSessionViewController: function(sessionHandler)

@@ -23,13 +23,13 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     var playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.sessionHandler);
 
-    this.playlistViewController = uiFactory.createPlaylistViewController(this.playlistService, this.playbackControlService, this.playlistFlowController, playlistElementLoveStateModifier);
+    this.playlistViewController = uiFactory.createPlaylistViewController(this.playlistService, this.playbackControlService, this.playlistFlowController);
 
     this.playbackDetailsViewController = uiFactory.createPlaybackDetailsViewController(this.playbackDetailsService);
 
     this.playbackControlViewController = uiFactory.createPlaybackControlViewController(this.player, this.playbackControlService);
 
-    this.playlistControlViewController = uiFactory.createPlaylistControlViewController(this.playlistService, this.playlistFlowController);
+    this.playlistControlViewController = uiFactory.createPlaylistControlViewController(this.playlistService, this.playlistFlowController, playlistElementLoveStateModifier);
 
     this.sessionViewController = uiFactory.createSessionViewController(this.sessionHandler);
 

@@ -5,7 +5,6 @@ window.UI.PlaylistUIConfig =
 {
     PlaylistItem: ".playlist-item",
 
-    LikeButtonContainer: ".playlist-item-like",
     RemoveButtonContainer: ".playlist-item-remove",
     EditButtonContainer: ".playlist-item-edit",
 
