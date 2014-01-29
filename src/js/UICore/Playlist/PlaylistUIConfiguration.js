@@ -23,5 +23,7 @@ window.UI.PlaylistUIConfig =
     IndexContainer: ".playlist-item-index-container",
     IndexStyle:  ".playlist-item-index",
 
-    PlaylistProgressBar: "#playlist-progressbar"
+    PlaylistProgressBar: "#playlist-progressbar",
+
+    AnimationTime: 200
 };

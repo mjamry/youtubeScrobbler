@@ -23,8 +23,8 @@ window.UI.PlaylistUIItemBuilder.prototype =
         return function()
         {
             $(this).addClass(style);
-            $(that._item).children().find(that._config.AdditionalButtonsContainer).slideDown();
-            $(that._item).children().find(that._config.CoverContainer).slideUp();
+            $(that._item).children().find(that._config.AdditionalButtonsContainer).slideDown(that._config.AnimationTime);
+            $(that._item).children().find(that._config.CoverContainer).slideUp(that._config.AnimationTime);
 
         }
     },
@@ -36,8 +36,8 @@ window.UI.PlaylistUIItemBuilder.prototype =
         return function()
         {
             $(this).removeClass(style);
-            $(that._item).children().find(that._config.AdditionalButtonsContainer).slideUp();
-            $(that._item).children().find(that._config.CoverContainer).slideDown();
+            $(that._item).children().find(that._config.AdditionalButtonsContainer).slideUp(that._config.AnimationTime);
+            $(that._item).children().find(that._config.CoverContainer).slideDown(that._config.AnimationTime);
         }
     },
 

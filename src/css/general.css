@@ -171,14 +171,16 @@ body
 
 .playlist-item-button
 {
-    margin-right:10px;
     margin-top:10px;
-    width:30px;
+
 }
 
 .playlist-item-buttons
 {
+    width:70%;
+    height:45px;
     float:right;
+    margin-right:10px
 }
 
 .playlist-item-even, .playlist-item-odd
