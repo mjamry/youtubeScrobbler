@@ -14,6 +14,11 @@ window.Player.MediaPlayer = function(configuration, container)
 
 window.Player.MediaPlayer.prototype =
 {
+    _updateCurrentMediaDetails: function(newMediaDetails)
+    {
+        this.currentlyLoadedMediaDetails = newMediaDetails;
+    },
+
     _createPlayerInstance: function(mediaDetails)
         {
             var successCallback = function(that, mediaDetails)
@@ -25,6 +30,7 @@ window.Player.MediaPlayer.prototype =
 
                     Logger.getInstance().Info("Media player has been initialised");
                     that._load(mediaDetails);
+                    that._updateCurrentMediaDetails(mediaDetails);
                 }
             };
 
@@ -100,8 +106,6 @@ window.Player.MediaPlayer.prototype =
 
     _load: function(mediaDetails)
     {
-        this.currentlyLoadedMediaDetails = mediaDetails;
-
         var source =
         [{
             src: mediaDetails.url,
@@ -130,6 +134,7 @@ window.Player.MediaPlayer.prototype =
             {
                 this._load(mediaDetails);
                 EventBroker.getInstance().fireEventWithData(window.Player.Events.MediaChanged, this.currentlyLoadedMediaDetails);
+                this._updateCurrentMediaDetails(mediaDetails);
             }
         }
     },
