@@ -16,10 +16,11 @@ window.Common.UrlParser.prototype =
 {
     getParameterValue : function(url, parameter)
     {
+        var params;
         try
         {
             var urlParts = url.split(window.Common.UrlParserConstants.PARAMS_START_SIGN);
-            var params = urlParts[1].split(window.Common.UrlParserConstants.PARAMS_SEPARATOR);
+            params = urlParts[1].split(window.Common.UrlParserConstants.PARAMS_SEPARATOR);
         }
         catch(ex)
         {

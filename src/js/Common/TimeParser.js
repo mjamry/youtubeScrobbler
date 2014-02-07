@@ -8,7 +8,7 @@ TimeParser = function()
 
 TimeParser.getInstance = function()
 {
-    if(this._instance == null)
+    if(this._instance === null)
     {
         var errorMsg = "Instance of TimeParser has not been set yet!";
         Logger.getInstance().Error(errorMsg);
@@ -20,7 +20,7 @@ TimeParser.getInstance = function()
 
 TimeParser.setInstance = function(instance)
 {
-    if(this._instance != null)
+    if(this._instance !== null)
     {
         var errorMsg = "Instance of TimeParser has been already set!";
         Logger.getInstance().Error(errorMsg);
@@ -59,11 +59,11 @@ window.Common.TimeParserImpl.prototype =
        timeInSeconds = Math.round(timeInSeconds);
 
        var secs = timeInSeconds % this.SecondsInMinute;
-       var mins = parseInt(timeInSeconds / this.SecondsInMinute);
+       var mins = parseInt(timeInSeconds / this.SecondsInMinute, 10);
 
        if(mins >= this.MinutesInHour)
        {
-           var hours = parseInt(mins / this.MinutesInHour);
+           var hours = parseInt(mins / this.MinutesInHour, 10);
            mins = mins - hours * this.MinutesInHour;
 
            return hours + ":" + this._timeCorrection(mins) + ":" + this._timeCorrection(secs);

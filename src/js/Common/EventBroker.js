@@ -8,7 +8,7 @@ EventBroker = function()
 
 EventBroker.setInstance = function(instance)
 {
-    if(this._instance != null)
+    if(this._instance !== null)
     {
         var errorMsg = "Instance of EventBroker has been already set!";
         Logger.getInstance().Error(errorMsg);
@@ -20,7 +20,7 @@ EventBroker.setInstance = function(instance)
 
 EventBroker.getInstance = function()
 {
-    if(this._instance == null)
+    if(this._instance === null)
     {
         var errorMsg = "Instance of EventBroker has not been set yet!";
         Logger.getInstance().Error(errorMsg);

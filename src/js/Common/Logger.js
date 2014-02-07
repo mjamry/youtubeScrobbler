@@ -8,7 +8,7 @@ Logger = function()
 
 Logger.getInstance = function()
 {
-    if(this._instance == null)
+    if(this._instance === null)
     {
         throw "Instance of Logger has not been set yet!";
     }
@@ -18,7 +18,7 @@ Logger.getInstance = function()
 
 Logger.setInstance = function(instance)
 {
-    if(this._instance != null)
+    if(this._instance !== null)
     {
         throw "Instance of Logger has been already set!";
     }

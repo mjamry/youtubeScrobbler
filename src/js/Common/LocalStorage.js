@@ -8,7 +8,7 @@ LocalStorage = function()
 
 LocalStorage.setInstance = function(instance)
 {
-    if(this._instance != null)
+    if(this._instance !== null)
     {
         var errorMsg = "Instance of LocalStorage has been already set!";
         Logger.getInstance().Error(errorMsg);
@@ -20,7 +20,7 @@ LocalStorage.setInstance = function(instance)
 
 LocalStorage.getInstance = function()
 {
-    if(this._instance == null)
+    if(this._instance === null)
     {
         var errorMsg = "Instance of LocalStorage has not been set yet!";
         Logger.getInstance().Error(errorMsg);
