@@ -3,31 +3,31 @@ window.Tracking = window.Tracking || {};
 
 GoogleTracker = function()
 {
-    this._instance = null;
+    GoogleTracker._instance = null;
 };
 
 GoogleTracker.setInstance = function(instance)
 {
-    if(this._instance !== null)
+    if(GoogleTracker._instance !== null)
     {
         var errorMsg = "Instance of GoogleTracker has been already set!";
         Logger.getInstance().Error(errorMsg);
         throw errorMsg;
     }
 
-    this._instance = instance;
+    GoogleTracker._instance = instance;
 };
 
 GoogleTracker.getInstance = function()
 {
-    if(this._instance === null)
+    if(GoogleTracker._instance === null)
     {
         var errorMsg = "Instance of GoogleTracker has not been set yet!";
         Logger.getInstance().Error(errorMsg);
         throw errorMsg;
     }
 
-    return this._instance;
+    return GoogleTracker._instance;
 };
 
 //provides ability to track user actions

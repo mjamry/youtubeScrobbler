@@ -3,27 +3,27 @@ window.Common = window.Common || {};
 
 Logger = function()
 {
-    this._instance = null;
+    Logger._instance = null;
 };
 
 Logger.getInstance = function()
 {
-    if(this._instance === null)
+    if(Logger._instance === null)
     {
         throw "Instance of Logger has not been set yet!";
     }
 
-    return this._instance;
+    return Logger._instance;
 };
 
 Logger.setInstance = function(instance)
 {
-    if(this._instance !== null)
+    if(Logger._instance !== null)
     {
         throw "Instance of Logger has been already set!";
     }
 
-    this._instance = instance;
+    Logger._instance = instance;
 };
 
 //TODO move it to common namespace

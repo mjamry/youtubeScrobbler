@@ -3,31 +3,31 @@ window.Common = window.Common || {};
 
 TimeParser = function()
 {
-    this._instance = null;
+    TimeParser._instance = null;
 };
 
 TimeParser.getInstance = function()
 {
-    if(this._instance === null)
+    if(TimeParser._instance === null)
     {
         var errorMsg = "Instance of TimeParser has not been set yet!";
         Logger.getInstance().Error(errorMsg);
         throw errorMsg;
     }
 
-    return this._instance;
+    return TimeParser._instance;
 };
 
 TimeParser.setInstance = function(instance)
 {
-    if(this._instance !== null)
+    if(TimeParser._instance !== null)
     {
         var errorMsg = "Instance of TimeParser has been already set!";
         Logger.getInstance().Error(errorMsg);
         throw errorMsg;
     }
 
-    this._instance = instance;
+    TimeParser._instance = instance;
 };
 
 window.Common.TimeParserImpl = function()

@@ -3,31 +3,31 @@ window.Common = window.Common || {};
 
 Cookie = function()
 {
-    this._instance = null;
+    Cookie._instance = null;
 };
 
 Cookie.setInstance = function(instance)
 {
-    if(this._instance !== null)
+    if(Cookie._instance !== null)
     {
         var errorMsg = "Instance of Cookie has been already set!";
         Logger.getInstance().Error(errorMsg);
         throw errorMsg;
     }
 
-    this._instance = instance;
+    Cookie._instance = instance;
 };
 
 Cookie.getInstance = function()
 {
-    if(this._instance === null)
+    if(Cookie._instance === null)
     {
         var errorMsg = "Instance of Cookie has not been set yet!";
         Logger.getInstance().Error(errorMsg);
         throw errorMsg;
     }
 
-    return this._instance;
+    return Cookie._instance;
 };
 
 window.Common.CookieImpl = function()

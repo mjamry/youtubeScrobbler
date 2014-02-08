@@ -3,31 +3,31 @@ window.Common = window.Common || {};
 
 EventBroker = function()
 {
-    this._instance = null;
+    EventBroker._instance = null;
 };
 
 EventBroker.setInstance = function(instance)
 {
-    if(this._instance !== null)
+    if(EventBroker._instance !== null)
     {
         var errorMsg = "Instance of EventBroker has been already set!";
         Logger.getInstance().Error(errorMsg);
         throw errorMsg;
     }
 
-    this._instance = instance;
+    EventBroker._instance = instance;
 };
 
 EventBroker.getInstance = function()
 {
-    if(this._instance === null)
+    if(EventBroker._instance === null)
     {
         var errorMsg = "Instance of EventBroker has not been set yet!";
         Logger.getInstance().Error(errorMsg);
         throw errorMsg;
     }
 
-    return this._instance;
+    return EventBroker._instance;
 };
 
 //Provides possibility to register listeners for specified event.

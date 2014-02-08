@@ -14,10 +14,12 @@ $(function()
     var playerServicesFactory = new window.Player.PlayerServicesFactory();
 
     //logger should be created at the beginning
+    new Logger();
     var logger = coreServicesFactory.createLoggerService();
     Logger.setInstance(logger);
 
     //creating event broker service
+    new EventBroker();
     this._eventBroker = coreServicesFactory.createBrokerHandler();
     EventBroker.setInstance(this._eventBroker);
 
@@ -28,10 +30,13 @@ $(function()
     uilogger.isLoggingAllowed = true;
 
     Logger.getInstance().Info("Application initialisation started.");
+    new TimeParser();
     TimeParser.setInstance(new window.Common.TimeParserImpl());
 
+    new LocalStorage();
     LocalStorage.setInstance(new window.Common.LocalStorageImpl());
 
+    new Cookie();
     Cookie.setInstance(coreServicesFactory.createCookieHandler());
 
     //creating application core
@@ -40,6 +45,7 @@ $(function()
 
     //creating google tracker
     var tracker = new window.Tracking.GoogleEventTrackerImpl(window.Tracking.GoogleTrackerConfig);
+    new GoogleTracker();
     GoogleTracker.setInstance(tracker);
 
     //hook to ui events

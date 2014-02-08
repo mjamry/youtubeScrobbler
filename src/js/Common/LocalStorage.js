@@ -3,31 +3,31 @@ window.Common = window.Common || {};
 
 LocalStorage = function()
 {
-    this.instance = null;
+    LocalStorage._instance = null;
 };
 
 LocalStorage.setInstance = function(instance)
 {
-    if(this._instance !== null)
+    if(LocalStorage._instance !== null)
     {
         var errorMsg = "Instance of LocalStorage has been already set!";
         Logger.getInstance().Error(errorMsg);
         throw errorMsg;
     }
 
-    this._instance = instance;
+    LocalStorage._instance = instance;
 };
 
 LocalStorage.getInstance = function()
 {
-    if(this._instance === null)
+    if(LocalStorage._instance === null)
     {
         var errorMsg = "Instance of LocalStorage has not been set yet!";
         Logger.getInstance().Error(errorMsg);
         throw errorMsg;
     }
 
-    return this._instance;
+    return LocalStorage._instance;
 };
 
 window.Common.LocalStorageImpl = function(){};
