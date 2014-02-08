@@ -56,6 +56,6 @@ window.UI.UIControllersFactory.prototype =
     createPlaylistItemEditorViewController: function(playlistProvider)
     {
         var detailsProvider = new window.LastFm.LastFmApiFactory().createInformationProvider();
-        return new window.UI.PlaylistItemDetailsEditorViewController(detailsProvider, playlistProvider, window.UI.PlaylistItemDetailsEditorConfig)
+        return new window.UI.PlaylistItemDetailsEditorViewController(detailsProvider, playlistProvider, window.UI.PlaylistItemDetailsEditorConfig);
     }
 };

@@ -72,7 +72,7 @@ window.UI.LoggerViewController.prototype =
             {
                 this.style.display = "none";
             }
-        })
+        });
     },
 
     //adds new log entry to logger view

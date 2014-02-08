@@ -26,7 +26,7 @@ window.UI.VolumeControl.prototype =
             that.view.find(".volume-control-indicator").css("width", newVolumeLvlInPercent+"%");
             //this requires normalized value
             that.volumeSetCallback(newVolumeLvlInPercent/100);
-        }
+        };
     },
 
     initialise: function(currentVolumeLevel)

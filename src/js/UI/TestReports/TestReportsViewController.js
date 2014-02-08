@@ -73,7 +73,7 @@ window.UI.TestReportsViewController.prototype =
                 {
                     Logger.getInstance().Info("Bug report has been sent.");
                     Logger.getInstance().Debug("Bug title: "+title);
-                    alert("Success.\r\n\r\Bug report has been sent.\r\nThank you for your effort.\r\n\r\nWe will stay in touch.")
+                    alert("Success.\r\n\rBug report has been sent.\r\nThank you for your effort.\r\n\r\nWe will stay in touch.");
                 },
                 fail: function()
                 {
@@ -99,7 +99,7 @@ window.UI.TestReportsViewController.prototype =
                 success: function()
                 {
                     Logger.getInstance().Info("Feature request has been sent.");
-                    alert("Success.\r\n\r\nFeature request has been sent.\r\nThank you for your effort.\r\n\r\nWe will stay in touch.")
+                    alert("Success.\r\n\r\nFeature request has been sent.\r\nThank you for your effort.\r\n\r\nWe will stay in touch.");
                 },
                 fail: function()
                 {
@@ -117,7 +117,7 @@ window.UI.TestReportsViewController.prototype =
         return function()
         {
             $(config.TestingFormContainer).show();
-        }
+        };
     },
 
     _hideForm: function(config)
@@ -125,7 +125,7 @@ window.UI.TestReportsViewController.prototype =
         return function()
         {
             $(config.TestingFormContainer).hide();
-        }
+        };
     },
 
     initialise: function()

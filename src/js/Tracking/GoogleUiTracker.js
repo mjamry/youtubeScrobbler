@@ -18,7 +18,7 @@ window.Tracking.GoogleUiTracker.prototype =
 
         $(playbackConfig.PauseButton).click($.proxy(function handlePauseClick()
         {
-            GoogleTracker.getInstance().trackUiAction(this.config.PlaybackControl, "pause")
+            GoogleTracker.getInstance().trackUiAction(this.config.PlaybackControl, "pause");
         },
         this));
 
@@ -115,8 +115,8 @@ window.Tracking.GoogleUiTracker.prototype =
         $(mediaLoadConfig.AddNewMediaButton).click($.proxy(function handleNewMediaAdded()
         {
             GoogleTracker.getInstance().trackUiAction(this.config.MediaLoadControl, "add_new_media_"+$(mediaLoadConfig.MediaLocationInput).val());
-        }
-        , this));
+        },
+        this));
     },
 
     hookUpToPlaylistItemEvents: function(playlistitemConfig)

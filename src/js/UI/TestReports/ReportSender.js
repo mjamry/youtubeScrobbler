@@ -20,7 +20,7 @@ window.UI.ReportSender.prototype =
         this.sendErrorReport(
             window.UI.ReportSenderConstants.destinationEmail,
             "Automatically generated report",
-            message)
+            message);
     },
 
     _getBrowser: function()
@@ -91,7 +91,7 @@ window.UI.ReportSender.prototype =
                 content: content
             })
             .fail(callbacks.fail)
-            .done(callbacks.success)
+            .done(callbacks.success);
     },
 
     sendFeatureRequest: function(sender, title, description, callbacks)
@@ -117,7 +117,7 @@ window.UI.ReportSender.prototype =
                 content: description
             })
             .fail(callbacks.fail)
-            .done(callbacks.success)
+            .done(callbacks.success);
     },
 
     initialise: function()

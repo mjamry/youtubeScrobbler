@@ -8,7 +8,7 @@ GoogleTracker = function()
 
 GoogleTracker.setInstance = function(instance)
 {
-    if(this._instance != null)
+    if(this._instance !== null)
     {
         var errorMsg = "Instance of GoogleTracker has been already set!";
         Logger.getInstance().Error(errorMsg);
@@ -20,7 +20,7 @@ GoogleTracker.setInstance = function(instance)
 
 GoogleTracker.getInstance = function()
 {
-    if(this._instance == null)
+    if(this._instance === null)
     {
         var errorMsg = "Instance of GoogleTracker has not been set yet!";
         Logger.getInstance().Error(errorMsg);

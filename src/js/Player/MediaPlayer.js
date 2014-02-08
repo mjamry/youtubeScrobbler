@@ -120,7 +120,7 @@ window.Player.MediaPlayer.prototype =
         if(mediaDetails !== null)
         {
             //when media type has been changed - recreate plugin
-            if(this.currentlyLoadedMediaDetails.mediaType !== mediaDetails.mediaType && this.instance != null)
+            if(this.currentlyLoadedMediaDetails.mediaType != mediaDetails.mediaType && this.instance !== null)
             {
                 this.instance.remove();
                 this.instance = null;

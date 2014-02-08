@@ -27,7 +27,7 @@ window.UI.PlaybackProgressControl.prototype =
 
             //fire an event
             that.playbackProgressChangedHandler(newPlaybackProgressValue);
-        }
+        };
     },
 
     bindToPlaybackProgressChangedEvent: function(callback)
