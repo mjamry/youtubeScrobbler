@@ -17,7 +17,7 @@ window.UI.MediaLoadViewController.prototype =
             location,
             $.proxy(function(playlist)
             {
-                this.model.addToPlaylist(playlist)
+                this.model.addToPlaylist(playlist);
             }, this)
         );
     },

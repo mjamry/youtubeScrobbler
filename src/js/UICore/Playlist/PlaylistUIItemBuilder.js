@@ -26,7 +26,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
             $(that._item).children().find(that._config.AdditionalButtonsContainer).slideDown(that._config.AnimationTime);
             $(that._item).children().find(that._config.CoverContainer).slideUp(that._config.AnimationTime);
 
-        }
+        };
     },
 
     //handles mouse leave event on base item.
@@ -38,7 +38,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
             $(this).removeClass(style);
             $(that._item).children().find(that._config.AdditionalButtonsContainer).slideUp(that._config.AnimationTime);
             $(that._item).children().find(that._config.CoverContainer).slideDown(that._config.AnimationTime);
-        }
+        };
     },
 
     _createIcon: function(style)

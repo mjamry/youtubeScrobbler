@@ -52,7 +52,7 @@ window.UI.PlaybackControlViewController.prototype =
         return function(newVolumeLevel)
         {
             volumeControlService.setVolumeLevel(newVolumeLevel);
-        }
+        };
     },
 
     _handlePlaybackProgressChanged: function(playbackControl)
@@ -61,7 +61,7 @@ window.UI.PlaybackControlViewController.prototype =
         return function changePlaybackProgress(newPlaybackProgressValue)
         {
            playbackControl.setPlaybackProgress(newPlaybackProgressValue);
-        }
+        };
     },
 
     _showPlayButton: function()

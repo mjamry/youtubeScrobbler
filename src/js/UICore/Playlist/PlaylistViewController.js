@@ -50,7 +50,7 @@ window.UI.PlaylistViewController.prototype =
                 index: index,
                 mediaDetails: mediaElement
             }
-        )
+        );
     },
 
     _createNewElement: function(mediaDetails, index)
@@ -58,7 +58,7 @@ window.UI.PlaylistViewController.prototype =
         var builder = new window.UI.PlaylistUIItemBuilder(index, this.config);
         builder.initialise();
 
-        var isIndexEven = index%2 == 0;
+        var isIndexEven = index%2 === 0;
 
         //add style
         if(isIndexEven)

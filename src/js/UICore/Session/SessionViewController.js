@@ -25,7 +25,7 @@ window.UI.SessionViewController.prototype =
         return function()
         {
             that._clearToken(token);
-        }
+        };
     },
 
     //handles successfully established session
@@ -42,7 +42,7 @@ window.UI.SessionViewController.prototype =
             });
 
             that.view.html('<div class="authentication-button">Hello! '+userDetails+'</div>');
-        }
+        };
     },
 
     //obtains token from current url address

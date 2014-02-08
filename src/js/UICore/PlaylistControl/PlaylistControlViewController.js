@@ -40,7 +40,7 @@ window.UI.PlaylistControlViewController.prototype =
                     }
                 );
             }
-        }
+        };
     },
 
     //handles successful change of love state
@@ -50,7 +50,7 @@ window.UI.PlaylistControlViewController.prototype =
         {
             that._setLoveStateFoCurrentTrack(mediaDetails.loved);
             that.playlistService.updateItem(index, mediaDetails);
-        }
+        };
     },
 
     //handles change of currently played track
@@ -77,7 +77,7 @@ window.UI.PlaylistControlViewController.prototype =
         return function()
         {
             model.clearPlaylist();
-        }
+        };
     },
 
     _savePlaylist: function(model)
@@ -85,7 +85,7 @@ window.UI.PlaylistControlViewController.prototype =
         return function()
         {
             model.savePlaylist();
-        }
+        };
     },
 
     _changeRepeatState: function(that)
@@ -104,7 +104,7 @@ window.UI.PlaylistControlViewController.prototype =
                 that.view.find(that.config.RepeatButton).removeClass(that.config.SelectedButtonClass);
                 that.playlistController.isLoop = false;
             }
-        }
+        };
     },
 
     _shufflePlaylist: function(model)
@@ -112,7 +112,7 @@ window.UI.PlaylistControlViewController.prototype =
         return function()
         {
             model.shuffle();
-        }
+        };
     },
 
     initialise: function()

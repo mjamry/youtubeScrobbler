@@ -59,7 +59,7 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         {
             that.mediaDetails = mediaDetails;
             that.updateView();
-        }
+        };
     },
 
     _retrieveMediaDetails: function()
@@ -141,15 +141,15 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         {
             e.preventDefault();
             this._swapArtistNameAndTitle(this);
-        }
-        ,this));
+        },
+        this));
 
         $(this.config.SaveButton).click($.proxy(function saveEditedItem(e)
         {
             e.preventDefault();
             this._savePlaylistItemDetails(this);
-        }
-        , this));
+        },
+        this));
 
         $(this.config.CheckButton).click($.proxy(function(e)
         {
@@ -163,15 +163,15 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
                     done: this._handleDetailsObtained(this),
                     fail: function(){}
                 }
-            )
-        }
-        , this));
+            );
+        },
+        this));
 
         $(this.config.CloseButton).click($.proxy(function closePlaylistItemEditor(e)
         {
             e.preventDefault();
             this._hide();
-        }
-        , this));
+        },
+        this));
     }
 };
