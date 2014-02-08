@@ -24,7 +24,7 @@ window.ApplicationCore.SessionHandler.prototype =
             that._setSessionCookie(session);
 
             that._postSessionObtained();
-        }
+        };
     },
 
     _handleSessionObtainingFailed: function()
@@ -61,7 +61,7 @@ window.ApplicationCore.SessionHandler.prototype =
         this.currentSession = this._getSessionCookie();
 
         //if there is no session stored establish new one
-        if(this.currentSession == null)
+        if(this.currentSession === null)
         {
             this._sessionProvider.create(
                 token,
@@ -80,14 +80,14 @@ window.ApplicationCore.SessionHandler.prototype =
     //returns current session
     getSession: function()
     {
-        if(this.currentSession != null)
+        if(this.currentSession !== null)
         {
             return this.currentSession;
         }
 
         Logger.getInstance().Warning("Session has not been established yet.");
         //TODO - change it to null
-        return {name:""}
+        return {name:""};
     }
 };
 

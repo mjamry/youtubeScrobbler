@@ -18,7 +18,7 @@ window.Player.PlaylistElementDetailsProvider.prototype =
             that.playlistProvider.updateItem(itemIndex, mediaDetails);
             itemIndex++;
             that._getDetails(itemIndex, that);
-        }
+        };
     },
 
     _handleObtainingError: function(itemIndex, that)
@@ -27,7 +27,7 @@ window.Player.PlaylistElementDetailsProvider.prototype =
         {
             itemIndex++;
             that._getDetails(itemIndex, that);
-        }
+        };
     },
 
     _getDetails: function(itemIndex, that)

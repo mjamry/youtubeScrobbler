@@ -138,7 +138,7 @@ window.Player.YouTubePlaylistLoader.prototype =
                         }
                     }
                 });
-            }
+            };
         })(playlist, callback, this)(1);
     },
             

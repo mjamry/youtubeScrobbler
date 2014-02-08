@@ -103,7 +103,7 @@ window.LastFm.InformationProvider.prototype =
                 this)
             }
 
-        )
+        );
     },
 
     getRecommendedArtists: function(params, session, callback){

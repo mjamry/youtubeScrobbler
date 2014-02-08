@@ -31,7 +31,7 @@ window.Player.MediaPlayer.prototype =
                     Logger.getInstance().Info("Media player has been initialised");
                     that._load(mediaDetails);
                     that._updateCurrentMediaDetails(mediaDetails);
-                }
+                };
             };
 
             var config = $.extend(
@@ -117,16 +117,16 @@ window.Player.MediaPlayer.prototype =
 
     load: function(mediaDetails)
     {
-        if(mediaDetails != null)
+        if(mediaDetails !== null)
         {
             //when media type has been changed - recreate plugin
-            if(this.currentlyLoadedMediaDetails.mediaType != mediaDetails.mediaType && this.instance != null)
+            if(this.currentlyLoadedMediaDetails.mediaType !== mediaDetails.mediaType && this.instance != null)
             {
                 this.instance.remove();
                 this.instance = null;
             }
 
-            if(this.instance == null)
+            if(this.instance === null)
             {
                 this._createPlayerInstance(mediaDetails);
             }
@@ -162,7 +162,7 @@ window.Player.MediaPlayer.prototype =
 
     setVolume: function(value)
     {
-        if(this.instance != null)
+        if(this.instance !== null)
         {
             this.instance.setVolume(value);
         }
@@ -174,7 +174,7 @@ window.Player.MediaPlayer.prototype =
 
     getVolume: function()
     {
-        if(this.instance != null)
+        if(this.instance !== null)
         {
             return this.instance.volume;
         }

@@ -23,6 +23,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
     //Checks if all requirements has been resolved to scrobble the track.
     _trackCanBeScrobbled: function(mediaDetails, startTime)
     {
+        var timeInSeconds = 0;
         //is track longer than 30s
         if(mediaDetails && mediaDetails.duration && mediaDetails.duration.getInSeconds() > 30)
         {
@@ -30,7 +31,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
             var playingTime = (new Date().getTime() - startTime);
 
             //if played for 4 minutes or at least hals of its duration
-            var timeInSeconds = TimeParser.getInstance().getSeconds(playingTime);
+            timeInSeconds = TimeParser.getInstance().getSeconds(playingTime);
             var timeInMinutes = TimeParser.getInstance().getMinutes(playingTime);
             if(
                 timeInMinutes > 4 ||

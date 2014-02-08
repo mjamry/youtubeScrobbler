@@ -69,7 +69,7 @@ window.Player.PlaybackControlService.prototype =
     playSpecific: function(index)
     {
         var item = this.playlistController.getSpecific(index);
-        if(item != null)
+        if(item !== null)
         {
             this._loadMedia(item);
         }
