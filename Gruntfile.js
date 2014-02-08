@@ -22,7 +22,7 @@ module.exports = function(grunt) {
             options: {
                 separator: ';'
             },
-            dist: {
+            js: {
                 src: ['src/js/**/*.js', '!src/js/lib/*'],
                 dest: 'build/<%= pkg.name %>.js'
             }
@@ -36,6 +36,18 @@ module.exports = function(grunt) {
                 src: 'build/<%= pkg.name %>.js',
                 dest: 'build/<%= pkg.name %>.min.js'
             }
+        },
+
+        cssmin: {
+            combine: {
+                files: {
+                    'build/<%= pkg.name %>.css': 'src/css/*.css'
+                }
+            },
+            minify: {
+                src: 'build/<%= pkg.name %>.css',
+                dest: 'build/<%= pkg.name %>.min.css'
+            }
         }
     });
 
@@ -44,9 +56,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+
 
     //Tasks
-    grunt.registerTask('build', ['concat', 'uglify']);
+    grunt.registerTask('build', ['concat', 'uglify', 'cssmin']);
     grunt.registerTask('tests', ['jshint', 'jasmine']);
 
     grunt.registerTask('default', ['tests']);
