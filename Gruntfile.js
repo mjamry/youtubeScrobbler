@@ -3,6 +3,14 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        jasmine: {
+            pivotal: {
+                src: ['src/js/**/*.js', '!src/js/lib/*'],
+                options: {
+                    spec: 'tests/spec/**/*.js'
+                }
+            }
+        },
 
         jshint: {
             foo: {
@@ -32,11 +40,12 @@ module.exports = function(grunt) {
     });
 
     // Load the plugin that provides the "uglify" task.
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat')
 
-    // Default task(s).
-    grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
+    grunt.registerTask('tests', ['jshint', 'jasmine']);
+    grunt.registerTask('build', ['concat', 'uglify']);
 
 };
