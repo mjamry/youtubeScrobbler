@@ -1,6 +1,12 @@
 {
   "name": "online-scrobbler",
   "version": "0.2.4",
+  "author": "michal jamry <michal.jamry@gmail.com>",
+  "repository":
+  {
+    "type": "git",
+    "url":  "https://github.com/mjamry/youtubeScrobbler.git"
+  },
   "devDependencies":
   {
     "grunt": "~0.4.2",
