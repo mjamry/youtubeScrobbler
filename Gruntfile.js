@@ -4,11 +4,11 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         jasmine: {
-            pivotal: {
-                src: ['src/js/**/*.js', '!src/js/lib/*'],
-                options: {
-                    spec: 'tests/spec/**/*.js'
-                }
+            src: ['src/js/**/*.js', '!src/js/lib/*'],
+            options: {
+                specs: 'tests/spec/**/*.js',
+                helpers: 'tests/helpers/**/*.js',
+                outfile: 'tests/_specRunner.html'
             }
         },
 
@@ -43,9 +43,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-concat')
+    grunt.loadNpmTasks('grunt-contrib-concat');
 
-    grunt.registerTask('tests', ['jshint', 'jasmine']);
+    //Tasks
     grunt.registerTask('build', ['concat', 'uglify']);
+    grunt.registerTask('tests', ['jshint', 'jasmine']);
+
+    grunt.registerTask('default', ['tests']);
 
 };

@@ -22,14 +22,17 @@ describe("PlaylistService", function(){
 
     beforeEach(function()
     {
-        playlistService = new window.Player.PlaylistService(playlist);
+        playlistService = new window.Player.PlaylistService();
     });
 
-    it("should return playlist passed as a parameter", function(){
+    it("should return the same playlist as created one", function(){
+
+        playlistService.clearPlaylist();
+        playlistService.addToPlaylist(playlist);
         expect(playlistService.getPlaylist()).toEqual(playlist);
     });
 
-    it("should create empty playlist replacing existing one", function(){
+    it("should clear existing playlist", function(){
         playlistService.clearPlaylist();
 
         expect(playlistService.getPlaylist()).not.toEqual(playlist);

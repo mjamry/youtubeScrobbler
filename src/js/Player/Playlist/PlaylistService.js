@@ -7,7 +7,7 @@ window.Common = window.Common || {};
 
 window.Player.PlaylistService = function()
 {
-    this.playlist = playlist || new window.Player.Playlist();
+    this.playlist = new window.Player.Playlist();
     this._eventBroker = EventBroker.getInstance();
     //TODO: for future purposes - will be configurable
     this._autoplay = true;
