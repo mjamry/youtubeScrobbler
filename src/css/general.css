@@ -67,8 +67,19 @@ body
 
 #header-content-logo
 {
-    width:200px;
+    width:120px;
     float:left;
+}
+
+.header-content-name
+{
+    font-size: 20pt;
+}
+
+.header-content-version
+{
+    font-size: 9pt;
+    float: right;
 }
 
 #header-session-details
@@ -79,7 +90,7 @@ body
 
 #page-content
 {
-    min-height:350px;
+    min-height:300px;
     width: 900px;
     padding-bottom: 150px;
     margin-left:auto;

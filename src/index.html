@@ -1,6 +1,7 @@
 <html>
 <head>
     <title>Online Scrobbler</title>
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" >
@@ -15,8 +16,10 @@
     <script type="text/javascript" src="js/lib/lastfm.api.js"></script>
     <script type="text/javascript" src="js/lib/lastfm.api.cache.js"></script>
     <script type="text/javascript" src="js/lib/lastfm.api.md5.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.cookie.js"></script>
 
     <script type="text/javascript" src="js/lib/mediaelement-and-player.js"></script>
+
     <!--google analytics-->
     <script type="text/javascript" src="js/lib/googleAnalytics.js"></script>
     <!--main application script-->
@@ -47,7 +50,7 @@
                 </div>
             </div>
             <div id="media-player-playback">
-                <div id="playback-progress-container">
+                <div id="playback-progress-container" title="rewind track">
                     <div class="playback-progress-bar-container">
                         <div class="playback-progress-bar"></div>
                     </div>
@@ -61,8 +64,8 @@
                 </div>
             </div>
             <div id="playback-control-volume-container">
-                <div class="volume-control-indicator-container">
-                    <div class="volume-control-indicator" title="change volume level"></div>
+                <div class="volume-control-indicator-container" title="change volume level">
+                    <div class="volume-control-indicator"></div>
                     <div class="volume-control-description">
                         <i class="fa fa-volume-up fa-2x"></i>
                     </div>
@@ -80,7 +83,7 @@
         </div>
         <div id="input-form">
             <form class="playlist-add-container">
-                <input class="playlist-add-input" type="text" id="media-location" placeholder="paste you YT link here"/>
+                <input class="playlist-add-input" type="text" id="media-location" placeholder="paste youtube link here" title="paste youtube link (for single video or playlist)"/>
                 <button id="add-to-playlist" class="playlist-add-button" title="add new items to playlist"><i class="fa fa-plus fa-2x"></i></button>
             </form>
         </div>
@@ -160,7 +163,7 @@
                 </div>
             </div>
             <div class="footer-licencing">
-                &copy; copyright onlinescrobbler 2013
+                &copy; copyright scrobbline 2014
             </div>
         </div>
     </div>

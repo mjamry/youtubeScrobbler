@@ -1,6 +1,7 @@
 body
 {
     color: #D9CB9E;
+    background-color: #2A2C2B;
 }
 
 
@@ -31,7 +32,7 @@ body A:hover
 /*--------PLAYLIST----------*/
 .playlist-item-current
 {
-    background-color: #374140 !important;
+    background-color: #2A2C2B !important;
     border-left:5px solid #DC3522;
 }
 
@@ -64,24 +65,24 @@ body A:hover
 .playlist-item-remove:hover,
 .playlist-item-edit:hover
 {
-    color: red;
+    color: #DC3522;
 }
 
 .playlist-item-even,
 .playlist-item-odd
 {
-    border-bottom: 1px solid #1E1E20;
-    border-top:  1px solid #374140;
+    border-bottom: 1px solid #2A2C2B;
+    border-top:  1px solid #4b5655;
 }
 
 .playlist-item-even
 {
-    background-color: #2A2C2B;
+    background-color: #374140;
 }
 
 .playlist-item-odd
 {
-    background-color: #2A2C2B;
+    background-color: #374140;
 }
 
 .playlist-item-odd:hover,
@@ -101,15 +102,15 @@ body A:hover
 
 #playlist-item-editor-container
 {
-    background-color: #2A2C2B;
+    background-color: #374140;
     color:#D9CB9E;
-    border-right:2px solid #374140;
+    border-right:1px solid #2A2C2B;
 }
 
 .playlist-item-editor-form input
 {
     background-color: #D9CB9E;
-    border:2px solid #374140;
+    border:1px solid #DC3522;
     color:#374140;
 }
 
@@ -133,6 +134,11 @@ body A:hover
 
     background-color:#374140;
     color:#DC3522;
+}
+
+.playlist-editor-button
+{
+    background-color: #2A2C2B;
 }
 
 .playback-control-button:hover,
@@ -189,10 +195,17 @@ body A:hover
 
 .playlist-add-input
 {
-    border:1px solid #1E1E20;
+    border:1px solid #DC3522;
     color: #1E1E20;
     background-color: #D9CB9E;
+    padding-left:10px;
+    font-size: 12pt;
 }
+
+::-webkit-input-placeholder { color:#DC3522; }
+::-moz-placeholder { color:#DC3522; } /* firefox 19+ */
+:-ms-input-placeholder { color:#DC3522; } /* ie */
+input:-moz-placeholder { color:#DC3522; }
 
 /*--------PLAYBACK--PROGRESS----------*/
 .playback-progress-bar-container,
