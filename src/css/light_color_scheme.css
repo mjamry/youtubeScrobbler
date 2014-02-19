@@ -1,0 +1,277 @@
+/*---COLOR---SCHEMES---*/
+/*  #E6DECF */
+/*  #FFE74A */
+/*  #FA756E */
+/*  #648FBD */
+/*  #636363 */
+
+body
+{
+    color: #D9CB9E;
+    background-color: #2A2C2B;
+}
+
+body A
+{
+    color: #D9CB9E;
+}
+
+body A:hover
+{
+    color: #DC3522;
+}
+
+/*--------FOOTER----------*/
+#footer
+{
+    border-top:1px solid #374140;
+    background-color: #1E1E20;
+}
+
+/*-------HEADER-----------*/
+#header
+{
+    border-bottom:1px solid #374140;
+    background-color: #1E1E20;
+}
+
+/*--------PLAYLIST----------*/
+.playlist-item-current
+{
+    background-color: #2A2C2B !important;
+    border-left:5px solid #DC3522;
+}
+
+.playlist-item-cover
+{
+    border:1px solid #1E1E20;
+    background-color: #2A2C2B;
+}
+
+#playlist-progressbar
+{
+    background-color: #DC3522;
+}
+
+.playlist-item-name,
+.playlist-item-details,
+.playlist-item-time,
+.playlist-item-icons
+{
+    color: #D9CB9E;
+}
+
+.playlist-item-like,
+.playlist-item-remove
+{
+    color: #D9CB9E;
+}
+
+.playlist-item-like:hover,
+.playlist-item-remove:hover,
+.playlist-item-edit:hover
+{
+    color: #DC3522;
+}
+
+.playlist-item-even,
+.playlist-item-odd
+{
+    border-bottom: 1px solid #2A2C2B;
+    border-top:  1px solid #4b5655;
+}
+
+.playlist-item-even
+{
+    background-color: #374140;
+}
+
+.playlist-item-odd
+{
+    background-color: #374140;
+}
+
+.playlist-item-odd:hover,
+.playlist-item-even:hover
+{
+    background-color: #1E1E20;
+}
+
+.playlist-item-index
+{
+    background:#374140;
+    color: #D9CB9E;
+    border:2px solid #2A2C2B;
+}
+
+/*--------PLAYLIST_ITEM_EDITOR----------*/
+
+#playlist-item-editor-container
+{
+    background-color: #374140;
+    color:#D9CB9E;
+    border-right:1px solid #2A2C2B;
+}
+
+.playlist-item-editor-form input
+{
+    background-color: #D9CB9E;
+    border:1px solid #DC3522;
+    color:#374140;
+}
+
+.playlist-editor-verification-ok
+{
+    color:green;
+}
+
+.playlist-editor-verification-err
+{
+    color:yellow;
+}
+
+
+/*--------BUTTONS----------*/
+#color-scheme-control-light-button
+{
+    background-color: transparent;
+    color: #D9CB9E;
+}
+
+.playback-control-button,
+.playlist-control-button,
+.playlist-add-button,
+.playlist-editor-button
+{
+
+    background-color:#374140;
+    color:#DC3522;
+}
+
+.playlist-editor-button
+{
+    background-color: #2A2C2B;
+}
+
+.playback-control-button:hover,
+.playlist-control-button:hover,
+.playlist-add-button:hover,
+.playlist-editor-button:hover
+{
+    background-color: #1E1E20;
+}
+
+.playlist-control-button-selected
+{
+    color: #D9CB9E;
+}
+
+.authentication-button
+{
+    color: #1E1E20;
+    background-color:#DC3522;
+}
+
+.authentication-button a
+{
+    color:#1E1E20;
+}
+
+.authentication-button a:hover
+{
+    color:#D9CB9E;
+}
+/*--------VOLUME--CONTROL----------*/
+.volume-control-description
+{
+
+    color:#DC3522;
+}
+
+.volume-control-description i
+{
+    width:100%;
+}
+
+.volume-control-indicator-container
+{
+    background-color:#1E1E20;
+}
+
+.volume-control-indicator
+{
+    background-color: #D9CB9E;
+}
+
+/*------------------*/
+
+.playlist-add-input
+{
+    border:1px solid #DC3522;
+    color: #1E1E20;
+    background-color: #D9CB9E;
+    padding-left:10px;
+    font-size: 12pt;
+}
+
+::-webkit-input-placeholder { color:#DC3522; }
+::-moz-placeholder { color:#DC3522; } /* firefox 19+ */
+:-ms-input-placeholder { color:#DC3522; } /* ie */
+input:-moz-placeholder { color:#DC3522; }
+
+/*--------PLAYBACK--PROGRESS----------*/
+.playback-progress-bar-container,
+.playback-data-bar-container
+{
+    background-color: #374140;
+}
+
+.playback-data-bar-container
+{
+    background-color: #374140;
+}
+
+.playback-progress-bar-container
+{
+    background-color: #374140;
+}
+
+.playback-progress-bar
+{
+    background-color: #1E1E20;
+}
+
+.playback-data-bar
+{
+    background-color: #DC3522;
+}
+
+.playback-details-container
+{
+
+    color:#D9CB9E;
+}
+
+
+/*--------LOGGER----------*/
+.logger-info
+{
+    background-color: lightyellow;
+}
+
+.logger-error
+{
+    background-color: lightcoral;
+}
+
+.logger-debug
+{
+    background-color: lightblue;
+}
+
+.logger-warning
+{
+    background-color: lightpink;
+}
+
+/*--------TESTER----------*
