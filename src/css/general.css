@@ -104,6 +104,20 @@ body
     text-align: center;
 }
 
+#color-scheme-control
+{
+    height:50px;
+    float: left;
+    margin-left:20px;
+    margin-top:10px;
+}
+
+.color-scheme-control-button
+{
+    border-style:none;
+    font-size: 10pt;
+}
+
 /*-----------------------------INPUT------------------------*/
 #input-form
 {

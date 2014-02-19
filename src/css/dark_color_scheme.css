@@ -126,6 +126,12 @@ body A:hover
 
 
 /*--------BUTTONS----------*/
+#color-scheme-control-light-button
+{
+    background-color: transparent;
+    color: #D9CB9E;
+}
+
 .playback-control-button,
 .playlist-control-button,
 .playlist-add-button,
