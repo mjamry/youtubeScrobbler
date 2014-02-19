@@ -48,5 +48,8 @@ window.UI.ColorSchemeControlViewController.prototype =
     {
         $(this.config.LightSchemeButton).click($.proxy(this._useLightColorStyle, this));
         $(this.config.DarkSchemeButton).click($.proxy(this._useDarkColorStyle, this));
+
+        this._hideAllButtons();
+        this._showButton(this.config.LightSchemeButton);
     }
 };
