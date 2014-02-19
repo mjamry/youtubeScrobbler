@@ -57,5 +57,10 @@ window.UI.UIControllersFactory.prototype =
     {
         var detailsProvider = new window.LastFm.LastFmApiFactory().createInformationProvider();
         return new window.UI.PlaylistItemDetailsEditorViewController(detailsProvider, playlistProvider, window.UI.PlaylistItemDetailsEditorConfig);
+    },
+
+    createColorSchemeControlViewController: function()
+    {
+        return new window.UI.ColorSchemeControlViewController(window.UI.ColorSchemeControlConfig);
     }
 };
