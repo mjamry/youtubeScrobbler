@@ -1,7 +1,8 @@
 {
-  "name": "online-scrobbler",
-  "version": "0.2.4",
+  "name": "scrobbline",
+  "version": "0.2.5",
   "author": "michal jamry <michal.jamry@gmail.com>",
+  "homepage": "www.scrobbline.com",
   "repository":
   {
     "type": "git",
