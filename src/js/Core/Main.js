@@ -13,6 +13,9 @@ $(function()
     var uiFactory = new window.UI.UIControllersFactory();
     var playerServicesFactory = new window.Player.PlayerServicesFactory();
 
+    var globalErrorHandler = new window.Common.GlobalErrorHandler();
+    globalErrorHandler.initialise();
+
     //logger should be created at the beginning
     new Logger();
     var logger = coreServicesFactory.createLoggerService();
