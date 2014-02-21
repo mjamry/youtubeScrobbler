@@ -54,17 +54,19 @@ window.UI.ReportSender.prototype =
     _generateErrorReportContent: function(sender, description)
     {
         return (
-            "<h2>Test report from: "+sender+"</h2>" +
-                "<h4>Environment details:</h4>" +
-                "<ul>" +
-                    "<li>OS: "+this._getOperatingSystem()+"</li>"+
-                    "<li>Browser: "+this._getBrowser()+"</li>"+
-                    "<li>User Agent: "+this._getUserAgent()+"</li>"+
-                "</ul>" +
-                "<h4>Error description:</h4>"+
-                description +
-                "<h4>Logs:</h4>"+
-                this._getLogs());
+            "<font face=\"Courier New\">" +
+                "<h2>Test report from: "+sender+"</h2>" +
+                    "<h4>Environment details:</h4>" +
+                    "<ul>" +
+                        "<li>OS: "+this._getOperatingSystem()+"</li>"+
+                        "<li>Browser: "+this._getBrowser()+"</li>"+
+                        "<li>User Agent: "+this._getUserAgent()+"</li>"+
+                    "</ul>" +
+                    "<h4>Error description:</h4>"+
+                    description +
+                    "<h4>Logs:</h4>"+
+                    this._getLogs()+
+            "</font>");
     },
 
     sendErrorReport: function(sender, title, description, callbacks)
