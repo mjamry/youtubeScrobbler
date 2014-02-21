@@ -160,11 +160,6 @@ body
     text-overflow: ellipsis;
 }
 
-.playlist-item-name
-{
-    text-shadow: 2px 2px 0px #374140;
-}
-
 .playlist-item-cover
 {
     height: 40px;
@@ -482,7 +477,6 @@ body
 .playback-details-container
 {
     text-align: center;
-    font-weight: bold;
     font-size: 12pt;
     display: block;
 }

@@ -1,45 +1,48 @@
 /*---COLOR---SCHEMES---*/
 /*  #E6DECF */
 /*  #FFE74A */
-/*  #FA756E */
-/*  #648FBD */
-/*  #636363 */
+/*  #FA4147 */
+/*  #309BBD */
+/*  #4A4A49 */
+/*  #1E1E20 */
+/*  #989083 */
 
 body
 {
-    color: #D9CB9E;
-    background-color: #2A2C2B;
+    color: #E6DECF;
+    background-color: #E6DECF;
 }
 
 body A
 {
-    color: #D9CB9E;
+    color: #E6DECF;
 }
 
 body A:hover
 {
-    color: #DC3522;
+    color: #4A4A49;
 }
 
 /*--------FOOTER----------*/
 #footer
 {
-    border-top:1px solid #374140;
-    background-color: #1E1E20;
+    border-top:1px solid #636363;
+    background-color: #309BBD;
 }
 
 /*-------HEADER-----------*/
 #header
 {
-    border-bottom:1px solid #374140;
-    background-color: #1E1E20;
+    border-bottom:1px solid #636363;
+    background-color: #309BBD;
 }
 
 /*--------PLAYLIST----------*/
 .playlist-item-current
 {
-    background-color: #2A2C2B !important;
-    border-left:5px solid #DC3522;
+    color: #E6DECF !important;
+    background-color: #4A4A49 !important;
+    border-left:5px solid #FA4147;
 }
 
 .playlist-item-cover
@@ -50,7 +53,7 @@ body A:hover
 
 #playlist-progressbar
 {
-    background-color: #DC3522;
+    background-color: #FA4147;
 }
 
 .playlist-item-name,
@@ -58,66 +61,66 @@ body A:hover
 .playlist-item-time,
 .playlist-item-icons
 {
-    color: #D9CB9E;
+    color: #E6DECF;
 }
 
-.playlist-item-like,
+.playlist-item-edit,
 .playlist-item-remove
 {
-    color: #D9CB9E;
+    color: #E6DECF;
 }
 
 .playlist-item-like:hover,
 .playlist-item-remove:hover,
 .playlist-item-edit:hover
 {
-    color: #DC3522;
+    color: #E6DECF;
 }
 
 .playlist-item-even,
 .playlist-item-odd
 {
-    border-bottom: 1px solid #2A2C2B;
-    border-top:  1px solid #4b5655;
+    border-bottom: 1px solid #4A4A49;
+    border-top:  1px solid #E6DECF;
 }
 
 .playlist-item-even
 {
-    background-color: #374140;
+    background-color: #989083;
 }
 
 .playlist-item-odd
 {
-    background-color: #374140;
+    background-color: #989083;
 }
 
 .playlist-item-odd:hover,
 .playlist-item-even:hover
 {
-    background-color: #1E1E20;
+    background-color: #4A4A49;
 }
 
 .playlist-item-index
 {
-    background:#374140;
-    color: #D9CB9E;
-    border:2px solid #2A2C2B;
+    background-color:#4A4A49;
+    color: #E6DECF;
+    border:2px solid #E6DECF;
 }
 
 /*--------PLAYLIST_ITEM_EDITOR----------*/
 
 #playlist-item-editor-container
 {
-    background-color: #374140;
-    color:#D9CB9E;
-    border-right:1px solid #2A2C2B;
+    background-color: #989083;
+    color:#E6DECF;
+    border-right:1px solid #4A4A49;
 }
 
 .playlist-item-editor-form input
 {
     background-color: #D9CB9E;
-    border:1px solid #DC3522;
-    color:#374140;
+    border:1px solid #FA4147;
+    color:#4A4A49;
 }
 
 .playlist-editor-verification-ok
@@ -132,25 +135,21 @@ body A:hover
 
 
 /*--------BUTTONS----------*/
-#color-scheme-control-light-button
+#color-scheme-control-dark-button
 {
     background-color: transparent;
-    color: #D9CB9E;
+    color: #E6DECF;
 }
 
 .playback-control-button,
 .playlist-control-button,
 .playlist-add-button,
+.playlist-editor-button,
 .playlist-editor-button
 {
 
-    background-color:#374140;
-    color:#DC3522;
-}
-
-.playlist-editor-button
-{
-    background-color: #2A2C2B;
+    background-color:#309BBD;
+    color:#E6DECF;
 }
 
 .playback-control-button:hover,
@@ -158,7 +157,7 @@ body A:hover
 .playlist-add-button:hover,
 .playlist-editor-button:hover
 {
-    background-color: #1E1E20;
+    background-color: #4A4A49;
 }
 
 .playlist-control-button-selected
@@ -184,8 +183,7 @@ body A:hover
 /*--------VOLUME--CONTROL----------*/
 .volume-control-description
 {
-
-    color:#DC3522;
+    color:#E6DECF;
 }
 
 .volume-control-description i
@@ -195,12 +193,12 @@ body A:hover
 
 .volume-control-indicator-container
 {
-    background-color:#1E1E20;
+    background-color:#4A4A49;
 }
 
 .volume-control-indicator
 {
-    background-color: #D9CB9E;
+    background-color: #989083;
 }
 
 /*------------------*/
@@ -223,33 +221,32 @@ input:-moz-placeholder { color:#DC3522; }
 .playback-progress-bar-container,
 .playback-data-bar-container
 {
-    background-color: #374140;
+    background-color: #4A4A49;
 }
 
 .playback-data-bar-container
 {
-    background-color: #374140;
+    background-color: #4A4A49;
 }
 
 .playback-progress-bar-container
 {
-    background-color: #374140;
+    background-color: #4A4A49;
 }
 
 .playback-progress-bar
 {
-    background-color: #1E1E20;
+    background-color: #989083;
 }
 
 .playback-data-bar
 {
-    background-color: #DC3522;
+    background-color: #FA4147;
 }
 
 .playback-details-container
 {
-
-    color:#D9CB9E;
+    color:#E6DECF;
 }
 
 
