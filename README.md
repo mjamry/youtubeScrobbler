@@ -2,9 +2,9 @@ scrobbline https://travis-ci.org/mjamry/youtubeScrobbler.png?branch=ui_changes
 ====================
 
 This is a music player application.
-Main aim was to give you a way of listening music without need to install anything on your computer and scrobble it on Last.fm portal.
+Main aim was to give you a way of listening music without need to install anything on your computer and scrobbling it on Last.fm portal.
 
-For now it supports music from youtube. But in future it will be extended to handle other well known music portals also a local music files (e.g. mp3).
+For now it supports music only from youtube. But in future it will be extended to handle other well known music portals, and also a local music files (e.g. mp3).
 
 It is minimalistic - it was one of requirements - easy to use, and there is no need of creating any type of account (for now, it can change in future).
 
@@ -14,8 +14,8 @@ Here is a tutorial describing main features of this application <a href="www.scr
 <h2>Features:</h2>
 <ul>
     <li>load music from youtube - singe video clips as well as whole playlists</li>
-    <li>save/clear current playlist - on local storage</li>
-    <li>login to Last.fm portal to scrobble played music</li>
+    <li>allows to save/remove current playlist - using local storage</li>
+    <li>login to Last.fm portal and scrobble played music</li>
     <li>like (love) played music - when you're logged into Last.fm</li>
     <li>edit track details - for each track details are loaded from youtube and corrected using Last.fm but you can as well edit each track manually</li>
     <li>you remove tracks from playlist</li>
