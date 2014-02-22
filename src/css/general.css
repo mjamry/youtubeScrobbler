@@ -94,6 +94,7 @@ body
 #header-session-details-container
 {
     float:right;
+    margin-right:3px;
 }
 
 .header-session-button
@@ -126,7 +127,6 @@ body
     border-style: none;
     height:35px;
     width:35px;
-    margin-left:5px;
 }
 
 /*-----------------------------INPUT------------------------*/
