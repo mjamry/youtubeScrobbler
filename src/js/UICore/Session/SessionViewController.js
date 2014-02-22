@@ -47,7 +47,7 @@ window.UI.SessionViewController.prototype =
         {
             $(that.config.SessionEstablishedContainer).hide();
             $(that.config.NoSessionContainer).show();
-        }
+        };
     },
 
     //obtains token from current url address
