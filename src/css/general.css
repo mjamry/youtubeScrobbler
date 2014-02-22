@@ -91,11 +91,6 @@ body
     float: right;
 }
 
-#header-with-session
-{
-    display:none;
-}
-
 #header-session-details-container
 {
     float:right;
