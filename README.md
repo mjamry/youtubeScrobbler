@@ -1,4 +1,4 @@
-scrobbline <img src="https://travis-ci.org/mjamry/youtubeScrobbler.png?branch=ui_changes"/>
+scrobbline <img src="https://travis-ci.org/mjamry/youtubeScrobbler.png?branch=master"/>
 ====================
 
 This is a music player application.
