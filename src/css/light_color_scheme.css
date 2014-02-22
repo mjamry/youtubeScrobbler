@@ -44,6 +44,13 @@ body A:hover
     background-color: #E6DECF;
 }
 
+.header-session-button:hover,
+.header-control-button:hover
+{
+    color: #E6DECF;
+    background-color: #4A4A49;
+}
+
 /*--------PLAYLIST----------*/
 .playlist-item-current
 {
@@ -170,22 +177,6 @@ body A:hover
 .playlist-control-button-selected
 {
     color: #D9CB9E;
-}
-
-.authentication-button
-{
-    color: #1E1E20;
-    background-color:#DC3522;
-}
-
-.authentication-button a
-{
-    color:#1E1E20;
-}
-
-.authentication-button a:hover
-{
-    color:#D9CB9E;
 }
 /*--------VOLUME--CONTROL----------*/
 .volume-control-description
