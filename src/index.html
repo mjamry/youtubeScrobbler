@@ -117,14 +117,17 @@
                 <div class="header-content-name">scrobbline</div>
                 <div class="header-content-version">v0.2.5 beta</div>
             </div>
-            <div id="header-session-details">
-                <div id="session-button">
-                    <div class="authentication-button" title="start scrobbling using your last.fm account">Log in to Last.fm</div>
-                </div>
+            <div id="header-control-buttons-container">
+                <button class="header-control-button" id="control-button-switch-theme"><i class="fa fa-adjust"></i></button>
             </div>
-            <div id="color-scheme-control">
-                <button class="color-scheme-control-button" id="color-scheme-control-light-button" title="changes color scheme">light colors</button>
-                <button class="color-scheme-control-button" id="color-scheme-control-dark-button" title="changes color scheme">dark colors</button>
+            <div id="header-session-details-container">
+                <div class="header-session-details" id="header-no-session">
+                    <button class="header-session-button" id="header-session-sign-in"><i class="fa fa-sign-in"></i> sign into the Last.fm</button>
+                </div>
+                <div class="header-session-details" id="header-with-session">
+                    <button class="header-session-button" id="header-session-info">Hello</button>
+                    <button class="header-session-button" id="header-session-sign-out"><i class="fa fa-sign-out"></i></button>
+                </div>
             </div>
         </div>
     </div>

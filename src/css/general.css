@@ -18,6 +18,15 @@ body
     position:relative;
 }
 
+#page-content
+{
+    min-height:300px;
+    width: 900px;
+    padding-bottom: 150px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
 /*----------------------------------------------FOOTER--------------------------------------------*/
 
 #footer
@@ -82,26 +91,20 @@ body
     float: right;
 }
 
-#header-session-details
+#header-with-session
 {
-    width:200px;
+    display:none;
+}
+
+#header-session-details-container
+{
     float:right;
 }
 
-#page-content
+.header-session-button
 {
-    min-height:300px;
-    width: 900px;
-    padding-bottom: 150px;
-    margin-left:auto;
-    margin-right:auto;
-}
-
-.authentication-button
-{
-    padding:10px;
-    cursor:pointer;
-    text-align: center;
+    border-style: none;
+    height:35px;
 }
 
 #color-scheme-control
@@ -116,6 +119,19 @@ body
 {
     border-style:none;
     font-size: 10pt;
+}
+
+#header-control-buttons-container
+{
+    float:right;
+}
+
+.header-control-button
+{
+    border-style: none;
+    height:35px;
+    width:35px;
+    margin-left:5px;
 }
 
 /*-----------------------------INPUT------------------------*/
