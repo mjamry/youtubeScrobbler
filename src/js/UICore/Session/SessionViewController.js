@@ -30,7 +30,7 @@ window.UI.SessionViewController.prototype =
     //handles successfully established session
     _handleNewSession: function(that, token)
     {
-        return function(userDetails)
+        return function onSessionEstablished(userDetails)
         {
             that._clearToken(token);
 
@@ -39,6 +39,15 @@ window.UI.SessionViewController.prototype =
             $(that.config.SessionEstablishedContainer).show();
             $(that.config.NoSessionContainer).hide();
         };
+    },
+
+    _handleSessionClosed: function(that)
+    {
+        return function onSessionClosed()
+        {
+            $(that.config.SessionEstablishedContainer).hide();
+            $(that.config.NoSessionContainer).show();
+        }
     },
 
     //obtains token from current url address
@@ -61,7 +70,7 @@ window.UI.SessionViewController.prototype =
     //clears current session
     _clearCurrentSession: function()
     {
-
+        this.model.closeSession();
     },
 
     initialise: function()
@@ -83,6 +92,7 @@ window.UI.SessionViewController.prototype =
         $(this.config.SessionEstablishedContainer).hide();
 
         EventBroker.getInstance().addListener(window.LastFm.Events.SessionEstablished, this._handleNewSession(this, token));
+        EventBroker.getInstance().addListener(window.LastFm.Events.SessionClosed, this._handleSessionClosed(this));
         EventBroker.getInstance().addListener(window.LastFm.Events.SessionEstablishmentFailed, this._handleSessionError(this, token));
 
         this._createSession(token);

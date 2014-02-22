@@ -52,6 +52,8 @@ window.ApplicationCore.SessionHandler.prototype =
     closeSession: function()
     {
         Cookie.getInstance().removeCookie(window.Common.CookiesNames.sessionCookie);
+        this.currentSession = null;
+        EventBroker.getInstance().fireEvent(window.LastFm.Events.SessionClosed);
     },
 
     //try to restore last session if it does not exist creates new one.
