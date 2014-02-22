@@ -37,6 +37,13 @@ body A:hover
     background-color: #309BBD;
 }
 
+.header-session-button,
+.header-control-button
+{
+    color: #2A2C2B;
+    background-color: #E6DECF;
+}
+
 /*--------PLAYLIST----------*/
 .playlist-item-current
 {

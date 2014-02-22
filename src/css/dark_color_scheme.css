@@ -4,7 +4,6 @@ body
     background-color: #2A2C2B;
 }
 
-
 body A
 {
     color: #D9CB9E;
@@ -27,6 +26,13 @@ body A:hover
 {
     border-bottom:1px solid #374140;
     background-color: #1E1E20;
+}
+
+.header-session-button,
+.header-control-button
+{
+    color: #1E1E20;
+    background-color: #DC3522;
 }
 
 /*--------PLAYLIST----------*/
