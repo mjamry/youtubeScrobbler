@@ -1,4 +1,4 @@
-scrobbline https://travis-ci.org/mjamry/youtubeScrobbler.png?branch=ui_changes
+scrobbline <img src="https://travis-ci.org/mjamry/youtubeScrobbler.png?branch=ui_changes"/>
 ====================
 
 This is a music player application.
@@ -9,7 +9,7 @@ For now it supports music only from youtube. But in future it will be extended t
 It is minimalistic - it was one of requirements - easy to use, and there is no need of creating any type of account (for now, it can change in future).
 
 You can find it here: <a href="www.scrobbline.com">SCROBBLINE</a>
-Here is a tutorial describing main features of this application <a href="www.scrobbline.com/help.html>HELP</a>
+Here is a tutorial describing main features of this application <a href="www.scrobbline.com/help.html">HELP</a>
 
 <h2>Features:</h2>
 <ul>
