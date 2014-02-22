@@ -4,6 +4,95 @@
     <title>scrobbler.com tutorial</title>
 </head>
 <body>
+    <!--MENU-->
+    <h2 id="menu">Scrobbline tutorial:</h2>
+    <ul>
+        <li><a href="#howto">How to start</a></li>
+        <li><a href="#playback_controls">How to control music playback</a></li>
+        <li><a href="#other_controls">How to control playlist</a></li>
+        <li><a href="#volume">How to change volume</a></li>
+        <li><a href="#editor">How to edit track details</a></li>
+        <li><a href="#sign_in_last_fm">How to sign into last.fm portal</a></li>
+        <li><a href="#scrobbling">How to scrobble</a></li>
+    </ul>
 
+    <!--HOW--TO--START-->
+    <h2 id="howto">How to start:</h2>
+    <span>As you can read in <a href="https://github.com/mjamry/youtubeScrobbler#scrobbline-" target="_blank">README</a> file, for now it supports only music from youtube.</span>
+    <h3>Here are few steps that you should do to fully enjoy your music using this app:</h3>
+    <ul>
+        <li>Go to youtube, and search for music you would like to listen to</li>
+        <li>open selected clip or playlist and copy link from address bar</li>
+        <li>
+            now you can go to <a href="http://www.scrobbline.com" target="_blank">scrobbline</a> and paste your link to input box which you will find at the center of screen (see screenshot below)<br>
+            <img src="tutorial/howto.png"/>
+        </li>
+        <li>now wait few seconds to load all data from youtube and last.fm</li>
+        <li>to start playing music just click on chosen track from loaded playlist</li>
+    </ul>
+
+    <h4>Few additional information:</h4>
+    <ul>
+        <li>music loaded from youtube has to have specific naming format/pattern - it should be artist name and title separated by dash</li>
+        <li>scrobbline will load to its playlist only clips that are matching mentioned pattern</li>
+        <li>after loading clip details from youtube scrobbline will correct artist name and title using last.fm database</li>
+    </ul>
+    <br><a href="#menu">go to menu</a>
+
+    <!--PLAYBACK---CONTROLS-->
+    <h2 id="playback_controls">How to control music playback:</h2>
+    As you can see on screen below there are few buttons that allows you to control music playback.
+    It is (from the left):
+    <ul>
+        <li>play previous track (if currently played is first one it will load last track from the playlist - loop option must be selected otherwise there will be no reaction)</li>
+        <li>Play/Pause music</li>
+        <li>play next track (if currently played track is last on the playlist it will jump to first item on playlist - loop option must be selected otherwise there will be no reaction</li>
+    </ul>
+    It is also possible to rewind currently played track - by clicking on progress bar with track title (on the right side of playback controls).
+    <img src="tutorial/playback_controls.png"/>
+    <br><a href="#menu">go to menu</a>
+
+    <!--OTHER--CONTROLS-->
+    <h2 id="other_controls">How to control playlist:</h2>
+    There is a few buttons that allow to control playlist and its behaviour (starting from the left):
+    <ul>
+        <li>like/love - it gives a possibility to love track on last.fm portal - it is required to be signed into last.fm</li>
+        <li>loop - when is selected playlist will be constantly repeated</li>
+        <li>shuffle - when pressed tracks in playlist will change order (randomly)</li>
+        <li>save - allows to store current playlist - using local storage</li>
+        <li>clear - removes all tracks from playlist (it does not clear saved playlist)</li>
+    </ul>
+    You can also edit details of each item, or remove it from the playlist for more details please see <a href="#editor">How to edit track details</a>.
+    <img src="tutorial/other_controls.png"/>
+    <br><a href="#menu">go to menu</a>
+
+    <h2 id="volume">How to change volume:</h2>
+    It is as easy as controlling track playback - volume level will be changed when volume bar will be clicked (left side is 100% right is 0% volume level).
+    <img src="tutorial/volume.png"/>
+    <br><a href="#menu">go to menu</a>
+
+    <h2 id="editor">How to edit track details:</h2>
+    First step is to move mouse pointer over the track you want to modify details on playlist - you will see two icons (trash and pencil) first one will remove item from playlist, second one will open track details editor.
+    There are four buttons (see screen below):
+    <ul>
+        <li>reload - it will get data from last.fm database to validate its correction</li>
+        <li>swap - it will swap title and artist name - it is common that these values are in incorrect positions on youtube's track details</li>
+        <li>save - stores entered values and refreshes playlist view</li>
+        <li>close - will close editor without saving changes</li>
+    </ul>
+    Beside each text input is a small icon which indicating if entered details are correctly recognised on last.fm. It is basing on mbid od received data.
+    <img src="tutorial/editor.png"/>
+    <br><a href="#menu">go to menu</a>
+
+    <h2 id="sign_in_last_fm">How to sign into last.fm portal:</h2>
+    Without signing into last.fm portal you will not be able to scrobble music. Another benefit is that you will be able to love music and see what you already loved on playlist view.
+    To sign in you have to press button located on page header. You will be moved to last.fm page where you should confirm that you are happy to allow scrobbline.com to scrobble on your profile.
+    Do not worry it will not do anything else especially without your will. It will never ask you about your password, it is not needed.
+    <br><a href="#menu">go to menu</a>
+
+    <h2 id="scrobbling">How to scrobble:</h2>
+    The only thing you have to do to be able to scrobble music is to sign into last.fm portal. It is described here: <a href="#sign_in_last_fm">How to sign into last.fm portal</a>.
+    While you listening to music scrobbline will also update information about currently played song.
+    <br><a href="#menu">go to menu</a>
 </body>
 </html>
