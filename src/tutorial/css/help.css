@@ -1,0 +1,35 @@
+body
+{
+    background-color: #2A2C2B;
+}
+
+body A
+{
+    text-decoration: none;
+    color: #2A2C2B;
+    background-color:#DC3522;
+    margin:5px;
+    padding:1px;
+}
+
+body A:hover
+{
+    background-color:#D9CB9E;
+    color: #2A2C2B;
+}
+
+
+#page_content
+{
+    max-width: 1200px;
+    margin-right:auto;
+    margin-left:auto;
+}
+
+.help_content
+{
+    background-color: #2A2C2B;
+    color:#D9CB9E;
+    border-bottom:#374140;
+    display:block;
+}
