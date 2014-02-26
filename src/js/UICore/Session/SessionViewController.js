@@ -34,7 +34,7 @@ window.UI.SessionViewController.prototype =
         {
             that._clearToken(token);
 
-            $(that.config.SessionDetailsButton).html('<div class="authentication-button">Hello! '+userDetails+'</div>');
+            $(that.config.SessionDetailsButton).html('<a href="'+that.config.LinkToPortal+userDetails+'" target="_blank"><div class="authentication-button">Hello! '+userDetails+'</div></a>');
 
             $(that.config.SessionEstablishedContainer).show();
             $(that.config.NoSessionContainer).hide();
