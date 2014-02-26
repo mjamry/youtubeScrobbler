@@ -96,8 +96,7 @@ body A:hover
 .playlist-item-even,
 .playlist-item-odd
 {
-    border-bottom: 1px solid #4A4A49;
-    border-top:  1px solid #E6DECF;
+    border-top:  1px solid #c3bba7;
 }
 
 .playlist-item-even
