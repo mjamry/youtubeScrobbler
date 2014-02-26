@@ -103,6 +103,11 @@ body
     height:35px;
 }
 
+.header-session-button A
+{
+    text-decoration: none;
+}
+
 #color-scheme-control
 {
     height:50px;

@@ -38,6 +38,7 @@ body A:hover
 }
 
 .header-session-button,
+.header-session-button A,
 .header-control-button
 {
     color: #2A2C2B;
@@ -45,6 +46,7 @@ body A:hover
 }
 
 .header-session-button:hover,
+.header-session-button A:hover,
 .header-control-button:hover
 {
     color: #E6DECF;
