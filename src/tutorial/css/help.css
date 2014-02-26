@@ -32,6 +32,11 @@ h2
     text-align: center;
 }
 
+hr
+{
+    border-color: #DC3522;;
+}
+
 #page_content
 {
     max-width: 1200px;
