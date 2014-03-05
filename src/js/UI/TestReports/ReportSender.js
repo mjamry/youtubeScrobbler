@@ -145,7 +145,7 @@ window.UI.ReportSender.prototype =
             .done(callbacks.success);
     },
 
-    sendUsageReport: function(sender, title)
+    sendUsageReport: function(sender, title, callbacks)
     {
         callbacks = callbacks || {
             success: function()
