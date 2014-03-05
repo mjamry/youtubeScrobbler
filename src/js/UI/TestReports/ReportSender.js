@@ -7,6 +7,7 @@ window.UI.ReportSenderConstants =
     emailScriptLocation: "php/EmailSender.php",
     errorTag: "[Error]",
     featureTag: "[FeatureRequest]",
+    usageTag: "[Usage]",
 
     logsContainer: "logger-content"
 };
@@ -21,6 +22,13 @@ window.UI.ReportSender.prototype =
             window.UI.ReportSenderConstants.destinationEmail,
             "Automatically generated report",
             message);
+    },
+
+    _handleApplicationClosed: function()
+    {
+        this.sendUsageReport(
+            window.UI.ReportSenderConstants.destinationEmail,
+            "Application closed report");
     },
 
     _getBrowser: function()
@@ -67,6 +75,21 @@ window.UI.ReportSender.prototype =
                     "<h4>Logs:</h4>"+
                     this._getLogs()+
             "</font>");
+    },
+
+    _generateUsageReport: function()
+    {
+        return (
+            "<font face=\"Courier New\">" +
+                "<h4>Environment details:</h4>" +
+                "<ul>" +
+                "<li>OS: "+this._getOperatingSystem()+"</li>"+
+                "<li>Browser: "+this._getBrowser()+"</li>"+
+                "<li>User Agent: "+this._getUserAgent()+"</li>"+
+                "</ul>" +
+                "<h4>Logs:</h4>"+
+                this._getLogs()+
+                "</font>");
     },
 
     sendErrorReport: function(sender, title, description, callbacks)
@@ -122,8 +145,37 @@ window.UI.ReportSender.prototype =
             .done(callbacks.success);
     },
 
+    sendUsageReport: function(sender, title)
+    {
+        callbacks = callbacks || {
+            success: function()
+            {
+                Logger.getInstance().Debug("Usage report has been sent.");
+            },
+            fail: function()
+            {
+                Logger.getInstance().Debug("Error occurs while sending usage report.");
+            }
+        };
+
+        title = window.UI.ReportSenderConstants.usageTag+" "+title;
+        var content = this._generateUsageReport();
+
+        $.post(window.UI.ReportSenderConstants.emailScriptLocation,
+            {
+                recipient: window.UI.ReportSenderConstants.destinationEmail,
+                sender: sender,
+                subject: title,
+                content: content
+            })
+            .fail(callbacks.fail)
+            .done(callbacks.success);
+    },
+
     initialise: function()
     {
         EventBroker.getInstance().addListener(window.Common.LoggerEvents.LoggerError, this._handleError, null, this);
+        //TODO: it is for development purposes only
+        EventBroker.getInstance().addListener(window.Common.ApplicationEvents.ApplicationClosed, this._handleApplicationClosed, null, this);
     }
 };

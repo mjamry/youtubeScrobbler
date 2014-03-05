@@ -64,4 +64,10 @@ $(function()
     testReport.initialise();
 
     Logger.getInstance().Info("Application initialisation ended.");
+
+});
+
+$(window).unload(function()
+{
+    EventBroker.getInstance().fireEvent(window.Common.ApplicationEvents.ApplicationClosed);
 });
