@@ -5,7 +5,6 @@ window.UI.SessionViewController = function(model, config)
 {
     this.model = model;
     this.config = config;
-    this.view = $(config.SessionDetailsButton);
 };
 
 window.UI.SessionViewController.prototype =
@@ -31,17 +30,23 @@ window.UI.SessionViewController.prototype =
     //handles successfully established session
     _handleNewSession: function(that, token)
     {
-        return function(userDetails)
+        return function onSessionEstablished(userDetails)
         {
             that._clearToken(token);
 
-            that.view.unbind("click");
-            that.view.click(function()
-            {
-                window.open(that.config.LinkToPortal+userDetails, "_blank");
-            });
+            $(that.config.SessionDetailsButton).html('<a href="'+that.config.LinkToPortal+userDetails+'" target="_blank"><div class="authentication-button">Hello! '+userDetails+'</div></a>');
 
-            that.view.html('<div class="authentication-button">Hello! '+userDetails+'</div>');
+            $(that.config.SessionEstablishedContainer).show();
+            $(that.config.NoSessionContainer).hide();
+        };
+    },
+
+    _handleSessionClosed: function(that)
+    {
+        return function onSessionClosed()
+        {
+            $(that.config.SessionEstablishedContainer).hide();
+            $(that.config.NoSessionContainer).show();
         };
     },
 
@@ -62,16 +67,32 @@ window.UI.SessionViewController.prototype =
         this.model.createNewSession(token);
     },
 
+    //clears current session
+    _clearCurrentSession: function()
+    {
+        this.model.closeSession();
+    },
+
     initialise: function()
     {
-        this.view.click($.proxy(function()
+        $(this.config.SignInButton).click($.proxy(function()
         {
             window.location = this.config.PortalAuthLink + window.LastFm.LastFmConstants.API_KEY + "&" + this.config.PortalUrlCallbackParam + document.URL;
-        }, this));
+        },
+        this));
+
+        $(this.config.SignOutButton).click($.proxy(function()
+        {
+            this._clearCurrentSession();
+        },
+        this));
 
         var token = this._getToken();
 
+        $(this.config.SessionEstablishedContainer).hide();
+
         EventBroker.getInstance().addListener(window.LastFm.Events.SessionEstablished, this._handleNewSession(this, token));
+        EventBroker.getInstance().addListener(window.LastFm.Events.SessionClosed, this._handleSessionClosed(this));
         EventBroker.getInstance().addListener(window.LastFm.Events.SessionEstablishmentFailed, this._handleSessionError(this, token));
 
         this._createSession(token);

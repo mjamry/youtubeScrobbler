@@ -37,6 +37,22 @@ body A:hover
     background-color: #309BBD;
 }
 
+.header-session-button,
+.header-session-button A,
+.header-control-button
+{
+    color: #2A2C2B;
+    background-color: #E6DECF;
+}
+
+.header-session-button:hover,
+.header-session-button A:hover,
+.header-control-button:hover
+{
+    color: #E6DECF;
+    background-color: #4A4A49;
+}
+
 /*--------PLAYLIST----------*/
 .playlist-item-current
 {
@@ -80,8 +96,7 @@ body A:hover
 .playlist-item-even,
 .playlist-item-odd
 {
-    border-bottom: 1px solid #4A4A49;
-    border-top:  1px solid #E6DECF;
+    border-top:  1px solid #beb69c;
 }
 
 .playlist-item-even
@@ -162,23 +177,7 @@ body A:hover
 
 .playlist-control-button-selected
 {
-    color: #D9CB9E;
-}
-
-.authentication-button
-{
-    color: #1E1E20;
-    background-color:#DC3522;
-}
-
-.authentication-button a
-{
-    color:#1E1E20;
-}
-
-.authentication-button a:hover
-{
-    color:#D9CB9E;
+    color: #FA4147;
 }
 /*--------VOLUME--CONTROL----------*/
 .volume-control-description

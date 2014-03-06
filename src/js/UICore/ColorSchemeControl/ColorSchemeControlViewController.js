@@ -1,33 +1,33 @@
 window.UI.ColorSchemeControlViewController = function(config)
 {
     this.config = config;
+    this.currentTheme = this.config.DarkStyle;
 };
 
 window.UI.ColorSchemeControlViewController.prototype =
 {
     _useDarkColorStyle: function _useDarkColorStyle()
     {
-        this._hideAllButtons();
-        this._showButton(this.config.LightSchemeButton);
-        this._changeColorStyle(this.config.DarkStyle);
+        this.currentTheme = this.config.DarkStyle;
+        this._changeColorStyle(this.currentTheme);
     },
 
     _useLightColorStyle: function _useLightColorStyle()
     {
-        this._hideAllButtons();
-        this._showButton(this.config.DarkSchemeButton);
-        this._changeColorStyle(this.config.LightStyle);
+        this.currentTheme = this.config.LightStyle;
+        this._changeColorStyle(this.currentTheme);
     },
 
-    _hideAllButtons: function _hideAllButtons()
+    _switchTheme: function _switchTheme()
     {
-        $(this.config.LightSchemeButton).hide();
-        $(this.config.DarkSchemeButton).hide();
-    },
-
-    _showButton: function _showButton(button)
-    {
-        $(button).show();
+        if(this.currentTheme === this.config.DarkStyle)
+        {
+            this._useLightColorStyle();
+        }
+        else
+        {
+            this._useDarkColorStyle();
+        }
     },
 
     _changeColorStyle: function _changeColorStyle(newStyle)
@@ -46,10 +46,6 @@ window.UI.ColorSchemeControlViewController.prototype =
 
     initialise: function initialise()
     {
-        $(this.config.LightSchemeButton).click($.proxy(this._useLightColorStyle, this));
-        $(this.config.DarkSchemeButton).click($.proxy(this._useDarkColorStyle, this));
-
-        this._hideAllButtons();
-        this._showButton(this.config.LightSchemeButton);
+        $(this.config.ThemeSwitchButton).click($.proxy(this._switchTheme, this));
     }
 };

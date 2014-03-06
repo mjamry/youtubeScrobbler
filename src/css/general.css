@@ -18,6 +18,15 @@ body
     position:relative;
 }
 
+#page-content
+{
+    min-height:300px;
+    width: 900px;
+    padding-bottom: 150px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
 /*----------------------------------------------FOOTER--------------------------------------------*/
 
 #footer
@@ -82,26 +91,21 @@ body
     float: right;
 }
 
-#header-session-details
+#header-session-details-container
 {
-    width:200px;
     float:right;
+    margin-right:3px;
 }
 
-#page-content
+.header-session-button
 {
-    min-height:300px;
-    width: 900px;
-    padding-bottom: 150px;
-    margin-left:auto;
-    margin-right:auto;
+    border-style: none;
+    height:35px;
 }
 
-.authentication-button
+.header-session-button A
 {
-    padding:10px;
-    cursor:pointer;
-    text-align: center;
+    text-decoration: none;
 }
 
 #color-scheme-control
@@ -116,6 +120,18 @@ body
 {
     border-style:none;
     font-size: 10pt;
+}
+
+#header-control-buttons-container
+{
+    float:right;
+}
+
+.header-control-button
+{
+    border-style: none;
+    height:35px;
+    width:35px;
 }
 
 /*-----------------------------INPUT------------------------*/
@@ -307,7 +323,6 @@ body
 {
     width: 450px;
     height: 338px;
-    background-image:url('media/online_scrobbler_test_screen.png');
 }
 /*----------------------------PLAYBACK---CONTROLS-------*/
 

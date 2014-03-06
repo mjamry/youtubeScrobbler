@@ -1,0 +1,53 @@
+body
+{
+    background-color: #2A2C2B;
+    font-family: 'Lato', sans-serif;
+}
+
+body A
+{
+    text-decoration: none;
+    color: #2A2C2B;
+    background-color:#DC3522;
+    margin:5px;
+    line-height: 25px;
+    padding:5px;
+}
+
+body A:hover
+{
+    background-color:#D9CB9E;
+    color: #2A2C2B;
+}
+
+li
+{
+    line-height: 35px;
+}
+
+h2
+{
+    text-decoration: underline;
+    letter-spacing: 5px;
+    text-align: center;
+}
+
+hr
+{
+    border-color: #DC3522;;
+}
+
+#page_content
+{
+    max-width: 1200px;
+    margin-right:auto;
+    margin-left:auto;
+}
+
+.help_content
+{
+    background-color: #2A2C2B;
+    color:#D9CB9E;
+    border-bottom:#374140;
+    display:block;
+}

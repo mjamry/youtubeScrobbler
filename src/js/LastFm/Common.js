@@ -3,8 +3,8 @@ window.LastFm = window.LastFm || {};
 //TODO move to server side.
 window.LastFm.LastFmConstants =
 {
-    API_KEY: 'ed21aeb031f9999c1fd0f92510b84364',
-    API_SECRET: 'c234b6bf6b9f738748ce92391f0b0846'
+    API_KEY: 'c6374de0b62e5b4a8776bf85a6b56801',
+    API_SECRET: '2584ffa53e3a1cbabded6a43fd9dc7c5'
 };
 
 LastFmApiCommon =

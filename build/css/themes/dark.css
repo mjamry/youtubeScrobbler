@@ -4,7 +4,6 @@ body
     background-color: #2A2C2B;
 }
 
-
 body A
 {
     color: #D9CB9E;
@@ -27,6 +26,22 @@ body A:hover
 {
     border-bottom:1px solid #374140;
     background-color: #1E1E20;
+}
+
+.header-session-button,
+.header-session-button A,
+.header-control-button
+{
+    color: #1E1E20;
+    background-color: #DC3522;
+}
+
+.header-session-button:hover,
+.header-session-button A:hover,
+.header-control-button:hover
+{
+    color: #1E1E20;
+    background-color: #D9CB9E;
 }
 
 /*--------PLAYLIST----------*/
@@ -71,8 +86,7 @@ body A:hover
 .playlist-item-even,
 .playlist-item-odd
 {
-    border-bottom: 1px solid #2A2C2B;
-    border-top:  1px solid #4b5655;
+    border-top:  1px solid #555756;
 }
 
 .playlist-item-even
@@ -158,22 +172,6 @@ body A:hover
 .playlist-control-button-selected
 {
     color: #D9CB9E;
-}
-
-.authentication-button
-{
-    color: #1E1E20;
-    background-color:#DC3522;
-}
-
-.authentication-button a
-{
-    color:#1E1E20;
-}
-
-.authentication-button a:hover
-{
-    color:#D9CB9E;
 }
 /*--------VOLUME--CONTROL----------*/
 .volume-control-description
