@@ -4,22 +4,24 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/dark_color_scheme.css">
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" >
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
+    <!--CSS-SCROBBLINE-->
+    <!--build:css css/scrobbline.min.css-->
+    <link rel="stylesheet" href="css/general.css">
+    <!--endbuild-->
+    <link rel="stylesheet" href="css/dark_color_scheme.css">
+
+    <!--JS-LIBRARIES-->
     <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
     <script type="text/javascript" src="js/lib/jquery.cookie.js"></script>
-    <!--last fm library-->
     <script type="text/javascript" src="js/lib/lastfm.api.js"></script>
     <script type="text/javascript" src="js/lib/lastfm.api.cache.js"></script>
     <script type="text/javascript" src="js/lib/lastfm.api.md5.js"></script>
     <script type="text/javascript" src="js/lib/jquery.cookie.js"></script>
-
     <script type="text/javascript" src="js/lib/mediaelement-and-player.js"></script>
-
+    <!--JS_SCROBBLINE-->
+    <!--build:js js/scrobbline.min.js-->
     <script type="text/javascript" src="js/UICore/UIConstants.js"></script>
     <script type="text/javascript" src="js/UICore/UICore.js"></script>
     <script type="text/javascript" src="js/UICore/UIEvents.js"></script>
@@ -91,10 +93,11 @@
     <script type="text/javascript" src="js/LastFm/LastFmSessionProvider.js"></script>
     <script type="text/javascript" src="js/LastFm/TrackLoveStateModifier.js"></script>
 
-
     <script type="text/javascript" src="js/Tracking/GoogleTracker.js"></script>
     <script type="text/javascript" src="js/Tracking/GoogleTrackerConfig.js"></script>
     <script type="text/javascript" src="js/Tracking/GoogleUiTracker.js"></script>
+    <!--endbuild-->
+    <!--JS-GOOGLE-ANALYTICS-->
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
