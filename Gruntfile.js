@@ -18,38 +18,6 @@ module.exports = function(grunt) {
             }
         },
 
-        concat: {
-            options: {
-                separator: ';'
-            },
-            js: {
-                src: ['src/js/**/*.js', '!src/js/lib/*'],
-                dest: 'build/<%= pkg.name %>.js'
-            }
-        },
-
-        uglify: {
-            options: {
-                banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-            },
-            build: {
-                src: 'build/<%= pkg.name %>.js',
-                dest: 'build/<%= pkg.name %>.min.js'
-            }
-        },
-
-        cssmin: {
-            combine: {
-                files: {
-                    'build/<%= pkg.name %>.css': 'src/css/*.css'
-                }
-            },
-            minify: {
-                src: 'build/<%= pkg.name %>.css',
-                dest: 'build/<%= pkg.name %>.min.css'
-            }
-        },
-
         useminPrepare: {
             html: 'src/index.html',
             options: {
