@@ -48,6 +48,30 @@ module.exports = function(grunt) {
                 src: 'build/<%= pkg.name %>.css',
                 dest: 'build/<%= pkg.name %>.min.css'
             }
+        },
+
+        useminPrepare: {
+            html: 'src/index.html',
+            options: {
+                dest: 'build'
+            }
+        },
+
+        usemin: {
+            html: 'build/index.html'
+        },
+
+        copy: {
+            copyIndex:{
+                src: 'src/index.html',
+                dest: 'build/index.html'
+            },
+            copyThemes:{
+                src: 'src/css/themes/*.css',
+                dest: 'build/css/themes',
+                flatten: true,
+                expand:true
+            }
         }
     });
 
@@ -57,10 +81,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-usemin');
 
 
     //Tasks
-    grunt.registerTask('build', ['concat', 'uglify', 'cssmin']);
+    grunt.registerTask('build', ['copy:copyIndex', 'copy:copyThemes', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin']);
     grunt.registerTask('tests', ['jshint', 'jasmine']);
 
     grunt.registerTask('default', ['tests']);
