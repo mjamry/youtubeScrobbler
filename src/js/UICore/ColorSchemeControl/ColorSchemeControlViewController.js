@@ -33,7 +33,7 @@ window.UI.ColorSchemeControlViewController.prototype =
     _changeColorStyle: function _changeColorStyle(newStyle)
     {
         //TODO change hardcoded value - it is an index of color.css link
-        var oldlink = document.getElementsByTagName("link").item(3);
+        var oldlink = document.getElementsByTagName("link").item(4);
 
         var newlink = document.createElement("link");
         newlink.setAttribute("rel", "stylesheet");
