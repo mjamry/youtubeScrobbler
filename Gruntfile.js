@@ -39,6 +39,18 @@ module.exports = function(grunt) {
                 dest: 'build/css/themes',
                 flatten: true,
                 expand:true
+            },
+            copyLibrariesStyles:{
+                src: 'src/css/lib/*.css',
+                dest: 'build/css/lib',
+                flatten: true,
+                expand:true
+            },
+            copyJSLibs:{
+                src:'src/js/lib/*.js',
+                dest:'build/js/lib',
+                flatten:true,
+                expand:true
             }
         }
     });
@@ -54,7 +66,7 @@ module.exports = function(grunt) {
 
 
     //Tasks
-    grunt.registerTask('build', ['copy:copyIndex', 'copy:copyThemes', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin']);
+    grunt.registerTask('build', ['copy', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin']);
     grunt.registerTask('tests', ['jshint', 'jasmine']);
 
     grunt.registerTask('default', ['tests']);
