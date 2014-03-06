@@ -18,35 +18,39 @@ module.exports = function(grunt) {
             }
         },
 
-        concat: {
+        useminPrepare: {
+            html: 'src/index.html',
             options: {
-                separator: ';'
-            },
-            js: {
-                src: ['src/js/**/*.js', '!src/js/lib/*'],
-                dest: 'build/<%= pkg.name %>.js'
+                dest: 'build'
             }
         },
 
-        uglify: {
-            options: {
-                banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-            },
-            build: {
-                src: 'build/<%= pkg.name %>.js',
-                dest: 'build/<%= pkg.name %>.min.js'
-            }
+        usemin: {
+            html: 'build/index.html'
         },
 
-        cssmin: {
-            combine: {
-                files: {
-                    'build/<%= pkg.name %>.css': 'src/css/*.css'
-                }
+        copy: {
+            copyIndex:{
+                src: 'src/index.html',
+                dest: 'build/index.html'
             },
-            minify: {
-                src: 'build/<%= pkg.name %>.css',
-                dest: 'build/<%= pkg.name %>.min.css'
+            copyThemes:{
+                src: 'src/css/themes/*.css',
+                dest: 'build/css/themes',
+                flatten: true,
+                expand:true
+            },
+            copyLibrariesStyles:{
+                src: 'src/css/lib/*.css',
+                dest: 'build/css/lib',
+                flatten: true,
+                expand:true
+            },
+            copyJSLibs:{
+                src:'src/js/lib/*.js',
+                dest:'build/js/lib',
+                flatten:true,
+                expand:true
             }
         }
     });
@@ -57,10 +61,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-usemin');
 
 
     //Tasks
-    grunt.registerTask('build', ['concat', 'uglify', 'cssmin']);
+    grunt.registerTask('build', ['copy', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin']);
     grunt.registerTask('tests', ['jshint', 'jasmine']);
 
     grunt.registerTask('default', ['tests']);
