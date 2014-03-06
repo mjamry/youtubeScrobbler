@@ -22,40 +22,7 @@
     <script type="text/javascript" src="js/lib/mediaelement-and-player.js"></script>
     <!--JS_SCROBBLINE-->
     <!--build:js js/scrobbline.min.js-->
-    <script type="text/javascript" src="js/UICore/UIConstants.js"></script>
-    <script type="text/javascript" src="js/UICore/UICore.js"></script>
-    <script type="text/javascript" src="js/UICore/UIEvents.js"></script>
-    <script type="text/javascript" src="js/UICore/Playlist/PlaylistViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/Playlist/PlaylistUIConfiguration.js"></script>
-    <script type="text/javascript" src="js/UICore/Playlist/PlaylistUIItemBuilder.js"></script>
-    <script type="text/javascript" src="js/UICore/PlaybackDetails/PlaybackDetailsViewConfiguration.js"></script>
-    <script type="text/javascript" src="js/UICore/PlaybackDetails/PlaybackDetailsViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/PlaybackControl/PlaybackControlViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/PlaybackControl/PlaybackControlConfiguration.js"></script>
-    <script type="text/javascript" src="js/UICore/PlaylistControl/PlaylistControlViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/PlaylistControl/PlaylistControlConfiguration.js"></script>
-    <script type="text/javascript" src="js/UICore/Session/SessionUIConfiguration.js"></script>
-    <script type="text/javascript" src="js/UICore/Session/SessionViewController.js"></script>
-    <script type="text/javascript" src="js/UI/UIControllersFactory.js"></script>
-    <script type="text/javascript" src="js/UI/Logger/LoggerViewController.js"></script>
-    <script type="text/javascript" src="js/UI/Logger/LoggerUIConfiguration.js"></script>
-    <script type="text/javascript" src="js/UI/TestReports/TestReportsUIConfiguration.js"></script>
-    <script type="text/javascript" src="js/UI/TestReports/TestReportsViewController.js"></script>
-    <script type="text/javascript" src="js/UI/TestReports/ReportSender.js"></script>
-    <script type="text/javascript" src="js/UI/VolumeControl.js"></script>
-    <script type="text/javascript" src="js/UI/PlaybackProgressControl.js"></script>
-    <script type="text/javascript" src="js/UICore/MediaLoad/MediaLoadConfig.js"></script>
-    <script type="text/javascript" src="js/UICore/MediaLoad/MediaLoadViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistItemEditorConfig.js"></script>
-    <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistItemEditorViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/ColorSchemeControl/ColorSchemeControlConfig.js"></script>
-    <script type="text/javascript" src="js/UICore/ColorSchemeControl/ColorSchemeControlViewController.js"></script>
 
-    <script type="text/javascript" src="js/Core/Main.js"></script>
-    <script type="text/javascript" src="js/Core/CoreServicesFactory.js"></script>
-    <script type="text/javascript" src="js/Core/ApplicationCore.js"></script>
-    <script type="text/javascript" src="js/Core/OnlineScrobbler.js"></script>
-    <script type="text/javascript" src="js/Core/SessionHandler.js"></script>
 
     <script type="text/javascript" src="js/Common/Logger.js"></script>
     <script type="text/javascript" src="js/Common/LoggerEvents.js"></script>
@@ -66,6 +33,21 @@
     <script type="text/javascript" src="js/Common/TimeParser.js"></script>
     <script type="text/javascript" src="js/Common/LocalStorage.js"></script>
     <script type="text/javascript" src="js/Common/GlobalErrorHandler.js"></script>
+
+    <script type="text/javascript" src="js/Core/Main.js"></script>
+    <script type="text/javascript" src="js/Core/CoreServicesFactory.js"></script>
+    <script type="text/javascript" src="js/Core/ApplicationCore.js"></script>
+    <script type="text/javascript" src="js/Core/OnlineScrobbler.js"></script>
+    <script type="text/javascript" src="js/Core/SessionHandler.js"></script>
+
+
+    <script type="text/javascript" src="js/LastFm/LastFmEvents.js"></script>
+    <script type="text/javascript" src="js/LastFm/Common.js"></script>
+    <script type="text/javascript" src="js/LastFm/LastFmApiFactory.js"></script>
+    <script type="text/javascript" src="js/LastFm/Scrobbler.js"></script>
+    <script type="text/javascript" src="js/LastFm/InformationProvider.js"></script>
+    <script type="text/javascript" src="js/LastFm/LastFmSessionProvider.js"></script>
+    <script type="text/javascript" src="js/LastFm/TrackLoveStateModifier.js"></script>
 
     <script type="text/javascript" src="js/Player/PlayerServicesFactory.js"></script>
     <script type="text/javascript" src="js/Player/MediaPlayer.js"></script>
@@ -85,17 +67,45 @@
     <script type="text/javascript" src="js/Player/PlayerEvents.js"></script>
     <script type="text/javascript" src="js/Player/VolumeControlService.js"></script>
 
-    <script type="text/javascript" src="js/LastFm/LastFmEvents.js"></script>
-    <script type="text/javascript" src="js/LastFm/Common.js"></script>
-    <script type="text/javascript" src="js/LastFm/LastFmApiFactory.js"></script>
-    <script type="text/javascript" src="js/LastFm/Scrobbler.js"></script>
-    <script type="text/javascript" src="js/LastFm/InformationProvider.js"></script>
-    <script type="text/javascript" src="js/LastFm/LastFmSessionProvider.js"></script>
-    <script type="text/javascript" src="js/LastFm/TrackLoveStateModifier.js"></script>
-
     <script type="text/javascript" src="js/Tracking/GoogleTracker.js"></script>
     <script type="text/javascript" src="js/Tracking/GoogleTrackerConfig.js"></script>
     <script type="text/javascript" src="js/Tracking/GoogleUiTracker.js"></script>
+
+    <script type="text/javascript" src="js/UI/UIControllersFactory.js"></script>
+    <script type="text/javascript" src="js/UI/Logger/LoggerViewController.js"></script>
+    <script type="text/javascript" src="js/UI/Logger/LoggerUIConfiguration.js"></script>
+    <script type="text/javascript" src="js/UI/TestReports/TestReportsUIConfiguration.js"></script>
+    <script type="text/javascript" src="js/UI/TestReports/TestReportsViewController.js"></script>
+    <script type="text/javascript" src="js/UI/TestReports/ReportSender.js"></script>
+    <script type="text/javascript" src="js/UI/VolumeControl.js"></script>
+    <script type="text/javascript" src="js/UI/PlaybackProgressControl.js"></script>
+
+    <script type="text/javascript" src="js/UICore/UIConstants.js"></script>
+    <script type="text/javascript" src="js/UICore/UICore.js"></script>
+    <script type="text/javascript" src="js/UICore/UIEvents.js"></script>
+    <script type="text/javascript" src="js/UICore/Playlist/PlaylistViewController.js"></script>
+    <script type="text/javascript" src="js/UICore/Playlist/PlaylistUIConfiguration.js"></script>
+    <script type="text/javascript" src="js/UICore/Playlist/PlaylistUIItemBuilder.js"></script>
+    <script type="text/javascript" src="js/UICore/PlaybackDetails/PlaybackDetailsViewConfiguration.js"></script>
+    <script type="text/javascript" src="js/UICore/PlaybackDetails/PlaybackDetailsViewController.js"></script>
+    <script type="text/javascript" src="js/UICore/PlaybackControl/PlaybackControlViewController.js"></script>
+    <script type="text/javascript" src="js/UICore/PlaybackControl/PlaybackControlConfiguration.js"></script>
+    <script type="text/javascript" src="js/UICore/PlaylistControl/PlaylistControlViewController.js"></script>
+    <script type="text/javascript" src="js/UICore/PlaylistControl/PlaylistControlConfiguration.js"></script>
+    <script type="text/javascript" src="js/UICore/Session/SessionUIConfiguration.js"></script>
+    <script type="text/javascript" src="js/UICore/Session/SessionViewController.js"></script>
+
+    <script type="text/javascript" src="js/UICore/MediaLoad/MediaLoadConfig.js"></script>
+    <script type="text/javascript" src="js/UICore/MediaLoad/MediaLoadViewController.js"></script>
+    <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistItemEditorConfig.js"></script>
+    <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistItemEditorViewController.js"></script>
+    <script type="text/javascript" src="js/UICore/ColorSchemeControl/ColorSchemeControlConfig.js"></script>
+    <script type="text/javascript" src="js/UICore/ColorSchemeControl/ColorSchemeControlViewController.js"></script>
+
+
+
+
+
     <!--endbuild-->
     <!--JS-GOOGLE-ANALYTICS-->
     <script>
