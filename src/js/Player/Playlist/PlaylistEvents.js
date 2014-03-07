@@ -8,5 +8,8 @@ window.Player.PlaylistEvents =
     PlaylistItemUpdated: "PlaylistItemUpdated",
     PlaylistItemRemoved: "PlaylistItemRemoved",
 
+    PlaylistCleared: "PlaylistCleared",     //no args
+    PlaylistCreated: "PlaylistCreated",     //new playlist length
+
     PlaylistItemEditionRequested: "PlaylistItemEditionRequested"
 };

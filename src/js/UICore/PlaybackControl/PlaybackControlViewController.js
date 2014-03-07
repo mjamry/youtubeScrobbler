@@ -64,6 +64,16 @@ window.UI.PlaybackControlViewController.prototype =
         };
     },
 
+    _handlePlaylistCreated: function()
+    {
+        //enable buttons
+    },
+
+    _handlePlaylistCleared: function()
+    {
+        //disable buttons
+    },
+
     _showPlayButton: function()
     {
         $(this.config.PlayButton).show();
@@ -104,5 +114,8 @@ window.UI.PlaybackControlViewController.prototype =
         EventBroker.getInstance().addListener(window.Player.Events.MediaPlay, $.proxy(this._showPauseButton, this));
         EventBroker.getInstance().addListener(window.Player.Events.MediaPaused, $.proxy(this._showPlayButton, this));
         EventBroker.getInstance().addListener(window.Player.Events.MediaStopped, $.proxy(this._showPlayButton, this));
+
+        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCreated, $.proxy(this._handlePlaylistCreated, this));
+        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCleared, $.proxy(this._handlePlaylistCleared, this));
     }
 };

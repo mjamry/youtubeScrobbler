@@ -8,6 +8,7 @@ window.Common = window.Common || {};
 window.Player.PlaylistService = function()
 {
     this.playlist = new window.Player.Playlist();
+    //TODO remove this field it is redundant
     this._eventBroker = EventBroker.getInstance();
     //TODO: for future purposes - will be configurable
     this._autoplay = true;
@@ -34,6 +35,7 @@ window.Player.PlaylistService.prototype =
     {
         Logger.getInstance().Info("Playlist has been cleared. "+ this.playlist.length() +" items removed.");
         this.playlist = new window.Player.Playlist();
+        EventBroker.getInstance().fireEvent(window.Player.PlaylistEvents.PlaylistCleared);
 
         this._updatePlaylist();
     },
@@ -46,6 +48,7 @@ window.Player.PlaylistService.prototype =
         {
             playlist.deserialize(storedData.mediaList);
             Logger.getInstance().Info("Playlist has been restored with "+playlist.length()+" elements.");
+            EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, playlist.length());
         }
 
         this.playlist = playlist;
@@ -60,6 +63,10 @@ window.Player.PlaylistService.prototype =
     //adds new playlist (or single media) to existing playlist.
     addToPlaylist: function(playlist)
     {
+        if(this.playlist.length() == 0)
+        {
+            EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, playlist.length());
+        }
         //TODO: consider moving this loop to playlist implementation
         for(var i=0;i<playlist.length();i++)
         {
