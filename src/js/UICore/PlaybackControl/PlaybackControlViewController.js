@@ -9,7 +9,6 @@ window.UI.PlaybackControlViewController = function(playbackControl, volumeContro
     this.config = config;
 
     this.volumeControl = null;
-    this.playbackControlAllowed = true;
 };
 
 window.UI.PlaybackControlViewController.prototype =
@@ -18,11 +17,8 @@ window.UI.PlaybackControlViewController.prototype =
     {
         return function ()
         {
-            if(that.playbackControlAllowed)
-            {
-                playbackControl.play();
-                that._showPlayButton();
-            }
+            playbackControl.play();
+            that._showPlayButton();
         };
     },
 
@@ -30,33 +26,24 @@ window.UI.PlaybackControlViewController.prototype =
     {
         return function ()
         {
-            if(that.playbackControlAllowed)
-            {
-                playbackControl.pause();
-                that._showPauseButton();
-            }
+            playbackControl.pause();
+            that._showPauseButton();
         };
     },
 
-    _next: function(playbackControl, that)
+    _next: function(playbackControl)
     {
         return function ()
         {
-            if(that.playbackControlAllowed)
-            {
-                playbackControl.playNext();
-            }
+            playbackControl.playNext();
         };
     },
 
-    _previous: function(playbackControl, that)
+    _previous: function(playbackControl)
     {
         return function ()
         {
-            if(that.playbackControlAllowed)
-            {
-                playbackControl.playPrevious();
-            }
+            playbackControl.playPrevious();
         };
     },
 
@@ -66,7 +53,6 @@ window.UI.PlaybackControlViewController.prototype =
         $(this.config.PauseButton).addClass(this.config.Disabled);
         $(this.config.NextButton).addClass(this.config.Disabled);
         $(this.config.PreviousButton).addClass(this.config.Disabled);
-        this.playbackControlAllowed = false;
     },
 
     _enableButtons: function()
@@ -75,7 +61,6 @@ window.UI.PlaybackControlViewController.prototype =
         $(this.config.PauseButton).removeClass(this.config.Disabled);
         $(this.config.NextButton).removeClass(this.config.Disabled);
         $(this.config.PreviousButton).removeClass(this.config.Disabled);
-        this.playbackControlAllowed = true;
     },
 
     _handleVolumeLevelChanged: function(volumeControlService)
@@ -93,16 +78,6 @@ window.UI.PlaybackControlViewController.prototype =
         {
            playbackControl.setPlaybackProgress(newPlaybackProgressValue);
         };
-    },
-
-    _handlePlaylistCreated: function()
-    {
-        this._enableButtons();
-    },
-
-    _handlePlaylistCleared: function()
-    {
-        this._disableButtons();
     },
 
     _showPlayButton: function()
@@ -128,8 +103,8 @@ window.UI.PlaybackControlViewController.prototype =
         EventBroker.getInstance().addListener(window.Player.Events.MediaPaused, $.proxy(this._showPlayButton, this));
         EventBroker.getInstance().addListener(window.Player.Events.MediaStopped, $.proxy(this._showPlayButton, this));
 
-        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCreated, $.proxy(this._handlePlaylistCreated, this));
-        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCleared, $.proxy(this._handlePlaylistCleared, this));
+        EventBroker.getInstance().addListener(window.UI.Events.DisablePlaybackControlButtonsRequested, $.proxy(this._disableButtons, this));
+        EventBroker.getInstance().addListener(window.UI.Events.EnablePlaybackControlButtonsRequested, $.proxy(this._enableButtons, this));
 
         //create volume level change handler
         this.volumeControl = new window.UI.VolumeControl("playback-control-volume-container");
