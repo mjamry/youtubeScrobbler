@@ -51,6 +51,12 @@ module.exports = function(grunt) {
                 dest:'build/js/lib',
                 flatten:true,
                 expand:true
+            },
+            copyMedia:{
+                src:'src/media/*',
+                dest:'build/media',
+                flatten:true,
+                expand:true
             }
         }
     });
