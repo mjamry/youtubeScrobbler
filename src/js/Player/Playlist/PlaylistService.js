@@ -14,7 +14,7 @@ window.Player.PlaylistService = function()
     this._autoplay = true;
 
     Logger.getInstance().Info("Playlist service has been created.");
-    this.restorePlaylist();
+
 };
 
 window.Player.PlaylistService.prototype =
@@ -23,6 +23,11 @@ window.Player.PlaylistService.prototype =
     {
         numberOfNewItems = numberOfNewItems || 0;
         this._eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistUpdated, numberOfNewItems);
+    },
+
+    initialise: function()
+    {
+        this.restorePlaylist();
     },
 
     refreshPlaylist: function()
@@ -44,14 +49,13 @@ window.Player.PlaylistService.prototype =
     {
         var storedData = LocalStorage.getInstance().getData("tempPl");
         var playlist = new window.Player.Playlist();
-        if(storedData)
+        if(storedData.mediaList.length > 0)
         {
             playlist.deserialize(storedData.mediaList);
+            this.playlist = playlist;
             Logger.getInstance().Info("Playlist has been restored with "+playlist.length()+" elements.");
             EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, playlist.length());
         }
-
-        this.playlist = playlist;
     },
 
     savePlaylist: function()

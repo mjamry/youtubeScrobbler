@@ -56,5 +56,6 @@ window.ApplicationCore.AppCore.prototype =
         this.playlistItemEditorViewController.initialise();
         this.onlineScrobbler.initialise();
         this.colorSchemeControlViewController.initialise();
+        this.playlistService.initialise();
     }
 };

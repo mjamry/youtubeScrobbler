@@ -76,7 +76,7 @@ window.UI.PlaylistViewController.prototype =
         return builder.build();
     },
 
-    _handlePlaylistUpdated: function(numberOfNewItems)
+    _refreshPlaylistView: function(numberOfNewItems)
     {
         this.numberOfNewItems = numberOfNewItems;
         if(this.numberOfNewItems > 0)
@@ -129,12 +129,13 @@ window.UI.PlaylistViewController.prototype =
 
     initialise: function()
     {
-        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistUpdated, this._handlePlaylistUpdated, null, this);
         EventBroker.getInstance().addListener(window.Player.Events.MediaChanged, this._deselectAllItems, null, this);
         EventBroker.getInstance().addListener(window.Player.Events.MediaStopped, this._deselectAllItems, null, this);
         EventBroker.getInstance().addListener(window.Player.Events.MediaPlay, this._handleMediaPlayed, null, this);
 
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistItemUpdated, this._handleItemUpdated, null, this);
+        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistUpdated, this._refreshPlaylistView, null, this);
+        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCreated, this._refreshPlaylistView, null, this);
 
         this.playlistService.refreshPlaylist();
     }
