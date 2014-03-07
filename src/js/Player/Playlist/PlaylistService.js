@@ -8,13 +8,7 @@ window.Common = window.Common || {};
 window.Player.PlaylistService = function()
 {
     this.playlist = new window.Player.Playlist();
-    //TODO remove this field it is redundant
-    this._eventBroker = EventBroker.getInstance();
-    //TODO: for future purposes - will be configurable
-    this._autoplay = true;
-
     Logger.getInstance().Info("Playlist service has been created.");
-
 };
 
 window.Player.PlaylistService.prototype =
@@ -22,7 +16,7 @@ window.Player.PlaylistService.prototype =
     _updatePlaylist: function(numberOfNewItems)
     {
         numberOfNewItems = numberOfNewItems || 0;
-        this._eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistUpdated, numberOfNewItems);
+        EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistUpdated, numberOfNewItems);
     },
 
     initialise: function()
@@ -92,7 +86,7 @@ window.Player.PlaylistService.prototype =
 
         this.playlist.replace(index, updatedMediaDetails);
 
-        this._eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistItemUpdated,
+        EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistItemUpdated,
             {
                 mediaDetails: updatedMediaDetails,
                 index: index
@@ -105,7 +99,7 @@ window.Player.PlaylistService.prototype =
         var currentItem = this.playlist.currentItemIndex;
         this.playlist.remove(index);
         Logger.getInstance().Debug("Element has been removed from playlist, now it contains "+this.playlist.length()+" elements.");
-        this._eventBroker.fireEventWithData(
+        EventBroker.getInstance().fireEventWithData(
             window.Player.PlaylistEvents.PlaylistItemRemoved,
             {
                 index: index,
