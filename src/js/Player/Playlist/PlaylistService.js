@@ -9,6 +9,7 @@ window.Player.PlaylistService = function()
 {
     this.playlist = new window.Player.Playlist();
     Logger.getInstance().Info("Playlist service has been created.");
+    this.storingPlaylistActionsAllowed = false;
 };
 
 window.Player.PlaylistService.prototype =
@@ -32,11 +33,15 @@ window.Player.PlaylistService.prototype =
     //creates new empty playlist replacing existing one.
     clearPlaylist: function()
     {
-        Logger.getInstance().Info("Playlist has been cleared. "+ this.playlist.length() +" items removed.");
-        this.playlist = new window.Player.Playlist();
-        EventBroker.getInstance().fireEvent(window.Player.PlaylistEvents.PlaylistCleared);
+        if(this.storingPlaylistActionsAllowed)
+        {
+            Logger.getInstance().Info("Playlist has been cleared. "+ this.playlist.length() +" items removed.");
+            this.playlist = new window.Player.Playlist();
+            EventBroker.getInstance().fireEvent(window.Player.PlaylistEvents.PlaylistCleared);
+            this.storingPlaylistActionsAllowed = false;
 
-        this._updatePlaylist();
+            this._updatePlaylist();
+        }
     },
 
     restorePlaylist: function()
@@ -49,13 +54,17 @@ window.Player.PlaylistService.prototype =
             this.playlist = playlist;
             Logger.getInstance().Info("Playlist has been restored with "+playlist.length()+" elements.");
             EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, playlist.length());
+            this.storingPlaylistActionsAllowed = true;
         }
     },
 
     savePlaylist: function()
     {
-        LocalStorage.getInstance().setData("tempPl", this.playlist);
-        Logger.getInstance().Info("Playlist has been saved with "+this.playlist.length()+" elements.");
+        if(this.storingPlaylistActionsAllowed)
+        {
+            LocalStorage.getInstance().setData("tempPl", this.playlist);
+            Logger.getInstance().Info("Playlist has been saved with "+this.playlist.length()+" elements.");
+        }
     },
 
     //adds new playlist (or single media) to existing playlist.
@@ -64,6 +73,7 @@ window.Player.PlaylistService.prototype =
         if(this.playlist.length() === 0)
         {
             EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, playlist.length());
+            this.storingPlaylistActionsAllowed = true;
         }
 
         this.playlist.addPlaylist(playlist);

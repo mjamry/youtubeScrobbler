@@ -47,6 +47,7 @@ window.ApplicationCore.AppCore.prototype =
     {
         this.playbackDetailsService.initialise();
         this.playbackControlService.initialise();
+        this.playlistFlowController.initialise();
         this.playlistViewController.initialise();
         this.playbackDetailsViewController.initialise();
         this.playbackControlViewController.initialise();
