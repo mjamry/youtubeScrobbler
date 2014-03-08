@@ -103,8 +103,8 @@ window.UI.PlaybackControlViewController.prototype =
         EventBroker.getInstance().addListener(window.Player.Events.MediaPaused, $.proxy(this._showPlayButton, this));
         EventBroker.getInstance().addListener(window.Player.Events.MediaStopped, $.proxy(this._showPlayButton, this));
 
-        EventBroker.getInstance().addListener(window.UI.Events.DisablePlaybackControlButtonsRequested, $.proxy(this._disableButtons, this));
-        EventBroker.getInstance().addListener(window.UI.Events.EnablePlaybackControlButtonsRequested, $.proxy(this._enableButtons, this));
+        EventBroker.getInstance().addListener(window.UI.Events.DisableControlButtonsRequested, $.proxy(this._disableButtons, this));
+        EventBroker.getInstance().addListener(window.UI.Events.EnableControlButtonsRequested, $.proxy(this._enableButtons, this));
 
         //create volume level change handler
         this.volumeControl = new window.UI.VolumeControl("playback-control-volume-container");

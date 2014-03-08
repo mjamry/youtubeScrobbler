@@ -36,13 +36,13 @@ window.Player.PlaybackControlService.prototype =
     _handlePlaylistCreated: function()
     {
         this.playbackControlAllowed = true;
-        EventBroker.getInstance().fireEvent(window.UI.Events.EnablePlaybackControlButtonsRequested);
+        EventBroker.getInstance().fireEvent(window.UI.Events.EnableControlButtonsRequested);
     },
 
     _handlePlaylistCleared: function()
     {
         this.playbackControlAllowed = false;
-        EventBroker.getInstance().fireEvent(window.UI.Events.DisablePlaybackControlButtonsRequested);
+        EventBroker.getInstance().fireEvent(window.UI.Events.DisableControlButtonsRequested);
     },
 
     initialise: function()
