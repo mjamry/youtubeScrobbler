@@ -99,20 +99,20 @@ window.UI.PlaylistControlViewController.prototype =
 
     _disableButtons: function()
     {
-        $(this.config.LoveButton).addClass(this.config.DisabledButtonClass);
-        $(this.config.ClearButton).addClass(this.config.DisabledButtonClass);
-        $(this.config.SaveButton).addClass(this.config.DisabledButtonClass);
-        $(this.config.ShuffleButton).addClass(this.config.DisabledButtonClass);
-        $(this.config.LoopButton).addClass(this.config.DisabledButtonClass);
+        $(this.config.LoveButton).attr(this.config.DisabledAttr, true);
+        $(this.config.ClearButton).attr(this.config.DisabledAttr, true);
+        $(this.config.SaveButton).attr(this.config.DisabledAttr, true);
+        $(this.config.ShuffleButton).attr(this.config.DisabledAttr, true);
+        $(this.config.LoopButton).attr(this.config.DisabledAttr, true);
     },
 
     _enableButtons: function()
     {
-        $(this.config.LoveButton).removeClass(this.config.DisabledButtonClass);
-        $(this.config.ClearButton).removeClass(this.config.DisabledButtonClass);
-        $(this.config.SaveButton).removeClass(this.config.DisabledButtonClass);
-        $(this.config.ShuffleButton).removeClass(this.config.DisabledButtonClass);
-        $(this.config.LoopButton).removeClass(this.config.DisabledButtonClass);
+        $(this.config.LoveButton).removeAttr(this.config.DisabledAttr);
+        $(this.config.ClearButton).removeAttr(this.config.DisabledAttr);
+        $(this.config.SaveButton).removeAttr(this.config.DisabledAttr);
+        $(this.config.ShuffleButton).removeAttr(this.config.DisabledAttr);
+        $(this.config.LoopButton).removeAttr(this.config.DisabledAttr);
     },
 
     initialise: function()

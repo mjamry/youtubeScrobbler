@@ -156,8 +156,8 @@ body A:hover
     color: #E6DECF;
 }
 
-.playback-control-disabled,
-.playlist-control-button-disabled
+.playback-control-button:disabled,
+.playlist-control-button:disabled
 {
     background-color:#309BBD !important;
     color: #989083 !important;

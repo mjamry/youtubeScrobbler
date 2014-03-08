@@ -10,5 +10,5 @@ window.UI.PlaybackControlConfiguration =
     PreviousButton: ".playback-control-previous",
 
     VolumeButton: ".playback-control-volume",
-    Disabled: "playback-control-disabled"
+    DisabledAttr: "disabled"
 };
