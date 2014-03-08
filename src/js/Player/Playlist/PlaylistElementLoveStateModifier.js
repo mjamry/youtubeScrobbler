@@ -17,7 +17,7 @@ window.Playlist.PlaylistElementLoveStateModifier.prototype =
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCleared, $.proxy(function(){this.modificationAllowed = false;}, this));
     },
 
-    changeTrackLoveState: function(callback)
+    toggleTrackLoveState: function(callback)
     {
         if(this.modificationAllowed)
         {
