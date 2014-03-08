@@ -9,6 +9,11 @@ window.UI.MediaLoadViewController = function(model, config)
 
 window.UI.MediaLoadViewController.prototype =
 {
+    _handlePlaylistUpdated: function()
+    {
+        $(this.config.MediaLocationInput).val("");
+    },
+
     _addNewMedia: function addNewMedia(location)
     {
         //TODO - check location type and get correct playlist provider from factory
@@ -30,5 +35,7 @@ window.UI.MediaLoadViewController.prototype =
             this._addNewMedia($(this.config.MediaLocationInput).val());
         },
         this));
+
+        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistUpdated, $.proxy(this._handlePlaylistUpdated, this));
     }
 };
