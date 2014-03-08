@@ -156,6 +156,13 @@ body A:hover
     color: #E6DECF;
 }
 
+.playback-control-disabled
+{
+    background-color:#309BBD !important;
+    color: #989083 !important;
+    cursor: default !important;
+}
+
 .playback-control-button,
 .playlist-control-button,
 .playlist-add-button,
