@@ -6,17 +6,10 @@ window.Playlist.PlaylistFlowController = function(playlistProvider)
 {
     this.playlistProvider = playlistProvider;
     this.isLoopModeOn = false;
-    this.actionsAllowed = false;
 };
 
 window.Playlist.PlaylistFlowController.prototype =
 {
-    initialise: function()
-    {
-        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCreated, $.proxy(function(){this.actionsAllowed = true;}, this));
-        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCleared, $.proxy(function(){this.actionsAllowed = false;}, this));
-    },
-
     getNext: function()
     {
         var playlist = this.playlistProvider.getPlaylist();
@@ -61,11 +54,8 @@ window.Playlist.PlaylistFlowController.prototype =
 
     shuffle: function()
     {
-        if(this.actionsAllowed)
-        {
-            this.playlistProvider.getPlaylist().shuffle();
-            this.playlistProvider.refreshPlaylist();
-        }
+        this.playlistProvider.getPlaylist().shuffle();
+        this.playlistProvider.refreshPlaylist();
     },
 
     getSpecific: function(index)
@@ -82,11 +72,8 @@ window.Playlist.PlaylistFlowController.prototype =
 
     toggleLoopMode: function(callback)
     {
-        if(this.actionsAllowed)
-        {
-            this.isLoopModeOn = !this.isLoopModeOn;
-            callback(this.isLoopModeOn);
-        }
+        this.isLoopModeOn = !this.isLoopModeOn;
+        callback(this.isLoopModeOn);
     },
 
     getCurrentItemIndex: function()

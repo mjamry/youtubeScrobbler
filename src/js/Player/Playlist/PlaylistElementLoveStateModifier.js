@@ -6,32 +6,22 @@ window.Playlist.PlaylistElementLoveStateModifier = function(innerModifier, sessi
     this.innerModifier = innerModifier;
     this.sessionProvider = sessionProvider;
     this.playlistService = playlistService;
-    this.modificationAllowed = false;
 };
 
 window.Playlist.PlaylistElementLoveStateModifier.prototype =
 {
-    initialise: function()
-    {
-        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCreated, $.proxy(function(){this.modificationAllowed = true;}, this));
-        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCleared, $.proxy(function(){this.modificationAllowed = false;}, this));
-    },
-
     toggleTrackLoveState: function(callback)
     {
-        if(this.modificationAllowed)
-        {
-            var currentItemIndex = this.playlistService.getPlaylist().currentItemIndex;
-            var currentItemDetails = this.playlistService.getPlaylist().get(currentItemIndex);
+        var currentItemIndex = this.playlistService.getPlaylist().currentItemIndex;
+        var currentItemDetails = this.playlistService.getPlaylist().get(currentItemIndex);
 
-            if(currentItemDetails.loved)
-            {
-                this._unlove(currentItemDetails, currentItemIndex, callback);
-            }
-            else
-            {
-                this._love(currentItemDetails, currentItemIndex, callback);
-            }
+        if(currentItemDetails.loved)
+        {
+            this._unlove(currentItemDetails, currentItemIndex, callback);
+        }
+        else
+        {
+            this._love(currentItemDetails, currentItemIndex, callback);
         }
     },
 

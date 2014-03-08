@@ -22,7 +22,6 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
     this.playlistElementDetailsProvider = playerServicesFactory.createPlaylistElementDetailsProvider(this.playlistService, this.sessionHandler);
 
     var playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.sessionHandler, this.playlistService);
-    playlistElementLoveStateModifier.initialise();
 
     this.playlistViewController = uiFactory.createPlaylistViewController(this.playlistService, this.playbackControlService, this.playlistFlowController);
 
@@ -47,7 +46,6 @@ window.ApplicationCore.AppCore.prototype =
     {
         this.playbackDetailsService.initialise();
         this.playbackControlService.initialise();
-        this.playlistFlowController.initialise();
         this.playlistViewController.initialise();
         this.playbackDetailsViewController.initialise();
         this.playbackControlViewController.initialise();
