@@ -17,11 +17,7 @@ window.UI.PlaylistControlViewController.prototype =
     {
         return function changeLoveStateForCurrentTrack()
         {
-            that.loveStateModifier.changeTrackLoveState(
-                {
-                    done:that._handleLoveStateChanged(that)
-                }
-            );
+            that.loveStateModifier.changeTrackLoveState(that._handleLoveStateChanged(that));
         };
     },
 

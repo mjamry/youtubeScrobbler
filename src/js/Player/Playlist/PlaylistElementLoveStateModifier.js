@@ -35,7 +35,7 @@ window.Playlist.PlaylistElementLoveStateModifier.prototype =
         }
     },
 
-    _love: function(mediaDetails, index, callbacks)
+    _love: function(mediaDetails, index, successCallback)
     {
         var details =
         {
@@ -43,17 +43,19 @@ window.Playlist.PlaylistElementLoveStateModifier.prototype =
             index: index
         };
 
-        var done = callbacks.done;
-        callbacks.done = function trackLoved(index, mediaDetails)
+        var callbacks =
         {
-            mediaDetails.loved = true;
-            done(index, mediaDetails);
+            success: function trackLoved(index, mediaDetails)
+            {
+                mediaDetails.loved = true;
+                successCallback(index, mediaDetails);
+            }
         };
 
         this.innerModifier.love(details, this.sessionProvider.getSession(), callbacks);
     },
 
-    _unlove: function(mediaDetails, index, callbacks)
+    _unlove: function(mediaDetails, index, successCallback)
     {
         var details =
         {
@@ -61,11 +63,13 @@ window.Playlist.PlaylistElementLoveStateModifier.prototype =
             index: index
         };
 
-        var done = callbacks.done;
-        callbacks.done = function trackLoved(index, mediaDetails)
+        var callbacks =
         {
-            mediaDetails.loved = false;
-            done(index, mediaDetails);
+            success: function trackUnloved(index, mediaDetails)
+            {
+                mediaDetails.loved = false;
+                successCallback(index, mediaDetails);
+            }
         };
 
         this.innerModifier.unLove(details, this.sessionProvider.getSession(), callbacks);
