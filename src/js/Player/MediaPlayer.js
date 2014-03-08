@@ -118,11 +118,8 @@ window.Player.MediaPlayer.prototype =
             window.Player.LibraryEventsNames.canplay,
             $.proxy(function()
                 {
-                    //this has to be done here as changing volume before full initialisation does not work
                     this.setVolume(this.config.startVolume);
-                    //this.play();
-                    //needed by UI controllers to refresh its states
-                   // EventBroker.getInstance().fireEventWithData(window.Player.Events.MediaPlay, this.currentlyLoadedMediaDetails);
+                    //TODO: here will be code responsible for autoplay after creating new playlist - it should be configurable
                 },
                 this),
             false
