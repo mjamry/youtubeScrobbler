@@ -97,6 +97,24 @@ window.UI.PlaylistControlViewController.prototype =
         };
     },
 
+    _disableButtons: function()
+    {
+        $(this.config.LoveButton).addClass(this.config.DisabledButtonClass);
+        $(this.config.ClearButton).addClass(this.config.DisabledButtonClass);
+        $(this.config.SaveButton).addClass(this.config.DisabledButtonClass);
+        $(this.config.ShuffleButton).addClass(this.config.DisabledButtonClass);
+        $(this.config.LoopButton).addClass(this.config.DisabledButtonClass);
+    },
+
+    _enableButtons: function()
+    {
+        $(this.config.LoveButton).removeClass(this.config.DisabledButtonClass);
+        $(this.config.ClearButton).removeClass(this.config.DisabledButtonClass);
+        $(this.config.SaveButton).removeClass(this.config.DisabledButtonClass);
+        $(this.config.ShuffleButton).removeClass(this.config.DisabledButtonClass);
+        $(this.config.LoopButton).removeClass(this.config.DisabledButtonClass);
+    },
+
     initialise: function()
     {
         //bind to Ui events
@@ -107,5 +125,10 @@ window.UI.PlaylistControlViewController.prototype =
         this.view.find(this.config.LoopButton).click(this._changeLoopModeState(this));
 
         EventBroker.getInstance().addListener(window.Player.Events.MediaChanged, this._handleMediaChanged, null, this);
+
+        EventBroker.getInstance().addListener(window.UI.Events.EnableControlButtonsRequested, $.proxy(this._enableButtons, this));
+        EventBroker.getInstance().addListener(window.UI.Events.DisableControlButtonsRequested, $.proxy(this._disableButtons, this));
+
+        this._disableButtons();
     }
 };

@@ -11,5 +11,6 @@ window.UI.PlaylistControlConfiguration =
 
     LoveButton: ".playlist-control-love",
 
-    SelectedButtonClass: "playlist-control-button-selected"
+    SelectedButtonClass: "playlist-control-button-selected",
+    DisabledButtonClass: "playlist-control-button-disabled"
 };
