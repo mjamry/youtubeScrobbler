@@ -21,7 +21,8 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     this.playlistElementDetailsProvider = playerServicesFactory.createPlaylistElementDetailsProvider(this.playlistService, this.sessionHandler);
 
-    var playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.sessionHandler);
+    var playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.sessionHandler, this.playlistService);
+    playlistElementLoveStateModifier.initialise();
 
     this.playlistViewController = uiFactory.createPlaylistViewController(this.playlistService, this.playbackControlService, this.playlistFlowController);
 

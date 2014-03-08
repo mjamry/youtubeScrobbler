@@ -17,29 +17,11 @@ window.UI.PlaylistControlViewController.prototype =
     {
         return function changeLoveStateForCurrentTrack()
         {
-            var currentTrackIndex = that.playlistService.getPlaylist().currentItemIndex;
-            var currentTrackDetails = that.playlistService.getPlaylist().get(currentTrackIndex);
-
-            if(currentTrackDetails.loved)
-            {
-                that.loveStateModifier.unlove(
-                    currentTrackDetails,
-                    currentTrackIndex,
-                    {
-                        done:that._handleLoveStateChanged(that)
-                    }
-                );
-            }
-            else
-            {
-                that.loveStateModifier.love(
-                    currentTrackDetails,
-                    currentTrackIndex,
-                    {
-                        done:that._handleLoveStateChanged(that)
-                    }
-                );
-            }
+            that.loveStateModifier.changeTrackLoveState(
+                {
+                    done:that._handleLoveStateChanged(that)
+                }
+            );
         };
     },
 
