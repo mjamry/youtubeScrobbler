@@ -26,7 +26,7 @@ window.UI.PlaylistControlViewController.prototype =
     {
         return function _handleLoveStateChanged(index, mediaDetails)
         {
-            that._setLoveStateFoCurrentTrack(mediaDetails.loved);
+            that._setLoveStateForCurrentTrack(mediaDetails.loved);
             that.playlistService.updateItem(index, mediaDetails);
         };
     },
@@ -34,11 +34,11 @@ window.UI.PlaylistControlViewController.prototype =
     //handles change of currently played track
     _handleMediaChanged: function(mediaDetails)
     {
-        this._setLoveStateFoCurrentTrack(mediaDetails.loved);
+        this._setLoveStateForCurrentTrack(mediaDetails.loved);
     },
 
     //changes visual indication of love state for current track
-    _setLoveStateFoCurrentTrack: function(isLoved)
+    _setLoveStateForCurrentTrack: function(isLoved)
     {
         if(isLoved)
         {
