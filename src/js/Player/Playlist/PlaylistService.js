@@ -43,7 +43,7 @@ window.Player.PlaylistService.prototype =
     {
         var storedData = LocalStorage.getInstance().getData("tempPl");
         var playlist = new window.Player.Playlist();
-        if(storedData.mediaList.length > 0)
+        if(storedData !== null && storedData.mediaList.length > 0)
         {
             playlist.deserialize(storedData.mediaList);
             this.playlist = playlist;
