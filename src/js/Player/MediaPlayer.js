@@ -16,7 +16,14 @@ window.Player.MediaPlayer.prototype =
 {
     _updateCurrentMediaDetails: function(newMediaDetails)
     {
+        var previousMediaDetails = this.currentlyLoadedMediaDetails;
         this.currentlyLoadedMediaDetails = newMediaDetails;
+        EventBroker.getInstance().fireEventWithData(
+            window.Player.Events.MediaChanged,
+            {
+                current: this.currentlyLoadedMediaDetails,
+                previous: previousMediaDetails
+            });
     },
 
     _createPlayerInstance: function(mediaDetails)
@@ -133,7 +140,6 @@ window.Player.MediaPlayer.prototype =
             else
             {
                 this._load(mediaDetails);
-                EventBroker.getInstance().fireEventWithData(window.Player.Events.MediaChanged, this.currentlyLoadedMediaDetails);
                 this._updateCurrentMediaDetails(mediaDetails);
             }
         }

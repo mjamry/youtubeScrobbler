@@ -32,9 +32,9 @@ window.UI.PlaylistControlViewController.prototype =
     },
 
     //handles change of currently played track
-    _handleMediaChanged: function(mediaDetails)
+    _handleMediaChanged: function(args)
     {
-        this._setLoveStateForCurrentTrack(mediaDetails.loved);
+        this._setLoveStateForCurrentTrack(args.current.loved);
     },
 
     //changes visual indication of love state for current track
