@@ -120,9 +120,9 @@ window.Player.MediaPlayer.prototype =
                 {
                     //this has to be done here as changing volume before full initialisation does not work
                     this.setVolume(this.config.startVolume);
-                    this.play();
+                    //this.play();
                     //needed by UI controllers to refresh its states
-                    EventBroker.getInstance().fireEventWithData(window.Player.Events.MediaPlay, this.currentlyLoadedMediaDetails);
+                   // EventBroker.getInstance().fireEventWithData(window.Player.Events.MediaPlay, this.currentlyLoadedMediaDetails);
                 },
                 this),
             false

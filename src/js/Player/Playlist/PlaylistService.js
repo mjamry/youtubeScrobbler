@@ -61,12 +61,12 @@ window.Player.PlaylistService.prototype =
     //adds new playlist (or single media) to existing playlist.
     addToPlaylist: function(playlist)
     {
-        if(this.playlist.length() === 0)
+        this.playlist.addPlaylist(playlist);
+        //if both playlist's length is equal it means that new playlist was created - so lets fire an event
+        if(this.playlist.length() === playlist.length())
         {
             EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, playlist.length());
         }
-
-        this.playlist.addPlaylist(playlist);
 
         Logger.getInstance().Info(playlist.length()+" new element(s) has been added to current playlist. It has now "+this.playlist.length()+" elements.");
 
