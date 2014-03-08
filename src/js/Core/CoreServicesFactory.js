@@ -37,9 +37,9 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new window.ApplicationCore.SessionHandler(factory.createSessionProvider());
     },
 
-    createMediaPlayer: function(container)
+    createMediaPlayer: function(container, playlistService)
     {
-        return new window.Player.MediaPlayer(window.Player.MediaPlayerConfig, container);
+        return new window.Player.MediaPlayer(window.Player.MediaPlayerConfig, container, playlistService);
     },
 
     createPlaylistService: function()

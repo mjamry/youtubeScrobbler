@@ -11,8 +11,9 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     this.sessionHandler = coreServicesFactory.createSessionHandler();
     this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler(this.sessionHandler);
-    this.player = coreServicesFactory.createMediaPlayer(this.uiCore.getPlayerContainer());
+
     this.playlistService = coreServicesFactory.createPlaylistService();
+    this.player = coreServicesFactory.createMediaPlayer(this.uiCore.getPlayerContainer(), this.playlistService);
     this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService(this.player);
 
     this.playlistFlowController = playerServicesFactory.createPlaylistFlowController(this.playlistService);

@@ -110,5 +110,11 @@ window.Player.PlaylistService.prototype =
     {
         //TODO return playlistController instead of playlist - so playlist can be modified only by this service
         return this.playlist;
+    },
+
+    getCurrentItemDetails: function()
+    {
+        var index = this.playlist.currentItemIndex;
+        return this.playlist.get(index);
     }
 };
