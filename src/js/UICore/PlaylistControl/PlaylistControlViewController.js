@@ -17,29 +17,7 @@ window.UI.PlaylistControlViewController.prototype =
     {
         return function changeLoveStateForCurrentTrack()
         {
-            var currentTrackIndex = that.playlistService.getPlaylist().currentItemIndex;
-            var currentTrackDetails = that.playlistService.getPlaylist().get(currentTrackIndex);
-
-            if(currentTrackDetails.loved)
-            {
-                that.loveStateModifier.unlove(
-                    currentTrackDetails,
-                    currentTrackIndex,
-                    {
-                        done:that._handleLoveStateChanged(that)
-                    }
-                );
-            }
-            else
-            {
-                that.loveStateModifier.love(
-                    currentTrackDetails,
-                    currentTrackIndex,
-                    {
-                        done:that._handleLoveStateChanged(that)
-                    }
-                );
-            }
+            that.loveStateModifier.toggleTrackLoveState(that._handleLoveStateChanged(that));
         };
     },
 
@@ -48,7 +26,7 @@ window.UI.PlaylistControlViewController.prototype =
     {
         return function _handleLoveStateChanged(index, mediaDetails)
         {
-            that._setLoveStateFoCurrentTrack(mediaDetails.loved);
+            that._setLoveStateForCurrentTrack(mediaDetails.loved);
             that.playlistService.updateItem(index, mediaDetails);
         };
     },
@@ -56,11 +34,11 @@ window.UI.PlaylistControlViewController.prototype =
     //handles change of currently played track
     _handleMediaChanged: function(mediaDetails)
     {
-        this._setLoveStateFoCurrentTrack(mediaDetails.loved);
+        this._setLoveStateForCurrentTrack(mediaDetails.loved);
     },
 
     //changes visual indication of love state for current track
-    _setLoveStateFoCurrentTrack: function(isLoved)
+    _setLoveStateForCurrentTrack: function(isLoved)
     {
         if(isLoved)
         {
@@ -88,21 +66,19 @@ window.UI.PlaylistControlViewController.prototype =
         };
     },
 
-    _changeRepeatState: function(that)
+    _changeLoopModeState: function(that)
     {
         return function()
         {
-            var currentState = that.playlistController.isLoop;
+            var isLoopModeOn = that.playlistController.toggleLoopMode();
 
-            if(!currentState)
+            if(isLoopModeOn)
             {
-                that.view.find(that.config.RepeatButton).addClass(that.config.SelectedButtonClass);
-                that.playlistController.isLoop = true;
+                that.view.find(that.config.LoopButton).addClass(that.config.SelectedButtonClass);
             }
             else
             {
-                that.view.find(that.config.RepeatButton).removeClass(that.config.SelectedButtonClass);
-                that.playlistController.isLoop = false;
+                that.view.find(that.config.LoopButton).removeClass(that.config.SelectedButtonClass);
             }
         };
     },
@@ -115,6 +91,24 @@ window.UI.PlaylistControlViewController.prototype =
         };
     },
 
+    _disableButtons: function()
+    {
+        $(this.config.LoveButton).attr(this.config.DisabledAttr, true);
+        $(this.config.ClearButton).attr(this.config.DisabledAttr, true);
+        $(this.config.SaveButton).attr(this.config.DisabledAttr, true);
+        $(this.config.ShuffleButton).attr(this.config.DisabledAttr, true);
+        $(this.config.LoopButton).attr(this.config.DisabledAttr, true);
+    },
+
+    _enableButtons: function()
+    {
+        $(this.config.LoveButton).removeAttr(this.config.DisabledAttr);
+        $(this.config.ClearButton).removeAttr(this.config.DisabledAttr);
+        $(this.config.SaveButton).removeAttr(this.config.DisabledAttr);
+        $(this.config.ShuffleButton).removeAttr(this.config.DisabledAttr);
+        $(this.config.LoopButton).removeAttr(this.config.DisabledAttr);
+    },
+
     initialise: function()
     {
         //bind to Ui events
@@ -122,8 +116,13 @@ window.UI.PlaylistControlViewController.prototype =
         this.view.find(this.config.ClearButton).click(this._clearPlaylist(this.playlistService));
         this.view.find(this.config.SaveButton).click(this._savePlaylist(this.playlistService));
         this.view.find(this.config.ShuffleButton).click(this._shufflePlaylist(this.playlistController));
-        this.view.find(this.config.RepeatButton).click(this._changeRepeatState(this));
+        this.view.find(this.config.LoopButton).click(this._changeLoopModeState(this));
 
         EventBroker.getInstance().addListener(window.Player.Events.MediaChanged, this._handleMediaChanged, null, this);
+
+        EventBroker.getInstance().addListener(window.UI.Events.EnableControlButtonsRequested, $.proxy(this._enableButtons, this));
+        EventBroker.getInstance().addListener(window.UI.Events.DisableControlButtonsRequested, $.proxy(this._disableButtons, this));
+
+        this._disableButtons();
     }
 };

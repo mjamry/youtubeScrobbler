@@ -5,6 +5,7 @@ window.Player.PlaybackControlService = function(player, playlistController)
 {
     this.player = player;
     this.playlistController = playlistController;
+    this.playbackControlAllowed = false;
 };
 
 window.Player.PlaybackControlService.prototype =
@@ -32,37 +33,64 @@ window.Player.PlaybackControlService.prototype =
         }
     },
 
+    _handlePlaylistCreated: function()
+    {
+        this.playbackControlAllowed = true;
+        EventBroker.getInstance().fireEvent(window.UI.Events.EnableControlButtonsRequested);
+    },
+
+    _handlePlaylistCleared: function()
+    {
+        this.playbackControlAllowed = false;
+        EventBroker.getInstance().fireEvent(window.UI.Events.DisableControlButtonsRequested);
+    },
+
     initialise: function()
     {
         //bind to player events
         EventBroker.getInstance().addListener(window.Player.Events.MediaStopped, this._handleMediaStopped, null, this);
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistItemRemoved, this._handlePlaylistItemRemoved, null, this);
+
+        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCreated, $.proxy(this._handlePlaylistCreated, this));
+        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCleared, $.proxy(this._handlePlaylistCleared, this));
     },
 
     //plays current track
     play: function()
     {
-        this.player.play();
+        if(this.playbackControlAllowed)
+        {
+            this.player.play();
+        }
     },
 
     //pauses current track
     pause: function()
     {
-        this.player.pause();
+        if(this.playbackControlAllowed)
+        {
+            this.player.pause();
+        }
     },
 
     //plays next media item from playlist
     playNext: function()
     {
-        var nextItem = this.playlistController.getNext();
-        this._loadMedia(nextItem);
+        if(this.playbackControlAllowed)
+        {
+            var nextItem = this.playlistController.getNext();
+            this._loadMedia(nextItem);
+        }
     },
 
     //plays previous media item from playlist
     playPrevious: function()
     {
-        var previousItem = this.playlistController.getPrevious();
-        this._loadMedia(previousItem);
+        if(this.playbackControlAllowed)
+        {
+            var previousItem = this.playlistController.getPrevious();
+            this._loadMedia(previousItem);
+        }
     },
 
     //plays item with given index from playlist
@@ -78,9 +106,11 @@ window.Player.PlaybackControlService.prototype =
     //changes order of elements in playlist
     shuffle: function()
     {
-        this.playlistController.shuffle();
-
-        this._updatePlaylist(this.playlistController);
+        if(this.playbackControlAllowed)
+        {
+            this.playlistController.shuffle();
+            this._updatePlaylist(this.playlistController);
+        }
     },
 
     //gets track details used passed index

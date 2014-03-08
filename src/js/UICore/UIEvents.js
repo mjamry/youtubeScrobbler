@@ -8,5 +8,8 @@ window.UI.Events =
     PlayPreviousRequested: "PlayPreviousRequested",
     PlaylistLoadRequested: "PlaylistLoadRequested",
 
+    DisableControlButtonsRequested: "DisableControlButtonsRequested",
+    EnableControlButtonsRequested: "EnableControlButtonsRequested",
+
     TrackLikeStateChangeRequested: "TrackLikeStateChangeRequested"
 };
