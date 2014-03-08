@@ -3,13 +3,16 @@ window.Player = window.Player || {};
 
 window.Common = window.Common || {};
 
-window.Player.MediaPlayer = function(configuration, container)
+window.Player.MediaPlayer = function(configuration, container, playlistService)
 {
     this.instance = null;
     this.currentlyLoadedMediaDetails = new window.Player.MediaDetails();
 
     this.container = container;
     this.config = configuration;
+    this.playlistService = playlistService;
+    EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCreated, $.proxy(this._handlePlaylistCreated, this));
+    EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCleared, $.proxy(this._handlePlaylistCleared, this));
 };
 
 window.Player.MediaPlayer.prototype =
@@ -60,6 +63,21 @@ window.Player.MediaPlayer.prototype =
         EventBroker.getInstance().fireEventWithData(window.Player.Events.TimeUpdated, timeDetails);
     },
 
+    _handlePlaylistCreated: function()
+    {
+        this._createPlayerInstance(this.playlistService.getCurrentItemDetails());
+    },
+
+    _handlePlaylistCleared: function()
+    {
+        if(this.instance !== null)
+        {
+            this.pause();
+            this.instance.remove();
+            this.instance = null;
+        }
+    },
+
     //initialises events for player
     _initialise: function(mediaElement)
     {
@@ -100,11 +118,8 @@ window.Player.MediaPlayer.prototype =
             window.Player.LibraryEventsNames.canplay,
             $.proxy(function()
                 {
-                    //this has to be done here as changing volume before full initialisation does not work
                     this.setVolume(this.config.startVolume);
-                    this.play();
-                    //needed by UI controllers to refresh its states
-                    EventBroker.getInstance().fireEventWithData(window.Player.Events.MediaPlay, this.currentlyLoadedMediaDetails);
+                    //TODO: here will be code responsible for autoplay after creating new playlist - it should be configurable
                 },
                 this),
             false
