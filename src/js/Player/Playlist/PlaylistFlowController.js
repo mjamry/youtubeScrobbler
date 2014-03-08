@@ -70,10 +70,10 @@ window.Playlist.PlaylistFlowController.prototype =
         return null;
     },
 
-    toggleLoopMode: function(callback)
+    toggleLoopMode: function()
     {
         this.isLoopModeOn = !this.isLoopModeOn;
-        callback(this.isLoopModeOn);
+        return this.isLoopModeOn;
     },
 
     getCurrentItemIndex: function()

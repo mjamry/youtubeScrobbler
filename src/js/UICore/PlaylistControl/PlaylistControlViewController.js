@@ -70,14 +70,8 @@ window.UI.PlaylistControlViewController.prototype =
     {
         return function()
         {
-            that.playlistController.toggleLoopMode(that._handleLoopModeChanged(that));
-        };
-    },
+            var isLoopModeOn = that.playlistController.toggleLoopMode();
 
-    _handleLoopModeChanged: function(that)
-    {
-        return function handleLoopModeChanged(isLoopModeOn)
-        {
             if(isLoopModeOn)
             {
                 that.view.find(that.config.LoopButton).addClass(that.config.SelectedButtonClass);
@@ -86,7 +80,7 @@ window.UI.PlaylistControlViewController.prototype =
             {
                 that.view.find(that.config.LoopButton).removeClass(that.config.SelectedButtonClass);
             }
-        }
+        };
     },
 
     _shufflePlaylist: function(model)
