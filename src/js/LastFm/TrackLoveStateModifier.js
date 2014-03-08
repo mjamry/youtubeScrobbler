@@ -17,7 +17,7 @@ window.LastFm.TrackLoveStateModifier.prototype =
     //      }
     love: function(loveRequestDetails, session, callbacks)
     {
-        var name = loveRequestDetails.details.artist.name+" - "+loveRequestDetails.details.track;
+        var name = loveRequestDetails.details.artist.name+" - "+loveRequestDetails.details.title;
         Logger.getInstance().Debug("Last fm scrobbler - love request with track: " + name);
         this.lastFmApi.track.love(
             {
@@ -58,7 +58,7 @@ window.LastFm.TrackLoveStateModifier.prototype =
     //      }
     unLove: function(loveRequestDetails, session, callbacks)
     {
-        var name = loveRequestDetails.details.artist+" - "+loveRequestDetails.details.track;
+        var name = loveRequestDetails.details.artist.name+" - "+loveRequestDetails.details.title;
         Logger.getInstance().Debug("Last fm scrobbler - unlove request with track: " + name);
         this.lastFmApi.track.unlove(
             {

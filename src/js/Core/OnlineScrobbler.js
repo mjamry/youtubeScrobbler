@@ -102,9 +102,9 @@ window.ApplicationCore.OnlineScrobbler.prototype =
 
         EventBroker.getInstance().addListener(
             window.Player.Events.MediaChanged,
-            $.proxy(function(mediaDetails)
+            $.proxy(function(args)
             {
-                this._updateScrobbling(mediaDetails);
+                this._updateScrobbling(args.previous);
             }, this)
         );
 
