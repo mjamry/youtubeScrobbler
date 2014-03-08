@@ -5,19 +5,18 @@ window.Playlist = window.Playlist || {};
 window.Playlist.PlaylistFlowController = function(playlistProvider)
 {
     this.playlistProvider = playlistProvider;
+    this.isLoopModeOn = false;
 };
 
 window.Playlist.PlaylistFlowController.prototype =
 {
-    isLoop: false,
-
     getNext: function()
     {
         var playlist = this.playlistProvider.getPlaylist();
         playlist.currentItemIndex++;
         if(playlist.currentItemIndex == playlist.length())
         {
-            if( !this.isLoop)
+            if( !this.isLoopModeOn)
             {
                 playlist.currentItemIndex = playlist.length() - 1;
                 return null;
@@ -38,7 +37,7 @@ window.Playlist.PlaylistFlowController.prototype =
         playlist.currentItemIndex--;
         if(playlist.currentItemIndex < 0)
         {
-            if( !this.isLoop)
+            if( !this.isLoopModeOn)
             {
                 playlist.currentItemIndex = 0;
                 return null;
@@ -69,6 +68,12 @@ window.Playlist.PlaylistFlowController.prototype =
         }
 
         return null;
+    },
+
+    toggleLoopMode: function(callback)
+    {
+        this.isLoopModeOn = !this.isLoopModeOn;
+        callback(this.isLoopModeOn);
     },
 
     getCurrentItemIndex: function()
