@@ -17,29 +17,7 @@ window.UI.PlaylistControlViewController.prototype =
     {
         return function changeLoveStateForCurrentTrack()
         {
-            var currentTrackIndex = that.playlistService.getPlaylist().currentItemIndex;
-            var currentTrackDetails = that.playlistService.getPlaylist().get(currentTrackIndex);
-
-            if(currentTrackDetails.loved)
-            {
-                that.loveStateModifier.unlove(
-                    currentTrackDetails,
-                    currentTrackIndex,
-                    {
-                        done:that._handleLoveStateChanged(that)
-                    }
-                );
-            }
-            else
-            {
-                that.loveStateModifier.love(
-                    currentTrackDetails,
-                    currentTrackIndex,
-                    {
-                        done:that._handleLoveStateChanged(that)
-                    }
-                );
-            }
+            that.loveStateModifier.toggleTrackLoveState(that._handleLoveStateChanged(that));
         };
     },
 
@@ -88,23 +66,27 @@ window.UI.PlaylistControlViewController.prototype =
         };
     },
 
-    _changeRepeatState: function(that)
+    _changeLoopModeState: function(that)
     {
         return function()
         {
-            var currentState = that.playlistController.isLoop;
+            that.playlistController.toggleLoopMode(that._handleLoopModeChanged(that));
+        };
+    },
 
-            if(!currentState)
+    _handleLoopModeChanged: function(that)
+    {
+        return function handleLoopModeChanged(isLoopModeOn)
+        {
+            if(isLoopModeOn)
             {
-                that.view.find(that.config.RepeatButton).addClass(that.config.SelectedButtonClass);
-                that.playlistController.isLoop = true;
+                that.view.find(that.config.LoopButton).addClass(that.config.SelectedButtonClass);
             }
             else
             {
-                that.view.find(that.config.RepeatButton).removeClass(that.config.SelectedButtonClass);
-                that.playlistController.isLoop = false;
+                that.view.find(that.config.LoopButton).removeClass(that.config.SelectedButtonClass);
             }
-        };
+        }
     },
 
     _shufflePlaylist: function(model)
@@ -122,7 +104,7 @@ window.UI.PlaylistControlViewController.prototype =
         this.view.find(this.config.ClearButton).click(this._clearPlaylist(this.playlistService));
         this.view.find(this.config.SaveButton).click(this._savePlaylist(this.playlistService));
         this.view.find(this.config.ShuffleButton).click(this._shufflePlaylist(this.playlistController));
-        this.view.find(this.config.RepeatButton).click(this._changeRepeatState(this));
+        this.view.find(this.config.LoopButton).click(this._changeLoopModeState(this));
 
         EventBroker.getInstance().addListener(window.Player.Events.MediaChanged, this._handleMediaChanged, null, this);
     }

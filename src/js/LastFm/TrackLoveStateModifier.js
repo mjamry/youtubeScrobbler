@@ -32,7 +32,7 @@ window.LastFm.TrackLoveStateModifier.prototype =
                             Logger.getInstance().Info("Track successfully loved.");
                             Logger.getInstance().Debug("LastFm Love details: "+ name);
 
-                            callbacks.done(loveRequestDetails.index, loveRequestDetails.details);
+                            callbacks.success(loveRequestDetails.index, loveRequestDetails.details);
                         },
                         this),
 
@@ -73,7 +73,7 @@ window.LastFm.TrackLoveStateModifier.prototype =
                             Logger.getInstance().Info("Track successfully unloved.");
                             Logger.getInstance().Debug("LastFm UnLove details: "+ name);
 
-                            callbacks.done(loveRequestDetails.index, loveRequestDetails.details);
+                            callbacks.success(loveRequestDetails.index, loveRequestDetails.details);
                         },
                         this),
 
