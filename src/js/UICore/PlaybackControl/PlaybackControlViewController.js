@@ -49,18 +49,12 @@ window.UI.PlaybackControlViewController.prototype =
 
     _disableButtons: function()
     {
-        $(this.config.PlayButton).attr(this.config.DisabledAttr, true);
-        $(this.config.PauseButton).attr(this.config.DisabledAttr, true);
-        $(this.config.NextButton).attr(this.config.DisabledAttr, true);
-        $(this.config.PreviousButton).attr(this.config.DisabledAttr, true);
+        this.view.find(this.config.PlaybackControlButtonClass).attr(this.config.DisabledAttr, true);
     },
 
     _enableButtons: function()
     {
-        $(this.config.PlayButton).removeAttr(this.config.DisabledAttr);
-        $(this.config.PauseButton).removeAttr(this.config.DisabledAttr);
-        $(this.config.NextButton).removeAttr(this.config.DisabledAttr);
-        $(this.config.PreviousButton).removeAttr(this.config.DisabledAttr);
+        this.view.find(this.config.PlaybackControlButtonClass).removeAttr(this.config.DisabledAttr);
     },
 
     _handleVolumeLevelChanged: function(volumeControlService)
