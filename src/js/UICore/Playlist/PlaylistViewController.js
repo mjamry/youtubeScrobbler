@@ -109,6 +109,7 @@ window.UI.PlaylistViewController.prototype =
         }
         var newItem = this._createNewElement(eventArgs.mediaDetails, eventArgs.index);
         this.view.find(this.config.PlaylistItem).eq(eventArgs.index).replaceWith(newItem);
+        this._selectItem(this.playlistFlowController.getCurrentItemIndex());
     },
 
     _handleMediaPlayed: function()
