@@ -93,20 +93,12 @@ window.UI.PlaylistControlViewController.prototype =
 
     _disableButtons: function()
     {
-        $(this.config.LoveButton).attr(this.config.DisabledAttr, true);
-        $(this.config.ClearButton).attr(this.config.DisabledAttr, true);
-        $(this.config.SaveButton).attr(this.config.DisabledAttr, true);
-        $(this.config.ShuffleButton).attr(this.config.DisabledAttr, true);
-        $(this.config.LoopButton).attr(this.config.DisabledAttr, true);
+        this.view.find(this.config.PlaylistControlButtonClass).attr(this.config.DisabledAttr, true);
     },
 
     _enableButtons: function()
     {
-        $(this.config.LoveButton).removeAttr(this.config.DisabledAttr);
-        $(this.config.ClearButton).removeAttr(this.config.DisabledAttr);
-        $(this.config.SaveButton).removeAttr(this.config.DisabledAttr);
-        $(this.config.ShuffleButton).removeAttr(this.config.DisabledAttr);
-        $(this.config.LoopButton).removeAttr(this.config.DisabledAttr);
+        this.view.find(this.config.PlaylistControlButtonClass).removeAttr(this.config.DisabledAttr);
     },
 
     initialise: function()
