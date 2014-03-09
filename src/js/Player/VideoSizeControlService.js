@@ -8,9 +8,27 @@ window.Player.VideoSizeControl = function(player)
 
 window.Player.VideoSizeControl.prototype =
 {
-    initialise: function videoSizeControlInitialise()
+    _handleFullScreenModeOn: function()
     {
+        this.player.setSize(window.screen.width, window.screen.height);
+    },
 
+    _handleFullScreenModeOff: function()
+    {
+        this.player.setSize(200, 200);
+    },
+
+    _handleFullScreenModeChanged: function()
+    {
+        if (!document.fullscreenElement &&    // alternative standard method
+            !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement )
+        {
+            this._handleFullScreenModeOff();
+        }
+        else
+        {
+            this._handleFullScreenModeOn();
+        }
     },
 
     setFullScreenModeOn: function()
@@ -26,7 +44,18 @@ window.Player.VideoSizeControl.prototype =
         } else if (playerContainer.msRequestFullscreen) {
             playerContainer.msRequestFullscreen();
         }
-        this.player.setSize(window.screen.width, window.screen.height);
+
+        document.addEventListener("fullscreenchange",
+            $.proxy(this._handleFullScreenModeChanged, this),
+            false);
+
+        document.addEventListener("mozfullscreenchange",
+            $.proxy(this._handleFullScreenModeChanged, this),
+            false);
+
+        document.addEventListener("webkitfullscreenchange",
+            $.proxy(this._handleFullScreenModeChanged, this),
+            false);
     },
 
     setFullScreenModeOff: function()
