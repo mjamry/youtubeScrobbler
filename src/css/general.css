@@ -395,7 +395,7 @@ body
 #media-playlist-control
 {
     float:left;
-    width:175px;
+    width:210px;
     height:35px;
     display:block;
 }
@@ -445,7 +445,7 @@ body
 #media-player-playback
 {
     float:left;
-    min-width:415px;
+    min-width:380px;
     cursor: ew-resize;
     -webkit-user-select: none;
     -moz-user-select: none;
