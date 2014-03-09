@@ -35,7 +35,8 @@ window.UI.UIControllersFactory.prototype =
     createPlaybackControlViewController: function(player, playbackControlService)
     {
         var volumeControlService = new window.Player.VolumeControlService(player);
-        return new window.UI.PlaybackControlViewController(playbackControlService, volumeControlService, "playback-control", window.UI.PlaybackControlConfiguration);
+        var sizeControlService = new window.Player.VideoSizeControl(player);
+        return new window.UI.PlaybackControlViewController(playbackControlService, volumeControlService, sizeControlService, "playback-control", window.UI.PlaybackControlConfiguration);
     },
 
     createPlaylistControlViewController: function(playlistService, playlistFlowController, loveStateModifier)

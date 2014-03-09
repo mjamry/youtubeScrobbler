@@ -206,6 +206,11 @@ window.Player.MediaPlayer.prototype =
     getCurrentMediaDetails: function()
     {
         return this.currentlyLoadedMediaDetails;
+    },
+
+    setSize: function(width, height)
+    {
+        this.instance.setVideoSize(width, height);
     }
 };
 
