@@ -3,6 +3,8 @@ window.UI = window.UI || {};
 
 window.UI.PlaybackControlConfiguration =
 {
+    PlaybackControlButtonClass: ".playback-control-button",
+
     PlayButton: ".playback-control-play",
     PauseButton: ".playback-control-pause",
 
