@@ -93,6 +93,14 @@ window.UI.PlaybackControlViewController.prototype =
         $(this.config.PauseButton).show();
     },
 
+    _toggleFullScreenMode: function(sizeControl)
+    {
+        return function()
+        {
+            sizeControl.setFullScreenModeOn();
+        }
+    },
+
     initialise: function()
     {
         //hide pause button
@@ -123,7 +131,8 @@ window.UI.PlaybackControlViewController.prototype =
         //bind to ui events
         this.view.find(this.config.PlayButton).click(this._play(this.playbackControl, this));
         this.view.find(this.config.PauseButton).click(this._pause(this.playbackControl, this));
-        this.view.find(this.config.NextButton).click(this._next(this.playbackControl, this));
-        this.view.find(this.config.PreviousButton).click(this._previous(this.playbackControl, this));
+        this.view.find(this.config.NextButton).click(this._next(this.playbackControl));
+        this.view.find(this.config.PreviousButton).click(this._previous(this.playbackControl));
+        $(this.config.FullScreenModeButton).click(this._toggleFullScreenMode(this.sizeControl));
     }
 };

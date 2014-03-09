@@ -10,5 +10,7 @@ window.UI.PlaybackControlConfiguration =
     PreviousButton: ".playback-control-previous",
 
     VolumeButton: ".playback-control-volume",
+    FullScreenModeButton: ".playlist-control-fullscreen",
+
     DisabledAttr: "disabled"
 };
