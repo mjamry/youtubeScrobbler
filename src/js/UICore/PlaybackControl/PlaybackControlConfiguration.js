@@ -11,6 +11,7 @@ window.UI.PlaybackControlConfiguration =
 
     VolumeButton: ".playback-control-volume",
     FullScreenModeButton: ".playlist-control-fullscreen",
+    FullScreenContainer: "fullscreen-video-container",
 
     DisabledAttr: "disabled"
 };

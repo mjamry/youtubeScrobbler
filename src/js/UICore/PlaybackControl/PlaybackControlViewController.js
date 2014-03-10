@@ -97,7 +97,7 @@ window.UI.PlaybackControlViewController.prototype =
     {
         return function()
         {
-            sizeControl.setFullScreenModeOn();
+            sizeControl.toggleFullScreenMode();
         }
     },
 

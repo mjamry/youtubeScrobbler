@@ -1,14 +1,16 @@
 //using
 window.Player = window.Player || {};
 
-window.Player.VideoSizeControlService = function(player)
+window.Player.VideoSizeControlService = function(player, fullScreenContainer, config)
 {
     this.player = player;
+    this.fullScreenContainer = fullScreenContainer;
+    this.config = config;
 };
 
 window.Player.VideoSizeControlService.prototype =
 {
-    _checkIfFullScreenModeIsOn: function()
+    _checkIfFullScreenModeIsOff: function()
     {
         return (!document.fullscreenElement &&
             !document.mozFullScreenElement &&
@@ -23,12 +25,13 @@ window.Player.VideoSizeControlService.prototype =
 
     _handleFullScreenModeOff: function()
     {
-        this.player.setSize(200, 200);
+        this.player.setSize(this.config.defaultVideoWidth, this.config.defaultVideoHeight);
     },
 
     _handleFullScreenModeChanged: function()
     {
-        if (this._checkIfFullScreenModeIsOn())
+        //this is called after handling full screen enabled event
+        if (this._checkIfFullScreenModeIsOff())
         {
             this._handleFullScreenModeOff();
         }
@@ -68,22 +71,21 @@ window.Player.VideoSizeControlService.prototype =
         //first check if fullscreen is available
         if(document.fullscreenEnabled || document.mozFullScreenEnabled || document.webkitFullscreenEnabled)
         {
-            var playerContainer = document.getElementById("fullscreen-video-container");
-            if (playerContainer.requestFullscreen)
+            if (this.fullScreenContainer.requestFullscreen)
             {
-                playerContainer.requestFullscreen();
+                this.fullScreenContainer.requestFullscreen();
             }
-            else if (playerContainer.webkitRequestFullscreen)
+            else if (this.fullScreenContainer.webkitRequestFullscreen)
             {
-                playerContainer.webkitRequestFullscreen();
+                this.fullScreenContainer.webkitRequestFullscreen();
             }
-            else if (playerContainer.mozRequestFullScreen)
+            else if (this.fullScreenContainer.mozRequestFullScreen)
             {
-                playerContainer.mozRequestFullScreen();
+                this.fullScreenContainer.mozRequestFullScreen();
             }
-            else if (playerContainer.msRequestFullscreen)
+            else if (this.fullScreenContainer.msRequestFullscreen)
             {
-                playerContainer.msRequestFullscreen();
+                this.fullScreenContainer.msRequestFullscreen();
             }
         }
     },
@@ -110,13 +112,13 @@ window.Player.VideoSizeControlService.prototype =
 
     toggleFullScreenMode: function()
     {
-        if(this._checkIfFullScreenModeIsOn())
+        if(this._checkIfFullScreenModeIsOff())
         {
-            this.setFullScreenModeOff();
+            this.setFullScreenModeOn();
         }
         else
         {
-            this.setFullScreenModeOn();
+            this.setFullScreenModeOff();
         }
     }
 };
