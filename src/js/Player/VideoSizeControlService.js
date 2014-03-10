@@ -8,6 +8,14 @@ window.Player.VideoSizeControl = function(player)
 
 window.Player.VideoSizeControl.prototype =
 {
+    _checkIfFullScreenModeIsOn: function()
+    {
+        return (!document.fullscreenElement &&
+            !document.mozFullScreenElement &&
+            !document.webkitFullscreenElement &&
+            !document.msFullscreenElement);
+    },
+
     _handleFullScreenModeOn: function()
     {
         this.player.setSize(window.screen.width, window.screen.height);
@@ -20,8 +28,7 @@ window.Player.VideoSizeControl.prototype =
 
     _handleFullScreenModeChanged: function()
     {
-        if (!document.fullscreenElement &&    // alternative standard method
-            !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement )
+        if (this._checkIfFullScreenModeIsOn())
         {
             this._handleFullScreenModeOff();
         }
@@ -31,35 +38,85 @@ window.Player.VideoSizeControl.prototype =
         }
     },
 
+    initialise: function videoSizeControlInitialise()
+    {
+        //this is needed to support all types of browsers
+        document.addEventListener
+            (
+                "fullscreenchange",
+                $.proxy(this._handleFullScreenModeChanged, this),
+                false
+            );
+
+        document.addEventListener
+            (
+                "mozfullscreenchange",
+                $.proxy(this._handleFullScreenModeChanged, this),
+                false
+            );
+
+        document.addEventListener
+            (
+                "webkitfullscreenchange",
+                $.proxy(this._handleFullScreenModeChanged, this),
+                false
+            );
+    },
+
     setFullScreenModeOn: function()
     {
-        //var playerContainer = document.getElementById(new window.UI.UIControllersFactory().createUICore().getPlayerContainer());
-        var playerContainer = document.getElementById("fullscreen-video-container");
-        if (playerContainer.requestFullscreen) {
-            playerContainer.requestFullscreen();
-        } else if (playerContainer.webkitRequestFullscreen) {
-            playerContainer.webkitRequestFullscreen();
-        } else if (playerContainer.mozRequestFullScreen) {
-            playerContainer.mozRequestFullScreen();
-        } else if (playerContainer.msRequestFullscreen) {
-            playerContainer.msRequestFullscreen();
+        //first check if fullscreen is available
+        if(document.fullscreenEnabled || document.mozFullScreenEnabled || document.webkitFullscreenEnabled)
+        {
+            var playerContainer = document.getElementById("fullscreen-video-container");
+            if (playerContainer.requestFullscreen)
+            {
+                playerContainer.requestFullscreen();
+            }
+            else if (playerContainer.webkitRequestFullscreen)
+            {
+                playerContainer.webkitRequestFullscreen();
+            }
+            else if (playerContainer.mozRequestFullScreen)
+            {
+                playerContainer.mozRequestFullScreen();
+            }
+            else if (playerContainer.msRequestFullscreen)
+            {
+                playerContainer.msRequestFullscreen();
+            }
         }
-
-        document.addEventListener("fullscreenchange",
-            $.proxy(this._handleFullScreenModeChanged, this),
-            false);
-
-        document.addEventListener("mozfullscreenchange",
-            $.proxy(this._handleFullScreenModeChanged, this),
-            false);
-
-        document.addEventListener("webkitfullscreenchange",
-            $.proxy(this._handleFullScreenModeChanged, this),
-            false);
     },
 
     setFullScreenModeOff: function()
     {
+        if (document.exitFullscreen)
+        {
+            document.exitFullscreen();
+        }
+        else if (document.msExitFullscreen)
+        {
+            document.msExitFullscreen();
+        }
+        else if (document.mozCancelFullScreen)
+        {
+            document.mozCancelFullScreen();
+        }
+        else if (document.webkitExitFullscreen)
+        {
+            document.webkitExitFullscreen();
+        }
+    },
 
+    toggleFullScreenMode: function()
+    {
+        if(this._checkIfFullScreenModeIsOn())
+        {
+            this.setFullScreenModeOff();
+        }
+        else
+        {
+            this.setFullScreenModeOn();
+        }
     }
 };
