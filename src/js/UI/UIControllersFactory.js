@@ -36,6 +36,7 @@ window.UI.UIControllersFactory.prototype =
     {
         var volumeControlService = new window.Player.VolumeControlService(player);
         var sizeControlService = new window.Player.VideoSizeControlService(player);
+        sizeControlService.initialise();
         return new window.UI.PlaybackControlViewController(playbackControlService, volumeControlService, sizeControlService, "playback-control", window.UI.PlaybackControlConfiguration);
     },
 
