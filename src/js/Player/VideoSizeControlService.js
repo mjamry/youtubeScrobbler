@@ -1,12 +1,12 @@
 //using
 window.Player = window.Player || {};
 
-window.Player.VideoSizeControl = function(player)
+window.Player.VideoSizeControlService = function(player)
 {
     this.player = player;
 };
 
-window.Player.VideoSizeControl.prototype =
+window.Player.VideoSizeControlService.prototype =
 {
     _checkIfFullScreenModeIsOn: function()
     {
