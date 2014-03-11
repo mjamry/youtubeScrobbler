@@ -61,7 +61,7 @@ window.Tracking.GoogleUiTracker.prototype =
         },
         this));
 
-        $(playlistConfig.RepeatButton).click($.proxy(function handleRepeatPlaylistClick()
+        $(playlistConfig.LoopButton).click($.proxy(function handleRepeatPlaylistClick()
         {
             GoogleTracker.getInstance().trackUiAction(this.config.PlaylistControl, "repeat");
         },

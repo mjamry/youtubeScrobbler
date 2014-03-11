@@ -5,7 +5,6 @@ window.Player.PlaybackDetailsService = function(mediaDetailsProvider)
 {
     this.mediaDetailsProvider = mediaDetailsProvider;
     this.state = new window.Player.PlaybackState();
-    this.currentMediaDetails = null;
     this.playbackDetails = null;
 };
 
@@ -17,25 +16,25 @@ window.Player.PlaybackDetailsService.prototype =
         this._updatePlaybackDetails();
     },
 
-    _handleMediaPaused: function(details)
+    _handleMediaPaused: function()
     {
         this.state.changeState(this.state.paused);
         this._updatePlaybackDetails();
     },
 
-    _handleMediaChanged: function(details)
+    _handleMediaChanged: function()
     {
         this.state.changeState(this.state.playing);
         this._updatePlaybackDetails();
     },
 
-    _handleMediaStopped: function(details)
+    _handleMediaStopped: function()
     {
         this.state.changeState(this.state.stoped);
         this._updatePlaybackDetails();
     },
 
-    _handleMediaPlay: function(details)
+    _handleMediaPlay: function()
     {
         this.state.changeState(this.state.playing);
         this._updatePlaybackDetails();

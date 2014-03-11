@@ -8,12 +8,7 @@ window.Common = window.Common || {};
 window.Player.PlaylistService = function()
 {
     this.playlist = new window.Player.Playlist();
-    this._eventBroker = EventBroker.getInstance();
-    //TODO: for future purposes - will be configurable
-    this._autoplay = true;
-
     Logger.getInstance().Info("Playlist service has been created.");
-    this.restorePlaylist();
 };
 
 window.Player.PlaylistService.prototype =
@@ -21,7 +16,12 @@ window.Player.PlaylistService.prototype =
     _updatePlaylist: function(numberOfNewItems)
     {
         numberOfNewItems = numberOfNewItems || 0;
-        this._eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistUpdated, numberOfNewItems);
+        EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistUpdated, numberOfNewItems);
+    },
+
+    initialise: function()
+    {
+        this.restorePlaylist();
     },
 
     refreshPlaylist: function()
@@ -34,6 +34,7 @@ window.Player.PlaylistService.prototype =
     {
         Logger.getInstance().Info("Playlist has been cleared. "+ this.playlist.length() +" items removed.");
         this.playlist = new window.Player.Playlist();
+        EventBroker.getInstance().fireEvent(window.Player.PlaylistEvents.PlaylistCleared);
 
         this._updatePlaylist();
     },
@@ -42,13 +43,13 @@ window.Player.PlaylistService.prototype =
     {
         var storedData = LocalStorage.getInstance().getData("tempPl");
         var playlist = new window.Player.Playlist();
-        if(storedData)
+        if(storedData !== null && storedData.mediaList.length > 0)
         {
             playlist.deserialize(storedData.mediaList);
+            this.playlist = playlist;
             Logger.getInstance().Info("Playlist has been restored with "+playlist.length()+" elements.");
+            EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, playlist.length());
         }
-
-        this.playlist = playlist;
     },
 
     savePlaylist: function()
@@ -60,10 +61,11 @@ window.Player.PlaylistService.prototype =
     //adds new playlist (or single media) to existing playlist.
     addToPlaylist: function(playlist)
     {
-        //TODO: consider moving this loop to playlist implementation
-        for(var i=0;i<playlist.length();i++)
+        this.playlist.addPlaylist(playlist);
+        //if both playlist's length is equal it means that new playlist was created - so lets fire an event
+        if(this.playlist.length() === playlist.length())
         {
-            this.playlist.addItem(playlist.get(i));
+            EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, playlist.length());
         }
 
         Logger.getInstance().Info(playlist.length()+" new element(s) has been added to current playlist. It has now "+this.playlist.length()+" elements.");
@@ -81,7 +83,7 @@ window.Player.PlaylistService.prototype =
 
         this.playlist.replace(index, updatedMediaDetails);
 
-        this._eventBroker.fireEventWithData(window.Player.PlaylistEvents.PlaylistItemUpdated,
+        EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistItemUpdated,
             {
                 mediaDetails: updatedMediaDetails,
                 index: index
@@ -94,7 +96,7 @@ window.Player.PlaylistService.prototype =
         var currentItem = this.playlist.currentItemIndex;
         this.playlist.remove(index);
         Logger.getInstance().Debug("Element has been removed from playlist, now it contains "+this.playlist.length()+" elements.");
-        this._eventBroker.fireEventWithData(
+        EventBroker.getInstance().fireEventWithData(
             window.Player.PlaylistEvents.PlaylistItemRemoved,
             {
                 index: index,
@@ -108,5 +110,11 @@ window.Player.PlaylistService.prototype =
     {
         //TODO return playlistController instead of playlist - so playlist can be modified only by this service
         return this.playlist;
+    },
+
+    getCurrentItemDetails: function()
+    {
+        var index = this.playlist.currentItemIndex;
+        return this.playlist.get(index);
     }
 };

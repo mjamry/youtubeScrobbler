@@ -17,7 +17,7 @@ window.LastFm.TrackLoveStateModifier.prototype =
     //      }
     love: function(loveRequestDetails, session, callbacks)
     {
-        var name = loveRequestDetails.details.artist.name+" - "+loveRequestDetails.details.track;
+        var name = loveRequestDetails.details.artist.name+" - "+loveRequestDetails.details.title;
         Logger.getInstance().Debug("Last fm scrobbler - love request with track: " + name);
         this.lastFmApi.track.love(
             {
@@ -32,7 +32,7 @@ window.LastFm.TrackLoveStateModifier.prototype =
                             Logger.getInstance().Info("Track successfully loved.");
                             Logger.getInstance().Debug("LastFm Love details: "+ name);
 
-                            callbacks.done(loveRequestDetails.index, loveRequestDetails.details);
+                            callbacks.success(loveRequestDetails.index, loveRequestDetails.details);
                         },
                         this),
 
@@ -58,7 +58,7 @@ window.LastFm.TrackLoveStateModifier.prototype =
     //      }
     unLove: function(loveRequestDetails, session, callbacks)
     {
-        var name = loveRequestDetails.details.artist+" - "+loveRequestDetails.details.track;
+        var name = loveRequestDetails.details.artist.name+" - "+loveRequestDetails.details.title;
         Logger.getInstance().Debug("Last fm scrobbler - unlove request with track: " + name);
         this.lastFmApi.track.unlove(
             {
@@ -73,7 +73,7 @@ window.LastFm.TrackLoveStateModifier.prototype =
                             Logger.getInstance().Info("Track successfully unloved.");
                             Logger.getInstance().Debug("LastFm UnLove details: "+ name);
 
-                            callbacks.done(loveRequestDetails.index, loveRequestDetails.details);
+                            callbacks.success(loveRequestDetails.index, loveRequestDetails.details);
                         },
                         this),
 

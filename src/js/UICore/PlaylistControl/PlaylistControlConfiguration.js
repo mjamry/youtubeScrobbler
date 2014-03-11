@@ -3,13 +3,15 @@ window.UI = window.UI || {};
 
 window.UI.PlaylistControlConfiguration =
 {
+    PlaylistControlButtonClass: ".playlist-control-button",
     ClearButton: ".playlist-control-clear",
     SaveButton: ".playlist-control-save",
 
     ShuffleButton: ".playlist-control-shuffle",
-    RepeatButton: ".playlist-control-repeat",
+    LoopButton: ".playlist-control-loop",
 
     LoveButton: ".playlist-control-love",
 
-    SelectedButtonClass: "playlist-control-button-selected"
+    SelectedButtonClass: "playlist-control-button-selected",
+    DisabledAttr: "disabled"
 };

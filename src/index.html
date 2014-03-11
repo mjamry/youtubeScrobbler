@@ -4,7 +4,7 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" >
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" >
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
     <!--CSS-SCROBBLINE-->
     <!--build:css css/scrobbline.min.css-->
@@ -64,6 +64,7 @@
     <script type="text/javascript" src="js/Player/MediaPlayerConfiguration.js"></script>
     <script type="text/javascript" src="js/Player/PlayerEvents.js"></script>
     <script type="text/javascript" src="js/Player/VolumeControlService.js"></script>
+    <script type="text/javascript" src="js/Player/VideoSizeControlService.js"></script>
 
     <script type="text/javascript" src="js/Tracking/GoogleTracker.js"></script>
     <script type="text/javascript" src="js/Tracking/GoogleTrackerConfig.js"></script>
@@ -121,7 +122,7 @@
         <div id="header-content">
             <div id="header-content-logo">
                 <div class="header-content-name">scrobbline</div>
-                <div class="header-content-version">v0.2.5 beta</div>
+                <div class="header-content-version">v0.2.6 beta</div>
             </div>
             <div id="header-control-buttons-container">
                 <button class="header-control-button" id="control-button-switch-theme" title="switch color theme"><i class="fa fa-adjust"></i></button>
@@ -175,8 +176,9 @@
             <div id="media-playlist-control">
                 <div id="playlist-control">
                     <button class="playlist-control-love playlist-control-button" title="love/unlove current track"><i class="fa fa-heart"></i></button>
-                    <button class="playlist-control-repeat playlist-control-button" title="repeat playlist"><i class="fa fa-repeat"></i></button>
+                    <button class="playlist-control-loop playlist-control-button" title="repeat playlist"><i class="fa fa-repeat"></i></button>
                     <button class="playlist-control-shuffle playlist-control-button" title="shuffle playlist"><i class="fa fa-random"></i></button>
+                    <button class="playlist-control-fullscreen playlist-control-button" title="fullscreen mode"><i class="fa fa-arrows-alt"></i></button>
                     <button class="playlist-control-save playlist-control-button" title="save current playlist - NOT WORKING YET"><i class="fa fa-save"></i></button>
                     <button class="playlist-control-clear playlist-control-button" title="clear playlist"><i class="fa fa-times"></i></button>
                 </div>
@@ -191,10 +193,12 @@
         <div id="media-content">
             <div class="pure-g">
                 <div class="pure-u-1-2">
-                    <div id="media-player">
-                        <video id="media_player" preload="none">
-                            <source type="video/youtube" src="https://www.youtube.com/" />
-                        </video>
+                    <div id="fullscreen-video-container">
+                        <div id="media-player">
+                            <video id="media_player" preload="none">
+                                <source type="video/youtube" src="https://www.youtube.com/" />
+                            </video>
+                        </div>
                     </div>
                 </div>
                 <div class="pure-u-1-2">

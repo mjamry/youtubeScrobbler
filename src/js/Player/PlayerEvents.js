@@ -8,7 +8,7 @@ window.Player.Events =
     MediaPaused: "MediaPaused",
     MediaPlay: "MediaStarted",
     MediaStopped: "MediaStopped",
-    MediaChanged: "MediaChanged",
+    MediaChanged: "MediaChanged", //args={current, previous}
 
     TimeUpdated: "TimeUpdated",
     PlaybackDetailsUpdated: "PlaybackDetailsUpdated"
