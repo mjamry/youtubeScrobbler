@@ -1,0 +1,7 @@
+////////////VERSION 0.2.6///////////////
+ - fixed playlist item selection when love track - it is not removed anymore
+ - full screen mode - for now without control buttons and playlist view
+ - control buttons are disabled when playlist is empty (i.e. when user clears it)
+ - player creation has been synchronised with playlist creation - now when user clears playlist it will also remove player, when create new playlist it automatically create player
+ - input box used to paste youtube links is now removed after adding items to playlist
+ - updated version of awesome font from 4.0.1 to 4.0.3
