@@ -1,11 +1,12 @@
 //namespace
 window.UI = window.UI || {};
 
-window.UI.PlaybackControlViewController = function(playbackControl, volumeControlService, view, config)
+window.UI.PlaybackControlViewController = function(playbackControl, volumeControlService, videoSizeControlService, view, config)
 {
     this.view = $("#"+view);
     this.playbackControl = playbackControl;
     this.volumeControlService = volumeControlService;
+    this.sizeControl = videoSizeControlService;
     this.config = config;
 
     this.volumeControl = null;
@@ -86,6 +87,14 @@ window.UI.PlaybackControlViewController.prototype =
         $(this.config.PauseButton).show();
     },
 
+    _toggleFullScreenMode: function(sizeControl)
+    {
+        return function()
+        {
+            sizeControl.toggleFullScreenMode();
+        }
+    },
+
     initialise: function()
     {
         //hide pause button
@@ -116,7 +125,8 @@ window.UI.PlaybackControlViewController.prototype =
         //bind to ui events
         this.view.find(this.config.PlayButton).click(this._play(this.playbackControl, this));
         this.view.find(this.config.PauseButton).click(this._pause(this.playbackControl, this));
-        this.view.find(this.config.NextButton).click(this._next(this.playbackControl, this));
-        this.view.find(this.config.PreviousButton).click(this._previous(this.playbackControl, this));
+        this.view.find(this.config.NextButton).click(this._next(this.playbackControl));
+        this.view.find(this.config.PreviousButton).click(this._previous(this.playbackControl));
+        $(this.config.FullScreenModeButton).click(this._toggleFullScreenMode(this.sizeControl));
     }
 };
