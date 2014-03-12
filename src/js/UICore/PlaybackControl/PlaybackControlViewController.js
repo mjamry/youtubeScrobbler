@@ -51,6 +51,7 @@ window.UI.PlaybackControlViewController.prototype =
     _disableButtons: function()
     {
         this.view.find(this.config.PlaybackControlButtonClass).attr(this.config.DisabledAttr, true);
+        this._showPlayButton();
     },
 
     _enableButtons: function()
