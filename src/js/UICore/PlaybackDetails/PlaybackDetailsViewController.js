@@ -82,9 +82,16 @@ window.UI.PlaybackDetailsViewController.prototype =
         document.title = title+"|"+time;
     },
 
+    _clearDetails: function()
+    {
+        this.view.find(this.config.PlaybackDetails).html("");
+        this.view.find(this.config.PlaybackTime).html("");
+    },
+
     initialise: function()
     {
         EventBroker.getInstance().addListener(window.Player.Events.PlaybackDetailsUpdated, this._handleDetailsUpdateRequest, null, this);
+        EventBroker.getInstance().addListener(window.UI.Events.DisableControlButtonsRequested, $.proxy(this._clearDetails, this));
         //bind to mouse events
         var mouseEnterHandler = this._handleMouseEnter(this);
         var mouseLeaveHandler = this._handleMouseLeave(this);
