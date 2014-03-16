@@ -6,6 +6,7 @@ window.UI.VolumeControl = function(view, config)
     this.view = $(view);
     this.volumeSetCallback = null;
     this.config = config;
+    this.isEnabled = false;
 };
 
 window.UI.VolumeControl.prototype =
@@ -14,18 +15,21 @@ window.UI.VolumeControl.prototype =
     {
         return function(eventArgs)
         {
-            //calculate offset
-            var target = eventArgs.target || eventArgs.srcElement,
-                rect = target.getBoundingClientRect(),
-                offsetX = eventArgs.clientX - rect.left;
+            if(that.isEnabled)
+            {
+                //calculate offset
+                var target = eventArgs.target || eventArgs.srcElement,
+                    rect = target.getBoundingClientRect(),
+                    offsetX = eventArgs.clientX - rect.left;
 
 
-            var width = eventArgs.currentTarget.clientWidth;
+                var width = eventArgs.currentTarget.clientWidth;
 
-            var newPercentageValue = ((offsetX) / width)*100;
-            that.view.find(that.config.VolumeControlIndicator).css("width", newPercentageValue+"%");
-            //this requires normalized value
-            that.volumeSetCallback(newPercentageValue/100);
+                var newPercentageValue = ((offsetX) / width)*100;
+                that.view.find(that.config.VolumeControlIndicator).css("width", newPercentageValue+"%");
+                //this requires normalized value
+                that.volumeSetCallback(newPercentageValue/100);
+            }
         };
     },
 
@@ -40,5 +44,15 @@ window.UI.VolumeControl.prototype =
     bindToVolumeSet: function(callback)
     {
         this.volumeSetCallback = callback;
+    },
+
+    disable: function()
+    {
+        this.isEnabled = false;
+    },
+
+    enable: function()
+    {
+        this.isEnabled = true;
     }
 };
