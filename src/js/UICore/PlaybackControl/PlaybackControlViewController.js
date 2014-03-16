@@ -10,6 +10,7 @@ window.UI.PlaybackControlViewController = function(playbackControl, volumeContro
     this.config = config;
 
     this.volumeControl = null;
+    this.areControlsEnabled = false;
 };
 
 window.UI.PlaybackControlViewController.prototype =
@@ -52,27 +53,35 @@ window.UI.PlaybackControlViewController.prototype =
     {
         this.view.find(this.config.PlaybackControlButtonClass).attr(this.config.DisabledAttr, true);
         this._showPlayButton();
+        this.areControlsEnabled = false;
     },
 
     _enableButtons: function()
     {
         this.view.find(this.config.PlaybackControlButtonClass).removeAttr(this.config.DisabledAttr);
+        this.areControlsEnabled = true;
     },
 
-    _handleVolumeLevelChanged: function(volumeControlService)
+    _handleVolumeLevelChanged: function(that, volumeControlService)
     {
         return function(newVolumeLevel)
         {
-            volumeControlService.setVolumeLevel(newVolumeLevel);
+            if(that.areControlsEnabled)
+            {
+                volumeControlService.setVolumeLevel(newVolumeLevel);
+            }
         };
     },
 
-    _handlePlaybackProgressChanged: function(playbackControl)
+    _handlePlaybackProgressChanged: function(that, playbackControl)
     {
         //playback progress value as percentage value
         return function changePlaybackProgress(newPlaybackProgressValue)
         {
-           playbackControl.setPlaybackProgress(newPlaybackProgressValue);
+            if(that.areControlsEnabled)
+            {
+                playbackControl.setPlaybackProgress(newPlaybackProgressValue);
+            }
         };
     },
 
@@ -112,13 +121,13 @@ window.UI.PlaybackControlViewController.prototype =
 
         //create volume level change handler
         this.volumeControl = new window.UI.VolumeControl("playback-control-volume-container");
-        var volumeLevelChangedHandler = this._handleVolumeLevelChanged(this.volumeControlService);
+        var volumeLevelChangedHandler = this._handleVolumeLevelChanged(this, this.volumeControlService);
         this.volumeControl.bindToVolumeSet(volumeLevelChangedHandler);
         this.volumeControl.initialise(this.volumeControlService.getVolumeLevel());
 
         //create playback progress change handler
         this.playbackProgressControl = new window.UI.PlaybackProgressControl($("#playback-progress-container"));
-        var playbackProgressValueChangedHandler = this._handlePlaybackProgressChanged(this.playbackControl);
+        var playbackProgressValueChangedHandler = this._handlePlaybackProgressChanged(this, this.playbackControl);
         this.playbackProgressControl.bindToPlaybackProgressChangedEvent(playbackProgressValueChangedHandler);
 
         this.playbackProgressControl.initialise();
