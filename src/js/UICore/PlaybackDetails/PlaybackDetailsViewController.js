@@ -93,9 +93,9 @@ window.UI.PlaybackDetailsViewController.prototype =
     {
         this.view.find(this.config.PlaybackDetails).html("");
         this.view.find(this.config.PlaybackTime).html("");
-       // this.view.attr(this.config.DisabledClass, true);
-        this.view.find(this.config.PlaybackDataBar).addClass(this.config.DisabledClass);
-        this.view.find(this.config.PlaybackProgressBar).addClass(this.config.DisabledClass);
+        this.view.addClass(this.config.DisabledClass);
+        this._resizeDataBar(0);
+        this._resizeProgressBar(0);
         this.areControlsEnabled = false;
     },
 
@@ -103,6 +103,7 @@ window.UI.PlaybackDetailsViewController.prototype =
     {
         this.areControlsEnabled = true;
         this.view.removeClass(this.config.DisabledClass);
+        this._handleMouseEnter(this);
     },
 
     initialise: function()
