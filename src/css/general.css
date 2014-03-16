@@ -391,6 +391,11 @@ body
     user-select: none;
 }
 
+.volume-control-disabled
+{
+    cursor:none !important;
+}
+
 .volume-control-indicator
 {
     height:100%;
@@ -452,7 +457,7 @@ body
 {
     float:left;
     min-width:380px;
-    cursor: ew-resize;
+
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -464,6 +469,7 @@ body
     top:0;
     position: relative;
     height:35px;
+    cursor: ew-resize;
 }
 
 .playback-progress-bar-container,

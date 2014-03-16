@@ -183,7 +183,6 @@ body A:hover
 /*--------VOLUME--CONTROL----------*/
 .volume-control-description
 {
-
     color:#DC3522;
 }
 
@@ -202,6 +201,12 @@ body A:hover
     background-color: #D9CB9E;
 }
 
+.volume-control-disabled
+{
+    background-color:#374140 !important;
+    color: #626e6d !important;
+    cursor: default !important;
+}
 /*------------------*/
 
 .playlist-add-input
@@ -247,11 +252,15 @@ input:-moz-placeholder { color:#DC3522; }
 
 .playback-details-container
 {
-
     color:#D9CB9E;
 }
 
-
+.playback-details-disabled
+{
+    background-color:#374140 !important;
+    color: #626e6d !important;
+    cursor: default !important;
+}
 /*--------LOGGER----------*/
 .logger-info
 {
