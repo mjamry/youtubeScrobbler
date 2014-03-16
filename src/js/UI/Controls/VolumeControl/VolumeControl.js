@@ -6,7 +6,7 @@ window.UI.VolumeControl = function(view, config)
     this.view = $(view);
     this.volumeSetCallback = null;
     this.config = config;
-    this.isEnabled = false;
+    this.isEnabled = true;
 };
 
 window.UI.VolumeControl.prototype =
@@ -37,7 +37,7 @@ window.UI.VolumeControl.prototype =
     {
         this.view.find(this.config.VolumeControlContainer).click(this._handleNewVolumeLevelSet(this));
         //initialise startup value
-        this.view.find(this.VolumeControlIndicator).css("width", (currentVolumeLevel*100)+"%");
+        this.view.find(this.config.VolumeControlIndicator).css("width", (currentVolumeLevel*100)+"%");
     },
 
     //bind to event
