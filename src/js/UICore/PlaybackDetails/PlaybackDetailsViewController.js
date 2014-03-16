@@ -64,18 +64,18 @@ window.UI.PlaybackDetailsViewController.prototype =
 
         this._updateView(this.model.getPlaybackState(), title, time);
         this._updatePageTitle(this.model.getPlaybackState(), title, time);
-        this._updatePlaybackProgress();
-        this._updateDataProgress();
+        this._updatePlaybackProgress(this.model.getPlaybackProgress());
+        this._updateDataProgress(this.model.getDataProgress());
     },
 
-    _updatePlaybackProgress: function()
+    _updatePlaybackProgress: function(percentageProgress)
     {
-        this.view.find(this.config.PlaybackProgressBar).css("width", this.model.getPlaybackProgress()+"%");
+        this.view.find(this.config.PlaybackProgressBar).css("width", percentageProgress+"%");
     },
 
-    _updateDataProgress: function()
+    _updateDataProgress: function(percentageProgress)
     {
-        this.view.find(this.config.PlaybackDataBar).css("width", this.model.getDataProgress()+"%");
+        this.view.find(this.config.PlaybackDataBar).css("width", percentageProgress+"%");
     },
 
     _updateView: function(state, title, time)
@@ -94,16 +94,18 @@ window.UI.PlaybackDetailsViewController.prototype =
         this.view.find(this.config.PlaybackDetails).html("");
         this.view.find(this.config.PlaybackTime).html("");
         this.view.addClass(this.config.DisabledClass);
-        this._resizeDataBar(0);
-        this._resizeProgressBar(0);
         this.areControlsEnabled = false;
+        this.model.clearData();
+        this._updatePlaybackProgress(0);
+        this._updateDataProgress(0);
     },
 
     _handleControlsEnableRequest: function()
     {
         this.areControlsEnabled = true;
         this.view.removeClass(this.config.DisabledClass);
-        this._handleMouseEnter(this);
+        this._updatePlaybackProgress(0);
+        this._updateDataProgress(0);
     },
 
     initialise: function()
