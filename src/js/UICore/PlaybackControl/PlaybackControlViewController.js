@@ -120,7 +120,7 @@ window.UI.PlaybackControlViewController.prototype =
         EventBroker.getInstance().addListener(window.UI.Events.EnableControlButtonsRequested, $.proxy(this._enableButtons, this));
 
         //create volume level change handler
-        this.volumeControl = new window.UI.VolumeControl("playback-control-volume-container");
+        this.volumeControl = new window.UI.VolumeControl(window.UI.VolumeControlConfiguration.MainContainer, window.UI.VolumeControlConfiguration);
         var volumeLevelChangedHandler = this._handleVolumeLevelChanged(this, this.volumeControlService);
         this.volumeControl.bindToVolumeSet(volumeLevelChangedHandler);
         this.volumeControl.initialise(this.volumeControlService.getVolumeLevel());
