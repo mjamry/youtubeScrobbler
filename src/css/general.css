@@ -391,6 +391,11 @@ body
     user-select: none;
 }
 
+.volume-control-disabled
+{
+    cursor:none !important;
+}
+
 .volume-control-indicator
 {
     height:100%;

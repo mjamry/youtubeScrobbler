@@ -54,10 +54,12 @@ window.UI.VolumeControl.prototype =
     disable: function()
     {
         this.isEnabled = false;
+        this.view.find(this.config.VolumeControlContainer).addClass(this.config.VolumeControlDisabled);
     },
 
     enable: function()
     {
         this.isEnabled = true;
+        this.view.find(this.config.VolumeControlContainer).removeClass(this.config.VolumeControlDisabled);
     }
 };
