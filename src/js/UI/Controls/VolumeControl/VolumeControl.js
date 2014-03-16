@@ -11,6 +11,11 @@ window.UI.VolumeControl = function(view, config)
 
 window.UI.VolumeControl.prototype =
 {
+    _setIndicatorSize: function(sizePercentageValue)
+    {
+        this.view.find(this.config.VolumeControlIndicator).css("width", sizePercentageValue+"%");
+    },
+
     _handleNewVolumeLevelSet: function(that)
     {
         return function(eventArgs)
@@ -26,7 +31,7 @@ window.UI.VolumeControl.prototype =
                 var width = eventArgs.currentTarget.clientWidth;
 
                 var newPercentageValue = ((offsetX) / width)*100;
-                that.view.find(that.config.VolumeControlIndicator).css("width", newPercentageValue+"%");
+                that._setIndicatorSize(newPercentageValue);
                 //this requires normalized value
                 that.volumeSetCallback(newPercentageValue/100);
             }
@@ -37,7 +42,7 @@ window.UI.VolumeControl.prototype =
     {
         this.view.find(this.config.VolumeControlContainer).click(this._handleNewVolumeLevelSet(this));
         //initialise startup value
-        this.view.find(this.config.VolumeControlIndicator).css("width", (currentVolumeLevel*100)+"%");
+        this._setIndicatorSize((currentVolumeLevel*100));
     },
 
     //bind to event
