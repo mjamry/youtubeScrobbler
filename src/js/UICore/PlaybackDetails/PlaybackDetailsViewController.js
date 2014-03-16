@@ -6,6 +6,7 @@ window.UI.PlaybackDetailsViewController = function(model, view, config)
     this.view = $("#"+view);
     this.model = model;
     this.config = config;
+    this.areControlsEnabled = false;
 };
 
 window.UI.PlaybackDetailsViewController.prototype =
@@ -26,13 +27,16 @@ window.UI.PlaybackDetailsViewController.prototype =
     {
         return function mouseEnterHandler()
         {
-            that.view.css("height", that.config.MouseOverProgressBarSize);
-            that.view.find(that.config.PlaybackDetailsContainer).css("height", that.config.MouseOverProgressBarSize);
+            if(that.areControlsEnabled)
+            {
+                that.view.css("height", that.config.MouseOverProgressBarSize);
+                that.view.find(that.config.PlaybackDetailsContainer).css("height", that.config.MouseOverProgressBarSize);
 
-            that._resizeProgressBar(that.config.MouseOverProgressBarSize);
-            that._resizeDataBar(that.config.MouseOverDataBarSize);
+                that._resizeProgressBar(that.config.MouseOverProgressBarSize);
+                that._resizeDataBar(that.config.MouseOverDataBarSize);
 
-            that.view.find(that.config.PlaybackTime).show();
+                that.view.find(that.config.PlaybackTime).show();
+            }
         };
     },
 
@@ -40,13 +44,16 @@ window.UI.PlaybackDetailsViewController.prototype =
     {
         return function mouseLeaveHandler()
         {
-            that.view.css("height", that.config.MouseOutProgressBarSize);
-            that.view.find(that.config.PlaybackDetailsContainer).css("height", that.config.MouseOutProgressBarSize);
+            if(that.areControlsEnabled)
+            {
+                that.view.css("height", that.config.MouseOutProgressBarSize);
+                that.view.find(that.config.PlaybackDetailsContainer).css("height", that.config.MouseOutProgressBarSize);
 
-            that._resizeProgressBar(that.config.MouseOutProgressBarSize);
-            that._resizeDataBar(that.config.MouseOutDataBarSize);
+                that._resizeProgressBar(that.config.MouseOutProgressBarSize);
+                that._resizeDataBar(that.config.MouseOutDataBarSize);
 
-            that.view.find(that.config.PlaybackTime).hide();
+                that.view.find(that.config.PlaybackTime).hide();
+            }
         };
     },
 
@@ -82,16 +89,27 @@ window.UI.PlaybackDetailsViewController.prototype =
         document.title = title+"|"+time;
     },
 
-    _clearDetails: function()
+    _handleControlsDisableRequest: function()
     {
         this.view.find(this.config.PlaybackDetails).html("");
         this.view.find(this.config.PlaybackTime).html("");
+       // this.view.attr(this.config.DisabledClass, true);
+        this.view.find(this.config.PlaybackDataBar).addClass(this.config.DisabledClass);
+        this.view.find(this.config.PlaybackProgressBar).addClass(this.config.DisabledClass);
+        this.areControlsEnabled = false;
+    },
+
+    _handleControlsEnableRequest: function()
+    {
+        this.areControlsEnabled = true;
+        this.view.removeClass(this.config.DisabledClass);
     },
 
     initialise: function()
     {
         EventBroker.getInstance().addListener(window.Player.Events.PlaybackDetailsUpdated, this._handleDetailsUpdateRequest, null, this);
-        EventBroker.getInstance().addListener(window.UI.Events.DisableControlButtonsRequested, $.proxy(this._clearDetails, this));
+        EventBroker.getInstance().addListener(window.UI.Events.DisableControlButtonsRequested, $.proxy(this._handleControlsDisableRequest, this));
+        EventBroker.getInstance().addListener(window.UI.Events.EnableControlButtonsRequested, $.proxy(this._handleControlsEnableRequest, this));
         //bind to mouse events
         var mouseEnterHandler = this._handleMouseEnter(this);
         var mouseLeaveHandler = this._handleMouseLeave(this);

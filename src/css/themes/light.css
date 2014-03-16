@@ -251,6 +251,13 @@ input:-moz-placeholder { color:#DC3522; }
     background-color: #FA4147;
 }
 
+.playback-details-disabled
+{
+    background-color:#309BBD !important;
+    color: #989083 !important;
+    cursor: default !important;
+}
+
 .playback-details-container
 {
     color:#E6DECF;

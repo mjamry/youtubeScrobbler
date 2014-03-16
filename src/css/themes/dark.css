@@ -247,11 +247,15 @@ input:-moz-placeholder { color:#DC3522; }
 
 .playback-details-container
 {
-
     color:#D9CB9E;
 }
 
-
+.playback-details-disabled
+{
+    background-color:#374140 !important;
+    color: #626e6d !important;
+    cursor: default !important;
+}
 /*--------LOGGER----------*/
 .logger-info
 {

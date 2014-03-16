@@ -452,7 +452,7 @@ body
 {
     float:left;
     min-width:380px;
-    cursor: ew-resize;
+
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -464,6 +464,12 @@ body
     top:0;
     position: relative;
     height:35px;
+    cursor: ew-resize;
+}
+
+#playback-progress-container:disabled
+{
+    cursor: default !important;
 }
 
 .playback-progress-bar-container,
