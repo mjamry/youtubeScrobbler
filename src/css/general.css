@@ -467,11 +467,6 @@ body
     cursor: ew-resize;
 }
 
-#playback-progress-container:disabled
-{
-    cursor: default !important;
-}
-
 .playback-progress-bar-container,
 .playback-data-bar-container,
 .playback-details-container
