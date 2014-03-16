@@ -54,12 +54,14 @@ window.UI.PlaybackControlViewController.prototype =
         this.view.find(this.config.PlaybackControlButtonClass).attr(this.config.DisabledAttr, true);
         this._showPlayButton();
         this.areControlsEnabled = false;
+        this.volumeControl.disable();
     },
 
     _enableButtons: function()
     {
         this.view.find(this.config.PlaybackControlButtonClass).removeAttr(this.config.DisabledAttr);
         this.areControlsEnabled = true;
+        this.volumeControl.enable();
     },
 
     _handleVolumeLevelChanged: function(that, volumeControlService)
@@ -109,7 +111,6 @@ window.UI.PlaybackControlViewController.prototype =
     {
         //hide pause button
         $(this.config.PauseButton).hide();
-        this._disableButtons();
 
         //bind to player events
         EventBroker.getInstance().addListener(window.Player.Events.MediaPlay, $.proxy(this._showPauseButton, this));
@@ -120,7 +121,7 @@ window.UI.PlaybackControlViewController.prototype =
         EventBroker.getInstance().addListener(window.UI.Events.EnableControlButtonsRequested, $.proxy(this._enableButtons, this));
 
         //create volume level change handler
-        this.volumeControl = new window.UI.VolumeControl("playback-control-volume-container");
+        this.volumeControl = new window.UI.VolumeControl(window.UI.VolumeControlConfiguration.MainContainer, window.UI.VolumeControlConfiguration);
         var volumeLevelChangedHandler = this._handleVolumeLevelChanged(this, this.volumeControlService);
         this.volumeControl.bindToVolumeSet(volumeLevelChangedHandler);
         this.volumeControl.initialise(this.volumeControlService.getVolumeLevel());
@@ -131,6 +132,8 @@ window.UI.PlaybackControlViewController.prototype =
         this.playbackProgressControl.bindToPlaybackProgressChangedEvent(playbackProgressValueChangedHandler);
 
         this.playbackProgressControl.initialise();
+
+        this._disableButtons();
 
         //bind to ui events
         this.view.find(this.config.PlayButton).click(this._play(this.playbackControl, this));
