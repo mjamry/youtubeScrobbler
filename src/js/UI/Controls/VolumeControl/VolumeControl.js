@@ -3,7 +3,7 @@ window.UI = window.UI || {};
 
 window.UI.VolumeControl = function(view, config)
 {
-    this.view = $("#"+view);
+    this.view = $(view);
     this.volumeSetCallback = null;
     this.config = config;
 };
@@ -14,7 +14,6 @@ window.UI.VolumeControl.prototype =
     {
         return function(eventArgs)
         {
-
             //calculate offset
             var target = eventArgs.target || eventArgs.srcElement,
                 rect = target.getBoundingClientRect(),
@@ -23,10 +22,10 @@ window.UI.VolumeControl.prototype =
 
             var width = eventArgs.currentTarget.clientWidth;
 
-            var newVolumeLvlInPercent = ((offsetX) / width)*100;
-            that.view.find(this.config.VolumeControlIndicator).css("width", newVolumeLvlInPercent+"%");
+            var newPercentageValue = ((offsetX) / width)*100;
+            that.view.find(that.config.VolumeControlIndicator).css("width", newPercentageValue+"%");
             //this requires normalized value
-            that.volumeSetCallback(newVolumeLvlInPercent/100);
+            that.volumeSetCallback(newPercentageValue/100);
         };
     },
 
