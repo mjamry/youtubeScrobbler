@@ -74,6 +74,7 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
 
     _swapArtistNameAndTitle: function(that)
     {
+        that.mediaDetails = that._retrieveMediaDetails();
         var title = that.mediaDetails.title;
         that.mediaDetails.title = that.mediaDetails.artist.name;
         that.mediaDetails.artist.name = title;
