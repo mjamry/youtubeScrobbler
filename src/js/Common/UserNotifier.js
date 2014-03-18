@@ -36,12 +36,23 @@ window.Common.UserNotifierImpl.prototype =
 {
     info: function showUserInformation(message, undoCallback)
     {
-
+        EventBroker.getInstance().fireEventWithData(
+            window.Common.UserNotifierEvents.InfoNotificationRequested,
+            {
+                message: message,
+                undoCallback: undoCallback
+            }
+        );
     },
 
     error: function showUserError(message)
     {
-
+        EventBroker.getInstance().fireEventWithData(
+            window.Common.UserNotifierEvents.ErrorNotificationRequested,
+            {
+                message: message,
+            }
+        );
     }
 };
 
