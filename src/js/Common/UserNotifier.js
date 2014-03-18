@@ -50,7 +50,7 @@ window.Common.UserNotifierImpl.prototype =
         EventBroker.getInstance().fireEventWithData(
             window.Common.UserNotifierEvents.ErrorNotificationRequested,
             {
-                message: message,
+                message: message
             }
         );
     }
