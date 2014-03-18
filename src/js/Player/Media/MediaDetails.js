@@ -32,6 +32,18 @@ window.Player.MediaDetails.prototype =
 
     clone: function()
     {
-        return JSON.parse(JSON.stringify(this));
+        var deepCopy = new window.Player.MediaDetails();
+
+        for(var prop in this)
+        {
+            //check if property is not a function - as we need to copy only values
+            if(this.hasOwnProperty(prop))
+            {
+                //copy property value
+                deepCopy[prop] = this[prop];
+            }
+        }
+
+        return deepCopy;
     }
 };
