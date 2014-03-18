@@ -57,14 +57,14 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
     {
         return function _handleDetailsObtained(mediaDetails)
         {
-            that.mediaDetails = mediaDetails;
+            that.mediaDetails = mediaDetails.clone();
             that.updateView();
         };
     },
 
     _retrieveMediaDetails: function()
     {
-        var mediaDetails = this.mediaDetails;
+        var mediaDetails = this.mediaDetails.clone();
         mediaDetails.artist.name = $(this.config.ArtistInput).val();
         mediaDetails.title = $(this.config.TitleInput).val();
         mediaDetails.album.name = $(this.config.AlbumInput).val();
@@ -74,10 +74,10 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
 
     _swapArtistNameAndTitle: function(that)
     {
+        that.mediaDetails = that._retrieveMediaDetails();
         var title = that.mediaDetails.title;
         that.mediaDetails.title = that.mediaDetails.artist.name;
         that.mediaDetails.artist.name = title;
-
         that.updateView();
     },
 
