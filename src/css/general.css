@@ -520,6 +520,67 @@ body
 {
     display:none;
 }
+/*----------------------------NOTIFICATIONS----------------------*/
+#user-notifications-container
+{
+    margin-top:20px;
+    margin-left:auto;
+    margin-right:auto;
+    height:100px;
+    width:800px;
+    border:1px solid black;
+}
+
+.user-notification
+{
+    height:40px;
+    width:750px;
+    border:1px solid red;
+    background-color:#ffa07a;
+    margin-right:auto;
+    margin-left:auto;
+}
+
+.user-notification-icon
+{
+    text-align: center;
+    line-height: 40px;
+}
+
+.user-notification-message
+{
+    font-weight: 200;
+    font-size: 18pt;
+    color: black;
+}
+
+.user-notification-undo
+{
+    right:0;
+}
+.user-notification-undo > button
+{
+    height:39px;
+    border-style: none;
+    background-color: transparent;
+
+}
+
+.user-notification-close > button
+{
+    border-style: none;
+    background-color: transparent;
+}
+
+.user-notification-icon,
+.user-notification-message,
+.user-notification-undo,
+.user-notification-close
+{
+    height:40px;
+}
+
+
 /*----------------------------LOGGER----------------------*/
 #logger-content
 {
