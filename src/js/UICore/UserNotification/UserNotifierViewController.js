@@ -1,4 +1,4 @@
-window,UI = window.UI || {};
+window.UI = window.UI || {};
 
 window.UI.UserNotifierViewController = function(view, configuration)
 {
