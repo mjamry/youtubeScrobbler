@@ -22,6 +22,11 @@ window.UI.UserNotificationBuilder.prototype =
         this.item.addClass(style);
     },
 
+    _clearNotification: function()
+    {
+        this.item.remove();
+    },
+
     setNotificationType: function(notificationType)
     {
         switch(notificationType)
@@ -51,6 +56,8 @@ window.UI.UserNotificationBuilder.prototype =
 
     build: function()
     {
+        this.item.find(this.config.ClearButton).click($.proxy(this._clearNotification, this));
+        window.setTimeout($.proxy(this._clearNotification, this), this.config.NotificationTimeout);
         return this.item;
     }
 };
