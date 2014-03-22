@@ -7,11 +7,11 @@ window.UI.UserNotifierConfiguration =
     ErrorClass: "user-notification-error",
     InfoClass: "user-notification-info",
 
-    IconContainer: "user-notification-icon",
-    MessageContainer: "user-notification-message",
+    IconContainer: ".user-notification-icon",
+    MessageContainer: ".user-notification-message",
 
-    UndoButton: "user-notification-undo-button",
-    CloseButton: "user-notification-close-button",
+    UndoButton: ".user-notification-undo-button",
+    CloseButton: ".user-notification-close-button",
 
     ErrorIconClass: "fa fa-exclamation-circle",
     InfoIconClass: "fa fa-info-circle"
