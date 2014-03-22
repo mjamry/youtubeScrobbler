@@ -3,10 +3,10 @@ window.Common = window.Common || {};
 
 UserNotifier = function()
 {
-    this._instance = null;
+    UserNotifier._instance = null;
 };
 
-UserNotifier.setInstance = function()
+UserNotifier.setInstance = function(instance)
 {
     if(UserNotifier._instance !== null)
     {

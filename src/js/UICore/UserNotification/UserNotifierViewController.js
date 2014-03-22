@@ -10,12 +10,23 @@ window.UI.UserNotifierViewController.prototype =
 {
     _handleInfoNotificationRequest: function(args)
     {
+        var builder = new window.UI.UserNotificationBuilder(this.config);
+        builder.setNotificationType(window.UI.UserNotificationTypes.Info);
+        builder.setMessage(args.message);
+        builder.setUndoAction(args.callback);
+        var notification = builder.build();
 
+        this.view.append(notification);
     },
 
     _handleErrorNotificationRequest: function(args)
     {
+        var builder = new window.UI.UserNotificationBuilder(this.config);
+        builder.setNotificationType(window.UI.UserNotificationTypes.Error);
+        builder.setMessage(args.message);
+        var notification = builder.build();
 
+        this.view.append(notification);
     },
 
     initialise: function()

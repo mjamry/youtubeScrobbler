@@ -55,6 +55,11 @@ window.ApplicationCore.CoreServicesFactory.prototype =
     createPlaybackControlService: function(player, playlistController)
     {
         return new window.Player.PlaybackControlService(player, playlistController);
+    },
+
+    createUserNotifier: function()
+    {
+        return new window.Common.UserNotifierImpl();
     }
 };
 

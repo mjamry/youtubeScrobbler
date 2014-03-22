@@ -32,6 +32,10 @@ $(function()
     uilogger.initialise();
     uilogger.isLoggingAllowed = true;
 
+    new UserNotifier();
+    var userNotifier = coreServicesFactory.createUserNotifier();
+    UserNotifier.setInstance(userNotifier);
+
     Logger.getInstance().Info("Application initialisation started.");
     new TimeParser();
     TimeParser.setInstance(new window.Common.TimeParserImpl());

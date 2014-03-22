@@ -49,7 +49,7 @@ window.UI.UserNotificationBuilder.prototype =
         this.item.find(this.config.UndoButton).click(callback);
     },
 
-    getNotification: function()
+    build: function()
     {
         return this.item;
     }
