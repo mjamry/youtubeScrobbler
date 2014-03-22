@@ -13,7 +13,10 @@ window.UI.UserNotifierViewController.prototype =
         var builder = new window.UI.UserNotificationBuilder(this.config);
         builder.setNotificationType(window.UI.UserNotificationTypes.Info);
         builder.setMessage(args.message);
-        builder.setUndoAction(args.callback);
+        if(args.callback)
+        {
+            builder.setUndoAction(args.callback);
+        }
         var notification = builder.build();
 
         this.view.append(notification);

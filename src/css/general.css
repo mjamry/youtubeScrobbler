@@ -528,15 +528,12 @@ body
     margin-right:auto;
     height:100px;
     width:800px;
-    border:1px solid black;
 }
 
 .user-notification
 {
-    height:40px;
+    height:35px;
     width:750px;
-    border:1px solid red;
-    background-color:#ffa07a;
     margin-right:auto;
     margin-left:auto;
 }
@@ -544,14 +541,17 @@ body
 .user-notification-icon
 {
     text-align: center;
-    line-height: 40px;
+}
+
+.user-notification-icon > i
+{
+    margin-top:10px;
 }
 
 .user-notification-message
 {
-    font-weight: 200;
-    font-size: 18pt;
-    color: black;
+    font-size: 14pt;
+    line-height:35px;
 }
 
 .user-notification-undo
@@ -560,10 +560,9 @@ body
 }
 .user-notification-undo > button
 {
-    height:39px;
+    height:35px;
     border-style: none;
     background-color: transparent;
-
 }
 
 .user-notification-close > button
@@ -577,7 +576,7 @@ body
 .user-notification-undo,
 .user-notification-close
 {
-    height:40px;
+    height:30px;
 }
 
 

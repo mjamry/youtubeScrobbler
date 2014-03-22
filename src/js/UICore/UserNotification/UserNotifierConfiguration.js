@@ -13,7 +13,7 @@ window.UI.UserNotifierConfiguration =
     UndoButton: ".user-notification-undo-button",
     CloseButton: ".user-notification-close-button",
 
-    ErrorIconClass: "fa fa-exclamation-circle",
+    ErrorIconClass: "fa fa-exclamation-circle fa-2x",
     InfoIconClass: "fa fa-info-circle"
 };
 
