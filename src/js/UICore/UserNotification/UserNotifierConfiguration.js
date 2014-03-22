@@ -2,7 +2,7 @@ window.UI = window.UI || {};
 
 window.UI.UserNotifierConfiguration =
 {
-    NotificationTimeout: 15000,
+    NotificationTimeout: 5000,
     MaxNumberOfNotifications: 2,
     ErrorClass: "user-notification-error",
     InfoClass: "user-notification-info",

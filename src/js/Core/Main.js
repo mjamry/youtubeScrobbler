@@ -68,7 +68,6 @@ $(function()
     testReport.initialise();
 
     Logger.getInstance().Info("Application initialisation ended.");
-    UserNotifier.getInstance().info("test");
 });
 
 $(window).unload(function()

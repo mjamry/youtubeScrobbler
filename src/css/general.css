@@ -22,7 +22,7 @@ body
 {
     min-height:300px;
     width: 900px;
-    padding-bottom: 150px;
+    padding-bottom: 100px;
     margin-left:auto;
     margin-right:auto;
 }
@@ -526,7 +526,7 @@ body
     margin-top:20px;
     margin-left:auto;
     margin-right:auto;
-    height:100px;
+    height:auto;
     width:800px;
 }
 
@@ -536,6 +536,7 @@ body
     width:750px;
     margin-right:auto;
     margin-left:auto;
+    margin-bottom:5px;
 }
 
 .user-notification-icon
@@ -569,6 +570,7 @@ body
 {
     border-style: none;
     background-color: transparent;
+    margin-top:5px;
 }
 
 .user-notification-icon,
