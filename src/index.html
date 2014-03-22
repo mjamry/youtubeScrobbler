@@ -32,6 +32,8 @@
     <script type="text/javascript" src="js/Common/LocalStorage.js"></script>
     <script type="text/javascript" src="js/Common/GlobalErrorHandler.js"></script>
     <script type="text/javascript" src="js/Common/ApplicationEvents.js"></script>
+    <script type="text/javascript" src="js/Common/UserNotifier/UserNotifier.js"></script>
+    <script type="text/javascript" src="js/Common/UserNotifier/UserNotifierEvents.js"></script>
 
     <script type="text/javascript" src="js/Core/Main.js"></script>
     <script type="text/javascript" src="js/Core/CoreServicesFactory.js"></script>
@@ -94,6 +96,9 @@
     <script type="text/javascript" src="js/UICore/PlaylistControl/PlaylistControlConfiguration.js"></script>
     <script type="text/javascript" src="js/UICore/Session/SessionUIConfiguration.js"></script>
     <script type="text/javascript" src="js/UICore/Session/SessionViewController.js"></script>
+    <script type="text/javascript" src="js/UICore/UserNotification/UserNotifierConfiguration.js"></script>
+    <script type="text/javascript" src="js/UICore/UserNotification/UserNotifierViewController.js"></script>
+    <script type="text/javascript" src="js/UICore/UserNotification/UserNotificationBuilder.js"></script>
 
     <script type="text/javascript" src="js/UICore/MediaLoad/MediaLoadConfig.js"></script>
     <script type="text/javascript" src="js/UICore/MediaLoad/MediaLoadViewController.js"></script>
@@ -254,6 +259,7 @@
                 </div>
             </div>
         </div>
+        <div id="user-notifications-container"></div>
     </div>
     <div id="footer">
         <div id="footer-content">
@@ -382,6 +388,17 @@
             <div>
                 <img class="playlist-item-cover" />
             </div>
+        </div>
+    </div>
+
+    <div class="pure-g user-notification">
+        <div class="pure-u-1-12 user-notification-icon"></div>
+        <div class="pure-u-3-4 user-notification-message"></div>
+        <div class="pure-u-1-8 user-notification-undo">
+            <button class="user-notification-undo-button"><i class="fa fa-reply"></i> undo</button>
+        </div>
+        <div class="pure-u-1-24 user-notification-close">
+            <button class="user-notification-close-button"><i class="fa fa-times"></i></button>
         </div>
     </div>
 </div>

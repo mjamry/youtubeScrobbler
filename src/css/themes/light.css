@@ -270,7 +270,19 @@ input:-moz-placeholder { color:#DC3522; }
     color:#E6DECF;
 }
 
+/*--------USER--NOTIFICATION----------*/
+.user-notification
+{
+    border:1px solid #989083;
+    background-color:#309BBD;
+    color:#E6DECF;
+}
 
+.user-notification-close > button,
+.user-notification-undo > button
+{
+    color:#E6DECF;
+}
 /*--------LOGGER----------*/
 .logger-info
 {

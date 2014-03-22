@@ -33,6 +33,7 @@ window.Player.PlaylistService.prototype =
     clearPlaylist: function()
     {
         Logger.getInstance().Info("Playlist has been cleared. "+ this.playlist.length() +" items removed.");
+        UserNotifier.getInstance().info("Playlist has been cleared. "+ this.playlist.length() +" items removed.", function(){alert("undo playlist clear")});
         this.playlist = new window.Player.Playlist();
         EventBroker.getInstance().fireEvent(window.Player.PlaylistEvents.PlaylistCleared);
 
@@ -49,6 +50,7 @@ window.Player.PlaylistService.prototype =
             this.playlist = playlist;
             Logger.getInstance().Info("Playlist has been restored with "+playlist.length()+" elements.");
             EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, playlist.length());
+            UserNotifier.getInstance().info("Playlist has been read.")
         }
     },
 
@@ -56,6 +58,7 @@ window.Player.PlaylistService.prototype =
     {
         LocalStorage.getInstance().setData("tempPl", this.playlist);
         Logger.getInstance().Info("Playlist has been saved with "+this.playlist.length()+" elements.");
+        UserNotifier.getInstance().info(this.playlist.length()+" items have been saved on the playlist.")
     },
 
     //adds new playlist (or single media) to existing playlist.
@@ -69,7 +72,7 @@ window.Player.PlaylistService.prototype =
         }
 
         Logger.getInstance().Info(playlist.length()+" new element(s) has been added to current playlist. It has now "+this.playlist.length()+" elements.");
-
+        UserNotifier.getInstance().info(playlist.length()+" new items have been successfully added to the playlist");
         this._updatePlaylist(playlist.length());
     },
 

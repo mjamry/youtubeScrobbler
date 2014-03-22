@@ -39,6 +39,8 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
     this.playlistItemEditorViewController = uiFactory.createPlaylistItemEditorViewController(this.playlistService);
 
     this.colorSchemeControlViewController = uiFactory.createColorSchemeControlViewController();
+
+    this.userNotificationViewController = uiFactory.createUserNotificationViewController();
 };
 
 window.ApplicationCore.AppCore.prototype =
@@ -50,6 +52,7 @@ window.ApplicationCore.AppCore.prototype =
         this.playlistViewController.initialise();
         this.playbackDetailsViewController.initialise();
         this.playbackControlViewController.initialise();
+        this.userNotificationViewController.initialise();
         this.playlistControlViewController.initialise();
         this.playlistElementDetailsProvider.initialise();
         this.mediaLoadViewController.initialise();

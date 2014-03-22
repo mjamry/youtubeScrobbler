@@ -22,7 +22,7 @@ body
 {
     min-height:300px;
     width: 900px;
-    padding-bottom: 150px;
+    padding-bottom: 100px;
     margin-left:auto;
     margin-right:auto;
 }
@@ -520,6 +520,68 @@ body
 {
     display:none;
 }
+/*----------------------------NOTIFICATIONS----------------------*/
+#user-notifications-container
+{
+    margin-top:20px;
+    margin-left:auto;
+    margin-right:auto;
+    height:auto;
+    width:800px;
+}
+
+.user-notification
+{
+    height:35px;
+    width:750px;
+    margin-right:auto;
+    margin-left:auto;
+    margin-bottom:5px;
+}
+
+.user-notification-icon
+{
+    text-align: center;
+}
+
+.user-notification-icon > i
+{
+    margin-top:10px;
+}
+
+.user-notification-message
+{
+    font-size: 14pt;
+    line-height:35px;
+}
+
+.user-notification-undo
+{
+    right:0;
+}
+.user-notification-undo > button
+{
+    height:35px;
+    border-style: none;
+    background-color: transparent;
+}
+
+.user-notification-close > button
+{
+    border-style: none;
+    background-color: transparent;
+    margin-top:5px;
+}
+
+.user-notification-icon,
+.user-notification-message,
+.user-notification-undo,
+.user-notification-close
+{
+    height:30px;
+}
+
+
 /*----------------------------LOGGER----------------------*/
 #logger-content
 {
