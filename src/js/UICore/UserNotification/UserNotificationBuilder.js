@@ -56,7 +56,7 @@ window.UI.UserNotificationBuilder.prototype =
 
     build: function()
     {
-        this.item.find(this.config.ClearButton).click($.proxy(this._clearNotification, this));
+        this.item.find(this.config.CloseButton).click($.proxy(this._clearNotification, this));
         window.setTimeout($.proxy(this._clearNotification, this), this.config.NotificationTimeout);
         return this.item;
     }
