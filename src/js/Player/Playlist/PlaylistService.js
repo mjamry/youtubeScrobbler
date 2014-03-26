@@ -32,8 +32,9 @@ window.Player.PlaylistService.prototype =
     //creates new empty playlist replacing existing one.
     clearPlaylist: function()
     {
-        Logger.getInstance().Info("Playlist has been cleared. "+ this.playlist.length() +" items removed.");
-        UserNotifier.getInstance().info("Playlist has been cleared. "+ this.playlist.length() +" items removed.");
+        var msg = "Playlist has been cleared. "+ this.playlist.length() +" item(s) removed.";
+        Logger.getInstance().Info(msg);
+        UserNotifier.getInstance().info(msg, function(){alert("undo playlist clear")});
         this.playlist = new window.Player.Playlist();
         EventBroker.getInstance().fireEvent(window.Player.PlaylistEvents.PlaylistCleared);
 
@@ -48,17 +49,21 @@ window.Player.PlaylistService.prototype =
         {
             playlist.deserialize(storedData.mediaList);
             this.playlist = playlist;
-            Logger.getInstance().Info("Playlist has been restored with "+playlist.length()+" elements.");
+
             EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, playlist.length());
-            UserNotifier.getInstance().info("Playlist has been read.");
+            var msg = playlist.length()+" item(s) have been read and added to the playlist.";
+            Logger.getInstance().Info(msg);
+            UserNotifier.getInstance().info(msg);
         }
     },
 
     savePlaylist: function()
     {
         LocalStorage.getInstance().setData("tempPl", this.playlist);
-        Logger.getInstance().Info("Playlist has been saved with "+this.playlist.length()+" elements.");
-        UserNotifier.getInstance().info(this.playlist.length()+" items have been saved on the playlist.");
+
+        var msg = "Playlist has been saved with "+this.playlist.length()+" element(s).";
+        Logger.getInstance().Info(msg);
+        UserNotifier.getInstance().info(msg);
     },
 
     //adds new playlist (or single media) to existing playlist.
@@ -71,8 +76,10 @@ window.Player.PlaylistService.prototype =
             EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, playlist.length());
         }
 
-        Logger.getInstance().Info(playlist.length()+" new element(s) has been added to current playlist. It has now "+this.playlist.length()+" elements.");
-        UserNotifier.getInstance().info(playlist.length()+" new items have been successfully added to the playlist");
+        var msg = playlist.length()+" new item(s) have been successfully added to the playlist";
+        Logger.getInstance().Info(msg);
+        UserNotifier.getInstance().info(msg);
+
         this._updatePlaylist(playlist.length());
     },
 
@@ -98,7 +105,10 @@ window.Player.PlaylistService.prototype =
     {
         var currentItem = this.playlist.currentItemIndex;
         this.playlist.remove(index);
-        Logger.getInstance().Debug("Element has been removed from playlist, now it contains "+this.playlist.length()+" elements.");
+
+        var msg = "Playlist item with index "+index+" has been removed.";
+        Logger.getInstance().Debug(msg);
+        UserNotifier.getInstance().info(msg, function(){alert("undo remove item")});
         EventBroker.getInstance().fireEventWithData(
             window.Player.PlaylistEvents.PlaylistItemRemoved,
             {
