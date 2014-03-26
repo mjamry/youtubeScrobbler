@@ -6,27 +6,37 @@ window.Player.MediaDetails = function()
 {
 };
 
+window.Player.ArtistDetails = function(details)
+{
+    return details ||
+        {
+            name: "",
+            mbid: "",
+            url: ""
+        };
+};
+
+window.Player.AlbumDetails = function(details)
+{
+    return details ||
+        {
+            name: "",
+            mbid: "",
+            url: "",
+            cover: ""
+        };
+};
+
 window.Player.MediaDetails.prototype =
 {
-    artist:
-    {
-        name: "",
-        mbid: "",
-        url: ""
-    },
+    artist: new window.Player.ArtistDetails(),
     title: "",
     mbid: "",
     duration: "", //new Druation()
     url: "",
     mediaType: "",//type of media e.g. "video/youtube"
     id: "",       //media id from portal e.g lastFm - used to indicate if details has been already obtained
-    album:
-    {
-        name: "",
-        mbid: "",
-        url: "",
-        cover: ""
-    },
+    album: new window.Player.AlbumDetails(),
     loved: "",       //determine if track has been loved already
     tags: "",
 
@@ -45,5 +55,15 @@ window.Player.MediaDetails.prototype =
         }
 
         return deepCopy;
+    },
+
+    serialise: function()
+    {
+
+    },
+
+    deserialise: function(data)
+    {
+
     }
 };

@@ -92,8 +92,8 @@ window.Player.Playlist.prototype =
         for(var i=0;i<data.length;i++)
         {
             var mediaDetails = new window.Player.MediaDetails();
-            mediaDetails.artist = data[i].artist;
-            mediaDetails.album = data[i].album;
+            mediaDetails.artist = new window.Player.ArtistDetails(data[i].artist);
+            mediaDetails.album = new window.Player.AlbumDetails(data[i].album);
             mediaDetails.title = data[i].title;
             mediaDetails.mbid = data[i].mbid;
             mediaDetails.duration = new window.Player.Duration(data[i].duration.duration);
