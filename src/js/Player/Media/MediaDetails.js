@@ -1,7 +1,29 @@
 //namespace
 window.Player = window.Player || {};
 
-//DTO - contains details specific for video/audio object.
+//DTOs - contains details specific for video/audio object.
+
+window.Player.ArtistDetails = function(details)
+{
+    return details ||
+    {
+        name: "",
+        mbid: "",
+        url: ""
+    };
+};
+
+window.Player.AlbumDetails = function(details)
+{
+    return details ||
+    {
+        name: "",
+        mbid: "",
+        url: "",
+        cover: ""
+    };
+};
+
 window.Player.MediaDetails = function(){};
 
 window.Player.MediaDetails.prototype =
@@ -46,25 +68,4 @@ window.Player.MediaDetails.prototype =
         this.id = data.id;
         this.loved = data.loved;
     }
-};
-
-window.Player.ArtistDetails = function(details)
-{
-    return details ||
-    {
-        name: "",
-        mbid: "",
-        url: ""
-    };
-};
-
-window.Player.AlbumDetails = function(details)
-{
-    return details ||
-    {
-        name: "",
-        mbid: "",
-        url: "",
-        cover: ""
-    };
 };
