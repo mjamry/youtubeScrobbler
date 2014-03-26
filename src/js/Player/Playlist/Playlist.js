@@ -91,18 +91,7 @@ window.Player.Playlist.prototype =
     {
         for(var i=0;i<data.length;i++)
         {
-            var mediaDetails = new window.Player.MediaDetails();
-            mediaDetails.artist = new window.Player.ArtistDetails(data[i].artist);
-            mediaDetails.album = new window.Player.AlbumDetails(data[i].album);
-            mediaDetails.title = data[i].title;
-            mediaDetails.mbid = data[i].mbid;
-            mediaDetails.duration = new window.Player.Duration(data[i].duration.duration);
-            mediaDetails.url = data[i].url;
-            mediaDetails.mediaType = data[i].mediaType;
-            mediaDetails.id = data[i].id;
-            mediaDetails.loved = data[i].loved;
-            mediaDetails.tags = data[i].tags;
-
+            var mediaDetails = window.Player.MediaDetails.deserialize(data[i]);
             this.addItem(mediaDetails);
         }
     }

@@ -6,6 +6,22 @@ window.Player.MediaDetails = function()
 {
 };
 
+window.Player.MediaDetails.deserialize = function(data)
+{
+    var mediaDetails = new window.Player.MediaDetails();
+    mediaDetails.artist = new window.Player.ArtistDetails(data.artist);
+    mediaDetails.album = new window.Player.AlbumDetails(data.album);
+    mediaDetails.title = data.title;
+    mediaDetails.mbid = data.mbid;
+    mediaDetails.duration = new window.Player.Duration(data.duration.duration);
+    mediaDetails.url = data.url;
+    mediaDetails.mediaType = data.mediaType;
+    mediaDetails.id = data.id;
+    mediaDetails.loved = data.loved;
+
+    return mediaDetails;
+};
+
 window.Player.ArtistDetails = function(details)
 {
     return details ||
@@ -62,8 +78,5 @@ window.Player.MediaDetails.prototype =
 
     },
 
-    deserialise: function(data)
-    {
 
-    }
 };
