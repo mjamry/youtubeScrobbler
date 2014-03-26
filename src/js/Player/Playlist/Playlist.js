@@ -91,7 +91,8 @@ window.Player.Playlist.prototype =
     {
         for(var i=0;i<data.length;i++)
         {
-            var mediaDetails = window.Player.MediaDetails.deserialize(data[i]);
+            var mediaDetails = new window.Player.MediaDetails();
+            mediaDetails.deserialize(data[i]);
             this.addItem(mediaDetails);
         }
     }

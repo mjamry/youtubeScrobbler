@@ -6,21 +6,7 @@ window.Player.MediaDetails = function()
 {
 };
 
-window.Player.MediaDetails.deserialize = function(data)
-{
-    var mediaDetails = new window.Player.MediaDetails();
-    mediaDetails.artist = new window.Player.ArtistDetails(data.artist);
-    mediaDetails.album = new window.Player.AlbumDetails(data.album);
-    mediaDetails.title = data.title;
-    mediaDetails.mbid = data.mbid;
-    mediaDetails.duration = new window.Player.Duration(data.duration.duration);
-    mediaDetails.url = data.url;
-    mediaDetails.mediaType = data.mediaType;
-    mediaDetails.id = data.id;
-    mediaDetails.loved = data.loved;
-
-    return mediaDetails;
-};
+window.Player.MediaDetails.
 
 window.Player.ArtistDetails = function(details)
 {
@@ -73,10 +59,16 @@ window.Player.MediaDetails.prototype =
         return deepCopy;
     },
 
-    serialise: function()
+    deserialize: function(data)
     {
-
-    },
-
-
+        this.artist = new window.Player.ArtistDetails(data.artist);
+        this.album = new window.Player.AlbumDetails(data.album);
+        this.title = data.title;
+        this.mbid = data.mbid;
+        this.duration = new window.Player.Duration(data.duration.duration);
+        this.url = data.url;
+        this.mediaType = data.mediaType;
+        this.id = data.id;
+        this.loved = data.loved;
+    }
 };
