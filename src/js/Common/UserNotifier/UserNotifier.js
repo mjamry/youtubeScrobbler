@@ -11,7 +11,7 @@ UserNotifier.setInstance = function(instance)
     if(UserNotifier._instance !== null)
     {
         var errorMsg = "Instance of UserNotifier has been already set!";
-        Logger.getInstance().Error(errorMsg);
+        Logger.getInstance().error(errorMsg);
         throw errorMsg;
     }
 
@@ -23,7 +23,7 @@ UserNotifier.getInstance = function()
     if(UserNotifier._instance === null)
     {
         var errorMsg = "Instance of UserNotifier has not been set yet!";
-        Logger.getInstance().Error(errorMsg);
+        Logger.getInstance().error(errorMsg);
         throw errorMsg;
     }
 

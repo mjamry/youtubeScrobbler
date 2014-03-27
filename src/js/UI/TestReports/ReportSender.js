@@ -97,11 +97,11 @@ window.UI.ReportSender.prototype =
         callbacks = callbacks || {
             success: function()
             {
-                Logger.getInstance().Debug("Error report has been sent.");
+                Logger.getInstance().debug("Error report has been sent.");
             },
             fail: function()
             {
-                Logger.getInstance().Debug("Error occurs while sending error report.");
+                Logger.getInstance().debug("Error occurs while sending error report.");
             }
         };
 
@@ -124,11 +124,11 @@ window.UI.ReportSender.prototype =
         callbacks = callbacks || {
             success: function()
             {
-                Logger.getInstance().Debug("Feature request has been sent.");
+                Logger.getInstance().debug("Feature request has been sent.");
             },
             fail: function()
             {
-                Logger.getInstance().Debug("Error occurs while sending feature request.");
+                Logger.getInstance().debug("Error occurs while sending feature request.");
             }
         };
 
@@ -150,11 +150,11 @@ window.UI.ReportSender.prototype =
         callbacks = callbacks || {
             success: function()
             {
-                Logger.getInstance().Debug("Usage report has been sent.");
+                Logger.getInstance().debug("Usage report has been sent.");
             },
             fail: function()
             {
-                Logger.getInstance().Debug("Error occurs while sending usage report.");
+                Logger.getInstance().debug("Error occurs while sending usage report.");
             }
         };
 

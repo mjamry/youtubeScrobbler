@@ -15,7 +15,7 @@ window.ApplicationCore.OnlineScrobbler = function(sessionHandler)
     this._trackStartPlayingTime = null;
 
     this._currentlyLoaded = null;
-    Logger.getInstance().Info("Scrobbler has been created.");
+    Logger.getInstance().info("Scrobbler has been created.");
 };
 
 window.ApplicationCore.OnlineScrobbler.prototype =
@@ -41,7 +41,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
             }
         }
         var msg = "Cannot scrobble track, because playing time was to short: " + timeInSeconds + "s.";
-        Logger.getInstance().Warning("[Scrobbler] "+msg);
+        Logger.getInstance().warning("[Scrobbler] "+msg);
         UserNotifier.getInstance().error("Cannot scrobble track, because playing time was to short: " + timeInSeconds + "s.");
         return false;
     },

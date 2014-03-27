@@ -11,7 +11,7 @@ GoogleTracker.setInstance = function(instance)
     if(GoogleTracker._instance !== null)
     {
         var errorMsg = "Instance of GoogleTracker has been already set!";
-        Logger.getInstance().Error(errorMsg);
+        Logger.getInstance().error(errorMsg);
         throw errorMsg;
     }
 
@@ -23,7 +23,7 @@ GoogleTracker.getInstance = function()
     if(GoogleTracker._instance === null)
     {
         var errorMsg = "Instance of GoogleTracker has not been set yet!";
-        Logger.getInstance().Error(errorMsg);
+        Logger.getInstance().error(errorMsg);
         throw errorMsg;
     }
 
@@ -33,7 +33,7 @@ GoogleTracker.getInstance = function()
 //provides ability to track user actions
 window.Tracking.GoogleEventTrackerImpl = function(config)
 {
-    Logger.getInstance().Info("Google tracker has been created.");
+    Logger.getInstance().info("Google tracker has been created.");
     this.config = config;
 };
 

@@ -8,7 +8,7 @@ window.Common = window.Common || {};
 window.Player.PlaylistService = function()
 {
     this.playlist = new window.Player.Playlist();
-    Logger.getInstance().Info("Playlist service has been created.");
+    Logger.getInstance().info("Playlist service has been created.");
 };
 
 window.Player.PlaylistService.prototype =
@@ -33,7 +33,7 @@ window.Player.PlaylistService.prototype =
     clearPlaylist: function()
     {
         var msg = "Playlist has been cleared. "+ this.playlist.length() +" item(s) removed.";
-        Logger.getInstance().Info(msg);
+        Logger.getInstance().info(msg);
         UserNotifier.getInstance().info(msg, function(){alert("undo playlist clear");});
         this.playlist = new window.Player.Playlist();
         EventBroker.getInstance().fireEvent(window.Player.PlaylistEvents.PlaylistCleared);
@@ -52,7 +52,7 @@ window.Player.PlaylistService.prototype =
 
             EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, playlist.length());
             var msg = playlist.length()+" item(s) have been read and added to the playlist.";
-            Logger.getInstance().Info(msg);
+            Logger.getInstance().info(msg);
             UserNotifier.getInstance().info(msg);
         }
     },
@@ -62,7 +62,7 @@ window.Player.PlaylistService.prototype =
         LocalStorage.getInstance().setData("tempPl", this.playlist);
 
         var msg = "Playlist has been saved with "+this.playlist.length()+" element(s).";
-        Logger.getInstance().Info(msg);
+        Logger.getInstance().info(msg);
         UserNotifier.getInstance().info(msg);
     },
 
@@ -77,7 +77,7 @@ window.Player.PlaylistService.prototype =
         }
 
         var msg = playlist.length()+" new item(s) have been successfully added to the playlist";
-        Logger.getInstance().Info(msg);
+        Logger.getInstance().info(msg);
         UserNotifier.getInstance().info(msg);
 
         this._updatePlaylist(playlist.length());
@@ -108,7 +108,7 @@ window.Player.PlaylistService.prototype =
         this.playlist.remove(index);
 
         var msg = "'"+mediaDetails.artist.name+" - "+mediaDetails.title+"' has been removed from the playlist.";
-        Logger.getInstance().Info(msg);
+        Logger.getInstance().info(msg);
         UserNotifier.getInstance().info(msg, function(){alert("undo remove item");});
         EventBroker.getInstance().fireEventWithData(
             window.Player.PlaylistEvents.PlaylistItemRemoved,
