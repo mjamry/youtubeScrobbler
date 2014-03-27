@@ -42,7 +42,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         }
         var msg = "Cannot scrobble track, because playing time was to short: " + timeInSeconds + "s.";
         Logger.getInstance().Warning("[Scrobbler] "+msg);
-        UserNotifier.getInstance().info("Cannot scrobble track, because playing time was to short: " + timeInSeconds + "s.");
+        UserNotifier.getInstance().error("Cannot scrobble track, because playing time was to short: " + timeInSeconds + "s.");
         return false;
     },
 
