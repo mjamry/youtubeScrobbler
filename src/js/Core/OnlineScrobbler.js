@@ -40,8 +40,9 @@ window.ApplicationCore.OnlineScrobbler.prototype =
                 return true;
             }
         }
-
-        Logger.getInstance().Warning("[Scrobbler] Cannot scrobble track, because playing time was to short: " + timeInSeconds + "s.");
+        var msg = "Cannot scrobble track, because playing time was to short: " + timeInSeconds + "s.";
+        Logger.getInstance().Warning("[Scrobbler] "+msg);
+        UserNotifier.getInstance().info("Cannot scrobble track, because playing time was to short: " + timeInSeconds + "s.");
         return false;
     },
 
