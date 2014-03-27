@@ -34,7 +34,7 @@ window.Player.PlaylistService.prototype =
     {
         var msg = "Playlist has been cleared. "+ this.playlist.length() +" item(s) removed.";
         Logger.getInstance().Info(msg);
-        UserNotifier.getInstance().info(msg, function(){alert("undo playlist clear")});
+        UserNotifier.getInstance().info(msg, function(){alert("undo playlist clear");});
         this.playlist = new window.Player.Playlist();
         EventBroker.getInstance().fireEvent(window.Player.PlaylistEvents.PlaylistCleared);
 
@@ -108,7 +108,7 @@ window.Player.PlaylistService.prototype =
 
         var msg = this.playlist.get(index).artist.name+" - "+this.playlist.get(index).title+" has been removed from the playlist.";
         Logger.getInstance().Debug(msg);
-        UserNotifier.getInstance().info(msg, function(){alert("undo remove item")});
+        UserNotifier.getInstance().info(msg, function(){alert("undo remove item");});
         EventBroker.getInstance().fireEventWithData(
             window.Player.PlaylistEvents.PlaylistItemRemoved,
             {

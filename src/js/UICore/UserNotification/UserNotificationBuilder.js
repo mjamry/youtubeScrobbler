@@ -23,7 +23,7 @@ window.UI.UserNotificationBuilder.prototype =
 
     _clearNotification: function()
     {
-        this.item.slideUp(this.config.AnimationSpeed, function(){this.item.remove()});
+        this.item.slideUp(this.config.AnimationSpeed, function(){this.item.remove();});
     },
 
     setNotificationType: function(notificationType)
