@@ -530,7 +530,8 @@ body
     width:800px;
 }
 
-.user-notification
+.user-notification-info,
+.user-notification-error
 {
     height:35px;
     width:750px;

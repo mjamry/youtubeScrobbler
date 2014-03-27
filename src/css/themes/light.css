@@ -271,11 +271,18 @@ input:-moz-placeholder { color:#DC3522; }
 }
 
 /*--------USER--NOTIFICATION----------*/
-.user-notification
+.user-notification-info
 {
     border:1px solid #989083;
     background-color:#309BBD;
     color:#E6DECF;
+}
+
+.user-notification-error
+{
+    border:1px solid #FA4147;
+    background-color:#309BBD;
+    color:#FA4147;
 }
 
 .user-notification-close > button,

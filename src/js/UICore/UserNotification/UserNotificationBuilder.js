@@ -18,7 +18,6 @@ window.UI.UserNotificationBuilder.prototype =
 
     _setStyle: function(style)
     {
-        this.item.find(this.config.MessageContainer).addClass(style);
         this.item.addClass(style);
     },
 
