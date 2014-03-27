@@ -11,7 +11,7 @@ Cookie.setInstance = function(instance)
     if(Cookie._instance !== null)
     {
         var errorMsg = "Instance of Cookie has been already set!";
-        Logger.getInstance().Error(errorMsg);
+        Logger.getInstance().error(errorMsg);
         throw errorMsg;
     }
 
@@ -23,7 +23,7 @@ Cookie.getInstance = function()
     if(Cookie._instance === null)
     {
         var errorMsg = "Instance of Cookie has not been set yet!";
-        Logger.getInstance().Error(errorMsg);
+        Logger.getInstance().error(errorMsg);
         throw errorMsg;
     }
 
@@ -35,7 +35,7 @@ window.Common.CookieImpl = function()
     //configuration
     $.cookie.json = true;
 
-    Logger.getInstance().Info("Cookies handler has been created.");
+    Logger.getInstance().info("Cookies handler has been created.");
 };
 
 window.Common.CookieImpl.prototype =
@@ -43,7 +43,7 @@ window.Common.CookieImpl.prototype =
     setCookie: function(name, value, expiryTime)
     {
         $.cookie(name, value, expiryTime);
-        Logger.getInstance().Debug("[Cookie] It has been created - '" + name + "' : "+ value);
+        Logger.getInstance().debug("[Cookie] It has been created - '" + name + "' : "+ value);
     },
 
     getCookie: function(name)
@@ -51,11 +51,11 @@ window.Common.CookieImpl.prototype =
         var value = $.cookie(name);
         if(value)
         {
-            Logger.getInstance().Debug("[Cookie] '" + name + "' has been read and has value: " + value);
+            Logger.getInstance().debug("[Cookie] '" + name + "' has been read and has value: " + value);
         }
         else
         {
-            Logger.getInstance().Warning("[Cookie] '"+name+"' does not exist");
+            Logger.getInstance().warning("[Cookie] '"+name+"' does not exist");
         }
 
         return value;
@@ -64,6 +64,6 @@ window.Common.CookieImpl.prototype =
     removeCookie: function(name)
     {
         $.removeCookie(name);
-        Logger.getInstance().Debug("[Cookie] '"+ name +"' has been removed.");
+        Logger.getInstance().debug("[Cookie] '"+ name +"' has been removed.");
     }
 };

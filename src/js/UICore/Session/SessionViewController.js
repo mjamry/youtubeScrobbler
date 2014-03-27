@@ -56,7 +56,7 @@ window.UI.SessionViewController.prototype =
         var urlPars = new window.Common.UrlParser();
         var token = urlPars.getParameterValue(window.location.href, "token");
 
-        Logger.getInstance().Debug("Token: "+token+" has been obtained.");
+        Logger.getInstance().debug("Token: "+token+" has been obtained.");
 
         return token;
     },

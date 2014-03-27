@@ -59,7 +59,7 @@ LoggerImpl.prototype =
         this._eventBroker = EventBroker.getInstance();
     },
 
-    Info: function(message)
+    info: function(message)
     {
         message = "[INF]" + this._getFormatedTimestamp() + message;
         console.info(message);
@@ -69,7 +69,7 @@ LoggerImpl.prototype =
         }
     },
 
-    Error: function(message)
+    error: function(message)
     {
         message = "[ERR]" + this._getFormatedTimestamp() + message;
         console.error(message);
@@ -79,7 +79,7 @@ LoggerImpl.prototype =
         }
     },
 
-    Warning: function(message)
+    warning: function(message)
     {
         message = "[WRN]" + this._getFormatedTimestamp() + message;
         console.warn(message);
@@ -89,7 +89,7 @@ LoggerImpl.prototype =
         }
     },
 
-    Debug: function(message)
+    debug: function(message)
     {
         message = "[DBG]" + this._getFormatedTimestamp() + message;
         console.debug(message);

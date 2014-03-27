@@ -8,14 +8,14 @@ window.Common = window.Common || {};
 window.LastFm.InformationProvider = function(lastFmDataProvider)
 {
     this.dataProvider = lastFmDataProvider;
-    Logger.getInstance().Info("LastFm Information provider has been created");
+    Logger.getInstance().info("LastFm Information provider has been created");
 };
 
 window.LastFm.InformationProvider.prototype =
 {
     getTrackDetails: function(mediaDetails, session, callbacks)
     {
-        Logger.getInstance().Debug("[LastFm] Track details requested for: "+mediaDetails.artist.name +" - "+mediaDetails.title);
+        Logger.getInstance().debug("[LastFm] Track details requested for: "+mediaDetails.artist.name +" - "+mediaDetails.title);
         this.dataProvider.track.getInfo(
             {
                 track: mediaDetails.title,
@@ -92,14 +92,14 @@ window.LastFm.InformationProvider.prototype =
 
                     mediaDetails.loved = response.track.userloved == "1";
 
-                    Logger.getInstance().Info("[LastFm] Track details has been obtained: "+mediaDetails.artist.name +" - "+mediaDetails.title);
+                    Logger.getInstance().info("[LastFm] Track details has been obtained: "+mediaDetails.artist.name +" - "+mediaDetails.title);
                     callbacks.done(mediaDetails);
                 },
                 this),
 
                 error: $.proxy(function(response)
                 {
-                    Logger.getInstance().Warning("[LastFm] Track details obtaining error: " +window.LastFm.Errors[response]);
+                    Logger.getInstance().warning("[LastFm] Track details obtaining error: " +window.LastFm.Errors[response]);
                     callbacks.fail();
                 },
                 this)

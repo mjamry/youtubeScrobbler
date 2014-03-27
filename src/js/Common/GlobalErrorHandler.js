@@ -9,7 +9,7 @@ window.Common.GlobalErrorHandler.prototype =
         var fileName = url.split("/");
         fileName = fileName[fileName.length - 1];
         var message = "[ErrorHandler] Error: "+msg+" | occurred in: "+fileName+" line: "+lineNumber;
-        Logger.getInstance().Error(message);
+        Logger.getInstance().error(message);
     },
 
     initialise: function()
