@@ -62,7 +62,15 @@ window.Player.YouTubePlaylistLoader.prototype =
             throw("[YT] Cannot read media details. Probably file does not exist anymore: "+media.title);
         }
 
-        mediaDetails.artist.name = trackName.artist;
+        mediaDetails.artist = new window.Player.ArtistDetails(
+            {
+                name: trackName.artist,
+                mbid: "",
+                url: "",
+                cover: ""
+            }
+        );
+
         mediaDetails.title = trackName.title;
         mediaDetails.url = media.player.default;
 

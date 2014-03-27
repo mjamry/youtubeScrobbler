@@ -70,22 +70,24 @@ window.LastFm.InformationProvider.prototype =
                     mediaDetails.mbid = response.track.mbid;
                     mediaDetails.id = response.track.id;
 
-                    mediaDetails.artist =
-                    {
-                        name: response.track.artist.name,
-                        mbid: response.track.artist.mbid,
-                        url: response.track.artist.url
-                    };
+                    mediaDetails.artist = new window.Player.ArtistDetails(
+                        {
+                            name: response.track.artist.name,
+                            mbid: response.track.artist.mbid,
+                            url: response.track.artist.url
+                        }
+                    );
 
                     if(response.track.album)
                     {
-                        mediaDetails.album =
-                        {
-                            name: response.track.album.title,
-                            mbid: response.track.album.mbid,
-                            url: response.track.album.url,
-                            cover: response.track.album.image[0]["#text"]
-                        };
+                        mediaDetails.album = new window.Player.AlbumDetails(
+                            {
+                                name: response.track.album.title,
+                                mbid: response.track.album.mbid,
+                                url: response.track.album.url,
+                                cover: response.track.album.image[0]["#text"]
+                            }
+                        );
                     }
 
                     mediaDetails.loved = response.track.userloved == "1";
