@@ -73,17 +73,11 @@ window.Common.EventBrokerImpl.prototype =
     {
         if(this.listeners[event])
         {
-            //Logger.Instance().debug("Event: "+event+" has been fired");
-
             for(var i = 0;i<this.listeners[event].length;i++)
             {
                 var listener = this.listeners[event][i];
                 listener.method.call(listener.context);
             }
-        }
-        else
-        {
-            //Logger.Instance().debug("Event: "+event+" hasn't got any listeners.");
         }
     },
     
@@ -91,17 +85,11 @@ window.Common.EventBrokerImpl.prototype =
     {
         if(this.listeners[event])
         {
-           // Logger.Instance().debug("Event: "+event+" has been fired, data: "+data);
-
             for(var i = 0;i<this.listeners[event].length;i++)
             {
                 var listener = this.listeners[event][i];
                 listener.method.call(listener.context, data);
             }
-        }
-        else
-        {
-            //Logger.Instance().debug("Event: "+event+" hasn't got any listeners.");
         }
     }
 };
