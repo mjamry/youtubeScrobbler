@@ -20,6 +20,7 @@ window.UI.UserNotifierViewController.prototype =
         var notification = builder.build();
 
         this.view.append(notification);
+        notification.slideDown(this.config.AnimationSpeed);
     },
 
     _handleErrorNotificationRequest: function(args)
