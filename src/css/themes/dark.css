@@ -262,11 +262,18 @@ input:-moz-placeholder { color:#DC3522; }
     cursor: default !important;
 }
 /*--------USER--NOTIFICATION----------*/
-.user-notification
+.user-notification-info
 {
     border:1px solid #374140;
     background-color:#1E1E20;
     color:#D9CB9E;
+}
+
+.user-notification-error
+{
+    border:1px solid #DC3522;
+    background-color:#1E1E20;
+    color:#DC3522;
 }
 
 .user-notification-close > button,

@@ -530,7 +530,8 @@ body
     width:800px;
 }
 
-.user-notification
+.user-notification-info,
+.user-notification-error
 {
     height:35px;
     width:750px;
@@ -551,7 +552,7 @@ body
 
 .user-notification-message
 {
-    font-size: 14pt;
+    font-size: 12pt;
     line-height:35px;
 }
 
@@ -579,6 +580,13 @@ body
 .user-notification-close
 {
     height:30px;
+}
+
+.user-notification-message
+{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 

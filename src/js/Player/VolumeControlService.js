@@ -12,6 +12,7 @@ window.Player.VolumeControlService.prototype =
     setVolumeLevel: function(value)
     {
         this.player.setVolume(value);
+        UserNotifier.getInstance().info("Volume level set to "+Math.round(value*100)+"%");
     },
 
     getVolumeLevel: function()

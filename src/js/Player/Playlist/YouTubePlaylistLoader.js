@@ -119,6 +119,7 @@ window.Player.YouTubePlaylistLoader.prototype =
             window.Player.YouTubePlaylistConstant.FEED_PARAMS +
             window.Player.YouTubePlaylistConstant.FEED_QUANTITY_PARAMS;
 
+        UserNotifier.getInstance().info("Please wait - loading youtube playlist details.");
         //TODO i belieave that it can be done in better way
         (function __obtainPlaylistDetails(playlist, callback, that)
         {
@@ -161,6 +162,7 @@ window.Player.YouTubePlaylistLoader.prototype =
             window.Player.YouTubePlaylistConstant.FEED_PARAMS;
 
         Logger.getInstance().Debug("[YT] Video details request");
+        UserNotifier.getInstance().info("Please wait - loading youtube video details.");
         $.getJSON(url, $.proxy(function(result)
         {
             //create a table from result

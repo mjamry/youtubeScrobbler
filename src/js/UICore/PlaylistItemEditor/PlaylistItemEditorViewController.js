@@ -84,8 +84,8 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
     _savePlaylistItemDetails: function _saveEditedPlaylistItem(that)
     {
         that.mediaDetails = that._retrieveMediaDetails();
-
         that.playlistProvider.updateItem(that.index, that.mediaDetails);
+        UserNotifier.getInstance().info("Details saved for '"+that.mediaDetails.artist.name+" - "+that.mediaDetails.title+"'");
         that._hide();
     },
 

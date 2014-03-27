@@ -41,7 +41,9 @@ window.LastFm.Scrobbler.prototype =
                         //fire event
                         this._eventBroker.fireEventWithData(window.LastFm.Events.TrackScrobbled, response);
 
-                        Logger.getInstance().Info("[LastFm] Track has been successfully scrobbled: "+trackDetails.artist+" - "+trackDetails.track);
+                        var msg = "'"+trackDetails.artist+" - "+trackDetails.track+"' has been scrobbled.";
+                        Logger.getInstance().Info("[LastFm] "+msg);
+                        UserNotifier.getInstance().info(msg);
                     },
                     this
                 ),

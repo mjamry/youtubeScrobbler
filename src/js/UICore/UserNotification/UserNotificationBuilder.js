@@ -18,13 +18,12 @@ window.UI.UserNotificationBuilder.prototype =
 
     _setStyle: function(style)
     {
-        this.item.find(this.config.MessageContainer).addClass(style);
         this.item.addClass(style);
     },
 
     _clearNotification: function()
     {
-        this.item.remove();
+        this.item.slideUp(this.config.AnimationSpeed, function(){this.item.remove();});
     },
 
     setNotificationType: function(notificationType)
@@ -58,6 +57,7 @@ window.UI.UserNotificationBuilder.prototype =
     {
         this.item.find(this.config.CloseButton).click($.proxy(this._clearNotification, this));
         window.setTimeout($.proxy(this._clearNotification, this), this.config.NotificationTimeout);
+        this.item.hide();
         return this.item;
     }
 };
