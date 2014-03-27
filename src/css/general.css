@@ -582,6 +582,13 @@ body
     height:30px;
 }
 
+.user-notification-message
+{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 
 /*----------------------------LOGGER----------------------*/
 #logger-content
