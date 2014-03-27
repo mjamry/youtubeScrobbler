@@ -29,9 +29,9 @@ window.LastFm.TrackLoveStateModifier.prototype =
                 success:
                     $.proxy(function()
                         {
-                            Logger.getInstance().Info("Track successfully loved.");
-                            Logger.getInstance().Debug("LastFm Love details: "+ name);
-
+                            var msg = "'"+loveRequestDetails.details.artist.name+" - "+loveRequestDetails.details.title+"' has been loved.";
+                            Logger.getInstance().Info(msg);
+                            UserNotifier.getInstance().info(msg);
                             callbacks.success(loveRequestDetails.index, loveRequestDetails.details);
                         },
                         this),
@@ -70,9 +70,9 @@ window.LastFm.TrackLoveStateModifier.prototype =
                 success:
                     $.proxy(function()
                         {
-                            Logger.getInstance().Info("Track successfully unloved.");
-                            Logger.getInstance().Debug("LastFm UnLove details: "+ name);
-
+                            var msg = "'"+loveRequestDetails.details.artist.name+" - "+loveRequestDetails.details.title+"' has been unloved.";
+                            Logger.getInstance().Info(msg);
+                            UserNotifier.getInstance().info(msg);
                             callbacks.success(loveRequestDetails.index, loveRequestDetails.details);
                         },
                         this),

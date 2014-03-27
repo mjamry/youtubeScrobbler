@@ -104,10 +104,11 @@ window.Player.PlaylistService.prototype =
     removeItem: function(index)
     {
         var currentItem = this.playlist.currentItemIndex;
+        var mediaDetails = this.playlist.get(index);
         this.playlist.remove(index);
 
-        var msg = this.playlist.get(index).artist.name+" - "+this.playlist.get(index).title+" has been removed from the playlist.";
-        Logger.getInstance().Debug(msg);
+        var msg = "'"+mediaDetails.artist.name+" - "+mediaDetails.title+"' has been removed from the playlist.";
+        Logger.getInstance().Info(msg);
         UserNotifier.getInstance().info(msg, function(){alert("undo remove item");});
         EventBroker.getInstance().fireEventWithData(
             window.Player.PlaylistEvents.PlaylistItemRemoved,

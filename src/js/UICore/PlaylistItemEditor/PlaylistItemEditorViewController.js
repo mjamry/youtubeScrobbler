@@ -85,7 +85,7 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
     {
         that.mediaDetails = that._retrieveMediaDetails();
         that.playlistProvider.updateItem(that.index, that.mediaDetails);
-        UserNotifier.getInstance().info("Details saved for "+that.mediaDetails.artist.name+" - "+that.mediaDetails.title);
+        UserNotifier.getInstance().info("Details saved for '"+that.mediaDetails.artist.name+" - "+that.mediaDetails.title+"'");
         that._hide();
     },
 

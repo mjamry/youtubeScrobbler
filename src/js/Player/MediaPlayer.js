@@ -50,6 +50,7 @@ window.Player.MediaPlayer.prototype =
                 error: function ()
                 {
                     Logger.getInstance().Error("Media player initialisation failed.");
+                    UserNotifier.getInstance().error("Media player initialisation failed. Please refresh page.");
                 }
             }, this.config
         );
