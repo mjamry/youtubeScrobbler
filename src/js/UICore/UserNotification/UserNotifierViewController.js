@@ -8,6 +8,13 @@ window.UI.UserNotifierViewController = function(view, configuration)
 
 window.UI.UserNotifierViewController.prototype =
 {
+    _addNewNotification: function(notification)
+    {
+        notification.hide();
+        this.view.append(notification);
+        notification.slideDown(this.config.AnimationSpeed);
+    },
+
     _handleInfoNotificationRequest: function(args)
     {
         var builder = new window.UI.UserNotificationBuilder(this.config);
@@ -19,8 +26,7 @@ window.UI.UserNotifierViewController.prototype =
         }
         var notification = builder.build();
 
-        this.view.append(notification);
-        notification.slideDown(this.config.AnimationSpeed);
+        this._addNewNotification(notification);
     },
 
     _handleErrorNotificationRequest: function(args)
@@ -30,7 +36,7 @@ window.UI.UserNotifierViewController.prototype =
         builder.setMessage(args.message);
         var notification = builder.build();
 
-        this.view.append(notification);
+        this._addNewNotification(notification);
     },
 
     initialise: function()

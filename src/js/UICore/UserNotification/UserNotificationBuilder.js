@@ -5,6 +5,7 @@ window.UI.UserNotificationBuilder = function(configuration)
     this.config = configuration;
     this.item = $("#controls-schemes .user-notification").clone();
     this.item.find(this.config.UndoButton).hide();
+    this.itemRemoveTimer = null;
 };
 
 window.UI.UserNotificationBuilder.prototype =
@@ -23,7 +24,20 @@ window.UI.UserNotificationBuilder.prototype =
 
     _clearNotification: function()
     {
-        this.item.slideUp(this.config.AnimationSpeed, function(){this.item.remove();});
+        this.item.slideUp(this.config.AnimationSpeed, function(){this.remove();});
+    },
+
+    _setItemRemoveTimer: function()
+    {
+        this.itemRemoveTimer = window.setTimeout($.proxy(this._clearNotification, this), this.config.NotificationTimeout);
+    },
+
+    _killItemRemoveTimer: function()
+    {
+        if(this.itemRemoveTimer)
+        {
+            window.clearTimeout(this.itemRemoveTimer);
+        }
     },
 
     setNotificationType: function(notificationType)
@@ -55,9 +69,10 @@ window.UI.UserNotificationBuilder.prototype =
 
     build: function()
     {
+        this.item.mouseenter($.proxy(this._killItemRemoveTimer, this));
+        this.item.mouseleave($.proxy(this._setItemRemoveTimer, this));
         this.item.find(this.config.CloseButton).click($.proxy(this._clearNotification, this));
-        window.setTimeout($.proxy(this._clearNotification, this), this.config.NotificationTimeout);
-        this.item.hide();
+        this._setItemRemoveTimer();
         return this.item;
     }
 };
