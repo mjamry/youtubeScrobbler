@@ -7,22 +7,22 @@ MockLoggerImpl.prototype =
         //does nothing
     },
 
-    Info: function(message)
+    info: function(message)
     {
         //does nothing
     },
 
-    Error: function(message)
+    error: function(message)
     {
         //does nothing
     },
 
-    Warning: function(message)
+    warning: function(message)
     {
         //does nothing
     },
 
-    Debug: function(message)
+    debug: function(message)
     {
         //does nothing
     }
