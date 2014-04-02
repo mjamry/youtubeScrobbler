@@ -1,3 +1,8 @@
+////////////VERSION 0.2.7///////////////
+ - added user notifications - #13
+ - fixes in playlist item editor - #18
+ - disable whole control bar when playlist is empty - #16
+ - other minor fixes
 ////////////VERSION 0.2.6///////////////
  - fixed playlist item selection when love track - it is not removed anymore
  - full screen mode - for now without control buttons and playlist view
