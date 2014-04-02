@@ -71,13 +71,13 @@ window.UI.TestReportsViewController.prototype =
             {
                 success: function()
                 {
-                    Logger.getInstance().Info("Bug report has been sent.");
-                    Logger.getInstance().Debug("Bug title: "+title);
+                    Logger.getInstance().info("Bug report has been sent.");
+                    Logger.getInstance().debug("Bug title: "+title);
                     alert("Success.\r\n\rBug report has been sent.\r\nThank you for your effort.\r\n\r\nWe will stay in touch.");
                 },
                 fail: function()
                 {
-                    Logger.getInstance().Info("Error occurs while sending error report.");
+                    Logger.getInstance().info("Error occurs while sending error report.");
                     alert("Failure.\r\n\r\nSorry cannot send your error report.\r\n\r\nPleas try again.");
                 }
             };
@@ -98,12 +98,12 @@ window.UI.TestReportsViewController.prototype =
             {
                 success: function()
                 {
-                    Logger.getInstance().Info("Feature request has been sent.");
+                    Logger.getInstance().info("Feature request has been sent.");
                     alert("Success.\r\n\r\nFeature request has been sent.\r\nThank you for your effort.\r\n\r\nWe will stay in touch.");
                 },
                 fail: function()
                 {
-                    Logger.getInstance().Info("Error occurs while sending feature request.");
+                    Logger.getInstance().info("Error occurs while sending feature request.");
                     alert("Failure.\r\n\r\nSorry cannot send your feature request.\r\n\r\nPleas try again.");
                 }
             };

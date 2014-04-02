@@ -11,7 +11,7 @@ EventBroker.setInstance = function(instance)
     if(EventBroker._instance !== null)
     {
         var errorMsg = "Instance of EventBroker has been already set!";
-        Logger.getInstance().Error(errorMsg);
+        Logger.getInstance().error(errorMsg);
         throw errorMsg;
     }
 
@@ -23,7 +23,7 @@ EventBroker.getInstance = function()
     if(EventBroker._instance === null)
     {
         var errorMsg = "Instance of EventBroker has not been set yet!";
-        Logger.getInstance().Error(errorMsg);
+        Logger.getInstance().error(errorMsg);
         throw errorMsg;
     }
 
@@ -34,7 +34,7 @@ EventBroker.getInstance = function()
 window.Common.EventBrokerImpl = function()
 {
     this.listeners = {};
-    Logger.getInstance().Info("Event broker has been created.");
+    Logger.getInstance().info("Event broker has been created.");
 };
 
 window.Common.EventBrokerImpl.prototype =
@@ -73,17 +73,11 @@ window.Common.EventBrokerImpl.prototype =
     {
         if(this.listeners[event])
         {
-            //Logger.Instance().Debug("Event: "+event+" has been fired");
-
             for(var i = 0;i<this.listeners[event].length;i++)
             {
                 var listener = this.listeners[event][i];
                 listener.method.call(listener.context);
             }
-        }
-        else
-        {
-            //Logger.Instance().Debug("Event: "+event+" hasn't got any listeners.");
         }
     },
     
@@ -91,17 +85,11 @@ window.Common.EventBrokerImpl.prototype =
     {
         if(this.listeners[event])
         {
-           // Logger.Instance().Debug("Event: "+event+" has been fired, data: "+data);
-
             for(var i = 0;i<this.listeners[event].length;i++)
             {
                 var listener = this.listeners[event][i];
                 listener.method.call(listener.context, data);
             }
-        }
-        else
-        {
-            //Logger.Instance().Debug("Event: "+event+" hasn't got any listeners.");
         }
     }
 };

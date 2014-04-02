@@ -75,10 +75,12 @@ window.UI.PlaylistControlViewController.prototype =
             if(isLoopModeOn)
             {
                 that.view.find(that.config.LoopButton).addClass(that.config.SelectedButtonClass);
+                UserNotifier.getInstance().info("Playlist loop mode on.");
             }
             else
             {
                 that.view.find(that.config.LoopButton).removeClass(that.config.SelectedButtonClass);
+                UserNotifier.getInstance().info("Playlist loop mode off.");
             }
         };
     },
@@ -88,6 +90,7 @@ window.UI.PlaylistControlViewController.prototype =
         return function()
         {
             model.shuffle();
+            UserNotifier.getInstance().info("Playlist has been shuffled.");
         };
     },
 

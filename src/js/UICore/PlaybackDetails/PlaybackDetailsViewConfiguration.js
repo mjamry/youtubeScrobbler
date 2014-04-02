@@ -17,5 +17,7 @@ window.UI.PLaybackDetailsViewConfiguration =
     MouseOutProgressBarSize: "35px",
 
     MouseOverDataBarSize: "5px",
-    MouseOutDataBarSize: "2px"
+    MouseOutDataBarSize: "2px",
+
+    DisabledClass: "playback-details-disabled"
 };

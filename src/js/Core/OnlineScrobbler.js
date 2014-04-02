@@ -15,7 +15,7 @@ window.ApplicationCore.OnlineScrobbler = function(sessionHandler)
     this._trackStartPlayingTime = null;
 
     this._currentlyLoaded = null;
-    Logger.getInstance().Info("Scrobbler has been created.");
+    Logger.getInstance().info("Scrobbler has been created.");
 };
 
 window.ApplicationCore.OnlineScrobbler.prototype =
@@ -40,8 +40,9 @@ window.ApplicationCore.OnlineScrobbler.prototype =
                 return true;
             }
         }
-
-        Logger.getInstance().Warning("[Scrobbler] Cannot scrobble track, because playing time was to short: " + timeInSeconds + "s.");
+        var msg = "Cannot scrobble track, because playing time was to short: " + timeInSeconds + "s.";
+        Logger.getInstance().warning("[Scrobbler] "+msg);
+        UserNotifier.getInstance().error("Cannot scrobble track, because playing time was to short: " + timeInSeconds + "s.");
         return false;
     },
 
@@ -52,7 +53,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
     //And the track has been played for at least half its duration, or for 4 minutes (whichever occurs earlier.)
     _updateScrobbling: function(mediaDetails)
     {
-        if(this._trackCanBeScrobbled(mediaDetails, this._trackStartPlayingTime))
+        if(this._sessionHandler.isSessionEstablished() && this._trackCanBeScrobbled(mediaDetails, this._trackStartPlayingTime))
         {
             this._scrobbler.scrobble(
                 {
@@ -69,7 +70,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
     _updateNowPlaying: function(mediaDetails)
     {
         //update now playing only when new track is loaded - it prevents before reaction on pause/play events
-        if(this._currentlyLoaded != mediaDetails)
+        if(this._sessionHandler.isSessionEstablished() && this._currentlyLoaded != mediaDetails)
         {
             this._currentlyLoaded = mediaDetails;
             this._trackStartPlayingTime = new Date().getTime();

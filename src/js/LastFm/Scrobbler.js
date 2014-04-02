@@ -9,7 +9,7 @@ window.LastFm.Scrobbler = function(lastFmApi)
 {
     this.lastFmApi = lastFmApi;
     this._eventBroker = EventBroker.getInstance();
-    Logger.getInstance().Info("LastFm - Scrobbler has been created.");
+    Logger.getInstance().info("LastFm - Scrobbler has been created.");
 };
 
 window.LastFm.Scrobbler.prototype =
@@ -18,7 +18,7 @@ window.LastFm.Scrobbler.prototype =
     //Details are passed as literal: {track, artist, timestamp}.
     scrobble: function(trackDetails, session)
     {
-        Logger.getInstance().Debug("[LastFm] Scrobbling request track: "+trackDetails.artist+" - "+trackDetails.track);
+        Logger.getInstance().debug("[LastFm] Scrobbling request track: "+trackDetails.artist+" - "+trackDetails.track);
         this.lastFmApi.track.scrobble(
             trackDetails,
             session,
@@ -41,7 +41,9 @@ window.LastFm.Scrobbler.prototype =
                         //fire event
                         this._eventBroker.fireEventWithData(window.LastFm.Events.TrackScrobbled, response);
 
-                        Logger.getInstance().Info("[LastFm] Track has been successfully scrobbled: "+trackDetails.artist+" - "+trackDetails.track);
+                        var msg = "'"+trackDetails.artist+" - "+trackDetails.track+"' has been scrobbled.";
+                        Logger.getInstance().info("[LastFm] "+msg);
+                        UserNotifier.getInstance().info(msg);
                     },
                     this
                 ),
@@ -51,8 +53,8 @@ window.LastFm.Scrobbler.prototype =
                         //fire event
                         this._eventBroker.fireEventWithData(window.LastFm.Events.ScrobblingFailed, response);
 
-                        Logger.getInstance().Warning("[LastFm] Scrobbling update failed for: "+trackDetails.artist+" - "+trackDetails.track);
-                        Logger.getInstance().Debug("[LastFm] Scrobbling failed: "+ window.LastFm.Errors[response.error]+" with message: "+response.message);
+                        Logger.getInstance().warning("[LastFm] Scrobbling update failed for: "+trackDetails.artist+" - "+trackDetails.track);
+                        Logger.getInstance().debug("[LastFm] Scrobbling failed: "+ window.LastFm.Errors[response.error]+" with message: "+response.message);
                     },
                     this
                 )
@@ -63,7 +65,7 @@ window.LastFm.Scrobbler.prototype =
     //Details are passed as literal: {track, artist}.
     updateNowPlaying: function(trackDetails, session)
     {
-        Logger.getInstance().Debug("[LastFm] NowPlaying update request with track: "+trackDetails.artist+" - "+trackDetails.track);
+        Logger.getInstance().debug("[LastFm] NowPlaying update request with track: "+trackDetails.artist+" - "+trackDetails.track);
         this.lastFmApi.track.updateNowPlaying(
             trackDetails,
             session,
@@ -82,7 +84,7 @@ window.LastFm.Scrobbler.prototype =
                         //fire event
                         this._eventBroker.fireEventWithData(window.LastFm.Events.NowPlayingUpdated, response);
 
-                        Logger.getInstance().Info("[LastFm] NowPlaying has been successfully updated: "+ trackDetails.artist+" - "+trackDetails.track);
+                        Logger.getInstance().info("[LastFm] NowPlaying has been successfully updated: "+ trackDetails.artist+" - "+trackDetails.track);
                     },
                     this
                 ),
@@ -92,8 +94,8 @@ window.LastFm.Scrobbler.prototype =
                         //fire event
                         this._eventBroker.fireEventWithData(window.LastFm.Events.NowPlayingUpdateFailed, response);
 
-                        Logger.getInstance().Warning("[LastFm] NowPlaying update failed for: "+trackDetails.artist+" - "+trackDetails.track);
-                        Logger.getInstance().Debug("[LastFm] NowPlaying failed: "+ window.LastFm.Errors[response.error]+" with message: "+response.message);
+                        Logger.getInstance().warning("[LastFm] NowPlaying update failed for: "+trackDetails.artist+" - "+trackDetails.track);
+                        Logger.getInstance().debug("[LastFm] NowPlaying failed: "+ window.LastFm.Errors[response.error]+" with message: "+response.message);
                     },
                     this
                 )

@@ -6,6 +6,7 @@ window.UI.PlaybackDetailsViewController = function(model, view, config)
     this.view = $("#"+view);
     this.model = model;
     this.config = config;
+    this.areControlsEnabled = false;
 };
 
 window.UI.PlaybackDetailsViewController.prototype =
@@ -26,13 +27,16 @@ window.UI.PlaybackDetailsViewController.prototype =
     {
         return function mouseEnterHandler()
         {
-            that.view.css("height", that.config.MouseOverProgressBarSize);
-            that.view.find(that.config.PlaybackDetailsContainer).css("height", that.config.MouseOverProgressBarSize);
+            if(that.areControlsEnabled)
+            {
+                that.view.css("height", that.config.MouseOverProgressBarSize);
+                that.view.find(that.config.PlaybackDetailsContainer).css("height", that.config.MouseOverProgressBarSize);
 
-            that._resizeProgressBar(that.config.MouseOverProgressBarSize);
-            that._resizeDataBar(that.config.MouseOverDataBarSize);
+                that._resizeProgressBar(that.config.MouseOverProgressBarSize);
+                that._resizeDataBar(that.config.MouseOverDataBarSize);
 
-            that.view.find(that.config.PlaybackTime).show();
+                that.view.find(that.config.PlaybackTime).show();
+            }
         };
     },
 
@@ -40,13 +44,16 @@ window.UI.PlaybackDetailsViewController.prototype =
     {
         return function mouseLeaveHandler()
         {
-            that.view.css("height", that.config.MouseOutProgressBarSize);
-            that.view.find(that.config.PlaybackDetailsContainer).css("height", that.config.MouseOutProgressBarSize);
+            if(that.areControlsEnabled)
+            {
+                that.view.css("height", that.config.MouseOutProgressBarSize);
+                that.view.find(that.config.PlaybackDetailsContainer).css("height", that.config.MouseOutProgressBarSize);
 
-            that._resizeProgressBar(that.config.MouseOutProgressBarSize);
-            that._resizeDataBar(that.config.MouseOutDataBarSize);
+                that._resizeProgressBar(that.config.MouseOutProgressBarSize);
+                that._resizeDataBar(that.config.MouseOutDataBarSize);
 
-            that.view.find(that.config.PlaybackTime).hide();
+                that.view.find(that.config.PlaybackTime).hide();
+            }
         };
     },
 
@@ -57,18 +64,18 @@ window.UI.PlaybackDetailsViewController.prototype =
 
         this._updateView(this.model.getPlaybackState(), title, time);
         this._updatePageTitle(this.model.getPlaybackState(), title, time);
-        this._updatePlaybackProgress();
-        this._updateDataProgress();
+        this._updatePlaybackProgress(this.model.getPlaybackProgress());
+        this._updateDataProgress(this.model.getDataProgress());
     },
 
-    _updatePlaybackProgress: function()
+    _updatePlaybackProgress: function(percentageProgress)
     {
-        this.view.find(this.config.PlaybackProgressBar).css("width", this.model.getPlaybackProgress()+"%");
+        this.view.find(this.config.PlaybackProgressBar).css("width", percentageProgress+"%");
     },
 
-    _updateDataProgress: function()
+    _updateDataProgress: function(percentageProgress)
     {
-        this.view.find(this.config.PlaybackDataBar).css("width", this.model.getDataProgress()+"%");
+        this.view.find(this.config.PlaybackDataBar).css("width", percentageProgress+"%");
     },
 
     _updateView: function(state, title, time)
@@ -82,9 +89,30 @@ window.UI.PlaybackDetailsViewController.prototype =
         document.title = title+"|"+time;
     },
 
+    _handleControlsDisableRequest: function()
+    {
+        this.view.find(this.config.PlaybackDetails).html("");
+        this.view.find(this.config.PlaybackTime).html("");
+        this.view.addClass(this.config.DisabledClass);
+        this.areControlsEnabled = false;
+        this.model.clearData();
+        this._updatePlaybackProgress(0);
+        this._updateDataProgress(0);
+    },
+
+    _handleControlsEnableRequest: function()
+    {
+        this.areControlsEnabled = true;
+        this.view.removeClass(this.config.DisabledClass);
+        this._updatePlaybackProgress(0);
+        this._updateDataProgress(0);
+    },
+
     initialise: function()
     {
         EventBroker.getInstance().addListener(window.Player.Events.PlaybackDetailsUpdated, this._handleDetailsUpdateRequest, null, this);
+        EventBroker.getInstance().addListener(window.UI.Events.DisableControlButtonsRequested, $.proxy(this._handleControlsDisableRequest, this));
+        EventBroker.getInstance().addListener(window.UI.Events.EnableControlButtonsRequested, $.proxy(this._handleControlsEnableRequest, this));
         //bind to mouse events
         var mouseEnterHandler = this._handleMouseEnter(this);
         var mouseLeaveHandler = this._handleMouseLeave(this);

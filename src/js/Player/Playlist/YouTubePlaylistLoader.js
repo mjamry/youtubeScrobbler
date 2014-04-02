@@ -48,7 +48,7 @@ window.Player.YouTubePlaylistLoader.prototype =
     //TODO - handle errors while parsing video details received from YT. It is possible that video has been deleted.
     _getMediaDetails: function(media)
     {
-        Logger.getInstance().Debug("[YT] Received details for media: "+media.title);
+        Logger.getInstance().debug("[YT] Received details for media: "+media.title);
         var mediaDetails = new window.Player.MediaDetails();
 
         mediaDetails.mediaType = window.Player.YouTubePlaylistConstant.MEDIA_TYPE;
@@ -62,7 +62,15 @@ window.Player.YouTubePlaylistLoader.prototype =
             throw("[YT] Cannot read media details. Probably file does not exist anymore: "+media.title);
         }
 
-        mediaDetails.artist.name = trackName.artist;
+        mediaDetails.artist = new window.Player.ArtistDetails(
+            {
+                name: trackName.artist,
+                mbid: "",
+                url: "",
+                cover: ""
+            }
+        );
+
         mediaDetails.title = trackName.title;
         mediaDetails.url = media.player.default;
 
@@ -79,7 +87,7 @@ window.Player.YouTubePlaylistLoader.prototype =
             if(list[i].video.restrictions)
             {
                 var restr = list[i].video.restrictions;
-                Logger.getInstance().Debug("[YT] Playback restrictions: "+restr.length+" | relationship: "+restr[0].relationship+" | type: "+restr[0].type+" | countries: "+restr[0].countries);
+                Logger.getInstance().debug("[YT] Playback restrictions: "+restr.length+" | relationship: "+restr[0].relationship+" | type: "+restr[0].type+" | countries: "+restr[0].countries);
             }
             var mediaDetails = null;
             try
@@ -88,7 +96,7 @@ window.Player.YouTubePlaylistLoader.prototype =
             }
             catch(e)
             {
-                Logger.getInstance().Warning(e);
+                Logger.getInstance().warning(e);
             }
 
             if (mediaDetails !== null)
@@ -111,6 +119,7 @@ window.Player.YouTubePlaylistLoader.prototype =
             window.Player.YouTubePlaylistConstant.FEED_PARAMS +
             window.Player.YouTubePlaylistConstant.FEED_QUANTITY_PARAMS;
 
+        UserNotifier.getInstance().info("Please wait - loading youtube playlist details.");
         //TODO i belieave that it can be done in better way
         (function __obtainPlaylistDetails(playlist, callback, that)
         {
@@ -118,7 +127,7 @@ window.Player.YouTubePlaylistLoader.prototype =
             {
                 var endIndex = startingIndex + window.Player.YouTubePlaylistConstant.MAX_NUMBER_OF_RESULTS;
                 //startingIndex++;
-                Logger.getInstance().Debug("[YT] Playlist details request for items in range: "+startingIndex+" - "+endIndex);
+                Logger.getInstance().debug("[YT] Playlist details request for items in range: "+startingIndex+" - "+endIndex);
                 $.getJSON(url+startingIndex, function(result)
                 {
                     if(result.data.items)
@@ -152,7 +161,8 @@ window.Player.YouTubePlaylistLoader.prototype =
             window.Common.UrlParserConstants.PARAMS_START_SIGN +
             window.Player.YouTubePlaylistConstant.FEED_PARAMS;
 
-        Logger.getInstance().Debug("[YT] Video details request");
+        Logger.getInstance().debug("[YT] Video details request");
+        UserNotifier.getInstance().info("Please wait - loading youtube video details.");
         $.getJSON(url, $.proxy(function(result)
         {
             //create a table from result
@@ -168,7 +178,7 @@ window.Player.YouTubePlaylistLoader.prototype =
     //playlist is returned via callback function
     loadPlaylistFromUrl : function(url, callback)
     {
-        Logger.getInstance().Debug("[YT] Sending data request for url: "+url);
+        Logger.getInstance().debug("[YT] Sending data request for url: "+url);
         var parser = new window.Common.UrlParser();
         var playlistId = parser.getParameterValue(url, window.Player.YouTubePlaylistConstant.PLAYLIST_PARAMETER_NAME);
         

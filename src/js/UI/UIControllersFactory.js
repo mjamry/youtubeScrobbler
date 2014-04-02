@@ -66,5 +66,10 @@ window.UI.UIControllersFactory.prototype =
     createColorSchemeControlViewController: function()
     {
         return new window.UI.ColorSchemeControlViewController(window.UI.ColorSchemeControlConfig);
+    },
+
+    createUserNotificationViewController: function()
+    {
+        return new window.UI.UserNotifierViewController("#user-notifications-container", window.UI.UserNotifierConfiguration);
     }
 };

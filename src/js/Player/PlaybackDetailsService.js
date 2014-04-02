@@ -88,5 +88,16 @@ window.Player.PlaybackDetailsService.prototype =
     getDataProgress: function()
     {
         return (( this.playbackDetails.bufferedBytes / this.playbackDetails.bytesTotal ) * 100);
+    },
+
+    clearData: function()
+    {
+        this.playbackDetails =
+        {
+            currentTime: 0,
+            duration: 0,
+            bufferedBytes: 0,
+            bytesTotal: 0
+        };
     }
 };

@@ -11,8 +11,8 @@ window.ApplicationCore.SessionHandler.prototype =
 {
     _postSessionObtained: function()
     {
-        Logger.getInstance().Info("Session has been established.");
-        Logger.getInstance().Debug("Session details - user: " + this.currentSession.name + ", key: "+ this.currentSession.key);
+        Logger.getInstance().info("Session has been established.");
+        Logger.getInstance().debug("Session details - user: " + this.currentSession.name + ", key: "+ this.currentSession.key);
         EventBroker.getInstance().fireEventWithData(window.LastFm.Events.SessionEstablished, this.currentSession.name);
     },
 
@@ -29,6 +29,7 @@ window.ApplicationCore.SessionHandler.prototype =
 
     _handleSessionObtainingFailed: function()
     {
+        this.currentSession = null;
         EventBroker.getInstance().fireEvent(window.LastFm.Events.SessionEstablishmentFailed);
     },
 
@@ -79,6 +80,11 @@ window.ApplicationCore.SessionHandler.prototype =
         }
     },
 
+    isSessionEstablished: function()
+    {
+        return this.currentSession !== null;
+    },
+
     //returns current session
     getSession: function()
     {
@@ -87,7 +93,7 @@ window.ApplicationCore.SessionHandler.prototype =
             return this.currentSession;
         }
 
-        Logger.getInstance().Warning("Session has not been established yet.");
+        Logger.getInstance().warning("Session has not been established yet.");
         //TODO - change it to null
         return {name:""};
     }

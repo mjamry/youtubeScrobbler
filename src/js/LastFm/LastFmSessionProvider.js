@@ -8,14 +8,14 @@ window.Common = window.Common || {};
 window.LastFm.LastFmSessionProvider = function(lastFmApi)
 {
     this.lastFmApi = lastFmApi;
-    Logger.getInstance().Info("Last fm session handler has been created.");
+    Logger.getInstance().info("Last fm session handler has been created.");
 };
 
 window.LastFm.LastFmSessionProvider.prototype =
 {
     create: function(token, callbacks)
     {
-        Logger.getInstance().Debug("Last fm - new session requested using token: " + token);
+        Logger.getInstance().debug("Last fm - new session requested using token: " + token);
         this.lastFmApi.auth.getSession({token:token},
             {
                 success: $.proxy(function(response)
@@ -31,7 +31,7 @@ window.LastFm.LastFmSessionProvider.prototype =
 
                 error: $.proxy(function(err, msg)
                 {
-                    Logger.getInstance().Warning("Cannot establish session: " + msg);
+                    Logger.getInstance().warning("Cannot establish session: " + msg);
 
                     callbacks.error();
                 }, this)

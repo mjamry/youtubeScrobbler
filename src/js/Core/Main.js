@@ -32,7 +32,11 @@ $(function()
     uilogger.initialise();
     uilogger.isLoggingAllowed = true;
 
-    Logger.getInstance().Info("Application initialisation started.");
+    new UserNotifier();
+    var userNotifier = coreServicesFactory.createUserNotifier();
+    UserNotifier.setInstance(userNotifier);
+
+    Logger.getInstance().info("Application initialisation started.");
     new TimeParser();
     TimeParser.setInstance(new window.Common.TimeParserImpl());
 
@@ -63,8 +67,7 @@ $(function()
     var testReport = uiFactory.createTestReportViewController();
     testReport.initialise();
 
-    Logger.getInstance().Info("Application initialisation ended.");
-
+    Logger.getInstance().info("Application initialisation ended.");
 });
 
 $(window).unload(function()

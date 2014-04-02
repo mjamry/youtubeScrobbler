@@ -16,4 +16,8 @@ beforeEach(function()
     new LocalStorage();
     var localStorage = new window.Common.LocalStorageImpl();
     LocalStorage.setInstance(localStorage);
+
+    new UserNotifier();
+    var userNotifier = new window.Common.UserNotifierImpl();
+    UserNotifier.setInstance(userNotifier);
 });

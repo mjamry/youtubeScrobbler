@@ -8,7 +8,7 @@ window.Common = window.Common || {};
 window.Player.PlaylistService = function()
 {
     this.playlist = new window.Player.Playlist();
-    Logger.getInstance().Info("Playlist service has been created.");
+    Logger.getInstance().info("Playlist service has been created.");
 };
 
 window.Player.PlaylistService.prototype =
@@ -32,7 +32,9 @@ window.Player.PlaylistService.prototype =
     //creates new empty playlist replacing existing one.
     clearPlaylist: function()
     {
-        Logger.getInstance().Info("Playlist has been cleared. "+ this.playlist.length() +" items removed.");
+        var msg = "Playlist has been cleared. "+ this.playlist.length() +" item(s) removed.";
+        Logger.getInstance().info(msg);
+        UserNotifier.getInstance().info(msg, function(){alert("undo playlist clear");});
         this.playlist = new window.Player.Playlist();
         EventBroker.getInstance().fireEvent(window.Player.PlaylistEvents.PlaylistCleared);
 
@@ -47,15 +49,21 @@ window.Player.PlaylistService.prototype =
         {
             playlist.deserialize(storedData.mediaList);
             this.playlist = playlist;
-            Logger.getInstance().Info("Playlist has been restored with "+playlist.length()+" elements.");
+
             EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, playlist.length());
+            var msg = playlist.length()+" item(s) have been read and added to the playlist.";
+            Logger.getInstance().info(msg);
+            UserNotifier.getInstance().info(msg);
         }
     },
 
     savePlaylist: function()
     {
         LocalStorage.getInstance().setData("tempPl", this.playlist);
-        Logger.getInstance().Info("Playlist has been saved with "+this.playlist.length()+" elements.");
+
+        var msg = "Playlist has been saved with "+this.playlist.length()+" element(s).";
+        Logger.getInstance().info(msg);
+        UserNotifier.getInstance().info(msg);
     },
 
     //adds new playlist (or single media) to existing playlist.
@@ -68,7 +76,9 @@ window.Player.PlaylistService.prototype =
             EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, playlist.length());
         }
 
-        Logger.getInstance().Info(playlist.length()+" new element(s) has been added to current playlist. It has now "+this.playlist.length()+" elements.");
+        var msg = playlist.length()+" new item(s) have been successfully added to the playlist";
+        Logger.getInstance().info(msg);
+        UserNotifier.getInstance().info(msg);
 
         this._updatePlaylist(playlist.length());
     },
@@ -94,8 +104,12 @@ window.Player.PlaylistService.prototype =
     removeItem: function(index)
     {
         var currentItem = this.playlist.currentItemIndex;
+        var mediaDetails = this.playlist.get(index);
         this.playlist.remove(index);
-        Logger.getInstance().Debug("Element has been removed from playlist, now it contains "+this.playlist.length()+" elements.");
+
+        var msg = "'"+mediaDetails.artist.name+" - "+mediaDetails.title+"' has been removed from the playlist.";
+        Logger.getInstance().info(msg);
+        UserNotifier.getInstance().info(msg, function(){alert("undo remove item");});
         EventBroker.getInstance().fireEventWithData(
             window.Player.PlaylistEvents.PlaylistItemRemoved,
             {

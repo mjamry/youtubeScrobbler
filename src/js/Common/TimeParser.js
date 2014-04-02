@@ -11,7 +11,7 @@ TimeParser.getInstance = function()
     if(TimeParser._instance === null)
     {
         var errorMsg = "Instance of TimeParser has not been set yet!";
-        Logger.getInstance().Error(errorMsg);
+        Logger.getInstance().error(errorMsg);
         throw errorMsg;
     }
 
@@ -23,7 +23,7 @@ TimeParser.setInstance = function(instance)
     if(TimeParser._instance !== null)
     {
         var errorMsg = "Instance of TimeParser has been already set!";
-        Logger.getInstance().Error(errorMsg);
+        Logger.getInstance().error(errorMsg);
         throw errorMsg;
     }
 

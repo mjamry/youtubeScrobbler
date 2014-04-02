@@ -38,7 +38,7 @@ window.Player.MediaPlayer.prototype =
                     that.instance = mediaElement;
                     that._initialise(mediaElement);
 
-                    Logger.getInstance().Info("Media player has been initialised");
+                    Logger.getInstance().info("Media player has been initialised");
                     that._load(mediaDetails);
                     that._updateCurrentMediaDetails(mediaDetails);
                 };
@@ -49,7 +49,8 @@ window.Player.MediaPlayer.prototype =
                 success: successCallback(this, mediaDetails),
                 error: function ()
                 {
-                    Logger.getInstance().Error("Media player initialisation failed.");
+                    Logger.getInstance().error("Media player initialisation failed.");
+                    UserNotifier.getInstance().error("Media player initialisation failed. Please refresh page.");
                 }
             }, this.config
         );

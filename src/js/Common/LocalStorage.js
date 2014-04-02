@@ -11,7 +11,7 @@ LocalStorage.setInstance = function(instance)
     if(LocalStorage._instance !== null)
     {
         var errorMsg = "Instance of LocalStorage has been already set!";
-        Logger.getInstance().Error(errorMsg);
+        Logger.getInstance().error(errorMsg);
         throw errorMsg;
     }
 
@@ -23,7 +23,7 @@ LocalStorage.getInstance = function()
     if(LocalStorage._instance === null)
     {
         var errorMsg = "Instance of LocalStorage has not been set yet!";
-        Logger.getInstance().Error(errorMsg);
+        Logger.getInstance().error(errorMsg);
         throw errorMsg;
     }
 
@@ -36,7 +36,7 @@ window.Common.LocalStorageImpl.prototype =
 {
     setData: function(name, value)
     {
-        Logger.getInstance().Info("[LocalStorage] "+name+" has been saved.");
+        Logger.getInstance().info("[LocalStorage] "+name+" has been saved.");
         localStorage.setItem(name, JSON.stringify(value));
     },
 
@@ -45,14 +45,14 @@ window.Common.LocalStorageImpl.prototype =
         var value = JSON.parse(localStorage.getItem(name));
         if(value)
         {
-            Logger.getInstance().Info("[LocalStorage] "+name+" has been read.");
+            Logger.getInstance().info("[LocalStorage] "+name+" has been read.");
         }
         return value;
     },
 
     removeData: function(name)
     {
-        Logger.getInstance().Info("[LocalStorage] "+name+" has been removed.");
+        Logger.getInstance().info("[LocalStorage] "+name+" has been removed.");
         localStorage.removeItem(name);
     }
 };
