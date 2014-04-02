@@ -53,7 +53,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
     //And the track has been played for at least half its duration, or for 4 minutes (whichever occurs earlier.)
     _updateScrobbling: function(mediaDetails)
     {
-        if(this._trackCanBeScrobbled(mediaDetails, this._trackStartPlayingTime))
+        if(this._sessionHandler.isSessionEstablished() && this._trackCanBeScrobbled(mediaDetails, this._trackStartPlayingTime))
         {
             this._scrobbler.scrobble(
                 {
@@ -70,7 +70,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
     _updateNowPlaying: function(mediaDetails)
     {
         //update now playing only when new track is loaded - it prevents before reaction on pause/play events
-        if(this._currentlyLoaded != mediaDetails)
+        if(this._sessionHandler.isSessionEstablished() && this._currentlyLoaded != mediaDetails)
         {
             this._currentlyLoaded = mediaDetails;
             this._trackStartPlayingTime = new Date().getTime();

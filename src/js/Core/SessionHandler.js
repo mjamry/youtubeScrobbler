@@ -29,6 +29,7 @@ window.ApplicationCore.SessionHandler.prototype =
 
     _handleSessionObtainingFailed: function()
     {
+        this.currentSession = null;
         EventBroker.getInstance().fireEvent(window.LastFm.Events.SessionEstablishmentFailed);
     },
 
@@ -77,6 +78,11 @@ window.ApplicationCore.SessionHandler.prototype =
         {
             this._postSessionObtained();
         }
+    },
+
+    isSessionEstablished: function()
+    {
+        return this.currentSession !== null;
     },
 
     //returns current session
