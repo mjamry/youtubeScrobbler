@@ -34,7 +34,7 @@ window.Player.PlaylistService.prototype =
     {
         var msg = "Playlist has been cleared. "+ this.playlist.length() +" item(s) removed.";
         Logger.getInstance().info(msg);
-        UserNotifier.getInstance().info(msg, function(){alert("undo playlist clear");});
+        UserNotifier.getInstance().info(msg, $.proxy(this.restorePlaylist, this));
         this.playlist = new window.Player.Playlist();
         EventBroker.getInstance().fireEvent(window.Player.PlaylistEvents.PlaylistCleared);
 
