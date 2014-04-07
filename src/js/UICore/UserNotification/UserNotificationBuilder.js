@@ -64,7 +64,13 @@ window.UI.UserNotificationBuilder.prototype =
     setUndoAction: function(callback)
     {
         this.item.find(this.config.UndoButton).show();
-        this.item.find(this.config.UndoButton).click(callback);
+        this.item.find(this.config.UndoButton).click(
+            $.proxy(function()
+            {
+                callback();
+                this._clearNotification();
+            },
+            this));
     },
 
     build: function()
