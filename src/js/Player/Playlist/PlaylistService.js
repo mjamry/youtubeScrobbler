@@ -83,6 +83,17 @@ window.Player.PlaylistService.prototype =
         this._updatePlaylist(playlist.length());
     },
 
+    insertIntoPlaylist: function(index, details)
+    {
+        this.playlist.insert(index, details);
+
+        var msg = "New item have been successfully added to the playlist, on position: "+(index+1);
+        Logger.getInstance().info(msg);
+        UserNotifier.getInstance().info(msg);
+
+        this._updatePlaylist(0);
+    },
+
     updateItem: function(index, updatedMediaDetails)
     {
         var item = this.playlist.get(index);
@@ -109,7 +120,10 @@ window.Player.PlaylistService.prototype =
 
         var msg = "'"+mediaDetails.artist.name+" - "+mediaDetails.title+"' has been removed from the playlist.";
         Logger.getInstance().info(msg);
-        UserNotifier.getInstance().info(msg, function(){alert("undo remove item");});
+        UserNotifier.getInstance().info(msg, $.proxy(function()
+        {
+            this.insertIntoPlaylist(index, mediaDetails);
+        }, this));
         EventBroker.getInstance().fireEventWithData(
             window.Player.PlaylistEvents.PlaylistItemRemoved,
             {

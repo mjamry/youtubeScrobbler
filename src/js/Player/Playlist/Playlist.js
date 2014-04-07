@@ -21,6 +21,11 @@ window.Player.Playlist.prototype =
         this.mediaList = this.mediaList.concat(playlist.mediaList);
     },
 
+    insert: function(index, mediaDetails)
+    {
+        this.mediaList.splice(index, 0, mediaDetails);
+    },
+
     get: function(index)
     {
         return this.mediaList[index];
