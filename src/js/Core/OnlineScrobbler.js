@@ -23,26 +23,28 @@ window.ApplicationCore.OnlineScrobbler.prototype =
     //Checks if all requirements has been resolved to scrobble the track.
     _trackCanBeScrobbled: function(mediaDetails, startTime)
     {
-        var timeInSeconds = 0;
-        //is track longer than 30s
-        if(mediaDetails && mediaDetails.duration && mediaDetails.duration.getInSeconds() > 30)
+        //check if there was any track previously played
+        if(startTime)
         {
-            //calculate playing time
-            var playingTime = (new Date().getTime() - startTime);
+            var timeInSeconds = 0;
+            //is track longer than 30s
+            if (mediaDetails && mediaDetails.duration && mediaDetails.duration.getInSeconds() > 30) {
+                //calculate playing time
+                var playingTime = (new Date().getTime() - startTime);
 
-            //if played for 4 minutes or at least hals of its duration
-            timeInSeconds = TimeParser.getInstance().getSeconds(playingTime);
-            var timeInMinutes = TimeParser.getInstance().getMinutes(playingTime);
-            if(
-                timeInMinutes > 4 ||
-                (timeInSeconds > mediaDetails.duration.getInSeconds() / 2))
-            {
-                return true;
+                //if played for 4 minutes or at least hals of its duration
+                timeInSeconds = TimeParser.getInstance().getSeconds(playingTime);
+                var timeInMinutes = TimeParser.getInstance().getMinutes(playingTime);
+                if (
+                    timeInMinutes > 4 ||
+                    (timeInSeconds > mediaDetails.duration.getInSeconds() / 2)) {
+                    return true;
+                }
             }
+            var msg = "Cannot scrobble track, because playing time was to short: " + timeInSeconds + "s.";
+            Logger.getInstance().warning("[Scrobbler] " + msg);
+            UserNotifier.getInstance().error("Cannot scrobble track, because playing time was to short: " + timeInSeconds + "s.");
         }
-        var msg = "Cannot scrobble track, because playing time was to short: " + timeInSeconds + "s.";
-        Logger.getInstance().warning("[Scrobbler] "+msg);
-        UserNotifier.getInstance().error("Cannot scrobble track, because playing time was to short: " + timeInSeconds + "s.");
         return false;
     },
 
@@ -91,6 +93,11 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         this._trackStartPlayingTime = null;
     },
 
+    _handlePlaylistCleared: function()
+    {
+        this._trackStartPlayingTime = null;
+    },
+
     initialise: function()
     {
         EventBroker.getInstance().addListener(
@@ -109,6 +116,8 @@ window.ApplicationCore.OnlineScrobbler.prototype =
             }, this)
         );
 
+        //clear track playing timeout
         EventBroker.getInstance().addListener(window.Player.Events.MediaStopped, $.proxy(this._handleMediaStopped, this));
+        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCleared, $.proxy(this._handlePlaylistCleared, this));
     }
 };
