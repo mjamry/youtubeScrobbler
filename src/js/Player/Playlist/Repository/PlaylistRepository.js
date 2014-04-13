@@ -16,8 +16,8 @@ window.Playlist.PlaylistRepository.prototype =
         return this.dataProvider.load(name);
     },
 
-    save: function(name)
+    save: function(name, data)
     {
-        this.dataProvider.save(name);
+        this.dataProvider.save(name, data);
     }
 };

@@ -8,19 +8,18 @@ window.Playlist.PlaylistLocalRepository.prototype =
 {
     load: function(name)
     {
-        var storedData = LocalStorage.getInstance().getData("tempPl");
+        var storedData = LocalStorage.getInstance().getData(name);
         var playlist = new window.Player.Playlist();
         if(storedData !== null && storedData.mediaList.length > 0)
         {
             playlist.deserialize(storedData.mediaList);
-            this.playlist = playlist;
         }
 
         return playlist;
     },
 
-    save: function(name)
+    save: function(name, playlist)
     {
-        LocalStorage.getInstance().setData("tempPl", this.playlist);
+        LocalStorage.getInstance().setData(name, playlist);
     }
 };

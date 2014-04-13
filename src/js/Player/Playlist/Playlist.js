@@ -100,5 +100,10 @@ window.Player.Playlist.prototype =
             mediaDetails.deserialize(data[i]);
             this.addItem(mediaDetails);
         }
+    },
+
+    isEmpty: function()
+    {
+        return this.length !== 0;
     }
 };

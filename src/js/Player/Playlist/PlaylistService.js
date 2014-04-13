@@ -45,16 +45,24 @@ window.Player.PlaylistService.prototype =
     restorePlaylist: function()
     {
         this.playlist = this.playlistRepository.load("tempPl");
+        if(!this.playlist.isEmpty())
+        {
+            EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, this.playlist.length());
+            var msg = this.playlist.length() + " item(s) have been read and added to the playlist.";
 
-        EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, this.playlist.length());
-        var msg = this.playlist.length()+" item(s) have been read and added to the playlist.";
+        }
+        else
+        {
+            var msg = "There is no playlist saved. Please create a new one."
+        }
+
         Logger.getInstance().info(msg);
         UserNotifier.getInstance().info(msg);
     },
 
     savePlaylist: function()
     {
-        this.playlistRepository.save("tempPl");
+        this.playlistRepository.save("tempPl", this.playlist);
 
         var msg = "Playlist has been saved with "+this.playlist.length()+" element(s).";
         Logger.getInstance().info(msg);
