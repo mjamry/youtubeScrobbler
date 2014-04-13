@@ -5,9 +5,10 @@ window.Player = window.Player || {};
 window.Common = window.Common || {};
 
 
-window.Player.PlaylistService = function()
+window.Player.PlaylistService = function(playlistRepo)
 {
     this.playlist = new window.Player.Playlist();
+    this.playlistRepository = new window.Playlist.PlaylistRepository(playlistRepo);
     Logger.getInstance().info("Playlist service has been created.");
 };
 
@@ -43,23 +44,17 @@ window.Player.PlaylistService.prototype =
 
     restorePlaylist: function()
     {
-        var storedData = LocalStorage.getInstance().getData("tempPl");
-        var playlist = new window.Player.Playlist();
-        if(storedData !== null && storedData.mediaList.length > 0)
-        {
-            playlist.deserialize(storedData.mediaList);
-            this.playlist = playlist;
+        this.playlist = this.playlistRepository.load("tempPl");
 
-            EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, playlist.length());
-            var msg = playlist.length()+" item(s) have been read and added to the playlist.";
-            Logger.getInstance().info(msg);
-            UserNotifier.getInstance().info(msg);
-        }
+        EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, this.playlist.length());
+        var msg = this.playlist.length()+" item(s) have been read and added to the playlist.";
+        Logger.getInstance().info(msg);
+        UserNotifier.getInstance().info(msg);
     },
 
     savePlaylist: function()
     {
-        LocalStorage.getInstance().setData("tempPl", this.playlist);
+        this.playlistRepository.save("tempPl");
 
         var msg = "Playlist has been saved with "+this.playlist.length()+" element(s).";
         Logger.getInstance().info(msg);
