@@ -22,7 +22,7 @@ window.Player.PlaylistService.prototype =
 
     initialise: function()
     {
-        this.restorePlaylist();
+        this.loadPlaylist();
     },
 
     refreshPlaylist: function()
@@ -35,14 +35,14 @@ window.Player.PlaylistService.prototype =
     {
         var msg = "Playlist has been cleared. "+ this.playlist.length() +" item(s) removed.";
         Logger.getInstance().info(msg);
-        UserNotifier.getInstance().info(msg, $.proxy(this.restorePlaylist, this));
+        UserNotifier.getInstance().info(msg, $.proxy(this.loadPlaylist, this));
         this.playlist = new window.Player.Playlist();
         EventBroker.getInstance().fireEvent(window.Player.PlaylistEvents.PlaylistCleared);
 
         this._updatePlaylist();
     },
 
-    restorePlaylist: function()
+    loadPlaylist: function()
     {
         this.playlist = this.playlistRepository.load("tempPl");
         if(!this.playlist.isEmpty())
