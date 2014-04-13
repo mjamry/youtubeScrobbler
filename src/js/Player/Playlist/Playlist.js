@@ -104,6 +104,6 @@ window.Player.Playlist.prototype =
 
     isEmpty: function()
     {
-        return this.length !== 0;
+        return this.length() === 0;
     }
 };

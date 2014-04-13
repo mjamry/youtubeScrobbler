@@ -7,7 +7,7 @@ window.Common = window.Common || {};
 
 window.Player.PlaylistService = function(playlistRepo)
 {
-    this.playlist = new window.Player.Playlist();
+    this.playlist = new window.Playlist.PersistentPlaylist(playlistRepo);
     this.playlistRepository = new window.Playlist.PlaylistRepository(playlistRepo);
     Logger.getInstance().info("Playlist service has been created.");
 };
@@ -35,8 +35,16 @@ window.Player.PlaylistService.prototype =
     {
         var msg = "Playlist has been cleared. "+ this.playlist.length() +" item(s) removed.";
         Logger.getInstance().info(msg);
-        UserNotifier.getInstance().info(msg, $.proxy(this.loadPlaylist, this));
-        this.playlist = new window.Player.Playlist();
+        UserNotifier.getInstance().info(msg, $.proxy(
+            function()
+            {
+                var storedPlaylist = this.playlist.getStoredState();
+                this.playlist.set(storedPlaylist);
+                EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, this.playlist.length());
+            },
+            this));
+
+        this.playlist.set(new window.Player.Playlist());
         EventBroker.getInstance().fireEvent(window.Player.PlaylistEvents.PlaylistCleared);
 
         this._updatePlaylist();
@@ -44,13 +52,12 @@ window.Player.PlaylistService.prototype =
 
     loadPlaylist: function()
     {
-        this.playlist = this.playlistRepository.load("tempPl");
+        this.playlist.set(this.playlistRepository.load("tempPl"));
         var msg = "";
         if(!this.playlist.isEmpty())
         {
             EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, this.playlist.length());
             msg = this.playlist.length() + " item(s) have been read and added to the playlist.";
-
         }
         else
         {
@@ -63,7 +70,7 @@ window.Player.PlaylistService.prototype =
 
     savePlaylist: function()
     {
-        this.playlistRepository.save("tempPl", this.playlist);
+        this.playlistRepository.save("tempPl", this.playlist.getCurrentState());
 
         var msg = "Playlist has been saved with "+this.playlist.length()+" element(s).";
         Logger.getInstance().info(msg);
@@ -141,12 +148,12 @@ window.Player.PlaylistService.prototype =
     getPlaylist: function()
     {
         //TODO return playlistController instead of playlist - so playlist can be modified only by this service
-        return this.playlist;
+        return this.playlist.getCurrentState();
     },
 
     getCurrentItemDetails: function()
     {
-        var index = this.playlist.currentItemIndex;
+        var index = this.playlist.getCurrentState().currentItemIndex;
         return this.playlist.get(index);
     }
 };
