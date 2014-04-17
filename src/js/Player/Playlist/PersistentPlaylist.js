@@ -45,6 +45,7 @@ window.Playlist.PersistentPlaylist.prototype =
         this.innerPlaylist.shuffle();
     },
 
+    //non persistent methods
     getCurrentState: function()
     {
         return this.innerPlaylist;
@@ -57,11 +58,9 @@ window.Playlist.PersistentPlaylist.prototype =
 
     set: function(playlist)
     {
-        this.repository.save(this.persistentPlaylistName, this.innerPlaylist);
         this.innerPlaylist = playlist;
     },
 
-    //non persistent methods
     get: function(index)
     {
         return this.innerPlaylist.get(index);

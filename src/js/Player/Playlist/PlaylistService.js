@@ -20,9 +20,18 @@ window.Player.PlaylistService.prototype =
         EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistUpdated, numberOfNewItems);
     },
 
+    _setPlaylist: function(playlist)
+    {
+        this.playlist.set(playlist);
+        if(!playlist.isEmpty())
+        {
+            EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, this.playlist.length());
+        }
+    },
+
     initialise: function()
     {
-        this.loadPlaylist();
+        this._setPlaylist(this.playlist.getStoredState());
     },
 
     refreshPlaylist: function()
@@ -38,14 +47,11 @@ window.Player.PlaylistService.prototype =
         UserNotifier.getInstance().info(msg, $.proxy(
             function()
             {
-                var storedPlaylist = this.playlist.getStoredState();
-                this.playlist.set(storedPlaylist);
-                EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, this.playlist.length());
+                this._setPlaylist(this.playlist.getStoredState());
             },
             this));
 
-        this.playlist.set(new window.Player.Playlist());
-        EventBroker.getInstance().fireEvent(window.Player.PlaylistEvents.PlaylistCleared);
+        this._setPlaylist(new window.Player.Playlist());
 
         this._updatePlaylist();
     },
