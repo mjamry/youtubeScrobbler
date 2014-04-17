@@ -52,6 +52,7 @@ window.Player.PlaylistService.prototype =
             this));
 
         this._setPlaylist(new window.Player.Playlist());
+        EventBroker.getInstance().fireEvent(window.Player.PlaylistEvents.PlaylistCleared);
 
         this._updatePlaylist();
     },
