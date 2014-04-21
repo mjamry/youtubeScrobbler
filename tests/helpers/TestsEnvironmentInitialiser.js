@@ -18,6 +18,6 @@ beforeEach(function()
     LocalStorage.setInstance(localStorage);
 
     new UserNotifier();
-    var userNotifier = new window.Common.UserNotifierImpl();
+    var userNotifier = new MockUserNotifier();
     UserNotifier.setInstance(userNotifier);
 });
