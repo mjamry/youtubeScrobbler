@@ -96,6 +96,25 @@ window.ApplicationCore.SessionHandler.prototype =
         Logger.getInstance().warning("Session has not been established yet.");
         //TODO - change it to null
         return {name:""};
+    },
+
+    getToken: function()
+    {
+        var urlPars = new window.Common.UrlParser();
+        var token = urlPars.getParameterValue(window.location.href, "token");
+
+        Logger.getInstance().debug("Token: "+token+" has been obtained.");
+
+        return token;
+    },
+
+    clearToken: function()
+    {
+        if(token != window.Common.UrlParserConstants.URL_PARSE_ERR)
+        {
+            //reload page removing parameters
+            window.location = window.location.pathname;
+        }
     }
 };
 
