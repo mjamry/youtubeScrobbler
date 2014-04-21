@@ -5,9 +5,10 @@ window.Player = window.Player || {};
 window.Common = window.Common || {};
 
 
-window.Player.PlaylistService = function()
+window.Player.PlaylistService = function(playlistRepo)
 {
-    this.playlist = new window.Player.Playlist();
+    this.playlist = new window.Playlist.PersistentPlaylist(playlistRepo);
+    this.playlistRepository = new window.Playlist.PlaylistRepository(playlistRepo);
     Logger.getInstance().info("Playlist service has been created.");
 };
 
@@ -19,9 +20,18 @@ window.Player.PlaylistService.prototype =
         EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistUpdated, numberOfNewItems);
     },
 
+    _setPlaylist: function(playlist)
+    {
+        this.playlist.set(playlist);
+        if(!playlist.isEmpty())
+        {
+            EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, this.playlist.length());
+        }
+    },
+
     initialise: function()
     {
-        this.restorePlaylist();
+        this._setPlaylist(this.playlist.getStoredState());
     },
 
     refreshPlaylist: function()
@@ -34,32 +44,40 @@ window.Player.PlaylistService.prototype =
     {
         var msg = "Playlist has been cleared. "+ this.playlist.length() +" item(s) removed.";
         Logger.getInstance().info(msg);
-        UserNotifier.getInstance().info(msg, $.proxy(this.restorePlaylist, this));
-        this.playlist = new window.Player.Playlist();
+        UserNotifier.getInstance().info(msg, $.proxy(
+            function()
+            {
+                this._setPlaylist(this.playlist.getStoredState());
+            },
+            this));
+
+        this._setPlaylist(new window.Player.Playlist());
         EventBroker.getInstance().fireEvent(window.Player.PlaylistEvents.PlaylistCleared);
 
         this._updatePlaylist();
     },
 
-    restorePlaylist: function()
+    loadPlaylist: function()
     {
-        var storedData = LocalStorage.getInstance().getData("tempPl");
-        var playlist = new window.Player.Playlist();
-        if(storedData !== null && storedData.mediaList.length > 0)
+        this.playlist.set(this.playlistRepository.load("tempPl"));
+        var msg = "";
+        if(!this.playlist.isEmpty())
         {
-            playlist.deserialize(storedData.mediaList);
-            this.playlist = playlist;
-
-            EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, playlist.length());
-            var msg = playlist.length()+" item(s) have been read and added to the playlist.";
-            Logger.getInstance().info(msg);
-            UserNotifier.getInstance().info(msg);
+            EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, this.playlist.length());
+            msg = this.playlist.length() + " item(s) have been read and added to the playlist.";
         }
+        else
+        {
+            msg = "There is no playlist saved. Please create a new one.";
+        }
+
+        Logger.getInstance().info(msg);
+        UserNotifier.getInstance().info(msg);
     },
 
     savePlaylist: function()
     {
-        LocalStorage.getInstance().setData("tempPl", this.playlist);
+        this.playlistRepository.save("tempPl", this.playlist.getCurrentState());
 
         var msg = "Playlist has been saved with "+this.playlist.length()+" element(s).";
         Logger.getInstance().info(msg);
@@ -137,12 +155,12 @@ window.Player.PlaylistService.prototype =
     getPlaylist: function()
     {
         //TODO return playlistController instead of playlist - so playlist can be modified only by this service
-        return this.playlist;
+        return this.playlist.getCurrentState();
     },
 
     getCurrentItemDetails: function()
     {
-        var index = this.playlist.currentItemIndex;
+        var index = this.playlist.getCurrentState().currentItemIndex;
         return this.playlist.get(index);
     }
 };
