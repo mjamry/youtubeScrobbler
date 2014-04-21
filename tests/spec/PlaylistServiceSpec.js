@@ -22,7 +22,7 @@ describe("PlaylistService", function(){
 
     beforeEach(function()
     {
-        playlistService = new window.Player.PlaylistService();
+        playlistService = new window.Player.PlaylistService(new window.Tests.MockPlaylistRepo());
     });
 
     it("should return the same playlist as created one", function(){
