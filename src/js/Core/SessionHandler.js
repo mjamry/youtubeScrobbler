@@ -80,6 +80,7 @@ window.ApplicationCore.SessionHandler.prototype =
         }
     },
 
+    //checks if session has already been created
     isSessionEstablished: function()
     {
         return this.currentSession !== null;
@@ -96,6 +97,27 @@ window.ApplicationCore.SessionHandler.prototype =
         Logger.getInstance().warning("Session has not been established yet.");
         //TODO - change it to null
         return {name:""};
+    },
+
+    //obtains token from url parameter
+    getToken: function()
+    {
+        var urlPars = new window.Common.UrlParser();
+        var token = urlPars.getParameterValue(window.location.href, "token");
+
+        Logger.getInstance().debug("Token: "+token+" has been obtained.");
+
+        return token;
+    },
+
+    //clears token in url parameter
+    clearToken: function()
+    {
+        if(token != window.Common.UrlParserConstants.URL_PARSE_ERR)
+        {
+            //reload page removing parameters
+            window.location = window.location.pathname;
+        }
     }
 };
 
