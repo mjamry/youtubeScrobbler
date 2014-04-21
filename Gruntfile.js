@@ -6,6 +6,7 @@ module.exports = function(grunt) {
         jasmine: {
             src: ['src/js/**/*.js', '!src/js/lib/*'],
             options: {
+                vendor: 'http://code.jquery.com/jquery-1.9.0rc1.js',
                 specs: 'tests/spec/**/*.js',
                 helpers: 'tests/helpers/**/*.js',
                 outfile: 'tests/_specRunner.html'

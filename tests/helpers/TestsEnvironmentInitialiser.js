@@ -2,7 +2,7 @@
 beforeEach(function()
 {
     new Logger();
-    var logger = new MockLoggerImpl();
+    var logger = new window.Tests.MockLoggerImpl();
     Logger.setInstance(logger);
 
     new TimeParser();
@@ -18,6 +18,6 @@ beforeEach(function()
     LocalStorage.setInstance(localStorage);
 
     new UserNotifier();
-    var userNotifier = new window.Common.UserNotifierImpl();
+    var userNotifier = new window.Tests.MockUserNotifier();
     UserNotifier.setInstance(userNotifier);
 });
