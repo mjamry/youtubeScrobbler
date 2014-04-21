@@ -61,6 +61,11 @@ window.ApplicationCore.CoreServicesFactory.prototype =
     createUserNotifier: function()
     {
         return new window.Common.UserNotifierImpl();
+    },
+
+    createPlaylistLoaderService: function(playlistService)
+    {
+        return new window.Playlist.PlaylistLoaderService(playlistService);
     }
 };
 

@@ -16,15 +16,7 @@ window.UI.MediaLoadViewController.prototype =
 
     _addNewMedia: function addNewMedia(location)
     {
-        //TODO - check location type and get correct playlist provider from factory
-        var plLoader = new window.Player.YouTubePlaylistLoader();
-        plLoader.loadPlaylistFromUrl(
-            location,
-            $.proxy(function(playlist)
-            {
-                this.model.addToPlaylist(playlist);
-            }, this)
-        );
+        this.model.loadPlaylist(location);
     },
 
     initialise: function initialise()
