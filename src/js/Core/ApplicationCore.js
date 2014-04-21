@@ -13,6 +13,8 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
     this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler(this.sessionHandler);
 
     this.playlistService = coreServicesFactory.createPlaylistService();
+    this.playlistLoaderService = coreServicesFactory.createPlaylistLoaderService(this.playlistService);
+
     this.player = coreServicesFactory.createMediaPlayer(this.uiCore.getPlayerContainer(), this.playlistService);
     this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService(this.player);
 
@@ -34,7 +36,7 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     this.sessionViewController = uiFactory.createSessionViewController(this.sessionHandler);
 
-    this.mediaLoadViewController = uiFactory.createMediaLoadViewController(this.playlistService);
+    this.mediaLoadViewController = uiFactory.createMediaLoadViewController(this.playlistLoaderService);
 
     this.playlistItemEditorViewController = uiFactory.createPlaylistItemEditorViewController(this.playlistService);
 
