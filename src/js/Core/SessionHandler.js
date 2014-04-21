@@ -80,6 +80,7 @@ window.ApplicationCore.SessionHandler.prototype =
         }
     },
 
+    //checks if session has already been created
     isSessionEstablished: function()
     {
         return this.currentSession !== null;
@@ -98,6 +99,7 @@ window.ApplicationCore.SessionHandler.prototype =
         return {name:""};
     },
 
+    //obtains token from url parameter
     getToken: function()
     {
         var urlPars = new window.Common.UrlParser();
@@ -108,6 +110,7 @@ window.ApplicationCore.SessionHandler.prototype =
         return token;
     },
 
+    //clears token in url parameter
     clearToken: function()
     {
         if(token != window.Common.UrlParserConstants.URL_PARSE_ERR)
