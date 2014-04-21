@@ -111,7 +111,7 @@ window.ApplicationCore.SessionHandler.prototype =
     },
 
     //clears token in url parameter
-    clearToken: function()
+    clearToken: function(token)
     {
         if(token != window.Common.UrlParserConstants.URL_PARSE_ERR)
         {
