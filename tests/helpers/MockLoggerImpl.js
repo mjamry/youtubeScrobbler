@@ -1,6 +1,6 @@
-MockLoggerImpl = function(){};
+window.tests.helpers.MockLoggerImpl = function(){};
 
-MockLoggerImpl.prototype =
+window.tests.helpers.MockLoggerImpl.prototype =
 {
     initialise: function()
     {
