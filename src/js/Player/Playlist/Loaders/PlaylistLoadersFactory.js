@@ -19,9 +19,9 @@ window.Playlist.PlaylistLoadersFactory.prototype =
     _detectLoaderType: function(url)
     {
         //check for youtube
-        for(var i=0 ; i < window.Playlist.PlaylistLoaderConst.Youtube.length() ; i++)
+        for(var i=0 ; i < window.Playlist.PlaylistLoaderConst.Youtube.length ; i++)
         {
-            if(url.contains(window.Playlist.PlaylistLoaderConst.Youtube[i]))
+            if(url.indexOf(window.Playlist.PlaylistLoaderConst.Youtube[i]) >= 0)
             {
                 return window.Playlist.PlaylistLoaderTypes.Youtube;
             }
@@ -35,7 +35,7 @@ window.Playlist.PlaylistLoadersFactory.prototype =
         var loaderType = this._detectLoaderType(url);
         switch(loaderType)
         {
-            case window.Playlist.PlaylistLoaderTypes:
+            case window.Playlist.PlaylistLoaderTypes.Youtube:
                 return new window.Playlist.YouTubePlaylistLoader();
                 break;
 

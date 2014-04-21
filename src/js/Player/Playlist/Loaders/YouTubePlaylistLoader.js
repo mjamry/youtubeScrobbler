@@ -4,7 +4,7 @@ window.Player = window.Player || {};
 //using
 window.Common = window.Common || {};
 
-window.Player.YouTubePlaylistConstant =
+window.Playlist.YouTubePlaylistConstant =
 {
     API_URL: "https://gdata.youtube.com/feeds/api/",
     API_VERSION: 2,
@@ -23,13 +23,13 @@ window.Player.YouTubePlaylistConstant =
 };
 
 //Main responsibility is to create playlists depending upon specified url address.
-window.Player.YouTubePlaylistLoader = function(){};
+window.Playlist.YouTubePlaylistLoader = function(){};
 
-window.Player.YouTubePlaylistLoader.prototype =
+window.Playlist.YouTubePlaylistLoader.prototype =
 {
     _splitTitle: function(details)
     {
-        var namePattern = RegExp(window.Player.YouTubePlaylistConstant.REGEX_NAMING_PATTERN);
+        var namePattern = RegExp(window.Playlist.YouTubePlaylistConstant.REGEX_NAMING_PATTERN);
         var names = namePattern.exec(details);
 
         if(names)
@@ -51,7 +51,7 @@ window.Player.YouTubePlaylistLoader.prototype =
         Logger.getInstance().debug("[YT] Received details for media: "+media.title);
         var mediaDetails = new window.Player.MediaDetails();
 
-        mediaDetails.mediaType = window.Player.YouTubePlaylistConstant.MEDIA_TYPE;
+        mediaDetails.mediaType = window.Playlist.YouTubePlaylistConstant.MEDIA_TYPE;
         mediaDetails.duration = new window.Player.Duration(media.duration);
 
         var trackName = this._splitTitle(media.title);
@@ -112,12 +112,12 @@ window.Player.YouTubePlaylistLoader.prototype =
     _obtainPlaylistDetails : function(id, callback)
     {
         var playlist = new window.Player.Playlist();
-        var url = window.Player.YouTubePlaylistConstant.API_URL +
-            window.Player.YouTubePlaylistConstant.PLAYLIST_API_VALUE +
+        var url = window.Playlist.YouTubePlaylistConstant.API_URL +
+            window.Playlist.YouTubePlaylistConstant.PLAYLIST_API_VALUE +
             id +
             window.Common.UrlParserConstants.PARAMS_START_SIGN +
-            window.Player.YouTubePlaylistConstant.FEED_PARAMS +
-            window.Player.YouTubePlaylistConstant.FEED_QUANTITY_PARAMS;
+            window.Playlist.YouTubePlaylistConstant.FEED_PARAMS +
+            window.Playlist.YouTubePlaylistConstant.FEED_QUANTITY_PARAMS;
 
         UserNotifier.getInstance().info("Please wait - loading youtube playlist details.");
         //TODO i belieave that it can be done in better way
@@ -125,7 +125,7 @@ window.Player.YouTubePlaylistLoader.prototype =
         {
             return function getPlaylistFromYoutube(startingIndex)
             {
-                var endIndex = startingIndex + window.Player.YouTubePlaylistConstant.MAX_NUMBER_OF_RESULTS;
+                var endIndex = startingIndex + window.Playlist.YouTubePlaylistConstant.MAX_NUMBER_OF_RESULTS;
                 //startingIndex++;
                 Logger.getInstance().debug("[YT] Playlist details request for items in range: "+startingIndex+" - "+endIndex);
                 $.getJSON(url+startingIndex, function(result)
@@ -137,7 +137,7 @@ window.Player.YouTubePlaylistLoader.prototype =
 
                         //check if all videos details are obtained if not increment start_index and call this function once again
                         //at the end call callback passing created playlist
-                        if(result.data.items.length >= window.Player.YouTubePlaylistConstant.MAX_NUMBER_OF_RESULTS)
+                        if(result.data.items.length >= window.Playlist.YouTubePlaylistConstant.MAX_NUMBER_OF_RESULTS)
                         {
                             getPlaylistFromYoutube(endIndex);
                         }
@@ -155,11 +155,11 @@ window.Player.YouTubePlaylistLoader.prototype =
     _obtainVideoDetails : function(id, callback)
     {
         var playlist = null;
-        var url = window.Player.YouTubePlaylistConstant.API_URL +
-            window.Player.YouTubePlaylistConstant.VIDEOS_API_VALUE +
+        var url = window.Playlist.YouTubePlaylistConstant.API_URL +
+            window.Playlist.YouTubePlaylistConstant.VIDEOS_API_VALUE +
             id +
             window.Common.UrlParserConstants.PARAMS_START_SIGN +
-            window.Player.YouTubePlaylistConstant.FEED_PARAMS;
+            window.Playlist.YouTubePlaylistConstant.FEED_PARAMS;
 
         Logger.getInstance().debug("[YT] Video details request");
         UserNotifier.getInstance().info("Please wait - loading youtube video details.");
@@ -176,11 +176,11 @@ window.Player.YouTubePlaylistLoader.prototype =
     //parses specified url address (form YT). Depending on url structure it loads playlist or single video.
     //returns playlist object literal: playlist = {title:string, videos:[{id, title}]};
     //playlist is returned via callback function
-    loadPlaylistFromUrl : function(url, callback)
+    loadPlaylist : function(url, callback)
     {
         Logger.getInstance().debug("[YT] Sending data request for url: "+url);
         var parser = new window.Common.UrlParser();
-        var playlistId = parser.getParameterValue(url, window.Player.YouTubePlaylistConstant.PLAYLIST_PARAMETER_NAME);
+        var playlistId = parser.getParameterValue(url, window.Playlist.YouTubePlaylistConstant.PLAYLIST_PARAMETER_NAME);
         
         if(playlistId !== window.Common.UrlParserConstants.URL_PARSE_ERR)
         {
@@ -188,7 +188,7 @@ window.Player.YouTubePlaylistLoader.prototype =
         }
         else
         {
-            var videoId = parser.getParameterValue(url, window.Player.YouTubePlaylistConstant.VIDEO_PARAMETER_NAME);
+            var videoId = parser.getParameterValue(url, window.Playlist.YouTubePlaylistConstant.VIDEO_PARAMETER_NAME);
             if(videoId !== window.Common.UrlParserConstants.URL_PARSE_ERR)
             {
                 this._obtainVideoDetails(videoId, callback);

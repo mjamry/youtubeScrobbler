@@ -4,9 +4,8 @@ window.Playlist.DefaultPlaylistLoader = function(){};
 
 window.Playlist.DefaultPlaylistLoader.prototype =
 {
-    loadPlaylist: function(url)
+    loadPlaylist: function(url, callback)
     {
-        //for now does nothing - just return empty playlist
-        return new window.Player.Playlist();
+        //for now does nothing
     }
 };
