@@ -1,6 +1,8 @@
-window.tests.helpers.MockUserNotifier = function(){};
+window.Tests = window.Tests || {};
 
-window.tests.helpers.MockUserNotifier.prototype =
+window.Tests.MockUserNotifier = function(){};
+
+window.Tests.MockUserNotifier.prototype =
 {
     info: function showUserInformation(message, undoCallback)
     {

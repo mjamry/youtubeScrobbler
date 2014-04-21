@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Jasmine Spec Runner</title>
+
+  <link rel="stylesheet" type="text/css" href="../.grunt/grunt-contrib-jasmine/jasmine.css">
+
+
+  
+  <script src="../.grunt/grunt-contrib-jasmine/phantom-polyfill.js"></script>
+  
+  <script src="../.grunt/grunt-contrib-jasmine/jasmine.js"></script>
+  
+  <script src="../.grunt/grunt-contrib-jasmine/jasmine-html.js"></script>
+  
+  <script src="../.grunt/grunt-contrib-jasmine/boot.js"></script>
+  
+  <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
+  
+  <script src="helpers/MockLoggerImpl.js"></script>
+  
+  <script src="helpers/MockPlaylistRepository.js"></script>
+  
+  <script src="helpers/MockUserNotifier.js"></script>
+  
+  <script src="helpers/TestsEnvironmentInitialiser.js"></script>
+  
+  <script src="../src/js/Common/ApplicationEvents.js"></script>
+  
+  <script src="../src/js/Common/CookieConstants.js"></script>
+  
+  <script src="../src/js/Common/CookieHandler.js"></script>
+  
+  <script src="../src/js/Common/EventBroker.js"></script>
+  
+  <script src="../src/js/Common/GlobalErrorHandler.js"></script>
+  
+  <script src="../src/js/Common/LocalStorage.js"></script>
+  
+  <script src="../src/js/Common/Log.js"></script>
+  
+  <script src="../src/js/Common/LoggerEvents.js"></script>
+  
+  <script src="../src/js/Common/TimeParser.js"></script>
+  
+  <script src="../src/js/Common/UrlParser.js"></script>
+  
+  <script src="../src/js/Common/UserNotifier/UserNotifier.js"></script>
+  
+  <script src="../src/js/Common/UserNotifier/UserNotifierEvents.js"></script>
+  
+  <script src="../src/js/Core/ApplicationCore.js"></script>
+  
+  <script src="../src/js/Core/CoreServicesFactory.js"></script>
+  
+  <script src="../src/js/Core/Main.js"></script>
+  
+  <script src="../src/js/Core/OnlineScrobbler.js"></script>
+  
+  <script src="../src/js/Core/SessionHandler.js"></script>
+  
+  <script src="../src/js/LastFm/Common.js"></script>
+  
+  <script src="../src/js/LastFm/InformationProvider.js"></script>
+  
+  <script src="../src/js/LastFm/LastFmApiFactory.js"></script>
+  
+  <script src="../src/js/LastFm/LastFmEvents.js"></script>
+  
+  <script src="../src/js/LastFm/LastFmSessionProvider.js"></script>
+  
+  <script src="../src/js/LastFm/Scrobbler.js"></script>
+  
+  <script src="../src/js/LastFm/TrackLoveStateModifier.js"></script>
+  
+  <script src="../src/js/Player/Media/Duration.js"></script>
+  
+  <script src="../src/js/Player/Media/MediaDetails.js"></script>
+  
+  <script src="../src/js/Player/MediaPlayer.js"></script>
+  
+  <script src="../src/js/Player/MediaPlayerConfiguration.js"></script>
+  
+  <script src="../src/js/Player/PlaybackControlService.js"></script>
+  
+  <script src="../src/js/Player/PlaybackDetailsService.js"></script>
+  
+  <script src="../src/js/Player/PlaybackState.js"></script>
+  
+  <script src="../src/js/Player/PlayerEvents.js"></script>
+  
+  <script src="../src/js/Player/PlayerServicesFactory.js"></script>
+  
+  <script src="../src/js/Player/Playlist/PersistentPlaylist.js"></script>
+  
+  <script src="../src/js/Player/Playlist/Playlist.js"></script>
+  
+  <script src="../src/js/Player/Playlist/PlaylistElementDetailsProvider.js"></script>
+  
+  <script src="../src/js/Player/Playlist/PlaylistElementLoveStateModifier.js"></script>
+  
+  <script src="../src/js/Player/Playlist/PlaylistEvents.js"></script>
+  
+  <script src="../src/js/Player/Playlist/PlaylistFlowController.js"></script>
+  
+  <script src="../src/js/Player/Playlist/PlaylistService.js"></script>
+  
+  <script src="../src/js/Player/Playlist/Repository/PlaylistLocalRepository.js"></script>
+  
+  <script src="../src/js/Player/Playlist/Repository/PlaylistRepository.js"></script>
+  
+  <script src="../src/js/Player/Playlist/YouTubePlaylistLoader.js"></script>
+  
+  <script src="../src/js/Player/VideoSizeControlService.js"></script>
+  
+  <script src="../src/js/Player/VolumeControlService.js"></script>
+  
+  <script src="../src/js/Tracking/GoogleTracker.js"></script>
+  
+  <script src="../src/js/Tracking/GoogleTrackerConfig.js"></script>
+  
+  <script src="../src/js/Tracking/GoogleUiTracker.js"></script>
+  
+  <script src="../src/js/UI/Controls/VolumeControl/VolumeControl.js"></script>
+  
+  <script src="../src/js/UI/Controls/VolumeControl/VolumeControlConfiguration.js"></script>
+  
+  <script src="../src/js/UI/Logger/LoggerUIConfiguration.js"></script>
+  
+  <script src="../src/js/UI/Logger/LoggerViewController.js"></script>
+  
+  <script src="../src/js/UI/PlaybackProgressControl.js"></script>
+  
+  <script src="../src/js/UI/TestReports/ReportSender.js"></script>
+  
+  <script src="../src/js/UI/TestReports/TestReportsUIConfiguration.js"></script>
+  
+  <script src="../src/js/UI/TestReports/TestReportsViewController.js"></script>
+  
+  <script src="../src/js/UI/UIControllersFactory.js"></script>
+  
+  <script src="../src/js/UICore/ColorSchemeControl/ColorSchemeControlConfig.js"></script>
+  
+  <script src="../src/js/UICore/ColorSchemeControl/ColorSchemeControlViewController.js"></script>
+  
+  <script src="../src/js/UICore/MediaLoad/MediaLoadConfig.js"></script>
+  
+  <script src="../src/js/UICore/MediaLoad/MediaLoadViewController.js"></script>
+  
+  <script src="../src/js/UICore/PlaybackControl/PlaybackControlConfiguration.js"></script>
+  
+  <script src="../src/js/UICore/PlaybackControl/PlaybackControlViewController.js"></script>
+  
+  <script src="../src/js/UICore/PlaybackDetails/PlaybackDetailsViewConfiguration.js"></script>
+  
+  <script src="../src/js/UICore/PlaybackDetails/PlaybackDetailsViewController.js"></script>
+  
+  <script src="../src/js/UICore/Playlist/PlaylistUIConfiguration.js"></script>
+  
+  <script src="../src/js/UICore/Playlist/PlaylistUIItemBuilder.js"></script>
+  
+  <script src="../src/js/UICore/Playlist/PlaylistViewController.js"></script>
+  
+  <script src="../src/js/UICore/PlaylistControl/PlaylistControlConfiguration.js"></script>
+  
+  <script src="../src/js/UICore/PlaylistControl/PlaylistControlViewController.js"></script>
+  
+  <script src="../src/js/UICore/PlaylistItemEditor/PlaylistItemEditorConfig.js"></script>
+  
+  <script src="../src/js/UICore/PlaylistItemEditor/PlaylistItemEditorViewController.js"></script>
+  
+  <script src="../src/js/UICore/Session/SessionUIConfiguration.js"></script>
+  
+  <script src="../src/js/UICore/Session/SessionViewController.js"></script>
+  
+  <script src="../src/js/UICore/UIConstants.js"></script>
+  
+  <script src="../src/js/UICore/UICore.js"></script>
+  
+  <script src="../src/js/UICore/UIEvents.js"></script>
+  
+  <script src="../src/js/UICore/UserNotification/UserNotificationBuilder.js"></script>
+  
+  <script src="../src/js/UICore/UserNotification/UserNotifierConfiguration.js"></script>
+  
+  <script src="../src/js/UICore/UserNotification/UserNotifierViewController.js"></script>
+  
+  <script src="spec/DurationSpec.js"></script>
+  
+  <script src="spec/PlaylistServiceSpec.js"></script>
+  
+  <script src="spec/PlaylistSpec.js"></script>
+  
+  <script src="spec/TimeParserSpec.js"></script>
+  
+  <script src="../.grunt/grunt-contrib-jasmine/reporter.js"></script>
+  
+
+</head>
+<body>
+</body>
+</html>
