@@ -16,7 +16,7 @@ window.Playlist.YouTubePlaylistConstant =
     VIDEOS_API_VALUE: "videos/",
     VIDEO_TITLE_ID: 1,
     ARTIST_NAME_ID: 0,
-    MAX_NUMBER_OF_RESULTS: 50,
+    MAX_NUMBER_OF_RESULTS: 10,
     VIDEO_NAME_SEPARATOR: "-",
     MEDIA_TYPE: "video/youtube",
     REGEX_NAMING_PATTERN: "([^\\-]*)-\\s?((?:[^\\{\\}\\(\\)\\[\\]]?)*)(.*)"
@@ -92,6 +92,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
             var mediaDetails = null;
             try
             {
+                Logger.getInstance().debug("[YT] try to obtain media details for "+list[i].video.title);
                 mediaDetails = this._getMediaDetails(list[i].video);
             }
             catch(e)
@@ -101,6 +102,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
 
             if (mediaDetails !== null)
             {
+                Logger.getInstance().debug("[YT] new item added to the playlist: "+mediaDetails.artist.name+" - "+mediaDetails.title);
                 playlist.addItem(mediaDetails);
             }
         }
@@ -130,19 +132,23 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                 Logger.getInstance().debug("[YT] Playlist details request for items in range: "+startingIndex+" - "+endIndex);
                 $.getJSON(url+startingIndex, function(result)
                 {
+                    Logger.getInstance().debug("[YT] pl loading result: "+JSON.stringify(result));
                     if(result.data.items)
                     {
                         var list = result.data.items;
                         playlist.addPlaylist(that._createPlaylist(list));
 
+                        Logger.getInstance().debug("[YT] new playlist length: "+playlist.length());
                         //check if all videos details are obtained if not increment start_index and call this function once again
                         //at the end call callback passing created playlist
                         if(result.data.items.length >= window.Playlist.YouTubePlaylistConstant.MAX_NUMBER_OF_RESULTS)
                         {
+                            Logger.getInstance().debug("[YT] getting next part of items");
                             getPlaylistFromYoutube(endIndex);
                         }
                         else
                         {
+                            Logger.getInstance().debug("[YT] playlist loading finished. Pl contains "+playlist.length()+" items");
                             callback(playlist);
                         }
                     }
