@@ -4,5 +4,5 @@ window.Google = window.Google || {};
 window.Google.GoogleApiConstants =
 {
     API_KEY: 'AIzaSyC4ABYBwDsCVEVcZG9KHSFqkAWINiSylQw',
-    MAX_NUMBER_OF_ITEMS_PER_REQUEST: 10
+    MAX_NUMBER_OF_ITEMS_PER_REQUEST: 50
 };

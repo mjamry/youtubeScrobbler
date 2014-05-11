@@ -23,7 +23,10 @@ window.Playlist.YouTubePlaylistConstant =
 };
 
 //Main responsibility is to create playlists depending upon specified url address.
-window.Playlist.YouTubePlaylistLoader = function(){};
+window.Playlist.YouTubePlaylistLoader = function()
+{
+    this.googleApi = new window.Google.GoogleApiWrapper();
+};
 
 window.Playlist.YouTubePlaylistLoader.prototype =
 {
@@ -178,7 +181,61 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         },
         this));
     },
-    
+
+    _newWayOfGettingPlaylistDetails: function(playlistId, callback)
+    {
+        var options =
+        {
+            playlistId: playlistId,
+            pageToken: ""
+        };
+        //needed inside addItemsToThePlaylist function
+        var that = this;
+
+        var addItemsToThePlaylist = function(currentPlaylist)
+        {
+            return function(response)
+            {
+                currentPlaylist.addPlaylist(that._createPlaylistFromItems(response.result.items));
+
+                if (response.result.nextPageToken)
+                {
+                    options.pageToken = response.result.nextPageToken;
+                    that.googleApi.obtainPlaylistDetails(options, addItemsToThePlaylist(currentPlaylist));
+                }
+                else
+                {
+                    callback(currentPlaylist);
+                }
+            }
+        };
+
+        //start obtaining playlist items
+        this.googleApi.obtainPlaylistDetails(options, addItemsToThePlaylist(new window.Player.Playlist()));
+    },
+
+    _createPlaylistFromItems: function(items)
+    {
+        var playlist = new window.Player.Playlist();
+        for (var i = 0; i < items.length; i++)
+        {
+            Logger.getInstance().debug("Item: " + items[i].snippet.title + " link: http://www.youtube.com/watch?v=" + items[i].snippet.resourceId.videoId);
+            //TODO add policy which will decide if item can be added to the playlist
+            //this._itemAddingPolicy(playlist, item)
+            playlist.addItem(this._obtainVideoDetails(items[i].snippet));
+        }
+
+        return playlist;
+    },
+
+    _obtainVideoDetails: function(video)
+    {
+        var mediaDetails = new window.Player.MediaDetails();
+        mediaDetails.title = video.title;
+
+        return mediaDetails;
+    },
+
     //parses specified url address (form YT). Depending on url structure it loads playlist or single video.
     //returns playlist object literal: playlist = {title:string, videos:[{id, title}]};
     //playlist is returned via callback function
@@ -190,7 +247,8 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         
         if(playlistId !== window.Common.UrlParserConstants.URL_PARSE_ERR)
         {
-            this._obtainPlaylistDetails(playlistId, callback);
+            //this._obtainPlaylistDetails(playlistId, callback);
+            this._newWayOfGettingPlaylistDetails(playlistId, callback);
         }
         else
         {
