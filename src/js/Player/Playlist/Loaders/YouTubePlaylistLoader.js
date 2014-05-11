@@ -80,109 +80,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         return mediaDetails;
     },
 
-    //creates playlist using details obtained from youtube
-    _createPlaylist: function(list)
-    {
-        var playlist = new window.Player.Playlist();
-        for (var i = 0; i < list.length; i++)
-        {
-            //TODO - it is only temporary needed for debugging
-            if(list[i].video.restrictions)
-            {
-                var restr = list[i].video.restrictions;
-                Logger.getInstance().debug("[YT] Playback restrictions: "+restr.length+" | relationship: "+restr[0].relationship+" | type: "+restr[0].type+" | countries: "+restr[0].countries);
-            }
-            var mediaDetails = null;
-            try
-            {
-                Logger.getInstance().debug("[YT] try to obtain media details for "+list[i].video.title);
-                mediaDetails = this._getMediaDetails(list[i].video);
-            }
-            catch(e)
-            {
-                Logger.getInstance().warning(e);
-            }
-
-            if (mediaDetails !== null)
-            {
-                Logger.getInstance().debug("[YT] new item added to the playlist: "+mediaDetails.artist.name+" - "+mediaDetails.title);
-                playlist.addItem(mediaDetails);
-            }
-        }
-
-        return playlist;
-    },
-
-    //gets playlist using playlist id. When finished it calls callback function to return data.
-    _obtainPlaylistDetails : function(id, callback)
-    {
-        var playlist = new window.Player.Playlist();
-        var url = window.Playlist.YouTubePlaylistConstant.API_URL +
-            window.Playlist.YouTubePlaylistConstant.PLAYLIST_API_VALUE +
-            id +
-            window.Common.UrlParserConstants.PARAMS_START_SIGN +
-            window.Playlist.YouTubePlaylistConstant.FEED_PARAMS +
-            window.Playlist.YouTubePlaylistConstant.FEED_QUANTITY_PARAMS;
-
-        UserNotifier.getInstance().info("Please wait - loading youtube playlist details.");
-        //TODO i belieave that it can be done in better way
-        (function __obtainPlaylistDetails(playlist, callback, that)
-        {
-            return function getPlaylistFromYoutube(startingIndex)
-            {
-                var endIndex = startingIndex + window.Playlist.YouTubePlaylistConstant.MAX_NUMBER_OF_RESULTS;
-                //startingIndex++;
-                Logger.getInstance().debug("[YT] Playlist details request for items in range: "+startingIndex+" - "+endIndex);
-                $.getJSON(url+startingIndex, function(result)
-                {
-                    Logger.getInstance().debug("[YT] pl loading result: "+JSON.stringify(result));
-                    if(result.data.items)
-                    {
-                        var list = result.data.items;
-                        playlist.addPlaylist(that._createPlaylist(list));
-
-                        Logger.getInstance().debug("[YT] new playlist length: "+playlist.length());
-                        //check if all videos details are obtained if not increment start_index and call this function once again
-                        //at the end call callback passing created playlist
-                        if(result.data.items.length >= window.Playlist.YouTubePlaylistConstant.MAX_NUMBER_OF_RESULTS)
-                        {
-                            Logger.getInstance().debug("[YT] getting next part of items");
-                            getPlaylistFromYoutube(endIndex);
-                        }
-                        else
-                        {
-                            Logger.getInstance().debug("[YT] playlist loading finished. Pl contains "+playlist.length()+" items");
-                            callback(playlist);
-                        }
-                    }
-                });
-            };
-        })(playlist, callback, this)(1);
-    },
-            
-    //gets video data using id. When finish it calls callback function to return data.
-    _obtainVideoDetails : function(id, callback)
-    {
-        var playlist = null;
-        var url = window.Playlist.YouTubePlaylistConstant.API_URL +
-            window.Playlist.YouTubePlaylistConstant.VIDEOS_API_VALUE +
-            id +
-            window.Common.UrlParserConstants.PARAMS_START_SIGN +
-            window.Playlist.YouTubePlaylistConstant.FEED_PARAMS;
-
-        Logger.getInstance().debug("[YT] Video details request");
-        UserNotifier.getInstance().info("Please wait - loading youtube video details.");
-        $.getJSON(url, $.proxy(function(result)
-        {
-            //create a table from result
-            playlist = this._createPlaylist([{video:result.data}]);
-            //TODO what if playlist is empty?
-            callback(playlist);
-        },
-        this));
-    },
-
-    _newWayOfGettingVideoDetails: function(videoId, callback)
+    _getVideoDetails: function(videoId, callback)
     {
         var options =
         {
@@ -201,7 +99,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         this.googleApi.obtainVideoDetails(options, addVideoToThePlaylist);
     },
 
-    _newWayOfGettingPlaylistDetails: function(playlistId, callback)
+    _getPlaylistDetails: function(playlistId, callback)
     {
         var options =
         {
@@ -266,16 +164,14 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         
         if(playlistId !== window.Common.UrlParserConstants.URL_PARSE_ERR)
         {
-            //this._obtainPlaylistDetails(playlistId, callback);
-            this._newWayOfGettingPlaylistDetails(playlistId, callback);
+            this._getPlaylistDetails(playlistId, callback);
         }
         else
         {
             var videoId = parser.getParameterValue(url, window.Playlist.YouTubePlaylistConstant.VIDEO_PARAMETER_NAME);
             if(videoId !== window.Common.UrlParserConstants.URL_PARSE_ERR)
             {
-               // this._obtainVideoDetails(videoId, callback);
-                this._newWayOfGettingVideoDetails(videoId, callback);
+                this._getVideoDetails(videoId, callback);
             }
         }
     }
