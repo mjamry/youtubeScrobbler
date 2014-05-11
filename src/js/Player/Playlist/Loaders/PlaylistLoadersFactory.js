@@ -37,11 +37,9 @@ window.Playlist.PlaylistLoadersFactory.prototype =
         {
             case window.Playlist.PlaylistLoaderTypes.Youtube:
                 return new window.Playlist.YouTubePlaylistLoader();
-                break;
 
             default:
                 return new window.Playlist.DefaultPlaylistLoader();
-                break;
         }
     }
 };

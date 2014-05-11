@@ -90,7 +90,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                 {
                     callback(currentPlaylist);
                 }
-            }
+            };
         };
 
         //start obtaining playlist items
