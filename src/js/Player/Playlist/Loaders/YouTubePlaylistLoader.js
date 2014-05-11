@@ -46,40 +46,6 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         throw("[YT] Error occurs while parsing title. Incorrect naming pattern: "+details);
     },
 
-    //gets details for specified clip.
-    //if cannot retrieve details returns "undefined";
-    //TODO - handle errors while parsing video details received from YT. It is possible that video has been deleted.
-    _getMediaDetails: function(media)
-    {
-        Logger.getInstance().debug("[YT] Received details for media: "+media.title);
-        var mediaDetails = new window.Player.MediaDetails();
-
-        mediaDetails.mediaType = window.Playlist.YouTubePlaylistConstant.MEDIA_TYPE;
-        mediaDetails.duration = new window.Player.Duration(media.duration);
-
-        var trackName = this._splitTitle(media.title);
-
-        //sometime media.player is empty - do not know why...
-        if(!media.player)
-        {
-            throw("[YT] Cannot read media details. Probably file does not exist anymore: "+media.title);
-        }
-
-        mediaDetails.artist = new window.Player.ArtistDetails(
-            {
-                name: trackName.artist,
-                mbid: "",
-                url: "",
-                cover: ""
-            }
-        );
-
-        mediaDetails.title = trackName.title;
-        mediaDetails.url = media.player.default;
-
-        return mediaDetails;
-    },
-
     _getVideoDetails: function(videoId, callback)
     {
         var options =
@@ -139,7 +105,15 @@ window.Playlist.YouTubePlaylistLoader.prototype =
            // Logger.getInstance().debug("Item: " + items[i].snippet.title + " link: http://www.youtube.com/watch?v=" + items[i].snippet.resourceId.videoId);
             //TODO add a policy which will decide if item can be added to the playlist
             //this._itemAddingPolicy(playlist, item)
-            playlist.addItem(this._obtainVideoDetails(items[i].snippet));
+            try
+            {
+                playlist.addItem(this._obtainVideoDetails(items[i].snippet));
+            }
+            catch(e)
+            {
+                Logger.getInstance().warning(e);
+            }
+
         }
 
         return playlist;
@@ -148,8 +122,24 @@ window.Playlist.YouTubePlaylistLoader.prototype =
     _obtainVideoDetails: function(video)
     {
         var mediaDetails = new window.Player.MediaDetails();
-        mediaDetails.title = video.title;
+
+        mediaDetails.mediaType = window.Playlist.YouTubePlaylistConstant.MEDIA_TYPE;
         mediaDetails.duration = new window.Player.Duration(20);
+
+        var trackName = this._splitTitle(video.title);
+
+        mediaDetails.artist = new window.Player.ArtistDetails(
+            {
+                name: trackName.artist,
+                mbid: "",
+                url: "",
+                cover: ""
+            }
+        );
+
+        mediaDetails.title = trackName.title;
+        mediaDetails.url = "http://www.youtube.com/watch?v=";
+
         return mediaDetails;
     },
 
