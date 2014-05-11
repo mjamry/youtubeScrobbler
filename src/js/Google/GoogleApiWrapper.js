@@ -30,5 +30,18 @@ window.Google.GoogleApiWrapper.prototype =
 
         var request = gapi.client.youtube.playlistItems.list(options);
         request.execute(callback);
+    },
+
+    obtainVideoDetails: function(requestOptions, callback)
+    {
+        var options = $.extend(
+            {
+                part: 'snippet',
+                fields: 'items/snippet'
+            },
+            requestOptions);
+
+        var request = gapi.client.youtube.videos.list(options);
+        request.execute(callback);
     }
 };

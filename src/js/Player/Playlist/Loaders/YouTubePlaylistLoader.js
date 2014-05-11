@@ -182,6 +182,25 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         this));
     },
 
+    _newWayOfGettingVideoDetails: function(videoId, callback)
+    {
+        var options =
+        {
+            id: videoId
+        };
+
+        var that = this;
+
+        var addVideoToThePlaylist = function(response)
+        {
+            var playlist = new window.Player.Playlist();
+            playlist.addPlaylist(that._createPlaylistFromItems(response.result.items));
+            callback(playlist);
+        };
+
+        this.googleApi.obtainVideoDetails(options, addVideoToThePlaylist);
+    },
+
     _newWayOfGettingPlaylistDetails: function(playlistId, callback)
     {
         var options =
@@ -219,8 +238,8 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         var playlist = new window.Player.Playlist();
         for (var i = 0; i < items.length; i++)
         {
-            Logger.getInstance().debug("Item: " + items[i].snippet.title + " link: http://www.youtube.com/watch?v=" + items[i].snippet.resourceId.videoId);
-            //TODO add policy which will decide if item can be added to the playlist
+           // Logger.getInstance().debug("Item: " + items[i].snippet.title + " link: http://www.youtube.com/watch?v=" + items[i].snippet.resourceId.videoId);
+            //TODO add a policy which will decide if item can be added to the playlist
             //this._itemAddingPolicy(playlist, item)
             playlist.addItem(this._obtainVideoDetails(items[i].snippet));
         }
@@ -232,7 +251,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
     {
         var mediaDetails = new window.Player.MediaDetails();
         mediaDetails.title = video.title;
-
+        mediaDetails.duration = new window.Player.Duration(20);
         return mediaDetails;
     },
 
@@ -255,7 +274,8 @@ window.Playlist.YouTubePlaylistLoader.prototype =
             var videoId = parser.getParameterValue(url, window.Playlist.YouTubePlaylistConstant.VIDEO_PARAMETER_NAME);
             if(videoId !== window.Common.UrlParserConstants.URL_PARSE_ERR)
             {
-                this._obtainVideoDetails(videoId, callback);
+               // this._obtainVideoDetails(videoId, callback);
+                this._newWayOfGettingVideoDetails(videoId, callback);
             }
         }
     }
