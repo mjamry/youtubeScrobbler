@@ -3,6 +3,7 @@ window.Playlist = window.Playlist || {};
 window.Playlist.PlaylistLoaderService = function(playlistService)
 {
     this.playlisService = playlistService;
+    this.factory = new window.Playlist.PlaylistLoadersFactory();
 };
 
 window.Playlist.PlaylistLoaderService.prototype =
@@ -14,7 +15,6 @@ window.Playlist.PlaylistLoaderService.prototype =
 
     loadPlaylist: function(url)
     {
-        var factory = new window.Playlist.PlaylistLoadersFactory();
-        factory.create(url).loadPlaylist(url, $.proxy(this._handlePlaylistLoaded, this));
+        this.factory.create(url).loadPlaylist(url, $.proxy(this._handlePlaylistLoaded, this));
     }
 };

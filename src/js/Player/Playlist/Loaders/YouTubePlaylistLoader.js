@@ -5,9 +5,9 @@ window.Player = window.Player || {};
 window.Common = window.Common || {};
 
 //Main responsibility is to create playlists depending upon specified url address.
-window.Playlist.YouTubePlaylistLoader = function()
+window.Playlist.YouTubePlaylistLoader = function(dataProvider)
 {
-    this.googleApi = new window.Google.GoogleApiWrapper();
+    this.innerRepository = dataProvider;
     //TODO move to more appropriate place
     this.REGEX_NAMING_PATTERN = "([^\\-]*)-\\s?((?:[^\\{\\}\\(\\)\\[\\]]?)*)(.*)"
 };
@@ -46,7 +46,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
             callback(playlist);
         };
 
-        this.googleApi.obtainVideoDetails(options, addVideoToThePlaylist);
+        this.innerRepository.getVideoDetails(options, addVideoToThePlaylist);
     },
 
     _getPlaylistDetails: function(playlistId, callback)
@@ -68,7 +68,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                 if (response.result.nextPageToken)
                 {
                     options.pageToken = response.result.nextPageToken;
-                    that.googleApi.obtainPlaylistDetails(options, addItemsToThePlaylist(currentPlaylist));
+                    that.innerRepository.getPlaylistDetails(options, addItemsToThePlaylist(currentPlaylist));
                 }
                 else
                 {
@@ -78,7 +78,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         };
 
         //start obtaining playlist items
-        this.googleApi.obtainPlaylistDetails(options, addItemsToThePlaylist(new window.Player.Playlist()));
+        this.innerRepository.getPlaylistDetails(options, addItemsToThePlaylist(new window.Player.Playlist()));
     },
 
     _createPlaylistFromItems: function(items)

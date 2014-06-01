@@ -19,7 +19,7 @@ window.Google.GoogleApiWrapper.prototype =
         });
     },
 
-    obtainPlaylistDetails: function(requestOptions, callback)
+    getPlaylistDetails: function(requestOptions, callback)
     {
         var options = $.extend(
             {
@@ -33,7 +33,7 @@ window.Google.GoogleApiWrapper.prototype =
         request.execute(callback);
     },
 
-    obtainVideoDetails: function(requestOptions, callback)
+    getVideoDetails: function(requestOptions, callback)
     {
         var options = $.extend(
             {

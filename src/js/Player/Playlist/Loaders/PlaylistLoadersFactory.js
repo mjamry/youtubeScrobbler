@@ -12,7 +12,13 @@ window.Playlist.PlaylistLoaderTypes =
     Default: ""
 };
 
-window.Playlist.PlaylistLoadersFactory = function(){};
+window.Playlist.PlaylistLoadersFactory = function()
+{
+    this.dataProviders =
+    {
+        Youtube: new window.Google.GoogleApiWrapper()
+    };
+};
 
 window.Playlist.PlaylistLoadersFactory.prototype =
 {
@@ -36,7 +42,7 @@ window.Playlist.PlaylistLoadersFactory.prototype =
         switch(loaderType)
         {
             case window.Playlist.PlaylistLoaderTypes.Youtube:
-                return new window.Playlist.YouTubePlaylistLoader();
+                return new window.Playlist.YouTubePlaylistLoader(this.dataProviders.Youtube);
 
             default:
                 return new window.Playlist.DefaultPlaylistLoader();
