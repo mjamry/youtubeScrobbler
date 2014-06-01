@@ -4,35 +4,19 @@ window.Player = window.Player || {};
 //using
 window.Common = window.Common || {};
 
-window.Playlist.YouTubePlaylistConstant =
-{
-    API_URL: "https://gdata.youtube.com/feeds/api/",
-    API_VERSION: 2,
-    FEED_PARAMS: "alt=jsonc&v=2",
-    FEED_QUANTITY_PARAMS: "&max-results=50&start-index=",
-    PLAYLIST_PARAMETER_NAME: "list",
-    VIDEO_PARAMETER_NAME: "v",
-    PLAYLIST_API_VALUE: "playlists/",
-    VIDEOS_API_VALUE: "videos/",
-    VIDEO_TITLE_ID: 1,
-    ARTIST_NAME_ID: 0,
-    MAX_NUMBER_OF_RESULTS: 10,
-    VIDEO_NAME_SEPARATOR: "-",
-    MEDIA_TYPE: "video/youtube",
-    REGEX_NAMING_PATTERN: "([^\\-]*)-\\s?((?:[^\\{\\}\\(\\)\\[\\]]?)*)(.*)"
-};
-
 //Main responsibility is to create playlists depending upon specified url address.
 window.Playlist.YouTubePlaylistLoader = function()
 {
     this.googleApi = new window.Google.GoogleApiWrapper();
+    //TODO move to more appropriate place
+    this.REGEX_NAMING_PATTERN = "([^\\-]*)-\\s?((?:[^\\{\\}\\(\\)\\[\\]]?)*)(.*)"
 };
 
 window.Playlist.YouTubePlaylistLoader.prototype =
 {
     _splitTitle: function(details)
     {
-        var namePattern = RegExp(window.Playlist.YouTubePlaylistConstant.REGEX_NAMING_PATTERN);
+        var namePattern = RegExp(this.REGEX_NAMING_PATTERN);
         var names = namePattern.exec(details);
 
         if(names)
@@ -123,7 +107,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
     {
         var mediaDetails = new window.Player.MediaDetails();
 
-        mediaDetails.mediaType = window.Playlist.YouTubePlaylistConstant.MEDIA_TYPE;
+        mediaDetails.mediaType = window.Google.GoogleApiConstants.YOUTUBE.MEDIA_TYPE;
         mediaDetails.duration = new window.Player.Duration(20);
 
         var trackName = this._splitTitle(video.title);
@@ -138,7 +122,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         );
 
         mediaDetails.title = trackName.title;
-        mediaDetails.url = "http://www.youtube.com/watch?v="+video.resourceId.videoId;
+        mediaDetails.url = window.Google.GoogleApiConstants.YOUTUBE.URL + video.resourceId.videoId;
 
         return mediaDetails;
     },
@@ -150,7 +134,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
     {
         Logger.getInstance().debug("[YT] Sending data request for url: "+url);
         var parser = new window.Common.UrlParser();
-        var playlistId = parser.getParameterValue(url, window.Playlist.YouTubePlaylistConstant.PLAYLIST_PARAMETER_NAME);
+        var playlistId = parser.getParameterValue(url, window.Google.GoogleApiConstants.YOUTUBE.LINK_PARAMS.PLAYLIST);
         
         if(playlistId !== window.Common.UrlParserConstants.URL_PARSE_ERR)
         {
@@ -158,7 +142,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         }
         else
         {
-            var videoId = parser.getParameterValue(url, window.Playlist.YouTubePlaylistConstant.VIDEO_PARAMETER_NAME);
+            var videoId = parser.getParameterValue(url, window.Google.GoogleApiConstants.YOUTUBE.LINK_PARAMS.VIDEO);
             if(videoId !== window.Common.UrlParserConstants.URL_PARSE_ERR)
             {
                 this._getVideoDetails(videoId, callback);
