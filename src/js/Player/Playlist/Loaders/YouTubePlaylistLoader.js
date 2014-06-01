@@ -9,7 +9,7 @@ window.Playlist.YouTubePlaylistLoader = function(dataProvider)
 {
     this.dataProvider = dataProvider;
     //TODO move to more appropriate place
-    this.REGEX_NAMING_PATTERN = "([^\\-]*)-\\s?((?:[^\\{\\}\\(\\)\\[\\]]?)*)(.*)"
+    this.REGEX_NAMING_PATTERN = "([^\\-]*)-\\s?((?:[^\\{\\}\\(\\)\\[\\]]?)*)(.*)";
 };
 
 window.Playlist.YouTubePlaylistLoader.prototype =
