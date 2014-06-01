@@ -38,7 +38,7 @@ window.Google.GoogleApiWrapper.prototype =
         var options = $.extend(
             {
                 part: 'snippet',
-                fields: 'items/snippet'
+                fields: 'items(id,snippet)'
             },
             requestOptions);
 

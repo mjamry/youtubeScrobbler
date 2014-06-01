@@ -42,7 +42,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         var addVideoToThePlaylist = function(response)
         {
             var playlist = new window.Player.Playlist();
-            playlist.addPlaylist(that._createPlaylistFromItems(response.result.items));
+            playlist.addItem(that._obtainVideoDetails(response.result.items[0].snippet, response.result.items[0].id));
             callback(playlist);
         };
 
@@ -91,7 +91,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
             //this._itemAddingPolicy(playlist, item)
             try
             {
-                playlist.addItem(this._obtainVideoDetails(items[i].snippet));
+                playlist.addItem(this._obtainVideoDetails(items[i].snippet, items[i].snippet.resourceId.videoId));
             }
             catch(e)
             {
@@ -103,7 +103,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         return playlist;
     },
 
-    _obtainVideoDetails: function(video)
+    _obtainVideoDetails: function(video, id)
     {
         var mediaDetails = new window.Player.MediaDetails();
 
@@ -122,7 +122,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         );
 
         mediaDetails.title = trackName.title;
-        mediaDetails.url = window.Google.GoogleApiConstants.YOUTUBE.URL + video.resourceId.videoId;
+        mediaDetails.url = window.Google.GoogleApiConstants.YOUTUBE.URL + id;
 
         return mediaDetails;
     },
