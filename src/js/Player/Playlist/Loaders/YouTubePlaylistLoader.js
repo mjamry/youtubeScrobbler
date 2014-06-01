@@ -7,7 +7,7 @@ window.Common = window.Common || {};
 //Main responsibility is to create playlists depending upon specified url address.
 window.Playlist.YouTubePlaylistLoader = function(dataProvider)
 {
-    this.innerRepository = dataProvider;
+    this.dataProvider = dataProvider;
     //TODO move to more appropriate place
     this.REGEX_NAMING_PATTERN = "([^\\-]*)-\\s?((?:[^\\{\\}\\(\\)\\[\\]]?)*)(.*)"
 };
@@ -46,7 +46,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
             callback(playlist);
         };
 
-        this.innerRepository.getVideoDetails(options, addVideoToThePlaylist);
+        this.dataProvider.getVideoDetails(options, addVideoToThePlaylist);
     },
 
     _getPlaylistDetails: function(playlistId, callback)
@@ -78,7 +78,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         };
 
         //start obtaining playlist items
-        this.innerRepository.getPlaylistDetails(options, addItemsToThePlaylist(new window.Player.Playlist()));
+        this.dataProvider.getPlaylistDetails(options, addItemsToThePlaylist(new window.Player.Playlist()));
     },
 
     _createPlaylistFromItems: function(items)
@@ -150,3 +150,4 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         }
     }
 };
+
