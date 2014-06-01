@@ -138,7 +138,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         );
 
         mediaDetails.title = trackName.title;
-        mediaDetails.url = "http://www.youtube.com/watch?v=";
+        mediaDetails.url = "http://www.youtube.com/watch?v="+video.resourceId.videoId;
 
         return mediaDetails;
     },
