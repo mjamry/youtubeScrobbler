@@ -10,8 +10,9 @@ window.Google.GoogleApiWrapper.prototype =
 {
     _initialise: function()
     {
+        //TODO handle loading errors
         gapi.client.setApiKey(window.Google.GoogleApiConstants.API_KEY);
-        gapi.client.load("youtube", "v3",
+        gapi.client.load(window.Google.GoogleApiConstants.YOUTUBE_API_NAME, window.Google.GoogleApiConstants.YOUTUBE_API_VERSION,
         function()
         {
             Logger.getInstance().debug("[Google API] youtube service loaded.");
