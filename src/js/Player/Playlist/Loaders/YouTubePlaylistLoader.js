@@ -30,55 +30,170 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         throw("[YT] Error occurs while parsing title. Incorrect naming pattern: "+details);
     },
 
-    _getVideoDetails: function(videoId, callback)
+    //videosIds - an array of videos' ids
+    //example response
+    //{
+    //"items": [
+    //    {
+    //        "id": "xyz",
+    //        "snippet": {
+    //            "publishedAt": "2010-07-05T15:20:22.000Z",
+    //            "channelId": "zxc",
+    //            "title": "abc - def",
+    //            "description": "abc",
+    //            "thumbnails": {
+    //                "default": {
+    //                    "url": "https://abc.jpg",
+    //                    "width": 120,
+    //                    "height": 90
+    //                },
+    //                "medium": {
+    //                    "url": "https://def.jpg",
+    //                    "width": 320,
+    //                    "height": 180
+    //                },
+    //                "high": {
+    //                    "url": "https://ghi.jpg",
+    //                    "width": 480,
+    //                    "height": 360
+    //                }
+    //            },
+    //            "channelTitle": "qwe",
+    //            "categoryId": "10",
+    //            "liveBroadcastContent": "none"
+    //        },
+    //        "contentDetails": {
+    //            "duration": "PT6M1S",
+    //            "dimension": "2d",
+    //            "definition": "sd",
+    //            "caption": "false",
+    //            "licensedContent": false
+    //        }
+    //    }
+    //]
+    //}
+    _getVideoDetails: function(videosIds)
     {
+        var items = [];
+        var that = this;
+        var ids = "";
+        var startIndex, endIndex;
+
+        startIndex = startIndex+50 || 0;
+        endIndex = endIndex+50 || 50;
+        if(endIndex > videosIds.length)
+        {
+            endIndex = videosIds.length;
+        }
+        for(var i=startIndex;i<endIndex-1;i++)
+        {
+            ids += videosIds[i]+",";
+        }
+        ids+=videosIds[endIndex-1];
+
         var options =
         {
-            id: videoId
+            id: ids
         };
 
-        var that = this;
-
-        var addVideoToThePlaylist = function(response)
+        return new Promise(function(resolve, reject)
         {
-            var playlist = new window.Player.Playlist();
-            playlist.addItem(that._obtainVideoDetails(response.result.items[0].snippet, response.result.items[0].id));
-            callback(playlist);
-        };
+            function obtainVideoDetails(response)
+            {
 
-        this.dataProvider.getVideoDetails(options, addVideoToThePlaylist);
+                endIndex = 50;
+                if(endIndex > videosIds.length)
+                {
+                    endIndex = videosIds.length;
+                }
+                for(var i=0;i<endIndex;i++)
+                {
+                    ids += videosIds[i]+",";
+                }
+
+                options.id = ids;
+
+                if(!response.error)
+                {
+                    //add items to array
+                    items = items.concat(response.items);
+                    //get details for next items
+
+//                    if(true)
+//                    {
+//                        that.dataProvider.getVideoDetails(options, obtainVideoDetails);
+//                    }
+                   // else
+                  //  {
+                        //all details obtained
+                    var result = [];
+                    for(var i in items)
+                    {
+                        result.push(
+                            {
+                                id: items[i].id,
+                                title: items[i].snippet.title,
+                                duration: items[i].contentDetails.duration
+                            }
+                        );
+                    }
+                        resolve(result);
+                  //  }
+                }
+                else
+                {
+                    reject("[YT] Error occurs while obtaining data from youtube");
+                }
+            }
+
+            that.dataProvider.getVideoDetails(options, obtainVideoDetails);
+        });
     },
 
-    _getPlaylistDetails: function(playlistId, callback)
+    _getPlaylistDetails: function(playlistId)
     {
+        var that = this;
+        var items = [];
         var options =
         {
             playlistId: playlistId,
             pageToken: ""
         };
-        //needed inside addItemsToThePlaylist function
-        var that = this;
 
-        var addItemsToThePlaylist = function(currentPlaylist)
+        return new Promise(function(resolve, reject)
         {
-            return function(response)
+           function obtainPlaylistDetails(response)
             {
-                currentPlaylist.addPlaylist(that._createPlaylistFromItems(response.result.items));
-
-                if (response.result.nextPageToken)
+                if(!response.error)
                 {
-                    options.pageToken = response.result.nextPageToken;
-                    that.innerRepository.getPlaylistDetails(options, addItemsToThePlaylist(currentPlaylist));
+                    //add items to array
+                    items = items.concat(response.items);
+                    //get details for next items
+                    if (response.result.nextPageToken)
+                    {
+                        options.pageToken = response.result.nextPageToken;
+                        that.dataProvider.getPlaylistDetails(options, obtainPlaylistDetails);
+                    }
+                    else
+                    {
+                        //all details obtained, so get only ids from response
+                        var result = [];
+                        for(var i in items)
+                        {
+                            result.push(items[i].contentDetails.videoId);
+                        }
+
+                        resolve(result);
+                    }
                 }
                 else
                 {
-                    callback(currentPlaylist);
+                    reject("[YT] Error occurs while obtaining data from youtube");
                 }
-            };
-        };
-
-        //start obtaining playlist items
-        this.dataProvider.getPlaylistDetails(options, addItemsToThePlaylist(new window.Player.Playlist()));
+            }
+            //start obtaining data
+            that.dataProvider.getPlaylistDetails(options, obtainPlaylistDetails);
+        });
     },
 
     _createPlaylistFromItems: function(items)
@@ -135,10 +250,19 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         Logger.getInstance().debug("[YT] Sending data request for url: "+url);
         var parser = new window.Common.UrlParser();
         var playlistId = parser.getParameterValue(url, window.Google.GoogleApiConstants.YOUTUBE.LINK_PARAMS.PLAYLIST);
-        
+        var loader = new Promise(function(resolve)
+        {
+            resolve(playlistId);
+        });
         if(playlistId !== window.Common.UrlParserConstants.URL_PARSE_ERR)
         {
-            this._getPlaylistDetails(playlistId, callback);
+            loader.then(this._getPlaylistDetails.bind(this))
+                .then(this._getVideoDetails.bind(this))
+                .then(callback)
+                .catch(function(error)
+                {
+                    Logger.getInstance().error(error);
+                });
         }
         else
         {
