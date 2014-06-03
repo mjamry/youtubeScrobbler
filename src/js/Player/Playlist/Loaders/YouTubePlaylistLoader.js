@@ -32,7 +32,6 @@ window.Playlist.YouTubePlaylistLoader.prototype =
 
     //videosIds - an array of videos' ids
     //example response
-    //{
     //"items": [
     //    {
     //        "id": "xyz",
@@ -119,13 +118,6 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                     items = items.concat(response.items);
                     //get details for next items
 
-//                    if(true)
-//                    {
-//                        that.dataProvider.getVideoDetails(options, obtainVideoDetails);
-//                    }
-                   // else
-                  //  {
-                        //all details obtained
                     var result = [];
                     for(var i in items)
                     {
@@ -137,8 +129,8 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                             }
                         );
                     }
-                        resolve(result);
-                  //  }
+
+                    resolve(result);
                 }
                 else
                 {
@@ -150,6 +142,34 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         });
     },
 
+    //example response:
+    //"items": [
+    //{
+    //    "contentDetails": {
+    //        "videoId": "abc"
+    //    }
+    //},
+    //{
+    //    "contentDetails": {
+    //        "videoId": "def"
+    //    }
+    //},
+    //{
+    //    "contentDetails": {
+    //        "videoId": "ghi"
+    //    }
+    //},
+    //{
+    //    "contentDetails": {
+    //        "videoId": "jkl"
+    //    }
+    //},
+    //{
+    //    "contentDetails": {
+    //        "videoId": "mno"
+    //    }
+    //}
+    //]
     _getPlaylistDetails: function(playlistId)
     {
         var that = this;
