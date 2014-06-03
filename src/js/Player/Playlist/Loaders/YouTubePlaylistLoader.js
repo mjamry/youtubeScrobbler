@@ -243,7 +243,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         var mediaDetails = new window.Player.MediaDetails();
 
         mediaDetails.mediaType = window.Google.GoogleApiConstants.YOUTUBE.MEDIA_TYPE;
-        mediaDetails.duration = videoDetails.duration;
+        mediaDetails.duration = new window.Player.Duration(videoDetails.duration);
 
         var trackName = this._splitTitle(videoDetails.title);
 

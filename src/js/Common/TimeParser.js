@@ -54,7 +54,7 @@ window.Common.TimeParserImpl.prototype =
         return Math.round(timeInMs / this.MsInSecond);
     },
 
-    getHumanReadableFormat: function(timeInSeconds)
+    getHumanReadableTimeFormat: function(timeInSeconds)
     {
        timeInSeconds = Math.round(timeInSeconds);
 
@@ -70,6 +70,12 @@ window.Common.TimeParserImpl.prototype =
        }
 
        return mins + ":" + this._timeCorrection(secs);
+    },
+
+    getHumanReadableDurationFormat: function(duration)
+    {
+        //TODO parse PTH1M2S33
+        return duration;
     }
 };
 

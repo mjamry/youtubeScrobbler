@@ -56,7 +56,7 @@ describe("TimeParser", function(){
 
     });
 
-    describe("getHumanReadableFormat method", function(){
+    describe("getHumanReadableTimeFormat method", function(){
         it("should return \"0:00\" for 0s", function(){
             expect(timeParser.getHumanReadableFormat(0)).toEqual("0:00");
         });
