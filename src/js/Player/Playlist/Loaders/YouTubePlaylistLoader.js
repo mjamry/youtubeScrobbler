@@ -226,7 +226,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
             //this._itemAddingPolicy(playlist, item)
             try
             {
-                playlist.addItem(this._obtainVideoDetails(items[i].snippet, items[i].snippet.resourceId.videoId));
+                playlist.addItem(this._obtainVideoDetails(items[i]));
             }
             catch(e)
             {
@@ -238,14 +238,14 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         return playlist;
     },
 
-    _obtainVideoDetails: function(video, id)
+    _obtainVideoDetails: function(videoDetails)
     {
         var mediaDetails = new window.Player.MediaDetails();
 
         mediaDetails.mediaType = window.Google.GoogleApiConstants.YOUTUBE.MEDIA_TYPE;
-        mediaDetails.duration = new window.Player.Duration(20);
+        mediaDetails.duration = videoDetails.duration;
 
-        var trackName = this._splitTitle(video.title);
+        var trackName = this._splitTitle(videoDetails.title);
 
         mediaDetails.artist = new window.Player.ArtistDetails(
             {
@@ -257,7 +257,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         );
 
         mediaDetails.title = trackName.title;
-        mediaDetails.url = window.Google.GoogleApiConstants.YOUTUBE.URL + id;
+        mediaDetails.url = window.Google.GoogleApiConstants.YOUTUBE.URL + videoDetails.id;
 
         return mediaDetails;
     },
@@ -278,6 +278,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         {
             loader.then(this._getPlaylistDetails.bind(this))
                 .then(this._getVideoDetails.bind(this))
+                .then(this._createPlaylistFromItems.bind(this))
                 .then(callback)
                 .catch(function(error)
                 {
