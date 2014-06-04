@@ -94,7 +94,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         {
             id: ids
         };
-
+        Logger.getInstance().debug("[YT] Obtaining details for videos ("+videosIds.length+")");
         return new Promise(function(resolve, reject)
         {
             function obtainVideoDetails(response)
@@ -153,21 +153,6 @@ window.Playlist.YouTubePlaylistLoader.prototype =
     //    "contentDetails": {
     //        "videoId": "def"
     //    }
-    //},
-    //{
-    //    "contentDetails": {
-    //        "videoId": "ghi"
-    //    }
-    //},
-    //{
-    //    "contentDetails": {
-    //        "videoId": "jkl"
-    //    }
-    //},
-    //{
-    //    "contentDetails": {
-    //        "videoId": "mno"
-    //    }
     //}
     //]
     _getPlaylistDetails: function(playlistId)
@@ -179,7 +164,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
             playlistId: playlistId,
             pageToken: ""
         };
-
+        Logger.getInstance().debug("[YT Obtaining details for playlist id: "+playlistId);
         return new Promise(function(resolve, reject)
         {
            function obtainPlaylistDetails(response)
@@ -235,6 +220,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
 
         }
 
+        Logger.getInstance().debug("[YT] Playlist created, contains "+playlist.length()+" items");
         return playlist;
     },
 
