@@ -24,7 +24,7 @@ window.Google.GoogleApiWrapper.prototype =
         var options = $.extend(
             {
                 part: 'contentDetails',
-                fields: 'items/contentDetails',
+                fields: 'items/contentDetails,nextPageToken,pageInfo',
                 maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_ITEMS_PER_REQUEST
             },
             requestOptions);

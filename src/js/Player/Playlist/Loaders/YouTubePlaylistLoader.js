@@ -76,19 +76,8 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         var items = [];
         var that = this;
         var ids = "";
-        var startIndex, endIndex;
+        var endIndex = 0;
 
-        startIndex = startIndex+50 || 0;
-        endIndex = endIndex+50 || 50;
-        if(endIndex > videosIds.length)
-        {
-            endIndex = videosIds.length;
-        }
-        for(var i=startIndex;i<endIndex-1;i++)
-        {
-            ids += videosIds[i]+",";
-        }
-        ids+=videosIds[endIndex-1];
 
         var options =
         {
@@ -97,48 +86,54 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         Logger.getInstance().debug("[YT] Obtaining details for videos ("+videosIds.length+")");
         return new Promise(function(resolve, reject)
         {
-            function obtainVideoDetails(response)
+            function obtainVideoDetails(startIndex)
             {
-
-                endIndex = 50;
-                if(endIndex > videosIds.length)
+                endIndex += 49;
+                if (endIndex > videosIds.length)
                 {
                     endIndex = videosIds.length;
                 }
-                for(var i=0;i<endIndex;i++)
+                for (var i = startIndex; i < endIndex-1; i++)
                 {
-                    ids += videosIds[i]+",";
+                    ids += videosIds[i] + ",";
                 }
-
+                ids+= videosIds[endIndex-1];
                 options.id = ids;
+               return function(response) {
 
-                if(!response.error)
-                {
-                    //add items to array
-                    items = items.concat(response.items);
-                    //get details for next items
+                   Logger.getInstance().debug("[YT] obtained details for videos from range: ["+startIndex+":"+endIndex+"]");
+                    if (!response.error) {
+                        //add items to array
+                        items = items.concat(response.items);
+                        //get details for next items
 
-                    var result = [];
-                    for(var i in items)
-                    {
-                        result.push(
-                            {
-                                id: items[i].id,
-                                title: items[i].snippet.title,
-                                duration: items[i].contentDetails.duration
+                        if (endIndex < videosIds.length)
+                        {
+                            that.dataProvider.getVideoDetails(options, obtainVideoDetails(endIndex));
+                        }
+                        else {
+                            //all details obtained so get only interesting information.
+                            var result = [];
+                            for (var i in items) {
+                                result.push(
+                                    {
+                                        id: items[i].id,
+                                        title: items[i].snippet.title,
+                                        duration: items[i].contentDetails.duration
+                                    }
+                                );
                             }
-                        );
-                    }
+                            resolve(result);
+                        }
 
-                    resolve(result);
-                }
-                else
-                {
-                    reject("[YT] Error occurs while obtaining data from youtube");
+                    }
+                    else {
+                        reject("[YT] Error occurs while obtaining video details. Msg: " + response.error.data[0].message + " reason: " + response.error.data[0].reason);
+                    }
                 }
             }
 
-            that.dataProvider.getVideoDetails(options, obtainVideoDetails);
+            that.dataProvider.getVideoDetails(options, obtainVideoDetails(0));
         });
     },
 
@@ -164,14 +159,14 @@ window.Playlist.YouTubePlaylistLoader.prototype =
             playlistId: playlistId,
             pageToken: ""
         };
-        Logger.getInstance().debug("[YT Obtaining details for playlist id: "+playlistId);
+        Logger.getInstance().debug("[YT] Obtaining details for playlist id: "+playlistId);
         return new Promise(function(resolve, reject)
         {
            function obtainPlaylistDetails(response)
             {
                 if(!response.error)
                 {
-                    //add items to array
+                    //add items to the array
                     items = items.concat(response.items);
                     //get details for next items
                     if (response.result.nextPageToken)
@@ -193,7 +188,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                 }
                 else
                 {
-                    reject("[YT] Error occurs while obtaining data from youtube");
+                    reject("[YT] Error occurs while obtaining playlist details. Msg: " + response.error.data[0].message + " reason: " + response.error.data[0].reason);
                 }
             }
             //start obtaining data
