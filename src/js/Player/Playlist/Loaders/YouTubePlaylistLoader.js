@@ -88,7 +88,8 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         {
             function obtainVideoDetails(startIndex)
             {
-                endIndex += 49;
+                ids = "";
+                endIndex += 50;
                 if (endIndex > videosIds.length)
                 {
                     endIndex = videosIds.length;
@@ -123,6 +124,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                                     }
                                 );
                             }
+                            Logger.getInstance().debug("[YT] obtained details for: "+result.length+" videos");
                             resolve(result);
                         }
 
@@ -171,6 +173,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                     //get details for next items
                     if (response.result.nextPageToken)
                     {
+                        Logger.getInstance().debug("[YT] obtaining details for next part of playlist: "+response.result.nextPageToken);
                         options.pageToken = response.result.nextPageToken;
                         that.dataProvider.getPlaylistDetails(options, obtainPlaylistDetails);
                     }
@@ -183,6 +186,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                             result.push(items[i].contentDetails.videoId);
                         }
 
+                        Logger.getInstance().debug("[YT] obtained ids of: "+result.length+" videos");
                         resolve(result);
                     }
                 }
