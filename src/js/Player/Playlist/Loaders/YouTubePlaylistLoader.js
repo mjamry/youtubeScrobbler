@@ -8,29 +8,12 @@ window.Common = window.Common || {};
 window.Playlist.YouTubePlaylistLoader = function(dataProvider)
 {
     this.dataProvider = dataProvider;
-    //TODO move to more appropriate place
-    this.REGEX_NAMING_PATTERN = "([^\\-]*)-\\s?((?:[^\\{\\}\\(\\)\\[\\]]?)*)(.*)";
+    this.helper = window.Playlist.YouTubePlaylistLoader.Helper;
 };
 
 window.Playlist.YouTubePlaylistLoader.prototype =
 {
-    _splitTitle: function(details)
-    {
-        var namePattern = RegExp(this.REGEX_NAMING_PATTERN);
-        var names = namePattern.exec(details);
-
-        if(names)
-        {
-            return {
-                artist: names[1],
-                title: names[2]
-            };
-        }
-
-        throw("[YT] Error occurs while parsing title. Incorrect naming pattern: "+details);
-    },
-
-    //videosIds - an array of videos' ids
+     //videosIds - an array of videos' ids
     //example response
     //"items": [
     //    {
@@ -112,27 +95,17 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                         {
                             that.dataProvider.getVideoDetails(options, obtainVideoDetails(endIndex));
                         }
-                        else {
+                        else
+                        {
                             //all details obtained so get only interesting information.
-                            var result = [];
-                            for (var i in items) {
-                                result.push(
-                                    {
-                                        id: items[i].id,
-                                        title: items[i].snippet.title,
-                                        duration: items[i].contentDetails.duration
-                                    }
-                                );
-                            }
-                            Logger.getInstance().debug("[YT] obtained details for: "+result.length+" videos");
-                            resolve(result);
+                            resolve(that.helper.getVideosDetailsFromItems(items));
                         }
-
                     }
-                    else {
+                    else
+                    {
                         reject("[YT] Error occurs while obtaining video details. Msg: " + response.error.data[0].message + " reason: " + response.error.data[0].reason);
                     }
-                }
+                };
             }
 
             that.dataProvider.getVideoDetails(options, obtainVideoDetails(0));
@@ -180,14 +153,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                     else
                     {
                         //all details obtained, so get only ids from response
-                        var result = [];
-                        for(var i in items)
-                        {
-                            result.push(items[i].contentDetails.videoId);
-                        }
-
-                        Logger.getInstance().debug("[YT] obtained ids of: "+result.length+" videos");
-                        resolve(result);
+                        resolve(that.helper.getPlaylistDetailsFromItems(items));
                     }
                 }
                 else
@@ -210,7 +176,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
             //this._itemAddingPolicy(playlist, item)
             try
             {
-                playlist.addItem(this._obtainVideoDetails(items[i]));
+                playlist.addItem(this.helper.generateMediaDetails(items[i]));
             }
             catch(e)
             {
@@ -221,30 +187,6 @@ window.Playlist.YouTubePlaylistLoader.prototype =
 
         Logger.getInstance().debug("[YT] Playlist created, contains "+playlist.length()+" items");
         return playlist;
-    },
-
-    _obtainVideoDetails: function(videoDetails)
-    {
-        var mediaDetails = new window.Player.MediaDetails();
-
-        mediaDetails.mediaType = window.Google.GoogleApiConstants.YOUTUBE.MEDIA_TYPE;
-        mediaDetails.duration = new window.Player.Duration(videoDetails.duration);
-
-        var trackName = this._splitTitle(videoDetails.title);
-
-        mediaDetails.artist = new window.Player.ArtistDetails(
-            {
-                name: trackName.artist,
-                mbid: "",
-                url: "",
-                cover: ""
-            }
-        );
-
-        mediaDetails.title = trackName.title;
-        mediaDetails.url = window.Google.GoogleApiConstants.YOUTUBE.URL + videoDetails.id;
-
-        return mediaDetails;
     },
 
     //parses specified url address (form YT). Depending on url structure it loads playlist or single video.
@@ -278,6 +220,78 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                 this._getVideoDetails(videoId, callback);
             }
         }
+    }
+};
+
+window.Playlist.YouTubePlaylistLoader.Helper =
+{
+    REGEX_NAMING_PATTERN: "([^\\-]*)-\\s?((?:[^\\{\\}\\(\\)\\[\\]]?)*)(.*)",
+
+    generateMediaDetails: function(videoDetails)
+    {
+        var mediaDetails = new window.Player.MediaDetails();
+
+        mediaDetails.mediaType = window.Google.GoogleApiConstants.YOUTUBE.MEDIA_TYPE;
+        mediaDetails.duration = new window.Player.Duration(videoDetails.duration);
+
+        var trackName = this.splitMediaTitle(videoDetails.title);
+
+        mediaDetails.artist = new window.Player.ArtistDetails(
+            {
+                name: trackName.artist,
+                mbid: "",
+                url: "",
+                cover: ""
+            }
+        );
+
+        mediaDetails.title = trackName.title;
+        mediaDetails.url = window.Google.GoogleApiConstants.YOUTUBE.URL + videoDetails.id;
+
+        return mediaDetails;
+    },
+
+    getPlaylistDetailsFromItems: function(items)
+    {
+        var result = [];
+        for(var i in items)
+        {
+            result.push(items[i].contentDetails.videoId);
+        }
+
+        return result;
+    },
+
+    getVideosDetailsFromItems: function(items)
+    {
+        var result = [];
+        for (var i in items) {
+            result.push(
+                {
+                    id: items[i].id,
+                    title: items[i].snippet.title,
+                    duration: items[i].contentDetails.duration
+                }
+            );
+        }
+
+        return result;
+    },
+
+    splitMediaTitle: function(details)
+    {
+        var namePattern = RegExp(this.REGEX_NAMING_PATTERN);
+        var names = namePattern.exec(details);
+
+        if(names)
+        {
+            return {
+                artist: names[1],
+                title: names[2]
+            };
+        }
+
+        throw("[YT] Error occurs while parsing title. Incorrect naming pattern: "+details);
     }
 };
 
