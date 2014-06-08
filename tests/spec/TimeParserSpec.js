@@ -58,39 +58,39 @@ describe("TimeParser", function(){
 
     describe("getHumanReadableTimeFormat method", function(){
         it("should return \"0:00\" for 0s", function(){
-            expect(timeParser.getHumanReadableFormat(0)).toEqual("0:00");
+            expect(timeParser.getHumanReadableTimeFormat(0)).toEqual("0:00");
         });
 
         it("should return \"1:00\" for 60s", function(){
-            expect(timeParser.getHumanReadableFormat(60)).toEqual("1:00");
+            expect(timeParser.getHumanReadableTimeFormat(60)).toEqual("1:00");
         });
 
         it("should return \"1:01\" for 61s", function(){
-            expect(timeParser.getHumanReadableFormat(61)).toEqual("1:01");
+            expect(timeParser.getHumanReadableTimeFormat(61)).toEqual("1:01");
         });
 
         it("should return \"1:11\" for 71s", function(){
-            expect(timeParser.getHumanReadableFormat(71)).toEqual("1:11");
+            expect(timeParser.getHumanReadableTimeFormat(71)).toEqual("1:11");
         });
 
         it("should return \"9:00\" for 540s", function(){
-            expect(timeParser.getHumanReadableFormat(540)).toEqual("9:00");
+            expect(timeParser.getHumanReadableTimeFormat(540)).toEqual("9:00");
         });
 
         it("should return \"59:59\" for 3599s", function(){
-            expect(timeParser.getHumanReadableFormat(3599)).toEqual("59:59");
+            expect(timeParser.getHumanReadableTimeFormat(3599)).toEqual("59:59");
         });
 
         it("should return \"1:00:00\" for 3600s", function(){
-            expect(timeParser.getHumanReadableFormat(3600)).toEqual("1:00:00");
+            expect(timeParser.getHumanReadableTimeFormat(3600)).toEqual("1:00:00");
         });
 
         it("should return \"1:00:01\" for 3601s", function(){
-            expect(timeParser.getHumanReadableFormat(3601)).toEqual("1:00:01");
+            expect(timeParser.getHumanReadableTimeFormat(3601)).toEqual("1:00:01");
         });
 
         it("should return \"1:01:01\" for 3661s", function(){
-            expect(timeParser.getHumanReadableFormat(3661)).toEqual("1:01:01");
+            expect(timeParser.getHumanReadableTimeFormat(3661)).toEqual("1:01:01");
         });
     });
 });
