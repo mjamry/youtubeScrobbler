@@ -23,9 +23,9 @@ window.Google.GoogleApiWrapper.prototype =
     {
         var options = $.extend(
             {
-                part: 'snippet',
-                fields: 'items/snippet,nextPageToken,pageInfo',
-                maxResults:window.Google.GoogleApiConstants.MAX_NUMBER_OF_ITEMS_PER_REQUEST
+                part: 'contentDetails',
+                fields: 'items/contentDetails,nextPageToken,pageInfo',
+                maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_ITEMS_PER_REQUEST
             },
             requestOptions);
 
@@ -37,8 +37,8 @@ window.Google.GoogleApiWrapper.prototype =
     {
         var options = $.extend(
             {
-                part: 'snippet',
-                fields: 'items(id,snippet)'
+                part: 'contentDetails, snippet',
+                fields: 'items(contentDetails,id,snippet)',
             },
             requestOptions);
 

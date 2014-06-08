@@ -1,5 +1,5 @@
 describe("Duration", function(){
-    var durationInSeconds = 134;
+    var durationInSeconds = "PT2M14S";
     var duration;
 
     beforeEach(function(){
