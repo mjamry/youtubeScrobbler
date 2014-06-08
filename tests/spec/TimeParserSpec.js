@@ -93,4 +93,42 @@ describe("TimeParser", function(){
             expect(timeParser.getHumanReadableTimeFormat(3661)).toEqual("1:01:01");
         });
     });
+
+    describe("getHumanReadableDurationFormat method", function() {
+        it("should return \"0:00\" for PT", function () {
+            expect(timeParser.getHumanReadableDurationFormat("PT")).toEqual("0:00");
+        });
+
+        it("should return \"0:11\" for PT11S", function () {
+            expect(timeParser.getHumanReadableDurationFormat("PT11S")).toEqual("0:11");
+        });
+
+        it("should return \"0:01\" for PT1S", function () {
+            expect(timeParser.getHumanReadableDurationFormat("PT1S")).toEqual("0:01");
+        });
+
+        it("should return \"1:00\" for PT1M", function () {
+            expect(timeParser.getHumanReadableDurationFormat("PT1M")).toEqual("1:00");
+        });
+
+        it("should return \"11:00\" for PT11M", function () {
+            expect(timeParser.getHumanReadableDurationFormat("PT11M")).toEqual("11:00");
+        });
+
+        it("should return \"1:01\" for PT1M1S", function () {
+            expect(timeParser.getHumanReadableDurationFormat("PT1M1S")).toEqual("1:01");
+        });
+
+        it("should return \"1:00:00\" for PT1H", function () {
+            expect(timeParser.getHumanReadableDurationFormat("PT1H")).toEqual("1:00:00");
+        });
+
+        it("should return \"11:00:00\" for PT11H", function () {
+            expect(timeParser.getHumanReadableDurationFormat("PT11H")).toEqual("11:00:00");
+        });
+
+        it("should return \"1:10:10\" for PT1H1M1S", function () {
+            expect(timeParser.getHumanReadableDurationFormat("PT1H1M1S")).toEqual("1:01:01");
+        });
+    });
 });
