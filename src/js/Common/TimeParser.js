@@ -35,6 +35,7 @@ window.Common.TimeParserImpl = function()
     this.MinutesInHour = 60;
     this.SecondsInMinute = 60;
     this.MsInSecond = 1000;
+    this.DURATION_PATTERN = "P([0-9]+Y)?([0-9]+M)?([0-9]+W)?([0-9]+D)?T([0-9]+H)?([0-9]+M)?([0-9]+S)?";
 };
 
 window.Common.TimeParserImpl.prototype =
@@ -61,6 +62,7 @@ window.Common.TimeParserImpl.prototype =
        var secs = timeInSeconds % this.SecondsInMinute;
        var mins = parseInt(timeInSeconds / this.SecondsInMinute, 10);
 
+        //if hour value is defined return time in format h:m:s otherwise only m:s
        if(mins >= this.MinutesInHour)
        {
            var hours = parseInt(mins / this.MinutesInHour, 10);
@@ -74,8 +76,17 @@ window.Common.TimeParserImpl.prototype =
 
     getHumanReadableDurationFormat: function(duration)
     {
-        //TODO parse PTH1M2S33
-        return duration;
+        var durationPattern = RegExp(this.DURATION_PATTERN);
+        var time = durationPattern.exec(duration);
+        var hours, mins, secs;
+            hours = time[5] ? time[5].substring(0, time[5].length - 1) : "";
+            mins = time[6] ? time[6].substring(0, time[6].length - 1) : "0";
+            secs = time[7] ? time[7].substring(0, time[7].length - 1) : "0";
+
+        //if hour value is defined return time in format h:m:s otherwise only m:s
+        return hours ?
+            hours+":"+this._timeCorrection(mins)+":"+this._timeCorrection(secs) :
+            mins+":"+this._timeCorrection(secs);
     }
 };
 
