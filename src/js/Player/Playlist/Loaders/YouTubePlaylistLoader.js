@@ -58,45 +58,27 @@ window.Playlist.YouTubePlaylistLoader.prototype =
     {
         var items = [];
         var that = this;
-        var ids = "";
-        var endIndex = 0;
-
-
-        var options =
-        {
-            id: ids
-        };
+        var options = {id: ""};
         Logger.getInstance().debug("[YT] Obtaining details for videos ("+videosIds.length+")");
         return new Promise(function(resolve, reject)
         {
-            function obtainVideoDetails(startIndex)
+            function obtainVideoDetails(firstItemIndex)
             {
-                ids = "";
-                endIndex += 50;
-                if (endIndex > videosIds.length)
-                {
-                    endIndex = videosIds.length;
-                }
-                for (var i = startIndex; i < endIndex-1; i++)
-                {
-                    ids += videosIds[i] + ",";
-                }
-                ids+= videosIds[endIndex-1];
-                options.id = ids;
-               return function(response) {
+                var lastItemIndex = that.helper.getLastItemIndex(videosIds, firstItemIndex);
+                options.id = that.helper.getVideosIds(videosIds, firstItemIndex, lastItemIndex);
 
-                   Logger.getInstance().debug("[YT] obtained details for videos from range: ["+startIndex+":"+endIndex+"]");
-                    if (!response.error) {
-                        //add items to array
+                return function (response)
+                {
+                    Logger.getInstance().debug("[YT] obtained details for videos from range: [" + firstItemIndex + ":" + lastItemIndex + "]");
+                    if (!response.error)
+                    {
+                        //add items to the array
                         items = items.concat(response.items);
-                        //get details for next items
-
-                        if (endIndex < videosIds.length)
-                        {
-                            that.dataProvider.getVideoDetails(options, obtainVideoDetails(endIndex));
+                        //get details for next items if are available
+                        if (lastItemIndex < videosIds.length) {
+                            that.dataProvider.getVideoDetails(options, obtainVideoDetails(lastItemIndex));
                         }
-                        else
-                        {
+                        else {
                             //all details obtained so get only interesting information.
                             resolve(that.helper.getVideosDetailsFromItems(items));
                         }
@@ -134,6 +116,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
             playlistId: playlistId,
             pageToken: ""
         };
+
         Logger.getInstance().debug("[YT] Obtaining details for playlist id: "+playlistId);
         return new Promise(function(resolve, reject)
         {
@@ -143,7 +126,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                 {
                     //add items to the array
                     items = items.concat(response.items);
-                    //get details for next items
+                    //get details for next items if are available
                     if (response.result.nextPageToken)
                     {
                         Logger.getInstance().debug("[YT] obtaining details for next part of playlist: "+response.result.nextPageToken);
@@ -166,29 +149,6 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         });
     },
 
-    _createPlaylistFromItems: function(items)
-    {
-        var playlist = new window.Player.Playlist();
-        for (var i = 0; i < items.length; i++)
-        {
-           // Logger.getInstance().debug("Item: " + items[i].snippet.title + " link: http://www.youtube.com/watch?v=" + items[i].snippet.resourceId.videoId);
-            //TODO add a policy which will decide if item can be added to the playlist
-            //this._itemAddingPolicy(playlist, item)
-            try
-            {
-                playlist.addItem(this.helper.generateMediaDetails(items[i]));
-            }
-            catch(e)
-            {
-                Logger.getInstance().warning(e);
-            }
-
-        }
-
-        Logger.getInstance().debug("[YT] Playlist created, contains "+playlist.length()+" items");
-        return playlist;
-    },
-
     //parses specified url address (form YT). Depending on url structure it loads playlist or single video.
     //returns playlist object literal: playlist = {title:string, videos:[{id, title}]};
     //playlist is returned via callback function
@@ -197,15 +157,16 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         Logger.getInstance().debug("[YT] Sending data request for url: "+url);
         var parser = new window.Common.UrlParser();
         var playlistId = parser.getParameterValue(url, window.Google.GoogleApiConstants.YOUTUBE.LINK_PARAMS.PLAYLIST);
-        var loader = new Promise(function(resolve)
-        {
-            resolve(playlistId);
-        });
+
         if(playlistId !== window.Common.UrlParserConstants.URL_PARSE_ERR)
         {
+            var loader = new Promise(function(resolve)
+            {
+                resolve(playlistId);
+            });
             loader.then(this._getPlaylistDetails.bind(this))
                 .then(this._getVideoDetails.bind(this))
-                .then(this._createPlaylistFromItems.bind(this))
+                .then(this.helper.getPlaylistFromItems.bind(this.helper))
                 .then(callback)
                 .catch(function(error)
                 {
@@ -217,7 +178,17 @@ window.Playlist.YouTubePlaylistLoader.prototype =
             var videoId = parser.getParameterValue(url, window.Google.GoogleApiConstants.YOUTUBE.LINK_PARAMS.VIDEO);
             if(videoId !== window.Common.UrlParserConstants.URL_PARSE_ERR)
             {
-                this._getVideoDetails(videoId, callback);
+                var loader = new Promise(function(resolve)
+                {
+                    resolve([videoId]);
+                });
+                loader.then(this._getVideoDetails.bind(this))
+                    .then(this.helper.getPlaylistFromItems.bind(this.helper))
+                    .then(callback)
+                    .catch(function(error)
+                    {
+                        Logger.getInstance().error(error);
+                    });
             }
         }
     }
@@ -278,6 +249,26 @@ window.Playlist.YouTubePlaylistLoader.Helper =
         return result;
     },
 
+    getPlaylistFromItems: function(items, policy)
+    {
+        var playlist = new window.Player.Playlist();
+        for (var i = 0; i < items.length; i++)
+        {
+            //TODO add a policy which will decide if item can be added to the playlist
+            try
+            {
+                playlist.addItem(this.generateMediaDetails(items[i]));
+            }
+            catch(e)
+            {
+                Logger.getInstance().warning(e);
+            }
+
+        }
+
+        return playlist;
+    },
+
     splitMediaTitle: function(details)
     {
         var namePattern = RegExp(this.REGEX_NAMING_PATTERN);
@@ -292,6 +283,30 @@ window.Playlist.YouTubePlaylistLoader.Helper =
         }
 
         throw("[YT] Error occurs while parsing title. Incorrect naming pattern: "+details);
+    },
+
+    getLastItemIndex: function(videos, firstItemIndex)
+    {
+        var lastItemIndex = firstItemIndex+50;
+        if (lastItemIndex > videos.length)
+        {
+            lastItemIndex = videos.length;
+        }
+
+        return lastItemIndex;
+    },
+
+    getVideosIds: function(videos, firstItemIndex, lastItemIndex)
+    {
+        var ids = [];
+        for (var i = firstItemIndex; i < lastItemIndex; i++)
+        {
+            ids += videos[i] + ",";
+        }
+        //have to remove coma from the end
+        ids = ids.substring(0, ids.length - 1);
+
+        return ids;
     }
 };
 
