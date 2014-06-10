@@ -7,7 +7,7 @@ window.Common = window.Common || {};
 //Provide easy way to get information about artist/track etc. from last.fm portal.
 window.LastFm.InformationProvider = function(lastFmDataProvider)
 {
-    this.dataProvider = lastFmDataProvider;
+    this.innerRepository = lastFmDataProvider;
     Logger.getInstance().info("LastFm Information provider has been created");
 };
 
@@ -16,7 +16,7 @@ window.LastFm.InformationProvider.prototype =
     getTrackDetails: function(mediaDetails, session, callbacks)
     {
         Logger.getInstance().debug("[LastFm] Track details requested for: "+mediaDetails.artist.name +" - "+mediaDetails.title);
-        this.dataProvider.track.getInfo(
+        this.innerRepository.track.getInfo(
             {
                 track: mediaDetails.title,
                 artist: mediaDetails.artist.name,

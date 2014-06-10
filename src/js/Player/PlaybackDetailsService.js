@@ -72,12 +72,12 @@ window.Player.PlaybackDetailsService.prototype =
 
     getPlaybackTime: function()
     {
-        return TimeParser.getInstance().getHumanReadableFormat(this.playbackDetails.currentTime);
+        return TimeParser.getInstance().getHumanReadableTimeFormat(this.playbackDetails.currentTime);
     },
 
     getDuration: function()
     {
-        return TimeParser.getInstance().getHumanReadableFormat(this.playbackDetails.duration);
+        return TimeParser.getInstance().getHumanReadableDurationFormat(this.playbackDetails.duration);
     },
 
     getPlaybackProgress: function()
