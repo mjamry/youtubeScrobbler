@@ -158,37 +158,38 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         var parser = new window.Common.UrlParser();
         var playlistId = parser.getParameterValue(url, window.Google.GoogleApiConstants.YOUTUBE.LINK_PARAMS.PLAYLIST);
 
+        var errorHandler = function(error)
+        {
+            Logger.getInstance().warning(error);
+        };
+
         if(playlistId !== window.Common.UrlParserConstants.URL_PARSE_ERR)
         {
-            var loader = new Promise(function(resolve)
-            {
-                resolve(playlistId);
-            });
-            loader.then(this._getPlaylistDetails.bind(this))
+            new Promise(function(resolve)
+                {
+                    //does nothing - just pass an argument
+                    resolve(playlistId);
+                })
+                .then(this._getPlaylistDetails.bind(this))
                 .then(this._getVideoDetails.bind(this))
                 .then(this.helper.getPlaylistFromItems.bind(this.helper))
                 .then(callback)
-                .catch(function(error)
-                {
-                    Logger.getInstance().error(error);
-                });
+                .catch(errorHandler);
         }
         else
         {
             var videoId = parser.getParameterValue(url, window.Google.GoogleApiConstants.YOUTUBE.LINK_PARAMS.VIDEO);
             if(videoId !== window.Common.UrlParserConstants.URL_PARSE_ERR)
             {
-                var loader = new Promise(function(resolve)
+                new Promise(function(resolve)
                 {
+                    //does nothing - just pass an argument
                     resolve([videoId]);
-                });
-                loader.then(this._getVideoDetails.bind(this))
+                })
+                    .then(this._getVideoDetails.bind(this))
                     .then(this.helper.getPlaylistFromItems.bind(this.helper))
                     .then(callback)
-                    .catch(function(error)
-                    {
-                        Logger.getInstance().error(error);
-                    });
+                    .catch(errorHandler);
             }
         }
     }
