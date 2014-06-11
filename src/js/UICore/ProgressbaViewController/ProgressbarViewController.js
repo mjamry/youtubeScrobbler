@@ -1,22 +1,26 @@
 //namespace
 window.UI = window.UI || {};
 
-window.UI.ProgressbarViewController = function()
+window.UI.ProgressbarViewController = function(config, view)
 {
     //substitute for dictionary
     this.ids = new Object();
+    this.config = config;
+    this.view = view;
 };
 
 window.UI.ProgressbarViewController.prototype =
 {
-    _createNewProgressbar: function()
+    _createNewProgressbar: function(title)
     {
-
+        return new window.UI.ProgressbarControl(this.config.ProgressbarClass, title);
     },
 
-    _handleProgressbarRegistration: function(id)
+    _handleProgressbarRegistration: function(args)
     {
-        this.ids[id] = this._createNewProgressbar();
+        var progressbar = this._createNewProgressbar(title);
+        this.ids[args.id] = progressbar;
+        view.append(progressbar);
     },
 
     _handleProgressbarStatusUpdate: function(args)
@@ -26,8 +30,7 @@ window.UI.ProgressbarViewController.prototype =
         if(args.value = 100)
         {
             //hide and remove progressbar
-            //progressbar.hide();
-
+            progressbar.hide();
         }
     },
 

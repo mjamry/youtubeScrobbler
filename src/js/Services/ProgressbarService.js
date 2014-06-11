@@ -21,15 +21,16 @@ window.UI.ProgressbarService.prototype =
     },
 
     //returns progressbar id as a reference
-    addNewProgressBar: function(maxValue)
+    addNewProgressBar: function(maxValue, title)
     {
+        title = title || "";
         var newId = this._generateId();
         this.ids[newId] =
         {
             maxValue: maxValue
         };
 
-        EventBroker.getInstance().fireEventWithData(window.UI.ProgressbarServiceEvents.RegisterNewProgressbar, newId);
+        EventBroker.getInstance().fireEventWithData(window.UI.ProgressbarServiceEvents.RegisterNewProgressbar, {id: newId, title: title});
 
         return newId;
     },
