@@ -133,7 +133,18 @@ body
     height:35px;
     width:35px;
 }
-
+/*-----------------------------PROGRESSBAR------------------*/
+#progressbar-container
+{
+    height:20px;
+    width:100%;
+    background-color: yellow;
+}
+.progressbar
+{
+    height:2px;
+    background-color: red;
+}
 /*-----------------------------INPUT------------------------*/
 #input-form
 {

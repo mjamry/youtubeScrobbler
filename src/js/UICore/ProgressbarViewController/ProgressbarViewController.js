@@ -18,16 +18,16 @@ window.UI.ProgressbarViewController.prototype =
 
     _handleProgressbarRegistration: function(args)
     {
-        var progressbar = this._createNewProgressbar(title);
+        var progressbar = this._createNewProgressbar(args.title);
         this.ids[args.id] = progressbar;
-        view.append(progressbar);
+        this.view.append(progressbar.container);
     },
 
     _handleProgressbarStatusUpdate: function(args)
     {
         var progressbar = this.ids[args.id];
         progressbar.update(args.value);
-        if(args.value = 100)
+        if(args.value == 100)
         {
             //hide and remove progressbar
             progressbar.hide();
@@ -36,7 +36,7 @@ window.UI.ProgressbarViewController.prototype =
 
     initialise: function()
     {
-        EventBroker.getInstance().addListener(window.UI.ProgressbarServiceEvents.RegisterNewProgressbar, this._handleProgressbarRegistration);
-        EventBroker.getInstance().addListener(window.UI.ProgressbarServiceEvents.UpdateProgressbarStatus, this._handleProgressbarStatusUpdate);
+        EventBroker.getInstance().addListener(window.UI.ProgressbarServiceEvents.RegisterNewProgressbar, $.proxy(this._handleProgressbarRegistration, this));
+        EventBroker.getInstance().addListener(window.UI.ProgressbarServiceEvents.UpdateProgressbarStatus, $.proxy(this._handleProgressbarStatusUpdate, this));
     }
 };

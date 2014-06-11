@@ -71,5 +71,10 @@ window.UI.UIControllersFactory.prototype =
     createUserNotificationViewController: function()
     {
         return new window.UI.UserNotifierViewController("#user-notifications-container", window.UI.UserNotifierConfiguration);
+    },
+
+    createProgressbarViewController: function()
+    {
+        return new window.UI.ProgressbarViewController(window.UI.ProgressbarViewControllerConfiguration, $("#progressbar-container"));
     }
 };
