@@ -138,11 +138,11 @@ body
 {
     height:20px;
     width:100%;
-    background-color: yellow;
+    background-color: white;
 }
 .progressbar
 {
-    height:2px;
+    height:10px;
     background-color: red;
 }
 /*-----------------------------INPUT------------------------*/

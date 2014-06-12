@@ -37,6 +37,7 @@ window.UI.ProgressbarService.prototype =
 
     updateProgress: function(id, currentValue)
     {
+        Logger.getInstance().debug("[PB] id: "+id+" value: "+currentValue);
         var percentageValue = this._calculatePercentageValue(currentValue, this.ids[id].maxValue);
         EventBroker.getInstance().fireEventWithData(window.UI.ProgressbarServiceEvents.UpdateProgressbarStatus, {id: id, value: percentageValue});
     }
