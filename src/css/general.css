@@ -136,14 +136,30 @@ body
 /*-----------------------------PROGRESSBAR------------------*/
 #progressbar-container
 {
-    height:20px;
     width:100%;
-    background-color: white;
+    min-height: 10px;
 }
+
+.progressbar-body
+{
+    height:4px;
+    background-color: red;
+}
+
 .progressbar
 {
     height:10px;
-    background-color: red;
+}
+
+.progressbar-title
+{
+    text-align: center;
+    color:white;
+    font-size: 8pt;
+    margin-left:auto;
+    margin-right:auto;
+    height:10px;
+    width:100%;
 }
 /*-----------------------------INPUT------------------------*/
 #input-form

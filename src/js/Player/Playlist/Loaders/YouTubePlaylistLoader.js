@@ -60,7 +60,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
     {
         var items = [];
         var that = this;
-        var progressbarId = null;
+        var progressbarId = that.progressbarService.addNewProgressBar(videosIds.length, "downloading videos details");;
         var options = {id: ""};
         Logger.getInstance().debug("[YT] Obtaining details for videos ("+videosIds.length+")");
         return new Promise(function(resolve, reject)
@@ -75,8 +75,6 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                     Logger.getInstance().debug("[YT] obtained details for videos from range: [" + firstItemIndex + ":" + lastItemIndex + "]");
                     if (!response.error)
                     {
-                        if(progressbarId === null)
-                            progressbarId = that.progressbarService.addNewProgressBar(videosIds.length);
                         //add items to the array
                         items = items.concat(response.items);
                         that.progressbarService.updateProgress(progressbarId, lastItemIndex);
@@ -135,7 +133,9 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                 if(!response.error)
                 {
                     if(progressbarId === null)
-                        progressbarId = that.progressbarService.addNewProgressBar(response.pageInfo.totalResults);
+                    {
+                        progressbarId = that.progressbarService.addNewProgressBar(response.pageInfo.totalResults, "downloading playlist details");
+                    }
                     //add items to the array
                     items = items.concat(response.items);
                     that.progressbarService.updateProgress(progressbarId, items.length);
@@ -302,7 +302,7 @@ window.Playlist.YouTubePlaylistLoader.Helper =
 
     getLastItemIndex: function(videos, firstItemIndex)
     {
-        var lastItemIndex = firstItemIndex+50;
+        var lastItemIndex = firstItemIndex + window.Google.GoogleApiConstants.MAX_NUMBER_OF_ITEMS_PER_REQUEST;
         if (lastItemIndex > videos.length)
         {
             lastItemIndex = videos.length;
