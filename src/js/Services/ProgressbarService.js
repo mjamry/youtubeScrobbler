@@ -21,7 +21,7 @@ window.UI.ProgressbarService.prototype =
     },
 
     //returns progressbar id as a reference
-    addNewProgressBar: function(maxValue, title)
+    addNewProgressbar: function(maxValue, title)
     {
         title = title || "";
         var newId = this._generateId();
@@ -35,7 +35,7 @@ window.UI.ProgressbarService.prototype =
         return newId;
     },
 
-    updateProgress: function(id, currentValue)
+    updateProgressbar: function(id, currentValue)
     {
         Logger.getInstance().debug("[PB] id: "+id+" value: "+currentValue);
         var percentageValue = this._calculatePercentageValue(currentValue, this.ids[id].maxValue);

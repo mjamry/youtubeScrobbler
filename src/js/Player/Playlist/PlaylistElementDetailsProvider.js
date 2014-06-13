@@ -21,7 +21,7 @@ window.Player.PlaylistElementDetailsProvider.prototype =
             that.playlistProvider.updateItem(itemIndex, mediaDetails);
             itemIndex++;
             that._getDetails(itemIndex, that);
-            that.progressbarService.updateProgress(that.progressbarId, itemIndex);
+            that.progressbarService.updateProgressbar(that.progressbarId, itemIndex);
         };
     },
 
@@ -30,7 +30,7 @@ window.Player.PlaylistElementDetailsProvider.prototype =
         return function()
         {
             itemIndex++;
-            that.progressbarService.updateProgress(that.progressbarId, itemIndex);
+            that.progressbarService.updateProgressbar(that.progressbarId, itemIndex);
             that._getDetails(itemIndex, that);
         };
     },
@@ -60,7 +60,7 @@ window.Player.PlaylistElementDetailsProvider.prototype =
         if(numberOfNewItems)
         {
             var itemIndex = this.playlistProvider.getPlaylist().length() - numberOfNewItems;
-            this.progressbarId = this.progressbarService.addNewProgressBar(numberOfNewItems, "updating playlist items with lastfm data");
+            this.progressbarId = this.progressbarService.addNewProgressbar(numberOfNewItems, "updating playlist items with lastfm data");
             this._getDetails(itemIndex, this);
         }
     },

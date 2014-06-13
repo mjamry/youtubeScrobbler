@@ -60,7 +60,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
     {
         var items = [];
         var that = this;
-        var progressbarId = that.progressbarService.addNewProgressBar(videosIds.length, "downloading videos details");;
+        var progressbarId = that.progressbarService.addNewProgressbar(videosIds.length, "downloading videos details");;
         var options = {id: ""};
         Logger.getInstance().debug("[YT] Obtaining details for videos ("+videosIds.length+")");
         return new Promise(function(resolve, reject)
@@ -77,7 +77,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                     {
                         //add items to the array
                         items = items.concat(response.items);
-                        that.progressbarService.updateProgress(progressbarId, lastItemIndex);
+                        that.progressbarService.updateProgressbar(progressbarId, lastItemIndex);
                         //get details for next items if are available
                         if (lastItemIndex < videosIds.length)
                         {
@@ -134,11 +134,11 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                 {
                     if(progressbarId === null)
                     {
-                        progressbarId = that.progressbarService.addNewProgressBar(response.pageInfo.totalResults, "downloading playlist details");
+                        progressbarId = that.progressbarService.addNewProgressbar(response.pageInfo.totalResults, "downloading playlist details");
                     }
                     //add items to the array
                     items = items.concat(response.items);
-                    that.progressbarService.updateProgress(progressbarId, items.length);
+                    that.progressbarService.updateProgressbar(progressbarId, items.length);
                     //get details for next items if are available
                     if (response.result.nextPageToken)
                     {
