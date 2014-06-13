@@ -6,6 +6,10 @@ window.Player.PlaylistElementDetailsProvider = function(playlistProvider, detail
     this.sessionProvider = sessionProvider;
     this.playlistProvider = playlistProvider;
     this.detailsProvider = detailsProvider;
+
+    //TODO - use as a service, only temporarily here
+    this.progressbarService = new window.UI.ProgressbarService();
+    this.progressbarId = null;
 };
 
 window.Player.PlaylistElementDetailsProvider.prototype =
@@ -17,6 +21,7 @@ window.Player.PlaylistElementDetailsProvider.prototype =
             that.playlistProvider.updateItem(itemIndex, mediaDetails);
             itemIndex++;
             that._getDetails(itemIndex, that);
+            that.progressbarService.updateProgress(that.progressbarId, itemIndex);
         };
     },
 
@@ -25,6 +30,7 @@ window.Player.PlaylistElementDetailsProvider.prototype =
         return function()
         {
             itemIndex++;
+            that.progressbarService.updateProgress(that.progressbarId, itemIndex);
             that._getDetails(itemIndex, that);
         };
     },
@@ -51,8 +57,12 @@ window.Player.PlaylistElementDetailsProvider.prototype =
 
     _handlePlaylistUpdated: function(numberOfNewItems)
     {
-        var itemIndex = this.playlistProvider.getPlaylist().length() - numberOfNewItems;
-        this._getDetails(itemIndex, this);
+        if(numberOfNewItems)
+        {
+            var itemIndex = this.playlistProvider.getPlaylist().length() - numberOfNewItems;
+            this.progressbarId = this.progressbarService.addNewProgressBar(numberOfNewItems, "updating playlist items with lastfm data");
+            this._getDetails(itemIndex, this);
+        }
     },
 
     initialise: function()
