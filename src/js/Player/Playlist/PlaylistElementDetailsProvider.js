@@ -15,7 +15,6 @@ window.Player.PlaylistElementDetailsProvider.prototype =
         return function(mediaDetails)
         {
             that.playlistProvider.updateItem(itemIndex, mediaDetails);
-            that.playlistProvider.updateItem(itemIndex, mediaDetails);
             itemIndex++;
             that._getDetails(itemIndex, that);
         };
