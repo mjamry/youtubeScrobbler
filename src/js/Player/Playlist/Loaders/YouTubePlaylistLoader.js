@@ -60,13 +60,17 @@ window.Playlist.YouTubePlaylistLoader.prototype =
     {
         var items = [];
         var that = this;
-        var progressbarId = that.progressbarService.addNewProgressbar(videosIds.length, "downloading videos details");;
+        var progressbarId = null;
         var options = {id: ""};
         Logger.getInstance().debug("[YT] Obtaining details for videos ("+videosIds.length+")");
         return new Promise(function(resolve, reject)
         {
             function obtainVideoDetails(firstItemIndex)
             {
+                if(progressbarId)
+                {
+                    progressbarId = that.progressbarService.addNewProgressbar(videosIds.length, "downloading videos details");
+                }
                 var lastItemIndex = that.helper.getLastItemIndex(videosIds, firstItemIndex);
                 options.id = that.helper.getVideosIds(videosIds, firstItemIndex, lastItemIndex);
 

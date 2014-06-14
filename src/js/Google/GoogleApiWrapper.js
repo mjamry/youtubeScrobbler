@@ -18,7 +18,7 @@ window.Google.GoogleApiWrapper.prototype =
         gapi.client.load(window.Google.GoogleApiConstants.YOUTUBE.API.NAME, window.Google.GoogleApiConstants.YOUTUBE.API.VERSION,
         function()
         {
-            //this.isLoaded = true;
+            this.isLoaded = true;
             Logger.getInstance().debug("[Google API] Youtube service loaded.");
         }.bind(this));
     },
