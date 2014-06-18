@@ -67,7 +67,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         {
             function obtainVideoDetails(firstItemIndex)
             {
-                if(progressbarId)
+                if(!progressbarId)
                 {
                     progressbarId = that.progressbarService.addNewProgressbar(videosIds.length, "downloading videos details");
                 }
