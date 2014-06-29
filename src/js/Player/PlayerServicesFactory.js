@@ -4,10 +4,10 @@ window.Player.PlayerServicesFactory = function(){};
 
 window.Player.PlayerServicesFactory.prototype =
 {
-    createPlaylistElementDetailsProvider: function(playlistService, sessionProvider)
+    createPlaylistElementDetailsProvider: function(sessionProvider)
     {
         var factory = new window.LastFm.LastFmApiFactory();
-        return new window.Player.PlaylistElementDetailsProvider(playlistService, factory.createInformationProvider(), sessionProvider);
+        return new window.Player.PlaylistElementDetailsProvider(factory.createInformationProvider(), sessionProvider);
     },
 
     createPlaylistElementLoveStateModifier: function(sessionProvider, playlistService)

@@ -5,19 +5,26 @@ window.Player = window.Player || {};
 window.Common = window.Common || {};
 
 
-window.Player.PlaylistService = function(playlistRepo)
+window.Player.PlaylistService = function(playlistRepo, playlistElementDetailsProvider)
 {
     this.playlist = new window.Playlist.PersistentPlaylist(playlistRepo);
     this.playlistRepository = new window.Playlist.PlaylistRepository(playlistRepo);
+    this.detailsProvider = playlistElementDetailsProvider;
     Logger.getInstance().info("Playlist service has been created.");
 };
 
 window.Player.PlaylistService.prototype =
 {
-    _updatePlaylist: function(numberOfNewItems)
+    _updatePlaylist: function(newItems)
     {
-        numberOfNewItems = numberOfNewItems || 0;
+        var numberOfNewItems = newItems ? newItems.length() : 0;
         EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistUpdated, numberOfNewItems);
+
+        if(numberOfNewItems > 0)
+        {
+            var firstNewItemIndex = this.playlist.length() - numberOfNewItems;
+            this.detailsProvider.obtainDetailsForItems(newItems.toArray(), firstNewItemIndex,  this.updateItem.bind(this));
+        }
     },
 
     _setPlaylist: function(playlist)
@@ -98,7 +105,7 @@ window.Player.PlaylistService.prototype =
         Logger.getInstance().info(msg);
         UserNotifier.getInstance().info(msg);
 
-        this._updatePlaylist(playlist.length());
+        this._updatePlaylist(playlist);
     },
 
     insertIntoPlaylist: function(index, details)
@@ -121,7 +128,6 @@ window.Player.PlaylistService.prototype =
         updatedMediaDetails.duration = item.duration;
 
         this.playlist.replace(index, updatedMediaDetails);
-
         EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistItemUpdated,
             {
                 mediaDetails: updatedMediaDetails,

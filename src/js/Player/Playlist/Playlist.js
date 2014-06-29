@@ -63,6 +63,16 @@ window.Player.Playlist.prototype =
         return this.mediaList.length;
     },
 
+    reduce: function(callback, initValue)
+    {
+        return this.mediaList.reduce(callback, initValue);
+    },
+
+    toArray: function()
+    {
+        return this.mediaList;
+    },
+
     //TODO remember to update currentIndex after changing playlist items order
     shuffle: function()
     {
