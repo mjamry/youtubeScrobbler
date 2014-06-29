@@ -66,6 +66,11 @@ window.ApplicationCore.CoreServicesFactory.prototype =
     createPlaylistLoaderService: function(playlistService)
     {
         return new window.Playlist.PlaylistLoaderService(playlistService);
+    },
+
+    createWelcomeService: function()
+    {
+        return new window.Services.WelcomeScreenService(window.UI.WelcomeScreenConfiguration);
     }
 };
 

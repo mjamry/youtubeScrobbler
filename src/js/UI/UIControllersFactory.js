@@ -76,5 +76,10 @@ window.UI.UIControllersFactory.prototype =
     createProgressbarViewController: function()
     {
         return new window.UI.ProgressbarViewController(window.UI.ProgressbarViewControllerConfiguration, $("#progressbar-container"));
+    },
+
+    createWelcomeScreenController: function(welcomeScreenService)
+    {
+        return new window.UI.WelcomeScreenController(window.UI.WelcomeScreenConfiguration, $("#page"), welcomeScreenService);
     }
 };

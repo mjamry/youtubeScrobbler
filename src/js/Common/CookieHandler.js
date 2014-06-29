@@ -42,7 +42,7 @@ window.Common.CookieImpl.prototype =
 {
     setCookie: function(name, value, expiryTime)
     {
-        $.cookie(name, value, expiryTime);
+        $.cookie(name, value, {expires: expiryTime});
         Logger.getInstance().debug("[Cookie] It has been created - '" + name + "' : "+ value);
     },
 

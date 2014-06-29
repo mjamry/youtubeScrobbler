@@ -45,6 +45,14 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
     this.userNotificationViewController = uiFactory.createUserNotificationViewController();
 
     this.progressbarViewController = uiFactory.createProgressbarViewController();
+
+    var welcomeScreenService = coreServicesFactory.createWelcomeService();
+    var welcomeScreenController = uiFactory.createWelcomeScreenController(welcomeScreenService);
+
+    if(welcomeScreenService.isApplicationAlreadyActivated())
+    {
+        welcomeScreenController.showMainScreen();
+    }
 };
 
 window.ApplicationCore.AppCore.prototype =

@@ -1,3 +1,10 @@
-/**
- * Created by michal on 6/29/14.
- */
+window.UI = window.UI || {};
+
+window.UI.WelcomeScreenConfiguration =
+{
+    WelcomeScreenId: "#welcome-screen",
+    MainScreenId: "#page-content",
+
+    WelcomeCookieName: "WasAlreadyVisited",
+    WelcomeCookieTrueValue: "true"
+};

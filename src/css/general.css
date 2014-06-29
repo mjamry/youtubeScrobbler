@@ -193,7 +193,6 @@ body
 #progressbar-container
 {
     width:100%;
-    min-height: 10px;
 }
 
 .progressbar-body
