@@ -15,20 +15,13 @@ window.Player.PlaylistService = function(playlistRepo, playlistElementDetailsPro
 
 window.Player.PlaylistService.prototype =
 {
-    _updatePlaylist: function(numberOfNewItems)
+    _updatePlaylist: function(newItems)
     {
-        numberOfNewItems = numberOfNewItems || 0;
+        var numberOfNewItems = newItems.length() || 0;
         EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistUpdated, numberOfNewItems);
-        items = [];
-        for(var i=0;i<numberOfNewItems;i++)
-        {
-            var index = this.playlist.length() - numberOfNewItems + i;
-            items[i] = {
-                index: index,
-                details: this.playlist.get(index)
-            }
-        }
-        this.detailsProvider.obtainDetailsForItems(items, this.updateItem.bind(this));
+
+        var firstNewItemIndex = this.playlist.length() - numberOfNewItems;
+        this.detailsProvider.obtainDetailsForItems(newItems.toArray(), firstNewItemIndex,  this.updateItem.bind(this));
     },
 
     _setPlaylist: function(playlist)
@@ -109,7 +102,7 @@ window.Player.PlaylistService.prototype =
         Logger.getInstance().info(msg);
         UserNotifier.getInstance().info(msg);
 
-        this._updatePlaylist(playlist.length());
+        this._updatePlaylist(playlist);
     },
 
     insertIntoPlaylist: function(index, details)

@@ -9,12 +9,12 @@ window.Player.PlaylistElementDetailsProvider = function(detailsProvider, session
 
 window.Player.PlaylistElementDetailsProvider.prototype =
 {
-    _obtainDetailsForItem: function(that, item)
+    _obtainDetailsForItem: function(that, itemDetails)
     {
         return new Promise(function(resolve, reject)
         {
             that.detailsProvider.getTrackDetails(
-                item.details,
+                itemDetails,
                 {
                     user: that.sessionProvider.getSession().name
                 },
@@ -26,7 +26,10 @@ window.Player.PlaylistElementDetailsProvider.prototype =
         })
     },
 
-    obtainDetailsForItems: function(items, callback)
+    //items - is a list containing new items
+    //startIndex - is an item index on the playlist - needed for callback
+    //callback - method called to update item details
+    obtainDetailsForItems: function(items, startIndex, callback)
     {
         var that = this;
         var progressbarId = ProgressbarService.getInstance().addNewProgressbar(items.length, "Updating playlist items details.");
@@ -41,7 +44,7 @@ window.Player.PlaylistElementDetailsProvider.prototype =
                     })
                     .then(function(details)
                     {
-                        callback(item.index, details);
+                        callback(itemIndex + startIndex, details);
                         ProgressbarService.getInstance().updateProgressbar(progressbarId, progress);
                     })
                     .catch(function()
