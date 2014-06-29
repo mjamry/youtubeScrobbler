@@ -32,7 +32,7 @@ window.Player.PlaylistElementDetailsProvider.prototype =
     obtainDetailsForItems: function(items, startIndex, callback)
     {
         var that = this;
-        var progressbarId = ProgressbarService.getInstance().addNewProgressbar(items.length, "Updating playlist items details.");
+        var progressbarId = ProgressbarService.getInstance().addNewProgressbar(items.length, "updating playlist items details.");
 
         items.reduce(function(sequence, item, itemIndex)
             {

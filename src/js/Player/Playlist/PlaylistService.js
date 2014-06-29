@@ -17,11 +17,14 @@ window.Player.PlaylistService.prototype =
 {
     _updatePlaylist: function(newItems)
     {
-        var numberOfNewItems = newItems.length() || 0;
+        var numberOfNewItems = newItems ? newItems.length() : 0;
         EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistUpdated, numberOfNewItems);
 
-        var firstNewItemIndex = this.playlist.length() - numberOfNewItems;
-        this.detailsProvider.obtainDetailsForItems(newItems.toArray(), firstNewItemIndex,  this.updateItem.bind(this));
+        if(numberOfNewItems > 0)
+        {
+            var firstNewItemIndex = this.playlist.length() - numberOfNewItems;
+            this.detailsProvider.obtainDetailsForItems(newItems.toArray(), firstNewItemIndex,  this.updateItem.bind(this));
+        }
     },
 
     _setPlaylist: function(playlist)
