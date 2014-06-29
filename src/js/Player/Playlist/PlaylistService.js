@@ -10,7 +10,6 @@ window.Player.PlaylistService = function(playlistRepo, playlistElementDetailsPro
     this.playlist = new window.Playlist.PersistentPlaylist(playlistRepo);
     this.playlistRepository = new window.Playlist.PlaylistRepository(playlistRepo);
     this.detailsProvider = playlistElementDetailsProvider;
-    this.detailsProvider.initialise(this);
     Logger.getInstance().info("Playlist service has been created.");
 };
 
