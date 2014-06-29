@@ -23,7 +23,7 @@ window.Player.PlaylistElementDetailsProvider.prototype =
                     fail: reject
                 }
             );
-        })
+        });
     },
 
     //items - is a list containing new items

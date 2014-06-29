@@ -34,7 +34,7 @@ ProgressbarService.getInstance = function()
 window.Common.ProgressbarServiceImpl = function()
 {
     //substitute for dictionary
-    this.ids = new Object();
+    this.ids = [];
     this.lastId = 0;
 };
 

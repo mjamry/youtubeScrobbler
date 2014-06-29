@@ -4,7 +4,7 @@ window.UI = window.UI || {};
 window.UI.ProgressbarViewController = function(config, view)
 {
     //substitute for dictionary
-    this.ids = new Object();
+    this.ids = [];
     this.config = config;
     this.view = view;
 };
