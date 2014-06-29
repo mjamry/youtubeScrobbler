@@ -1,16 +1,14 @@
 //namespace
 window.Player = window.Player || {};
 
-window.Player.PlaylistElementDetailsProvider = function(playlistProvider, detailsProvider, sessionProvider)
+window.Player.PlaylistElementDetailsProvider = function(detailsProvider, sessionProvider)
 {
     this.sessionProvider = sessionProvider;
-    this.playlistProvider = playlistProvider;
     this.detailsProvider = detailsProvider;
 
     //TODO - use as a service, only temporarily here
     this.progressbarService = new window.UI.ProgressbarService();
-    this.progressbarId = null;
-    this.numberOfNewItems = 0;
+
 };
 
 window.Player.PlaylistElementDetailsProvider.prototype =
@@ -64,19 +62,51 @@ window.Player.PlaylistElementDetailsProvider.prototype =
         }
     },
 
-    _handlePlaylistUpdated: function(numberOfNewItems)
+    _obtainDetailsForItem: function(that, item)
     {
-        this.numberOfNewItems = numberOfNewItems;
-        if(this.numberOfNewItems)
+        return new Promise(function(resolve, reject)
         {
-            var itemIndex = this.playlistProvider.getPlaylist().length() - this.numberOfNewItems;
-            this.progressbarId = this.progressbarService.addNewProgressbar(this.numberOfNewItems, "updating playlist items with lastfm data");
-            this._getDetails(itemIndex, this);
-        }
+            that.detailsProvider.getTrackDetails(
+                item.details,
+                {
+                    user: that.sessionProvider.getSession().name
+                },
+                {
+                    done: resolve,
+                    fail: reject
+                }
+            );
+        })
+    },
+
+    obtainDetailsForItems: function(items, callback)
+    {
+        var that = this;
+        var sequence = Promise.resolve();
+
+        items.forEach(function(item)
+        {
+            sequence = sequence
+                .then(function()
+                {
+
+                    return that._obtainDetailsForItem(that, item);
+                })
+                .then(function(details)
+                {
+                    callback(item.index, details);
+                    Logger.getInstance().debug("[PEDP] OK item: "+details.title);
+                })
+                .catch(function(){
+                Logger.getInstance().debug("[PEDP] Error");
+            })
+        });
+
+
     },
 
     initialise: function()
     {
-        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistUpdated, this._handlePlaylistUpdated, null, this);
+
     }
 };

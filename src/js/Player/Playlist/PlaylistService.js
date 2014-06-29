@@ -29,7 +29,7 @@ window.Player.PlaylistService.prototype =
                 details: this.playlist.get(index)
             }
         }
-        this.detailsProvider.obtainDetailsForItems(items, this.updateItem);
+        this.detailsProvider.obtainDetailsForItems(items, this.updateItem.bind(this));
     },
 
     _setPlaylist: function(playlist)
