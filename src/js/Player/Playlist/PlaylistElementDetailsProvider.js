@@ -83,23 +83,34 @@ window.Player.PlaylistElementDetailsProvider.prototype =
     {
         var that = this;
         var sequence = Promise.resolve();
+        var progressbarId = this.progressbarService.addNewProgressbar(items.length, "Ladind playlist items details.");
+
+
+        items.reduce(function(sequence, item, itemIndex)
+            {
+                var progress = itemIndex + 1;
+                return sequence
+                    .then(function()
+                    {
+
+                        return that._obtainDetailsForItem(that, item);
+                    })
+                    .then(function(details)
+                    {
+                        callback(item.index, details);
+                        that.progressbarService.updateProgressbar(progressbarId, progress);
+                        Logger.getInstance().debug("[PEDP] OK item: "+details.title+" itemIndex: "+itemIndex);
+                    })
+                    .catch(function(){
+                        Logger.getInstance().debug("[PEDP] Error itemIndex: "+itemIndex);
+                    })
+            },
+            Promise.resolve()
+        );
 
         items.forEach(function(item)
         {
-            sequence = sequence
-                .then(function()
-                {
 
-                    return that._obtainDetailsForItem(that, item);
-                })
-                .then(function(details)
-                {
-                    callback(item.index, details);
-                    Logger.getInstance().debug("[PEDP] OK item: "+details.title);
-                })
-                .catch(function(){
-                Logger.getInstance().debug("[PEDP] Error");
-            })
         });
 
 
