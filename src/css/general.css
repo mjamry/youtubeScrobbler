@@ -16,6 +16,7 @@ body
 {
     min-height:100%;
     position:relative;
+
 }
 
 #page-content
@@ -25,6 +26,45 @@ body
     padding-bottom: 100px;
     margin-left:auto;
     margin-right:auto;
+    display:none;
+}
+
+#welcome-screen-description
+{
+    color: black;
+    font-size: 20pt;
+    background-color: #DC3522;
+}
+
+#welcome-screen-details
+{
+
+}
+
+.welcome-screen-content
+{
+    width: 900px;
+    padding-bottom: 80px;
+    padding-top: 80px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+
+.welcome-detail-content
+{
+    padding:5px;
+    text-align: center;
+    margin-top:10px;
+    width:90%;
+    font-size: 10pt;
+    color: #D9CB9E;
+}
+
+.welcome-detail-content-title
+{
+    font-size: 18pt;
+    margin-bottom: 10px;
 }
 
 /*----------------------------------------------FOOTER--------------------------------------------*/
