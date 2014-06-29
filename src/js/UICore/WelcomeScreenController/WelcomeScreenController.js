@@ -9,15 +9,20 @@ window.UI.WelcomeScreenController = function(config, view, model)
 
 window.UI.WelcomeScreenController.prototype =
 {
-    showWelcomeScreen: function()
+    _handleButtonClicked: function()
     {
-        this.view.find(this.config.WelcomeScreenId).show();
-        this.view.find(this.config.MainScreenId).hide();
+        this.model.activateApplication();
+        this.showMainScreen();
     },
 
     showMainScreen: function()
     {
         this.view.find(this.config.MainScreenId).show();
         this.view.find(this.config.WelcomeScreenId).hide();
+    },
+
+    initialise: function()
+    {
+        this.view.find(this.config.WelcomeScreenButton).click(this._handleButtonClicked.bind(this));
     }
 };

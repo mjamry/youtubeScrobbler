@@ -5,6 +5,8 @@ window.UI.WelcomeScreenConfiguration =
     WelcomeScreenId: "#welcome-screen",
     MainScreenId: "#page-content",
 
-    WelcomeCookieName: "WasAlreadyVisited",
+    WelcomeScreenButton: "#welcome-screen-try-it-btn",
+
+    WelcomeCookieName: "Scrobbline_WasAlreadyVisited",
     WelcomeCookieTrueValue: "true"
 };

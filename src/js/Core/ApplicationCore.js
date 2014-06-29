@@ -46,13 +46,8 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     this.progressbarViewController = uiFactory.createProgressbarViewController();
 
-    var welcomeScreenService = coreServicesFactory.createWelcomeService();
-    var welcomeScreenController = uiFactory.createWelcomeScreenController(welcomeScreenService);
-
-    if(welcomeScreenService.isApplicationAlreadyActivated())
-    {
-        welcomeScreenController.showMainScreen();
-    }
+    this.welcomeScreenService = coreServicesFactory.createWelcomeService();
+    this.welcomeScreenController = uiFactory.createWelcomeScreenController(this.welcomeScreenService);
 };
 
 window.ApplicationCore.AppCore.prototype =
@@ -73,5 +68,11 @@ window.ApplicationCore.AppCore.prototype =
         this.colorSchemeControlViewController.initialise();
         this.playlistService.initialise();
         this.progressbarViewController.initialise();
+        this.welcomeScreenController.initialise();
+
+        if(this.welcomeScreenService.isApplicationAlreadyActivated())
+        {
+            this.welcomeScreenController.showMainScreen();
+        }
     }
 };
