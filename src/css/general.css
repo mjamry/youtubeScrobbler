@@ -133,7 +133,34 @@ body
     height:35px;
     width:35px;
 }
+/*-----------------------------PROGRESSBAR------------------*/
+#progressbar-container
+{
+    width:100%;
+    min-height: 10px;
+}
 
+.progressbar-body
+{
+    height:4px;
+    background-color: red;
+}
+
+.progressbar
+{
+    height:10px;
+}
+
+.progressbar-title
+{
+    text-align: center;
+    color:white;
+    font-size: 8pt;
+    margin-left:auto;
+    margin-right:auto;
+    height:10px;
+    width:100%;
+}
 /*-----------------------------INPUT------------------------*/
 #input-form
 {

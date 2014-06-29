@@ -43,6 +43,8 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
     this.colorSchemeControlViewController = uiFactory.createColorSchemeControlViewController();
 
     this.userNotificationViewController = uiFactory.createUserNotificationViewController();
+
+    this.progressbarViewController = uiFactory.createProgressbarViewController();
 };
 
 window.ApplicationCore.AppCore.prototype =
@@ -63,5 +65,6 @@ window.ApplicationCore.AppCore.prototype =
         this.onlineScrobbler.initialise();
         this.colorSchemeControlViewController.initialise();
         this.playlistService.initialise();
+        this.progressbarViewController.initialise();
     }
 };

@@ -9,6 +9,8 @@ window.Playlist.YouTubePlaylistLoader = function(dataProvider)
 {
     this.dataProvider = dataProvider;
     this.helper = window.Playlist.YouTubePlaylistLoader.Helper;
+    //TODO - use as a service, only temporarily here
+    this.progressbarService = new window.UI.ProgressbarService();
 };
 
 window.Playlist.YouTubePlaylistLoader.prototype =
@@ -58,12 +60,17 @@ window.Playlist.YouTubePlaylistLoader.prototype =
     {
         var items = [];
         var that = this;
+        var progressbarId = null;
         var options = {id: ""};
         Logger.getInstance().debug("[YT] Obtaining details for videos ("+videosIds.length+")");
         return new Promise(function(resolve, reject)
         {
             function obtainVideoDetails(firstItemIndex)
             {
+                if(!progressbarId)
+                {
+                    progressbarId = that.progressbarService.addNewProgressbar(videosIds.length, "downloading videos details");
+                }
                 var lastItemIndex = that.helper.getLastItemIndex(videosIds, firstItemIndex);
                 options.id = that.helper.getVideosIds(videosIds, firstItemIndex, lastItemIndex);
 
@@ -74,11 +81,15 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                     {
                         //add items to the array
                         items = items.concat(response.items);
+                        that.progressbarService.updateProgressbar(progressbarId, lastItemIndex);
                         //get details for next items if are available
-                        if (lastItemIndex < videosIds.length) {
+                        if (lastItemIndex < videosIds.length)
+                        {
                             that.dataProvider.getVideoDetails(options, obtainVideoDetails(lastItemIndex));
                         }
-                        else {
+                        else
+                        {
+                            that.progressbarId = null;
                             //all details obtained so get only interesting information.
                             resolve(that.helper.getVideosDetailsFromItems(items));
                         }
@@ -111,6 +122,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
     {
         var that = this;
         var items = [];
+        var progressbarId = null;
         var options =
         {
             playlistId: playlistId,
@@ -124,8 +136,13 @@ window.Playlist.YouTubePlaylistLoader.prototype =
             {
                 if(!response.error)
                 {
+                    if(progressbarId === null)
+                    {
+                        progressbarId = that.progressbarService.addNewProgressbar(response.pageInfo.totalResults, "downloading playlist details");
+                    }
                     //add items to the array
                     items = items.concat(response.items);
+                    that.progressbarService.updateProgressbar(progressbarId, items.length);
                     //get details for next items if are available
                     if (response.result.nextPageToken)
                     {
@@ -135,6 +152,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                     }
                     else
                     {
+                        that.progressbarId = null;
                         //all details obtained, so get only ids from response
                         resolve(that.helper.getPlaylistDetailsFromItems(items));
                     }
@@ -288,7 +306,7 @@ window.Playlist.YouTubePlaylistLoader.Helper =
 
     getLastItemIndex: function(videos, firstItemIndex)
     {
-        var lastItemIndex = firstItemIndex+50;
+        var lastItemIndex = firstItemIndex + window.Google.GoogleApiConstants.MAX_NUMBER_OF_ITEMS_PER_REQUEST;
         if (lastItemIndex > videos.length)
         {
             lastItemIndex = videos.length;

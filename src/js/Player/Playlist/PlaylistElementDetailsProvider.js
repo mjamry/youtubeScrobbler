@@ -6,18 +6,29 @@ window.Player.PlaylistElementDetailsProvider = function(playlistProvider, detail
     this.sessionProvider = sessionProvider;
     this.playlistProvider = playlistProvider;
     this.detailsProvider = detailsProvider;
+
+    //TODO - use as a service, only temporarily here
+    this.progressbarService = new window.UI.ProgressbarService();
+    this.progressbarId = null;
+    this.numberOfNewItems = 0;
 };
 
 window.Player.PlaylistElementDetailsProvider.prototype =
 {
+    _updateProgressbar: function(itemIndex, that)
+    {
+        var progress = itemIndex - (that.playlistProvider.getPlaylist().length() - this.numberOfNewItems);
+        that.progressbarService.updateProgressbar(that.progressbarId, progress);
+    },
+
     _handleDetailsObtained: function(itemIndex, that)
     {
         return function(mediaDetails)
         {
             that.playlistProvider.updateItem(itemIndex, mediaDetails);
-            that.playlistProvider.updateItem(itemIndex, mediaDetails);
             itemIndex++;
             that._getDetails(itemIndex, that);
+            that._updateProgressbar(itemIndex, that);
         };
     },
 
@@ -25,8 +36,11 @@ window.Player.PlaylistElementDetailsProvider.prototype =
     {
         return function()
         {
+            //there was an error with downloading details (probably there was something wrong with artist/track name).
+            //do not care about that, just get details for next item.
             itemIndex++;
             that._getDetails(itemIndex, that);
+            that._updateProgressbar(itemIndex, that);
         };
     },
 
@@ -52,8 +66,13 @@ window.Player.PlaylistElementDetailsProvider.prototype =
 
     _handlePlaylistUpdated: function(numberOfNewItems)
     {
-        var itemIndex = this.playlistProvider.getPlaylist().length() - numberOfNewItems;
-        this._getDetails(itemIndex, this);
+        this.numberOfNewItems = numberOfNewItems;
+        if(this.numberOfNewItems)
+        {
+            var itemIndex = this.playlistProvider.getPlaylist().length() - this.numberOfNewItems;
+            this.progressbarId = this.progressbarService.addNewProgressbar(this.numberOfNewItems, "updating playlist items with lastfm data");
+            this._getDetails(itemIndex, this);
+        }
     },
 
     initialise: function()

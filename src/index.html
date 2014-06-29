@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/themes/dark.css">
 
     <!--JS-LIBRARIES-->
+    <script type="text/javascript" src="https://apis.google.com/js/client.js"></script>
     <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
     <script type="text/javascript" src="js/lib/jquery.cookie.js"></script>
     <script type="text/javascript" src="js/lib/lastfm.api.js"></script>
@@ -20,7 +21,7 @@
     <script type="text/javascript" src="js/lib/lastfm.api.md5.js"></script>
     <script type="text/javascript" src="js/lib/jquery.cookie.js"></script>
     <script type="text/javascript" src="js/lib/mediaelement-and-player.js"></script>
-    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+
     <!--JS_SCROBBLINE-->
     <!--build:js js/scrobbline.min.js-->
     <script type="text/javascript" src="js/Common/Log.js"></script>
@@ -75,6 +76,8 @@
     <script type="text/javascript" src="js/Player/Playlist/Repository/PlaylistRepository.js"></script>
     <script type="text/javascript" src="js/Player/Playlist/PersistentPlaylist.js"></script>
 
+    <script type="text/javascript" src="js/Services/ProgressbarService.js"></script>
+
     <script type="text/javascript" src="js/Tracking/GoogleTracker.js"></script>
     <script type="text/javascript" src="js/Tracking/GoogleTrackerConfig.js"></script>
     <script type="text/javascript" src="js/Tracking/GoogleUiTracker.js"></script>
@@ -90,6 +93,7 @@
     <script type="text/javascript" src="js/UI/TestReports/ReportSender.js"></script>
     <script type="text/javascript" src="js/UI/Controls/VolumeControl/VolumeControl.js"></script>
     <script type="text/javascript" src="js/UI/Controls/VolumeControl/VolumeControlConfiguration.js"></script>
+    <script type="text/javascript" src="js/UI/Controls/ProgressbarControl/ProgressbarControl.js"></script>
     <script type="text/javascript" src="js/UI/PlaybackProgressControl.js"></script>
 
     <script type="text/javascript" src="js/UICore/UIConstants.js"></script>
@@ -109,6 +113,8 @@
     <script type="text/javascript" src="js/UICore/UserNotification/UserNotifierConfiguration.js"></script>
     <script type="text/javascript" src="js/UICore/UserNotification/UserNotifierViewController.js"></script>
     <script type="text/javascript" src="js/UICore/UserNotification/UserNotificationBuilder.js"></script>
+    <script type="text/javascript" src="js/UICore/ProgressbarViewController/ProgressbarViewController.js"></script>
+    <script type="text/javascript" src="js/UICore/ProgressbarViewController/ProgressbarViewControllerConfig.js"></script>
 
     <script type="text/javascript" src="js/UICore/MediaLoad/MediaLoadConfig.js"></script>
     <script type="text/javascript" src="js/UICore/MediaLoad/MediaLoadViewController.js"></script>
@@ -157,6 +163,7 @@
             </div>
         </div>
     </div>
+    <div id="progressbar-container"></div>
     <div id="page-content">
         <div id="media-player-playback-controls-container">
             <div id="media-player-controls">
@@ -218,7 +225,6 @@
                     </div>
                 </div>
                 <div class="pure-u-1-2">
-                    <div id="playlist-progressbar"></div>
                     <div id="playlist">
                         <div id="playlist-container"></div>
                     </div>
@@ -410,5 +416,10 @@
         <div class="pure-u-1-24 user-notification-close">
             <button class="user-notification-close-button"><i class="fa fa-times"></i></button>
         </div>
+    </div>
+
+    <div class="progressbar">
+        <div class="progressbar-body"></div>
+        <div class="progressbar-title"></div>
     </div>
 </div>
