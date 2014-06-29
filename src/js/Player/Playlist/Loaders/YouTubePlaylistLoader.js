@@ -9,8 +9,6 @@ window.Playlist.YouTubePlaylistLoader = function(dataProvider)
 {
     this.dataProvider = dataProvider;
     this.helper = window.Playlist.YouTubePlaylistLoader.Helper;
-    //TODO - use as a service, only temporarily here
-    this.progressbarService = new window.UI.ProgressbarService();
 };
 
 window.Playlist.YouTubePlaylistLoader.prototype =
@@ -69,7 +67,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
             {
                 if(!progressbarId)
                 {
-                    progressbarId = that.progressbarService.addNewProgressbar(videosIds.length, "downloading videos details");
+                    progressbarId = ProgressbarService.getInstance().addNewProgressbar(videosIds.length, "downloading videos details");
                 }
                 var lastItemIndex = that.helper.getLastItemIndex(videosIds, firstItemIndex);
                 options.id = that.helper.getVideosIds(videosIds, firstItemIndex, lastItemIndex);
@@ -81,7 +79,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                     {
                         //add items to the array
                         items = items.concat(response.items);
-                        that.progressbarService.updateProgressbar(progressbarId, lastItemIndex);
+                        ProgressbarService.getInstance().updateProgressbar(progressbarId, lastItemIndex);
                         //get details for next items if are available
                         if (lastItemIndex < videosIds.length)
                         {
@@ -138,11 +136,11 @@ window.Playlist.YouTubePlaylistLoader.prototype =
                 {
                     if(progressbarId === null)
                     {
-                        progressbarId = that.progressbarService.addNewProgressbar(response.pageInfo.totalResults, "downloading playlist details");
+                        progressbarId = ProgressbarService.getInstance().addNewProgressbar(response.pageInfo.totalResults, "downloading playlist details");
                     }
                     //add items to the array
                     items = items.concat(response.items);
-                    that.progressbarService.updateProgressbar(progressbarId, items.length);
+                    ProgressbarService.getInstance().updateProgressbar(progressbarId, items.length);
                     //get details for next items if are available
                     if (response.result.nextPageToken)
                     {

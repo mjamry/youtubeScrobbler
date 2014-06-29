@@ -5,10 +5,6 @@ window.Player.PlaylistElementDetailsProvider = function(detailsProvider, session
 {
     this.sessionProvider = sessionProvider;
     this.detailsProvider = detailsProvider;
-
-    //TODO - use as a service, only temporarily here
-    this.progressbarService = new window.UI.ProgressbarService();
-
 };
 
 window.Player.PlaylistElementDetailsProvider.prototype =
@@ -33,7 +29,7 @@ window.Player.PlaylistElementDetailsProvider.prototype =
     obtainDetailsForItems: function(items, callback)
     {
         var that = this;
-        var progressbarId = this.progressbarService.addNewProgressbar(items.length, "Updating playlist items details.");
+        var progressbarId = ProgressbarService.getInstance().addNewProgressbar(items.length, "Updating playlist items details.");
 
         items.reduce(function(sequence, item, itemIndex)
             {
@@ -46,15 +42,15 @@ window.Player.PlaylistElementDetailsProvider.prototype =
                     .then(function(details)
                     {
                         callback(item.index, details);
-                        that.progressbarService.updateProgressbar(progressbarId, progress);
-                        Logger.getInstance().debug("[PEDP] OK item: "+details.title+" itemIndex: "+itemIndex);
+                        ProgressbarService.getInstance().updateProgressbar(progressbarId, progress);
                     })
                     .catch(function()
                     {
-                        Logger.getInstance().debug("[PEDP] Error itemIndex: "+itemIndex);
-                    })
+                        //don't care about errors, just update progressbar and move on
+                        ProgressbarService.getInstance().updateProgressbar(progressbarId, progress);
+                    });
             },
             Promise.resolve()
         );
-    },
+    }
 };

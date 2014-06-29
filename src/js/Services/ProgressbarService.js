@@ -1,14 +1,44 @@
 //namespace
 window.UI = window.UI || {};
 
-window.UI.ProgressbarService = function()
+ProgressbarService = function()
+{
+    ProgressbarService._instance = null;
+};
+
+ProgressbarService.setInstance = function(instance)
+{
+    if(ProgressbarService._instance !== null)
+    {
+        var errorMsg = "Instance of ProgressbarService has been already set!";
+        Logger.getInstance().error(errorMsg);
+        throw errorMsg;
+    }
+
+    ProgressbarService._instance = instance;
+};
+
+ProgressbarService.getInstance = function()
+{
+    if(ProgressbarService._instance === null)
+    {
+        var errorMsg = "Instance of ProgressbarService has not been set yet!";
+        Logger.getInstance().error(errorMsg);
+        throw errorMsg;
+    }
+
+    return ProgressbarService._instance;
+};
+
+
+window.Common.ProgressbarServiceImpl = function()
 {
     //substitute for dictionary
     this.ids = new Object();
     this.lastId = 0;
 };
 
-window.UI.ProgressbarService.prototype =
+window.Common.ProgressbarServiceImpl.prototype =
 {
     _generateId: function()
     {
