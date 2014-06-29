@@ -45,6 +45,9 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
     this.userNotificationViewController = uiFactory.createUserNotificationViewController();
 
     this.progressbarViewController = uiFactory.createProgressbarViewController();
+
+    this.welcomeScreenService = coreServicesFactory.createWelcomeService();
+    this.welcomeScreenController = uiFactory.createWelcomeScreenController(this.welcomeScreenService);
 };
 
 window.ApplicationCore.AppCore.prototype =
@@ -65,5 +68,11 @@ window.ApplicationCore.AppCore.prototype =
         this.colorSchemeControlViewController.initialise();
         this.playlistService.initialise();
         this.progressbarViewController.initialise();
+        this.welcomeScreenController.initialise();
+
+        if(this.welcomeScreenService.isApplicationAlreadyActivated())
+        {
+            this.welcomeScreenController.showMainScreen();
+        }
     }
 };
