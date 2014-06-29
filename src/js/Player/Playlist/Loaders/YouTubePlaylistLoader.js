@@ -178,7 +178,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
 
         var errorHandler = function(error)
         {
-            Logger.getInstance().warning(error);
+            Logger.getInstance().warning("[YT] Details loading error: "+error);
         };
 
         if(playlistId !== window.Common.UrlParserConstants.URL_PARSE_ERR)

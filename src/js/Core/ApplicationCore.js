@@ -12,7 +12,9 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
     this.sessionHandler = coreServicesFactory.createSessionHandler();
     this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler(this.sessionHandler);
 
-    this.playlistService = coreServicesFactory.createPlaylistService();
+    var playlistElementDetailsProvider = playerServicesFactory.createPlaylistElementDetailsProvider(this.sessionHandler);
+
+    this.playlistService = coreServicesFactory.createPlaylistService(playlistElementDetailsProvider);
     this.playlistLoaderService = coreServicesFactory.createPlaylistLoaderService(this.playlistService);
 
     this.player = coreServicesFactory.createMediaPlayer(this.uiCore.getPlayerContainer(), this.playlistService);
@@ -21,8 +23,6 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
     this.playlistFlowController = playerServicesFactory.createPlaylistFlowController(this.playlistService);
 
     this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistFlowController);
-
-    this.playlistElementDetailsProvider = playerServicesFactory.createPlaylistElementDetailsProvider(this.playlistService, this.sessionHandler);
 
     var playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.sessionHandler, this.playlistService);
 
@@ -58,7 +58,6 @@ window.ApplicationCore.AppCore.prototype =
         this.playbackControlViewController.initialise();
         this.userNotificationViewController.initialise();
         this.playlistControlViewController.initialise();
-        this.playlistElementDetailsProvider.initialise();
         this.mediaLoadViewController.initialise();
         this.sessionViewController.initialise();
         this.playlistItemEditorViewController.initialise();

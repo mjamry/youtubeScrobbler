@@ -42,10 +42,10 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new window.Player.MediaPlayer(window.Player.MediaPlayerConfig, container, playlistService);
     },
 
-    createPlaylistService: function()
+    createPlaylistService: function(playlistElementDetailsProvider)
     {
         var playlistRepo = new window.Playlist.PlaylistLocalRepository();
-        return new window.Player.PlaylistService(playlistRepo);
+        return new window.Player.PlaylistService(playlistRepo, playlistElementDetailsProvider);
     },
 
     createPlaybackDetailsService: function(player)

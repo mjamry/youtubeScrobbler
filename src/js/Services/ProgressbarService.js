@@ -31,6 +31,7 @@ window.UI.ProgressbarService.prototype =
         };
 
         EventBroker.getInstance().fireEventWithData(window.UI.ProgressbarServiceEvents.RegisterNewProgressbar, {id: newId, title: title});
+        Logger.getInstance().debug("[PB] New progressbar. MaxValue: "+maxValue+" title: "+title);
 
         return newId;
     },
@@ -40,6 +41,7 @@ window.UI.ProgressbarService.prototype =
         Logger.getInstance().debug("[PB] id: "+id+" value: "+currentValue);
         var percentageValue = this._calculatePercentageValue(currentValue, this.ids[id].maxValue);
         EventBroker.getInstance().fireEventWithData(window.UI.ProgressbarServiceEvents.UpdateProgressbarStatus, {id: id, value: percentageValue});
+        Logger.getInstance().debug("[PB] id: "+id+" value: "+percentageValue+"%");
     }
 };
 
