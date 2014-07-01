@@ -1,26 +1,30 @@
 //namespace
 window.Google = window.Google || {};
 
+initialiseGoogleApi = function()
+{
+    //TODO handle loading errors
+    gapi.client.setApiKey(window.Google.GoogleApiConstants.YOUTUBE.API.KEY);
+    gapi.client.load(window.Google.GoogleApiConstants.YOUTUBE.API.NAME, window.Google.GoogleApiConstants.YOUTUBE.API.VERSION,
+        function()
+        {
+            this.initialise();
+        }.bind(window.Google.GoogleApiWrapper.prototype));
+};
+
 window.Google.GoogleApiWrapper = function()
 {
-    this._initialise();
-    this.isLoaded = false;
     this.USER_ERROR_MSG = "There is a problem with loading Google services. Please reload page.";
     this.LOG_ERROR_MSG = "[Google API] Youtube service is not loaded yet.";
 };
 
 window.Google.GoogleApiWrapper.prototype =
 {
-    _initialise: function()
+    isLoaded: false,
+    initialise: function()
     {
-        //TODO handle loading errors
-        gapi.client.setApiKey(window.Google.GoogleApiConstants.YOUTUBE.API.KEY);
-        gapi.client.load(window.Google.GoogleApiConstants.YOUTUBE.API.NAME, window.Google.GoogleApiConstants.YOUTUBE.API.VERSION,
-        function()
-        {
-            this.isLoaded = true;
-            Logger.getInstance().debug("[Google API] Youtube service loaded.");
-        }.bind(this));
+        this.isLoaded = true;
+        Logger.getInstance().debug("[Google API] Youtube service loaded.");
     },
 
     getPlaylistDetails: function(requestOptions, callback)
