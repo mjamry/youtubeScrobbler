@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="css/themes/dark.css">
 
     <!--JS-LIBRARIES-->
-
     <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
     <script type="text/javascript" src="js/lib/jquery.cookie.js"></script>
     <script type="text/javascript" src="js/lib/lastfm.api.js"></script>
@@ -82,9 +81,6 @@
     <script type="text/javascript" src="js/Tracking/GoogleTrackerConfig.js"></script>
     <script type="text/javascript" src="js/Tracking/GoogleUiTracker.js"></script>
 
-    <script type="text/javascript" src="js/Google/GoogleApiConstants.js"></script>
-    <script type="text/javascript" src="js/Google/GoogleApiWrapper.js"></script>
-
     <script type="text/javascript" src="js/Services/WelcomeScreenService.js"></script>
 
     <script type="text/javascript" src="js/UI/UIControllersFactory.js"></script>
@@ -126,7 +122,14 @@
     <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistItemEditorViewController.js"></script>
     <script type="text/javascript" src="js/UICore/ColorSchemeControl/ColorSchemeControlConfig.js"></script>
     <script type="text/javascript" src="js/UICore/ColorSchemeControl/ColorSchemeControlViewController.js"></script>
+
+    <!--GOOGLE-STUFF-->
+    <!--it has to be at the end because initialiseGoogleApi is defined in googleApiWrapper file-->
+    <script type="text/javascript" src="js/Google/GoogleApiConstants.js"></script>
+    <script type="text/javascript" src="js/Google/GoogleApiWrapper.js"></script>
     <!--endbuild-->
+    <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=initialiseGoogleApi"></script>
+
     <!--JS-GOOGLE-ANALYTICS-->
     <script>
 
@@ -142,7 +145,7 @@
         ga('send', 'pageview');
 
     </script>
-    <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=initialiseGoogleApi"></script>
+
 </head>
 <body class="pure-skin-sc">
 <div id="page">
