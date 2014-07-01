@@ -52,9 +52,9 @@ window.UI.UIControllersFactory.prototype =
         return new window.UI.SessionViewController(sessionHandler, window.UI.SessionUIConfiguration);
     },
 
-    createMediaLoadViewController: function(playlistService)
+    createMediaLoadViewController: function(playlistLoaderService)
     {
-        return new window.UI.MediaLoadViewController(playlistService, window.UI.MediaLoadConfig);
+        return new window.UI.MediaLoadViewController(playlistLoaderService, window.UI.MediaLoadConfig);
     },
 
     createPlaylistItemEditorViewController: function(playlistProvider)
@@ -71,5 +71,15 @@ window.UI.UIControllersFactory.prototype =
     createUserNotificationViewController: function()
     {
         return new window.UI.UserNotifierViewController("#user-notifications-container", window.UI.UserNotifierConfiguration);
+    },
+
+    createProgressbarViewController: function()
+    {
+        return new window.UI.ProgressbarViewController(window.UI.ProgressbarViewControllerConfiguration, $("#progressbar-container"));
+    },
+
+    createWelcomeScreenController: function(welcomeScreenService)
+    {
+        return new window.UI.WelcomeScreenController(window.UI.WelcomeScreenConfiguration, $("#page"), welcomeScreenService);
     }
 };

@@ -42,9 +42,10 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new window.Player.MediaPlayer(window.Player.MediaPlayerConfig, container, playlistService);
     },
 
-    createPlaylistService: function()
+    createPlaylistService: function(playlistElementDetailsProvider)
     {
-        return new window.Player.PlaylistService();
+        var playlistRepo = new window.Playlist.PlaylistLocalRepository();
+        return new window.Player.PlaylistService(playlistRepo, playlistElementDetailsProvider);
     },
 
     createPlaybackDetailsService: function(player)
@@ -60,6 +61,16 @@ window.ApplicationCore.CoreServicesFactory.prototype =
     createUserNotifier: function()
     {
         return new window.Common.UserNotifierImpl();
+    },
+
+    createPlaylistLoaderService: function(playlistService)
+    {
+        return new window.Playlist.PlaylistLoaderService(playlistService);
+    },
+
+    createWelcomeService: function()
+    {
+        return new window.Services.WelcomeScreenService(window.UI.WelcomeScreenConfiguration);
     }
 };
 

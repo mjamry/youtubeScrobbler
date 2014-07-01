@@ -6,7 +6,7 @@ window.Common = window.Common || {};
 window.Player.MediaPlayer = function(configuration, container, playlistService)
 {
     this.instance = null;
-    this.currentlyLoadedMediaDetails = new window.Player.MediaDetails();
+    this.currentlyLoadedMediaDetails = null;
 
     this.container = container;
     this.config = configuration;
@@ -21,12 +21,14 @@ window.Player.MediaPlayer.prototype =
     {
         var previousMediaDetails = this.currentlyLoadedMediaDetails;
         this.currentlyLoadedMediaDetails = newMediaDetails;
-        EventBroker.getInstance().fireEventWithData(
-            window.Player.Events.MediaChanged,
-            {
-                current: this.currentlyLoadedMediaDetails,
-                previous: previousMediaDetails
-            });
+        if(previousMediaDetails !== null) {
+            EventBroker.getInstance().fireEventWithData(
+                window.Player.Events.MediaChanged,
+                {
+                    current: this.currentlyLoadedMediaDetails,
+                    previous: previousMediaDetails
+                });
+        }
     },
 
     _createPlayerInstance: function(mediaDetails)
@@ -77,6 +79,8 @@ window.Player.MediaPlayer.prototype =
             this.instance.remove();
             this.instance = null;
         }
+
+        this.currentlyLoadedMediaDetails = null;
     },
 
     //initialises events for player

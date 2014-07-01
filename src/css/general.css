@@ -16,6 +16,7 @@ body
 {
     min-height:100%;
     position:relative;
+
 }
 
 #page-content
@@ -25,6 +26,61 @@ body
     padding-bottom: 100px;
     margin-left:auto;
     margin-right:auto;
+    display:none;
+}
+
+#welcome-screen-description
+{
+    color: black;
+    font-size: 20pt;
+    background-color: #DC3522;
+}
+
+#welcome-screen-try-it-btn
+{
+    font-size: 18pt;
+    background-color: #1E1E20;
+    color: #D9CB9E;
+    padding:15px;
+    border: 1px solid #D9CB9E;
+}
+
+#welcome-screen-try-it
+{
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+}
+
+#welcome-screen-details
+{
+    min-height:450px;
+}
+
+.welcome-screen-content
+{
+    width: 900px;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+
+.welcome-detail-content
+{
+    padding:5px;
+    text-align: center;
+    margin-top:10px;
+    width:90%;
+    font-size: 10pt;
+    color: #D9CB9E;
+}
+
+.welcome-detail-content-title
+{
+    font-size: 18pt;
+    margin-bottom: 10px;
 }
 
 /*----------------------------------------------FOOTER--------------------------------------------*/
@@ -133,7 +189,33 @@ body
     height:35px;
     width:35px;
 }
+/*-----------------------------PROGRESSBAR------------------*/
+#progressbar-container
+{
+    width:100%;
+}
 
+.progressbar-body
+{
+    height:4px;
+    background-color: red;
+}
+
+.progressbar
+{
+    height:10px;
+}
+
+.progressbar-title
+{
+    text-align: center;
+    color:white;
+    font-size: 8pt;
+    margin-left:auto;
+    margin-right:auto;
+    height:10px;
+    width:100%;
+}
 /*-----------------------------INPUT------------------------*/
 #input-form
 {

@@ -12,8 +12,6 @@ window.UI.PlaylistViewController = function(playlistService, playlistControlServ
     this.playlistControlService = playlistControlService;
     this.view = $("#"+view);
     this.config = config;
-
-    this.numberOfNewItems = 0;
 };
 
 window.UI.PlaylistViewController.prototype =
@@ -78,11 +76,6 @@ window.UI.PlaylistViewController.prototype =
 
     _refreshPlaylistView: function(numberOfNewItems)
     {
-        this.numberOfNewItems = numberOfNewItems;
-        if(this.numberOfNewItems > 0)
-        {
-            $(this.config.PlaylistProgressBar).show();
-        }
         //clear view
         this.view.empty();
         var playlist = this.playlistService.getPlaylist();
@@ -103,10 +96,6 @@ window.UI.PlaylistViewController.prototype =
     //pass only index - details can be obtained
     _handleItemUpdated: function(eventArgs)
     {
-        if(this.numberOfNewItems > 0)
-        {
-            this._updateProgressbar(eventArgs.index);
-        }
         var newItem = this._createNewElement(eventArgs.mediaDetails, eventArgs.index);
         this.view.find(this.config.PlaylistItem).eq(eventArgs.index).replaceWith(newItem);
         this._selectItem(this.playlistFlowController.getCurrentItemIndex());
@@ -115,17 +104,6 @@ window.UI.PlaylistViewController.prototype =
     _handleMediaPlayed: function()
     {
         this._selectItem(this.playlistFlowController.getCurrentItemIndex());
-    },
-
-    _updateProgressbar: function(itemIndex)
-    {
-        var progressBarPercentValue = ((this.numberOfNewItems - (this.playlistService.getPlaylist().length() - 1 - itemIndex))/this.numberOfNewItems)*100;
-        $(this.config.PlaylistProgressBar).css({width:progressBarPercentValue+"%"});
-        if(progressBarPercentValue == 100)
-        {
-            $(this.config.PlaylistProgressBar).hide();
-            this.numberOfNewItems = 0;
-        }
     },
 
     initialise: function()
@@ -137,7 +115,5 @@ window.UI.PlaylistViewController.prototype =
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistItemUpdated, this._handleItemUpdated, null, this);
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistUpdated, this._refreshPlaylistView, null, this);
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCreated, this._refreshPlaylistView, null, this);
-
-        this.playlistService.refreshPlaylist();
     }
 };

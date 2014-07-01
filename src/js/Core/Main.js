@@ -46,6 +46,9 @@ $(function()
     new Cookie();
     Cookie.setInstance(coreServicesFactory.createCookieHandler());
 
+    new ProgressbarService();
+    ProgressbarService.setInstance(new window.Common.ProgressbarServiceImpl());
+
     //creating application core
     var applicationCore = new window.ApplicationCore.AppCore(coreServicesFactory, uiFactory, playerServicesFactory);
     applicationCore.initialise();

@@ -9,21 +9,12 @@ window.UI.SessionViewController = function(model, config)
 
 window.UI.SessionViewController.prototype =
 {
-    _clearToken: function(token)
-    {
-        if(token != window.Common.UrlParserConstants.URL_PARSE_ERR)
-        {
-            //reload page removing parameters
-            window.location = window.location.pathname;
-        }
-    },
-
     //handles session establishing error
-    _handleSessionError: function(that, token)
+    _handleSessionError: function(model, token)
     {
         return function()
         {
-            that._clearToken(token);
+            model.clearToken(token);
         };
     },
 
@@ -32,7 +23,7 @@ window.UI.SessionViewController.prototype =
     {
         return function onSessionEstablished(userDetails)
         {
-            that._clearToken(token);
+            that.model.clearToken(token);
 
             $(that.config.SessionDetailsButton).html('<a href="'+that.config.LinkToPortal+userDetails+'" target="_blank"><div class="authentication-button">Hello! '+userDetails+'</div></a>');
 
@@ -48,17 +39,6 @@ window.UI.SessionViewController.prototype =
             $(that.config.SessionEstablishedContainer).hide();
             $(that.config.NoSessionContainer).show();
         };
-    },
-
-    //obtains token from current url address
-    _getToken: function()
-    {
-        var urlPars = new window.Common.UrlParser();
-        var token = urlPars.getParameterValue(window.location.href, "token");
-
-        Logger.getInstance().debug("Token: "+token+" has been obtained.");
-
-        return token;
     },
 
     //creates new session using passed token
@@ -87,13 +67,13 @@ window.UI.SessionViewController.prototype =
         },
         this));
 
-        var token = this._getToken();
+        var token = this.model.getToken();
 
         $(this.config.SessionEstablishedContainer).hide();
 
         EventBroker.getInstance().addListener(window.LastFm.Events.SessionEstablished, this._handleNewSession(this, token));
         EventBroker.getInstance().addListener(window.LastFm.Events.SessionClosed, this._handleSessionClosed(this));
-        EventBroker.getInstance().addListener(window.LastFm.Events.SessionEstablishmentFailed, this._handleSessionError(this, token));
+        EventBroker.getInstance().addListener(window.LastFm.Events.SessionEstablishmentFailed, this._handleSessionError(this.model, token));
 
         this._createSession(token);
     }

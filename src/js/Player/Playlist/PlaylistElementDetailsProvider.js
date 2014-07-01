@@ -1,63 +1,59 @@
 //namespace
 window.Player = window.Player || {};
 
-window.Player.PlaylistElementDetailsProvider = function(playlistProvider, detailsProvider, sessionProvider)
+window.Player.PlaylistElementDetailsProvider = function(detailsProvider, sessionProvider)
 {
     this.sessionProvider = sessionProvider;
-    this.playlistProvider = playlistProvider;
     this.detailsProvider = detailsProvider;
 };
 
 window.Player.PlaylistElementDetailsProvider.prototype =
 {
-    _handleDetailsObtained: function(itemIndex, that)
+    _obtainDetailsForItem: function(that, itemDetails)
     {
-        return function(mediaDetails)
+        return new Promise(function(resolve, reject)
         {
-            that.playlistProvider.updateItem(itemIndex, mediaDetails);
-            that.playlistProvider.updateItem(itemIndex, mediaDetails);
-            itemIndex++;
-            that._getDetails(itemIndex, that);
-        };
-    },
-
-    _handleObtainingError: function(itemIndex, that)
-    {
-        return function()
-        {
-            itemIndex++;
-            that._getDetails(itemIndex, that);
-        };
-    },
-
-    _getDetails: function(itemIndex, that)
-    {
-        if(itemIndex < that.playlistProvider.getPlaylist().length())
-        {
-            var done = that._handleDetailsObtained(itemIndex, that);
-            var fail = that._handleObtainingError(itemIndex, that);
-
-            this.detailsProvider.getTrackDetails(
-                that.playlistProvider.getPlaylist().get(itemIndex),
+            that.detailsProvider.getTrackDetails(
+                itemDetails,
                 {
-                    user: this.sessionProvider.getSession().name
+                    user: that.sessionProvider.getSession().name
                 },
                 {
-                    done: done,
-                    fail: fail
+                    done: resolve,
+                    fail: reject
                 }
             );
-        }
+        });
     },
 
-    _handlePlaylistUpdated: function(numberOfNewItems)
+    //items - is a list containing new items
+    //startIndex - is an item index on the playlist - needed for callback
+    //callback - method called to update item details
+    obtainDetailsForItems: function(items, startIndex, callback)
     {
-        var itemIndex = this.playlistProvider.getPlaylist().length() - numberOfNewItems;
-        this._getDetails(itemIndex, this);
-    },
+        var that = this;
+        var progressbarId = ProgressbarService.getInstance().addNewProgressbar(items.length, "updating playlist items details.");
 
-    initialise: function()
-    {
-        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistUpdated, this._handlePlaylistUpdated, null, this);
+        items.reduce(function(sequence, item, itemIndex)
+            {
+                var progress = itemIndex + 1;
+                return sequence
+                    .then(function()
+                    {
+                        return that._obtainDetailsForItem(that, item);
+                    })
+                    .then(function(details)
+                    {
+                        callback(itemIndex + startIndex, details);
+                        ProgressbarService.getInstance().updateProgressbar(progressbarId, progress);
+                    })
+                    .catch(function()
+                    {
+                        //don't care about errors, just update progressbar and move on
+                        ProgressbarService.getInstance().updateProgressbar(progressbarId, progress);
+                    });
+            },
+            Promise.resolve()
+        );
     }
 };

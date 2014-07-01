@@ -22,7 +22,7 @@ describe("PlaylistService", function(){
 
     beforeEach(function()
     {
-        playlistService = new window.Player.PlaylistService();
+        playlistService = new window.Player.PlaylistService(new window.Tests.MockPlaylistRepo(), new window.Tests.MockDetailsProvider());
     });
 
     it("should return the same playlist as created one", function(){
@@ -30,6 +30,7 @@ describe("PlaylistService", function(){
         playlistService.clearPlaylist();
         playlistService.addToPlaylist(playlist);
         expect(playlistService.getPlaylist()).toEqual(playlist);
+        console.log(playlist);
     });
 
     it("should clear existing playlist", function(){

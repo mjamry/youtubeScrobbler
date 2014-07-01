@@ -21,6 +21,11 @@ window.Player.Playlist.prototype =
         this.mediaList = this.mediaList.concat(playlist.mediaList);
     },
 
+    insert: function(index, mediaDetails)
+    {
+        this.mediaList.splice(index, 0, mediaDetails);
+    },
+
     get: function(index)
     {
         return this.mediaList[index];
@@ -56,6 +61,16 @@ window.Player.Playlist.prototype =
     length: function()
     {
         return this.mediaList.length;
+    },
+
+    reduce: function(callback, initValue)
+    {
+        return this.mediaList.reduce(callback, initValue);
+    },
+
+    toArray: function()
+    {
+        return this.mediaList;
     },
 
     //TODO remember to update currentIndex after changing playlist items order
@@ -95,5 +110,10 @@ window.Player.Playlist.prototype =
             mediaDetails.deserialize(data[i]);
             this.addItem(mediaDetails);
         }
+    },
+
+    isEmpty: function()
+    {
+        return this.length() === 0;
     }
 };

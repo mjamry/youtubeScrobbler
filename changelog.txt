@@ -1,3 +1,8 @@
+////////////VERSION 0.2.8///////////////
+ - corrections in user notifications, error notifications have been removed - #22
+ - latest version (v.3) of youtube's API is now in use - #25
+ - added more sophisticated way to manage progress indicators, also corrected issues with existing ones - #7
+ - added welcome page, which displays basic information about application's features - #26
 ////////////VERSION 0.2.7///////////////
  - added user notifications - #13
  - fixes in playlist item editor - #18
