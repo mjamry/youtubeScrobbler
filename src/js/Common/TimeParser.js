@@ -35,10 +35,12 @@ window.Common.TimeParserImpl = function()
     this.MinutesInHour = 60;
     this.SecondsInMinute = 60;
     this.MsInSecond = 1000;
-    this.DURATION_PATTERN = "P([0-9]+Y)?([0-9]+M)?([0-9]+W)?([0-9]+D)?T([0-9]+H)?([0-9]+M)?([0-9]+S)?";
-    this.DURATION_HOUR_INDEX = 5;
-    this.DURATION_MINUTES_INDEX = 6;
-    this.DURATION_SEC_INDEX = 7;
+    //example format:
+    //P2Y11M5W1DT2H23M56S
+    this.DURATION_PATTERN = "P(?:.*)T((\\d*)?(?=H).?)?((\\d*)?(?=M).?)?((\\d*)?(?=S).?)?";
+    this.DURATION_HOUR_INDEX = 2;
+    this.DURATION_MINUTES_INDEX = 4;
+    this.DURATION_SEC_INDEX = 6;
 };
 
 window.Common.TimeParserImpl.prototype =
@@ -50,8 +52,18 @@ window.Common.TimeParserImpl.prototype =
 
     _parseDuration: function(duration)
     {
-        var durationPattern = RegExp(this.DURATION_PATTERN);
-        return durationPattern.exec(duration);
+        var durationPattern = RegExp(this.DURATION_PATTERN, 'g');
+        var time = durationPattern.exec(duration);
+        //converts 'undefined' to 0
+        for(var i=0;i<time.length;i++)
+        {
+            if(!time[i])
+            {
+                time[i] = 0;
+            }
+        }
+
+        return time;
     },
 
     getMinutes: function(timeInMs)
@@ -66,7 +78,10 @@ window.Common.TimeParserImpl.prototype =
 
     getSecondsFromDuration: function(duration)
     {
-
+        var time = this._parseDuration(duration);
+        return +time[this.DURATION_HOUR_INDEX]*this.MinutesInHour*this.SecondsInMinute +
+             +time[this.DURATION_MINUTES_INDEX]*this.SecondsInMinute +
+             +time[this.DURATION_SEC_INDEX];
     },
 
     getHumanReadableTimeFormat: function(timeInSeconds)
@@ -92,9 +107,9 @@ window.Common.TimeParserImpl.prototype =
     {
         var time = this._parseDuration(duration);
         var hours, mins, secs;
-            hours = time[this.DURATION_HOUR_INDEX] ? time[this.DURATION_HOUR_INDEX].substring(0, time[this.DURATION_HOUR_INDEX].length - 1) : "";
-            mins = time[this.DURATION_MINUTES_INDEX] ? time[this.DURATION_MINUTES_INDEX].substring(0, time[this.DURATION_MINUTES_INDEX].length - 1) : "0";
-            secs = time[this.DURATION_SEC_INDEX] ? time[this.DURATION_SEC_INDEX].substring(0, time[this.DURATION_SEC_INDEX].length - 1) : "0";
+            hours = time[this.DURATION_HOUR_INDEX] ? time[this.DURATION_HOUR_INDEX] : "";
+            mins = time[this.DURATION_MINUTES_INDEX] ? time[this.DURATION_MINUTES_INDEX] : "0";
+            secs = time[this.DURATION_SEC_INDEX] ? time[this.DURATION_SEC_INDEX] : "0";
 
         //if hour value is defined return time in format h:m:s otherwise only m:s
         return hours ?
