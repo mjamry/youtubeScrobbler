@@ -79,9 +79,9 @@ window.Common.TimeParserImpl.prototype =
     getSecondsFromDuration: function(duration)
     {
         var time = this._parseDuration(duration);
-        return +time[this.DURATION_HOUR_INDEX]*this.MinutesInHour*this.SecondsInMinute +
-             +time[this.DURATION_MINUTES_INDEX]*this.SecondsInMinute +
-             +time[this.DURATION_SEC_INDEX];
+        return parseInt(time[this.DURATION_HOUR_INDEX]*this.MinutesInHour*this.SecondsInMinute, 10) +
+            parseInt(time[this.DURATION_MINUTES_INDEX]*this.SecondsInMinute, 10) +
+            parseInt(time[this.DURATION_SEC_INDEX], 10);
     },
 
     getHumanReadableTimeFormat: function(timeInSeconds)
