@@ -18,7 +18,6 @@ window.LastFm.Scrobbler.prototype =
     //Details are passed as literal: {track, artist, timestamp}.
     scrobble: function(trackDetails, session)
     {
-        trackDetails.duration = TimeParser.getInstance().getSecondsFromDuration(trackDetails.duration);
         Logger.getInstance().debug("[LastFm] Scrobbling request track: "+trackDetails.artist+" - "+trackDetails.track);
         this.lastFmApi.track.scrobble(
             trackDetails,
@@ -66,7 +65,6 @@ window.LastFm.Scrobbler.prototype =
     //Details are passed as literal: {track, artist}.
     updateNowPlaying: function(trackDetails, session)
     {
-        trackDetails.duration = TimeParser.getInstance().getSecondsFromDuration(trackDetails.duration);
         Logger.getInstance().debug("[LastFm] NowPlaying update request with track: "+trackDetails.artist+" - "+trackDetails.track);
         this.lastFmApi.track.updateNowPlaying(
             trackDetails,
