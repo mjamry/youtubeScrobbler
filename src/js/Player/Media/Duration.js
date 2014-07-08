@@ -11,7 +11,7 @@ window.Player.Duration.prototype =
     getInSeconds: function()
     {
         //TODO - format as seconds
-        return this.duration;
+        return TimeParser.getInstance().getSecondsFromDuration(this.duration);
     },
 
     ///change length in seconds to human readable format, containing minutes and seconds.

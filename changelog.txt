@@ -1,3 +1,7 @@
+////////////HOTFIX #2///////////////////
+Resolved issue with incorrect playing time calculation by scrobbler class.
+////////////HOTFIX #1///////////////////
+Resolved issue with updating now playing - passed track duration had incorrect format
 ////////////VERSION 0.2.8///////////////
  - corrections in user notifications, error notifications have been removed - #22
  - latest version (v.3) of youtube's API is now in use - #25
