@@ -1,4 +1,4 @@
-//namespace
+g//namespace
 window.Tracking = window.Tracking || {};
 
 GoogleTracker = function()
