@@ -85,7 +85,7 @@ window.Google.GoogleApiWrapper.prototype =
                     part: "snippet"
                 },
                 requestOptions);
-            var request = gapi.client.youtue.search.list(options);
+            var request = gapi.client.youtube.search.list(options);
             request.execute(callback);
         }
         else
