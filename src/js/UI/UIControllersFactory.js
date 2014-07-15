@@ -52,9 +52,9 @@ window.UI.UIControllersFactory.prototype =
         return new window.UI.SessionViewController(sessionHandler, window.UI.SessionUIConfiguration);
     },
 
-    createMediaLoadViewController: function(playlistLoaderService)
+    createMediaLoadViewController: function(playlistLoaderService, searchService)
     {
-        return new window.UI.MediaLoadViewController(playlistLoaderService, window.UI.MediaLoadConfig);
+        return new window.UI.MediaLoadViewController(playlistLoaderService, searchService, window.UI.MediaLoadConfig);
     },
 
     createPlaylistItemEditorViewController: function(playlistProvider)

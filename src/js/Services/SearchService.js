@@ -4,5 +4,8 @@ window.Playlist.SearchService = function(){};
 
 window.Playlist.SearchService.prototype =
 {
+    search: function(value)
+    {
 
+    }
 };

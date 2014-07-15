@@ -1,22 +1,36 @@
 //namespace
 window.UI = window.UI || {};
 
-window.UI.MediaLoadViewController = function(model, config)
+window.UI.MediaLoadViewController = function(playlistLoaderService, searchService, config)
 {
-    this.model = model;
+    this.playlistLoader = playlistLoaderService;
+    this.searchService = searchService;
     this.config = config;
 };
 
 window.UI.MediaLoadViewController.prototype =
 {
+    _isUrl: function()
+    {
+        //todo add some logic checking if passed string value is an url - regex
+        return true;
+    },
+
     _handlePlaylistUpdated: function()
     {
         $(this.config.MediaLocationInput).val("");
     },
 
-    _addNewMedia: function addNewMedia(location)
+    _handleInputValue: function(value)
     {
-        this.model.loadPlaylist(location);
+        if(this._isUrl(value))
+        {
+            this.playlistLoader.loadPlaylist(value);
+        }
+        else
+        {
+            this.searchService.search(value);
+        }
     },
 
     initialise: function initialise()
@@ -24,7 +38,7 @@ window.UI.MediaLoadViewController.prototype =
         $(this.config.AddNewMediaButton).click($.proxy(function handleAddMediaClicked(e)
         {
             e.preventDefault();
-            this._addNewMedia($(this.config.MediaLocationInput).val());
+            this._handleInputValue($(this.config.MediaLocationInput).val());
         },
         this));
 

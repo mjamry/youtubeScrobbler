@@ -4,14 +4,14 @@ window.Playlist.PlaylistLoaderService = function(playlistService)
 {
     this.playlisService = playlistService;
     this.loaderFactory = new window.Playlist.PlaylistLoadersFactory();
+    this.searchService = new window.Playlist.SearchService(new window.Playlist.SearchEngineFactory().create());
 };
 
 window.Playlist.PlaylistLoaderService.prototype =
 {
     _isUrl: function(value)
     {
-        //todo add some logic checking if passed string value is an url - regex
-        return true;
+
     },
 
     _handlePlaylistLoaded: function(playlist)
@@ -19,15 +19,15 @@ window.Playlist.PlaylistLoaderService.prototype =
         this.playlisService.addToPlaylist(playlist);
     },
 
-    loadPlaylist: function(url)
+    loadPlaylist: function(value)
     {
-        if(this._isUrl(url))
+        if(this._isUrl(value))
         {
-            this.loaderFactory.create(url).loadPlaylist(url, $.proxy(this._handlePlaylistLoaded, this));
+            this.loaderFactory.create(value).loadPlaylist(value, $.proxy(this._handlePlaylistLoaded, this));
         }
         else
         {
-
+            this.searchService.search(value);
         }
     }
 };
