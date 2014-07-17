@@ -13,7 +13,7 @@ window.UI.MediaLoadViewController.prototype =
     _isUrl: function()
     {
         //todo add some logic checking if passed string value is an url - regex
-        return true;
+        return false;
     },
 
     _handlePlaylistUpdated: function()

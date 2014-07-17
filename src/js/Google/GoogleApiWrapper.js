@@ -82,7 +82,9 @@ window.Google.GoogleApiWrapper.prototype =
         {
             var options = $.extend(
                 {
-                    part: "snippet"
+                    part: "snippet",
+                    fields: "items(id,snippet),nextPageToken,pageInfo",
+                    maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_ITEMS_PER_REQUEST
                 },
                 requestOptions);
             var request = gapi.client.youtube.search.list(options);

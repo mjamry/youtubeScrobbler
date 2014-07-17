@@ -12,11 +12,15 @@ window.Services.SearchService.prototype =
 {
     _handleResult: function(result)
     {
-        Logger.getInstance().debug(JSON.parse(result));
+        result.items.forEach(function(details)
+        {
+            Logger.getInstance().debug("[Search] title: "+details.snippet.title);
+        });
+
     },
 
     search: function(value)
     {
-        this.dataProviders.search(value, this._handleResult);
+        this.dataProviders.Youtube.getSearchResults({q:value}, this._handleResult);
     }
 };
