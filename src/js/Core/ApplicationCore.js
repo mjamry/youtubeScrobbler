@@ -16,6 +16,7 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     this.playlistService = coreServicesFactory.createPlaylistService(playlistElementDetailsProvider);
     this.playlistLoaderService = coreServicesFactory.createPlaylistLoaderService(this.playlistService);
+    this.searchService = coreServicesFactory.createSearchService();
 
     this.player = coreServicesFactory.createMediaPlayer(this.uiCore.getPlayerContainer(), this.playlistService);
     this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService(this.player);
@@ -36,7 +37,7 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     this.sessionViewController = uiFactory.createSessionViewController(this.sessionHandler);
 
-    this.mediaLoadViewController = uiFactory.createMediaLoadViewController(this.playlistLoaderService);
+    this.mediaLoadViewController = uiFactory.createMediaLoadViewController(this.playlistLoaderService, this.searchService);
 
     this.playlistItemEditorViewController = uiFactory.createPlaylistItemEditorViewController(this.playlistService);
 

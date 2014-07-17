@@ -71,6 +71,11 @@ window.ApplicationCore.CoreServicesFactory.prototype =
     createWelcomeService: function()
     {
         return new window.Services.WelcomeScreenService(window.UI.WelcomeScreenConfiguration);
+    },
+
+    createSearchService: function()
+    {
+        return new window.Services.SearchService();
     }
 };
 
