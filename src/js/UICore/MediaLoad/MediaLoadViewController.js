@@ -19,11 +19,15 @@ window.UI.MediaLoadViewController.prototype =
     _handleSearchItemAdded: function(videoId)
     {
         Logger.getInstance().debug("[Search] Video with id "+videoId+" has been added.");
+        //TODO only temporarly - add close button/icon instead
+        $(this.config.SearchResultsContainer).hide();
     },
 
     _handleSearchResult: function(result)
     {
         var searchResultContainer = $(this.config.SearchResultsContainer);
+        searchResultContainer.empty();
+        searchResultContainer.show();
         var that = this;
         result.forEach(function(item)
         {
@@ -32,7 +36,7 @@ window.UI.MediaLoadViewController.prototype =
             builder.initialise();
             builder.setTitle(item.title);
             builder.setVideoId(item.id);
-            builder.setAddButtonHandler(that._handleSearchItemAdded);
+            builder.setAddButtonHandler(that._handleSearchItemAdded, that);
 
             var searchItem = builder.build();
             searchResultContainer.append(searchItem);

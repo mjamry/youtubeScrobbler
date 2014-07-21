@@ -14,7 +14,7 @@ window.UI.SearchResultItemBuilder.prototype =
 {
     initialise: function()
     {
-        this._item = $("#control-schemes .search-result-item").clone();
+        this._item = $("#controls-schemes .search-result-item").clone();
         this._addButton = this._item.find(this.config.SearchItemAddButton)
     },
 
@@ -33,17 +33,17 @@ window.UI.SearchResultItemBuilder.prototype =
         this._item.addClass(style);
     },
 
-    setAddButtonHandler: function(handler)
+    setAddButtonHandler: function(handler, context)
     {
-        var onAdd = function(handler, videoId)
+        var onAddButtonClicked = function(handlerContext, handler, videoId)
         {
             return function handleAddButtonClicked()
             {
-                handler.call(videoId);
+                handler.call(handlerContext, videoId);
             };
         };
 
-        this._addButton.click(onAdd(handler, this._videoId));
+        this._addButton.click(onAddButtonClicked(context, handler, this._videoId));
     },
 
     build: function()

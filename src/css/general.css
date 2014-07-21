@@ -536,6 +536,39 @@ body
     border-style:none;
 }
 
+/*------------------------------SEARCH---RESULTS--------------------------------------------*/
+#search-results
+{
+    height:200px;
+    width:500px;
+    margin-left:auto;
+    margin-right:auto;
+
+    overflow: auto;
+
+    position: relative;
+    z-index: 9999;
+
+    /*TODO move to "colo" css file*/
+    background-color: #374140;
+}
+
+.search-result-item
+{
+    height:25px;
+}
+
+.search-result-title
+{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.search-result-add-button
+{
+    cursor: pointer;
+}
 /*----------------------------PROGRESS---BARS----------*/
 #media-player-playback
 {
