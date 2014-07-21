@@ -16,6 +16,14 @@ window.UI.MediaLoadViewController.prototype =
         return false;
     },
 
+    _handleSearchResult: function(result)
+    {
+        result.forEach(function(item)
+        {
+            Logger.getInstance().debug("[Search] title: "+item.title+" id: "+item.id);
+        });
+    },
+
     _handlePlaylistUpdated: function()
     {
         $(this.config.MediaLocationInput).val("");
@@ -43,5 +51,6 @@ window.UI.MediaLoadViewController.prototype =
         this));
 
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistUpdated, $.proxy(this._handlePlaylistUpdated, this));
+        EventBroker.getInstance().addListener(window.Services.SearchResultEvents.SearchFinishedWithSuccess, $.proxy(this._handleSearchResult, this));
     }
 };

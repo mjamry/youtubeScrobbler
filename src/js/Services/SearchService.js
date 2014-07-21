@@ -12,10 +12,20 @@ window.Services.SearchService.prototype =
 {
     _handleResult: function(result)
     {
+        var output = [];
         result.items.forEach(function(details)
         {
-            Logger.getInstance().debug("[Search] title: "+details.snippet.title);
+
+            //TODO: filter titles using naming pattern etc
+            output.push(
+                {
+                    id: details.id.videoId,
+                    title: details.snippet.title
+                }
+            );
         });
+
+        EventBroker.getInstance().fireEventWithData(window.Services.SearchResultEvents.SearchFinishedWithSuccess, output);
 
     },
 
@@ -23,4 +33,10 @@ window.Services.SearchService.prototype =
     {
         this.dataProviders.Youtube.getSearchResults({q:value}, this._handleResult);
     }
+};
+
+window.Services.SearchResultEvents =
+{
+    SearchFinishedWithError: "SearchFinishedWithError",
+    SearchFinishedWithSuccess: "SearchFinishedWithSuccess"
 };
