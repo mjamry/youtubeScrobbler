@@ -119,6 +119,7 @@
 
     <script type="text/javascript" src="js/UICore/MediaLoad/MediaLoadConfig.js"></script>
     <script type="text/javascript" src="js/UICore/MediaLoad/MediaLoadViewController.js"></script>
+    <script type="text/javascript" src="js/UICore/MediaLoad/SearchResultItemBuilder.js"></script>
     <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistItemEditorConfig.js"></script>
     <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistItemEditorViewController.js"></script>
     <script type="text/javascript" src="js/UICore/ColorSchemeControl/ColorSchemeControlConfig.js"></script>
@@ -279,6 +280,7 @@
                 <input class="playlist-add-input" type="text" id="media-location" placeholder="paste youtube link here" title="paste youtube link (for single video or playlist)"/>
                 <button id="add-to-playlist" class="playlist-add-button" title="add new items to playlist"><i class="fa fa-plus fa-2x"></i></button>
             </form>
+            <div id="search-results"></div>
         </div>
         <div id="media-content">
             <div class="pure-g">
@@ -472,6 +474,11 @@
                 <img class="playlist-item-cover" />
             </div>
         </div>
+    </div>
+
+    <div class="search-result-item pure-g">
+        <div class="search-result-title pure-u-4-5"></div>
+        <div class="search-result-add-button pure-u-1-5"><i class="fa fa-plus"></i></div>
     </div>
 
     <div class="pure-g user-notification">

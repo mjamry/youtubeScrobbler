@@ -16,11 +16,27 @@ window.UI.MediaLoadViewController.prototype =
         return false;
     },
 
+    _handleSearchItemAdded: function(videoId)
+    {
+        Logger.getInstance().debug("[Search] Video with id "+videoId+" has been added.");
+    },
+
     _handleSearchResult: function(result)
     {
+        var searchResultContainer = $(this.config.SearchResultsContainer);
+        var that = this;
         result.forEach(function(item)
         {
             Logger.getInstance().debug("[Search] title: "+item.title+" id: "+item.id);
+            var builder = new window.UI.SearchResultItemBuilder(window.UI.MediaLoadConfig);
+            builder.initialise();
+            builder.setTitle(item.title);
+            builder.setVideoId(item.id);
+            builder.setAddButtonHandler(that._handleSearchItemAdded);
+
+            var searchItem = builder.build();
+            searchResultContainer.append(searchItem);
+
         });
     },
 
