@@ -6,14 +6,15 @@ window.UI.MediaLoadViewController = function(playlistLoaderService, searchServic
     this.playlistLoader = playlistLoaderService;
     this.searchService = searchService;
     this.config = config;
+    this.REGEX_URL_PATTERN = "(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})\\.*";
 };
 
 window.UI.MediaLoadViewController.prototype =
 {
-    _isUrl: function()
+    _isUrl: function(value)
     {
-        //todo add some logic checking if passed string value is an url - regex
-        return false;
+        var regex = new RegExp(this.REGEX_URL_PATTERN);
+        return regex.test(value);
     },
 
     _handleSearchItemAdded: function(videoUrl)
