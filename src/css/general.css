@@ -551,6 +551,7 @@ body
 
     /*TODO move to "colo" css file*/
     background-color: #374140;
+    display: none;
 }
 
 .search-result-item

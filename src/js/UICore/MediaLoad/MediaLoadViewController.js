@@ -16,11 +16,12 @@ window.UI.MediaLoadViewController.prototype =
         return false;
     },
 
-    _handleSearchItemAdded: function(videoId)
+    _handleSearchItemAdded: function(videoUrl)
     {
-        Logger.getInstance().debug("[Search] Video with id "+videoId+" has been added.");
+        Logger.getInstance().debug("[Search] Video with id "+videoUrl+" has been added.");
         //TODO only temporarly - add close button/icon instead
         $(this.config.SearchResultsContainer).hide();
+        this.playlistLoader.loadPlaylist(videoUrl);
     },
 
     _handleSearchResult: function(result)
@@ -31,11 +32,11 @@ window.UI.MediaLoadViewController.prototype =
         var that = this;
         result.forEach(function(item)
         {
-            Logger.getInstance().debug("[Search] title: "+item.title+" id: "+item.id);
+            Logger.getInstance().debug("[Search] title: "+item.title+" id: "+item.url);
             var builder = new window.UI.SearchResultItemBuilder(window.UI.MediaLoadConfig);
             builder.initialise();
             builder.setTitle(item.title);
-            builder.setVideoId(item.id);
+            builder.setVideoUrl(item.url);
             builder.setAddButtonHandler(that._handleSearchItemAdded, that);
 
             var searchItem = builder.build();

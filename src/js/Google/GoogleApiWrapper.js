@@ -82,6 +82,7 @@ window.Google.GoogleApiWrapper.prototype =
         {
             var options = $.extend(
                 {
+                    //TODO add country code here
                     part: "snippet",
                     fields: "items(id,snippet),nextPageToken,pageInfo",
                     maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_ITEMS_PER_REQUEST

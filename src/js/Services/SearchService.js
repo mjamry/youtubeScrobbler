@@ -19,7 +19,8 @@ window.Services.SearchService.prototype =
             //TODO: filter titles using naming pattern etc
             output.push(
                 {
-                    id: details.id.videoId,
+                    //TODO check if result is a video or playlist and create appropriate url
+                    url: window.Google.GoogleApiConstants.YOUTUBE.URL+details.id.videoId,
                     title: details.snippet.title
                 }
             );

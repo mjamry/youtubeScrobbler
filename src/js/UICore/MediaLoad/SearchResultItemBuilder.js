@@ -2,7 +2,7 @@ window.UI = window.UI || {};
 
 window.UI.SearchResultItemBuilder = function(config)
 {
-    this._videoId = 0;
+    this._videoUrl = 0;
     this._handler = null;
     this._addButton = null;
     this._item = null;
@@ -23,9 +23,9 @@ window.UI.SearchResultItemBuilder.prototype =
         this._item.find(this.config.SearchItemTitle).append(title);
     },
 
-    setVideoId: function(videoId)
+    setVideoUrl: function(videoUrl)
     {
-        this._videoId = videoId;
+        this._videoUrl = videoUrl;
     },
 
     setStyle: function(style)
@@ -43,7 +43,7 @@ window.UI.SearchResultItemBuilder.prototype =
             };
         };
 
-        this._addButton.click(onAddButtonClicked(context, handler, this._videoId));
+        this._addButton.click(onAddButtonClicked(context, handler, this._videoUrl));
     },
 
     build: function()
