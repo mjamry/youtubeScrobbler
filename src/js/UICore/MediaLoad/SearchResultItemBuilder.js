@@ -66,6 +66,12 @@ window.UI.SearchResultItemBuilder.prototype =
         }
     },
 
+    setCover: function(imgUrl)
+    {
+        var cov = this._item.find(this.config.SearchItemCover);
+        cov.attr("src", imgUrl);
+    },
+
     build: function()
     {
         return this._item;

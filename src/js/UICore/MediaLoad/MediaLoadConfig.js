@@ -11,6 +11,7 @@ window.UI.MediaLoadConfig =
     SearchItemTitle: ".search-result-title",
     SearchItemAddButton: ".search-result-add-button",
     SearchItemIcons: ".search-result-icons",
+    SearchItemCover: ".search-result-cover",
 
     PlaylistIcon: "fa fa-th-list",
     YoutubeIcon: "fa fa-youtube"

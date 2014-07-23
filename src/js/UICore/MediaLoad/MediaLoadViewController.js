@@ -45,6 +45,7 @@ window.UI.MediaLoadViewController.prototype =
                 icons.push(that.config.PlaylistIcon);
             }
             builder.setIcons(icons);
+            builder.setCover(item.cover);
             var searchItem = builder.build();
             searchResultContainer.append(searchItem);
 

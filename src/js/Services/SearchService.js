@@ -52,7 +52,8 @@ window.Services.SearchService.prototype =
                 {
                     url: that._getUrlForResource(details),
                     title: details.snippet.title,
-                    type: that._getTypeOfResource(details)
+                    type: that._getTypeOfResource(details),
+                    cover: details.snippet.thumbnails.default.url
                 }
             );
         });

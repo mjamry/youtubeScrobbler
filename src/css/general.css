@@ -556,7 +556,7 @@ body
 
 .search-result-item
 {
-    height:25px;
+    height:35px;
 }
 
 .search-result-title
@@ -569,6 +569,12 @@ body
 .search-result-add-button
 {
     cursor: pointer;
+}
+
+.search-result-cover
+{
+    height:30px;
+    width:30px;
 }
 /*----------------------------PROGRESS---BARS----------*/
 #media-player-playback
