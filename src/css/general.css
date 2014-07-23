@@ -564,17 +564,27 @@ body
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 35px;
+    margin-right:5px;
 }
 
 .search-result-add-button
 {
     cursor: pointer;
+    border-style:none;
+}
+
+.search-result-icons
+{
+    padding-top: 10px;
+    letter-spacing: 5px;
 }
 
 .search-result-cover
 {
     height:30px;
     width:30px;
+    border:1px 0 solid;
 }
 /*----------------------------PROGRESS---BARS----------*/
 #media-player-playback
