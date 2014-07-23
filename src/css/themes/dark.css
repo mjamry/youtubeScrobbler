@@ -180,6 +180,18 @@ body A:hover
 {
     color: #D9CB9E;
 }
+
+/*-----------SEARCH----------------*/
+.search-result-add-button
+{
+    color:#DC3522;
+    background-color: #1E1E20;
+}
+
+#search-results
+{
+    background-color: #1E1E20;
+}
 /*--------VOLUME--CONTROL----------*/
 .volume-control-description
 {
