@@ -1,11 +1,8 @@
 //namespace
 window.UI = window.UI || {};
 
-window.UI.MediaLoadConfig =
+window.UI.SearchResultConfig =
 {
-    MediaLocationInput: "#media-location",
-    AddNewMediaButton: "#add-to-playlist",
-
     SearchResultsContainer: "#search-results",
     SearchItem: ".search-result-item",
     SearchItemTitle: ".search-result-title",

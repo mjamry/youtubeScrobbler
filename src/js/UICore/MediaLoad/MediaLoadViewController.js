@@ -39,7 +39,12 @@ window.UI.MediaLoadViewController.prototype =
             builder.setTitle(item.title);
             builder.setVideoUrl(item.url);
             builder.setAddButtonHandler(that._handleSearchItemAdded, that);
-
+            var icons = [that.config.YoutubeIcon];
+            if(item.type == window.Services.SearchResourceType.Playlist)
+            {
+                icons.push(that.config.PlaylistIcon);
+            }
+            builder.setIcons(icons);
             var searchItem = builder.build();
             searchResultContainer.append(searchItem);
 

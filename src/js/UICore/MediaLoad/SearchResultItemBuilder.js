@@ -12,6 +12,14 @@ window.UI.SearchResultItemBuilder = function(config)
 
 window.UI.SearchResultItemBuilder.prototype =
 {
+    _createIcon: function(style)
+    {
+        var icon = document.createElement("i");
+        icon.className += style;
+
+        return icon;
+    },
+
     initialise: function()
     {
         this._item = $("#controls-schemes .search-result-item").clone();
@@ -44,6 +52,18 @@ window.UI.SearchResultItemBuilder.prototype =
         };
 
         this._addButton.click(onAddButtonClicked(context, handler, this._videoUrl));
+    },
+
+    setIcons: function(iconsList)
+    {
+        if(iconsList.length > 0)
+        {
+            var iconContainer = this._item.find(this.config.SearchItemIcons);
+            iconsList.forEach(function(icon)
+            {
+                iconContainer.append(this._createIcon(icon));
+            }.bind(this));
+        }
     },
 
     build: function()

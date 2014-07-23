@@ -24,7 +24,19 @@ window.Services.SearchService.prototype =
         }
         else if(details.id.kind == this.RESOURCE_TYPE_VIDEO)
         {
-            return this.URL_VIDEO+details.id.videoId
+            return this.URL_VIDEO+details.id.videoId;
+        }
+    },
+
+    _getTypeOfResource: function(details)
+    {
+        if(details.id.kind == this.RESOURCE_TYPE_PLAYLIST)
+        {
+            return window.Services.SearchResourceType.Playlist;
+        }
+        else if(details.id.kind == this.RESOURCE_TYPE_VIDEO)
+        {
+            return window.Services.SearchResourceType.Video;
         }
     },
 
@@ -39,7 +51,8 @@ window.Services.SearchService.prototype =
             output.push(
                 {
                     url: that._getUrlForResource(details),
-                    title: details.snippet.title
+                    title: details.snippet.title,
+                    type: that._getTypeOfResource(details)
                 }
             );
         });
@@ -57,4 +70,10 @@ window.Services.SearchResultEvents =
 {
     SearchFinishedWithError: "SearchFinishedWithError",
     SearchFinishedWithSuccess: "SearchFinishedWithSuccess"
+};
+
+window.Services.SearchResourceType =
+{
+    Playlist: "Playlist",
+    Video: "Video"
 };
