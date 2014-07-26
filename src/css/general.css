@@ -539,19 +539,47 @@ body
 /*------------------------------SEARCH---RESULTS--------------------------------------------*/
 #search-results
 {
+    width:600px;
+    margin-left:70px;
+    position: absolute;
+
+    display: none;
+}
+
+#search-results-container
+{
     height:200px;
-    width:500px;
-    margin-left:auto;
-    margin-right:auto;
-
     overflow: auto;
-
     position: relative;
     z-index: 9999;
+    padding:10px;
+}
 
-    /*TODO move to "colo" css file*/
-    background-color: #374140;
-    display: none;
+#search-result-controls
+{
+    height:40px;
+    position: relative;
+    z-index: 9999;
+    padding:2px;
+}
+
+#search-result-controls > button
+{
+    border-style: none;
+    height:20px;
+    width:20px;
+}
+
+#search-result-close
+{
+    float:right;
+    padding:5px;
+}
+
+#search-result-pagination
+{
+    float:left;
+    padding:5px;
 }
 
 .search-result-item
@@ -585,6 +613,15 @@ body
     height:30px;
     width:30px;
     border:1px 0 solid;
+}
+
+.search-result-previous-button,
+.search-result-next-button,
+.search-result-close-button
+{
+    border-style:none;
+    height:30px;
+    width:30px;
 }
 /*----------------------------PROGRESS---BARS----------*/
 #media-player-playback

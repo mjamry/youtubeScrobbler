@@ -6,7 +6,8 @@ window.UI.MediaLoadConfig =
     MediaLocationInput: "#media-location",
     AddNewMediaButton: "#add-to-playlist",
 
-    SearchResultsContainer: "#search-results",
+    SearchResults: "#search-results",
+    SearchResultsContainer: "#search-results-container",
     SearchItem: ".search-result-item",
     SearchItemTitle: ".search-result-title",
     SearchItemAddButton: ".search-result-add-button",

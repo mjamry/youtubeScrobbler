@@ -280,7 +280,18 @@
                 <input class="playlist-add-input" type="text" id="media-location" placeholder="paste youtube link here" title="paste youtube link (for single video or playlist)"/>
                 <button id="add-to-playlist" class="playlist-add-button" title="add new items to playlist"><i class="fa fa-plus fa-2x"></i></button>
             </form>
-            <div id="search-results"></div>
+            <div id="search-results">
+                <div id="search-results-container"></div>
+                <div id="search-result-controls">
+                    <div id="search-result-pagination">
+                        <button class="search-result-previous-button"><i class="fa fa-chevron-left"></i></button>
+                        <button class="search-result-next-button"><i class="fa fa-chevron-right"></i></button>
+                    </div>
+                    <div id="search-result-close">
+                        <button class="search-result-close-button"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="media-content">
             <div class="pure-g">
@@ -481,8 +492,10 @@
             <img class="search-result-cover" />
         </div>
         <div class="search-result-title pure-u-2-3"></div>
-        <div class="search-result-icons pure-u-1-8"></div>
-        <button class="search-result-add-button pure-u-1-12" title="add to the playlist"><i class="fa fa-plus"></i></button>
+        <div class="pure-u-1-6">
+            <div class="search-result-icons pure-u-2-3"></div>
+            <button class="search-result-add-button pure-u-1-4" title="add to the playlist"><i class="fa fa-plus"></i></button>
+        </div>
     </div>
 
     <div class="pure-g user-notification">

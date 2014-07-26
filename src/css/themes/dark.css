@@ -188,7 +188,31 @@ body A:hover
     background-color: #1E1E20;
 }
 
-#search-results
+#search-results-container
+{
+    background-color: #1E1E20;
+    border: 2px solid #374140;
+    border-bottom-width: 0;
+}
+
+#search-result-controls
+{
+    background-color: #1E1E20;
+    border: 2px solid #374140;
+    border-top-width: 1px;
+}
+
+.search-result-previous-button,
+.search-result-next-button,
+.search-result-close-button
+{
+    background-color:#374140;
+    color:#DC3522;
+}
+
+.search-result-previous-button:hover,
+.search-result-next-button:hover,
+.search-result-close-button:hover
 {
     background-color: #1E1E20;
 }

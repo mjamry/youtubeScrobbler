@@ -21,7 +21,7 @@ window.UI.MediaLoadViewController.prototype =
     {
         Logger.getInstance().debug("[Search] Video with id "+videoUrl+" has been added.");
         //TODO only temporarly - add close button/icon instead
-        $(this.config.SearchResultsContainer).hide();
+        $(this.config.SearchResults).hide();
         this.playlistLoader.loadPlaylist(videoUrl);
     },
 
@@ -29,7 +29,7 @@ window.UI.MediaLoadViewController.prototype =
     {
         var searchResultContainer = $(this.config.SearchResultsContainer);
         searchResultContainer.empty();
-        searchResultContainer.show();
+        $(this.config.SearchResults).show();
         var that = this;
         result.forEach(function(item)
         {
