@@ -29,6 +29,8 @@ body
     display:none;
 }
 
+/*----------------------------------------------WELCOME--SCREEN------------------------------------------*/
+
 #welcome-screen-description
 {
     color: black;
@@ -534,6 +536,85 @@ body
     border-style:none;
 }
 
+/*------------------------------SEARCH---RESULTS--------------------------------------------*/
+#search-results
+{
+    width:500px;
+    margin-left:145px;
+    position: absolute;
+
+    display: none;
+}
+
+#search-results-container
+{
+    height:200px;
+    overflow: auto;
+    position: relative;
+    z-index: 9999;
+}
+
+#search-result-controls
+{
+    height:35px;
+    position: relative;
+    z-index: 9999;
+}
+
+#search-result-close
+{
+    float:right;
+    padding:5px;
+}
+
+#search-result-pagination
+{
+    float:left;
+    padding:5px;
+}
+
+.search-result-item
+{
+    height:35px;
+    cursor: pointer;
+}
+
+.search-result-title
+{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 35px;
+    cursor: pointer;
+}
+
+.search-result-add-button
+{
+    border-style:none;
+}
+
+.search-result-icons
+{
+    padding-top: 10px;
+    letter-spacing: 5px;
+    float:right;
+}
+
+.search-result-cover
+{
+    height:35px;
+    width:35px;
+    border:1px 0 solid;
+}
+
+.search-result-previous-button,
+.search-result-next-button,
+.search-result-close-button
+{
+    border-style:none;
+    height:25px;
+    width:25px;
+}
 /*----------------------------PROGRESS---BARS----------*/
 #media-player-playback
 {

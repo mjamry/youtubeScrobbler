@@ -82,6 +82,10 @@
     <script type="text/javascript" src="js/Tracking/GoogleUiTracker.js"></script>
 
     <script type="text/javascript" src="js/Services/WelcomeScreenService.js"></script>
+    <script type="text/javascript" src="js/Services/SearchService.js"></script>
+
+    <script type="text/javascript" src="js/Google/GoogleApiConstants.js"></script>
+    <script type="text/javascript" src="js/Google/GoogleApiWrapper.js"></script>
 
     <script type="text/javascript" src="js/UI/UIControllersFactory.js"></script>
     <script type="text/javascript" src="js/UI/Logger/LoggerViewController.js"></script>
@@ -118,15 +122,15 @@
 
     <script type="text/javascript" src="js/UICore/MediaLoad/MediaLoadConfig.js"></script>
     <script type="text/javascript" src="js/UICore/MediaLoad/MediaLoadViewController.js"></script>
+    <script type="text/javascript" src="js/UICore/MediaLoad/Search/SearchResultItemBuilder.js"></script>
+    <script type="text/javascript" src="js/UICore/MediaLoad/Search/SearchResultEvents.js"></script>
+    <script type="text/javascript" src="js/UICore/MediaLoad/Search/SearchResourceType.js"></script>
+    <script type="text/javascript" src="js/UICore/MediaLoad/Search/SearchServiceConstants.js"></script>
     <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistItemEditorConfig.js"></script>
     <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistItemEditorViewController.js"></script>
     <script type="text/javascript" src="js/UICore/ColorSchemeControl/ColorSchemeControlConfig.js"></script>
     <script type="text/javascript" src="js/UICore/ColorSchemeControl/ColorSchemeControlViewController.js"></script>
 
-    <!--GOOGLE-STUFF-->
-    <!--it has to be at the end because initialiseGoogleApi is defined in googleApiWrapper file-->
-    <script type="text/javascript" src="js/Google/GoogleApiConstants.js"></script>
-    <script type="text/javascript" src="js/Google/GoogleApiWrapper.js"></script>
     <!--endbuild-->
     <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=initialiseGoogleApi"></script>
 
@@ -278,6 +282,18 @@
                 <input class="playlist-add-input" type="text" id="media-location" placeholder="paste youtube link here" title="paste youtube link (for single video or playlist)"/>
                 <button id="add-to-playlist" class="playlist-add-button" title="add new items to playlist"><i class="fa fa-plus fa-2x"></i></button>
             </form>
+            <div id="search-results">
+                <div id="search-results-container"></div>
+                <div id="search-result-controls">
+                    <div id="search-result-pagination">
+                        <!--<button class="search-result-previous-button"><i class="fa fa-chevron-left"></i></button>-->
+                        <!--<button class="search-result-next-button"><i class="fa fa-chevron-right"></i></button>-->
+                    </div>
+                    <div id="search-result-close">
+                        <button class="search-result-close-button"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="media-content">
             <div class="pure-g">
@@ -471,6 +487,14 @@
                 <img class="playlist-item-cover" />
             </div>
         </div>
+    </div>
+
+    <div class="search-result-item pure-g">
+        <div class="pure-u-1-12">
+            <img class="search-result-cover" />
+        </div>
+        <div class="search-result-title pure-u-5-6"></div>
+        <div class="search-result-icons pure-u-1-12"></div>
     </div>
 
     <div class="pure-g user-notification">

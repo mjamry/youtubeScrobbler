@@ -20,6 +20,12 @@ window.Google.GoogleApiWrapper = function()
 
 window.Google.GoogleApiWrapper.prototype =
 {
+    _handleServiceError: function()
+    {
+        UserNotifier.getInstance().error(this.USER_ERROR_MSG);
+        Logger.getInstance().warning(this.LOG_ERROR_MSG);
+    },
+
     isLoaded: false,
     initialise: function()
     {
@@ -45,8 +51,7 @@ window.Google.GoogleApiWrapper.prototype =
         }
         else
         {
-            UserNotifier.getInstance().error(this.USER_ERROR_MSG);
-            Logger.getInstance().warning(this.LOG_ERROR_MSG);
+            this._handleServiceError();
         }
     },
 
@@ -67,8 +72,28 @@ window.Google.GoogleApiWrapper.prototype =
         }
         else
         {
-            UserNotifier.getInstance().error(this.USER_ERROR_MSG);
-            Logger.getInstance().warning(this.LOG_ERROR_MSG);
+            this._handleServiceError();
+        }
+    },
+
+    getSearchResults: function(requestOptions, callback)
+    {
+        if(this.isLoaded)
+        {
+            var options = $.extend(
+                {
+                    //TODO add country code here
+                    part: "snippet",
+                    fields: "items(id,snippet),nextPageToken,pageInfo",
+                    maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_SEARCH_RESULTS_PER_REQUEST
+                },
+                requestOptions);
+            var request = gapi.client.youtube.search.list(options);
+            request.execute(callback);
+        }
+        else
+        {
+            this._handleServiceError();
         }
     }
 };

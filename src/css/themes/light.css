@@ -187,6 +187,47 @@ body A:hover
 {
     color: #FA4147;
 }
+
+/*-----------SEARCH----------------*/
+.search-result-add-button
+{
+    background-color:#309BBD;
+    color:#E6DECF;
+}
+
+.search-result-item:hover
+{
+    background-color: #374140;
+}
+
+#search-results-container
+{
+    background-color: #309BBD;
+    border: 2px solid #E6DECF;
+    border-bottom-width: 0;
+}
+
+#search-result-controls
+{
+    background-color: #309BBD;
+    border: 2px solid #E6DECF;
+    border-top-width: 1px;
+}
+
+.search-result-previous-button,
+.search-result-next-button,
+.search-result-close-button
+{
+    background-color:#309BBD;
+    color:#DC3522;
+}
+
+.search-result-previous-button:hover,
+.search-result-next-button:hover,
+.search-result-close-button:hover
+{
+    background-color: #E6DECF;
+}
 /*--------VOLUME--CONTROL----------*/
 .volume-control-description
 {

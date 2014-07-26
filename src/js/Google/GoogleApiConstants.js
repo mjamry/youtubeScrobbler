@@ -4,6 +4,7 @@ window.Google = window.Google || {};
 window.Google.GoogleApiConstants =
 {
     MAX_NUMBER_OF_ITEMS_PER_REQUEST: 50,
+    MAX_NUMBER_OF_SEARCH_RESULTS_PER_REQUEST: 50,
     YOUTUBE:
     {
         API: {
