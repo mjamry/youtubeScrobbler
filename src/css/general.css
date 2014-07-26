@@ -539,8 +539,8 @@ body
 /*------------------------------SEARCH---RESULTS--------------------------------------------*/
 #search-results
 {
-    width:600px;
-    margin-left:70px;
+    width:500px;
+    margin-left:145px;
     position: absolute;
 
     display: none;
@@ -552,22 +552,13 @@ body
     overflow: auto;
     position: relative;
     z-index: 9999;
-    padding:10px;
 }
 
 #search-result-controls
 {
-    height:40px;
+    height:35px;
     position: relative;
     z-index: 9999;
-    padding:2px;
-}
-
-#search-result-controls > button
-{
-    border-style: none;
-    height:20px;
-    width:20px;
 }
 
 #search-result-close
@@ -585,6 +576,7 @@ body
 .search-result-item
 {
     height:35px;
+    cursor: pointer;
 }
 
 .search-result-title
@@ -593,12 +585,11 @@ body
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 35px;
-    margin-right:5px;
+    cursor: pointer;
 }
 
 .search-result-add-button
 {
-    cursor: pointer;
     border-style:none;
 }
 
@@ -606,6 +597,7 @@ body
 {
     padding-top: 10px;
     letter-spacing: 5px;
+    float:right;
 }
 
 .search-result-cover
@@ -620,8 +612,8 @@ body
 .search-result-close-button
 {
     border-style:none;
-    height:30px;
-    width:30px;
+    height:25px;
+    width:25px;
 }
 /*----------------------------PROGRESS---BARS----------*/
 #media-player-playback

@@ -188,6 +188,11 @@ body A:hover
     background-color: #1E1E20;
 }
 
+.search-result-item:hover
+{
+    background-color: #374140;
+}
+
 #search-results-container
 {
     background-color: #1E1E20;
@@ -206,7 +211,7 @@ body A:hover
 .search-result-next-button,
 .search-result-close-button
 {
-    background-color:#374140;
+    background-color:#1E1E20;
     color:#DC3522;
 }
 
@@ -214,7 +219,7 @@ body A:hover
 .search-result-next-button:hover,
 .search-result-close-button:hover
 {
-    background-color: #1E1E20;
+    background-color: #374140;
 }
 /*--------VOLUME--CONTROL----------*/
 .volume-control-description
