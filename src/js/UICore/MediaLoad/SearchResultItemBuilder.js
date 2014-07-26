@@ -51,7 +51,7 @@ window.UI.SearchResultItemBuilder.prototype =
             };
         };
 
-        this._addButton.click(onAddButtonClicked(context, handler, this._videoUrl));
+        this._item.click(onAddButtonClicked(context, handler, this._videoUrl));
     },
 
     setIcons: function(iconsList)

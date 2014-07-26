@@ -8,6 +8,8 @@ window.UI.SearchResultConfig =
     SearchItemTitle: ".search-result-title",
     SearchItemAddButton: ".search-result-add-button",
     SearchItemIcons: ".search-result-icons",
+    SearchResultsControls: "#search-result-controls",
+    SearchResultCloseButton: ".search-result-close-button",
 
     PlaylistIcon: "fa fa-th-list",
     YoutubeIcon: "fa fa-youtube"

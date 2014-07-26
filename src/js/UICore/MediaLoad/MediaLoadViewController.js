@@ -7,6 +7,10 @@ window.UI.MediaLoadViewController = function(playlistLoaderService, searchServic
     this.searchService = searchService;
     this.config = config;
     this.REGEX_URL_PATTERN = "(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})\\.*";
+
+    this.searchControl = $(this.config.SearchResults);
+    this.searchResults = $(this.config.SearchResultsContainer);
+    this.mediaInput = $(this.config.MediaLocationInput);
 };
 
 window.UI.MediaLoadViewController.prototype =
@@ -20,16 +24,13 @@ window.UI.MediaLoadViewController.prototype =
     _handleSearchItemAdded: function(videoUrl)
     {
         Logger.getInstance().debug("[Search] Video with id "+videoUrl+" has been added.");
-        //TODO only temporarly - add close button/icon instead
-        $(this.config.SearchResults).hide();
         this.playlistLoader.loadPlaylist(videoUrl);
     },
 
     _handleSearchResult: function(result)
     {
-        var searchResultContainer = $(this.config.SearchResultsContainer);
-        searchResultContainer.empty();
-        $(this.config.SearchResults).show();
+        this.searchResults.empty();
+        this.searchControl.show();
         var that = this;
         result.forEach(function(item)
         {
@@ -39,6 +40,7 @@ window.UI.MediaLoadViewController.prototype =
             builder.setTitle(item.title);
             builder.setVideoUrl(item.url);
             builder.setAddButtonHandler(that._handleSearchItemAdded, that);
+
             var icons = [that.config.YoutubeIcon];
             if(item.type == window.Services.SearchResourceType.Playlist)
             {
@@ -46,15 +48,20 @@ window.UI.MediaLoadViewController.prototype =
             }
             builder.setIcons(icons);
             builder.setCover(item.cover);
-            var searchItem = builder.build();
-            searchResultContainer.append(searchItem);
 
+            var searchItem = builder.build();
+            that.searchResults.append(searchItem);
         });
     },
 
     _handlePlaylistUpdated: function()
     {
-        $(this.config.MediaLocationInput).val("");
+        this._clearMediaInput();
+    },
+
+    _clearMediaInput: function()
+    {
+        this.mediaInput.val("");
     },
 
     _handleInputValue: function(value)
@@ -74,7 +81,15 @@ window.UI.MediaLoadViewController.prototype =
         $(this.config.AddNewMediaButton).click($.proxy(function handleAddMediaClicked(e)
         {
             e.preventDefault();
-            this._handleInputValue($(this.config.MediaLocationInput).val());
+            this._handleInputValue(this.mediaInput.val());
+        },
+        this));
+
+        $(this.config.SearchResultsControls).find(this.config.SearchResultCloseButton).click($.proxy(function handleCloseSearchResultClicked(e)
+        {
+            e.preventDefault();
+            this.searchControl.hide();
+            this._clearMediaInput();
         },
         this));
 

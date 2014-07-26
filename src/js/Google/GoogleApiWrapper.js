@@ -85,7 +85,7 @@ window.Google.GoogleApiWrapper.prototype =
                     //TODO add country code here
                     part: "snippet",
                     fields: "items(id,snippet),nextPageToken,pageInfo",
-                    maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_ITEMS_PER_REQUEST
+                    maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_SEARCH_RESULTS_PER_REQUEST
                 },
                 requestOptions);
             var request = gapi.client.youtube.search.list(options);
