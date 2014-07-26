@@ -2,11 +2,6 @@ window.Services = window.Services || {};
 
 window.Services.SearchService = function()
 {
-    this.RESOURCE_TYPE_PLAYLIST = "youtube#playlist";
-    this.RESOURCE_TYPE_VIDEO = "youtube#video";
-    this.URL_VIDEO = window.Google.GoogleApiConstants.YOUTUBE.URL;
-    this.URL_PLAYLIST = window.Google.GoogleApiConstants.YOUTUBE.URL+"0&"+window.Google.GoogleApiConstants.YOUTUBE.LINK_PARAMS.PLAYLIST+"=";
-
     this.dataProviders =
     {
         Youtube: new window.Google.GoogleApiWrapper()
@@ -18,23 +13,23 @@ window.Services.SearchService.prototype =
     //gets url depending on resource type
     _getUrlForResource: function(details)
     {
-        if(details.id.kind == this.RESOURCE_TYPE_PLAYLIST)
+        if(details.id.kind == window.Services.SearchServiceConstants.RESOURCE_TYPE_PLAYLIST)
         {
-            return this.URL_PLAYLIST+details.id.playlistId;
+            return window.Services.SearchServiceConstants.URL_PLAYLIST+details.id.playlistId;
         }
-        else if(details.id.kind == this.RESOURCE_TYPE_VIDEO)
+        else if(details.id.kind == window.Services.SearchServiceConstants.RESOURCE_TYPE_VIDEO)
         {
-            return this.URL_VIDEO+details.id.videoId;
+            return window.Services.SearchServiceConstants.URL_VIDEO+details.id.videoId;
         }
     },
 
     _getTypeOfResource: function(details)
     {
-        if(details.id.kind == this.RESOURCE_TYPE_PLAYLIST)
+        if(details.id.kind == window.Services.SearchServiceConstants.RESOURCE_TYPE_PLAYLIST)
         {
             return window.Services.SearchResourceType.Playlist;
         }
-        else if(details.id.kind == this.RESOURCE_TYPE_VIDEO)
+        else if(details.id.kind == window.Services.SearchServiceConstants.RESOURCE_TYPE_VIDEO)
         {
             return window.Services.SearchResourceType.Video;
         }
@@ -65,16 +60,4 @@ window.Services.SearchService.prototype =
     {
         this.dataProviders.Youtube.getSearchResults({q:value}, this._handleResult.bind(this));
     }
-};
-
-window.Services.SearchResultEvents =
-{
-    SearchFinishedWithError: "SearchFinishedWithError",
-    SearchFinishedWithSuccess: "SearchFinishedWithSuccess"
-};
-
-window.Services.SearchResourceType =
-{
-    Playlist: "Playlist",
-    Video: "Video"
 };
