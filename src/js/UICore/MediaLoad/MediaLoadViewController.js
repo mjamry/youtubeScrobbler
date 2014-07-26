@@ -46,6 +46,8 @@ window.UI.MediaLoadViewController.prototype =
             {
                 icons.push(that.config.PlaylistIcon);
             }
+
+            builder.setToolTipText("Add to the playlist: "+item.title);
             builder.setIcons(icons);
             builder.setCover(item.cover);
 
