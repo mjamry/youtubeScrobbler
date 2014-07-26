@@ -203,14 +203,14 @@ body A:hover
 #search-results-container
 {
     background-color: #309BBD;
-    border: 2px solid #FA4147;
+    border: 2px solid #E6DECF;
     border-bottom-width: 0;
 }
 
 #search-result-controls
 {
     background-color: #309BBD;
-    border: 2px solid #FA4147;
+    border: 2px solid #E6DECF;
     border-top-width: 1px;
 }
 
@@ -226,7 +226,7 @@ body A:hover
 .search-result-next-button:hover,
 .search-result-close-button:hover
 {
-    background-color: #FA4147;
+    background-color: #E6DECF;
 }
 /*--------VOLUME--CONTROL----------*/
 .volume-control-description
