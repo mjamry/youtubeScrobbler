@@ -13,14 +13,36 @@ window.UI.PlaybackDetailsViewController.prototype =
 {
     _resizeProgressBar: function(size)
     {
-        this.view.find(this.config.PlaybackProgressBarContainer).css("height", size);
-        this.view.find(this.config.PlaybackProgressBar).css("height", size);
+        if(size != this.config.ZeroSizeValue)
+        {
+            this.view.find(this.config.PlaybackProgressBarContainer).css("height", size);
+            this.view.find(this.config.PlaybackProgressBar).css("height", size);
+        }
     },
 
     _resizeDataBar: function(size)
     {
-        this.view.find(this.config.PlaybackDataBarContainer).css("height", size);
-        this.view.find(this.config.PlaybackDataBar).css("height", size);
+        if(size != this.config.ZeroSizeValue)
+        {
+            this.view.find(this.config.PlaybackDataBarContainer).css("height", size);
+            this.view.find(this.config.PlaybackDataBar).css("height", size);
+        }
+    },
+
+    _resizeDetails: function(size)
+    {
+        if(size != this.config.ZeroSizeValue)
+        {
+            this.view.find(this.config.PlaybackDetailsContainer).css("height", size);
+        }
+    },
+
+    _resizeControl: function(size)
+    {
+        if(size != this.config.ZeroSizeValue)
+        {
+            this.view.css("height", size);
+        }
     },
 
     _handleMouseEnter: function(that)
@@ -29,13 +51,10 @@ window.UI.PlaybackDetailsViewController.prototype =
         {
             if(that.areControlsEnabled)
             {
-                that.view.css("height", that.config.MouseOverProgressBarSize);
-                that.view.find(that.config.PlaybackDetailsContainer).css("height", that.config.MouseOverProgressBarSize);
-
+                that._resizeControl(that.config.MouseOverProgressBarSize);
+                that._resizeDetails(that.config.MouseOverProgressBarSize);
                 that._resizeProgressBar(that.config.MouseOverProgressBarSize);
                 that._resizeDataBar(that.config.MouseOverDataBarSize);
-
-                that.view.find(that.config.PlaybackTime).show();
             }
         };
     },
@@ -46,13 +65,10 @@ window.UI.PlaybackDetailsViewController.prototype =
         {
             if(that.areControlsEnabled)
             {
-                that.view.css("height", that.config.MouseOutProgressBarSize);
-                that.view.find(that.config.PlaybackDetailsContainer).css("height", that.config.MouseOutProgressBarSize);
-
+                that._resizeControl(that.config.MouseOutProgressBarSize);
+                that._resizeDetails(that.config.MouseOutProgressBarSize);
                 that._resizeProgressBar(that.config.MouseOutProgressBarSize);
                 that._resizeDataBar(that.config.MouseOutDataBarSize);
-
-                that.view.find(that.config.PlaybackTime).hide();
             }
         };
     },

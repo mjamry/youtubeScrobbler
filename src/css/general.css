@@ -675,13 +675,12 @@ body
 .playback-details
 {
     height:20px;
-    width:100%;
+    width:95%;
     margin: auto;
-}
 
-.playback-time
-{
-    display:none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 /*----------------------------NOTIFICATIONS----------------------*/
 #user-notifications-container
