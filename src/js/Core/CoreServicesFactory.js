@@ -50,7 +50,7 @@ window.ApplicationCore.CoreServicesFactory.prototype =
 
     createPlaybackDetailsService: function(player)
     {
-        return new window.Player.PlaybackDetailsService(player);
+        return new window.Player.PlaybackDetailsService(player, player);
     },
 
     createPlaybackControlService: function(player, playlistController)

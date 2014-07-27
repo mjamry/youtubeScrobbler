@@ -1,10 +1,10 @@
 //using
 window.Player = window.Player || {};
 
-window.Player.PlaybackDetailsService = function(mediaDetailsProvider)
+window.Player.PlaybackDetailsService = function(mediaDetailsProvider, playbackStateProvider)
 {
     this.mediaDetailsProvider = mediaDetailsProvider;
-    this.state = new window.Player.PlaybackState();
+    this.playbackState = playbackStateProvider;
     this.playbackDetails = null;
 };
 
@@ -18,25 +18,21 @@ window.Player.PlaybackDetailsService.prototype =
 
     _handleMediaPaused: function()
     {
-        this.state.changeState(this.state.paused);
         this._updatePlaybackDetails();
     },
 
     _handleMediaChanged: function()
     {
-        this.state.changeState(this.state.playing);
         this._updatePlaybackDetails();
     },
 
     _handleMediaStopped: function()
     {
-        this.state.changeState(this.state.stoped);
         this._updatePlaybackDetails();
     },
 
     _handleMediaPlay: function()
     {
-        this.state.changeState(this.state.playing);
         this._updatePlaybackDetails();
     },
 
@@ -62,7 +58,7 @@ window.Player.PlaybackDetailsService.prototype =
 
     getPlaybackState: function()
     {
-        return this.state.getCurrentState();
+        return this.playbackState.getPlaybackState();
     },
 
     getMediaDetails: function()

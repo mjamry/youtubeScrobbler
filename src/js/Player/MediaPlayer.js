@@ -11,6 +11,9 @@ window.Player.MediaPlayer = function(configuration, container, playlistService)
     this.container = container;
     this.config = configuration;
     this.playlistService = playlistService;
+    this.playbackState = new window.Player.PlaybackStateHolder();
+
+    //these event handler definitions have to be here (not in _initialise method) as it is called after player creation
     EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCreated, $.proxy(this._handlePlaylistCreated, this));
     EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCleared, $.proxy(this._handlePlaylistCleared, this));
 };
@@ -90,6 +93,7 @@ window.Player.MediaPlayer.prototype =
             window.Player.LibraryEventsNames.play,
             $.proxy(function()
                 {
+                    this.playbackState.changeToPlay();
                     EventBroker.getInstance().fireEventWithData(window.Player.Events.MediaPlay, this.currentlyLoadedMediaDetails);
                 },
                 this),
@@ -100,6 +104,7 @@ window.Player.MediaPlayer.prototype =
             window.Player.LibraryEventsNames.ended,
             $.proxy(function()
                 {
+                    this.playbackState.changeToStop();
                     EventBroker.getInstance().fireEventWithData(window.Player.Events.MediaStopped, this.currentlyLoadedMediaDetails);
                 },
                 this),
@@ -110,6 +115,7 @@ window.Player.MediaPlayer.prototype =
             window.Player.LibraryEventsNames.pause,
             $.proxy(function()
                 {
+                    this.playbackState.changeToPause();
                     EventBroker.getInstance().fireEventWithData(window.Player.Events.MediaPaused, this.currentlyLoadedMediaDetails);
                 },
                 this),
@@ -213,9 +219,13 @@ window.Player.MediaPlayer.prototype =
         return this.currentlyLoadedMediaDetails;
     },
 
+    getPlaybackState: function()
+    {
+        return this.playbackState.getCurrentState();
+    },
+
     setSize: function(width, height)
     {
         this.instance.setVideoSize(width, height);
     }
 };
-
