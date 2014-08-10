@@ -21,5 +21,7 @@ window.UI.PLaybackDetailsViewConfiguration =
     MouseOverDataBarSize: "0px",
     MouseOutDataBarSize: "0px",
 
-    DisabledClass: "playback-details-disabled"
+    DisabledClass: "playback-details-disabled",
+
+    DefaultPageTitle: window.Common.ApplicationDetails.Name + " " + window.Common.ApplicationDetails.Version
 };

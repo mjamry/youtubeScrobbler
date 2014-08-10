@@ -100,9 +100,14 @@ window.UI.PlaybackDetailsViewController.prototype =
         this.view.find(this.config.PlaybackTime).html(time);
     },
 
+    _setPageTitle: function(value)
+    {
+        document.title = value;
+    },
+
     _updatePageTitle: function(state, title, time)
     {
-        document.title = title+"|"+time;
+        this._setPageTitle(title+" | "+time);
     },
 
     _handleControlsDisableRequest: function()
@@ -114,6 +119,7 @@ window.UI.PlaybackDetailsViewController.prototype =
         this.model.clearData();
         this._updatePlaybackProgress(0);
         this._updateDataProgress(0);
+        this._setPageTitle(this.config.DefaultPageTitle);
     },
 
     _handleControlsEnableRequest: function()
@@ -135,5 +141,6 @@ window.UI.PlaybackDetailsViewController.prototype =
 
         this.view.mouseenter(mouseEnterHandler);
         this.view.mouseleave(mouseLeaveHandler);
+        this._setPageTitle(this.config.DefaultPageTitle);
     }
 };
