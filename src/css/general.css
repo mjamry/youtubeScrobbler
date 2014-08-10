@@ -66,6 +66,9 @@ body
     padding-bottom: 20px;
     margin-left:auto;
     margin-right:auto;
+    font-size: 18pt;
+    line-height: 30pt;
+    text-align: center;
 }
 
 
@@ -77,6 +80,7 @@ body
     width:90%;
     font-size: 10pt;
     color: #D9CB9E;
+    line-height: 14pt;
 }
 
 .welcome-detail-content-title
