@@ -23,16 +23,14 @@ window.Services.SearchService.prototype =
         }
     },
 
-    _getTypeOfResource: function(details)
+    _isPlaylist: function(details)
     {
         if(details.id.kind == window.Services.SearchServiceConstants.RESOURCE_TYPE_PLAYLIST)
         {
-            return window.Services.SearchResourceType.Playlist;
+            return true;
         }
-        else if(details.id.kind == window.Services.SearchServiceConstants.RESOURCE_TYPE_VIDEO)
-        {
-            return window.Services.SearchResourceType.Video;
-        }
+
+        return false;
     },
 
     _handleResult: function(result)
@@ -41,14 +39,12 @@ window.Services.SearchService.prototype =
         var that = this;
         result.items.forEach(function(details)
         {
-
-            //TODO: filter titles using naming pattern etc
             output.push(
                 {
                     url: that._getUrlForResource(details),
-                    title: details.snippet.title,
-                    type: that._getTypeOfResource(details),
-                    cover: details.snippet.thumbnails.default.url
+                    name: details.snippet.title,
+                    cover: details.snippet.thumbnails.default.url,
+                    isPlaylist: that._isPlaylist(details)
                 }
             );
         });

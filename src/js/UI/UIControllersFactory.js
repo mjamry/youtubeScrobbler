@@ -54,7 +54,10 @@ window.UI.UIControllersFactory.prototype =
 
     createMediaLoadViewController: function(playlistLoaderService, searchService)
     {
-        return new window.UI.MediaLoadViewController(playlistLoaderService, searchService, window.UI.MediaLoadConfig);
+        //TODO make configurable which policy is applied
+        var searchResultValidator = new window.Services.SearchResultNameValidator(new window.Services.DefaultTrackNamePolicy(), new window.Services.DefaultPlaylistNamePolicy());
+        var searchResultParser = new window.Services.SearchResultParser(searchResultValidator);
+        return new window.UI.MediaLoadViewController(playlistLoaderService, searchService, searchResultParser, window.UI.MediaLoadConfig);
     },
 
     createPlaylistItemEditorViewController: function(playlistProvider)
