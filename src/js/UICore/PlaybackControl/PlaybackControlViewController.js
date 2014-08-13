@@ -3,7 +3,7 @@ window.UI = window.UI || {};
 
 window.UI.PlaybackControlViewController = function(playbackControl, volumeControlService, videoSizeControlService, view, config)
 {
-    this.view = $("#"+view);
+    this.view = view;
     this.playbackControl = playbackControl;
     this.volumeControlService = volumeControlService;
     this.sizeControl = videoSizeControlService;

@@ -10,10 +10,10 @@ window.UI.LoggerLevels =
 };
 
 
-window.UI.LoggerViewController = function(container, config)
+window.UI.LoggerViewController = function(view, config)
 {
     this._config = config;
-    this._container = $(container);
+    this._view = view;
 };
 
 window.UI.LoggerViewController.prototype =
@@ -25,7 +25,7 @@ window.UI.LoggerViewController.prototype =
     //removes all log entries
     _clearLogs: function()
     {
-        this._container.empty();
+        this._view.empty();
     },
 
     //enables logger - new entries can be added
@@ -61,7 +61,7 @@ window.UI.LoggerViewController.prototype =
     //updates logger view. shows/hides entries according to its level
     _updateLoggerView: function(currentLevel)
     {
-        this._container.children().each(function()
+        this._view.children().each(function()
         {
             var level = this.getAttribute("level");
             if(level <= currentLevel)
@@ -88,13 +88,13 @@ window.UI.LoggerViewController.prototype =
             newLog.innerHTML = message;
             newLog.setAttribute("level", level);
 
-            if(this._container.children().length + 1 > this._config.MaxNumberOfLogs)
+            if(this._view.children().length + 1 > this._config.MaxNumberOfLogs)
             {
                 //remove first element if limit has been reached.
-                this._container.find(this._config.SingleElementType+':last').remove();
+                this._view.find(this._config.SingleElementType+':last').remove();
             }
 
-            this._container.prepend(newLog);
+            this._view.prepend(newLog);
 
             if(level > this.currentLoggerLevel)
             {

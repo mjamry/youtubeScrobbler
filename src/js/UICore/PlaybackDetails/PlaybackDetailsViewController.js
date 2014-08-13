@@ -3,7 +3,7 @@ window.UI = window.UI || {};
 
 window.UI.PlaybackDetailsViewController = function(model, view, config)
 {
-    this.view = $("#"+view);
+    this.view = view;
     this.model = model;
     this.config = config;
     this.areControlsEnabled = false;
