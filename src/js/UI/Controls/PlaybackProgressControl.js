@@ -12,9 +12,9 @@ window.UI.PlaybackProgressControl.prototype =
 {
     _handlePlaybackProgressChange: function(that)
     {
-        if(that.enabled)
+        return function changePlaybackProgressValue(eventArgs)
         {
-            return function changePlaybackProgressValue(eventArgs)
+            if(that.enabled)
             {
                 //calculate offset
                 var target = eventArgs.target || eventArgs.srcElement,
@@ -30,8 +30,8 @@ window.UI.PlaybackProgressControl.prototype =
 
                 //fire an event
                 that.playbackProgressChangedHandler(newPlaybackProgressValue);
-            };
-        }
+            }
+        };
     },
 
     bindToPlaybackProgressChangedEvent: function(callback)
