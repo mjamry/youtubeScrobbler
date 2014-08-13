@@ -15,10 +15,10 @@ window.Services.SearchResultNameValidator.prototype =
         if(details.isPlaylist)
         {
             var playlistName = this.playlistNamePolicy.parse(details.name);
-            return playlistName != null;
+            return playlistName !== null;
         }
 
         var trackName = this.trackNamePolicy.parse(details.name);
-        return trackName != null;;
+        return trackName !== null;
     }
 };
