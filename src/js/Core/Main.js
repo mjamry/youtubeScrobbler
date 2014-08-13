@@ -10,7 +10,7 @@ $(function()
     $("#controls-schemes").hide();
 
     var coreServicesFactory = new window.ApplicationCore.CoreServicesFactory();
-    var uiFactory = new window.UI.UIControllersFactory();
+    var uiFactory = new window.UI.UIControllersFactory(window.UI.UIControllersFactoryConfig);
     var playerServicesFactory = new window.Player.PlayerServicesFactory();
 
     var globalErrorHandler = new window.Common.GlobalErrorHandler();
