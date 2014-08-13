@@ -84,5 +84,10 @@ window.UI.UIControllersFactory.prototype =
     createWelcomeScreenController: function(welcomeScreenService)
     {
         return new window.UI.WelcomeScreenController(window.UI.WelcomeScreenConfiguration, $("#page"), welcomeScreenService);
+    },
+
+    createAppDetailsViewController: function()
+    {
+        return new window.UI.AppDetailsViewController(window.UI.AppDetailsConfig);
     }
 };

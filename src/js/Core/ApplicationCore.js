@@ -49,6 +49,9 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     this.welcomeScreenService = coreServicesFactory.createWelcomeService();
     this.welcomeScreenController = uiFactory.createWelcomeScreenController(this.welcomeScreenService);
+
+    var appDetailsViewController = uiFactory.createAppDetailsViewController();
+    appDetailsViewController.setupDetails(window.Common.ApplicationDetails);
 };
 
 window.ApplicationCore.AppCore.prototype =
