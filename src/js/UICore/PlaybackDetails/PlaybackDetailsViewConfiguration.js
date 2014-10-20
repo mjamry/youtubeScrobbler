@@ -12,12 +12,16 @@ window.UI.PLaybackDetailsViewConfiguration =
     PlaybackDetails: ".playback-details",
     PlaybackTime: ".playback-time",
 
+    ZeroSizeValue: "0px",
 
-    MouseOverProgressBarSize: "35px",
-    MouseOutProgressBarSize: "35px",
+    //for now progressbar resize is turned off
+    MouseOverProgressBarSize: "0px",
+    MouseOutProgressBarSize: "0px",
 
-    MouseOverDataBarSize: "5px",
-    MouseOutDataBarSize: "2px",
+    MouseOverDataBarSize: "0px",
+    MouseOutDataBarSize: "0px",
 
-    DisabledClass: "playback-details-disabled"
+    DisabledClass: "playback-details-disabled",
+
+    DefaultPageTitle: window.Common.ApplicationDetails.Name + " " + window.Common.ApplicationDetails.Version
 };

@@ -7,7 +7,7 @@ window.UI.PlaylistControlViewController = function(playlistService, playlistCont
     this.playlistService = playlistService;
     this.loveStateModifier = loveStateModifier;
     this.config = config;
-    this.view = $("#"+view);
+    this.view = view;
 };
 
 window.UI.PlaylistControlViewController.prototype =

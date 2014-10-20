@@ -35,6 +35,7 @@
     <script type="text/javascript" src="js/Common/ApplicationEvents.js"></script>
     <script type="text/javascript" src="js/Common/UserNotifier/UserNotifier.js"></script>
     <script type="text/javascript" src="js/Common/UserNotifier/UserNotifierEvents.js"></script>
+    <script type="text/javascript" src="js/Common/ApplicationDetails.js"></script>
 
     <script type="text/javascript" src="js/Core/Main.js"></script>
     <script type="text/javascript" src="js/Core/CoreServicesFactory.js"></script>
@@ -54,9 +55,10 @@
     <script type="text/javascript" src="js/Player/MediaPlayer.js"></script>
     <script type="text/javascript" src="js/Player/Media/MediaDetails.js"></script>
     <script type="text/javascript" src="js/Player/Media/Duration.js"></script>
-    <script type="text/javascript" src="js/Player/PlaybackDetailsService.js"></script>
-    <script type="text/javascript" src="js/Player/PlaybackControlService.js"></script>
-    <script type="text/javascript" src="js/Player/PlaybackState.js"></script>
+    <script type="text/javascript" src="js/Player/Playback/PlaybackDetailsService.js"></script>
+    <script type="text/javascript" src="js/Player/Playback/PlaybackControlService.js"></script>
+    <script type="text/javascript" src="js/Player/Playback/PlaybackState.js"></script>
+    <script type="text/javascript" src="js/Player/Playback/PlaybackStateHolder.js"></script>
     <script type="text/javascript" src="js/Player/Playlist/Playlist.js"></script>
     <script type="text/javascript" src="js/Player/Playlist/PlaylistFlowController.js"></script>
     <script type="text/javascript" src="js/Player/Playlist/PlaylistService.js"></script>
@@ -75,19 +77,24 @@
     <script type="text/javascript" src="js/Player/Playlist/Repository/PlaylistRepository.js"></script>
     <script type="text/javascript" src="js/Player/Playlist/PersistentPlaylist.js"></script>
 
-    <script type="text/javascript" src="js/Common/ProgressbarService.js"></script>
-
     <script type="text/javascript" src="js/Tracking/GoogleTracker.js"></script>
     <script type="text/javascript" src="js/Tracking/GoogleTrackerConfig.js"></script>
     <script type="text/javascript" src="js/Tracking/GoogleUiTracker.js"></script>
 
     <script type="text/javascript" src="js/Services/WelcomeScreenService.js"></script>
-    <script type="text/javascript" src="js/Services/SearchService.js"></script>
+    <script type="text/javascript" src="js/Services/Search/SearchService.js"></script>
+    <script type="text/javascript" src="js/Services/Search/SearchResultParser.js"></script>
+    <script type="text/javascript" src="js/Services/Policies/DefaultTrackNamePolicy.js"></script>
+    <script type="text/javascript" src="js/Services/Policies/DefaultPlaylistNamePolicy.js"></script>
+    <script type="text/javascript" src="js/Services/Validators/SearchResultNameValidator.js"></script>
+    <script type="text/javascript" src="js/Services/Progressbar/ProgressbarService.js"></script>
+    <script type="text/javascript" src="js/Services/Progressbar/ProgressbarServiceEvents.js"></script>
 
     <script type="text/javascript" src="js/Google/GoogleApiConstants.js"></script>
     <script type="text/javascript" src="js/Google/GoogleApiWrapper.js"></script>
 
     <script type="text/javascript" src="js/UI/UIControllersFactory.js"></script>
+    <script type="text/javascript" src="js/UI/UIControllersFactoryConfig.js"></script>
     <script type="text/javascript" src="js/UI/Logger/LoggerViewController.js"></script>
     <script type="text/javascript" src="js/UI/Logger/LoggerUIConfiguration.js"></script>
     <script type="text/javascript" src="js/UI/TestReports/TestReportsUIConfiguration.js"></script>
@@ -96,7 +103,7 @@
     <script type="text/javascript" src="js/UI/Controls/VolumeControl/VolumeControl.js"></script>
     <script type="text/javascript" src="js/UI/Controls/VolumeControl/VolumeControlConfiguration.js"></script>
     <script type="text/javascript" src="js/UI/Controls/ProgressbarControl/ProgressbarControl.js"></script>
-    <script type="text/javascript" src="js/UI/PlaybackProgressControl.js"></script>
+    <script type="text/javascript" src="js/UI/Controls/PlaybackProgressControl.js"></script>
 
     <script type="text/javascript" src="js/UICore/UIConstants.js"></script>
     <script type="text/javascript" src="js/UICore/UICore.js"></script>
@@ -119,13 +126,15 @@
     <script type="text/javascript" src="js/UICore/ProgressbarViewController/ProgressbarViewControllerConfig.js"></script>
     <script type="text/javascript" src="js/UICore/WelcomeScreenController/WelcomeScreenController.js"></script>
     <script type="text/javascript" src="js/UICore/WelcomeScreenController/WelcomeScreenConfiguration.js"></script>
+    <script type="text/javascript" src="js/UICore/AppDetailsController/AppDetailsConfig.js"></script>
+    <script type="text/javascript" src="js/UICore/AppDetailsController/AppDetailsViewController.js"></script>
 
     <script type="text/javascript" src="js/UICore/MediaLoad/MediaLoadConfig.js"></script>
     <script type="text/javascript" src="js/UICore/MediaLoad/MediaLoadViewController.js"></script>
     <script type="text/javascript" src="js/UICore/MediaLoad/Search/SearchResultItemBuilder.js"></script>
-    <script type="text/javascript" src="js/UICore/MediaLoad/Search/SearchResultEvents.js"></script>
-    <script type="text/javascript" src="js/UICore/MediaLoad/Search/SearchResourceType.js"></script>
-    <script type="text/javascript" src="js/UICore/MediaLoad/Search/SearchServiceConstants.js"></script>
+    <script type="text/javascript" src="js/Services/Search/SearchResultEvents.js"></script>
+    <script type="text/javascript" src="js/Services/Search/SearchResourceType.js"></script>
+    <script type="text/javascript" src="js/Services/Search/SearchServiceConstants.js"></script>
     <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistItemEditorConfig.js"></script>
     <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistItemEditorViewController.js"></script>
     <script type="text/javascript" src="js/UICore/ColorSchemeControl/ColorSchemeControlConfig.js"></script>
@@ -155,8 +164,8 @@
     <div id="header">
         <div id="header-content">
             <div id="header-content-logo">
-                <div class="header-content-name">scrobbline</div>
-                <div class="header-content-version">v0.2.8 beta</div>
+                <div class="header-content-name"></div>
+                <div class="header-content-version"></div>
             </div>
             <div id="header-control-buttons-container">
                 <button class="header-control-button" id="control-button-switch-theme" title="switch color theme"><i class="fa fa-adjust"></i></button>
@@ -275,18 +284,18 @@
         </div>
         <div id="input-form">
             <form class="playlist-add-container">
-                <input class="playlist-add-input" type="text" id="media-location" placeholder="paste youtube link here" title="paste youtube link (for single video or playlist)"/>
+                <input class="playlist-add-input" type="text" id="media-location" placeholder="type to search or paste youtube link" title="start typing to search for music or paste link for youtube video/playlist to add new items to the playlist"/>
                 <button id="add-to-playlist" class="playlist-add-button" title="add new items to playlist"><i class="fa fa-plus fa-2x"></i></button>
             </form>
             <div id="search-results">
                 <div id="search-results-container"></div>
                 <div id="search-result-controls">
                     <div id="search-result-pagination">
-                        <!--<button class="search-result-previous-button"><i class="fa fa-chevron-left"></i></button>-->
-                        <!--<button class="search-result-next-button"><i class="fa fa-chevron-right"></i></button>-->
+                        <!--<button class="search-result-previous-button" title="previous page of search results"><i class="fa fa-chevron-left"></i></button>-->
+                        <!--<button class="search-result-next-button" title="next page of search results"><i class="fa fa-chevron-right"></i></button>-->
                     </div>
                     <div id="search-result-close">
-                        <button class="search-result-close-button"><i class="fa fa-times"></i></button>
+                        <button class="search-result-close-button" title="close search results"><i class="fa fa-times"></i></button>
                     </div>
                 </div>
             </div>

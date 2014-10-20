@@ -1,10 +1,12 @@
 //namespace
 window.UI = window.UI || {};
 
-window.UI.MediaLoadViewController = function(playlistLoaderService, searchService, config)
+window.UI.MediaLoadViewController = function(playlistLoaderService, searchService, searchResultParser, config)
 {
     this.playlistLoader = playlistLoaderService;
     this.searchService = searchService;
+    this.searchResultParser = searchResultParser;
+
     this.config = config;
     this.REGEX_URL_PATTERN = "(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})\\.*";
 
@@ -31,29 +33,7 @@ window.UI.MediaLoadViewController.prototype =
     {
         this.searchResults.empty();
         this.searchControl.show();
-        var that = this;
-        result.forEach(function(item)
-        {
-            Logger.getInstance().debug("[Search] title: "+item.title+" id: "+item.url);
-            var builder = new window.UI.SearchResultItemBuilder(window.UI.MediaLoadConfig);
-            builder.initialise();
-            builder.setTitle(item.title);
-            builder.setVideoUrl(item.url);
-            builder.setAddButtonHandler(that._handleSearchItemAdded, that);
-
-            var icons = [that.config.YoutubeIcon];
-            if(item.type == window.Services.SearchResourceType.Playlist)
-            {
-                icons.push(that.config.PlaylistIcon);
-            }
-
-            builder.setToolTipText("Add to the playlist: "+item.title);
-            builder.setIcons(icons);
-            builder.setCover(item.cover);
-
-            var searchItem = builder.build();
-            that.searchResults.append(searchItem);
-        });
+        this.searchResults.append(this.searchResultParser.parse(result, this._handleSearchItemAdded, this));
     },
 
     _handlePlaylistUpdated: function()

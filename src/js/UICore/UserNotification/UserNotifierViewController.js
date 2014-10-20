@@ -2,7 +2,7 @@ window.UI = window.UI || {};
 
 window.UI.UserNotifierViewController = function(view, configuration)
 {
-    this.view = $(view);
+    this.view = view;
     this.config = configuration;
 };
 

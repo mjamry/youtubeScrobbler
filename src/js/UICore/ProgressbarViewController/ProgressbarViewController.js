@@ -36,7 +36,7 @@ window.UI.ProgressbarViewController.prototype =
 
     initialise: function()
     {
-        EventBroker.getInstance().addListener(window.UI.ProgressbarServiceEvents.RegisterNewProgressbar, $.proxy(this._handleProgressbarRegistration, this));
-        EventBroker.getInstance().addListener(window.UI.ProgressbarServiceEvents.UpdateProgressbarStatus, $.proxy(this._handleProgressbarStatusUpdate, this));
+        EventBroker.getInstance().addListener(window.Services.ProgressbarServiceEvents.RegisterNewProgressbar, $.proxy(this._handleProgressbarRegistration, this));
+        EventBroker.getInstance().addListener(window.Services.ProgressbarServiceEvents.UpdateProgressbarStatus, $.proxy(this._handleProgressbarStatusUpdate, this));
     }
 };

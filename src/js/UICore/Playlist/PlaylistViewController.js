@@ -10,7 +10,7 @@ window.UI.PlaylistViewController = function(playlistService, playlistControlServ
     this.playlistService = playlistService;
     this.playlistFlowController = playlistFlowController;
     this.playlistControlService = playlistControlService;
-    this.view = $("#"+view);
+    this.view = view;
     this.config = config;
 };
 

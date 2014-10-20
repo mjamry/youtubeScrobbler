@@ -3,7 +3,7 @@ window.UI = window.UI || {};
 
 window.UI.PlaybackControlViewController = function(playbackControl, volumeControlService, videoSizeControlService, view, config)
 {
-    this.view = $("#"+view);
+    this.view = view;
     this.playbackControl = playbackControl;
     this.volumeControlService = volumeControlService;
     this.sizeControl = videoSizeControlService;
@@ -55,6 +55,7 @@ window.UI.PlaybackControlViewController.prototype =
         this._showPlayButton();
         this.areControlsEnabled = false;
         this.volumeControl.disable();
+        this.playbackProgressControl.disable();
     },
 
     _enableButtons: function()
@@ -62,6 +63,7 @@ window.UI.PlaybackControlViewController.prototype =
         this.view.find(this.config.PlaybackControlButtonClass).removeAttr(this.config.DisabledAttr);
         this.areControlsEnabled = true;
         this.volumeControl.enable();
+        this.playbackProgressControl.enable();
     },
 
     _handleVolumeLevelChanged: function(that, volumeControlService)

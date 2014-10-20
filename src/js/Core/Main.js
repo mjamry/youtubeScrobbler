@@ -10,7 +10,7 @@ $(function()
     $("#controls-schemes").hide();
 
     var coreServicesFactory = new window.ApplicationCore.CoreServicesFactory();
-    var uiFactory = new window.UI.UIControllersFactory();
+    var uiFactory = new window.UI.UIControllersFactory(window.UI.UIControllersFactoryConfig);
     var playerServicesFactory = new window.Player.PlayerServicesFactory();
 
     var globalErrorHandler = new window.Common.GlobalErrorHandler();
@@ -47,7 +47,7 @@ $(function()
     Cookie.setInstance(coreServicesFactory.createCookieHandler());
 
     new ProgressbarService();
-    ProgressbarService.setInstance(new window.Common.ProgressbarServiceImpl());
+    ProgressbarService.setInstance(new window.Services.ProgressbarServiceImpl());
 
     //creating application core
     var applicationCore = new window.ApplicationCore.AppCore(coreServicesFactory, uiFactory, playerServicesFactory);
