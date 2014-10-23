@@ -52,6 +52,12 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     var appDetailsViewController = uiFactory.createAppDetailsViewController();
     appDetailsViewController.setupDetails(window.Common.ApplicationDetails);
+
+    this.menuController = uiFactory.createMenuViewController();
+    this.menuController.add(new window.UI.MenuItem("test", "fa fa-times-circle fa-2x", "top", ""));
+    this.menuController.add(new window.UI.MenuItem("test", "fa fa-times-circle fa-2x", "top", ""));
+    this.menuController.add(new window.UI.MenuItem("test", "fa fa-times-circle fa-2x", "top", ""));
+    this.menuController.add(new window.UI.MenuItem("test", "fa fa-times-circle fa-2x", "top", ""));
 };
 
 window.ApplicationCore.AppCore.prototype =

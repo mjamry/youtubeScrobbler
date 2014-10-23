@@ -120,5 +120,10 @@ window.UI.UIControllersFactory.prototype =
     createAppDetailsViewController: function()
     {
         return new window.UI.AppDetailsViewController(window.UI.AppDetailsConfig);
+    },
+
+    createMenuViewController: function()
+    {
+        return new window.UI.MenuController($(this.config.MenuView), window.UI.MenuControllerConfig);
     }
 };

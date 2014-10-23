@@ -9,5 +9,6 @@ window.UI.UIControllersFactoryConfig =
     PlaybackControlView: "#playback-control",
     UserNotificationView: "#user-notifications-container",
     ProgressbarView: "#progressbar-container",
-    WelcomeScreenView: "#page"
+    WelcomeScreenView: "#page",
+    MenuView: "#menu"
 };
