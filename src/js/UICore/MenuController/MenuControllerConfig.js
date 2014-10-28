@@ -2,9 +2,8 @@ window.UI = window.UI || {};
 
 window.UI.MenuControllerConfig =
 {
-    Width: "65px",
-    Height: "25px",
-    ButtonWidth: "20px",
-    ButtonHeight: "20px",
-
+    MenuItemButton: ".menu-item-button",
+    MenuItemTitle: ".menu-item-title",
+    MenuItemIcon: ".menu-item-icon",
+    MenuItemContainer: ".menu-item-container"
 };

@@ -55,7 +55,7 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     this.menuController = uiFactory.createMenuViewController();
     this.menuController.add(new window.UI.MenuItem("test", "fa fa-times-circle fa-2x", "top", ""));
-    this.menuController.add(new window.UI.MenuItem("test", "fa fa-times-circle fa-2x", "top", ""));
+    this.menuController.add(new window.UI.MenuItem("mail me", "fa fa-envelope fa-2x", "top", ""));
     this.menuController.add(new window.UI.MenuItem("test", "fa fa-times-circle fa-2x", "top", ""));
     this.menuController.add(new window.UI.MenuItem("test", "fa fa-times-circle fa-2x", "top", ""));
 };

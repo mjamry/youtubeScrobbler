@@ -10,7 +10,7 @@ window.UI.MenuController.prototype =
 {
     add: function(menuItemDetails)
     {
-        var item = this._createNewmenuItem(menuItemDetails);
+        var item = this._createNewMenuItem(menuItemDetails);
         this.view.append(item);
     },
 
@@ -24,30 +24,12 @@ window.UI.MenuController.prototype =
 
     },
 
-    _createNewmenuItem: function(itemDetails)
+    _createNewMenuItem: function(itemDetails)
     {
-        var newItem = document.createElement("div");
-        newItem.width = this.config.Width;
-        newItem.height = this.config.Height;
+        var builder = new window.UI.MenuItemBuilder(this.config);
+        builder.setTitle(itemDetails.getName());
+        builder.setIcon(itemDetails.getIcon());
 
-        newItem.name = itemDetails.name+"_menu_item";
-
-        var newItemButton = document.createElement("div");
-        newItemButton.className = this.config.MenuItemButtonStyle;
-        newItem.width = this.config.ButtonWidth;
-        newItem.height = this.config.ButtonHeight;
-        newItemButton.appendChild(this._createIcon(itemDetails));
-
-        newItem.appendChild(newItemButton);
-
-        return newItem;
-    },
-
-    _createIcon: function(itemDetails)
-    {
-        var icon = document.createElement("i");
-        icon.className = itemDetails.icon;
-
-        return icon;
+        return builder.build();
     }
 };

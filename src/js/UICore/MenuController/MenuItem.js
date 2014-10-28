@@ -2,31 +2,31 @@ window.UI = window.UI || {};
 
 window.UI.MenuItem = function(name, icon, position, page)
 {
-    this.name = name;
-    this.icon = icon;
-    this.position = position;
-    this.page = page;
+    this._name = name;
+    this._icon = icon;
+    this._position = position;
+    this._page = page;
 };
 
 window.UI.MenuItem.prototype =
 {
     getName: function()
     {
-        return this.name;
+        return this._name;
     },
 
     getIcon: function()
     {
-        return this.icon;
+        return this._icon;
     },
 
     getPosition: function()
     {
-        return this.position;
+        return this._position;
     },
 
     getPage: function()
     {
-        return this.page;
+        return this._page;
     }
 };
