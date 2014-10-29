@@ -758,35 +758,49 @@ body
 #menu
 {
     width:200px;
+    height:100%;
     border:1px solid red;
     display:block;
     position:absolute;
-    top:50px;
+
+    overflow: hidden;
+    top:70px;
+    bottom:50px;
     left:0px;
+
+    background-color: black;
+}
+
+.menu-item-container:hover
+{
+    background-color: darkgrey;
+    color:black;
 }
 
 .menu-item-container
 {
     /*display: inline;*/
-    width:195px;
+    width:220px;
     height:35px;
-    border:1px solid yellow;
+    margin-top:15px;
+    margin-bottom:15px;
+    cursor:pointer;
 }
 
 .menu-item-button
 {
-    width: 30px;
-    height: 30px;
-    border: 1px solid blue;
+    width: 35px;
+    height: 35px;
+    margin-left:10px;
 }
 
 .menu-item-title
 {
     width: 150px;
-    height:20px;
-    border: 1px solid green;
-    font-size:12pt;
-    margin-left:5px;
+    height:35px;
+    line-height: 35px;
+    font-size:13pt;
+    margin-left:15px;
 }
 /*----------------------------LOGGER----------------------*/
 #logger-content

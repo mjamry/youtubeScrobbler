@@ -54,10 +54,7 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
     appDetailsViewController.setupDetails(window.Common.ApplicationDetails);
 
     this.menuController = uiFactory.createMenuViewController();
-    this.menuController.add(new window.UI.MenuItem("test", "fa fa-times-circle fa-2x", "top", ""));
-    this.menuController.add(new window.UI.MenuItem("mail me", "fa fa-envelope fa-2x", "top", ""));
-    this.menuController.add(new window.UI.MenuItem("test", "fa fa-times-circle fa-2x", "top", ""));
-    this.menuController.add(new window.UI.MenuItem("test", "fa fa-times-circle fa-2x", "top", ""));
+    this.menuController.initialise();
 };
 
 window.ApplicationCore.AppCore.prototype =
@@ -83,6 +80,14 @@ window.ApplicationCore.AppCore.prototype =
         if(this.welcomeScreenService.isApplicationAlreadyActivated())
         {
             this.welcomeScreenController.showMainScreen();
+        }
+    },
+
+    setUpMenuItems: function(menuConfig)
+    {
+        for(var item in menuConfig)
+        {
+            this.menuController.add(menuConfig[item].Name, menuConfig[item].Icon, menuConfig[item].Page);
         }
     }
 };

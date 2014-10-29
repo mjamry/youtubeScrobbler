@@ -2,16 +2,39 @@ window.UI = window.UI || {};
 
 window.UI.MenuController = function(view, config)
 {
-    this.view = view;
-    this.config = config;
+    this._view = view;
+    this._config = config;
 };
 
 window.UI.MenuController.prototype =
 {
-    add: function(menuItemDetails)
+    _onMouseEnter: function(that)
     {
-        var item = this._createNewMenuItem(menuItemDetails);
-        this.view.append(item);
+        return function()
+        {
+            that._view.css("width", that._config.MenuActiveWidth);
+        }
+    },
+
+    _onMouseLeave: function(that)
+    {
+        return function()
+        {
+            that._view.css("width", that._config.MenuInactiveWidth);
+        }
+    },
+
+    initialise: function()
+    {
+        this._view.mouseenter(this._onMouseEnter(this));
+        this._view.mouseleave(this._onMouseLeave(this));
+        this._view.css("width", this._config.MenuInactiveWidth);
+    },
+
+    add: function(name, icon, position, action)
+    {
+        var item = this._createNewMenuItem(name, icon, page, position);
+        this._view.append(item.getControl());
     },
 
     _setTopPosition: function(item)
@@ -24,12 +47,20 @@ window.UI.MenuController.prototype =
 
     },
 
-    _createNewMenuItem: function(itemDetails)
+    _createNewMenuItem: function(name, icon, page, position)
     {
-        var builder = new window.UI.MenuItemBuilder(this.config);
-        builder.setTitle(itemDetails.getName());
-        builder.setIcon(itemDetails.getIcon());
+        var item = new window.UI.MenuItem(this._config.MenuItemContainer);
+        item.setName(name, this._config.MenuItemTitle);
+        item.setIcon(icon, this._config.MenuItemIcon);
+        item.setAction(this._handleMenuItemAction());
+        return item;
+    },
 
-        return builder.build();
+    _handleMenuItemAction: function()
+    {
+        return function onMenuItemActioned(item)
+        {
+            console.log(item.getName());
+        }
     }
 };

@@ -52,6 +52,7 @@ $(function()
     //creating application core
     var applicationCore = new window.ApplicationCore.AppCore(coreServicesFactory, uiFactory, playerServicesFactory);
     applicationCore.initialise();
+    applicationCore.setUpMenuItems(window.UI.MenuItemsConfig);
 
     //creating google tracker
     var tracker = new window.Tracking.GoogleEventTrackerImpl(window.Tracking.GoogleTrackerConfig);
