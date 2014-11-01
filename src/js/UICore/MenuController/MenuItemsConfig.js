@@ -9,11 +9,25 @@ window.UI.MenuItemsConfig =
         Page: "#player"
     },
 
-    Playlist:
+    PlaylistManage:
     {
-        Name: "playlist",
+        Name: "playlist manager",
         Icon: "fa fa-list-ul fa-2x",
-        Page: "#playlist"
+        Page: "#playlist-manager"
+    },
+
+    PlaylistEditor:
+    {
+        Name: "playlist editor",
+        Icon: "fa fa-pencil fa-2x",
+        Page: "#playlist-item-editor-container"
+    },
+
+    AccountManage:
+    {
+        Name: "accounts",
+        Icon: "fa fa-user fa-2x",
+        Page: "#accounts"
     },
 
     Settings:

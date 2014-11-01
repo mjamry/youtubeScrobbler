@@ -1,8 +1,9 @@
 window.UI = window.UI || {};
 
-window.UI.PageDisplayCoordinator = function()
+window.UI.PageDisplayCoordinator = function(startingPage)
 {
-    this._currentPage = null;
+    this._currentPage = $(startingPage);
+    this._show(this._currentPage);
 };
 
 window.UI.PageDisplayCoordinator.prototype =
@@ -21,10 +22,8 @@ window.UI.PageDisplayCoordinator.prototype =
     showPage: function(page)
     {
         var pageView = $(page);
-        if(this._currentPage !== null)
-        {
-            this._hide(this._currentPage);
-        }
+
+        this._hide(this._currentPage);
 
         this._show(pageView);
         this._currentPage = pageView;

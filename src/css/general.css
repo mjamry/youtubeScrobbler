@@ -754,6 +754,24 @@ body
     overflow: hidden;
     text-overflow: ellipsis;
 }
+/*----------------------------PAGES----------------------*/
+#accounts
+{
+    background-color: red;
+}
+
+#settings
+{
+    background-color: green;
+}
+
+
+
+.application-page
+{
+    width:100%;
+    hright:100%;
+}
 /*----------------------------MENU----------------------*/
 #menu
 {
