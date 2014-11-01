@@ -758,14 +758,13 @@ body
 #menu
 {
     width:200px;
-    height:100%;
     border:1px solid red;
     display:block;
     position:absolute;
 
     overflow: hidden;
     top:70px;
-    bottom:50px;
+    bottom:70px;
     left:0px;
 
     background-color: black;
