@@ -124,6 +124,6 @@ window.UI.UIControllersFactory.prototype =
 
     createMenuViewController: function()
     {
-        return new window.UI.MenuController($(this.config.MenuView), window.UI.MenuControllerConfig);
+        return new window.UI.MenuController($(this.config.MenuView), window.UI.MenuControllerConfig, new window.UI.PageDisplayCoordinator());
     }
 };

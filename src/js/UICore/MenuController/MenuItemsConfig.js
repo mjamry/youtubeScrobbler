@@ -2,6 +2,13 @@ window.UI = window.UI || {};
 
 window.UI.MenuItemsConfig =
 {
+    Player:
+    {
+        Name: "player",
+        Icon: "fa fa-play-circle-o fa-2x",
+        Page: "#player"
+    },
+
     Playlist:
     {
         Name: "playlist",

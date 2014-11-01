@@ -1,9 +1,16 @@
 window.UI = window.UI || {};
 
-window.UI.MenuController = function(view, config)
+window.UI.MenuController = function(view, config, displayCoordintor)
 {
     this._view = view;
     this._config = config;
+    this._displayCoordinator = displayCoordintor;
+};
+
+window.UI.MenuItemPosition =
+{
+    Top: "top",
+    Bottom: "bottom"
 };
 
 window.UI.MenuController.prototype =
@@ -31,20 +38,12 @@ window.UI.MenuController.prototype =
         this._view.css("width", this._config.MenuInactiveWidth);
     },
 
-    add: function(name, icon, position, action)
+    add: function(name, icon, page, position)
     {
+        //if position is not set, use Top as default
+        position = position || window.UI.MenuItemPosition.Top;
         var item = this._createNewMenuItem(name, icon, page, position);
         this._view.append(item.getControl());
-    },
-
-    _setTopPosition: function(item)
-    {
-
-    },
-
-    _setBottonPosition: function(item)
-    {
-
     },
 
     _createNewMenuItem: function(name, icon, page, position)
@@ -52,15 +51,19 @@ window.UI.MenuController.prototype =
         var item = new window.UI.MenuItem(this._config.MenuItemContainer);
         item.setName(name, this._config.MenuItemTitle);
         item.setIcon(icon, this._config.MenuItemIcon);
+        item.setPage(page);
         item.setAction(this._handleMenuItemAction());
+
         return item;
     },
 
     _handleMenuItemAction: function()
     {
+        var that = this;
         return function onMenuItemActioned(item)
         {
-            console.log(item.getName());
+            Logger.getInstance().info("[Menu] Item: "+item.getName()+" actioned.");
+            that._displayCoordinator.showPage(item.getPage());
         }
     }
 };

@@ -3,6 +3,7 @@ window.UI = window.UI || {};
 window.UI.MenuItem = function(container)
 {
     this._action = null;
+    this._page = null;
     this._name = "";
     this._itemView = $("#controls-schemes").find(container).clone();
 };
@@ -33,9 +34,14 @@ window.UI.MenuItem.prototype =
         this._itemView.mousedown(this._handleItemActioned(action));
     },
 
-    getAction: function()
+    setPage: function(page)
     {
-        return this._action;
+        this._page = page;
+    },
+
+    getPage: function()
+    {
+        return this._page;
     },
 
     getControl: function()
