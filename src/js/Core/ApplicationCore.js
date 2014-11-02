@@ -88,6 +88,7 @@ window.ApplicationCore.AppCore.prototype =
         for(var item in menuConfig)
         {
             this.menuController.add(menuConfig[item].Name, menuConfig[item].Icon, menuConfig[item].Page);
+
         }
     }
 };

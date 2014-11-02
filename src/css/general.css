@@ -130,7 +130,7 @@ body
 
 #header-content
 {
-    width:800px;
+    width:900px;
     height:100%;
     margin:auto;
     padding:10px;
@@ -755,22 +755,9 @@ body
     text-overflow: ellipsis;
 }
 /*----------------------------PAGES----------------------*/
-#accounts
-{
-    background-color: red;
-}
-
-#settings
-{
-    background-color: green;
-}
-
-
-
 .application-page
 {
-    width:100%;
-    hright:100%;
+    padding:15px;
 }
 /*----------------------------MENU----------------------*/
 #menu

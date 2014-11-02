@@ -20,7 +20,7 @@ window.UI.MenuItemsConfig =
     {
         Name: "playlist editor",
         Icon: "fa fa-pencil fa-2x",
-        Page: "#playlist-item-editor-container"
+        Page: "#playlist-editor"
     },
 
     AccountManage:

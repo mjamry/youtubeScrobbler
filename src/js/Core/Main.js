@@ -8,6 +8,7 @@ $(function()
 {
     //hides controls
     $("#controls-schemes").hide();
+    HideAllAplicationPages();
 
     var coreServicesFactory = new window.ApplicationCore.CoreServicesFactory();
     var uiFactory = new window.UI.UIControllersFactory(window.UI.UIControllersFactoryConfig);
@@ -78,3 +79,13 @@ $(window).unload(function()
 {
     EventBroker.getInstance().fireEvent(window.Common.ApplicationEvents.ApplicationClosed);
 });
+
+//TODO: find more appropriate place for this
+function HideAllAplicationPages()
+{
+    var menuConfig = window.UI.MenuItemsConfig;
+    for(var i in menuConfig)
+    {
+        $(menuConfig[i].Page).hide();
+    }
+}
