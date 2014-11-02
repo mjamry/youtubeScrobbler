@@ -22,7 +22,7 @@ body
 #page-content
 {
     min-height:300px;
-    width: 900px;
+    width: 930px;
     padding-bottom: 100px;
     margin-left:auto;
     margin-right:auto;
@@ -139,7 +139,9 @@ body
 #header-content-logo
 {
     width:120px;
-    float:left;
+    position: fixed;
+    left: 10px;
+    top:10px;
 }
 
 .header-content-name
@@ -335,11 +337,6 @@ body
 {
     width:450px;
     height:338px;
-    position: absolute;
-    top:0;
-    left:0;
-    /*-it is displayed on demand, but by default should be hidden-*/
-    display: none;
 }
 
 #playlist-item-editor
@@ -400,7 +397,7 @@ body
     padding:6px;
 }
 /*------------------------------MEDIA------------------*/
-#media-content
+#player
 {
     width:900px;
     margin:auto;
@@ -694,6 +691,8 @@ body
     margin-right:auto;
     height:auto;
     width:800px;
+    position: fixed;
+    bottom: 90px;
 }
 
 .user-notification-info,
@@ -856,6 +855,34 @@ body
 .test-environment-color
 {
     color:darkred;
+}
+/*--------------------------------TO--REMOVE!!---------------------------*/
+#header-content
+{
+    border:1px solid green;
+}
+
+#page-content
+{
+    border:1px solid blue;
+}
+
+#input-form
+{
+    border:1px solid yellow;
+}
+
+#media-player{
+    border:1px solid green;
+}
+
+#playlist{
+    border:1px solid red;
+}
+
+#playlist-item-editor-container
+{
+    border:1px solid orange;
 }
 
 
