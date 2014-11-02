@@ -763,22 +763,12 @@ body
 #menu
 {
     width:200px;
-    border:1px solid red;
     display:block;
     position:absolute;
-
     overflow: hidden;
     top:70px;
-    bottom:70px;
+    bottom:73px;
     left:0px;
-
-    background-color: black;
-}
-
-.menu-item-container:hover
-{
-    background-color: darkgrey;
-    color:black;
 }
 
 .menu-item-container

@@ -322,7 +322,24 @@ input:-moz-placeholder { color:#DC3522; }
 {
     color:#D9CB9E;
 }
+/*--------MENU----------*/
+#menu
+{
+    background-color: #1E1E20;
+    border-right:1px solid #374140;
+}
 
+.menu-item-container
+{
+    background-color: #1E1E20;
+    color:#D9CB9E;
+}
+
+.menu-item-container:hover
+{
+    background-color: #374140;
+    color:#D9CB9E;
+}
 /*--------LOGGER----------*/
 .logger-info
 {
