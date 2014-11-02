@@ -86,6 +86,6 @@ function HideAllAplicationPages()
     var menuConfig = window.UI.MenuItemsConfig;
     for(var i in menuConfig)
     {
-        $(menuConfig[i].Page).hide();
+        $(menuConfig[i].Page).addClass("application-page-hidden");
     }
 }
