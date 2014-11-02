@@ -784,9 +784,10 @@ body
     /*display: inline;*/
     width:220px;
     height:35px;
-    margin-top:15px;
-    margin-bottom:15px;
     cursor:pointer;
+    padding-top:10px;
+    padding-bottom:10px;
+
 }
 
 .menu-item-button
