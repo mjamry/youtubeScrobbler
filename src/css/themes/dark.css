@@ -30,7 +30,7 @@ body A:hover
 
 .header-session-button,
 .header-session-button A,
-.header-control-button
+.settings-control-button
 {
     color: #1E1E20;
     background-color: #DC3522;
@@ -38,7 +38,7 @@ body A:hover
 
 .header-session-button:hover,
 .header-session-button A:hover,
-.header-control-button:hover
+.settings-control-button:hover
 {
     color: #1E1E20;
     background-color: #D9CB9E;

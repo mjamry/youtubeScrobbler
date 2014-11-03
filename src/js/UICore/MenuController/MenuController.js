@@ -62,7 +62,7 @@ window.UI.MenuController.prototype =
         var that = this;
         return function onMenuItemActioned(item)
         {
-            Logger.getInstance().info("[Menu] Item: "+item.getName()+" actioned.");
+            Logger.getInstance().debug("[Menu] Item: '"+item.getName()+"' actioned.");
             that._displayCoordinator.showPage(item.getPage());
         }
     }

@@ -27,6 +27,5 @@ window.UI.PageDisplayCoordinator.prototype =
 
         this._show(pageView);
         this._currentPage = pageView;
-        Logger.getInstance().debug("[PageDisp] Show page: "+page);
     }
 };

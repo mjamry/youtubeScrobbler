@@ -186,12 +186,12 @@ body
     font-size: 10pt;
 }
 
-#header-control-buttons-container
+#settings-control-buttons-container
 {
     float:right;
 }
 
-.header-control-button
+.settings-control-button
 {
     border-style: none;
     height:35px;
@@ -837,6 +837,7 @@ body
     width:800px;
     margin-left:auto;
     margin-right:auto;
+    margin-top: 10px;
     border:1px solid #2A2C2B;
     background-color: #D9CB9E;
     color:#1E1E20;
@@ -860,45 +861,34 @@ body
     font-size:9pt;
     background-color: mediumseagreen;
 }
+/*--------------------------------BORDERS-ON-MAIN-ITEMS---------------------------*/
+/*#header-content*/
+/*{*/
+    /*border:1px solid green;*/
+/*}*/
 
-.testing-environment-hide-button
-{
-    float: right;
-    color: darkred;
-}
+/*#page-content*/
+/*{*/
+    /*border:1px solid blue;*/
+/*}*/
 
-.test-environment-color
-{
-    color:darkred;
-}
-/*--------------------------------TO--REMOVE!!---------------------------*/
-#header-content
-{
-    border:1px solid green;
-}
+/*#input-form*/
+/*{*/
+    /*border:1px solid yellow;*/
+/*}*/
 
-#page-content
-{
-    border:1px solid blue;
-}
+/*#media-player{*/
+    /*border:1px solid green;*/
+/*}*/
 
-#input-form
-{
-    border:1px solid yellow;
-}
+/*#playlist{*/
+    /*border:1px solid red;*/
+/*}*/
 
-#media-player{
-    border:1px solid green;
-}
-
-#playlist{
-    border:1px solid red;
-}
-
-#playlist-item-editor-container
-{
-    border:1px solid orange;
-}
+/*#playlist-item-editor-container*/
+/*{*/
+    /*border:1px solid orange;*/
+/*}*/
 
 
 
