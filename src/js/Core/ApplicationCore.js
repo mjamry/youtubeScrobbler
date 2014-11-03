@@ -31,9 +31,9 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     this.playbackDetailsViewController = uiFactory.createPlaybackDetailsViewController(this.playbackDetailsService);
 
-    this.playbackControlViewController = uiFactory.createPlaybackControlViewController(this.player, this.playbackControlService);
+    this.playbackControlViewController = uiFactory.createPlaybackControlViewController(this.player, this.playbackControlService, playlistElementLoveStateModifier, this.playlistService);
 
-    this.playlistControlViewController = uiFactory.createPlaylistControlViewController(this.playlistService, this.playlistFlowController, playlistElementLoveStateModifier);
+    this.playlistControlViewController = uiFactory.createPlaylistControlViewController(this.playlistService, this.playlistFlowController);
 
     this.sessionViewController = uiFactory.createSessionViewController(this.sessionHandler);
 

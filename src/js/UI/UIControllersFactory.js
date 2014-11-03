@@ -45,7 +45,7 @@ window.UI.UIControllersFactory.prototype =
         );
     },
 
-    createPlaybackControlViewController: function(player, playbackControlService)
+    createPlaybackControlViewController: function(player, playbackControlService, loveStateModifier, playlistService)
     {
         var volumeControlService = new window.Player.VolumeControlService(player);
 
@@ -57,17 +57,18 @@ window.UI.UIControllersFactory.prototype =
             playbackControlService,
             volumeControlService,
             sizeControlService,
+            loveStateModifier,
+            playlistService,
             $(this.config.PlaybackControlView),
             window.UI.PlaybackControlConfiguration
         );
     },
 
-    createPlaylistControlViewController: function(playlistService, playlistFlowController, loveStateModifier)
+    createPlaylistControlViewController: function(playlistService, playlistFlowController)
     {
         return new window.UI.PlaylistControlViewController(
             playlistService,
             playlistFlowController,
-            loveStateModifier,
             $(this.config.PlaylistControlView),
             window.UI.PlaylistControlConfiguration
         );
