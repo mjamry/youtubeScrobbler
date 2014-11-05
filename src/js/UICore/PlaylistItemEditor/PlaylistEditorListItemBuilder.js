@@ -2,9 +2,9 @@ window.UI = window.UI || {};
 
 window.UI.PlaylistEditorListItemBuilder = function(index, config)
 {
-    this._item = $("#controls-schemes").find(".playlist-editor-list-item").clone();
-    this._index = index;
     this._config = config;
+    this._item = $("#controls-schemes").find(this._config.EditorListItem).clone();
+    this._index = index;
 
     //to avoid indexes starting on 0
     this._item.find(this._config.ItemIndex).append(index+1);

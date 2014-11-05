@@ -52,7 +52,7 @@ window.UI.PlaylistEditorListViewController.prototype =
     _handleItemUpdated: function(eventArgs)
     {
         var newItem = this._createNewElement(eventArgs.mediaDetails, eventArgs.index);
-        this.view.find(this.config.PlaylistItem).eq(eventArgs.index).replaceWith(newItem);
+        this.view.find(this.config.EditorListItem).eq(eventArgs.index).replaceWith(newItem);
     },
 
     initialise: function()

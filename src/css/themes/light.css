@@ -121,7 +121,17 @@ body A:hover
     color: #E6DECF;
     border:2px solid #E6DECF;
 }
+/*--------PLAYLIST_ITEM_EDITOR_LIST----------*/
+.playlist-editor-list-item
+{
+    border-top:  1px solid #beb69c;
+    background-color: #989083;
+}
 
+.playlist-editor-list-item:hover
+{
+    background-color:  #4A4A49;
+}
 /*--------PLAYLIST_ITEM_EDITOR----------*/
 
 #playlist-item-editor-container
