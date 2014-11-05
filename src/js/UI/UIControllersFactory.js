@@ -98,6 +98,11 @@ window.UI.UIControllersFactory.prototype =
         return new window.UI.PlaylistItemDetailsEditorViewController(detailsProvider, playlistProvider, window.UI.PlaylistItemDetailsEditorConfig);
     },
 
+    createPlaylistEditorListViewController: function(playlistProvider)
+    {
+        return new window.UI.PlaylistEditorListViewController($(this.config.PlaylistEditorListView), playlistProvider, window.UI.PlaylistEditorItemConfiguration);
+    },
+
     createColorSchemeControlViewController: function()
     {
         return new window.UI.ColorSchemeControlViewController(window.UI.ColorSchemeControlConfig);

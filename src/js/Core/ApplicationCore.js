@@ -41,6 +41,8 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     this.playlistItemEditorViewController = uiFactory.createPlaylistItemEditorViewController(this.playlistService);
 
+    this.playlistItemEditorListViewController = uiFactory.createPlaylistEditorListViewController(this.playlistService);
+
     this.colorSchemeControlViewController = uiFactory.createColorSchemeControlViewController();
 
     this.userNotificationViewController = uiFactory.createUserNotificationViewController();
@@ -71,6 +73,7 @@ window.ApplicationCore.AppCore.prototype =
         this.mediaLoadViewController.initialise();
         this.sessionViewController.initialise();
         this.playlistItemEditorViewController.initialise();
+        this.playlistItemEditorListViewController.initialise();
         this.onlineScrobbler.initialise();
         this.colorSchemeControlViewController.initialise();
         this.playlistService.initialise();

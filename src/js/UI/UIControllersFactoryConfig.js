@@ -10,5 +10,6 @@ window.UI.UIControllersFactoryConfig =
     UserNotificationView: "#user-notifications-container",
     ProgressbarView: "#progressbar-container",
     WelcomeScreenView: "#page",
-    MenuView: "#menu"
+    MenuView: "#menu",
+    PlaylistEditorListView: "#playlist-editor-list-container"
 };

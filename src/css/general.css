@@ -332,6 +332,24 @@ body
     font-weight: bold;
     line-height:20px;
 }
+/*------------------------------PLAYLIST--ITEM--EDITOR--LIST------------*/
+#playlist-editor-list-container
+{
+    width:450px;
+    height:338px;
+    /*TODO do it with JS*/
+    overflow: auto;
+}
+
+.playlist-editor-list-item
+{
+    height:50px;
+}
+
+.playlist-editor-list-item:hover
+{
+    cursor:pointer;
+}
 /*------------------------------PLAYLIST--ITEM--EDITOR------------------*/
 #playlist-item-editor-container
 {

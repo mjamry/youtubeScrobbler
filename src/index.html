@@ -142,6 +142,9 @@
     <script type="text/javascript" src="js/Services/Search/SearchServiceConstants.js"></script>
     <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistItemEditorConfig.js"></script>
     <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistItemEditorViewController.js"></script>
+    <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistEditorItemConfiguration.js"></script>
+    <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistEditorListViewController.js"></script>
+    <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistEditorListItemBuilder.js"></script>
     <script type="text/javascript" src="js/UICore/ColorSchemeControl/ColorSchemeControlConfig.js"></script>
     <script type="text/javascript" src="js/UICore/ColorSchemeControl/ColorSchemeControlViewController.js"></script>
 
@@ -334,40 +337,49 @@
             </div>
         </div>
         <div id="playlist-editor" class="application-page">
-            <div id="playlist-item-editor-container">
-                <div id="playlist-item-editor">
-                    <form class="playlist-item-editor-form">
-                        <legend>playlist item editor</legend>
-                        <label for="playlist-item-editor-artist">artist:</label>
-                        <div class="playlist-editor-line">
-                            <input id="playlist-item-editor-artist" type="text" placeholder="artist name">
-                            <div class="playlist-editor-artist-check playlist-editor-verification">
-                                <i class="playlist-editor-verification-ok fa fa-check-square"></i>
-                                <i class="playlist-editor-verification-err fa fa-exclamation-triangle"></i>
-                            </div>
-                        </div>
-                        <label for="playlist-item-editor-title">title:</label>
-                        <div class="playlist-editor-line">
-                            <input id="playlist-item-editor-title" type="text" placeholder="track title">
-                            <div class="playlist-editor-title-check playlist-editor-verification">
-                                <i class="playlist-editor-verification-ok fa fa-check-square"></i>
-                                <i class="playlist-editor-verification-err fa fa-exclamation-triangle"></i>
-                            </div>
-                        </div>
-                        <label for="playlist-item-editor-album">album:</label>
-                        <div class="playlist-editor-line">
-                            <input id="playlist-item-editor-album" type="text" placeholder="album name">
-                            <div class="playlist-editor-album-check playlist-editor-verification">
-                                <i class="playlist-editor-verification-ok fa fa-check-square"></i>
-                                <i class="playlist-editor-verification-err fa fa-exclamation-triangle"></i>
-                            </div>
-                        </div>
+            <div class="pure-g">
+                <div class="pure-u-1-2">
+                    <div id="playlist-item-editor-container">
+                        <div id="playlist-item-editor">
+                            <form class="playlist-item-editor-form">
+                                <legend>playlist item editor</legend>
+                                <label for="playlist-item-editor-artist">artist:</label>
+                                <div class="playlist-editor-line">
+                                    <input id="playlist-item-editor-artist" type="text" placeholder="artist name">
+                                    <div class="playlist-editor-artist-check playlist-editor-verification">
+                                        <i class="playlist-editor-verification-ok fa fa-check-square"></i>
+                                        <i class="playlist-editor-verification-err fa fa-exclamation-triangle"></i>
+                                    </div>
+                                </div>
+                                <label for="playlist-item-editor-title">title:</label>
+                                <div class="playlist-editor-line">
+                                    <input id="playlist-item-editor-title" type="text" placeholder="track title">
+                                    <div class="playlist-editor-title-check playlist-editor-verification">
+                                        <i class="playlist-editor-verification-ok fa fa-check-square"></i>
+                                        <i class="playlist-editor-verification-err fa fa-exclamation-triangle"></i>
+                                    </div>
+                                </div>
+                                <label for="playlist-item-editor-album">album:</label>
+                                <div class="playlist-editor-line">
+                                    <input id="playlist-item-editor-album" type="text" placeholder="album name">
+                                    <div class="playlist-editor-album-check playlist-editor-verification">
+                                        <i class="playlist-editor-verification-ok fa fa-check-square"></i>
+                                        <i class="playlist-editor-verification-err fa fa-exclamation-triangle"></i>
+                                    </div>
+                                </div>
 
-                        <button class="playlist-item-editor-button-check playlist-editor-button" title="validate details via LastFm portal"><i class="fa fa-refresh"></i></button>
-                        <button class="playlist-item-editor-button-swap playlist-editor-button" title="swap title and artist name"><i class="fa fa-exchange"></i></button>
-                        <button class="playlist-item-editor-button-save playlist-editor-button" title="save details"><i class="fa fa-save"></i></button>
-                        <button class="playlist-item-editor-button-close playlist-editor-button" title="close without saving"><i class="fa fa-times"></i></button>
-                    </form>
+                                <button class="playlist-item-editor-button-check playlist-editor-button" title="validate details via LastFm portal"><i class="fa fa-refresh"></i></button>
+                                <button class="playlist-item-editor-button-swap playlist-editor-button" title="swap title and artist name"><i class="fa fa-exchange"></i></button>
+                                <button class="playlist-item-editor-button-save playlist-editor-button" title="save details"><i class="fa fa-save"></i></button>
+                                <button class="playlist-item-editor-button-close playlist-editor-button" title="close without saving"><i class="fa fa-times"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="pure-u-1-2">
+                    <div id="playlist-editor-list-container">
+                        <div id="playlist-editor-list"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -498,6 +510,16 @@
             <div>
                 <img class="playlist-item-cover" />
             </div>
+        </div>
+    </div>
+
+    <div class="playlist-editor-list-item pure-g">
+        <div class="playlist-item-index-container pure-u-1-12">
+            <div class="playlist-item-index"></div>
+        </div>
+        <div class="pure-u-11-12">
+            <div class="playlist-editor-artist-name"></div>
+            <div class="playlist-editor-album-name"></div>
         </div>
     </div>
 
