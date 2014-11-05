@@ -351,9 +351,19 @@ body
     cursor:pointer;
 }
 
-.playlist-editor-artist-name, .playlist-editor-album-name
+.playlist-editor-list-item-artist-name,
+.playlist-editor-list-item-album-name,
+.playlist-editor-list-item-artist-icon,
+.playlist-editor-list-item-album-icon
 {
-    height:25px;
+    height:20px;
+}
+
+.playlist-editor-list-item-artist-icon,
+.playlist-editor-list-item-album-icon
+{
+    margin-top:5px;
+    margin-left:5px;
 }
 /*------------------------------PLAYLIST--ITEM--EDITOR------------------*/
 #playlist-editor

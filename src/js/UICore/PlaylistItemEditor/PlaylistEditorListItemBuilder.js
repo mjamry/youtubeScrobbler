@@ -12,14 +12,32 @@ window.UI.PlaylistEditorListItemBuilder = function(index, config)
 
 window.UI.PlaylistEditorListItemBuilder.prototype =
 {
+    _addIconIfPossible: function(item, iconStyle)
+    {
+        if(iconStyle)
+        {
+            var icon = document.createElement("i");
+            icon.className = iconStyle;
+            this._item.find(item).append(icon);
+        }
+    },
+
     setUpArtistAndTrackName: function(artistName, trackName)
     {
-        this._item.find(this._config.ArtistAndTrackNameContainer).append(artistName + " - " + trackName);
+        var field = this._item.find(this._config.ArtistAndTrackNameContainer);
+
+        this._addIconIfPossible(this._config.ArtistIconContainer, this._config.ArtistIcon);
+        field.append(artistName + " - " + trackName);
     },
 
     setUpAlbumName: function(albumName)
     {
-        this._item.find(this._config.AlbumNameContainer).append(albumName);
+        var field = this._item.find(this._config.AlbumNameContainer);
+        if(albumName)
+        {
+            this._addIconIfPossible(this._config.AlbumIconContainer, this._config.AlbumIcon);
+            field.append(albumName);
+        }
     },
 
     setUpMouseClickHandler: function(callbackContext, mouseClickCallback)
