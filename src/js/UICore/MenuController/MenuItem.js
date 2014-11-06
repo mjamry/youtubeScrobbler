@@ -60,6 +60,6 @@ window.UI.MenuItem.prototype =
         return function()
         {
             action(that);
-        }
+        };
     }
 };

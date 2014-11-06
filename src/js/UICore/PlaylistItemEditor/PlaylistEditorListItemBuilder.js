@@ -47,7 +47,7 @@ window.UI.PlaylistEditorListItemBuilder.prototype =
             return function onMouseClicked(e)
             {
                 e.stopPropagation();
-                callback.call(context, itemIndex)
+                callback.call(context, itemIndex);
             };
         };
 

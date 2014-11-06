@@ -20,7 +20,7 @@ window.UI.MenuController.prototype =
         return function()
         {
             that._view.css("width", that._config.MenuActiveWidth);
-        }
+        };
     },
 
     _onMouseLeave: function(that)
@@ -28,7 +28,7 @@ window.UI.MenuController.prototype =
         return function()
         {
             that._view.css("width", that._config.MenuInactiveWidth);
-        }
+        };
     },
 
     initialise: function()
@@ -64,6 +64,6 @@ window.UI.MenuController.prototype =
         {
             Logger.getInstance().debug("[Menu] Item: '"+item.getName()+"' actioned.");
             that._displayCoordinator.showPage(item.getPage());
-        }
+        };
     }
 };
