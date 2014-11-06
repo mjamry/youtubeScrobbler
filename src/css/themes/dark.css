@@ -30,7 +30,7 @@ body A:hover
 
 .header-session-button,
 .header-session-button A,
-.header-control-button
+.settings-control-button
 {
     color: #1E1E20;
     background-color: #DC3522;
@@ -38,7 +38,7 @@ body A:hover
 
 .header-session-button:hover,
 .header-session-button A:hover,
-.header-control-button:hover
+.settings-control-button:hover
 {
     color: #1E1E20;
     background-color: #D9CB9E;
@@ -112,6 +112,17 @@ body A:hover
     border:2px solid #2A2C2B;
 }
 
+/*--------PLAYLIST_ITEM_EDITOR_LIST----------*/
+.playlist-editor-list-item
+{
+    border-top:  1px solid #555756;
+    background-color: #374140;
+}
+
+.playlist-editor-list-item:hover
+{
+    background-color: #1E1E20;
+}
 /*--------PLAYLIST_ITEM_EDITOR----------*/
 
 #playlist-item-editor-container
@@ -322,7 +333,24 @@ input:-moz-placeholder { color:#DC3522; }
 {
     color:#D9CB9E;
 }
+/*--------MENU----------*/
+#menu
+{
+    background-color: #1E1E20;
+    border-right:1px solid #374140;
+}
 
+.menu-item-container
+{
+    background-color: #1E1E20;
+    color:#D9CB9E;
+}
+
+.menu-item-container:hover
+{
+    background-color: #374140;
+    color:#D9CB9E;
+}
 /*--------LOGGER----------*/
 .logger-info
 {

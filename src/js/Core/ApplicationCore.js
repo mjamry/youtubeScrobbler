@@ -31,15 +31,17 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     this.playbackDetailsViewController = uiFactory.createPlaybackDetailsViewController(this.playbackDetailsService);
 
-    this.playbackControlViewController = uiFactory.createPlaybackControlViewController(this.player, this.playbackControlService);
+    this.playbackControlViewController = uiFactory.createPlaybackControlViewController(this.player, this.playbackControlService, playlistElementLoveStateModifier, this.playlistService);
 
-    this.playlistControlViewController = uiFactory.createPlaylistControlViewController(this.playlistService, this.playlistFlowController, playlistElementLoveStateModifier);
+    this.playlistControlViewController = uiFactory.createPlaylistControlViewController(this.playlistService, this.playlistFlowController);
 
     this.sessionViewController = uiFactory.createSessionViewController(this.sessionHandler);
 
     this.mediaLoadViewController = uiFactory.createMediaLoadViewController(this.playlistLoaderService, this.searchService);
 
     this.playlistItemEditorViewController = uiFactory.createPlaylistItemEditorViewController(this.playlistService);
+
+    this.playlistItemEditorListViewController = uiFactory.createPlaylistEditorListViewController(this.playlistService);
 
     this.colorSchemeControlViewController = uiFactory.createColorSchemeControlViewController();
 
@@ -52,6 +54,9 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     var appDetailsViewController = uiFactory.createAppDetailsViewController();
     appDetailsViewController.setupDetails(window.Common.ApplicationDetails);
+
+    this.menuController = uiFactory.createMenuViewController();
+    this.menuController.initialise();
 };
 
 window.ApplicationCore.AppCore.prototype =
@@ -68,6 +73,7 @@ window.ApplicationCore.AppCore.prototype =
         this.mediaLoadViewController.initialise();
         this.sessionViewController.initialise();
         this.playlistItemEditorViewController.initialise();
+        this.playlistItemEditorListViewController.initialise();
         this.onlineScrobbler.initialise();
         this.colorSchemeControlViewController.initialise();
         this.playlistService.initialise();
@@ -77,6 +83,15 @@ window.ApplicationCore.AppCore.prototype =
         if(this.welcomeScreenService.isApplicationAlreadyActivated())
         {
             this.welcomeScreenController.showMainScreen();
+        }
+    },
+
+    setUpMenuItems: function(menuConfig)
+    {
+        for(var item in menuConfig)
+        {
+            this.menuController.add(menuConfig[item].Name, menuConfig[item].Icon, menuConfig[item].Page);
+
         }
     }
 };

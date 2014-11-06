@@ -39,18 +39,6 @@ window.UI.PlaylistViewController.prototype =
         this.playlistControlService.playSpecific(index);
     },
 
-    _edit: function(index)
-    {
-        var mediaElement = this.playlistService.getPlaylist().get(index);
-        EventBroker.getInstance().fireEventWithData(
-            window.Player.PlaylistEvents.PlaylistItemEditionRequested,
-            {
-                index: index,
-                mediaDetails: mediaElement
-            }
-        );
-    },
-
     _createNewElement: function(mediaDetails, index)
     {
         var builder = new window.UI.PlaylistUIItemBuilder(index, this.config);

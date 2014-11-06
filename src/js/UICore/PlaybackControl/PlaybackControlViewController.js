@@ -1,11 +1,13 @@
 //namespace
 window.UI = window.UI || {};
 
-window.UI.PlaybackControlViewController = function(playbackControl, volumeControlService, videoSizeControlService, view, config)
+window.UI.PlaybackControlViewController = function(playbackControl, volumeControlService, videoSizeControlService, loveStateModifier, playlistService, view, config)
 {
     this.view = view;
     this.playbackControl = playbackControl;
+    this.playlistService = playlistService;
     this.volumeControlService = volumeControlService;
+    this.loveStateModifier = loveStateModifier;
     this.sizeControl = videoSizeControlService;
     this.config = config;
 
@@ -15,6 +17,44 @@ window.UI.PlaybackControlViewController = function(playbackControl, volumeContro
 
 window.UI.PlaybackControlViewController.prototype =
 {
+    //changes love state for currently played track
+    _changeLoveStateForCurrentTrack: function(that)
+    {
+        return function changeLoveStateForCurrentTrack()
+        {
+            that.loveStateModifier.toggleTrackLoveState(that._handleLoveStateChanged(that));
+        };
+    },
+
+    //handles successful change of love state
+    _handleLoveStateChanged: function(that)
+    {
+        return function _handleLoveStateChanged(index, mediaDetails)
+        {
+            that._setLoveStateForCurrentTrack(mediaDetails.loved);
+            that.playlistService.updateItem(index, mediaDetails);
+        };
+    },
+
+    //handles change of currently played track
+    _handleMediaChanged: function(args)
+    {
+        this._setLoveStateForCurrentTrack(args.current.loved);
+    },
+
+    //changes visual indication of love state for current track
+    _setLoveStateForCurrentTrack: function(isLoved)
+    {
+        if(isLoved)
+        {
+            $(this.config.LoveButton).addClass(this.config.SelectedButtonClass);
+        }
+        else
+        {
+            $(this.config.LoveButton).removeClass(this.config.SelectedButtonClass);
+        }
+    },
+
     _play: function(playbackControl, that)
     {
         return function ()
@@ -118,6 +158,7 @@ window.UI.PlaybackControlViewController.prototype =
         EventBroker.getInstance().addListener(window.Player.Events.MediaPlay, $.proxy(this._showPauseButton, this));
         EventBroker.getInstance().addListener(window.Player.Events.MediaPaused, $.proxy(this._showPlayButton, this));
         EventBroker.getInstance().addListener(window.Player.Events.MediaStopped, $.proxy(this._showPlayButton, this));
+        EventBroker.getInstance().addListener(window.Player.Events.MediaChanged, this._handleMediaChanged, null, this);
 
         EventBroker.getInstance().addListener(window.UI.Events.DisableControlButtonsRequested, $.proxy(this._disableButtons, this));
         EventBroker.getInstance().addListener(window.UI.Events.EnableControlButtonsRequested, $.proxy(this._enableButtons, this));
@@ -142,6 +183,7 @@ window.UI.PlaybackControlViewController.prototype =
         this.view.find(this.config.PauseButton).click(this._pause(this.playbackControl, this));
         this.view.find(this.config.NextButton).click(this._next(this.playbackControl));
         this.view.find(this.config.PreviousButton).click(this._previous(this.playbackControl));
+        this.view.find(this.config.LoveButton).click(this._changeLoveStateForCurrentTrack(this));
         $(this.config.FullScreenModeButton).click(this._toggleFullScreenMode(this.sizeControl));
     }
 };

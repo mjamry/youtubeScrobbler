@@ -81,18 +81,18 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         that.updateView();
     },
 
-    _savePlaylistItemDetails: function _saveEditedPlaylistItem(that)
+    _savePlaylistItemDetails: function(that)
     {
         that.mediaDetails = that._retrieveMediaDetails();
         that.playlistProvider.updateItem(that.index, that.mediaDetails);
         UserNotifier.getInstance().info("Details saved for '"+that.mediaDetails.artist.name+" - "+that.mediaDetails.title+"'");
+        Logger.getInstance().info("[Editor] Details saved for '"+that.mediaDetails.artist.name+" - "+that.mediaDetails.title+"'");
         that._hide();
     },
 
     _hide: function hidePlaylistItemEditor()
     {
         this._clearView();
-        $(this.config.Container).hide();
         this.index = null;
         this.mediaDetails = null;
     },
@@ -130,7 +130,6 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
     {
         this.index = index;
         this.mediaDetails = mediaDetails;
-        $(this.config.Container).show();
     },
 
     initialise: function()

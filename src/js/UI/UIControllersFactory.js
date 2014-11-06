@@ -45,7 +45,7 @@ window.UI.UIControllersFactory.prototype =
         );
     },
 
-    createPlaybackControlViewController: function(player, playbackControlService)
+    createPlaybackControlViewController: function(player, playbackControlService, loveStateModifier, playlistService)
     {
         var volumeControlService = new window.Player.VolumeControlService(player);
 
@@ -57,17 +57,18 @@ window.UI.UIControllersFactory.prototype =
             playbackControlService,
             volumeControlService,
             sizeControlService,
+            loveStateModifier,
+            playlistService,
             $(this.config.PlaybackControlView),
             window.UI.PlaybackControlConfiguration
         );
     },
 
-    createPlaylistControlViewController: function(playlistService, playlistFlowController, loveStateModifier)
+    createPlaylistControlViewController: function(playlistService, playlistFlowController)
     {
         return new window.UI.PlaylistControlViewController(
             playlistService,
             playlistFlowController,
-            loveStateModifier,
             $(this.config.PlaylistControlView),
             window.UI.PlaylistControlConfiguration
         );
@@ -97,6 +98,11 @@ window.UI.UIControllersFactory.prototype =
         return new window.UI.PlaylistItemDetailsEditorViewController(detailsProvider, playlistProvider, window.UI.PlaylistItemDetailsEditorConfig);
     },
 
+    createPlaylistEditorListViewController: function(playlistProvider)
+    {
+        return new window.UI.PlaylistEditorListViewController($(this.config.PlaylistEditorListView), playlistProvider, window.UI.PlaylistEditorItemConfiguration);
+    },
+
     createColorSchemeControlViewController: function()
     {
         return new window.UI.ColorSchemeControlViewController(window.UI.ColorSchemeControlConfig);
@@ -120,5 +126,10 @@ window.UI.UIControllersFactory.prototype =
     createAppDetailsViewController: function()
     {
         return new window.UI.AppDetailsViewController(window.UI.AppDetailsConfig);
+    },
+
+    createMenuViewController: function()
+    {
+        return new window.UI.MenuController($(this.config.MenuView), window.UI.MenuControllerConfig, new window.UI.PageDisplayCoordinator("#player"));
     }
 };

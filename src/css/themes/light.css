@@ -39,7 +39,7 @@ body A:hover
 
 .header-session-button,
 .header-session-button A,
-.header-control-button
+.settings-control-button
 {
     color: #2A2C2B;
     background-color: #E6DECF;
@@ -47,7 +47,7 @@ body A:hover
 
 .header-session-button:hover,
 .header-session-button A:hover,
-.header-control-button:hover
+.settings-control-button:hover
 {
     color: #E6DECF;
     background-color: #4A4A49;
@@ -121,7 +121,17 @@ body A:hover
     color: #E6DECF;
     border:2px solid #E6DECF;
 }
+/*--------PLAYLIST_ITEM_EDITOR_LIST----------*/
+.playlist-editor-list-item
+{
+    border-top:  1px solid #beb69c;
+    background-color: #989083;
+}
 
+.playlist-editor-list-item:hover
+{
+    background-color:  #4A4A49;
+}
 /*--------PLAYLIST_ITEM_EDITOR----------*/
 
 #playlist-item-editor-container
@@ -330,6 +340,22 @@ input:-moz-placeholder { color:#DC3522; }
 .user-notification-undo > button
 {
     color:#E6DECF;
+}
+/*--------MENU----------*/
+#menu
+{
+    background-color: #309BBD;
+    border-right:1px solid #4A4A49;
+}
+
+.menu-item-container
+{
+    color: #E6DECF;
+}
+
+.menu-item-container:hover
+{
+    background-color: #4A4A49;
 }
 /*--------LOGGER----------*/
 .logger-info
