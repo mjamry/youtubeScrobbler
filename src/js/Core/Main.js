@@ -73,6 +73,7 @@ $(function()
     testReport.initialise();
 
     Logger.getInstance().info("Application initialisation ended.");
+    hookUpToGoogleAuthButton();
 });
 
 $(window).unload(function()
@@ -88,4 +89,35 @@ function HideAllAplicationPages()
     {
         $(menuConfig[i].Page).addClass("application-page-hidden");
     }
+};
+
+function hookUpToGoogleAuthButton()
+{
+    var button = $("#accounts-google-auth-button");
+    var fun = function()
+    {
+        return function()
+        {
+            var goog = new window.Google.GoogleApiWrapper();
+            var userPlaylistDetailsHandler = function(details)
+            {
+                for(var i in details.items)
+                {
+                    Logger.getInstance().debug("id: "+details.items[i].id+"title: "+details.items[i].title+" decr: "+details.items[i].description);
+
+                }
+
+            };
+
+            var userDetailsHandler = function(details)
+            {
+                Logger.getInstance().debug("id: "+details.id+' name: '+details.given_name+' pic: '+details.picture);
+            };
+            goog.authorize();
+            goog.getUserInfo(userDetailsHandler);
+            goog.getUserPlaylists(userPlaylistDetailsHandler)
+        }
+    };
+
+    button.click(fun());
 }

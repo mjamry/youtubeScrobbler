@@ -10,6 +10,7 @@ initialiseGoogleApi = function()
         {
             this.initialise();
         }.bind(window.Google.GoogleApiWrapper.prototype));
+    gapi.client.load('oauth2', 'v2', function(){alert("oauth2")});
 };
 
 window.Google.GoogleApiWrapper = function()
@@ -26,11 +27,71 @@ window.Google.GoogleApiWrapper.prototype =
         Logger.getInstance().warning(this.LOG_ERROR_MSG);
     },
 
+    _getPlaylistDetails: function(options, callback)
+    {
+
+    },
+
     isLoaded: false,
     initialise: function()
     {
         this.isLoaded = true;
         Logger.getInstance().debug("[Google API] Youtube service loaded.");
+        //window.setTimeout(this.authorizeUser.bind(this),1);
+    },
+
+    authorize: function()
+    {
+        if(this.isLoaded)
+        {
+            var options =
+            {
+                client_id: window.Google.GoogleApiConstants.YOUTUBE.API.AUTH.CLIENT_ID,
+                immediate: false,
+                response_type: "token",
+                scope: [window.Google.GoogleApiConstants.YOUTUBE.API.AUTH.SCOPE, "https://www.googleapis.com/auth/userinfo.profile"]
+            };
+
+            var callback = function(authObject)
+            {
+                Logger.getInstance().debug("[Google][Auth] token: "+authObject.access_token);
+                Logger.getInstance().debug("[Google][Auth] err: "+authObject.error);
+                Logger.getInstance().debug("[Google][Auth] expiry date: "+authObject.expies_in);
+                Logger.getInstance().debug("[Google][Auth] state: "+authObject.state);
+            };
+
+            gapi.auth.authorize(options, callback);
+        }
+    },
+
+    getUserInfo: function(callback)
+    {
+        if(this.isLoaded)
+        {
+            var request = gapi.client.oauth2.userinfo.get();
+            request.execute(callback);
+        }
+    },
+
+    getUserPlaylists: function(callback)
+    {
+        if(this.isLoaded)
+        {
+            var options =
+                {
+                    part: 'snippet',
+                    fields: 'items,nextPageToken,pageInfo',
+                    mine: true,
+                    maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_ITEMS_PER_REQUEST
+                };
+
+            var request = gapi.client.youtube.playlists.list(options);
+            request.execute(callback);
+        }
+        else
+        {
+            this._handleServiceError();
+        }
     },
 
     getPlaylistDetails: function(requestOptions, callback)

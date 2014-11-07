@@ -8,7 +8,13 @@ window.Google.GoogleApiConstants =
     YOUTUBE:
     {
         API: {
-            KEY: 'AIzaSyC4ABYBwDsCVEVcZG9KHSFqkAWINiSylQw',
+            //url with keys/ids: https://console.developers.google.com/project/scrobbline-001/apiui/credential
+            AUTH:
+            {
+                CLIENT_ID: "545850510511-njg0onu8v94vgdqetnt1bhnptomevl74.apps.googleusercontent.com",
+                SCOPE: "https://www.googleapis.com/auth/youtube"
+            },
+            KEY: "AIzaSyC4ABYBwDsCVEVcZG9KHSFqkAWINiSylQw",
             NAME: "youtube",
             VERSION: "v3"
         },
