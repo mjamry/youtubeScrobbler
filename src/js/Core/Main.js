@@ -103,7 +103,7 @@ function hookUpToGoogleAuthButton()
             {
                 for(var i in details.items)
                 {
-                    Logger.getInstance().debug("id: "+details.items[i].id+"title: "+details.items[i].title+" decr: "+details.items[i].description);
+                    Logger.getInstance().debug("id: "+details.items[i].id+" title: "+details.items[i].snippet.title+" decr: "+details.items[i].snippet.description);
 
                 }
 
