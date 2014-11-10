@@ -111,11 +111,14 @@ function hookUpToGoogleAuthButton()
 
             var userDetailsHandler = function(details)
             {
-                Logger.getInstance().debug("id: "+details.id+' name: '+details.given_name+' pic: '+details.picture);
+                Logger.getInstance().debug("usr id: "+details.id+' name: '+details.given_name+' pic: '+details.picture);
             };
-            goog.authorize();
-            goog.getUserInfo(userDetailsHandler);
-            goog.getUserPlaylists(userPlaylistDetailsHandler)
+
+            var g = new window.Google.GoogleApiWithSessionControl(goog);
+            Logger.getInstance().debug("[MAIN] 1");
+            g.getUserInfo(userDetailsHandler);
+            g.getUserPlaylists(userPlaylistDetailsHandler);
+            Logger.getInstance().debug("[MAIN] 2");
         }
     };
 

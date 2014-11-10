@@ -10,7 +10,9 @@ initialiseGoogleApi = function()
         {
             this.initialise();
         }.bind(window.Google.GoogleApiWrapper.prototype));
-    gapi.client.load('oauth2', 'v2', function(){alert("oauth2")});
+    gapi.client.load('oauth2', 'v2', function(){
+        Logger.getInstance().info("[Google] OAuth2 loaded.");
+    });
 };
 
 window.Google.GoogleApiWrapper = function()
@@ -40,28 +42,38 @@ window.Google.GoogleApiWrapper.prototype =
         //window.setTimeout(this.authorizeUser.bind(this),1);
     },
 
-    authorize: function()
+    _wrapAuthResponse: function(response)
+    {
+
+    },
+
+    _obtainSessionToken: function(requestOptions, callback)
     {
         if(this.isLoaded)
         {
-            var options =
-            {
-                client_id: window.Google.GoogleApiConstants.YOUTUBE.API.AUTH.CLIENT_ID,
-                immediate: false,
-                response_type: "token",
-                scope: [window.Google.GoogleApiConstants.YOUTUBE.API.AUTH.SCOPE, "https://www.googleapis.com/auth/userinfo.profile"]
-            };
-
-            var callback = function(authObject)
-            {
-                Logger.getInstance().debug("[Google][Auth] token: "+authObject.access_token);
-                Logger.getInstance().debug("[Google][Auth] err: "+authObject.error);
-                Logger.getInstance().debug("[Google][Auth] expiry date: "+authObject.expies_in);
-                Logger.getInstance().debug("[Google][Auth] state: "+authObject.state);
-            };
+            var options = $.extend(
+                {
+                    client_id: window.Google.GoogleApiConstants.YOUTUBE.API.AUTH.CLIENT_ID,
+                    response_type: "token",
+                    scope: [window.Google.GoogleApiConstants.YOUTUBE.API.AUTH.SCOPE, "https://www.googleapis.com/auth/userinfo.profile"]
+                },
+                requestOptions
+            );
 
             gapi.auth.authorize(options, callback);
         }
+    },
+
+    authorize: function(callback)
+    {
+        //show sign on dialog
+        this._obtainSessionToken({immediate:false}, callback);
+    },
+
+    refreshSessionToken: function(callback)
+    {
+        //without sign on dialog
+        this._obtainSessionToken({immediate:true}, callback);
     },
 
     getUserInfo: function(callback)
