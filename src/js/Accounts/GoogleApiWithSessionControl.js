@@ -21,7 +21,7 @@ window.Google.GoogleApiWithSessionControl.prototype =
             {
                 reject();
             }
-        }
+        };
     },
 
     _refreshToken: function ()

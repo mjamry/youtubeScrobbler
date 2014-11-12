@@ -3,7 +3,7 @@ window.UI = window.UI || {};
 window.UI.AccountDetailsBuilder = function(config)
 {
     this._config = config;
-    this._item = $("controls-schemes").(this._config.AccountDetailsContainer).clone();
+    this._item = $("#controls-schemes").find(this._config.AccountDetailsContainer).clone();
 };
 
 window.UI.AccountDetailsBuilder.prototype =
@@ -26,12 +26,16 @@ window.UI.AccountDetailsBuilder.prototype =
     {
         var itemInfo = this._item.find(this._config.AccountInfo);
 
-        for(var i in details)
+        for(var item in details)
         {
-            var itemDetails = document.createElement("div");
-            itemDetails.innerHTML = details[i].label + " : "+details[i].value;
+            for(var name in details[item])
+            {
+                var itemDetails = document.createElement("div");
+                itemDetails.innerHTML = name + " : "+details[item][name];
 
-            itemInfo.append(itemDetails);
+                itemInfo.append(itemDetails);
+            }
+
         }
     },
 

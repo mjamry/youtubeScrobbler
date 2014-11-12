@@ -433,6 +433,14 @@ body
     height:25px;
     padding:6px;
 }
+/*------------------------------ACCOUNTS------------------*/
+.account-active-picture > img
+{
+    height:100px;
+    width:100px;
+}
+
+
 /*------------------------------MEDIA------------------*/
 #player
 {

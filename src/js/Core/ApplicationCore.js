@@ -49,6 +49,8 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     this.progressbarViewController = uiFactory.createProgressbarViewController();
 
+    this.accountDetailsViewController = uiFactory.createAccountsViewController();
+
     this.welcomeScreenService = coreServicesFactory.createWelcomeService();
     this.welcomeScreenController = uiFactory.createWelcomeScreenController(this.welcomeScreenService);
 
@@ -79,6 +81,7 @@ window.ApplicationCore.AppCore.prototype =
         this.playlistService.initialise();
         this.progressbarViewController.initialise();
         this.welcomeScreenController.initialise();
+        this.accountDetailsViewController.initialise();
 
         if(this.welcomeScreenService.isApplicationAlreadyActivated())
         {

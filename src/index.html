@@ -48,7 +48,6 @@
     <script type="text/javascript" src="js/LastFm/LastFmApiFactory.js"></script>
     <script type="text/javascript" src="js/LastFm/Scrobbler.js"></script>
     <script type="text/javascript" src="js/LastFm/InformationProvider.js"></script>
-    <script type="text/javascript" src="js/LastFm/LastFmSessionProvider.js"></script>
     <script type="text/javascript" src="js/LastFm/TrackLoveStateModifier.js"></script>
 
     <script type="text/javascript" src="js/Player/PlayerServicesFactory.js"></script>
@@ -92,7 +91,14 @@
 
     <script type="text/javascript" src="js/Google/GoogleApiConstants.js"></script>
     <script type="text/javascript" src="js/Google/GoogleApiWrapper.js"></script>
-    <script type="text/javascript" src="js/Google/GoogleApiWithSessionControl.js"></script>
+
+
+    <script type="text/javascript" src="js/Accounts/LastFmSessionProvider.js"></script>
+    <script type="text/javascript" src="js/Accounts/GoogleApiWithSessionControl.js"></script>
+    <script type="text/javascript" src="js/UICore/Accounts/AccountsViewController.js"></script>
+    <script type="text/javascript" src="js/UICore/Accounts/AccountsViewControllerConfiguration.js"></script>
+    <script type="text/javascript" src="js/UICore/Accounts/AccountDetailsBuilder.js"></script>
+    <script type="text/javascript" src="js/UICore/Accounts/AAA.js"></script>
 
     <script type="text/javascript" src="js/UI/UIControllersFactory.js"></script>
     <script type="text/javascript" src="js/UI/UIControllersFactoryConfig.js"></script>
@@ -576,7 +582,7 @@
         <legend class="account-active-legend"></legend>
         <div class="pure-g">
             <div class="pure-u-1-4 account-active-picture"></div>
-            <div cladd="pure-u-3-4 account-active-info"></div>
+            <div class="pure-u-3-4 account-active-info"></div>
         </div>
     </div>
 </div>

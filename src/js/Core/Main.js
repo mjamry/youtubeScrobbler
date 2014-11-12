@@ -8,7 +8,7 @@ $(function()
 {
     //hides controls
     $("#controls-schemes").hide();
-    HideAllAplicationPages();
+    HideAllApplicationPages();
 
     var coreServicesFactory = new window.ApplicationCore.CoreServicesFactory();
     var uiFactory = new window.UI.UIControllersFactory(window.UI.UIControllersFactoryConfig);
@@ -82,14 +82,14 @@ $(window).unload(function()
 });
 
 //TODO: find more appropriate place for this
-function HideAllAplicationPages()
+function HideAllApplicationPages()
 {
     var menuConfig = window.UI.MenuItemsConfig;
     for(var i in menuConfig)
     {
         $(menuConfig[i].Page).addClass("application-page-hidden");
     }
-};
+}
 
 function hookUpToGoogleAuthButton()
 {
@@ -111,6 +111,15 @@ function hookUpToGoogleAuthButton()
 
             var userDetailsHandler = function(details)
             {
+                var accountDetails =
+                {
+                    accountName: "Google",
+                    userName: details.given_name,
+                    pictureUrl: details.picture,
+                    otherDetails: [{link: details.link}]
+                };
+
+                EventBroker.getInstance().fireEventWithData(window.LastFm.Events.SessionEstablished, accountDetails);
                 Logger.getInstance().debug("usr id: "+details.id+' name: '+details.given_name+' pic: '+details.picture);
             };
 
@@ -119,7 +128,7 @@ function hookUpToGoogleAuthButton()
             g.getUserInfo(userDetailsHandler);
             g.getUserPlaylists(userPlaylistDetailsHandler);
             Logger.getInstance().debug("[MAIN] 2");
-        }
+        };
     };
 
     button.click(fun());
