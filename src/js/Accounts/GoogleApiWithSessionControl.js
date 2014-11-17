@@ -1,9 +1,10 @@
 window.Google = window.Google || {};
 
 //Mainly has the same methods as default google api wrapper but it checks responses for error 401 (unauthorized) and try to refresh token if possible
-window.Google.GoogleApiWithSessionControl = function(defaultGoogleApiWrapper)
+window.Google.GoogleApiWithSessionControl = function(googleApiWrapper, googleSessionManager)
 {
-    this._innerApiWrapper = defaultGoogleApiWrapper;
+    this._innerApiWrapper = googleApiWrapper;
+    this._sessionManager = googleSessionManager;
 };
 
 window.Google.GoogleApiWithSessionControl.prototype =
@@ -22,49 +23,6 @@ window.Google.GoogleApiWithSessionControl.prototype =
                 reject();
             }
         };
-    },
-
-    _refreshToken: function ()
-    {
-        var that = this;
-        return new Promise(function (resolve, reject)
-        {
-            that._innerApiWrapper.refreshSessionToken(that._handleGoogleResponse(resolve, reject));
-        });
-    },
-
-    _authorizeUser: function ()
-    {
-        var that = this;
-        return new Promise(function (resolve, reject)
-        {
-            that._innerApiWrapper.authorize(that._handleGoogleResponse(resolve, reject));
-        });
-    },
-
-    _establishSession: function ()
-    {
-        var that = this;
-        return that._refreshToken().
-            then(function ()
-                {
-                    Logger.getInstance().debug("[Google] Token has been refreshed.");
-                    return Promise.resolve();
-                }
-            ).catch(function ()
-                {
-                    return that._authorizeUser().
-                        then(function ()
-                            {
-                                Logger.getInstance().debug("[Google] New Token has been obtained.");
-                            }
-                        ).catch(function ()
-                            {
-                                Logger.getInstance().debug("[Google] Session obtaining error.");
-                            }
-                        );
-                }
-            );
     },
 
     _checkForErrors: function (response)
@@ -99,7 +57,7 @@ window.Google.GoogleApiWithSessionControl.prototype =
             ).catch(function ()
                 {
                     Logger.getInstance().debug("[Google] 2_3");
-                    that._establishSession().
+                    that._sessionManager.establishSession().
                         then(function ()
                         {
                             Logger.getInstance().debug("[Google] 2_4");

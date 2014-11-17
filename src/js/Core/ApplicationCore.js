@@ -21,6 +21,8 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
     this.player = coreServicesFactory.createMediaPlayer(this.uiCore.getPlayerContainer(), this.playlistService);
     this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService(this.player);
 
+    this.sessionManager = coreServicesFactory.createSessionManager();
+
     this.playlistFlowController = playerServicesFactory.createPlaylistFlowController(this.playlistService);
 
     this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistFlowController);

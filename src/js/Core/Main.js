@@ -73,7 +73,7 @@ $(function()
     testReport.initialise();
 
     Logger.getInstance().info("Application initialisation ended.");
-    hookUpToGoogleAuthButton();
+    hookUpToGoogleAuthButton(applicationCore);
 });
 
 $(window).unload(function()
@@ -91,14 +91,14 @@ function HideAllApplicationPages()
     }
 }
 
-function hookUpToGoogleAuthButton()
+function hookUpToGoogleAuthButton(app)
 {
     var button = $("#accounts-google-auth-button");
     var fun = function()
     {
         return function()
         {
-            var goog = new window.Google.GoogleApiWrapper();
+
             var userPlaylistDetailsHandler = function(details)
             {
                 for(var i in details.items)
@@ -123,10 +123,13 @@ function hookUpToGoogleAuthButton()
                 Logger.getInstance().debug("usr id: "+details.id+' name: '+details.given_name+' pic: '+details.picture);
             };
 
-            var g = new window.Google.GoogleApiWithSessionControl(goog);
+            var goog = new window.Google.GoogleApiWrapper();
+            var g = new window.Google.GoogleApiWithSessionControl(goog, new window.Accounts.GoogleSessionCoordinator(goog));
+            var g2 = app.sessionManager;
+            g2.establishSession(window.Accounts.AccountsNames.Google);
             Logger.getInstance().debug("[MAIN] 1");
-            g.getUserInfo(userDetailsHandler);
-            g.getUserPlaylists(userPlaylistDetailsHandler);
+           //g.getUserInfo(userDetailsHandler);
+           // g.getUserPlaylists(userPlaylistDetailsHandler);
             Logger.getInstance().debug("[MAIN] 2");
         };
     };

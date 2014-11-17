@@ -31,10 +31,21 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new window.Common.CookieImpl();
     },
 
+    //deprecated - use createSessionManager
     createSessionHandler: function()
     {
         var factory = new window.LastFm.LastFmApiFactory();
         return new window.ApplicationCore.SessionHandler(factory.createSessionProvider());
+    },
+
+    createSessionManager: function()
+    {
+        var sessionCoordinators =
+        {
+            Google: new window.Accounts.GoogleSessionCoordinator(new window.Google.GoogleApiWrapper())
+        };
+
+        return new window.Accounts.SessionManager(sessionCoordinators);
     },
 
     createMediaPlayer: function(container, playlistService)
