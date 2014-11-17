@@ -7,9 +7,9 @@ window.Accounts.SessionManager = function(sessionCoordinators)
 
 window.Accounts.SessionManager.prototype =
 {
-    _handleSessionEstablished: function(accountName)
+    _handleSessionEstablished: function(sessionDetails)
     {
-        EventBroker.getInstance().fireEventWithData(window.LastFm.Events.SessionEstablished, accountName);
+        EventBroker.getInstance().fireEventWithData(window.LastFm.Events.SessionEstablished, sessionDetails);
     },
 
     establishSession: function(accountName)

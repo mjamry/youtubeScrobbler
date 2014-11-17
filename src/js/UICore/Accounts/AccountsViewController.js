@@ -10,21 +10,16 @@ window.UI.AccountsViewController = function(view, accounts, config)
 
 window.UI.AccountsViewController.prototype =
 {
-    //accountDetails : {
-    // accountName,
-    // userName,
-    // pictureUrl,
-    // otherDetails[]
-    // }
+    //passed window.Accounts.SessionDetails
     _handleNewSession: function(that)
     {
-        return function onSessionEstablished(accountDetails)
+        return function onSessionEstablished(sessionDetails)
         {
-            accountDetails.otherDetails.unshift({name: accountDetails.userName});
+            sessionDetails.Details.unshift({name: sessionDetails.UserName});
             var builder = new window.UI.AccountDetailsBuilder(that._config);
-            builder.setAccountName(accountDetails.accountName);
-            builder.setAccountPicture(accountDetails.pictureUrl);
-            builder.setAccountDetails(accountDetails.otherDetails);
+            builder.setAccountName(sessionDetails.AccountName);
+            builder.setAccountPicture(sessionDetails.PictureUrl);
+            builder.setAccountDetails(sessionDetails.Details);
 
             var newAccountItem = builder.build();
 

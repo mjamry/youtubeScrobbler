@@ -36,6 +36,41 @@ window.Accounts.GoogleSessionCoordinator.prototype =
         return true;
     },
 
+    _handleSessionEstablished: function(callback)
+    {
+        var that = this;
+        that._getUserDetails().then(
+            function getUserDetailsSuccess(userDetails)
+            {
+                Logger.getInstance().debug("[Google] User details obtained.");
+                callback(that._standardiseSessionDetails(userDetails));
+            },
+            function getUserDetailsError()
+            {
+                Logger.getInstance().debug("[Google] Error while obtaining user details.");
+            })
+    },
+
+    //response : {
+    //"id": "117575643415949930977",
+    //"name": "scrobbline a",
+    //"given_name": "scrobbline",
+    //"family_name": "a",
+    //"link": "https://plus.google.com/117575643415949930977",
+    //"picture": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
+    //"locale": "en"
+    //}
+    //use window.Accounts.SessionDetails to pass it further
+    _standardiseSessionDetails: function(details)
+    {
+        var sessionDetails = new window.Accounts.SessionDetails();
+        sessionDetails.AccountName = window.Accounts.AccountsNames.Google;
+        sessionDetails.UserName = details.given_name;
+        sessionDetails.PictureUrl = details.picture;
+
+        return sessionDetails;
+    },
+
     _refreshToken: function ()
     {
         var that = this;
@@ -56,21 +91,30 @@ window.Accounts.GoogleSessionCoordinator.prototype =
         );
     },
 
-    _refreshSession: function(errorHandler, successHandler)
+    _refreshSession: function(errorHandler, callback)
     {
         var that = this;
         return that._refreshToken().
             then(
-            function()
+            function refreshTokenSuccess()
             {
                 Logger.getInstance().debug("[Google] Token has been refreshed.");
-                successHandler(window.Accounts.AccountsNames.Google);
+                that._handleSessionEstablished(callback);
             },
-            function()
+            function refreshTokenError()
             {
                 errorHandler();
             }
         );
+    },
+
+    _getUserDetails: function()
+    {
+        var that = this;
+        return new Promise(function(resolve, reject)
+        {
+            that._innerApiWrapper.getUserInfo(that._handleGoogleResponse(resolve, reject));
+        });
     },
 
     establishSession: function (callback)
@@ -80,12 +124,12 @@ window.Accounts.GoogleSessionCoordinator.prototype =
         var refreshSessionError = function onSessionRefreshError()
         {
             that._authorizeUser().
-                then(function()
+                then(function authorizeUserSuccess()
                 {
                     Logger.getInstance().debug("[Google] New Token has been obtained.");
-                    callback(window.Accounts.AccountsNames.Google);
+                    that._handleSessionEstablished(callback);
                 },
-                function()
+                function authorizeUserError()
                 {
                     Logger.getInstance().debug("[Google] Session obtaining error.");
                 }
