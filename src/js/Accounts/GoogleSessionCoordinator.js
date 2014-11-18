@@ -98,7 +98,7 @@ window.Accounts.GoogleSessionCoordinator.prototype =
             then(
             function refreshTokenSuccess()
             {
-                Logger.getInstance().debug("[Google] Token has been refreshed.");
+                Logger.getInstance().debug("[Google] Session has been refreshed.");
                 that._handleSessionEstablished(callback);
             },
             function refreshTokenError()
@@ -126,7 +126,7 @@ window.Accounts.GoogleSessionCoordinator.prototype =
             that._authorizeUser().
                 then(function authorizeUserSuccess()
                 {
-                    Logger.getInstance().debug("[Google] New Token has been obtained.");
+                    Logger.getInstance().debug("[Google] New session has been established.");
                     that._handleSessionEstablished(callback);
                 },
                 function authorizeUserError()
