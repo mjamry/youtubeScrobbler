@@ -67,6 +67,7 @@ window.Accounts.GoogleSessionCoordinator.prototype =
         sessionDetails.AccountName = window.Accounts.AccountsNames.Google;
         sessionDetails.UserName = details.given_name;
         sessionDetails.PictureUrl = details.picture;
+        sessionDetails.Details = [];
 
         return sessionDetails;
     },

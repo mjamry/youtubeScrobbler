@@ -42,7 +42,8 @@ window.ApplicationCore.CoreServicesFactory.prototype =
     {
         var sessionCoordinators =
         {
-            Google: new window.Accounts.GoogleSessionCoordinator(new window.Google.GoogleApiWrapper())
+            Google: new window.Accounts.GoogleSessionCoordinator(new window.Google.GoogleApiWrapper()),
+            LastFM: new window.Accounts.LastFmSessionCoordinator(LastFmApiCommon.DATA_PROVIDER)
         };
 
         return new window.Accounts.SessionManager(sessionCoordinators);

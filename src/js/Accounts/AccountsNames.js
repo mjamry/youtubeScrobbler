@@ -2,6 +2,6 @@ window.Accounts = window.Accounts || {};
 
 window.Accounts.AccountsNames =
 {
-    LastFM: "Last FM",
+    LastFM: "LastFM",
     Google: "Google"
 };
