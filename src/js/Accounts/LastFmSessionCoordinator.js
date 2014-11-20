@@ -63,7 +63,12 @@ window.Accounts.LastFmSessionCoordinator.prototype =
         sessionDetails.AccountName = window.Accounts.AccountsNames.LastFM;
         sessionDetails.UserName = details.user.name;
         sessionDetails.PictureUrl = details.user.image[1]["#text"];
-        sessionDetails.Details = [];
+        sessionDetails.Details =
+        {
+            age: details.user.age,
+            gender: details.user.gender,
+            playcount: details.user.playcount
+        };
 
         return sessionDetails;
     },

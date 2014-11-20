@@ -8,6 +8,16 @@ window.UI.AccountDetailsBuilder = function(config)
 
 window.UI.AccountDetailsBuilder.prototype =
 {
+    _createDetailsItem: function(name, value)
+    {
+        var itemInfo = this._item.find(this._config.AccountInfo);
+
+        var itemDetails = document.createElement("div");
+        itemDetails.innerHTML = name + " : "+value;
+
+        itemInfo.append(itemDetails);
+    },
+
     setAccountName: function(name)
     {
         this._item.find(this._config.AccountLegend).text(name);
@@ -21,21 +31,22 @@ window.UI.AccountDetailsBuilder.prototype =
         this._item.find(this._config.AccountPicture).append(img);
     },
 
+    setUserName: function(userName)
+    {
+        var itemInfo = this._item.find(this._config.AccountInfo);
+        var itemDetails = this._createDetailsItem("name", userName);
+        itemInfo.prepend(itemDetails);
+    },
+
     //array: {label, value}
     setAccountDetails: function(details)
     {
-        var itemInfo = this._item.find(this._config.AccountInfo);
-
-        for(var item in details)
+        for(var name in details)
         {
-            for(var name in details[item])
-            {
-                var itemDetails = document.createElement("div");
-                itemDetails.innerHTML = name + " : "+details[item][name];
+            var itemInfo = this._item.find(this._config.AccountInfo);
+            var itemDetails =             this._createDetailsItem(name, details[name]);
 
-                itemInfo.append(itemDetails);
-            }
-
+            itemInfo.append(itemDetails);
         }
     },
 

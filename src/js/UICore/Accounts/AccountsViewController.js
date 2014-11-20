@@ -15,11 +15,11 @@ window.UI.AccountsViewController.prototype =
     {
         return function onSessionEstablished(sessionDetails)
         {
-            sessionDetails.Details.unshift({name: sessionDetails.UserName});
             var builder = new window.UI.AccountDetailsBuilder(that._config);
             builder.setAccountName(sessionDetails.AccountName);
             builder.setAccountPicture(sessionDetails.PictureUrl);
             builder.setAccountDetails(sessionDetails.Details);
+            builder.setUserName(sessionDetails.UserName);
 
             var newAccountItem = builder.build();
 
