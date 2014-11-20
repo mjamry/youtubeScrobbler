@@ -1,8 +1,9 @@
 window.Accounts = window.Accounts || {};
 
-window.Accounts.LastFmSessionCoordinator = function(lastFmApi)
+window.Accounts.LastFmSessionCoordinator = function(lastFmApi, tokenHandler)
 {
     this.lastFmApi = lastFmApi;
+    this.tokenHandler = tokenHandler;
 };
 
 window.Accounts.LastFmSessionCoordinator.prototype =
@@ -73,15 +74,14 @@ window.Accounts.LastFmSessionCoordinator.prototype =
         return sessionDetails;
     },
 
-    establishSession: function(callback)
+    establishSession: function()
     {
-        //just move to another page where
-        window.location = this.config.PortalAuthLink + window.LastFm.LastFmConstants.API_KEY + "&" + this.config.PortalUrlCallbackParam + document.URL;
+        this.tokenHandler.generateSessionToken();
     },
 
     refreshSession: function(callback)
     {
-        var lastSessionToken = Cookie.getInstance().getCookie(window.Common.CookiesNames.sessionCookie);
+        var lastSessionToken = this.tokenHandler.getSessionToken();
         if(lastSessionToken == null)
         {
             Logger.getInstance().debug("[LastFm] Cannot refresh session token does not exist.");

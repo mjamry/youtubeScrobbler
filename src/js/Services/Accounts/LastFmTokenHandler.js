@@ -20,7 +20,7 @@ window.Accounts.LastFmTokenHandler.prototype =
             return token;
         }
 
-        token = Cookie.getInstance.getCookie(window.Common.CookiesNames.sessionCookie);
+        token = Cookie.getInstance().getCookie(window.Common.CookiesNames.sessionCookie);
 
         if(token != null)
         {

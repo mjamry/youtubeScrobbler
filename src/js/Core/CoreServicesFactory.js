@@ -38,12 +38,14 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new window.ApplicationCore.SessionHandler(factory.createSessionProvider());
     },
 
+    //TODO remove hardcoded session coordinators names
     createSessionManager: function()
     {
+        var lastFmTokenHandler = new window.Accounts.LastFmTokenHandler(window.Accounts.LastFmSessionConstants);
         var sessionCoordinators =
         {
             Google: new window.Accounts.GoogleSessionCoordinator(new window.Google.GoogleApiWrapper()),
-            LastFM: new window.Accounts.LastFmSessionCoordinator(LastFmApiCommon.DATA_PROVIDER)
+            LastFM: new window.Accounts.LastFmSessionCoordinator(LastFmApiCommon.DATA_PROVIDER, lastFmTokenHandler)
         };
 
         return new window.Accounts.SessionManager(sessionCoordinators);
