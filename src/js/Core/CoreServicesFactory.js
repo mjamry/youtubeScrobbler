@@ -39,7 +39,7 @@ window.ApplicationCore.CoreServicesFactory.prototype =
     },
 
     //TODO remove hardcoded session coordinators names
-    createSessionManager: function()
+    createSessionService: function()
     {
         var lastFmTokenHandler = new window.Accounts.LastFmTokenHandler(window.Accounts.LastFmSessionConstants);
         var sessionCoordinators =
@@ -48,7 +48,7 @@ window.ApplicationCore.CoreServicesFactory.prototype =
             LastFM: new window.Accounts.LastFmSessionCoordinator(LastFmApiCommon.DATA_PROVIDER, lastFmTokenHandler)
         };
 
-        return new window.Accounts.SessionManager(sessionCoordinators);
+        return new window.Accounts.SessionService(sessionCoordinators);
     },
 
     createMediaPlayer: function(container, playlistService)

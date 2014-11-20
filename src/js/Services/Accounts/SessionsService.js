@@ -1,11 +1,11 @@
 window.Accounts = window.Accounts || {};
 
-window.Accounts.SessionManager = function(sessionCoordinators)
+window.Accounts.SessionService = function(sessionCoordinators)
 {
     this._accounts = sessionCoordinators;
 };
 
-window.Accounts.SessionManager.prototype =
+window.Accounts.SessionService.prototype =
 {
     _handleSessionEstablished: function(sessionDetails)
     {
@@ -25,6 +25,15 @@ window.Accounts.SessionManager.prototype =
     getSessionDetails: function(accountName)
     {
         return this._accounts[accountName].getSessionDetails();
+    },
+
+    //initialises session coordinators
+    initialise: function()
+    {
+        for(var accountName in this._accounts)
+        {
+            this.refreshSession(accountName);
+        }
     }
 };
 
