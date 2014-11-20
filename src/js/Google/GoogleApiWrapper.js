@@ -4,13 +4,13 @@ window.Google = window.Google || {};
 initialiseGoogleApi = function()
 {
     //TODO handle loading errors
-    gapi.client.setApiKey(window.Google.GoogleApiConstants.YOUTUBE.API.KEY);
-    gapi.client.load(window.Google.GoogleApiConstants.YOUTUBE.API.NAME, window.Google.GoogleApiConstants.YOUTUBE.API.VERSION,
+    gapi.client.setApiKey(window.Google.YoutubeApi.KEY);
+    gapi.client.load(window.Google.YoutubeApi.NAME, window.Google.YoutubeApi.VERSION,
         function()
         {
             this.initialise();
         }.bind(window.Google.GoogleApiWrapper.prototype));
-    gapi.client.load('oauth2', 'v2', function(){
+    gapi.client.load(window.Google.AuthApi.NAME, window.Google.AuthApi.VERSION, function(){
         Logger.getInstance().info("[Google] OAuth2 loaded.");
     });
 };
@@ -53,9 +53,9 @@ window.Google.GoogleApiWrapper.prototype =
         {
             var options = $.extend(
                 {
-                    client_id: window.Google.GoogleApiConstants.YOUTUBE.API.AUTH.CLIENT_ID,
+                    client_id: window.Google.AuthApi.CLIENT_ID,
                     response_type: "token",
-                    scope: [window.Google.GoogleApiConstants.YOUTUBE.API.AUTH.SCOPE, "https://www.googleapis.com/auth/userinfo.profile"]
+                    scope: [window.Google.AuthApi.SCOPE_PROFILE, window.Google.AuthApi.SCOPE_EMAIL, window.Google.YoutubeApi.SCOPE]
                 },
                 requestOptions
             );
