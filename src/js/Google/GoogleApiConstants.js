@@ -35,3 +35,9 @@ window.Google.YoutubeApi =
     MEDIA_TYPE: "video/youtube"
 };
 
+window.Google.ServiceNames =
+{
+    Youtube: window.Google.YoutubeApi.NAME,
+    Auth: window.Google.AuthApi.NAME
+};
+
