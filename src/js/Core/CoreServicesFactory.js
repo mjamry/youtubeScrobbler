@@ -52,12 +52,10 @@ window.ApplicationCore.CoreServicesFactory.prototype =
     //TODO remove hardcoded session coordinators names
     createSessionService: function()
     {
-        var apiWrapper = {};
-        apiWrapper[window.Google.ServiceNames.Auth] = this._createGoogleApiWrapper();
         var lastFmTokenHandler = new window.Accounts.LastFmTokenHandler(window.Accounts.LastFmSessionConstants);
         var sessionCoordinators =
         {
-            Google: new window.Accounts.GoogleSessionCoordinator(apiWrapper),
+            Google: new window.Accounts.GoogleSessionCoordinator(this._createGoogleApiWrapper()),
             LastFM: new window.Accounts.LastFmSessionCoordinator(LastFmApiCommon.DATA_PROVIDER, lastFmTokenHandler)
         };
 

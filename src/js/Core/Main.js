@@ -126,8 +126,8 @@ function hookUpToGoogleAuthButton(app)
             var goog = new window.Google.GoogleApiWrapper();
             var g = new window.Google.GoogleApiWithSessionControl(goog, new window.Accounts.GoogleSessionCoordinator(goog));
             var g2 = app.sessionService;
-            g2.establishSession(window.Accounts.AccountsNames.LastFM);
-            //g2.refreshSession(window.Accounts.AccountsNames.LastFM);
+           // g2.establishSession(window.Accounts.AccountsNames.LastFM);
+            g2.establishSession(window.Accounts.AccountsNames.Google);
             Logger.getInstance().debug("[MAIN] 1");
            //g.getUserInfo(userDetailsHandler);
            // g.getUserPlaylists(userPlaylistDetailsHandler);

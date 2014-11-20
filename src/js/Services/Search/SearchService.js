@@ -3,7 +3,7 @@ window.Services = window.Services || {};
 window.Services.SearchService = function(dataProviders)
 {
     this.dataProviders = dataProviders;
-    this.dataProviders[window.Google.ServiceNames.Youtube].initialiseService(window.Google.ServiceNames.Youtube);
+    this.dataProviders[window.Google.ServiceNames.Youtube].initialiseService(window.Google.ServiceNames.Youtube, function(){});
 };
 
 window.Services.SearchService.prototype =

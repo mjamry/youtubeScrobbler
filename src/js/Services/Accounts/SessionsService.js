@@ -27,12 +27,22 @@ window.Accounts.SessionService.prototype =
         return this._accounts[accountName].getSessionDetails();
     },
 
-    //initialises session coordinators
+    //initialises
     initialise: function()
     {
+        Logger.getInstance().info("[Session] Session service initialised.");
         for(var accountName in this._accounts)
         {
-            this.refreshSession(accountName);
+            var callbackCreator = function(that, name)
+            {
+                return function()
+                {
+                    that.refreshSession(name);
+                    Logger.getInstance().info("[Session] "+name+" session coordinator initialised.");
+                }
+            };
+
+            this._accounts[accountName].initialise(callbackCreator(this, accountName));
         }
     }
 };

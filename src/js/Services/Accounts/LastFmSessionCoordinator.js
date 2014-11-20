@@ -74,6 +74,12 @@ window.Accounts.LastFmSessionCoordinator.prototype =
         return sessionDetails;
     },
 
+    initialise: function(callback)
+    {
+        //there is no need to initialise anything, so just call callback function
+        callback();
+    },
+
     establishSession: function()
     {
         this.tokenHandler.generateSessionToken();

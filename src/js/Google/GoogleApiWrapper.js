@@ -66,13 +66,13 @@ window.Google.GoogleApiWrapper.prototype =
 
     _obtainSessionToken: function(requestOptions, callback)
     {
-        if(this.isLoaded)
+        if(this._initialsiedServices[window.Google.ServiceNames.Auth])
         {
             var options = $.extend(
                 {
                     client_id: window.Google.AuthApi.CLIENT_ID,
                     response_type: "token",
-                    scope: [window.Google.AuthApi.SCOPE_PROFILE, window.Google.AuthApi.SCOPE_EMAIL, window.Google.YoutubeApi.SCOPE]
+                    scope: [window.Google.AuthApi.SCOPE_PROFILE, window.Google.YoutubeApi.SCOPE]
                 },
                 requestOptions
             );

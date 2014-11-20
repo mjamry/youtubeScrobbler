@@ -3,7 +3,6 @@ window.Accounts = window.Accounts || {};
 window.Accounts.GoogleSessionCoordinator = function(googleApiWrapper)
 {
     this._innerApiWrapper = googleApiWrapper;
-    this._innerApiWrapper[window.Google.ServiceNames.Auth].initialiseService(window.Google.ServiceNames.Auth, this.refreshSession);
 };
 
 window.Accounts.GoogleSessionCoordinator.prototype =
@@ -117,6 +116,11 @@ window.Accounts.GoogleSessionCoordinator.prototype =
         {
             that._innerApiWrapper.getUserInfo(that._handleGoogleResponse(resolve, reject));
         });
+    },
+
+    initialise: function(callback)
+    {
+        this._innerApiWrapper.initialiseService(window.Google.ServiceNames.Auth, callback);
     },
 
     establishSession: function (callback)
