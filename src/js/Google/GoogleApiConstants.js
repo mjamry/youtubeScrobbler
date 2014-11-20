@@ -4,7 +4,8 @@ window.Google = window.Google || {};
 window.Google.GoogleApiConstants =
 {
     MAX_NUMBER_OF_ITEMS_PER_REQUEST: 50,
-    MAX_NUMBER_OF_SEARCH_RESULTS_PER_REQUEST: 50
+    MAX_NUMBER_OF_SEARCH_RESULTS_PER_REQUEST: 50,
+    API_KEY: "AIzaSyC4ABYBwDsCVEVcZG9KHSFqkAWINiSylQw"
 };
 
 //TODO: move client id and key to server side
@@ -20,7 +21,6 @@ window.Google.AuthApi =
 
 window.Google.YoutubeApi =
 {
-    KEY: "AIzaSyC4ABYBwDsCVEVcZG9KHSFqkAWINiSylQw",
     NAME: "youtube",
     VERSION: "v3",
     SCOPE: "https://www.googleapis.com/auth/youtube",

@@ -3,6 +3,7 @@ window.Accounts = window.Accounts || {};
 window.Accounts.GoogleSessionCoordinator = function(googleApiWrapper)
 {
     this._innerApiWrapper = googleApiWrapper;
+    this._innerApiWrapper[window.Google.ServiceNames.Auth].initialiseService(window.Google.ServiceNames.Auth, this.refreshSession);
 };
 
 window.Accounts.GoogleSessionCoordinator.prototype =

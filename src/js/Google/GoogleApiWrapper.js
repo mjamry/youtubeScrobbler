@@ -9,6 +9,9 @@ window.Google.GoogleApiWrapper = function()
     this._initialsiedServices = {};
     this._initialsiedServices[window.Google.ServiceNames.Youtube] = false;
     this._initialsiedServices[window.Google.ServiceNames.Auth] = false;
+
+    //initialises api
+    gapi.client.setApiKey(window.Google.GoogleApiConstants.API_KEY);
 };
 
 window.Google.GoogleApiWrapper.prototype =
@@ -21,26 +24,32 @@ window.Google.GoogleApiWrapper.prototype =
 
     _initialiseYoutube: function(callback)
     {
-        var onServiceInitialised = function()
+        if(!this._initialsiedServices[window.Google.ServiceNames.Youtube])
         {
-            Logger.getInstance().info("[Google Api] Youtube service loaded.");
-            this._initialsiedServices[window.Google.ServiceNames.Youtube] = true;
-            callback();
-        }.bind(this);
+            var onServiceInitialised = function()
+            {
+                Logger.getInstance().info("[Google Api] Youtube service loaded.");
+                this._initialsiedServices[window.Google.ServiceNames.Youtube] = true;
+                callback();
+            }.bind(this);
 
-        gapi.client.load(window.Google.YoutubeApi.NAME, window.Google.YoutubeApi.VERSION,onServiceInitialised);
+            gapi.client.load(window.Google.YoutubeApi.NAME, window.Google.YoutubeApi.VERSION,onServiceInitialised);
+        }
     },
 
     _initialisesAuth: function(callback)
     {
-        var onServiceInitialised = function()
+        if(!this._initialsiedServices[window.Google.ServiceNames.Auth])
         {
-            Logger.getInstance().info("[Google Api] OAuth2 service loaded.");
-            this._initialsiedServices[window.Google.ServiceNames.Auth] = true;
-            callback();
-        }.bind(this);
+            var onServiceInitialised = function ()
+            {
+                Logger.getInstance().info("[Google Api] OAuth2 service loaded.");
+                this._initialsiedServices[window.Google.ServiceNames.Auth] = true;
+                callback();
+            }.bind(this);
 
-        gapi.client.load(window.Google.AuthApi.NAME, window.Google.AuthApi.VERSION,onServiceInitialised);
+            gapi.client.load(window.Google.AuthApi.NAME, window.Google.AuthApi.VERSION, onServiceInitialised);
+        }
     },
 
     initialiseService: function(serviceName, callback)
