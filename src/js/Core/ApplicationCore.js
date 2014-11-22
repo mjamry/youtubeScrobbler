@@ -38,8 +38,6 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     this.playlistControlViewController = uiFactory.createPlaylistControlViewController(this.playlistService, this.playlistFlowController);
 
-   // this.sessionViewController = uiFactory.createSessionViewController(this.sessionHandler);
-
     this.mediaLoadViewController = uiFactory.createMediaLoadViewController(this.playlistLoaderService, this.searchService);
 
     this.playlistItemEditorViewController = uiFactory.createPlaylistItemEditorViewController(this.playlistService);
