@@ -131,5 +131,10 @@ window.UI.UIControllersFactory.prototype =
     createMenuViewController: function()
     {
         return new window.UI.MenuController($(this.config.MenuView), window.UI.MenuControllerConfig, new window.UI.PageDisplayCoordinator("#player"));
+    },
+
+    createAccountsViewController: function(sessionService)
+    {
+        return new window.UI.AccountsViewController($(this.config.AccountsView), window.Accounts.AccountsNames, sessionService, window.UI.AccountsViewControllerConfiguration);
     }
 };

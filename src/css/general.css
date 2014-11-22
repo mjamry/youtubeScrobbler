@@ -433,6 +433,38 @@ body
     height:25px;
     padding:6px;
 }
+/*------------------------------ACCOUNTS------------------*/
+.account-active-details-container
+{
+    width:90%;
+    display:block;
+    margin-top:25px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.account-active-info
+{
+    width:70%;
+}
+
+.account-active-picture > img
+{
+    height:100px;
+    width:100px;
+}
+
+.accounts-login-button
+{
+    height: 55px;
+    width:250px;
+    border-style: none;
+    display:block;
+    margin-top:25px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
 /*------------------------------MEDIA------------------*/
 #player
 {

@@ -21,6 +21,9 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
     this.player = coreServicesFactory.createMediaPlayer(this.uiCore.getPlayerContainer(), this.playlistService);
     this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService(this.player);
 
+    this.sessionService = coreServicesFactory.createSessionService();
+    this.sessionService.initialise();
+
     this.playlistFlowController = playerServicesFactory.createPlaylistFlowController(this.playlistService);
 
     this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistFlowController);
@@ -35,8 +38,6 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     this.playlistControlViewController = uiFactory.createPlaylistControlViewController(this.playlistService, this.playlistFlowController);
 
-    this.sessionViewController = uiFactory.createSessionViewController(this.sessionHandler);
-
     this.mediaLoadViewController = uiFactory.createMediaLoadViewController(this.playlistLoaderService, this.searchService);
 
     this.playlistItemEditorViewController = uiFactory.createPlaylistItemEditorViewController(this.playlistService);
@@ -48,6 +49,8 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
     this.userNotificationViewController = uiFactory.createUserNotificationViewController();
 
     this.progressbarViewController = uiFactory.createProgressbarViewController();
+
+    this.accountDetailsViewController = uiFactory.createAccountsViewController(this.sessionService);
 
     this.welcomeScreenService = coreServicesFactory.createWelcomeService();
     this.welcomeScreenController = uiFactory.createWelcomeScreenController(this.welcomeScreenService);
@@ -71,7 +74,6 @@ window.ApplicationCore.AppCore.prototype =
         this.userNotificationViewController.initialise();
         this.playlistControlViewController.initialise();
         this.mediaLoadViewController.initialise();
-        this.sessionViewController.initialise();
         this.playlistItemEditorViewController.initialise();
         this.playlistItemEditorListViewController.initialise();
         this.onlineScrobbler.initialise();
@@ -79,6 +81,7 @@ window.ApplicationCore.AppCore.prototype =
         this.playlistService.initialise();
         this.progressbarViewController.initialise();
         this.welcomeScreenController.initialise();
+        this.accountDetailsViewController.initialise();
 
         if(this.welcomeScreenService.isApplicationAlreadyActivated())
         {

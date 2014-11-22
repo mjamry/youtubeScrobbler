@@ -11,5 +11,6 @@ window.UI.UIControllersFactoryConfig =
     ProgressbarView: "#progressbar-container",
     WelcomeScreenView: "#page",
     MenuView: "#menu",
-    PlaylistEditorListView: "#playlist-editor-list-container"
+    PlaylistEditorListView: "#playlist-editor-list-container",
+    AccountsView: "#accounts"
 };

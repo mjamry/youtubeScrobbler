@@ -105,6 +105,10 @@ window.ApplicationCore.SessionHandler.prototype =
         var urlPars = new window.Common.UrlParser();
         var token = urlPars.getParameterValue(window.location.href, "token");
 
+        if(token != "0")
+        {
+            this._setSessionCookie(token);
+        }
         Logger.getInstance().debug("Token: "+token+" has been obtained.");
 
         return token;

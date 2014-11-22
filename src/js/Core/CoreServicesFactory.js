@@ -7,10 +7,21 @@ window.Player = window.Player || {};
 window.ApplicationCore.CoreServicesFactory = function()
 {
     this._sessionProvider = null;
+    this._googleApiWrapper = null;
 };
 
 window.ApplicationCore.CoreServicesFactory.prototype =
 {
+    _createGoogleApiWrapper: function()
+    {
+        if(this._googleApiWrapper === null)
+        {
+            this._googleApiWrapper = new window.Google.GoogleApiWrapper();
+        }
+
+        return this._googleApiWrapper;
+    },
+
     createBrokerHandler: function()
     {
         return new window.Common.EventBrokerImpl();
@@ -31,10 +42,24 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new window.Common.CookieImpl();
     },
 
+    //deprecated - use createSessionManager
     createSessionHandler: function()
     {
         var factory = new window.LastFm.LastFmApiFactory();
         return new window.ApplicationCore.SessionHandler(factory.createSessionProvider());
+    },
+
+    //TODO remove hardcoded session coordinators names
+    createSessionService: function()
+    {
+        var lastFmTokenHandler = new window.Accounts.LastFmTokenHandler(window.Accounts.LastFmSessionConstants);
+        var sessionCoordinators =
+        {
+            Google: new window.Accounts.GoogleSessionCoordinator(this._createGoogleApiWrapper()),
+            LastFM: new window.Accounts.LastFmSessionCoordinator(LastFmApiCommon.DATA_PROVIDER, lastFmTokenHandler)
+        };
+
+        return new window.Accounts.SessionService(sessionCoordinators);
     },
 
     createMediaPlayer: function(container, playlistService)
@@ -75,7 +100,10 @@ window.ApplicationCore.CoreServicesFactory.prototype =
 
     createSearchService: function()
     {
-        return new window.Services.SearchService();
+        var searchDetailsProviders = {};
+        searchDetailsProviders[window.Google.ServiceNames.Youtube] = this._createGoogleApiWrapper();
+
+        return new window.Services.SearchService(searchDetailsProviders);
     }
 };
 

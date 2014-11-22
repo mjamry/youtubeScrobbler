@@ -1,11 +1,9 @@
 window.Services = window.Services || {};
 
-window.Services.SearchService = function()
+window.Services.SearchService = function(dataProviders)
 {
-    this.dataProviders =
-    {
-        Youtube: new window.Google.GoogleApiWrapper()
-    };
+    this.dataProviders = dataProviders;
+    this.dataProviders[window.Google.ServiceNames.Youtube].initialiseService(window.Google.ServiceNames.Youtube, function(){});
 };
 
 window.Services.SearchService.prototype =
