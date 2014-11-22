@@ -18,7 +18,7 @@ window.UI.AccountsViewController.prototype =
             return function onLogInButtonClicked()
             {
                 that.sessionService.establishSession(accountName);
-            }
+            };
         };
 
         var button = document.createElement("button");

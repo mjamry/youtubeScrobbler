@@ -14,7 +14,7 @@ window.ApplicationCore.CoreServicesFactory.prototype =
 {
     _createGoogleApiWrapper: function()
     {
-        if(this._googleApiWrapper == null)
+        if(this._googleApiWrapper === null)
         {
             this._googleApiWrapper = new window.Google.GoogleApiWrapper();
         }

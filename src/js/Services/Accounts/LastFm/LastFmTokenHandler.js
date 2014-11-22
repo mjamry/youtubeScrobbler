@@ -22,7 +22,7 @@ window.Accounts.LastFmTokenHandler.prototype =
 
         token = Cookie.getInstance().getCookie(window.Common.CookiesNames.sessionCookie);
 
-        if(token != null)
+        if(token !== null)
         {
             return token;
         }

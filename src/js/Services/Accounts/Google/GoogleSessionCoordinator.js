@@ -48,7 +48,7 @@ window.Accounts.GoogleSessionCoordinator.prototype =
             function getUserDetailsError()
             {
                 Logger.getInstance().debug("[Google] Error while obtaining user details.");
-            })
+            });
     },
 
     //response : {

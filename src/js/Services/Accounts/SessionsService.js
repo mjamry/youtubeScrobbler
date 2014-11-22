@@ -31,17 +31,18 @@ window.Accounts.SessionService.prototype =
     initialise: function()
     {
         Logger.getInstance().info("[Session] Session service initialised.");
+
+        var callbackCreator = function(that, name)
+        {
+            return function()
+            {
+                that.refreshSession(name);
+                Logger.getInstance().info("[Session] "+name+" session coordinator initialised.");
+            };
+        };
+
         for(var accountName in this._accounts)
         {
-            var callbackCreator = function(that, name)
-            {
-                return function()
-                {
-                    that.refreshSession(name);
-                    Logger.getInstance().info("[Session] "+name+" session coordinator initialised.");
-                }
-            };
-
             this._accounts[accountName].initialise(callbackCreator(this, accountName));
         }
     }

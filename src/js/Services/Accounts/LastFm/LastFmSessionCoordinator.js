@@ -88,7 +88,7 @@ window.Accounts.LastFmSessionCoordinator.prototype =
     refreshSession: function(callback)
     {
         var lastSessionToken = this.tokenHandler.getSessionToken();
-        if(lastSessionToken == null)
+        if(lastSessionToken === null)
         {
             Logger.getInstance().debug("[LastFm] Cannot refresh session token does not exist.");
             return Promise.reject();
