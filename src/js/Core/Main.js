@@ -73,7 +73,6 @@ $(function()
     testReport.initialise();
 
     Logger.getInstance().info("Application initialisation ended.");
-    hookUpToGoogleAuthButton(applicationCore);
 });
 
 $(window).unload(function()
@@ -89,51 +88,4 @@ function HideAllApplicationPages()
     {
         $(menuConfig[i].Page).addClass("application-page-hidden");
     }
-}
-
-function hookUpToGoogleAuthButton(app)
-{
-    var button = $("#accounts-google-auth-button");
-    var fun = function()
-    {
-        return function()
-        {
-
-            var userPlaylistDetailsHandler = function(details)
-            {
-                for(var i in details.items)
-                {
-                    Logger.getInstance().debug("id: "+details.items[i].id+" title: "+details.items[i].snippet.title+" decr: "+details.items[i].snippet.description);
-
-                }
-
-            };
-
-            var userDetailsHandler = function(details)
-            {
-                var accountDetails =
-                {
-                    accountName: "Google",
-                    userName: details.given_name,
-                    pictureUrl: details.picture,
-                    otherDetails: [{link: details.link}]
-                };
-
-                EventBroker.getInstance().fireEventWithData(window.LastFm.Events.SessionEstablished, accountDetails);
-                Logger.getInstance().debug("usr id: "+details.id+' name: '+details.given_name+' pic: '+details.picture);
-            };
-
-            var goog = new window.Google.GoogleApiWrapper();
-            var g = new window.Google.GoogleApiWithSessionControl(goog, new window.Accounts.GoogleSessionCoordinator(goog));
-            var g2 = app.sessionService;
-           // g2.establishSession(window.Accounts.AccountsNames.LastFM);
-            g2.establishSession(window.Accounts.AccountsNames.Google);
-            Logger.getInstance().debug("[MAIN] 1");
-           //g.getUserInfo(userDetailsHandler);
-           // g.getUserPlaylists(userPlaylistDetailsHandler);
-            Logger.getInstance().debug("[MAIN] 2");
-        };
-    };
-
-    button.click(fun());
 }

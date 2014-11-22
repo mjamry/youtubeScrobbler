@@ -50,7 +50,7 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     this.progressbarViewController = uiFactory.createProgressbarViewController();
 
-    this.accountDetailsViewController = uiFactory.createAccountsViewController();
+    this.accountDetailsViewController = uiFactory.createAccountsViewController(this.sessionService);
 
     this.welcomeScreenService = coreServicesFactory.createWelcomeService();
     this.welcomeScreenController = uiFactory.createWelcomeScreenController(this.welcomeScreenService);
@@ -74,7 +74,6 @@ window.ApplicationCore.AppCore.prototype =
         this.userNotificationViewController.initialise();
         this.playlistControlViewController.initialise();
         this.mediaLoadViewController.initialise();
-       // this.sessionViewController.initialise();
         this.playlistItemEditorViewController.initialise();
         this.playlistItemEditorListViewController.initialise();
         this.onlineScrobbler.initialise();

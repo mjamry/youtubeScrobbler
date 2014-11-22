@@ -36,23 +36,6 @@ body A:hover
     border-bottom:1px solid #636363;
     background-color: #309BBD;
 }
-
-.header-session-button,
-.header-session-button A,
-.settings-control-button
-{
-    color: #2A2C2B;
-    background-color: #E6DECF;
-}
-
-.header-session-button:hover,
-.header-session-button A:hover,
-.settings-control-button:hover
-{
-    color: #E6DECF;
-    background-color: #4A4A49;
-}
-
 /*--------PLAYLIST----------*/
 .playlist-item-current
 {
@@ -196,6 +179,19 @@ body A:hover
 .playlist-control-button-selected
 {
     color: #FA4147;
+}
+
+/*-----------ACCOUNTS----------------*/
+.accounts-login-button
+{
+    color: #2A2C2B;
+    background-color: #E6DECF;
+}
+
+.accounts-login-button:hover
+{
+    color: #E6DECF;
+    background-color: #4A4A49;
 }
 
 /*-----------SEARCH----------------*/

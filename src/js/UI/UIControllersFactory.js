@@ -133,8 +133,8 @@ window.UI.UIControllersFactory.prototype =
         return new window.UI.MenuController($(this.config.MenuView), window.UI.MenuControllerConfig, new window.UI.PageDisplayCoordinator("#player"));
     },
 
-    createAccountsViewController: function()
+    createAccountsViewController: function(sessionService)
     {
-        return new window.UI.AccountsViewController($(this.config.AccountsView), [], window.UI.AccountsViewControllerConfiguration);
+        return new window.UI.AccountsViewController($(this.config.AccountsView), window.Accounts.AccountsNames, sessionService, window.UI.AccountsViewControllerConfiguration);
     }
 };
