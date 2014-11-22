@@ -2,7 +2,7 @@ window.UI = window.UI || {};
 
 window.UI.AccountsViewControllerConfiguration =
 {
-    AccountDetailsContainer: ".account-active-details",
+    AccountDetailsContainer: ".account-active-details-container",
     AccountLegend: ".account-active-legend",
     AccountPicture: ".account-active-picture",
     AccountInfo: ".account-active-info",
