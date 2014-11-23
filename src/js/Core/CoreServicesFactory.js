@@ -32,9 +32,11 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new LoggerImpl();
     },
 
-    createOnlineScrobbler: function(sessionProvider)
+    createOnlineScrobbler: function()
     {
-        return new window.ApplicationCore.OnlineScrobbler(sessionProvider);
+        var factory = new window.LastFm.LastFmApiFactory();
+        var lowLevelScrobbler = factory.createScrobbler();
+        return new window.ApplicationCore.OnlineScrobbler(lowLevelScrobbler);
     },
 
     createCookieHandler: function()

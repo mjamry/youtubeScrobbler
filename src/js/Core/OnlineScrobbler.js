@@ -6,11 +6,9 @@ window.Player = window.Player || {};
 window.Common = window.Common || {};
 window.LastFm = window.LastFm || {};
 
-window.ApplicationCore.OnlineScrobbler = function(sessionHandler)
+window.ApplicationCore.OnlineScrobbler = function(scrobbler)
 {
-    this._sessionHandler = sessionHandler;
-    this._lastFmFactory = new window.LastFm.LastFmApiFactory();
-    this._scrobbler = this._lastFmFactory.createScrobbler();
+    this._scrobbler = scrobbler;
 
     this._trackStartPlayingTime = null;
 
@@ -55,7 +53,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
     //And the track has been played for at least half its duration, or for 4 minutes (whichever occurs earlier.)
     _updateScrobbling: function(mediaDetails)
     {
-        if(this._sessionHandler.isSessionEstablished() && this._trackCanBeScrobbled(mediaDetails, this._trackStartPlayingTime))
+        if(this._trackCanBeScrobbled(mediaDetails, this._trackStartPlayingTime))
         {
             this._scrobbler.scrobble(
                 {
@@ -63,8 +61,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
                     artist: mediaDetails.artist.name,
 
                     timestamp: TimeParser.getInstance().getSeconds(this._trackStartPlayingTime)
-                },
-                this._sessionHandler.getSession()
+                }
             );
         }
     },
@@ -72,17 +69,16 @@ window.ApplicationCore.OnlineScrobbler.prototype =
     _updateNowPlaying: function(mediaDetails)
     {
         //update now playing only when new track is loaded - it prevents before reaction on pause/play events
-        if(this._sessionHandler.isSessionEstablished() && this._currentlyLoaded != mediaDetails)
+        if(this._currentlyLoaded != mediaDetails)
         {
             this._currentlyLoaded = mediaDetails;
             this._trackStartPlayingTime = new Date().getTime();
             this._scrobbler.updateNowPlaying(
+                mediaDetails,
                 {
-                    track: mediaDetails.title,
-                    artist: mediaDetails.artist.name,
-                    duration: mediaDetails.duration.getInSeconds()
-                },
-                this._sessionHandler.getSession()
+                    success: function(){},
+                    error: function(){}
+                }
             );
         }
     },

@@ -1,16 +1,28 @@
 //using
 window.LastFm = window.LastFm || {};
 
-window.LastFm.LastFmApiFactory = function(){};
+window.LastFm.LastFmApiFactory = function()
+{
+    this.sessionProvider = null;
+};
 
 window.LastFm.LastFmApiFactory.prototype =
 {
+    _createSessionProvider: function()
+    {
+        if(this.sessionProvider === null)
+        {
+            this.sessionProvider = new window.Accounts.LastFmSessionProvider();;
+            this.sessionProvider.initialise();
+        }
+
+        return this.sessionProvider;
+    },
+
     ///Creates information
     createInformationProvider: function()
     {
-        var sessionProvider = new window.Accounts.LastFmSessionProvider();
-        sessionProvider.initialise();
-        return new window.LastFm.LastFmTrackInformationProvider(LastFmApiCommon.DATA_PROVIDER, sessionProvider);
+        return new window.LastFm.LastFmTrackInformationProvider(LastFmApiCommon.DATA_PROVIDER, this._createSessionProvider());
     },
 
     createSessionProvider: function()
@@ -20,7 +32,7 @@ window.LastFm.LastFmApiFactory.prototype =
 
     createScrobbler: function()
     {
-        return new window.LastFm.Scrobbler(LastFmApiCommon.DATA_PROVIDER);
+        return new window.LastFm.Scrobbler(LastFmApiCommon.DATA_PROVIDER, this._createSessionProvider());
     },
 
     createTrackLoveStateModifier: function()
