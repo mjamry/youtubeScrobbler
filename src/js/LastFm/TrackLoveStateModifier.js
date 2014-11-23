@@ -40,6 +40,26 @@ window.LastFm.TrackLoveStateModifier.prototype =
         return this._getUserUnauthorisedResponse();
     },
 
+    _unLove: function(mediaDetails)
+    {
+        if(this.sessionProvider.isSessionCreated())
+        {
+            var that = this;
+            var requestParameters =
+            {
+                track: mediaDetails.title,
+                artist: mediaDetails.artist.name
+            };
+
+            return new Promise(function(resolve, reject)
+            {
+                that.lastFmApi.track.unlove(requestParameters, that.sessionProvider.getSession(), {success: resolve, error: reject});
+            });
+        }
+
+        return this._getUserUnauthorisedResponse();
+    },
+
     love: function(mediaDetails,  callbacks)
     {
         Logger.getInstance().debug("[LastFm] Love request for track: " + mediaDetails.artist.name+" - "+mediaDetails.title);
@@ -56,45 +76,19 @@ window.LastFm.TrackLoveStateModifier.prototype =
             });
     },
 
-    //loves passed track using artist name and title.
-    //details should contains:
-    //      {
-    //        artist,
-    //        title,
-    //        index
-    //      }
-    unLove: function(loveRequestDetails, session, callbacks)
+    unLove: function(mediaDetails, callbacks)
     {
-        var name = loveRequestDetails.details.artist.name+" - "+loveRequestDetails.details.title;
-        Logger.getInstance().debug("Last fm scrobbler - unlove request with track: " + name);
-        this.lastFmApi.track.unlove(
+        Logger.getInstance().debug("[LastFm] Unlove request with track: " + mediaDetails.artist.name+" - "+mediaDetails.title);
+        this._unLove(mediaDetails).then(
+            function onUnLoveSuccess()
             {
-                track: loveRequestDetails.details.title,
-                artist: loveRequestDetails.details.artist.name
+                Logger.getInstance().info("[LastFM] Track has been unloved.");
+                callbacks.success();
             },
-            session,
+            function onUnLoveError(response)
             {
-                success:
-                    $.proxy(function()
-                        {
-                            var msg = "'"+loveRequestDetails.details.artist.name+" - "+loveRequestDetails.details.title+"' has been unloved.";
-                            Logger.getInstance().info(msg);
-                            UserNotifier.getInstance().info(msg);
-                            callbacks.success(loveRequestDetails.index, loveRequestDetails.details);
-                        },
-                        this),
-
-                error:
-                    $.proxy(function(response)
-                        {
-                            Logger.getInstance().warning("LastFm UnLove update failed: "+ response.message);
-                            Logger.getInstance().debug("LastFm UnLove failed for: "+ name);
-
-                            callbacks.fail();
-                        },
-                        this)
-            }
-        );
+                Logger.getInstance().warning("[LastFm] Unlove update failed: "+ window.LastFm.Errors[response.error]+" with message: "+response.message);
+                callbacks.error();
+            });
     }
 };
-

@@ -43,22 +43,18 @@ window.Playlist.PlaylistElementLoveStateModifier.prototype =
 
     _unlove: function(mediaDetails, index, successCallback)
     {
-        var details =
+        var success = function()
         {
-            details: mediaDetails,
-            index: index
+            mediaDetails.loved = false;
+            successCallback(index, mediaDetails);
         };
 
-        var callbacks =
-        {
-            success: function trackUnloved(index, mediaDetails)
+        this.innerModifier.unLove(
+            mediaDetails,
             {
-                mediaDetails.loved = false;
-                successCallback(index, mediaDetails);
-            }
-        };
-
-        this.innerModifier.unLove(details, this.sessionProvider.getSession(), callbacks);
+                success: success,
+                error: function(){}
+            });
     }
 };
 
