@@ -20,8 +20,7 @@ window.LastFm.Scrobbler.prototype =
         //pass 9 as a parameter (it means that user has to re authenticate) for more details see window.LastFm.Errors
         return Promise.reject(
             {
-                error: 9,
-                message: window.LastFm.Errors[9]
+                error: 9
             }
         );
     },
@@ -92,7 +91,7 @@ window.LastFm.Scrobbler.prototype =
             },
             function onScrobbleError(response)
             {
-                Logger.getInstance().debug("[LastFm] Scrobbling failed: "+ window.LastFm.Errors[response.error]+" with message: "+response.message);
+                Logger.getInstance().debug("[LastFm] Scrobbling failed: "+ window.LastFm.Errors[response.error]);
                 callbacks.error();
             });
     },
@@ -118,7 +117,7 @@ window.LastFm.Scrobbler.prototype =
             },
             function onUpdateNowPlayingError(response)
             {
-                Logger.getInstance().debug("[LastFm] NowPlaying failed: "+ window.LastFm.Errors[response.error]+" with message: "+response.message);
+                Logger.getInstance().debug("[LastFm] NowPlaying failed: "+ window.LastFm.Errors[response.error]);
                 callbacks.error();
             });
     }

@@ -14,8 +14,7 @@ window.LastFm.TrackLoveStateModifier.prototype =
         //pass 9 as a parameter (it means that user has to re authenticate) for more details see window.LastFm.Errors
         return Promise.reject(
             {
-                error: 9,
-                message: window.LastFm.Errors[9]
+                error: 9
             }
         );
     },
@@ -71,7 +70,7 @@ window.LastFm.TrackLoveStateModifier.prototype =
             },
             function onLoveError(response)
             {
-                Logger.getInstance().warning("LastFm Love update failed: "+ window.LastFm.Errors[response.error]+" with message: "+response.message);
+                Logger.getInstance().warning("LastFm Love update failed: "+ window.LastFm.Errors[response.error]);
                 callbacks.error();
             });
     },
@@ -87,7 +86,7 @@ window.LastFm.TrackLoveStateModifier.prototype =
             },
             function onUnLoveError(response)
             {
-                Logger.getInstance().warning("[LastFm] Unlove update failed: "+ window.LastFm.Errors[response.error]+" with message: "+response.message);
+                Logger.getInstance().warning("[LastFm] Unlove update failed: "+ window.LastFm.Errors[response.error]);
                 callbacks.error();
             });
     }
