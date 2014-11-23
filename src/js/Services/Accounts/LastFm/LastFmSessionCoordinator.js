@@ -8,14 +8,42 @@ window.Accounts.LastFmSessionCoordinator = function(lastFmApi, tokenHandler)
 
 window.Accounts.LastFmSessionCoordinator.prototype =
 {
+    _getSessionFromCookies: function()
+    {
+
+    },
+
     _refreshSession: function(token)
     {
-        Logger.getInstance().debug("[LastFm] Refreshing session using token: " + token);
-        var that = this;
-        return new Promise(function(resolve, reject)
+        var lastSessionToken = this.tokenHandler.getSessionToken();
+
+        //check if token has been generated, if yes get new session from last.fm using this token
+        if(lastSessionToken !== null)
         {
-            that.lastFmApi.auth.getSession({token:token}, {success: resolve, error: reject});
-        });
+            Logger.getInstance().debug("[LastFm] Refreshing session using token: " + lastSessionToken);
+            var that = this;
+            return new Promise(function(resolve, reject)
+            {
+                that.lastFmApi.auth.getSession({token: lastSessionToken}, {success: resolve, error: reject});
+            });
+        }
+        else
+        {
+            //check if session has been already created, and use it
+            var session = Cookie.getInstance().getCookie(window.Common.CookiesNames.sessionCookie);
+            if(session !== null)
+            {
+                return Promise.resolve(
+                    {
+                        session: session
+                    });
+            }
+        }
+
+        //session cannot be refreshed
+        Logger.getInstance().debug("[LastFm] Session does not exists.");
+        //pass 9 as a parameter (it means that user has to re authenticate) for more details see window.LastFm.Errors
+        return Promise.reject(9);
     },
 
     _getUserDetails: function(userName)
@@ -36,6 +64,8 @@ window.Accounts.LastFmSessionCoordinator.prototype =
                 Logger.getInstance().debug("[LastFm] User details obtained.");
                 callback(that._standardiseSessionDetails(userDetails));
 
+                //save session as cookie
+                Cookie.getInstance().setCookie(window.Common.CookiesNames.sessionCookie, sessionDetails);
                 //inform that last fm session object has been created
                 EventBroker.getInstance().fireEventWithData(window.LastFm.Events.SessionObjectCreated, sessionDetails);
             },
@@ -90,15 +120,8 @@ window.Accounts.LastFmSessionCoordinator.prototype =
 
     refreshSession: function(callback)
     {
-        var lastSessionToken = this.tokenHandler.getSessionToken();
-        if(lastSessionToken === null)
-        {
-            Logger.getInstance().debug("[LastFm] Cannot refresh session token does not exist.");
-            return Promise.reject();
-        }
-
         var that = this;
-        this._refreshSession(lastSessionToken).then(
+        this._refreshSession().then(
             function onSessionRefreshSuccess(response)
             {
                 Logger.getInstance().debug("[LastFm] Session has been refreshed.");

@@ -16,14 +16,6 @@ window.Accounts.LastFmTokenHandler.prototype =
 
         if(token != "0")
         {
-            Cookie.getInstance().setCookie(window.Common.CookiesNames.sessionCookie, token);
-            return token;
-        }
-
-        token = Cookie.getInstance().getCookie(window.Common.CookiesNames.sessionCookie);
-
-        if(token !== null)
-        {
             return token;
         }
 
