@@ -1,10 +1,9 @@
 //namespace
 window.Playlist = window.Playlist || {};
 
-window.Playlist.PlaylistElementLoveStateModifier = function(innerModifier, sessionProvider, playlistService)
+window.Playlist.PlaylistElementLoveStateModifier = function(innerModifier, playlistService)
 {
     this.innerModifier = innerModifier;
-    this.sessionProvider = sessionProvider;
     this.playlistService = playlistService;
 };
 

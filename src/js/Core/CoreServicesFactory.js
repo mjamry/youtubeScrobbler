@@ -44,13 +44,6 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new window.Common.CookieImpl();
     },
 
-    //deprecated - use createSessionManager
-    createSessionHandler: function()
-    {
-        var factory = new window.LastFm.LastFmApiFactory();
-        return new window.ApplicationCore.SessionHandler(factory.createSessionProvider());
-    },
-
     //TODO remove hardcoded session coordinators names
     createSessionService: function()
     {

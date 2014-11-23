@@ -4,16 +4,16 @@ window.Player.PlayerServicesFactory = function(){};
 
 window.Player.PlayerServicesFactory.prototype =
 {
-    createPlaylistElementDetailsProvider: function(sessionProvider)
+    createPlaylistElementDetailsProvider: function()
     {
         var factory = new window.LastFm.LastFmApiFactory();
         return new window.Player.PlaylistElementDetailsProvider(factory.createInformationProvider());
     },
 
-    createPlaylistElementLoveStateModifier: function(sessionProvider, playlistService)
+    createPlaylistElementLoveStateModifier: function(playlistService)
     {
         var factory = new window.LastFm.LastFmApiFactory();
-        return new window.Playlist.PlaylistElementLoveStateModifier(factory.createTrackLoveStateModifier(), sessionProvider, playlistService);
+        return new window.Playlist.PlaylistElementLoveStateModifier(factory.createTrackLoveStateModifier(), playlistService);
     },
 
     createPlaylistFlowController: function(playlistService)

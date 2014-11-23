@@ -9,7 +9,6 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 {
     this.uiCore = uiFactory.createUICore();
 
-    this.sessionHandler = coreServicesFactory.createSessionHandler();
     this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler();
 
     var playlistElementDetailsProvider = playerServicesFactory.createPlaylistElementDetailsProvider();
@@ -28,7 +27,7 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistFlowController);
 
-    var playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.sessionHandler, this.playlistService);
+    var playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.playlistService);
 
     this.playlistViewController = uiFactory.createPlaylistViewController(this.playlistService, this.playbackControlService, this.playlistFlowController);
 
