@@ -1,40 +1,53 @@
 //namespace
-window.LastFm = window.LastFm || {};
-
-//using
-window.Common = window.Common || {};
+window.Accounts = window.Accounts || {};
 
 //Handles sessions on last.fm portal.
-window.LastFm.LastFmSessionProvider = function(lastFmApi)
+window.Accounts.LastFmSessionProvider = function()
 {
-    this.lastFmApi = lastFmApi;
-    Logger.getInstance().info("Last fm session handler has been created.");
+    Logger.getInstance().info("[LastFm] Session provider has been created.");
+    this._session = null;
 };
 
-window.LastFm.LastFmSessionProvider.prototype =
+window.Accounts.LastFmSessionProvider.prototype =
 {
-    create: function(token, callbacks)
+    //<session>
+    //    <name>MyLastFMUsername</name>
+    //    <key>d580d57f32848f5dcf574d1ce18d78b2</key>
+    //    <subscriber>0</subscriber>
+    //</session>
+    _handleNewSessionCreated: function(that)
     {
-        Logger.getInstance().debug("Last fm - new session requested using token: " + token);
-        this.lastFmApi.auth.getSession({token:token},
-            {
-                success: $.proxy(function(response)
-                {
-                    //Response structure:
-                    //<session>
-                    //  <name>MyLastFMUsername</name>
-                    //  <key>d580d57f32848f5dcf574d1ce18d78b2</key>
-                    //  <subscriber>0</subscriber>
-                    //</session>
-                    callbacks.success(response.session);
-                }, this),
+        return function onNewSessionCreated(sessionDetails)
+        {
+            Logger.getInstance().info("[LastFm] Session for user: "+sessionDetails.name+" has been created.");
+            that._session = sessionDetails;
+        }
+    },
 
-                error: $.proxy(function(err, msg)
-                {
-                    Logger.getInstance().warning("Cannot establish session: " + msg);
+    isSessionCreated: function()
+    {
+        return this._session !== null;
+    },
 
-                    callbacks.error();
-                }, this)
-            });
+    getSession: function()
+    {
+        if(this.isSessionCreated())
+        {
+            return this._session;
+        }
+        else
+        {
+            //return empty session object
+            return {
+                name: "",
+                key: "",
+                subscriber: 0
+            }
+        }
+    },
+
+    initialise: function()
+    {
+        EventBroker.getInstance().addListener(window.LastFm.Events.SessionObjectCreated, this._handleNewSessionCreated(this))
     }
 };

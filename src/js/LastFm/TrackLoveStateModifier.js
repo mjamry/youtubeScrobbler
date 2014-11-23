@@ -1,93 +1,93 @@
 //namespace
 window.LastFm = window.LastFm || {};
 
-window.LastFm.TrackLoveStateModifier = function(lastFmApi)
+window.LastFm.TrackLoveStateModifier = function(lastFmApi, sessionProvider)
 {
     this.lastFmApi = lastFmApi;
+    this.sessionProvider = sessionProvider;
 };
 
 window.LastFm.TrackLoveStateModifier.prototype =
 {
-    //loves passed track using artist name and title.
-    //details should contains:
-    //      {
-    //        artist,
-    //        title,
-    //        index
-    //      }
-    love: function(loveRequestDetails, session, callbacks)
+    _getUserUnauthorisedResponse: function()
     {
-        var name = loveRequestDetails.details.artist.name+" - "+loveRequestDetails.details.title;
-        Logger.getInstance().debug("Last fm scrobbler - love request with track: " + name);
-        this.lastFmApi.track.love(
+        //pass 9 as a parameter (it means that user has to re authenticate) for more details see window.LastFm.Errors
+        return Promise.reject(
             {
-                track: loveRequestDetails.details.title,
-                artist: loveRequestDetails.details.artist.name
-            },
-            session,
-            {
-                success:
-                    $.proxy(function()
-                        {
-                            var msg = "'"+loveRequestDetails.details.artist.name+" - "+loveRequestDetails.details.title+"' has been loved.";
-                            Logger.getInstance().info(msg);
-                            UserNotifier.getInstance().info(msg);
-                            callbacks.success(loveRequestDetails.index, loveRequestDetails.details);
-                        },
-                        this),
-
-                error:
-                    $.proxy(function(response)
-                        {
-                            Logger.getInstance().warning("LastFm Love update failed: "+ response.message);
-                            Logger.getInstance().debug("LastFm Love failed for: "+ name);
-
-                            callbacks.fail();
-                        },
-                        this)
+                error: 9
             }
         );
     },
 
-    //loves passed track using artist name and title.
-    //details should contains:
-    //      {
-    //        artist,
-    //        title,
-    //        index
-    //      }
-    unLove: function(loveRequestDetails, session, callbacks)
+    _love: function(mediaDetails)
     {
-        var name = loveRequestDetails.details.artist.name+" - "+loveRequestDetails.details.title;
-        Logger.getInstance().debug("Last fm scrobbler - unlove request with track: " + name);
-        this.lastFmApi.track.unlove(
+        if(this.sessionProvider.isSessionCreated())
+        {
+            var that = this;
+            var requestParameters =
             {
-                track: loveRequestDetails.details.title,
-                artist: loveRequestDetails.details.artist.name
+                track: mediaDetails.title,
+                artist: mediaDetails.artist.name
+            };
+
+            return new Promise(function(resolve, reject)
+            {
+                that.lastFmApi.track.love(requestParameters, that.sessionProvider.getSession(), {success: resolve, error: reject});
+            });
+        }
+
+        return this._getUserUnauthorisedResponse();
+    },
+
+    _unLove: function(mediaDetails)
+    {
+        if(this.sessionProvider.isSessionCreated())
+        {
+            var that = this;
+            var requestParameters =
+            {
+                track: mediaDetails.title,
+                artist: mediaDetails.artist.name
+            };
+
+            return new Promise(function(resolve, reject)
+            {
+                that.lastFmApi.track.unlove(requestParameters, that.sessionProvider.getSession(), {success: resolve, error: reject});
+            });
+        }
+
+        return this._getUserUnauthorisedResponse();
+    },
+
+    love: function(mediaDetails,  callbacks)
+    {
+        Logger.getInstance().debug("[LastFm] Love request for track: " + mediaDetails.artist.name+" - "+mediaDetails.title);
+        this._love(mediaDetails).then(
+            function onLoveSuccess()
+            {
+                Logger.getInstance().info("[LastFm] Track has been loved.");
+                callbacks.success();
             },
-            session,
+            function onLoveError(response)
             {
-                success:
-                    $.proxy(function()
-                        {
-                            var msg = "'"+loveRequestDetails.details.artist.name+" - "+loveRequestDetails.details.title+"' has been unloved.";
-                            Logger.getInstance().info(msg);
-                            UserNotifier.getInstance().info(msg);
-                            callbacks.success(loveRequestDetails.index, loveRequestDetails.details);
-                        },
-                        this),
+                Logger.getInstance().warning("LastFm Love update failed: "+ window.LastFm.Errors[response.error]);
+                callbacks.error();
+            });
+    },
 
-                error:
-                    $.proxy(function(response)
-                        {
-                            Logger.getInstance().warning("LastFm UnLove update failed: "+ response.message);
-                            Logger.getInstance().debug("LastFm UnLove failed for: "+ name);
-
-                            callbacks.fail();
-                        },
-                        this)
-            }
-        );
+    unLove: function(mediaDetails, callbacks)
+    {
+        Logger.getInstance().debug("[LastFm] Unlove request with track: " + mediaDetails.artist.name+" - "+mediaDetails.title);
+        this._unLove(mediaDetails).then(
+            function onUnLoveSuccess()
+            {
+                Logger.getInstance().info("[LastFM] Track has been unloved.");
+                callbacks.success();
+            },
+            function onUnLoveError(response)
+            {
+                Logger.getInstance().warning("[LastFm] Unlove update failed: "+ window.LastFm.Errors[response.error]);
+                callbacks.error();
+            });
     }
 };
-

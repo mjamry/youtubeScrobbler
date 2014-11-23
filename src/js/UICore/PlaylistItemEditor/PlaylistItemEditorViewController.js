@@ -157,7 +157,6 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
             var mediaDetails = this._retrieveMediaDetails();
             this.detailsProvider.getTrackDetails(
                 mediaDetails,
-                {user:""},
                 {
                     done: this._handleDetailsObtained(this),
                     fail: function(){}
