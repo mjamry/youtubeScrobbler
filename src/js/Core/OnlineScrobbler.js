@@ -55,12 +55,17 @@ window.ApplicationCore.OnlineScrobbler.prototype =
     {
         if(this._trackCanBeScrobbled(mediaDetails, this._trackStartPlayingTime))
         {
+            var trackTimeStamp = TimeParser.getInstance().getSeconds(this._trackStartPlayingTime);
             this._scrobbler.scrobble(
+                mediaDetails,
+                trackTimeStamp,
                 {
-                    track: mediaDetails.title,
-                    artist: mediaDetails.artist.name,
-
-                    timestamp: TimeParser.getInstance().getSeconds(this._trackStartPlayingTime)
+                    success: function(mediaDetails)
+                    {
+                        var msg = "'"+mediaDetails.artist.name+" - "+mediaDetails.title+"' has been scrobbled.";
+                        UserNotifier.getInstance().info(msg);
+                    },
+                    error: function(){}
                 }
             );
         }
