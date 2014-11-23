@@ -8,12 +8,14 @@ window.LastFm.LastFmApiFactory.prototype =
     ///Creates information
     createInformationProvider: function()
     {
-        return new window.LastFm.InformationProvider(LastFmApiCommon.DATA_PROVIDER);
+        var sessionProvider = new window.Accounts.LastFmSessionProvider();
+        sessionProvider.initialise();
+        return new window.LastFm.LastFmTrackInformationProvider(LastFmApiCommon.DATA_PROVIDER, sessionProvider);
     },
 
     createSessionProvider: function()
     {
-        return new window.LastFm.LastFmSessionProvider(LastFmApiCommon.DATA_PROVIDER);
+        return new window.Accounts.LastFmSessionProvider(LastFmApiCommon.DATA_PROVIDER);
     },
 
     createScrobbler: function()

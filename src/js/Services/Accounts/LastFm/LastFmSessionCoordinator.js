@@ -27,14 +27,17 @@ window.Accounts.LastFmSessionCoordinator.prototype =
         });
     },
 
-    _handleSessionEstablished: function(callback, userName)
+    _handleSessionEstablished: function(callback, sessionDetails)
     {
         var that = this;
-        that._getUserDetails(userName).then(
+        that._getUserDetails(sessionDetails.name).then(
             function getUserDetailsSuccess(userDetails)
             {
                 Logger.getInstance().debug("[LastFm] User details obtained.");
                 callback(that._standardiseSessionDetails(userDetails));
+
+                //inform that last fm session object has been created
+                EventBroker.getInstance().fireEventWithData(window.LastFm.Events.SessionObjectCreated, sessionDetails);
             },
             function getUserDetailsError()
             {
@@ -99,7 +102,7 @@ window.Accounts.LastFmSessionCoordinator.prototype =
             function onSessionRefreshSuccess(response)
             {
                 Logger.getInstance().debug("[LastFm] Session has been refreshed.");
-                that._handleSessionEstablished(callback, response.session.name);
+                that._handleSessionEstablished(callback, response.session);
             },
             function onSessionRefreshError(error)
             {

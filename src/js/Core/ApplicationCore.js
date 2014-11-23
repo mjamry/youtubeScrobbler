@@ -12,7 +12,7 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
     this.sessionHandler = coreServicesFactory.createSessionHandler();
     this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler(this.sessionHandler);
 
-    var playlistElementDetailsProvider = playerServicesFactory.createPlaylistElementDetailsProvider(this.sessionHandler);
+    var playlistElementDetailsProvider = playerServicesFactory.createPlaylistElementDetailsProvider();
 
     this.playlistService = coreServicesFactory.createPlaylistService(playlistElementDetailsProvider);
     this.playlistLoaderService = coreServicesFactory.createPlaylistLoaderService(this.playlistService);
