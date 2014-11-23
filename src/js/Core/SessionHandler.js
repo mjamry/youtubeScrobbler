@@ -13,7 +13,7 @@ window.ApplicationCore.SessionHandler.prototype =
     {
         Logger.getInstance().info("Session has been established.");
         Logger.getInstance().debug("Session details - user: " + this.currentSession.name + ", key: "+ this.currentSession.key);
-        EventBroker.getInstance().fireEventWithData(window.LastFm.Events.SessionEstablished, this.currentSession.name);
+        EventBroker.getInstance().fireEventWithData(window.Accounts.SessionEvents.SessionEstablished, this.currentSession.name);
     },
 
     _handleSessionObtained: function(that)

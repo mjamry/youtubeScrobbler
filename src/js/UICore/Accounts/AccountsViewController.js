@@ -55,7 +55,7 @@ window.UI.AccountsViewController.prototype =
 
     initialise: function()
     {
-        EventBroker.getInstance().addListener(window.LastFm.Events.SessionEstablished, this._handleNewSession(this));
+        EventBroker.getInstance().addListener(window.Accounts.SessionEvents.SessionEstablished, this._handleNewSession(this));
 
         for(var account in this.accounts)
         {
