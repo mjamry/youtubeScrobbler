@@ -44,7 +44,6 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new window.Common.CookieImpl();
     },
 
-    //TODO remove hardcoded session coordinators names
     createSessionService: function()
     {
         var lastFmTokenHandler = new window.Accounts.LastFmTokenHandler(window.Accounts.LastFmSessionConstants);
