@@ -29,17 +29,14 @@ window.Playlist.PlaylistElementLoveStateModifier.prototype =
     {
         var success = function()
         {
-            return function onTrackLoved()
-            {
-                mediaDetails.loved = true;
-                successCallback(index, mediaDetails);
-            }
+            mediaDetails.loved = true;
+            successCallback(index, mediaDetails);
         };
 
         this.innerModifier.love(
             mediaDetails,
             {
-                success: success(),
+                success: success,
                 error: function(){}
             });
     },
