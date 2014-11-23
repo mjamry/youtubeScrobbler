@@ -8,11 +8,6 @@ window.Accounts.LastFmSessionCoordinator = function(lastFmApi, tokenHandler)
 
 window.Accounts.LastFmSessionCoordinator.prototype =
 {
-    _getSessionFromCookies: function()
-    {
-
-    },
-
     _refreshSession: function(token)
     {
         var lastSessionToken = this.tokenHandler.getSessionToken();

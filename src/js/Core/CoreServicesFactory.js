@@ -44,22 +44,12 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new window.Common.CookieImpl();
     },
 
-    //deprecated - use createSessionManager
-    createSessionHandler: function()
-    {
-        var factory = new window.LastFm.LastFmApiFactory();
-        return new window.ApplicationCore.SessionHandler(factory.createSessionProvider());
-    },
-
-    //TODO remove hardcoded session coordinators names
     createSessionService: function()
     {
         var lastFmTokenHandler = new window.Accounts.LastFmTokenHandler(window.Accounts.LastFmSessionConstants);
-        var sessionCoordinators =
-        {
-            Google: new window.Accounts.GoogleSessionCoordinator(this._createGoogleApiWrapper()),
-            LastFM: new window.Accounts.LastFmSessionCoordinator(LastFmApiCommon.DATA_PROVIDER, lastFmTokenHandler)
-        };
+        var sessionCoordinators = [];
+        sessionCoordinators[window.Accounts.AccountsNames.Google] = new window.Accounts.GoogleSessionCoordinator(this._createGoogleApiWrapper());
+        sessionCoordinators[window.Accounts.AccountsNames.LastFM] = new window.Accounts.LastFmSessionCoordinator(LastFmApiCommon.DATA_PROVIDER, lastFmTokenHandler);
 
         return new window.Accounts.SessionService(sessionCoordinators);
     },

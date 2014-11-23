@@ -9,7 +9,7 @@ window.Accounts.SessionService.prototype =
 {
     _handleSessionEstablished: function(sessionDetails)
     {
-        EventBroker.getInstance().fireEventWithData(window.LastFm.Events.SessionEstablished, sessionDetails);
+        EventBroker.getInstance().fireEventWithData(window.Accounts.SessionEvents.SessionEstablished, sessionDetails);
     },
 
     establishSession: function(accountName)
