@@ -10,7 +10,7 @@ window.LastFm.Scrobbler = function(lastFmApi, sessionProvider)
     this.lastFmApi = lastFmApi;
     this.sessionProvider = sessionProvider;
     this._eventBroker = EventBroker.getInstance();
-    Logger.getInstance().info("LastFm - Scrobbler has been created.");
+    Logger.getInstance().info("[LastFm] Scrobbler has been created.");
 };
 
 window.LastFm.Scrobbler.prototype =

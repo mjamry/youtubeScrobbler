@@ -27,22 +27,21 @@ window.Playlist.PlaylistElementLoveStateModifier.prototype =
 
     _love: function(mediaDetails, index, successCallback)
     {
-        var details =
+        var success = function()
         {
-            details: mediaDetails,
-            index: index
-        };
-
-        var callbacks =
-        {
-            success: function trackLoved(index, mediaDetails)
+            return function onTrackLoved()
             {
                 mediaDetails.loved = true;
                 successCallback(index, mediaDetails);
             }
         };
 
-        this.innerModifier.love(details, this.sessionProvider.getSession(), callbacks);
+        this.innerModifier.love(
+            mediaDetails,
+            {
+                success: success(),
+                error: function(){}
+            });
     },
 
     _unlove: function(mediaDetails, index, successCallback)

@@ -37,6 +37,6 @@ window.LastFm.LastFmApiFactory.prototype =
 
     createTrackLoveStateModifier: function()
     {
-        return new window.LastFm.TrackLoveStateModifier(LastFmApiCommon.DATA_PROVIDER);
+        return new window.LastFm.TrackLoveStateModifier(LastFmApiCommon.DATA_PROVIDER, this._createSessionProvider());
     }
 };
