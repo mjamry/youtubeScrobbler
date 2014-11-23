@@ -90,7 +90,11 @@ window.ApplicationCore.CoreServicesFactory.prototype =
 
     createPlaylistLoaderService: function(playlistService)
     {
-        return new window.Playlist.PlaylistLoaderService(playlistService);
+        var dataProvides = [];
+        dataProvides[window.Playlist.PlaylistLoaderTypes.Youtube] = this._createGoogleApiWrapper();
+        var playlistLoadersFactory = new window.Playlist.PlaylistLoadersFactory(dataProvides);
+
+        return new window.Playlist.PlaylistLoaderService(playlistService, playlistLoadersFactory);
     },
 
     createWelcomeService: function()
