@@ -31,6 +31,8 @@ window.Playlist.PlaylistElementLoveStateModifier.prototype =
         {
             mediaDetails.loved = true;
             successCallback(index, mediaDetails);
+
+            UserNotifier.getInstance().info("'"+mediaDetails.artist.name+" - "+mediaDetails.title+"' has been loved.");
         };
 
         this.innerModifier.love(
@@ -47,6 +49,8 @@ window.Playlist.PlaylistElementLoveStateModifier.prototype =
         {
             mediaDetails.loved = false;
             successCallback(index, mediaDetails);
+
+            UserNotifier.getInstance().info("'"+mediaDetails.artist.name+" - "+mediaDetails.title+"' has been unloved.");
         };
 
         this.innerModifier.unLove(
