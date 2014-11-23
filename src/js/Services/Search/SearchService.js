@@ -52,6 +52,6 @@ window.Services.SearchService.prototype =
 
     search: function(value)
     {
-        this.dataProviders.Youtube.getSearchResults({q:value}, this._handleResult.bind(this));
+        this.dataProviders[window.Google.ServiceNames.Youtube].getSearchResults({q:value}, this._handleResult.bind(this));
     }
 };
