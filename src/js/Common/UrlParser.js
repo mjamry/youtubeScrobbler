@@ -37,11 +37,9 @@ window.Common.UrlParser.prototype =
 
         url.replace(this.urlParamsRegex, generateKeyValuePair);
 
-        var parameterValue = params[parameter];
-
-        if(parameterValue !== "undefined")
+        if(params.hasOwnProperty(parameter))
         {
-            return parameterValue;
+            return params[parameter];
         }
 
         return null;
