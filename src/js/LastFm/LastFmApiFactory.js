@@ -20,14 +20,9 @@ window.LastFm.LastFmApiFactory.prototype =
     },
 
     ///Creates information
-    createInformationProvider: function()
+    createTrackInformationProvider: function()
     {
         return new window.LastFm.LastFmTrackInformationProvider(LastFmApiCommon.DATA_PROVIDER, this._createSessionProvider());
-    },
-
-    createSessionProvider: function()
-    {
-        return new window.Accounts.LastFmSessionProvider(LastFmApiCommon.DATA_PROVIDER);
     },
 
     createScrobbler: function()

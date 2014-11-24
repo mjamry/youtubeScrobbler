@@ -92,10 +92,9 @@ window.UI.UIControllersFactory.prototype =
         );
     },
 
-    createPlaylistItemEditorViewController: function(playlistProvider)
+    createPlaylistItemEditorViewController: function(playlistProvider, trackDetailsProvider)
     {
-        var detailsProvider = new window.LastFm.LastFmApiFactory().createInformationProvider();
-        return new window.UI.PlaylistItemDetailsEditorViewController(detailsProvider, playlistProvider, window.UI.PlaylistItemDetailsEditorConfig);
+        return new window.UI.PlaylistItemDetailsEditorViewController(trackDetailsProvider, playlistProvider, window.UI.PlaylistItemDetailsEditorConfig);
     },
 
     createPlaylistEditorListViewController: function(playlistProvider)

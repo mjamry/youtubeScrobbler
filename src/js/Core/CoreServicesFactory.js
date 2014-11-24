@@ -32,10 +32,8 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new LoggerImpl();
     },
 
-    createOnlineScrobbler: function()
+    createOnlineScrobbler: function(lowLevelScrobbler)
     {
-        var factory = new window.LastFm.LastFmApiFactory();
-        var lowLevelScrobbler = factory.createScrobbler();
         return new window.ApplicationCore.OnlineScrobbler(lowLevelScrobbler);
     },
 
