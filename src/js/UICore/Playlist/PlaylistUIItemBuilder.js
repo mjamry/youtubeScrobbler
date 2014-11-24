@@ -9,7 +9,6 @@ window.UI.PlaylistUIItemBuilder = function(index, config)
     this._config = config;
     this._item = null;
     this._removeButton = null;
-    this._editButton = null;
     this._hoverStyle = null;
     this._cover = null;
 };
@@ -59,7 +58,6 @@ window.UI.PlaylistUIItemBuilder.prototype =
 
         this._cover = this._item.find(this._config.CoverContainer);
         this._removeButton = this._item.find(this._config.RemoveButtonContainer);
-        this._editButton = this._item.find(this._config.EditButtonContainer);
     },
 
     //add styles to current element and its inner elements.
