@@ -1,6 +1,15 @@
 //namespace
 window.Common = window.Common || {};
 
+//const values
+window.Common.UrlParserConstants =
+{
+      URL_PARSE_ERR: "0",
+      PARAMS_START_SIGN: "?",
+      PARAMS_SEPARATOR: "&",
+      PARAM_VALUE_INDICATOR: "="
+};
+
 window.Common.UrlParser = function()
 {
     //g - global flags, search will be executed multiple times

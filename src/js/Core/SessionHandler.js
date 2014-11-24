@@ -117,7 +117,7 @@ window.ApplicationCore.SessionHandler.prototype =
     //clears token in url parameter
     clearToken: function(token)
     {
-        if(token != window.Common.UrlParserConstants.URL_PARSE_ERR)
+        if(token !== null)
         {
             //reload page removing parameters
             window.location = window.location.pathname;
