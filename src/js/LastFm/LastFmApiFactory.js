@@ -12,7 +12,7 @@ window.LastFm.LastFmApiFactory.prototype =
     {
         if(this.sessionProvider === null)
         {
-            this.sessionProvider = new window.Accounts.LastFmSessionProvider();;
+            this.sessionProvider = new window.Accounts.LastFmSessionProvider();
             this.sessionProvider.initialise();
         }
 

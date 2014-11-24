@@ -21,7 +21,7 @@ window.Accounts.LastFmSessionProvider.prototype =
         {
             Logger.getInstance().info("[LastFm] Session for user: "+sessionDetails.name+" has been created.");
             that._session = sessionDetails;
-        }
+        };
     },
 
     isSessionCreated: function()
@@ -42,12 +42,12 @@ window.Accounts.LastFmSessionProvider.prototype =
                 name: "",
                 key: "",
                 subscriber: 0
-            }
+            };
         }
     },
 
     initialise: function()
     {
-        EventBroker.getInstance().addListener(window.LastFm.Events.SessionObjectCreated, this._handleNewSessionCreated(this))
+        EventBroker.getInstance().addListener(window.LastFm.Events.SessionObjectCreated, this._handleNewSessionCreated(this));
     }
 };
