@@ -18,11 +18,14 @@ window.Common.UrlParser = function()
     //$0 = param=value
     //$1 = param
     //$2 = value
-    this.urlRegex = new RegExp("/?(([\\w\\-]*)=([^&#/]*))", "g");
+    this.urlParamsRegex = new RegExp("/?(([\\w\\-]*)=([^&#/]*))", "g");
+
+    this.urlRegex = new RegExp("([^?]*)");
 };
 
 window.Common.UrlParser.prototype =
 {
+    //returns value for passed parameter. if it does not exist returns null
     getParameterValue : function(url, parameter)
     {
         var params = {};
@@ -32,7 +35,7 @@ window.Common.UrlParser.prototype =
             params[$2] = $3;
         };
 
-        url.replace(this.urlRegex, generateKeyValuePair);
+        url.replace(this.urlParamsRegex, generateKeyValuePair);
 
         var parameterValue = params[parameter];
 
@@ -42,5 +45,13 @@ window.Common.UrlParser.prototype =
         }
 
         return null;
+    },
+
+    //returns page url without parameters
+    getPageUrl:function(url)
+    {
+        var urlElements = this.urlRegex.exec(url);
+
+        return urlElements[1];
     }
 };

@@ -3,19 +3,27 @@ window.Accounts = window.Accounts || {};
 window.Accounts.LastFmTokenHandler = function(config)
 {
     this.config = config;
+    this.urlParser = new window.Common.UrlParser();
 };
 
 window.Accounts.LastFmTokenHandler.prototype =
 {
+    _removeTokenFromUrl: function()
+    {
+        var pageUrl = this.urlParser.getPageUrl(window.location.href);
+
+        window.history.replaceState({}, document.title, pageUrl);
+    },
+
     //try to obtain token from url if it possible, if not search for cookie
     //returns token if successful else null
     getSessionToken: function()
     {
-        var urlPars = new window.Common.UrlParser();
-        var token = urlPars.getParameterValue(window.location.href, "token");
+        var token = this.urlParser.getParameterValue(window.location.href, "token");
 
         if(token !== null)
         {
+            this._removeTokenFromUrl();
             return token;
         }
 
