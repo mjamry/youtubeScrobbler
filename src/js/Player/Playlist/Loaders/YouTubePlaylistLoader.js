@@ -179,7 +179,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
             Logger.getInstance().warning("[YT] Details loading error: "+error);
         };
 
-        if(playlistId !== window.Common.UrlParserConstants.URL_PARSE_ERR)
+        if(playlistId !== null)
         {
             new Promise(function(resolve)
                 {
@@ -195,7 +195,7 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         else
         {
             var videoId = parser.getParameterValue(url, window.Google.YoutubeApi.LINK_PARAMS.VIDEO);
-            if(videoId !== window.Common.UrlParserConstants.URL_PARSE_ERR)
+            if(videoId !== null)
             {
                 new Promise(function(resolve)
                 {

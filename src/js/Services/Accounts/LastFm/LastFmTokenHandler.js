@@ -14,7 +14,7 @@ window.Accounts.LastFmTokenHandler.prototype =
         var urlPars = new window.Common.UrlParser();
         var token = urlPars.getParameterValue(window.location.href, "token");
 
-        if(token != "0")
+        if(token !== null)
         {
             return token;
         }
