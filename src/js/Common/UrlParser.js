@@ -25,6 +25,7 @@ window.Common.UrlParser = function()
 
 window.Common.UrlParser.prototype =
 {
+    //returns value for passed parameter. if it does not exist returns null
     getParameterValue : function(url, parameter)
     {
         var params = {};
@@ -46,6 +47,7 @@ window.Common.UrlParser.prototype =
         return null;
     },
 
+    //returns page url without parameters
     getPageUrl:function(url)
     {
         var urlElements = this.urlRegex.exec(url);
