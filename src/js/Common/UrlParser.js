@@ -1,43 +1,37 @@
 //namespace
 window.Common = window.Common || {};
 
-//const values
-window.Common.UrlParserConstants =
+window.Common.UrlParser = function()
 {
-      URL_PARSE_ERR: "0",
-      PARAMS_START_SIGN: "?",
-      PARAMS_SEPARATOR: "&",
-      PARAM_VALUE_INDICATOR: "="
+    //g - global flags, search will be executed multiple times
+    // &#/ - elements that can be found at the end of the url
+    //for each search result will be:
+    //$0 = param=value
+    //$1 = param
+    //$2 = value
+    this.urlRegex = new RegExp("/?(([\\w\\-]*)=([^&#/]*))", "g");
 };
-
-window.Common.UrlParser = function(){};
 
 window.Common.UrlParser.prototype =
 {
     getParameterValue : function(url, parameter)
     {
-        var params;
-        try
+        var params = {};
+
+        var generateKeyValuePair = function($0, $1, $2, $3)
         {
-            var urlParts = url.split(window.Common.UrlParserConstants.PARAMS_START_SIGN);
-            params = urlParts[1].split(window.Common.UrlParserConstants.PARAMS_SEPARATOR);
-        }
-        catch(ex)
+            params[$2] = $3;
+        };
+
+        url.replace(this.urlRegex, generateKeyValuePair);
+
+        var parameterValue = params[parameter];
+
+        if(parameterValue !== "undefined")
         {
-            Logger.getInstance().warning("Url parsing has failed. Ex: "+ex);
-            //TODO return null
-            return window.Common.UrlParserConstants.URL_PARSE_ERR;
+            return parameterValue;
         }
 
-        for(var i=0; i<params.length; i++)
-        {
-            var value = params[i].split(window.Common.UrlParserConstants.PARAM_VALUE_INDICATOR);
-            if(value[0] === parameter)
-            {
-                return value[1];
-            }
-        }
-        
-        return window.Common.UrlParserConstants.URL_PARSE_ERR;
+        return null;
     }
 };
