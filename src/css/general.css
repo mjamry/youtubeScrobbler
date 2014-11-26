@@ -687,7 +687,7 @@ body
 
 #search-results-container
 {
-    height:200px;
+    height:300px;
     overflow: auto;
     position: relative;
     z-index: 9999;
@@ -724,13 +724,14 @@ body
     padding-top: 10px;
     letter-spacing: 5px;
     float:right;
+    text-align: right;
 }
 
 .search-result-cover
 {
     height:35px;
     width:35px;
-    border:1px 0 solid;
+    border-radius: 100%;
 }
 
 .search-result-previous-button,
