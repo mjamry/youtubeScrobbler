@@ -298,15 +298,12 @@ body
 .playlist-item-button
 {
     margin-top:10px;
-
 }
 
 .playlist-item-buttons
 {
-    width:70%;
-    height:45px;
     float:right;
-    margin-right:10px
+    margin-right:15px
 }
 
 .playlist-item-even, .playlist-item-odd
@@ -690,23 +687,10 @@ body
 
 #search-results-container
 {
-    height:200px;
+    height:300px;
     overflow: auto;
     position: relative;
     z-index: 9999;
-}
-
-#search-result-controls
-{
-    height:35px;
-    position: relative;
-    z-index: 9999;
-}
-
-#search-result-close
-{
-    float:right;
-    padding:5px;
 }
 
 #search-result-pagination
@@ -740,13 +724,14 @@ body
     padding-top: 10px;
     letter-spacing: 5px;
     float:right;
+    text-align: right;
 }
 
 .search-result-cover
 {
     height:35px;
     width:35px;
-    border:1px 0 solid;
+    border-radius: 100%;
 }
 
 .search-result-previous-button,
@@ -930,34 +915,6 @@ body
     font-size:9pt;
     background-color: mediumseagreen;
 }
-/*--------------------------------BORDERS-ON-MAIN-ITEMS---------------------------*/
-/*#header-content*/
-/*{*/
-    /*border:1px solid green;*/
-/*}*/
-
-/*#page-content*/
-/*{*/
-    /*border:1px solid blue;*/
-/*}*/
-
-/*#input-form*/
-/*{*/
-    /*border:1px solid yellow;*/
-/*}*/
-
-/*#media-player{*/
-    /*border:1px solid green;*/
-/*}*/
-
-/*#playlist{*/
-    /*border:1px solid red;*/
-/*}*/
-
-/*#playlist-item-editor-container*/
-/*{*/
-    /*border:1px solid orange;*/
-/*}*/
 
 
 

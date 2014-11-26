@@ -26,6 +26,10 @@ window.UI.MediaLoadViewController.prototype =
     {
         Logger.getInstance().debug("[Search] Video with id "+videoUrl+" has been added.");
         this.playlistLoader.loadPlaylist(videoUrl);
+
+        //hide search results
+        this.searchControl.hide();
+        this._clearMediaInput();
     },
 
     _handleSearchResult: function(result)
@@ -63,14 +67,6 @@ window.UI.MediaLoadViewController.prototype =
         {
             e.preventDefault();
             this._handleInputValue(this.mediaInput.val());
-        },
-        this));
-
-        $(this.config.SearchResultsControls).find(this.config.SearchResultCloseButton).click($.proxy(function handleCloseSearchResultClicked(e)
-        {
-            e.preventDefault();
-            this.searchControl.hide();
-            this._clearMediaInput();
         },
         this));
 

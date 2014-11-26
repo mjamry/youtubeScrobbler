@@ -6,7 +6,6 @@ window.UI.PlaylistUIConfig =
     PlaylistItem: ".playlist-item",
 
     RemoveButtonContainer: ".playlist-item-remove",
-    EditButtonContainer: ".playlist-item-edit",
 
     DetailsContainer: ".playlist-item-name",
     TimeContainer: ".playlist-item-time",
@@ -25,5 +24,5 @@ window.UI.PlaylistUIConfig =
 
     PlaylistProgressBar: "#playlist-progressbar",
 
-    AnimationTime: 200
+    AnimationTime: 0
 };
