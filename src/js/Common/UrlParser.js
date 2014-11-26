@@ -42,15 +42,10 @@ window.Common.UrlParser.prototype =
     //returns page url without parameters
     getPageUrl:function(url)
     {
-        if(this.isUrl(url))
-        {
-            var regex = new RegExp(this.getPageUrlRegexPattern);
-            var urlElements = regex.exec(url);
+        var regex = new RegExp(this.getPageUrlRegexPattern);
+        var urlElements = regex.exec(url);
 
-            return urlElements[1];
-        }
-
-        return null;
+        return urlElements[1];
     },
 
     //detects if passed value is an url
