@@ -5,13 +5,13 @@ window.ApplicationCore = window.ApplicationCore || {};
 window.UI = window.UI || {};
 window.Player = window.Player || {};
 
-window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, playerServicesFactory)
+window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, playerServicesFactory, lastFmServicesFactory)
 {
     this.uiCore = uiFactory.createUICore();
 
-    this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler();
+    this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler(lastFmServicesFactory.createScrobbler());
 
-    var playlistElementDetailsProvider = playerServicesFactory.createPlaylistElementDetailsProvider();
+    var playlistElementDetailsProvider = playerServicesFactory.createPlaylistElementDetailsProvider(lastFmServicesFactory.createTrackInformationProvider());
 
     this.playlistService = coreServicesFactory.createPlaylistService(playlistElementDetailsProvider);
     this.playlistLoaderService = coreServicesFactory.createPlaylistLoaderService(this.playlistService);
@@ -27,7 +27,7 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistFlowController);
 
-    var playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.playlistService);
+    var playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.playlistService, lastFmServicesFactory.createTrackLoveStateModifier());
 
     this.playlistViewController = uiFactory.createPlaylistViewController(this.playlistService, this.playbackControlService, this.playlistFlowController);
 
@@ -39,7 +39,7 @@ window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, player
 
     this.mediaLoadViewController = uiFactory.createMediaLoadViewController(this.playlistLoaderService, this.searchService);
 
-    this.playlistItemEditorViewController = uiFactory.createPlaylistItemEditorViewController(this.playlistService);
+    this.playlistItemEditorViewController = uiFactory.createPlaylistItemEditorViewController(this.playlistService, lastFmServicesFactory.createTrackInformationProvider());
 
     this.playlistItemEditorListViewController = uiFactory.createPlaylistEditorListViewController(this.playlistService);
 

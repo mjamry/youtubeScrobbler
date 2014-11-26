@@ -13,6 +13,7 @@ $(function()
     var coreServicesFactory = new window.ApplicationCore.CoreServicesFactory();
     var uiFactory = new window.UI.UIControllersFactory(window.UI.UIControllersFactoryConfig);
     var playerServicesFactory = new window.Player.PlayerServicesFactory();
+    var lastFmServicesFactory = new window.LastFm.LastFmApiFactory();
 
     var globalErrorHandler = new window.Common.GlobalErrorHandler();
     globalErrorHandler.initialise();
@@ -51,7 +52,7 @@ $(function()
     ProgressbarService.setInstance(new window.Services.ProgressbarServiceImpl());
 
     //creating application core
-    var applicationCore = new window.ApplicationCore.AppCore(coreServicesFactory, uiFactory, playerServicesFactory);
+    var applicationCore = new window.ApplicationCore.AppCore(coreServicesFactory, uiFactory, playerServicesFactory, lastFmServicesFactory);
     applicationCore.initialise();
     applicationCore.setUpMenuItems(window.UI.MenuItemsConfig);
 

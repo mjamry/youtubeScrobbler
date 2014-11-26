@@ -8,7 +8,6 @@ window.UI.MediaLoadViewController = function(playlistLoaderService, searchServic
     this.searchResultParser = searchResultParser;
 
     this.config = config;
-    this.REGEX_URL_PATTERN = "(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})\\.*";
 
     this.searchControl = $(this.config.SearchResults);
     this.searchResults = $(this.config.SearchResultsContainer);
@@ -19,8 +18,8 @@ window.UI.MediaLoadViewController.prototype =
 {
     _isUrl: function(value)
     {
-        var regex = new RegExp(this.REGEX_URL_PATTERN);
-        return regex.test(value);
+        var urlParser = new window.Common.UrlParser();
+        return urlParser.isUrl(value);
     },
 
     _handleSearchItemAdded: function(videoUrl)
