@@ -25,7 +25,7 @@ window.Accounts.LastFmSessionCoordinator.prototype =
         else
         {
             //check if session has been already created, and use it
-            var session = Cookie.getInstance().getCookie(window.Common.CookiesNames.sessionCookie);
+            var session = Cookie.getInstance().getCookie(window.Common.CookiesNames.SessionCookie);
             if(session !== null)
             {
                 return Promise.resolve(
@@ -60,7 +60,7 @@ window.Accounts.LastFmSessionCoordinator.prototype =
                 callback(that._standardiseSessionDetails(userDetails));
 
                 //save session as cookie
-                Cookie.getInstance().setCookie(window.Common.CookiesNames.sessionCookie, sessionDetails);
+                Cookie.getInstance().setCookie(window.Common.CookiesNames.SessionCookie, sessionDetails, window.Common.CookiesNames.OneYearValid);
                 //inform that last fm session object has been created
                 EventBroker.getInstance().fireEventWithData(window.LastFm.Events.SessionObjectCreated, sessionDetails);
             },
@@ -125,7 +125,7 @@ window.Accounts.LastFmSessionCoordinator.prototype =
             function onSessionRefreshError(error)
             {
                 Logger.getInstance().debug("[LastFm] Session refreshing error: "+window.LastFm.Errors[error]);
-                Cookie.getInstance().removeCookie(window.Common.CookiesNames.sessionCookie);
+                Cookie.getInstance().removeCookie(window.Common.CookiesNames.SessionCookie);
             }
         );
     }

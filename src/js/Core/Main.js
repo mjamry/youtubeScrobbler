@@ -38,6 +38,7 @@ $(function()
     var userNotifier = coreServicesFactory.createUserNotifier();
     UserNotifier.setInstance(userNotifier);
 
+    Logger.getInstance().info(window.Common.ApplicationDetails.Name+" version: "+window.Common.ApplicationDetails.Version);
     Logger.getInstance().info("Application initialisation started.");
     new TimeParser();
     TimeParser.setInstance(new window.Common.TimeParserImpl());
