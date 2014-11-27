@@ -8,5 +8,5 @@ window.Common.CookiesNames =
 
     CookieTrueValue: "true",
 
-    OneYearValid: "356"
+    OneYearValid: 356
 };
