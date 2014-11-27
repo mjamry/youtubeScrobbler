@@ -4,7 +4,7 @@ window.UI = window.UI || {};
 window.LastFm = window.LastFm || {};
 
 //main
-$(function()
+main = function()
 {
     //hides controls
     $("#controls-schemes").hide();
@@ -75,7 +75,7 @@ $(function()
     testReport.initialise();
 
     Logger.getInstance().info("Application initialisation ended.");
-});
+};
 
 $(window).unload(function()
 {
