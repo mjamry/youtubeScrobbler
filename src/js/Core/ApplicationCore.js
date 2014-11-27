@@ -7,6 +7,7 @@ window.Player = window.Player || {};
 
 window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, playerServicesFactory, lastFmServicesFactory)
 {
+    Logger.getInstance().info("Creating core services.");
     this.uiCore = uiFactory.createUICore();
 
     this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler(lastFmServicesFactory.createScrobbler());
@@ -65,8 +66,13 @@ window.ApplicationCore.AppCore.prototype =
 {
     initialise: function()
     {
+        Logger.getInstance().info("Initialising core services.");
         this.playbackDetailsService.initialise();
         this.playbackControlService.initialise();
+        this.onlineScrobbler.initialise();
+        this.playlistService.initialise();
+
+        Logger.getInstance().info("Initialising view controllers.");
         this.playlistViewController.initialise();
         this.playbackDetailsViewController.initialise();
         this.playbackControlViewController.initialise();
@@ -75,9 +81,7 @@ window.ApplicationCore.AppCore.prototype =
         this.mediaLoadViewController.initialise();
         this.playlistItemEditorViewController.initialise();
         this.playlistItemEditorListViewController.initialise();
-        this.onlineScrobbler.initialise();
         this.colorSchemeControlViewController.initialise();
-        this.playlistService.initialise();
         this.progressbarViewController.initialise();
         this.welcomeScreenController.initialise();
         this.accountDetailsViewController.initialise();
