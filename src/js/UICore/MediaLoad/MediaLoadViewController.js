@@ -1,22 +1,64 @@
 //namespace
 window.UI = window.UI || {};
 
-window.UI.MediaLoadViewController = function(model, config)
+window.UI.MediaLoadViewController = function(playlistLoaderService, searchService, searchResultParser, config)
 {
-    this.model = model;
+    this.playlistLoader = playlistLoaderService;
+    this.searchService = searchService;
+    this.searchResultParser = searchResultParser;
+
     this.config = config;
+
+    this.searchControl = $(this.config.SearchResults);
+    this.searchResults = $(this.config.SearchResultsContainer);
+    this.mediaInput = $(this.config.MediaLocationInput);
 };
 
 window.UI.MediaLoadViewController.prototype =
 {
-    _handlePlaylistUpdated: function()
+    _isUrl: function(value)
     {
-        $(this.config.MediaLocationInput).val("");
+        var urlParser = new window.Common.UrlParser();
+        return urlParser.isUrl(value);
     },
 
-    _addNewMedia: function addNewMedia(location)
+    _handleSearchItemAdded: function(videoUrl)
     {
-        this.model.loadPlaylist(location);
+        Logger.getInstance().debug("[Search] Video with id "+videoUrl+" has been added.");
+        this.playlistLoader.loadPlaylist(videoUrl);
+
+        //hide search results
+        this.searchControl.hide();
+        this._clearMediaInput();
+    },
+
+    _handleSearchResult: function(result)
+    {
+        this.searchResults.empty();
+        this.searchControl.show();
+        this.searchResults.append(this.searchResultParser.parse(result, this._handleSearchItemAdded, this));
+    },
+
+    _handlePlaylistUpdated: function()
+    {
+        this._clearMediaInput();
+    },
+
+    _clearMediaInput: function()
+    {
+        this.mediaInput.val("");
+    },
+
+    _handleInputValue: function(value)
+    {
+        if(this._isUrl(value))
+        {
+            this.playlistLoader.loadPlaylist(value);
+        }
+        else
+        {
+            this.searchService.search(value);
+        }
     },
 
     initialise: function initialise()
@@ -24,10 +66,11 @@ window.UI.MediaLoadViewController.prototype =
         $(this.config.AddNewMediaButton).click($.proxy(function handleAddMediaClicked(e)
         {
             e.preventDefault();
-            this._addNewMedia($(this.config.MediaLocationInput).val());
+            this._handleInputValue(this.mediaInput.val());
         },
         this));
 
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistUpdated, $.proxy(this._handlePlaylistUpdated, this));
+        EventBroker.getInstance().addListener(window.Services.SearchResultEvents.SearchFinishedWithSuccess, $.proxy(this._handleSearchResult, this));
     }
 };

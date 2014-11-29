@@ -14,7 +14,5 @@ window.UI.TestReportUIConfig =
     FeatureDescription: "#feedback-description",
     FeatureEmail: "#feedback-email",
 
-    ShowFormButton: ".testing-environment-show-button",
-    HideFormButton: ".testing-environment-hide-button",
     TestingFormContainer: "#testing-environment"
 };

@@ -112,22 +112,6 @@ window.UI.TestReportsViewController.prototype =
         }
     },
 
-    _showForm: function(config)
-    {
-        return function()
-        {
-            $(config.TestingFormContainer).show();
-        };
-    },
-
-    _hideForm: function(config)
-    {
-        return function()
-        {
-            $(config.TestingFormContainer).hide();
-        };
-    },
-
     initialise: function()
     {
         this._errorContainer.hide();
@@ -136,10 +120,5 @@ window.UI.TestReportsViewController.prototype =
         this._hookUpToButtonsEvents();
 
         this._hookUpFormsActions();
-
-        $(this._config.ShowFormButton).click(this._showForm(this._config));
-        $(this._config.HideFormButton).click(this._hideForm(this._config));
-
-        this._hideForm(this._config)();
     }
 };

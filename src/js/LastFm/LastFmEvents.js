@@ -13,7 +13,5 @@ window.LastFm.Events =
     TrackLoved: "TrackLoved",
     TrackUnloved: "TrackUnloved",
 
-    SessionEstablished: "SessionEstablished",
-    SessionClosed: "SessionClosed",
-    SessionEstablishmentFailed: "SessionEstablishmentFiled"
+    SessionObjectCreated: "SessionObjectCreated",
 };

@@ -1,9 +1,9 @@
 window.Playlist = window.Playlist || {};
 
-window.Playlist.PlaylistLoaderService = function(playlistService)
+window.Playlist.PlaylistLoaderService = function(playlistService, factory)
 {
     this.playlisService = playlistService;
-    this.factory = new window.Playlist.PlaylistLoadersFactory();
+    this.loaderFactory = factory;
 };
 
 window.Playlist.PlaylistLoaderService.prototype =
@@ -13,8 +13,8 @@ window.Playlist.PlaylistLoaderService.prototype =
         this.playlisService.addToPlaylist(playlist);
     },
 
-    loadPlaylist: function(url)
+    loadPlaylist: function(value)
     {
-        this.factory.create(url).loadPlaylist(url, $.proxy(this._handlePlaylistLoaded, this));
+        this.loaderFactory.create(value).loadPlaylist(value, $.proxy(this._handlePlaylistLoaded, this));
     }
 };

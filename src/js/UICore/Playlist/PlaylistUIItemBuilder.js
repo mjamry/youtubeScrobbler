@@ -9,7 +9,6 @@ window.UI.PlaylistUIItemBuilder = function(index, config)
     this._config = config;
     this._item = null;
     this._removeButton = null;
-    this._editButton = null;
     this._hoverStyle = null;
     this._cover = null;
 };
@@ -59,7 +58,6 @@ window.UI.PlaylistUIItemBuilder.prototype =
 
         this._cover = this._item.find(this._config.CoverContainer);
         this._removeButton = this._item.find(this._config.RemoveButtonContainer);
-        this._editButton = this._item.find(this._config.EditButtonContainer);
     },
 
     //add styles to current element and its inner elements.
@@ -110,7 +108,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
     },
 
     //hooks up to UI events such as clock, mouse enter, mouse leave.
-    hookUpToEvents: function(callbackContext, clickHandler, removeHandler, editHanlder)
+    hookUpToEvents: function(callbackContext, clickHandler, removeHandler)
     {
         //event handler
         var handleEvent = function(context, handler, index)
@@ -131,10 +129,8 @@ window.UI.PlaylistUIItemBuilder.prototype =
         this._item.mouseleave(onMouseLeaveHandler);
 
         var onRemove = handleEvent(callbackContext, removeHandler, this._index);
-        var onEdit = handleEvent(callbackContext, editHanlder, this._index);
 
         this._removeButton.click(onRemove);
-        this._editButton.click(onEdit);
     },
 
     //builds fully initialised playlist item.

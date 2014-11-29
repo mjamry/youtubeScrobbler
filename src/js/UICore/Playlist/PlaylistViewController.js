@@ -10,7 +10,7 @@ window.UI.PlaylistViewController = function(playlistService, playlistControlServ
     this.playlistService = playlistService;
     this.playlistFlowController = playlistFlowController;
     this.playlistControlService = playlistControlService;
-    this.view = $("#"+view);
+    this.view = view;
     this.config = config;
 };
 
@@ -37,18 +37,6 @@ window.UI.PlaylistViewController.prototype =
     {
         this._deselectAllItems();
         this.playlistControlService.playSpecific(index);
-    },
-
-    _edit: function(index)
-    {
-        var mediaElement = this.playlistService.getPlaylist().get(index);
-        EventBroker.getInstance().fireEventWithData(
-            window.Player.PlaylistEvents.PlaylistItemEditionRequested,
-            {
-                index: index,
-                mediaDetails: mediaElement
-            }
-        );
     },
 
     _createNewElement: function(mediaDetails, index)

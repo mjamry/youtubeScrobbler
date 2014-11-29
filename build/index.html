@@ -3,6 +3,8 @@
     <title>scrobbline</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--it has to be loaded at first place                              -->
+
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" >
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
@@ -21,58 +23,74 @@
 
     <!--JS_SCROBBLINE-->
     <script src="js/scrobbline.min.js"></script>
-    <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=initialiseGoogleApi"></script>
+    <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=main"></script>
 
     <!--JS-GOOGLE-ANALYTICS-->
     <script>
-
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
                 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-        //ga('create', 'UA-6631391-2', 'interpc.pl');
-        ga('create', 'UA-6631391-2', {
-            'cookieDomain': 'none'
-        });
+        ga('create', 'UA-48367204-1', 'auto');
         ga('send', 'pageview');
-
     </script>
 
 </head>
 <body class="pure-skin-sc">
 <div id="page">
     <div id="header">
+        <div id="header-content-logo">
+            <div class="header-content-name"></div>
+            <div class="header-content-version"></div>
+        </div>
         <div id="header-content">
-            <div id="header-content-logo">
-                <div class="header-content-name">scrobbline</div>
-                <div class="header-content-version">v0.2.8 beta</div>
-            </div>
-            <div id="header-control-buttons-container">
-                <button class="header-control-button" id="control-button-switch-theme" title="switch color theme"><i class="fa fa-adjust"></i></button>
-                <a href="help.html" target="_blank">
-                    <button class="header-control-button" id="control-button-show-help" title="how to use scrobble.com"><i class="fa fa-info"></i></button>
-                </a>
-            </div>
-            <div id="header-session-details-container">
-                <div class="header-session-details" id="header-no-session">
-                    <button class="header-session-button" id="header-session-sign-in" title="sign into last.fm using your account"><i class="fa fa-sign-in"></i> sign into the Last.fm</button>
+
+            <div id="media-player-playback-controls-container">
+                <div id="media-player-controls">
+                    <div id="playback-control">
+                        <button class="playback-control-previous playback-control-button" title="play previous track"><i class="fa fa-step-backward"></i></button>
+                        <button class="playback-control-play playback-control-button" title="play current track"><i class="fa fa-play fa-2x"></i></button>
+                        <button class="playback-control-pause playback-control-button" title="pause current track"><i class="fa fa-pause fa-2x"></i></button>
+                        <button class="playback-control-next playback-control-button" title="play next track"><i class="fa fa-step-forward"></i></button>
+                        <button class="playlist-control-love playback-control-button" title="love/unlove current track"><i class="fa fa-heart"></i></button>
+                    </div>
                 </div>
-                <div class="header-session-details" id="header-with-session">
-                    <button class="header-session-button" id="header-session-info" title="show last.fm account">Hello</button>
-                    <button class="header-session-button" id="header-session-sign-out" title="sign out from last.fm"><i class="fa fa-sign-out"></i></button>
+                <div id="media-player-playback">
+                    <div id="playback-progress-container" title="rewind track">
+                        <div class="playback-progress-bar-container">
+                            <div class="playback-progress-bar"></div>
+                        </div>
+                        <div class="playback-data-bar-container">
+                            <div class="playback-data-bar"></div>
+                        </div>
+                        <div class="playback-details-container">
+                            <div class="playback-details"></div>
+                            <div class="playback-time"></div>
+                        </div>
+                    </div>
                 </div>
+                <div id="playback-control-volume-container">
+                    <div class="volume-control-indicator-container" title="change volume level">
+                        <div class="volume-control-indicator"></div>
+                        <div class="volume-control-description">
+                            <i class="fa fa-volume-up fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
+    <div id="menu"></div>
     <div id="progressbar-container"></div>
     <div id="welcome-screen">
-
             <div id="welcome-screen-description">
                 <div class="welcome-screen-content">
-                    Have you ever wonder if there is a simple way of scrobbling your favourite music directly from youtube to last.fm ?
-                    <br><br>Now it is available!
-                    <br><br><div id="welcome-screen-try-it"><button id="welcome-screen-try-it-btn">Try it now!</button></div>
+                    Have you ever wondered if there is a simpler way to create a playlist and listen to the music from youtube ?
+                    <br>Here it is - a new simple and user friendly music player.
+                    <br>It also allows you to save your listening history on your last.fm account.
+                    <br><br><div id="welcome-screen-try-it"><button id="welcome-screen-try-it-btn">Click here to <b>try it</b>!</button></div>
                 </div>
             </div>
             <div id="welcome-screen-details">
@@ -82,97 +100,79 @@
                             <div class="welcome-detail-content">
                                 <i class="fa fa-play-circle fa-4x"></i><br>
                                 <div class="welcome-detail-content-title">Music player</div>
-                                it is an online music player, you can listen to youtube music.
+                                it is an new and improved music player so you can easily listen to youtube music.
                             </div>
                         </div>
                         <div class="pure-u-1-3">
                             <div class="welcome-detail-content">
                                 <i class="fa fa-list fa-4x"></i><br>
                                 <div class="welcome-detail-content-title">Playlists</div>
-                                You can create, edit and save your playlists.
+                                You can create, edit and save your playlists without a need to create an account.
                             </div>
                         </div>
                         <div class="pure-u-1-3">
                             <div class="welcome-detail-content">
                                 <i class="fa fa-heart fa-4x"></i><br>
                                 <div class="welcome-detail-content-title">Last.fm integration</div>
-                                You can easily love your favourite music.
+                                You can easily save your listening history, and love your favourite tracks.
                             </div>
                         </div>
                     </div>
-
                     <div class="pure-g">
                         <div class="pure-u-1-3">
                             <div class="welcome-detail-content">
-                            </div>
-                        </div>
-                        <div class="pure-u-1-3">
-                            <div class="welcome-detail-content">
                                 <i class="fa fa-check-circle fa-4x"></i><br>
-                                <div class="welcome-detail-content-title">Details validation</div>
-                                You can check if your sons have correct details according to last.fm's database.
+                                <div class="welcome-detail-content-title">Always correct song title</div>
+                                You can check if your songs have correct details according to last.fm's database.
                             </div>
                         </div>
                         <div class="pure-u-1-3">
                             <div class="welcome-detail-content">
+                            </div>
+                        </div>
+                        <div class="pure-u-1-3">
+                            <div class="welcome-detail-content">
+                                <i class="fa fa-search fa-4x"></i><br>
+                                <div class="welcome-detail-content-title">Search on youtube</div>
+                                You can easily search youtube for your favourite songs directly from application.
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
 
     <div id="page-content">
-        <div id="media-player-playback-controls-container">
-            <div id="media-player-controls">
-                <div id="playback-control">
-                    <button class="playback-control-previous playback-control-button" title="play previous track"><i class="fa fa-step-backward"></i></button>
-                    <button class="playback-control-play playback-control-button" title="play current track"><i class="fa fa-play fa-2x"></i></button>
-                    <button class="playback-control-pause playback-control-button" title="pause current track"><i class="fa fa-pause fa-2x"></i></button>
-                    <button class="playback-control-next playback-control-button" title="play next track"><i class="fa fa-step-forward"></i></button>
-                </div>
-            </div>
-            <div id="media-player-playback">
-                <div id="playback-progress-container" title="rewind track">
-                    <div class="playback-progress-bar-container">
-                        <div class="playback-progress-bar"></div>
-                    </div>
-                    <div class="playback-data-bar-container">
-                        <div class="playback-data-bar"></div>
-                    </div>
-                    <div class="playback-details-container">
-                        <div class="playback-details"></div>
-                        <div class="playback-time"></div>
-                    </div>
-                </div>
-            </div>
-            <div id="playback-control-volume-container">
-                <div class="volume-control-indicator-container" title="change volume level">
-                    <div class="volume-control-indicator"></div>
-                    <div class="volume-control-description">
-                        <i class="fa fa-volume-up fa-2x"></i>
-                    </div>
-                </div>
-            </div>
+        <div id="accounts" class="application-page"></div>
+        <div id="settings" class="application-page">
             <div id="media-playlist-control">
                 <div id="playlist-control">
-                    <button class="playlist-control-love playlist-control-button" title="love/unlove current track"><i class="fa fa-heart"></i></button>
+
                     <button class="playlist-control-loop playlist-control-button" title="repeat playlist"><i class="fa fa-repeat"></i></button>
                     <button class="playlist-control-shuffle playlist-control-button" title="shuffle playlist"><i class="fa fa-random"></i></button>
                     <button class="playlist-control-fullscreen playlist-control-button" title="fullscreen mode"><i class="fa fa-arrows-alt"></i></button>
-                    <button class="playlist-control-save playlist-control-button" title="save current playlist - NOT WORKING YET"><i class="fa fa-save"></i></button>
+                    <button class="playlist-control-save playlist-control-button" title="save current playlist"><i class="fa fa-save"></i></button>
                     <button class="playlist-control-clear playlist-control-button" title="clear playlist"><i class="fa fa-times"></i></button>
                 </div>
             </div>
+            <div id="settings-control-buttons-container">
+                <button class="settings-control-button" id="control-button-switch-theme" title="switch color theme"><i class="fa fa-adjust"></i></button>
+                <a href="help.html" target="_blank">
+                    <button class="settings-control-button" id="control-button-show-help" title="how to use scrobbline"><i class="fa fa-info"></i></button>
+                </a>
+            </div>
         </div>
-        <div id="input-form">
-            <form class="playlist-add-container">
-                <input class="playlist-add-input" type="text" id="media-location" placeholder="paste youtube link here" title="paste youtube link (for single video or playlist)"/>
-                <button id="add-to-playlist" class="playlist-add-button" title="add new items to playlist"><i class="fa fa-plus fa-2x"></i></button>
-            </form>
-        </div>
-        <div id="media-content">
+        <div id="player" class="application-page">
+            <div id="input-form">
+                <form class="playlist-add-container">
+                    <input class="playlist-add-input" type="text" id="media-location" placeholder="type to search or paste youtube link" title="start typing to search for music or paste link for youtube video/playlist to add new items to the playlist"/>
+                    <button id="add-to-playlist" class="playlist-add-button" title="add new items to playlist"><i class="fa fa-plus fa-2x"></i></button>
+                </form>
+                <div id="search-results">
+                    <div id="search-results-container"></div>
+                </div>
+            </div>
+
             <div class="pure-g">
                 <div class="pure-u-1-2">
                     <div id="fullscreen-video-container">
@@ -188,14 +188,16 @@
                         <div id="playlist-container"></div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div id="playlist-editor" class="application-page">
+            <div class="pure-g">
                 <div class="pure-u-1-2">
                     <div id="playlist-item-editor-container">
                         <div id="playlist-item-editor">
                             <form class="playlist-item-editor-form">
                                 <legend>playlist item editor</legend>
-
                                 <label for="playlist-item-editor-artist">artist:</label>
-
                                 <div class="playlist-editor-line">
                                     <input id="playlist-item-editor-artist" type="text" placeholder="artist name">
                                     <div class="playlist-editor-artist-check playlist-editor-verification">
@@ -203,9 +205,7 @@
                                         <i class="playlist-editor-verification-err fa fa-exclamation-triangle"></i>
                                     </div>
                                 </div>
-
                                 <label for="playlist-item-editor-title">title:</label>
-
                                 <div class="playlist-editor-line">
                                     <input id="playlist-item-editor-title" type="text" placeholder="track title">
                                     <div class="playlist-editor-title-check playlist-editor-verification">
@@ -213,9 +213,7 @@
                                         <i class="playlist-editor-verification-err fa fa-exclamation-triangle"></i>
                                     </div>
                                 </div>
-
                                 <label for="playlist-item-editor-album">album:</label>
-
                                 <div class="playlist-editor-line">
                                     <input id="playlist-item-editor-album" type="text" placeholder="album name">
                                     <div class="playlist-editor-album-check playlist-editor-verification">
@@ -232,6 +230,94 @@
                         </div>
                     </div>
                 </div>
+                <div class="pure-u-1-2">
+                    <div id="playlist-editor-list-container">
+                        <div id="playlist-editor-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="playlist-manager" class="application-page">playlist manager</div>
+        <div id="testing-environment">
+            <div id="testing-helper">
+                <form class="pure-form">
+                    <fieldset>
+                        <legend>Tester helper:</legend>
+                        <input type="button" value="Report bug" id="report-bug-btn" class="pure-button"/>
+                        <input type="button" value="Send feedback" id="report-feature-btn" class="pure-button"/>
+                    </fieldset>
+                </form>
+                <form class="pure-form pure-form-aligned" id="error-report">
+                    <fieldset>
+                        <legend>Bug reporting</legend>
+                        Thank you for your time and engagement :)<br>
+                        This form will send us an email with attached:
+                        <ul>
+                            <li>bug description,</li>
+                            <li>logs in debug level (visible below),</li>
+                            <li>browser and OS versions you are using,</li>
+                            <li>your email address - to get back to you.</li>
+                        </ul>
+                        <div class="pure-control-group">
+                            <label for="bug-email">sender:</label>
+                            <input type="email" id="bug-email" placeholder="write your email here"/>
+                        </div>
+                        <div class="pure-control-group">
+                            <label for="bug-title">title:</label>
+                            <input type="text" id="bug-title" placeholder="write bug title"/>
+                        </div>
+                        <div class="pure-control-group">
+                            <label for="bug-description">description:</label>
+                            <textarea id="bug-description" placeholder="write here bug's description/steps to reproduce - basically how you managed to get this bug"></textarea>
+                        </div>
+                        <div class="pure-controls">
+                            <input type="submit" value="send" class="pure-button"/>
+                        </div>
+                    </fieldset>
+                </form>
+                <form class="pure-form pure-form-aligned" id="feature-report">
+                    <fieldset>
+                        <legend>Feedback sending</legend>
+                        Here you can send us your thoughts about this app.<br>
+                        You can also share your ideas and ask for new features.<br><br>
+
+                        <div class="pure-control-group">
+                            <label for="feedback-email">sender:</label>
+                            <input type="email" id="feedback-email" placeholder="write your email here"/>
+                        </div>
+                        <div class="pure-control-group">
+                            <label for="feedback-title">title:</label>
+                            <input type="text" id="feedback-title" placeholder="write title"/>
+                        </div>
+                        <div class="pure-control-group">
+                            <label for="feedback-description">description:</label>
+                            <textarea id="feedback-description" placeholder="here you can put your thoughts"></textarea>
+                        </div>
+                        <div class="pure-controls">
+                            <input type="submit" value="send" class="pure-button"/>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div id="logger-container">
+                <div id="logger-header">
+                    <form class="pure-form">
+                        <fieldset>
+                            <legend>Logger options:</legend>
+                            <input type="checkbox" id="enable-logger" checked>
+                            <label for="enable-logger">Logger enabled</label>
+                            | <label for="logger-level">Logger level</label>
+                            <select id="logger-level">
+                                <option selected value="0">Info</option>
+                                <option value="1">Warning</option>
+                                <option value="2">Error</option>
+                                <option value="3">Debug</option>
+                            </select>
+                            | <input type="button" id="clear-logs" value="Clear logs" class="pure-button"/>
+                        </fieldset>
+                    </form>
+                </div>
+                <div id="logger-content"></div>
             </div>
         </div>
         <div id="user-notifications-container"></div>
@@ -239,13 +325,10 @@
     <div id="footer">
         <div id="footer-content">
             <div class="pure-g">
-                <div class="pure-u-1-3">
-                    <a href="#" class="testing-environment-show-button test-environment-color" title="Tester helper"><i class="fa fa-bug fa-2x"></i></a>
-                </div>
-                <div class="pure-u-1-3">
+                <div class="pure-u-1-2">
                     <a href="https://github.com/mjamry/youtubeScrobbler" title="Sources" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
                 </div>
-                <div class="pure-u-1-3">
+                <div class="pure-u-1-2">
                     <a href="mailto:onlinescrobbler@gmail.com" title="Contact"><i class="fa fa-envelope fa-2x"></i></a>
                 </div>
             </div>
@@ -257,89 +340,7 @@
 </div>
 </body>
 </html>
-<div id="testing-environment">
-    <div id="testing-helper">
-        <button class="testing-environment-hide-button"><i class="fa fa-times-circle fa-2x"></i></button>
-        <form class="pure-form">
-            <fieldset>
-                <legend>Tester helper:</legend>
-                <input type="button" value="Report bug" id="report-bug-btn" class="pure-button"/>
-                <input type="button" value="Send feedback" id="report-feature-btn" class="pure-button"/>
-            </fieldset>
-        </form>
-        <form class="pure-form pure-form-aligned" id="error-report">
-            <fieldset>
-                <legend>Bug reporting</legend>
-                Thank you for your time and engagement :)<br>
-                This form will send us an email with attached:
-                <ul>
-                    <li>bug description,</li>
-                    <li>logs in debug level (visible below),</li>
-                    <li>browser and OS versions you are using,</li>
-                    <li>your email address - to get back to you.</li>
-                </ul>
-                <div class="pure-control-group">
-                    <label for="bug-email">sender:</label>
-                    <input type="email" id="bug-email" placeholder="write your email here"/>
-                </div>
-                <div class="pure-control-group">
-                    <label for="bug-title">title:</label>
-                    <input type="text" id="bug-title" placeholder="write bug title"/>
-                </div>
-                <div class="pure-control-group">
-                    <label for="bug-description">description:</label>
-                    <textarea id="bug-description" placeholder="write here bug's description/steps to reproduce - basically how you managed to get this bug"></textarea>
-                </div>
-                <div class="pure-controls">
-                    <input type="submit" value="send" class="pure-button"/>
-                </div>
-            </fieldset>
-            </form>
-            <form class="pure-form pure-form-aligned" id="feature-report">
-            <fieldset>
-                <legend>Feedback sending</legend>
-                Here you can send us your thoughts about this app.<br>
-                You can also share your ideas and ask for new features.<br><br>
 
-                <div class="pure-control-group">
-                    <label for="feedback-email">sender:</label>
-                    <input type="email" id="feedback-email" placeholder="write your email here"/>
-                </div>
-                <div class="pure-control-group">
-                    <label for="feedback-title">title:</label>
-                    <input type="text" id="feedback-title" placeholder="write title"/>
-                </div>
-                <div class="pure-control-group">
-                    <label for="feedback-description">description:</label>
-                    <textarea id="feedback-description" placeholder="here you can put your thoughts"></textarea>
-                </div>
-                <div class="pure-controls">
-                    <input type="submit" value="send" class="pure-button"/>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-    <div id="logger-container">
-        <div id="logger-header">
-            <form class="pure-form">
-                <fieldset>
-                    <legend>Logger options:</legend>
-                    <input type="checkbox" id="enable-logger" checked>
-                    <label for="enable-logger">Logger enabled</label>
-                    | <label for="logger-level">Logger level</label>
-                    <select id="logger-level">
-                        <option selected value="0">Info</option>
-                        <option value="1">Warning</option>
-                        <option value="2">Error</option>
-                        <option value="3">Debug</option>
-                    </select>
-                    | <input type="button" id="clear-logs" value="Clear logs" class="pure-button"/>
-                </fieldset>
-            </form>
-        </div>
-        <div id="logger-content"></div>
-    </div>
-</div>
 <div id="controls-schemes">
     <div class="playlist-item pure-g">
         <div class="playlist-item-index-container pure-u-1-12">
@@ -356,14 +357,45 @@
             </div>
         </div>
         <div class="pure-u-1-4">
-            <div class="playlist-item-buttons pure-g">
-                <div class="playlist-item-button playlist-item-remove pure-u-1-2" title="remove track from playlist"><i class="fa fa-trash-o fa-2x"></i></div>
-                <div class="playlist-item-button playlist-item-edit pure-u-1-2" title="edit track details"><i class="fa fa-pencil fa-2x"></i></div>
+            <div class="playlist-item-buttons">
+                <div class="playlist-item-button playlist-item-remove" title="remove track from playlist"><i class="fa fa-trash-o fa-2x"></i></div>
             </div>
             <div>
                 <img class="playlist-item-cover" />
             </div>
         </div>
+    </div>
+
+    <div class="playlist-editor-list-item pure-g">
+        <div class="playlist-item-index-container pure-u-1-12">
+            <div class="playlist-item-index"></div>
+        </div>
+        <div class="pure-u-11-12">
+            <div class="pure-g">
+                <div class="pure-u-1-12">
+                    <div class="playlist-editor-list-item-artist-icon"></div>
+                </div>
+                <div class="pure-u-11-12">
+                    <div class="playlist-editor-list-item-artist-name" title="artist name and track name"></div>
+                </div>
+            </div>
+            <div class="pure-g">
+                <div class="pure-u-1-12">
+                    <div class="playlist-editor-list-item-album-icon"></div>
+                </div>
+                <div class="pure-u-11-12">
+                    <div class="playlist-editor-list-item-album-name" title="album name"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-result-item pure-g">
+        <div class="pure-u-1-12">
+            <img class="search-result-cover" />
+        </div>
+            <div class="search-result-title pure-u-19-24"></div>
+        <div class="search-result-icons pure-u-1-12"></div>
     </div>
 
     <div class="pure-g user-notification">
@@ -380,5 +412,18 @@
     <div class="progressbar">
         <div class="progressbar-body"></div>
         <div class="progressbar-title"></div>
+    </div>
+
+    <div class="menu-item-container pure-g">
+        <div class="menu-item-button pure-u-1-3"><i class="menu-item-icon"></i></div>
+        <div class="menu-item-title pure-u-2-3"></div>
+    </div>
+
+    <div class="account-active-details-container">
+        <legend class="account-active-legend"></legend>
+        <div class="pure-g">
+            <div class="pure-u-1-4 account-active-picture"></div>
+            <div class="pure-u-3-4 account-active-info"></div>
+        </div>
     </div>
 </div>

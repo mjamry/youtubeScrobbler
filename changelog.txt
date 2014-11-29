@@ -1,3 +1,12 @@
+///////////VERSION 0.3.0////////////////
+ - using google api to obtain information about user
+ - changed ui - now there is an menu, on the left side
+ - new playlist editor view
+ - new account details view
+ - a lot of UI fixes
+///////////VERSION 0.2.8 #1/////////////
+ - added support for google api
+ - new feature - possibility to search music on youtube
 ////////////HOTFIX #2///////////////////
 Resolved issue with incorrect playing time calculation by scrobbler class.
 ////////////HOTFIX #1///////////////////

@@ -1,5 +1,5 @@
 //namespace
-window.UI = window.UI || {};
+window.Services = window.Services || {};
 
 ProgressbarService = function()
 {
@@ -31,14 +31,14 @@ ProgressbarService.getInstance = function()
 };
 
 
-window.Common.ProgressbarServiceImpl = function()
+window.Services.ProgressbarServiceImpl = function()
 {
     //substitute for dictionary
     this.ids = [];
     this.lastId = 0;
 };
 
-window.Common.ProgressbarServiceImpl.prototype =
+window.Services.ProgressbarServiceImpl.prototype =
 {
     _generateId: function()
     {
@@ -57,26 +57,19 @@ window.Common.ProgressbarServiceImpl.prototype =
         var newId = this._generateId();
         this.ids[newId] =
         {
+            title: title,
             maxValue: maxValue
         };
 
-        EventBroker.getInstance().fireEventWithData(window.UI.ProgressbarServiceEvents.RegisterNewProgressbar, {id: newId, title: title});
-        Logger.getInstance().debug("[PB] New progressbar. MaxValue: "+maxValue+" title: "+title);
-
+        EventBroker.getInstance().fireEventWithData(window.Services.ProgressbarServiceEvents.RegisterNewProgressbar, {id: newId, title: title});
         return newId;
     },
 
     updateProgressbar: function(id, currentValue)
     {
-        Logger.getInstance().debug("[PB] id: "+id+" value: "+currentValue);
         var percentageValue = this._calculatePercentageValue(currentValue, this.ids[id].maxValue);
-        EventBroker.getInstance().fireEventWithData(window.UI.ProgressbarServiceEvents.UpdateProgressbarStatus, {id: id, value: percentageValue});
-        Logger.getInstance().debug("[PB] id: "+id+" value: "+percentageValue+"%");
+        EventBroker.getInstance().fireEventWithData(window.Services.ProgressbarServiceEvents.UpdateProgressbarStatus, {id: id, value: percentageValue});
+        Logger.getInstance().debug("[PB] Title: "+this.ids[id].title+" (id:"+id+") value: "+currentValue+" ("+percentageValue+"%) of "+this.ids[id].maxValue);
     }
 };
 
-window.UI.ProgressbarServiceEvents =
-{
-    RegisterNewProgressbar: "RegisterNewProgressbar",
-    UpdateProgressbarStatus: "UpdateProgressbarStatus"
-};

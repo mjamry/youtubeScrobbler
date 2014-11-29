@@ -1,43 +1,57 @@
 //namespace
 window.Common = window.Common || {};
 
-//const values
-window.Common.UrlParserConstants =
+window.Common.UrlParser = function()
 {
-      URL_PARSE_ERR: "0",
-      PARAMS_START_SIGN: "?",
-      PARAMS_SEPARATOR: "&",
-      PARAM_VALUE_INDICATOR: "="
-};
+    // &#/ - elements that can be found at the end of the url
+    //for each search result will be:
+    //$0 = param=value
+    //$1 = param
+    //$2 = value
+    this.getUrlParamsRegexPattern = "/?(([\\w\\-]*)=([^&#/]*))";
 
-window.Common.UrlParser = function(){};
+    this.getPageUrlRegexPattern = "([^?]*)";
+
+    this.urlTestRegexPattern = "(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})\\.*";
+};
 
 window.Common.UrlParser.prototype =
 {
+    //returns value for passed parameter. if it does not exist returns null
     getParameterValue : function(url, parameter)
     {
-        var params;
-        try
+        var params = {};
+
+        var generateKeyValuePair = function($0, $1, $2, $3)
         {
-            var urlParts = url.split(window.Common.UrlParserConstants.PARAMS_START_SIGN);
-            params = urlParts[1].split(window.Common.UrlParserConstants.PARAMS_SEPARATOR);
-        }
-        catch(ex)
+            params[$2] = $3;
+        };
+
+        //g - global flags, search will be executed multiple times
+        var regex = new RegExp(this.getUrlParamsRegexPattern, "g");
+        url.replace(regex, generateKeyValuePair);
+
+        if(params.hasOwnProperty(parameter))
         {
-            Logger.getInstance().warning("Url parsing has failed. Ex: "+ex);
-            //TODO return null
-            return window.Common.UrlParserConstants.URL_PARSE_ERR;
+            return params[parameter];
         }
 
-        for(var i=0; i<params.length; i++)
-        {
-            var value = params[i].split(window.Common.UrlParserConstants.PARAM_VALUE_INDICATOR);
-            if(value[0] === parameter)
-            {
-                return value[1];
-            }
-        }
-        
-        return window.Common.UrlParserConstants.URL_PARSE_ERR;
+        return null;
+    },
+
+    //returns page url without parameters
+    getPageUrl:function(url)
+    {
+        var regex = new RegExp(this.getPageUrlRegexPattern);
+        var urlElements = regex.exec(url);
+
+        return urlElements[1];
+    },
+
+    //detects if passed value is an url
+    isUrl: function(valueToTest)
+    {
+        var regex = new RegExp(this.urlTestRegexPattern);
+        return regex.test(valueToTest);
     }
 };

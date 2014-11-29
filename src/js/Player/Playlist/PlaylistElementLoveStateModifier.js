@@ -1,10 +1,9 @@
 //namespace
 window.Playlist = window.Playlist || {};
 
-window.Playlist.PlaylistElementLoveStateModifier = function(innerModifier, sessionProvider, playlistService)
+window.Playlist.PlaylistElementLoveStateModifier = function(innerModifier, playlistService)
 {
     this.innerModifier = innerModifier;
-    this.sessionProvider = sessionProvider;
     this.playlistService = playlistService;
 };
 
@@ -27,42 +26,38 @@ window.Playlist.PlaylistElementLoveStateModifier.prototype =
 
     _love: function(mediaDetails, index, successCallback)
     {
-        var details =
+        var success = function()
         {
-            details: mediaDetails,
-            index: index
+            mediaDetails.loved = true;
+            successCallback(index, mediaDetails);
+
+            UserNotifier.getInstance().info("'"+mediaDetails.artist.name+" - "+mediaDetails.title+"' has been loved.");
         };
 
-        var callbacks =
-        {
-            success: function trackLoved(index, mediaDetails)
+        this.innerModifier.love(
+            mediaDetails,
             {
-                mediaDetails.loved = true;
-                successCallback(index, mediaDetails);
-            }
-        };
-
-        this.innerModifier.love(details, this.sessionProvider.getSession(), callbacks);
+                success: success,
+                error: function(){}
+            });
     },
 
     _unlove: function(mediaDetails, index, successCallback)
     {
-        var details =
+        var success = function()
         {
-            details: mediaDetails,
-            index: index
+            mediaDetails.loved = false;
+            successCallback(index, mediaDetails);
+
+            UserNotifier.getInstance().info("'"+mediaDetails.artist.name+" - "+mediaDetails.title+"' has been unloved.");
         };
 
-        var callbacks =
-        {
-            success: function trackUnloved(index, mediaDetails)
+        this.innerModifier.unLove(
+            mediaDetails,
             {
-                mediaDetails.loved = false;
-                successCallback(index, mediaDetails);
-            }
-        };
-
-        this.innerModifier.unLove(details, this.sessionProvider.getSession(), callbacks);
+                success: success,
+                error: function(){}
+            });
     }
 };
 

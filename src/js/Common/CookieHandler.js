@@ -52,13 +52,13 @@ window.Common.CookieImpl.prototype =
         if(value)
         {
             Logger.getInstance().debug("[Cookie] '" + name + "' has been read and has value: " + value);
+            return value;
         }
         else
         {
             Logger.getInstance().warning("[Cookie] '"+name+"' does not exist");
+            return null;
         }
-
-        return value;
     },
 
     removeCookie: function(name)

@@ -172,14 +172,14 @@ window.Playlist.YouTubePlaylistLoader.prototype =
     {
         Logger.getInstance().debug("[YT] Sending data request for url: "+url);
         var parser = new window.Common.UrlParser();
-        var playlistId = parser.getParameterValue(url, window.Google.GoogleApiConstants.YOUTUBE.LINK_PARAMS.PLAYLIST);
+        var playlistId = parser.getParameterValue(url, window.Google.YoutubeApi.LINK_PARAMS.PLAYLIST);
 
         var errorHandler = function(error)
         {
             Logger.getInstance().warning("[YT] Details loading error: "+error);
         };
 
-        if(playlistId !== window.Common.UrlParserConstants.URL_PARSE_ERR)
+        if(playlistId !== null)
         {
             new Promise(function(resolve)
                 {
@@ -194,8 +194,8 @@ window.Playlist.YouTubePlaylistLoader.prototype =
         }
         else
         {
-            var videoId = parser.getParameterValue(url, window.Google.GoogleApiConstants.YOUTUBE.LINK_PARAMS.VIDEO);
-            if(videoId !== window.Common.UrlParserConstants.URL_PARSE_ERR)
+            var videoId = parser.getParameterValue(url, window.Google.YoutubeApi.LINK_PARAMS.VIDEO);
+            if(videoId !== null)
             {
                 new Promise(function(resolve)
                 {
@@ -219,7 +219,7 @@ window.Playlist.YouTubePlaylistLoader.Helper =
     {
         var mediaDetails = new window.Player.MediaDetails();
 
-        mediaDetails.mediaType = window.Google.GoogleApiConstants.YOUTUBE.MEDIA_TYPE;
+        mediaDetails.mediaType = window.Google.YoutubeApi.MEDIA_TYPE;
         mediaDetails.duration = new window.Player.Duration(videoDetails.duration);
 
         var trackName = this.splitMediaTitle(videoDetails.title);
@@ -234,7 +234,7 @@ window.Playlist.YouTubePlaylistLoader.Helper =
         );
 
         mediaDetails.title = trackName.title;
-        mediaDetails.url = window.Google.GoogleApiConstants.YOUTUBE.URL + videoDetails.id;
+        mediaDetails.url = window.Google.YoutubeApi.URL + videoDetails.id;
 
         return mediaDetails;
     },

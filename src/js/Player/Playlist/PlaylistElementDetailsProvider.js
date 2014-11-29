@@ -3,7 +3,6 @@ window.Player = window.Player || {};
 
 window.Player.PlaylistElementDetailsProvider = function(detailsProvider, sessionProvider)
 {
-    this.sessionProvider = sessionProvider;
     this.detailsProvider = detailsProvider;
 };
 
@@ -15,9 +14,6 @@ window.Player.PlaylistElementDetailsProvider.prototype =
         {
             that.detailsProvider.getTrackDetails(
                 itemDetails,
-                {
-                    user: that.sessionProvider.getSession().name
-                },
                 {
                     done: resolve,
                     fail: reject

@@ -10,13 +10,13 @@ window.Services.WelcomeScreenService.prototype =
     activateApplication: function()
     {
         //cookie that will expire in one year
-        Cookie.getInstance().setCookie(this.config.WelcomeCookieName, this.config.WelcomeCookieTrueValue, 356);
+        Cookie.getInstance().setCookie(window.Common.CookiesNames.WelcomeCookie, window.Common.CookiesNames.CookieTrueValue, window.Common.CookiesNames.OneYearValid);
     },
 
     isApplicationAlreadyActivated: function()
     {
-        var cookieVal = Cookie.getInstance().getCookie(this.config.WelcomeCookieName);
+        var cookieVal = Cookie.getInstance().getCookie(window.Common.CookiesNames.WelcomeCookie);
 
-        return cookieVal === this.config.WelcomeCookieTrueValue;
+        return cookieVal === window.Common.CookiesNames.CookieTrueValue;
     }
 };
