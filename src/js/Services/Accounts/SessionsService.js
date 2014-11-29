@@ -7,9 +7,11 @@ window.Accounts.SessionService = function(sessionCoordinators)
 
 window.Accounts.SessionService.prototype =
 {
+    //session details -> window.Accounts.SessionDetails
     _handleSessionEstablished: function(sessionDetails)
     {
         EventBroker.getInstance().fireEventWithData(window.Accounts.SessionEvents.SessionEstablished, sessionDetails);
+        UserNotifier.getInstance().info("Session for your "+sessionDetails.AccountName+" account has been established.");
     },
 
     establishSession: function(accountName)

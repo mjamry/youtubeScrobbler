@@ -66,12 +66,6 @@ window.ApplicationCore.AppCore.prototype =
 {
     initialise: function()
     {
-        Logger.getInstance().info("Initialising core services.");
-        this.playbackDetailsService.initialise();
-        this.playbackControlService.initialise();
-        this.onlineScrobbler.initialise();
-        this.playlistService.initialise();
-
         Logger.getInstance().info("Initialising view controllers.");
         this.playlistViewController.initialise();
         this.playbackDetailsViewController.initialise();
@@ -85,6 +79,12 @@ window.ApplicationCore.AppCore.prototype =
         this.progressbarViewController.initialise();
         this.welcomeScreenController.initialise();
         this.accountDetailsViewController.initialise();
+
+        Logger.getInstance().info("Initialising core services.");
+        this.playbackDetailsService.initialise();
+        this.playbackControlService.initialise();
+        this.onlineScrobbler.initialise();
+        this.playlistService.initialise();
 
         if(this.welcomeScreenService.isApplicationAlreadyActivated())
         {
