@@ -11,9 +11,6 @@ main = function()
     var coreServicesFactory = new window.ApplicationCore.CoreServicesFactory();
     pageLoader.preInitialise(coreServicesFactory);
 
-    Logger.getInstance().info(window.Common.ApplicationDetails.Name+" version: "+window.Common.ApplicationDetails.Version);
-    Logger.getInstance().info("Application initialisation started.");
-
     var globalErrorHandler = new window.Common.GlobalErrorHandler();
     globalErrorHandler.initialise();
 
@@ -23,12 +20,8 @@ main = function()
 
     pageLoader.initialiseServices(coreServicesFactory, lastFmServicesFactory, playerServicesFactory);
     pageLoader.initialiseUI(uiFactory, lastFmServicesFactory);
-
     pageLoader.loadSubpages(uiFactory, window.UI.MenuItemsConfig);
-
     pageLoader.postInitialise(uiFactory);
-
-    Logger.getInstance().info("Application initialisation ended.");
 };
 
 $(window).unload(function()

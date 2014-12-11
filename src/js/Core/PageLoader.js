@@ -14,6 +14,9 @@ window.ApplicationCore.PageLoader.prototype =
         var logger = coreServicesFactory.createLoggerService();
         Logger.setInstance(logger);
 
+        Logger.getInstance().info(window.Common.ApplicationDetails.Name+" version: "+window.Common.ApplicationDetails.Version);
+        Logger.getInstance().info("[Init] Pre initialise - loading static services");
+
         //creating event broker service
         new EventBroker();
         this._eventBroker = coreServicesFactory.createBrokerHandler();
@@ -45,20 +48,23 @@ window.ApplicationCore.PageLoader.prototype =
 
     initialiseServices: function(coreServicesFactory, lastFmServicesFactory, playerServicesFactory)
     {
+        Logger.getInstance().info("[Init] Creating app services");
         this.appCore.createAppServices(coreServicesFactory, lastFmServicesFactory, playerServicesFactory);
-
+        Logger.getInstance().info("[Init] Initialising app services");
         this.appCore.initialiseAppServices();
     },
 
     initialiseUI: function(uiFactory, lastFmServicesFactory)
     {
+        Logger.getInstance().info("[Init] Creating UI view controllers");
         this.appCore.createViewControllers(uiFactory, lastFmServicesFactory);
-
+        Logger.getInstance().info("[Init] Initialising UI view controllers");
         this.appCore.initialiseViewControllers();
     },
 
     loadSubpages: function(uiFactory, pagesConfiguration)
     {
+        Logger.getInstance().info("[Init] Loading app pages");
         this.menuController = uiFactory.createMenuViewController();
         this.menuController.initialise();
 
@@ -70,6 +76,7 @@ window.ApplicationCore.PageLoader.prototype =
 
     postInitialise: function(uiFactory)
     {
+        Logger.getInstance().info("[Init] Post initialise");
         //this is here only for testing purposes to show logs
         var uilogger = uiFactory.createLoggerViewController();
         uilogger.initialise();
