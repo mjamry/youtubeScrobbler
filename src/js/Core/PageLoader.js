@@ -62,9 +62,41 @@ window.ApplicationCore.PageLoader.prototype =
 
     },
 
-    createApplicationCore: function()
+    postInitialise: function(uiFactory)
     {
-        return new window.ApplicationCore.AppCore();
+        //this is here only for testing purposes to show logs
+        var uilogger = uiFactory.createLoggerViewController();
+        uilogger.initialise();
+        uilogger.isLoggingAllowed = true;
+
+        //creating google tracker
+        var tracker = new window.Tracking.GoogleEventTrackerImpl(window.Tracking.GoogleTrackerConfig);
+        new GoogleTracker();
+        GoogleTracker.setInstance(tracker);
+
+        //hook to ui events
+        var uiTracker = new window.Tracking.GoogleUiTracker(window.Tracking.GoogleTrackerConfig);
+        uiTracker.hookUpToPlaybackControlEvents(window.UI.PlaybackControlConfiguration);
+        uiTracker.hookUpToPlaylistControlEvents(window.UI.PlaylistControlConfiguration);
+        uiTracker.hookUpToTestControlEvents(window.UI.TestReportUIConfig);
+        uiTracker.hookUpToLoggerControlEvents(window.UI.LoggerUIConfig);
+        uiTracker.hookUpToMediaLoadEvents(window.UI.MediaLoadConfig);
+        uiTracker.hookUpToPlaylistItemEvents(window.UI.PlaylistUIConfig);
+
+        var testReport = uiFactory.createTestReportViewController();
+        testReport.initialise();
+
+        this.HideAllApplicationPages();
+    },
+
+    //TODO: find more appropriate place for this
+    HideAllApplicationPages: function()
+    {
+        var menuConfig = window.UI.MenuItemsConfig;
+        for(var i in menuConfig)
+        {
+            $(menuConfig[i].Page).addClass("application-page-hidden");
+        }
     }
 };
 
