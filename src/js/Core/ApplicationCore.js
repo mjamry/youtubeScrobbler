@@ -5,68 +5,67 @@ window.ApplicationCore = window.ApplicationCore || {};
 window.UI = window.UI || {};
 window.Player = window.Player || {};
 
-window.ApplicationCore.AppCore = function(coreServicesFactory, uiFactory, playerServicesFactory, lastFmServicesFactory)
+window.ApplicationCore.AppCore = function()
 {
-    Logger.getInstance().info("Creating core services.");
-    this.uiCore = uiFactory.createUICore();
-
-    this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler(lastFmServicesFactory.createScrobbler());
-
-    var playlistElementDetailsProvider = playerServicesFactory.createPlaylistElementDetailsProvider(lastFmServicesFactory.createTrackInformationProvider());
-
-    this.playlistService = coreServicesFactory.createPlaylistService(playlistElementDetailsProvider);
-    this.playlistLoaderService = coreServicesFactory.createPlaylistLoaderService(this.playlistService);
-    this.searchService = coreServicesFactory.createSearchService();
-
-    this.player = coreServicesFactory.createMediaPlayer(this.uiCore.getPlayerContainer(), this.playlistService);
-    this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService(this.player);
-
-    this.sessionService = coreServicesFactory.createSessionService();
-    this.sessionService.initialise();
-
-    this.playlistFlowController = playerServicesFactory.createPlaylistFlowController(this.playlistService);
-
-    this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistFlowController);
-
-    var playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.playlistService, lastFmServicesFactory.createTrackLoveStateModifier());
-
-    this.playlistViewController = uiFactory.createPlaylistViewController(this.playlistService, this.playbackControlService, this.playlistFlowController);
-
-    this.playbackDetailsViewController = uiFactory.createPlaybackDetailsViewController(this.playbackDetailsService);
-
-    this.playbackControlViewController = uiFactory.createPlaybackControlViewController(this.player, this.playbackControlService, playlistElementLoveStateModifier, this.playlistService);
-
-    this.playlistControlViewController = uiFactory.createPlaylistControlViewController(this.playlistService, this.playlistFlowController);
-
-    this.mediaLoadViewController = uiFactory.createMediaLoadViewController(this.playlistLoaderService, this.searchService);
-
-    this.playlistItemEditorViewController = uiFactory.createPlaylistItemEditorViewController(this.playlistService, lastFmServicesFactory.createTrackInformationProvider());
-
-    this.playlistItemEditorListViewController = uiFactory.createPlaylistEditorListViewController(this.playlistService);
-
-    this.colorSchemeControlViewController = uiFactory.createColorSchemeControlViewController();
-
-    this.userNotificationViewController = uiFactory.createUserNotificationViewController();
-
-    this.progressbarViewController = uiFactory.createProgressbarViewController();
-
-    this.accountDetailsViewController = uiFactory.createAccountsViewController(this.sessionService);
-
-    this.welcomeScreenService = coreServicesFactory.createWelcomeService();
-    this.welcomeScreenController = uiFactory.createWelcomeScreenController(this.welcomeScreenService);
-
-    var appDetailsViewController = uiFactory.createAppDetailsViewController();
-    appDetailsViewController.setupDetails(window.Common.ApplicationDetails);
-
-    this.menuController = uiFactory.createMenuViewController();
-    this.menuController.initialise();
 };
 
 window.ApplicationCore.AppCore.prototype =
 {
-    initialise: function()
+    createAppServices: function(coreServicesFactory, lastFmServicesFactory, playerServicesFactory)
     {
-        Logger.getInstance().info("Initialising view controllers.");
+        this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler(lastFmServicesFactory.createScrobbler());
+
+        var playlistElementDetailsProvider = playerServicesFactory.createPlaylistElementDetailsProvider(lastFmServicesFactory.createTrackInformationProvider());
+
+        this.playlistService = coreServicesFactory.createPlaylistService(playlistElementDetailsProvider);
+        this.playlistLoaderService = coreServicesFactory.createPlaylistLoaderService(this.playlistService);
+        this.searchService = coreServicesFactory.createSearchService();
+
+        this.player = coreServicesFactory.createMediaPlayer(this.playlistService);
+        this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService(this.player);
+
+        this.sessionService = coreServicesFactory.createSessionService();
+        this.sessionService.initialise();
+
+        this.playlistFlowController = playerServicesFactory.createPlaylistFlowController(this.playlistService);
+
+        this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistFlowController);
+
+        this.playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.playlistService, lastFmServicesFactory.createTrackLoveStateModifier());
+
+        this.welcomeScreenService = coreServicesFactory.createWelcomeService();
+    },
+
+    initialiseAppServices: function()
+    {
+        this.playbackDetailsService.initialise();
+        this.playbackControlService.initialise();
+        this.onlineScrobbler.initialise();
+        this.playlistService.initialise();
+    },
+
+    createViewControllers: function(uiFactory, lastFmServicesFactory)
+    {
+        this.playlistViewController = uiFactory.createPlaylistViewController(this.playlistService, this.playbackControlService, this.playlistFlowController);
+        this.playbackDetailsViewController = uiFactory.createPlaybackDetailsViewController(this.playbackDetailsService);
+        this.playbackControlViewController = uiFactory.createPlaybackControlViewController(this.player, this.playbackControlService, this.playlistElementLoveStateModifier, this.playlistService);
+        this.playlistControlViewController = uiFactory.createPlaylistControlViewController(this.playlistService, this.playlistFlowController);
+        this.mediaLoadViewController = uiFactory.createMediaLoadViewController(this.playlistLoaderService, this.searchService);
+        this.playlistItemEditorViewController = uiFactory.createPlaylistItemEditorViewController(this.playlistService, lastFmServicesFactory.createTrackInformationProvider());
+        this.playlistItemEditorListViewController = uiFactory.createPlaylistEditorListViewController(this.playlistService);
+        this.colorSchemeControlViewController = uiFactory.createColorSchemeControlViewController();
+        this.userNotificationViewController = uiFactory.createUserNotificationViewController();
+        this.progressbarViewController = uiFactory.createProgressbarViewController();
+        this.accountDetailsViewController = uiFactory.createAccountsViewController(this.sessionService);
+        this.welcomeScreenController = uiFactory.createWelcomeScreenController(this.welcomeScreenService);
+        var appDetailsViewController = uiFactory.createAppDetailsViewController();
+        appDetailsViewController.setupDetails(window.Common.ApplicationDetails);
+        this.menuController = uiFactory.createMenuViewController();
+        this.menuController.initialise();
+    },
+
+    initialiseViewControllers: function()
+    {
         this.playlistViewController.initialise();
         this.playbackDetailsViewController.initialise();
         this.playbackControlViewController.initialise();
@@ -79,12 +78,6 @@ window.ApplicationCore.AppCore.prototype =
         this.progressbarViewController.initialise();
         this.welcomeScreenController.initialise();
         this.accountDetailsViewController.initialise();
-
-        Logger.getInstance().info("Initialising core services.");
-        this.playbackDetailsService.initialise();
-        this.playbackControlService.initialise();
-        this.onlineScrobbler.initialise();
-        this.playlistService.initialise();
 
         if(this.welcomeScreenService.isApplicationAlreadyActivated())
         {

@@ -6,56 +6,31 @@ window.LastFm = window.LastFm || {};
 //main
 main = function()
 {
-    //hides controls
-    $("#controls-schemes").hide();
+    var pageLoader = new window.ApplicationCore.PageLoader();
     HideAllApplicationPages();
 
     var coreServicesFactory = new window.ApplicationCore.CoreServicesFactory();
-    var uiFactory = new window.UI.UIControllersFactory(window.UI.UIControllersFactoryConfig);
-    var playerServicesFactory = new window.Player.PlayerServicesFactory();
-    var lastFmServicesFactory = new window.LastFm.LastFmApiFactory();
+    pageLoader.preInitialise(coreServicesFactory);
+
+    Logger.getInstance().info(window.Common.ApplicationDetails.Name+" version: "+window.Common.ApplicationDetails.Version);
+    Logger.getInstance().info("Application initialisation started.");
 
     var globalErrorHandler = new window.Common.GlobalErrorHandler();
     globalErrorHandler.initialise();
 
-    //logger should be created at the beginning
-    new Logger();
-    var logger = coreServicesFactory.createLoggerService();
-    Logger.setInstance(logger);
+    var uiFactory = new window.UI.UIControllersFactory(window.UI.UIControllersFactoryConfig);
+    var playerServicesFactory = new window.Player.PlayerServicesFactory();
+    var lastFmServicesFactory = new window.LastFm.LastFmApiFactory();
 
-    //creating event broker service
-    new EventBroker();
-    this._eventBroker = coreServicesFactory.createBrokerHandler();
-    EventBroker.setInstance(this._eventBroker);
+    pageLoader.initialiseServices(coreServicesFactory, lastFmServicesFactory, playerServicesFactory);
+    pageLoader.initialiseUI(uiFactory, lastFmServicesFactory);
 
-    logger.initialise(this._eventBroker);
-
+    //this is here only for testing purposes to show logs
     var uilogger = uiFactory.createLoggerViewController();
     uilogger.initialise();
     uilogger.isLoggingAllowed = true;
 
-    new UserNotifier();
-    var userNotifier = coreServicesFactory.createUserNotifier();
-    UserNotifier.setInstance(userNotifier);
 
-    Logger.getInstance().info(window.Common.ApplicationDetails.Name+" version: "+window.Common.ApplicationDetails.Version);
-    Logger.getInstance().info("Application initialisation started.");
-    new TimeParser();
-    TimeParser.setInstance(new window.Common.TimeParserImpl());
-
-    new LocalStorage();
-    LocalStorage.setInstance(new window.Common.LocalStorageImpl());
-
-    new Cookie();
-    Cookie.setInstance(coreServicesFactory.createCookieHandler());
-
-    new ProgressbarService();
-    ProgressbarService.setInstance(new window.Services.ProgressbarServiceImpl());
-
-    //creating application core
-    var applicationCore = new window.ApplicationCore.AppCore(coreServicesFactory, uiFactory, playerServicesFactory, lastFmServicesFactory);
-    applicationCore.initialise();
-    applicationCore.setUpMenuItems(window.UI.MenuItemsConfig);
 
     //creating google tracker
     var tracker = new window.Tracking.GoogleEventTrackerImpl(window.Tracking.GoogleTrackerConfig);

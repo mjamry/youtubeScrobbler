@@ -52,9 +52,9 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new window.Accounts.SessionService(sessionCoordinators);
     },
 
-    createMediaPlayer: function(container, playlistService)
+    createMediaPlayer: function(playlistService)
     {
-        return new window.Player.MediaPlayer(window.Player.MediaPlayerConfig, container, playlistService);
+        return new window.Player.MediaPlayer(window.Player.MediaPlayerConfig, window.UI.UIConstants.PlayerContainer, playlistService);
     },
 
     createPlaylistService: function(playlistElementDetailsProvider)

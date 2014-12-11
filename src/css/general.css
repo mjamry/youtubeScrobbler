@@ -29,6 +29,11 @@ body
     display:none;
 }
 
+#controls-schemes
+{
+    display: none;
+}
+
 /*----------------------------------------------WELCOME--SCREEN------------------------------------------*/
 
 #welcome-screen-description
