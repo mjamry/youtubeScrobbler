@@ -71,6 +71,10 @@ window.ApplicationCore.PageLoader.prototype =
         for(var item in pagesConfiguration)
         {
             this.menuController.add(pagesConfiguration[item].Name, pagesConfiguration[item].Icon, pagesConfiguration[item].Page);
+            $(pagesConfiguration[item].Page).load(pagesConfiguration[item].ContentLocation, function(response, status)
+            {
+                Logger.getInstance().debug("file: "+pagesConfiguration[item].ContentLocation+" stat: "+status);
+            });
         }
     },
 

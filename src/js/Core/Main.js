@@ -18,9 +18,9 @@ main = function()
     var playerServicesFactory = new window.Player.PlayerServicesFactory();
     var lastFmServicesFactory = new window.LastFm.LastFmApiFactory();
 
+    pageLoader.loadSubpages(uiFactory, window.UI.MenuItemsConfig);
     pageLoader.initialiseServices(coreServicesFactory, lastFmServicesFactory, playerServicesFactory);
     pageLoader.initialiseUI(uiFactory, lastFmServicesFactory);
-    pageLoader.loadSubpages(uiFactory, window.UI.MenuItemsConfig);
     pageLoader.postInitialise(uiFactory);
 };
 
