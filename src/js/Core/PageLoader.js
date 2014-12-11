@@ -57,9 +57,15 @@ window.ApplicationCore.PageLoader.prototype =
         this.appCore.initialiseViewControllers();
     },
 
-    loadSubpages: function()
+    loadSubpages: function(uiFactory, pagesConfiguration)
     {
+        this.menuController = uiFactory.createMenuViewController();
+        this.menuController.initialise();
 
+        for(var item in pagesConfiguration)
+        {
+            this.menuController.add(pagesConfiguration[item].Name, pagesConfiguration[item].Icon, pagesConfiguration[item].Page);
+        }
     },
 
     postInitialise: function(uiFactory)

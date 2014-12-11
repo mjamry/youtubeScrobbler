@@ -60,8 +60,7 @@ window.ApplicationCore.AppCore.prototype =
         this.welcomeScreenController = uiFactory.createWelcomeScreenController(this.welcomeScreenService);
         var appDetailsViewController = uiFactory.createAppDetailsViewController();
         appDetailsViewController.setupDetails(window.Common.ApplicationDetails);
-        this.menuController = uiFactory.createMenuViewController();
-        this.menuController.initialise();
+
     },
 
     initialiseViewControllers: function()
@@ -82,15 +81,6 @@ window.ApplicationCore.AppCore.prototype =
         if(this.welcomeScreenService.isApplicationAlreadyActivated())
         {
             this.welcomeScreenController.showMainScreen();
-        }
-    },
-
-    setUpMenuItems: function(menuConfig)
-    {
-        for(var item in menuConfig)
-        {
-            this.menuController.add(menuConfig[item].Name, menuConfig[item].Icon, menuConfig[item].Page);
-
         }
     }
 };

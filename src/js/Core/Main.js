@@ -24,6 +24,8 @@ main = function()
     pageLoader.initialiseServices(coreServicesFactory, lastFmServicesFactory, playerServicesFactory);
     pageLoader.initialiseUI(uiFactory, lastFmServicesFactory);
 
+    pageLoader.loadSubpages(uiFactory, window.UI.MenuItemsConfig);
+
     pageLoader.postInitialise(uiFactory);
 
     Logger.getInstance().info("Application initialisation ended.");
