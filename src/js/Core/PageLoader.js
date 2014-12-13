@@ -68,14 +68,24 @@ window.ApplicationCore.PageLoader.prototype =
         this.menuController = uiFactory.createMenuViewController();
         this.menuController.initialise();
 
+        var pageLoadedHandler = function onPageLoaded(pageConfig)
+        {
+            return function onPageLoaded(response, status)
+            {
+                Logger.getInstance().debug("file: "+pageConfig.ContentLocation+" stat: "+status);
+            };
+        };
+
         for(var item in pagesConfiguration)
         {
             this.menuController.add(pagesConfiguration[item].Name, pagesConfiguration[item].Icon, pagesConfiguration[item].Page);
-            $(pagesConfiguration[item].Page).load(pagesConfiguration[item].ContentLocation, function(response, status)
-            {
-                Logger.getInstance().debug("file: "+pagesConfiguration[item].ContentLocation+" stat: "+status);
-            });
+            $(pagesConfiguration[item].Page).load(pagesConfiguration[item].ContentLocation, pageLoadedHandler(pagesConfiguration[item]));
         }
+    },
+
+    initialiseGoogleServices: function()
+    {
+        this.appCore.initialiseGoogleApiServices();
     },
 
     postInitialise: function(uiFactory)

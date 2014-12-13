@@ -12,14 +12,9 @@ window.ApplicationCore.CoreServicesFactory = function()
 
 window.ApplicationCore.CoreServicesFactory.prototype =
 {
-    _createGoogleApiWrapper: function()
+    createGoogleApiWrapper: function()
     {
-        if(this._googleApiWrapper === null)
-        {
-            this._googleApiWrapper = new window.Google.GoogleApiWrapper();
-        }
-
-        return this._googleApiWrapper;
+        return new window.Google.GoogleApiWrapper();
     },
 
     createBrokerHandler: function()
@@ -42,11 +37,11 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new window.Common.CookieImpl();
     },
 
-    createSessionService: function()
+    createSessionService: function(googleApi)
     {
         var lastFmTokenHandler = new window.Accounts.LastFmTokenHandler(window.Accounts.LastFmSessionConstants);
         var sessionCoordinators = [];
-        sessionCoordinators[window.Accounts.AccountsNames.Google] = new window.Accounts.GoogleSessionCoordinator(this._createGoogleApiWrapper());
+        sessionCoordinators[window.Accounts.AccountsNames.Google] = new window.Accounts.GoogleSessionCoordinator(googleApi);
         sessionCoordinators[window.Accounts.AccountsNames.LastFM] = new window.Accounts.LastFmSessionCoordinator(LastFmApiCommon.DATA_PROVIDER, lastFmTokenHandler);
 
         return new window.Accounts.SessionService(sessionCoordinators);
@@ -78,10 +73,10 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new window.Common.UserNotifierImpl();
     },
 
-    createPlaylistLoaderService: function(playlistService)
+    createPlaylistLoaderService: function(playlistService, dataProvider)
     {
         var dataProvides = [];
-        dataProvides[window.Playlist.PlaylistLoaderTypes.Youtube] = this._createGoogleApiWrapper();
+        dataProvides[window.Playlist.PlaylistLoaderTypes.Youtube] = dataProvider;
         var playlistLoadersFactory = new window.Playlist.PlaylistLoadersFactory(dataProvides);
 
         return new window.Playlist.PlaylistLoaderService(playlistService, playlistLoadersFactory);
@@ -92,10 +87,10 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new window.Services.WelcomeScreenService(window.UI.WelcomeScreenConfiguration);
     },
 
-    createSearchService: function()
+    createSearchService: function(dataProvider)
     {
         var searchDetailsProviders = {};
-        searchDetailsProviders[window.Google.ServiceNames.Youtube] = this._createGoogleApiWrapper();
+        searchDetailsProviders[window.Google.ServiceNames.Youtube] = dataProvider;
 
         return new window.Services.SearchService(searchDetailsProviders);
     }

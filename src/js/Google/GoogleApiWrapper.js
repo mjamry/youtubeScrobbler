@@ -10,8 +10,16 @@ window.Google.GoogleApiWrapper = function()
     this._initialsiedServices[window.Google.ServiceNames.Youtube] = false;
     this._initialsiedServices[window.Google.ServiceNames.Auth] = false;
 
+    //{name, callback, ready}
+    this._services = [];
+    this._apiLoaded = false;
+
     //initialises api
-    gapi.client.setApiKey(window.Google.GoogleApiConstants.API_KEY);
+    if(gapi.client)
+    {
+
+        this._apiLoaded = true;
+    }
 };
 
 window.Google.GoogleApiWrapper.prototype =
@@ -52,15 +60,44 @@ window.Google.GoogleApiWrapper.prototype =
         }
     },
 
+    initialise: function()
+    {
+        gapi.client.setApiKey(window.Google.GoogleApiConstants.API_KEY);
+
+        var serviceInitHandler = function(service)
+        {
+            return function onServiceInitialised()
+            {
+                service.ready = true;
+                service.callback();
+            };
+        };
+
+        for(var index in this._services)
+        {
+            if (this._services[index].name === window.Google.ServiceNames.Youtube)
+            {
+                this._initialiseYoutube(serviceInitHandler(this._services[index]));
+            }
+            if (this._services[index].name === window.Google.ServiceNames.Auth)
+            {
+                this._initialisesAuth(serviceInitHandler(this._services[index]));
+            }
+        }
+    },
+
     initialiseService: function(serviceName, callback)
     {
-        if(serviceName === window.Google.ServiceNames.Youtube)
+        this._services.push(
+            {
+                name: serviceName,
+                callback: callback,
+                ready: false
+            });
+
+        if(this._apiLoaded)
         {
-            this._initialiseYoutube(callback);
-        }
-        if(serviceName === window.Google.ServiceNames.Auth)
-        {
-            this._initialisesAuth(callback);
+
         }
     },
 
