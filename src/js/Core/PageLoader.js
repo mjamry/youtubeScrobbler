@@ -10,31 +10,32 @@ window.ApplicationCore.PageLoader.prototype =
 {
     load: function(coreServicesFactory, lastFmServicesFactory, playerServicesFactory, uiFactory, pagesConfiguration)
     {
+        var startTime = new Date().getTime();
         var that = this;
-        this.preInitialise(coreServicesFactory).
+        this._preInitialise(coreServicesFactory).
             then(function preInitSuccess()
             {
-                return that.loadSubpages(uiFactory, pagesConfiguration);
+                return that._loadPagesContent(uiFactory, pagesConfiguration);
             }).
             then(function loadPagesContentSuccess()
             {
-                return that.createServices(coreServicesFactory, lastFmServicesFactory, playerServicesFactory);
+                return that._createServices(coreServicesFactory, lastFmServicesFactory, playerServicesFactory);
             }).
             then(function createServicesSuccess()
             {
-                return that.createUI(uiFactory, lastFmServicesFactory);
+                return that._createUI(uiFactory, lastFmServicesFactory);
             }).
             then(function createUISuccess()
             {
-                return that.initialiseUI();
+                return that._initialiseUI();
             }).
             then(function initialiseUISuccess()
             {
-                return that.initialiseServices();
+                return that._initialiseServices();
             }).
             then(function initialiseServicesSuccess()
             {
-                return that.postInitialise(uiFactory);
+                return that._postInitialise(uiFactory);
             }).
             then(function postInitialiseSuccess()
             {
@@ -49,11 +50,13 @@ window.ApplicationCore.PageLoader.prototype =
                     that.canLoadGoogleServices = true;
                 }
 
-                Logger.getInstance().info("[Init] Page initialisation successful");
+                var endTime = new Date().getTime();
+                Logger.getInstance().info("[Init] Page initialisation successful.");
+                Logger.getInstance().debug("[Init] Initialisation took "+(endTime - startTime)+"ms");
             });
     },
 
-    preInitialise: function(coreServicesFactory)
+    _preInitialise: function(coreServicesFactory)
     {
         var that = this;
         return new Promise(function(resolve)
@@ -77,6 +80,10 @@ window.ApplicationCore.PageLoader.prototype =
             UserNotifier.setInstance(userNotifier);
 
             logger.initialise(that._eventBroker);
+            //this is here only for testing purposes to show logs
+            var uilogger = uiFactory.createLoggerViewController();
+            uilogger.initialise();
+            uilogger.isLoggingAllowed = true;
 
             //create time parser
             new TimeParser();
@@ -98,7 +105,7 @@ window.ApplicationCore.PageLoader.prototype =
         });
     },
 
-    createServices: function(coreServicesFactory, lastFmServicesFactory, playerServicesFactory)
+    _createServices: function(coreServicesFactory, lastFmServicesFactory, playerServicesFactory)
     {
         var that = this;
         return new Promise(function(resolve)
@@ -110,7 +117,7 @@ window.ApplicationCore.PageLoader.prototype =
         });
     },
 
-    initialiseServices: function()
+    _initialiseServices: function()
     {
         var that = this;
         return new Promise(function(resolve)
@@ -122,7 +129,7 @@ window.ApplicationCore.PageLoader.prototype =
         });
     },
 
-    createUI: function(uiFactory, lastFmServicesFactory)
+    _createUI: function(uiFactory, lastFmServicesFactory)
     {
         var that = this;
         return new Promise(function(resolve)
@@ -134,7 +141,7 @@ window.ApplicationCore.PageLoader.prototype =
         });
     },
 
-    initialiseUI: function()
+    _initialiseUI: function()
     {
         var that = this;
         return new Promise(function(resolve)
@@ -146,7 +153,7 @@ window.ApplicationCore.PageLoader.prototype =
         });
     },
 
-    loadSubpages: function(uiFactory, pagesConfiguration)
+    _loadPagesContent: function(uiFactory, pagesConfiguration)
     {
         var that = this;
         return new Promise(function(resolve)
@@ -190,16 +197,12 @@ window.ApplicationCore.PageLoader.prototype =
         }
     },
 
-    postInitialise: function(uiFactory)
+    _postInitialise: function(uiFactory)
     {
         var that = this;
         return new Promise(function(resolve)
         {
             Logger.getInstance().info("[Init] Post initialise");
-            //this is here only for testing purposes to show logs
-            var uilogger = uiFactory.createLoggerViewController();
-            uilogger.initialise();
-            uilogger.isLoggingAllowed = true;
 
             //creating google tracker
             var tracker = new window.Tracking.GoogleEventTrackerImpl(window.Tracking.GoogleTrackerConfig);
@@ -233,6 +236,9 @@ window.ApplicationCore.PageLoader.prototype =
         {
             $(menuConfig[i].Page).addClass("application-page-hidden");
         }
+
+        //show player after initialisation
+        $(menuConfig[0].Page).removeClass("application-page-hidden");
     }
 };
 
