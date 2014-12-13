@@ -6,20 +6,8 @@ window.Google.GoogleApiWrapper = function()
     this.USER_ERROR_MSG = "There is a problem with loading Google services. Please reload page.";
     this.LOG_ERROR_MSG = "[Google API] Youtube service is not loaded yet.";
 
-    this._initialsiedServices = {};
-    this._initialsiedServices[window.Google.ServiceNames.Youtube] = false;
-    this._initialsiedServices[window.Google.ServiceNames.Auth] = false;
-
     //{name, callback, ready}
     this._services = [];
-    this._apiLoaded = false;
-
-    //initialises api
-    if(gapi.client)
-    {
-
-        this._apiLoaded = true;
-    }
 };
 
 window.Google.GoogleApiWrapper.prototype =
@@ -32,32 +20,24 @@ window.Google.GoogleApiWrapper.prototype =
 
     _initialiseYoutube: function(callback)
     {
-        if(!this._initialsiedServices[window.Google.ServiceNames.Youtube])
+        var onServiceInitialised = function()
         {
-            var onServiceInitialised = function()
-            {
-                Logger.getInstance().info("[Google Api] Youtube service loaded.");
-                this._initialsiedServices[window.Google.ServiceNames.Youtube] = true;
-                callback();
-            }.bind(this);
+            Logger.getInstance().info("[Google Api] Youtube service loaded.");
+            callback();
+        }.bind(this);
 
-            gapi.client.load(window.Google.YoutubeApi.NAME, window.Google.YoutubeApi.VERSION,onServiceInitialised);
-        }
+        gapi.client.load(window.Google.YoutubeApi.NAME, window.Google.YoutubeApi.VERSION,onServiceInitialised);
     },
 
     _initialisesAuth: function(callback)
     {
-        if(!this._initialsiedServices[window.Google.ServiceNames.Auth])
+        var onServiceInitialised = function ()
         {
-            var onServiceInitialised = function ()
-            {
-                Logger.getInstance().info("[Google Api] OAuth2 service loaded.");
-                this._initialsiedServices[window.Google.ServiceNames.Auth] = true;
-                callback();
-            }.bind(this);
+            Logger.getInstance().info("[Google Api] OAuth2 service loaded.");
+            callback();
+        }.bind(this);
 
-            gapi.client.load(window.Google.AuthApi.NAME, window.Google.AuthApi.VERSION, onServiceInitialised);
-        }
+        gapi.client.load(window.Google.AuthApi.NAME, window.Google.AuthApi.VERSION, onServiceInitialised);
     },
 
     initialise: function()
@@ -68,42 +48,37 @@ window.Google.GoogleApiWrapper.prototype =
         {
             return function onServiceInitialised()
             {
-                service.ready = true;
+                service.isReady = true;
                 service.callback();
             };
         };
 
-        for(var index in this._services)
+        for(var service in this._services)
         {
-            if (this._services[index].name === window.Google.ServiceNames.Youtube)
+            switch(service)
             {
-                this._initialiseYoutube(serviceInitHandler(this._services[index]));
-            }
-            if (this._services[index].name === window.Google.ServiceNames.Auth)
-            {
-                this._initialisesAuth(serviceInitHandler(this._services[index]));
+                case window.Google.ServiceNames.Youtube:
+                    this._initialiseYoutube(serviceInitHandler(this._services[service]));
+                    break;
+                case window.Google.ServiceNames.Auth:
+                    this._initialisesAuth(serviceInitHandler(this._services[service]));
+                    break;
             }
         }
     },
 
     initialiseService: function(serviceName, callback)
     {
-        this._services.push(
+        this._services[serviceName] =
             {
-                name: serviceName,
                 callback: callback,
-                ready: false
-            });
-
-        if(this._apiLoaded)
-        {
-
-        }
+                isReady: false
+            };
     },
 
     _obtainSessionToken: function(requestOptions, callback)
     {
-        if(this._initialsiedServices[window.Google.ServiceNames.Auth])
+        if(this._services[window.Google.ServiceNames.Auth].isReady)
         {
             var options = $.extend(
                 {
@@ -132,7 +107,7 @@ window.Google.GoogleApiWrapper.prototype =
 
     getUserInfo: function(callback)
     {
-        if(this._initialsiedServices[window.Google.ServiceNames.Auth])
+        if(this._services[window.Google.ServiceNames.Auth].isReady)
         {
             var request = gapi.client.oauth2.userinfo.get();
             request.execute(callback);
@@ -141,7 +116,7 @@ window.Google.GoogleApiWrapper.prototype =
 
     getUserPlaylists: function(callback)
     {
-        if(this._initialsiedServices[window.Google.ServiceNames.Youtube])
+        if(this._services[window.Google.ServiceNames.Youtube].isReady)
         {
             var options =
                 {
@@ -162,7 +137,7 @@ window.Google.GoogleApiWrapper.prototype =
 
     getPlaylistDetails: function(requestOptions, callback)
     {
-        if(this._initialsiedServices[window.Google.ServiceNames.Youtube])
+        if(this._services[window.Google.ServiceNames.Youtube].isReady)
         {
             var options = $.extend(
                 {
@@ -184,7 +159,7 @@ window.Google.GoogleApiWrapper.prototype =
 
     getVideoDetails: function(requestOptions, callback)
     {
-        if(this._initialsiedServices[window.Google.ServiceNames.Youtube])
+        if(this._services[window.Google.ServiceNames.Youtube].isReady)
         {
             var options = $.extend(
                 {
@@ -205,7 +180,7 @@ window.Google.GoogleApiWrapper.prototype =
 
     getSearchResults: function(requestOptions, callback)
     {
-        if(this._initialsiedServices[window.Google.ServiceNames.Youtube])
+        if(this._services[window.Google.ServiceNames.Youtube].isReady)
         {
             var options = $.extend(
                 {
