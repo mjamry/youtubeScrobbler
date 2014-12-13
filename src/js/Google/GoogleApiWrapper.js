@@ -20,48 +20,47 @@ window.Google.GoogleApiWrapper.prototype =
 
     _initialiseYoutube: function(callback)
     {
-        var onServiceInitialised = function()
+        if(!this._services[window.Google.ServiceNames.Youtube].isReady)
         {
-            Logger.getInstance().info("[Google Api] Youtube service loaded.");
-            callback();
-        }.bind(this);
+            var onServiceInitialised = function ()
+            {
+                Logger.getInstance().info("[Google Api] Youtube service loaded.");
+                this._services[window.Google.ServiceNames.Youtube].isReady = true;
+                callback();
+            }.bind(this);
 
-        gapi.client.load(window.Google.YoutubeApi.NAME, window.Google.YoutubeApi.VERSION,onServiceInitialised);
+            gapi.client.load(window.Google.YoutubeApi.NAME, window.Google.YoutubeApi.VERSION, onServiceInitialised);
+        }
     },
 
     _initialisesAuth: function(callback)
     {
-        var onServiceInitialised = function ()
+        if(!this._services[window.Google.ServiceNames.Auth].isReady)
         {
-            Logger.getInstance().info("[Google Api] OAuth2 service loaded.");
-            callback();
-        }.bind(this);
+            var onServiceInitialised = function ()
+            {
+                Logger.getInstance().info("[Google Api] OAuth2 service loaded.");
+                this._services[window.Google.ServiceNames.Auth].isReady = true;
+                callback();
+            }.bind(this);
 
-        gapi.client.load(window.Google.AuthApi.NAME, window.Google.AuthApi.VERSION, onServiceInitialised);
+            gapi.client.load(window.Google.AuthApi.NAME, window.Google.AuthApi.VERSION, onServiceInitialised);
+        }
     },
 
     initialise: function()
     {
         gapi.client.setApiKey(window.Google.GoogleApiConstants.API_KEY);
 
-        var serviceInitHandler = function(service)
-        {
-            return function onServiceInitialised()
-            {
-                service.isReady = true;
-                service.callback();
-            };
-        };
-
         for(var service in this._services)
         {
             switch(service)
             {
                 case window.Google.ServiceNames.Youtube:
-                    this._initialiseYoutube(serviceInitHandler(this._services[service]));
+                    this._initialiseYoutube(this._services[service].callback);
                     break;
                 case window.Google.ServiceNames.Auth:
-                    this._initialisesAuth(serviceInitHandler(this._services[service]));
+                    this._initialisesAuth(this._services[service].callback);
                     break;
             }
         }
