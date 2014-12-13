@@ -20,14 +20,10 @@ $(function()
     playerServicesFactory = new window.Player.PlayerServicesFactory();
     lastFmServicesFactory = new window.LastFm.LastFmApiFactory();
 
-    pageLoader.preInitialise(coreServicesFactory);
-
     var globalErrorHandler = new window.Common.GlobalErrorHandler();
     globalErrorHandler.initialise();
 
-    pageLoader.loadSubpages(uiFactory, window.UI.MenuItemsConfig);
-
-
+    pageLoader.load(coreServicesFactory, lastFmServicesFactory, playerServicesFactory, uiFactory, window.UI.MenuItemsConfig);
 });
 
 $(window).unload(function()
@@ -37,10 +33,5 @@ $(window).unload(function()
 
 main = function()
 {
-    pageLoader.createServices(coreServicesFactory, lastFmServicesFactory, playerServicesFactory);
-    pageLoader.createUI(uiFactory, lastFmServicesFactory);
-    pageLoader.initialiseUI();
-    pageLoader.initialiseServices();
-    pageLoader.postInitialise(uiFactory);
     pageLoader.initialiseGoogleServices();
 };
