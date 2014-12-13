@@ -37,8 +37,10 @@ $(window).unload(function()
 
 main = function()
 {
-    pageLoader.initialiseServices(coreServicesFactory, lastFmServicesFactory, playerServicesFactory);
-    pageLoader.initialiseUI(uiFactory, lastFmServicesFactory);
+    pageLoader.createServices(coreServicesFactory, lastFmServicesFactory, playerServicesFactory);
+    pageLoader.createUI(uiFactory, lastFmServicesFactory);
+    pageLoader.initialiseUI();
+    pageLoader.initialiseServices();
     pageLoader.postInitialise(uiFactory);
     pageLoader.initialiseGoogleServices();
 };

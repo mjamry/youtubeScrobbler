@@ -46,18 +46,26 @@ window.ApplicationCore.PageLoader.prototype =
         ProgressbarService.setInstance(new window.Services.ProgressbarServiceImpl());
     },
 
-    initialiseServices: function(coreServicesFactory, lastFmServicesFactory, playerServicesFactory)
+    createServices: function(coreServicesFactory, lastFmServicesFactory, playerServicesFactory)
     {
         Logger.getInstance().info("[Init] Creating app services");
         this.appCore.createAppServices(coreServicesFactory, lastFmServicesFactory, playerServicesFactory);
+    },
+
+    initialiseServices: function()
+    {
         Logger.getInstance().info("[Init] Initialising app services");
         this.appCore.initialiseAppServices();
     },
 
-    initialiseUI: function(uiFactory, lastFmServicesFactory)
+    createUI: function(uiFactory, lastFmServicesFactory)
     {
         Logger.getInstance().info("[Init] Creating UI view controllers");
         this.appCore.createViewControllers(uiFactory, lastFmServicesFactory);
+    },
+
+    initialiseUI: function()
+    {
         Logger.getInstance().info("[Init] Initialising UI view controllers");
         this.appCore.initialiseViewControllers();
     },
