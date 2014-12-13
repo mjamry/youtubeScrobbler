@@ -12,32 +12,32 @@ window.ApplicationCore.PageLoader.prototype =
     {
         var startTime = new Date().getTime();
         var that = this;
-        this._preInitialise(coreServicesFactory).
-            then(function preInitSuccess()
+        this._preInitialise(coreServicesFactory, uiFactory)
+            .then(function preInitSuccess()
             {
                 return that._loadPagesContent(uiFactory, pagesConfiguration);
-            }).
-            then(function loadPagesContentSuccess()
+            })
+            .then(function loadPagesContentSuccess()
             {
                 return that._createServices(coreServicesFactory, lastFmServicesFactory, playerServicesFactory);
-            }).
-            then(function createServicesSuccess()
+            })
+            .then(function createServicesSuccess()
             {
                 return that._createUI(uiFactory, lastFmServicesFactory);
-            }).
-            then(function createUISuccess()
+            })
+            .then(function createUISuccess()
             {
                 return that._initialiseUI();
-            }).
-            then(function initialiseUISuccess()
+            })
+            .then(function initialiseUISuccess()
             {
                 return that._initialiseServices();
-            }).
-            then(function initialiseServicesSuccess()
+            })
+            .then(function initialiseServicesSuccess()
             {
                 return that._postInitialise(uiFactory);
-            }).
-            then(function postInitialiseSuccess()
+            })
+            .then(function postInitialiseSuccess()
             {
                 //check if google client has been already loaded
                 //if yes init google services, else just wait until it is ready
@@ -53,10 +53,14 @@ window.ApplicationCore.PageLoader.prototype =
                 var endTime = new Date().getTime();
                 Logger.getInstance().info("[Init] Page initialisation successful.");
                 Logger.getInstance().debug("[Init] Initialisation took "+(endTime - startTime)+"ms");
+            })
+            .catch(function(error)
+            {
+                Logger.getInstance().error("[Init] Page initialisation error: "+error)
             });
     },
 
-    _preInitialise: function(coreServicesFactory)
+    _preInitialise: function(coreServicesFactory, uiFactory)
     {
         var that = this;
         return new Promise(function(resolve)
@@ -80,10 +84,6 @@ window.ApplicationCore.PageLoader.prototype =
             UserNotifier.setInstance(userNotifier);
 
             logger.initialise(that._eventBroker);
-            //this is here only for testing purposes to show logs
-            var uilogger = uiFactory.createLoggerViewController();
-            uilogger.initialise();
-            uilogger.isLoggingAllowed = true;
 
             //create time parser
             new TimeParser();
@@ -203,6 +203,11 @@ window.ApplicationCore.PageLoader.prototype =
         return new Promise(function(resolve)
         {
             Logger.getInstance().info("[Init] Post initialise");
+
+            //this is here only for testing purposes to show logs
+            var uilogger = uiFactory.createLoggerViewController();
+            uilogger.initialise();
+            uilogger.isLoggingAllowed = true;
 
             //creating google tracker
             var tracker = new window.Tracking.GoogleEventTrackerImpl(window.Tracking.GoogleTrackerConfig);
