@@ -8,14 +8,14 @@ window.ApplicationCore.PageLoader  =function()
 
 window.ApplicationCore.PageLoader.prototype =
 {
-    load: function(coreServicesFactory, lastFmServicesFactory, playerServicesFactory, uiFactory, pagesConfiguration)
+    load: function(coreServicesFactory, lastFmServicesFactory, playerServicesFactory, uiFactory, pagesConfiguration, menuItemsConfiguration)
     {
         var startTime = new Date().getTime();
         var that = this;
         this._preInitialise(coreServicesFactory, uiFactory)
             .then(function preInitSuccess()
             {
-                return that._loadPagesContent(uiFactory, pagesConfiguration);
+                return that._loadPagesContent(pagesConfiguration);
             })
             .then(function loadPagesContentSuccess()
             {
@@ -27,7 +27,7 @@ window.ApplicationCore.PageLoader.prototype =
             })
             .then(function createUISuccess()
             {
-                return that._initialiseUI();
+                return that._initialiseUI(menuItemsConfiguration);
             })
             .then(function initialiseUISuccess()
             {
@@ -156,35 +156,27 @@ window.ApplicationCore.PageLoader.prototype =
         });
     },
 
-    _initialiseUI: function()
+    _initialiseUI: function(menuItemsConfiguration)
     {
         var that = this;
         return new Promise(function(resolve)
         {
             Logger.getInstance().info("[Init] Initialising UI view controllers");
-            that.appCore.initialiseViewControllers();
+            that.appCore.initialiseViewControllers(menuItemsConfiguration);
 
             resolve();
         });
     },
 
-    _loadPagesContent: function(uiFactory, pagesConfiguration)
+    _loadPagesContent: function(pagesConfiguration)
     {
-        var that = this;
         Logger.getInstance().info("[Init] Loading app pages");
-        that.menuController = uiFactory.createMenuViewController();
-        that.menuController.initialise();
 
         var pageLoadingPromises = [];
 
         for(var item in pagesConfiguration)
         {
-            that.menuController.add(pagesConfiguration[item].Name, pagesConfiguration[item].Icon, pagesConfiguration[item].Page);
-            //load only if page is defined in config
-            if(pagesConfiguration[item].ContentLocation)
-            {
-                pageLoadingPromises.push(that._loadPage(pagesConfiguration[item]));
-            }
+            pageLoadingPromises.push(this._loadPage(pagesConfiguration[item]));
         }
 
         //load all pages (simultaneously) and move on
@@ -193,7 +185,6 @@ window.ApplicationCore.PageLoader.prototype =
 
     _loadPage: function(page)
     {
-        var that = this;
         var pageLoadedHandler = function onPageLoaded(resolve, reject)
         {
             return function onPageLoaded(response, status, xhr)
@@ -212,7 +203,7 @@ window.ApplicationCore.PageLoader.prototype =
 
         return new Promise(function(resolve, reject)
         {
-            $(page.Page).load(page.ContentLocation, pageLoadedHandler(resolve, reject));
+            $(page.Container).load(page.ContentLocation, pageLoadedHandler(resolve, reject));
         });
 
     },

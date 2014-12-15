@@ -20,7 +20,7 @@ $(function()
     playerServicesFactory = new window.Player.PlayerServicesFactory();
     lastFmServicesFactory = new window.LastFm.LastFmApiFactory();
 
-    pageLoader.load(coreServicesFactory, lastFmServicesFactory, playerServicesFactory, uiFactory, window.UI.MenuItemsConfig);
+    pageLoader.load(coreServicesFactory, lastFmServicesFactory, playerServicesFactory, uiFactory, window.Common.PagesConfiguration, window.UI.MenuItemsConfig);
 });
 
 $(window).unload(function()

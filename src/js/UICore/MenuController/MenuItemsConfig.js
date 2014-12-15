@@ -6,40 +6,35 @@ window.UI.MenuItemsConfig =
     {
         Name: "player",
         Icon: "fa fa-play-circle-o fa-2x",
-        Page: "#player",
-        ContentLocation: "pages/player.html"
+        Page: "#player"
     },
 
     PlaylistManage:
     {
         Name: "playlist manager",
         Icon: "fa fa-list-ul fa-2x",
-        Page: "#playlist-manager",
-        ContentLocation: "pages/playlistManager.html"
+        Page: "#playlist-manager"
     },
 
     PlaylistEditor:
     {
         Name: "playlist editor",
         Icon: "fa fa-pencil fa-2x",
-        Page: "#playlist-editor",
-        ContentLocation: "pages/playlistEditor.html"
+        Page: "#playlist-editor"
     },
 
-    AccountManage:
+    AccountManager:
     {
         Name: "accounts",
         Icon: "fa fa-user fa-2x",
-        Page: "#accounts",
-        ContentLocation: "pages/accountManager.html"
+        Page: "#accounts"
     },
 
     Settings:
     {
         Name: "settings",
         Icon: "fa fa-gear fa-2x",
-        Page: "#settings",
-        ContentLocation: "pages/settings.html"
+        Page: "#settings"
     },
 
     Logs:

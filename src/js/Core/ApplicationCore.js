@@ -65,10 +65,10 @@ window.ApplicationCore.AppCore.prototype =
         this.welcomeScreenController = uiFactory.createWelcomeScreenController(this.welcomeScreenService);
         var appDetailsViewController = uiFactory.createAppDetailsViewController();
         appDetailsViewController.setupDetails(window.Common.ApplicationDetails);
-
+        this.menuController = uiFactory.createMenuViewController();
     },
 
-    initialiseViewControllers: function()
+    initialiseViewControllers: function(menuItemsConfiguration)
     {
         this.playlistViewController.initialise();
         this.playbackDetailsViewController.initialise();
@@ -82,6 +82,12 @@ window.ApplicationCore.AppCore.prototype =
         this.progressbarViewController.initialise();
         this.welcomeScreenController.initialise();
         this.accountDetailsViewController.initialise();
+        this.menuController.initialise();
+
+        for(var item in menuItemsConfiguration)
+        {
+            this.menuController.add(menuItemsConfiguration[item].Name, menuItemsConfiguration[item].Icon, menuItemsConfiguration[item].Page);
+        }
 
         if(this.welcomeScreenService.isApplicationAlreadyActivated())
         {
