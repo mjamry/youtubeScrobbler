@@ -27,6 +27,11 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new LoggerImpl();
     },
 
+    createReportSender: function()
+    {
+        return new window.Common.ReportSenderImpl();
+    },
+
     createOnlineScrobbler: function(lowLevelScrobbler)
     {
         return new window.ApplicationCore.OnlineScrobbler(lowLevelScrobbler);

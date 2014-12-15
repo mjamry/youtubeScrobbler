@@ -78,10 +78,20 @@ window.ApplicationCore.PageLoader.prototype =
             that._eventBroker = coreServicesFactory.createBrokerHandler();
             EventBroker.setInstance(that._eventBroker);
 
+            //handles global errors
+            var globalErrorHandler = new window.Common.GlobalErrorHandler();
+            globalErrorHandler.initialise();
+
             //this is here only for testing purposes to show logs
             var uilogger = uiFactory.createLoggerViewController();
             uilogger.initialise();
             uilogger.isLoggingAllowed = true;
+
+            //creates report sender service (sends an email in case of error)
+            new ReportSender();
+            var reportSender = coreServicesFactory.createReportSender();
+            reportSender.initialise();
+            ReportSender.setInstance(reportSender);
 
             //create user notifier service
             new UserNotifier();

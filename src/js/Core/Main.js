@@ -20,9 +20,6 @@ $(function()
     playerServicesFactory = new window.Player.PlayerServicesFactory();
     lastFmServicesFactory = new window.LastFm.LastFmApiFactory();
 
-    var globalErrorHandler = new window.Common.GlobalErrorHandler();
-    globalErrorHandler.initialise();
-
     pageLoader.load(coreServicesFactory, lastFmServicesFactory, playerServicesFactory, uiFactory, window.UI.MenuItemsConfig);
 });
 
