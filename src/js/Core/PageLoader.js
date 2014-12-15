@@ -156,28 +156,46 @@ window.ApplicationCore.PageLoader.prototype =
     _loadPagesContent: function(uiFactory, pagesConfiguration)
     {
         var that = this;
-        return new Promise(function(resolve)
+        Logger.getInstance().info("[Init] Loading app pages");
+        that.menuController = uiFactory.createMenuViewController();
+        that.menuController.initialise();
+
+        var pageLoadingPromises = [];
+
+        for(var item in pagesConfiguration)
         {
-            Logger.getInstance().info("[Init] Loading app pages");
-            that.menuController = uiFactory.createMenuViewController();
-            that.menuController.initialise();
+            pageLoadingPromises.push(that._loadPage(pagesConfiguration[item]));
+        }
 
-            var pageLoadedHandler = function onPageLoaded(pageConfig)
+        //load all pages (simultaneously) and move on
+        return Promise.all(pageLoadingPromises);
+    },
+
+    _loadPage: function(page)
+    {
+        var that = this;
+        var pageLoadedHandler = function onPageLoaded(resolve, reject)
+        {
+            return function onPageLoaded(response, status)
             {
-                return function onPageLoaded(response, status)
+                if(status === "success")
                 {
-                    Logger.getInstance().debug("file: "+pageConfig.ContentLocation+" stat: "+status);
-                };
+                    Logger.getInstance().debug("[Init] File "+page.ContentLocation+" loaded");
+                    that.menuController.add(page.Name, page.Icon, page.Page);
+                    resolve();
+                }
+                else
+                {
+                    reject("[Init] Page loading error: "+page.ContentLocation);
+                }
             };
+        };
 
-            for(var item in pagesConfiguration)
-            {
-                that.menuController.add(pagesConfiguration[item].Name, pagesConfiguration[item].Icon, pagesConfiguration[item].Page);
-                $(pagesConfiguration[item].Page).load(pagesConfiguration[item].ContentLocation, pageLoadedHandler(pagesConfiguration[item]));
-            }
-
-            resolve();
+        return new Promise(function(resolve, reject)
+        {
+            $(page.Page).load(page.ContentLocation, pageLoadedHandler(resolve, reject));
         });
+
     },
 
     initialiseGoogleServices: function()
@@ -243,7 +261,7 @@ window.ApplicationCore.PageLoader.prototype =
         }
 
         //show player after initialisation
-        $(menuConfig[0].Page).removeClass("application-page-hidden");
+        $(menuConfig.Player.Page).removeClass("application-page-hidden");
     }
 };
 
