@@ -78,6 +78,11 @@ window.ApplicationCore.PageLoader.prototype =
             that._eventBroker = coreServicesFactory.createBrokerHandler();
             EventBroker.setInstance(that._eventBroker);
 
+            //this is here only for testing purposes to show logs
+            var uilogger = uiFactory.createLoggerViewController();
+            uilogger.initialise();
+            uilogger.isLoggingAllowed = true;
+
             //create user notifier service
             new UserNotifier();
             var userNotifier = coreServicesFactory.createUserNotifier();
@@ -164,7 +169,12 @@ window.ApplicationCore.PageLoader.prototype =
 
         for(var item in pagesConfiguration)
         {
-            pageLoadingPromises.push(that._loadPage(pagesConfiguration[item]));
+            that.menuController.add(pagesConfiguration[item].Name, pagesConfiguration[item].Icon, pagesConfiguration[item].Page);
+            //load only if page is defined in config
+            if(pagesConfiguration[item].ContentLocation)
+            {
+                pageLoadingPromises.push(that._loadPage(pagesConfiguration[item]));
+            }
         }
 
         //load all pages (simultaneously) and move on
@@ -176,17 +186,16 @@ window.ApplicationCore.PageLoader.prototype =
         var that = this;
         var pageLoadedHandler = function onPageLoaded(resolve, reject)
         {
-            return function onPageLoaded(response, status)
+            return function onPageLoaded(response, status, xhr)
             {
                 if(status === "success")
                 {
                     Logger.getInstance().debug("[Init] File "+page.ContentLocation+" loaded");
-                    that.menuController.add(page.Name, page.Icon, page.Page);
                     resolve();
                 }
                 else
                 {
-                    reject("[Init] Page loading error: "+page.ContentLocation);
+                    reject("[Init] Page loading error: "+page.ContentLocation+" - "+xhr.statusText+" ("+xhr.status+")");
                 }
             };
         };
@@ -221,11 +230,6 @@ window.ApplicationCore.PageLoader.prototype =
         return new Promise(function(resolve)
         {
             Logger.getInstance().info("[Init] Post initialise");
-
-            //this is here only for testing purposes to show logs
-            var uilogger = uiFactory.createLoggerViewController();
-            uilogger.initialise();
-            uilogger.isLoggingAllowed = true;
 
             //creating google tracker
             var tracker = new window.Tracking.GoogleEventTrackerImpl(window.Tracking.GoogleTrackerConfig);

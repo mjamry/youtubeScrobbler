@@ -46,7 +46,6 @@ window.UI.MenuItemsConfig =
     {
         Name: 'app logs',
         Icon: "fa fa-bug fa-2x",
-        Page: "#testing-environment",
-        ContentLocation: "pages/logs.html"
+        Page: "#testing-environment"
     }
 };
