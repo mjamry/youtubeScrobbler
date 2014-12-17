@@ -12,6 +12,9 @@ window.ApplicationCore.PageLoader.prototype =
     {
         var startTime = new Date().getTime();
         var that = this;
+
+        $("#loading-indicator").show();
+
         this._preInitialise(coreServicesFactory, uiFactory)
             .then(function preInitSuccess()
             {
@@ -53,6 +56,8 @@ window.ApplicationCore.PageLoader.prototype =
                 var endTime = new Date().getTime();
                 Logger.getInstance().info("[Init] Page initialisation successful.");
                 Logger.getInstance().debug("[Init] Initialisation took "+(endTime - startTime)+"ms");
+
+                $("#loading-indicator").hide();
             })
             .catch(function(error)
             {
