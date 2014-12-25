@@ -120,6 +120,10 @@ window.ApplicationCore.PageLoader.prototype =
             new ProgressbarService();
             ProgressbarService.setInstance(new window.Services.ProgressbarServiceImpl());
 
+            //create loading indicator service
+            new LoadingIndicatorService();
+            LoadingIndicatorService.setInstance(new window.Services.LoadingIndicatorServiceImpl());
+
             resolve();
         });
     },
