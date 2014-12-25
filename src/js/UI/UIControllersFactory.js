@@ -20,9 +20,7 @@ window.UI.UIControllersFactory.prototype =
 
     createTestReportViewController: function()
     {
-        var reportSender = new window.UI.ReportSender();
-        reportSender.initialise();
-        return new window.UI.TestReportsViewController(reportSender, window.UI.TestReportUIConfig);
+        return new window.UI.TestReportsViewController(window.UI.TestReportUIConfig);
     },
 
     createPlaylistViewController: function(playlistService, playbackControlService, playlistFlowController)

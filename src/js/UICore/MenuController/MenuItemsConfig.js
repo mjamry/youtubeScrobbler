@@ -23,7 +23,7 @@ window.UI.MenuItemsConfig =
         Page: "#playlist-editor"
     },
 
-    AccountManage:
+    AccountManager:
     {
         Name: "accounts",
         Icon: "fa fa-user fa-2x",
