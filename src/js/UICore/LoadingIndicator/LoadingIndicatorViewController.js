@@ -16,7 +16,7 @@ window.UI.LoadingIndicatorViewController.prototype =
             var opacity = that.config.NonFullScreenOpacity;
             if(eventArgs.fullScreen)
             {
-                that.view.find(that.config.IndicatorOverlay).css("opacity", that.config.FullScreenOpacity);
+                opacity = that.config.FullScreenOpacity;
             }
 
             that.view.find(that.config.IndicatorOverlay).css("opacity", opacity);

@@ -8,5 +8,5 @@ window.UI.LoadingIndicatorConfiguration =
     IndicatorDescription: ".loading-indicator-description",
 
     FullScreenOpacity: 1,
-    NonFullScreenOpacity: 0.9
+    NonFullScreenOpacity: 0.75
 };
