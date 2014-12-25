@@ -2,7 +2,8 @@ window.UI = window.UI || {};
 
 window.UI.LoadingIndicatorViewController = function(config)
 {
-    this.view = config.IndicatorContainer;
+    this.view = $(config.IndicatorContainer);
+    this.config = config;
 };
 
 window.UI.LoadingIndicatorViewController.prototype =

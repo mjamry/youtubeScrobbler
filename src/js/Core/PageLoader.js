@@ -16,14 +16,18 @@ window.ApplicationCore.PageLoader.prototype =
         this._preInitialise(coreServicesFactory, uiFactory)
             .then(function preInitSuccess()
             {
+                LoadingIndicatorService.getInstance().show("Please wait, page is being loaded.");
+                LoadingIndicatorService.getInstance().updateContent("Loading page content");
                 return that._loadPagesContent(pagesConfiguration);
             })
             .then(function loadPagesContentSuccess()
             {
+                LoadingIndicatorService.getInstance().updateContent("Creating page services");
                 return that._createServices(coreServicesFactory, lastFmServicesFactory, playerServicesFactory);
             })
             .then(function createServicesSuccess()
             {
+                LoadingIndicatorService.getInstance().updateContent("Creating UI");
                 return that._createUI(uiFactory, lastFmServicesFactory);
             })
             .then(function createUISuccess()
@@ -36,6 +40,7 @@ window.ApplicationCore.PageLoader.prototype =
             })
             .then(function initialiseServicesSuccess()
             {
+                LoadingIndicatorService.getInstance().updateContent("Almost everything loaded");
                 return that._postInitialise(uiFactory);
             })
             .then(function postInitialiseSuccess()
@@ -55,7 +60,7 @@ window.ApplicationCore.PageLoader.prototype =
                 Logger.getInstance().info("[Init] Page initialisation successful.");
                 Logger.getInstance().debug("[Init] Initialisation took "+(endTime - startTime)+"ms");
 
-                $("#loading-indicator").hide();
+                LoadingIndicatorService.getInstance().hide();
                 $("#page").show();
             })
             .catch(function(error)
@@ -123,6 +128,8 @@ window.ApplicationCore.PageLoader.prototype =
             //create loading indicator service
             new LoadingIndicatorService();
             LoadingIndicatorService.setInstance(new window.Services.LoadingIndicatorServiceImpl());
+            var loadingIndicatorView = new window.UI.LoadingIndicatorViewController(window.UI.LoadingIndicatorConfiguration);
+            loadingIndicatorView.initialise();
 
             resolve();
         });
