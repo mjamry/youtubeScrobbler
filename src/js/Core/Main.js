@@ -28,7 +28,7 @@ $(window).on("beforeunload", function()
     EventBroker.getInstance().fireEvent(window.Common.ApplicationEvents.ApplicationClosed);
 });
 
-main = function()
+onGoogleClientLoaded = function()
 {
     pageLoader.initialiseGoogleServices();
 };
