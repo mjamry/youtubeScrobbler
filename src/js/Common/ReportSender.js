@@ -186,12 +186,17 @@ window.Common.ReportSenderImpl.prototype =
         title = window.Common.ReportSenderConstants.usageTag+" "+title;
         var content = this._generateUsageReport();
 
-        $.post(window.Common.ReportSenderConstants.emailScriptLocation,
-            {
+        $.ajax({
+            type: "POST",
+            url: window.Common.ReportSenderConstants.emailScriptLocation,
+            data: {
                 recipient: window.Common.ReportSenderConstants.destinationEmail,
                 sender: sender,
                 subject: title,
                 content: content
+            },
+            async: false
+
             })
             .fail(callbacks.fail)
             .done(callbacks.success);

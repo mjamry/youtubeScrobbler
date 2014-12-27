@@ -23,7 +23,7 @@ $(function()
     pageLoader.load(coreServicesFactory, lastFmServicesFactory, playerServicesFactory, uiFactory, window.Common.PagesConfiguration, window.UI.MenuItemsConfig);
 });
 
-$(window).unload(function()
+$(window).on("beforeunload", function()
 {
     EventBroker.getInstance().fireEvent(window.Common.ApplicationEvents.ApplicationClosed);
 });
