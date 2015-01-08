@@ -1,20 +1,20 @@
 //namespace
 window.UI = window.UI || {};
 
-window.UI.PlaylistControlViewController = function(view, scrobbler, config)
+window.UI.ScrobblingControlViewController = function(view, scrobbler, config)
 {
     this.scrobbler = scrobbler;
     this.config = config;
     this.view = view;
 };
 
-window.UI.PlaylistControlViewController.prototype =
+window.UI.ScrobblingControlViewController.prototype =
 {
     _changeScrobblingState: function(that)
     {
         return function()
         {
-            var isScrobblingEnabled = that.scrobbler.togglerScrobblingMode();
+            var isScrobblingEnabled = that.scrobbler.toggleScrobblingMode();
 
             if(isScrobblingEnabled)
             {

@@ -66,6 +66,7 @@ window.ApplicationCore.AppCore.prototype =
         var appDetailsViewController = uiFactory.createAppDetailsViewController();
         appDetailsViewController.setupDetails(window.Common.ApplicationDetails);
         this.menuController = uiFactory.createMenuViewController();
+        this.scrobblingControlViewController = uiFactory.createScrobblingControlViewController(this.onlineScrobbler);
     },
 
     initialiseViewControllers: function(menuItemsConfiguration)
@@ -83,6 +84,7 @@ window.ApplicationCore.AppCore.prototype =
         this.welcomeScreenController.initialise();
         this.accountDetailsViewController.initialise();
         this.menuController.initialise();
+        this.scrobblingControlViewController.initialise();
 
         for(var item in menuItemsConfiguration)
         {

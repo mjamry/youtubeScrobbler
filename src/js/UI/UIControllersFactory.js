@@ -133,5 +133,10 @@ window.UI.UIControllersFactory.prototype =
     createAccountsViewController: function(sessionService)
     {
         return new window.UI.AccountsViewController($(this.config.AccountsView), window.Accounts.AccountsNames, sessionService, window.UI.AccountsViewControllerConfiguration);
+    },
+
+    createScrobblingControlViewController: function(scrobbler)
+    {
+        return new window.UI.ScrobblingControlViewController($('#scrobbler-settings'), scrobbler, window.UI.ScrobblingControlConfiguration);
     }
 };
