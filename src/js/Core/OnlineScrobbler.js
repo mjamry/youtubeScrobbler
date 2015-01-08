@@ -11,7 +11,7 @@ window.ApplicationCore.OnlineScrobbler = function(scrobbler)
     this._scrobbler = scrobbler;
 
     this._trackStartPlayingTime = null;
-
+    this._isScrobblingEnabled = true;
     this._currentlyLoaded = null;
     Logger.getInstance().info("Scrobbler has been created.");
 };
@@ -22,7 +22,8 @@ window.ApplicationCore.OnlineScrobbler.prototype =
     _trackCanBeScrobbled: function(mediaDetails, startTime)
     {
         //check if there was any track previously played
-        if(startTime)
+        //and if scrobbling is enabled
+        if(startTime && this._isScrobblingEnabled)
         {
             var timeInSeconds = 0;
             //is track longer than 30s
@@ -120,5 +121,11 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         //clear track playing timeout
         EventBroker.getInstance().addListener(window.Player.Events.MediaStopped, $.proxy(this._handleMediaStopped, this));
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCleared, $.proxy(this._handlePlaylistCleared, this));
+    },
+
+    toggleScrobblingMode: function()
+    {
+        this._isScrobblingEnabled = !this._isScrobblingEnabled;
+        return this._isScrobblingEnabled;
     }
 };
