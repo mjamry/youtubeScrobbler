@@ -11,7 +11,7 @@ window.ApplicationCore.OnlineScrobbler = function(scrobbler)
     this._scrobbler = scrobbler;
 
     this._trackStartPlayingTime = null;
-    this._isScrobblingEnabled = true;
+    this._isScrobblingEnabled = false;
     this._currentlyLoaded = null;
     Logger.getInstance().info("Scrobbler has been created.");
 };
@@ -99,6 +99,11 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         this._trackStartPlayingTime = null;
     },
 
+    _handleSessionCreated: function()
+    {
+        this._isScrobblingEnabled = true;
+    },
+
     initialise: function()
     {
         EventBroker.getInstance().addListener(
@@ -120,6 +125,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         //clear track playing timeout
         EventBroker.getInstance().addListener(window.Player.Events.MediaStopped, $.proxy(this._handleMediaStopped, this));
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCleared, $.proxy(this._handlePlaylistCleared, this));
+        EventBroker.getInstance().addListener(window.LastFm.Events.SessionObjectCreated, $.proxy(this._handleSessionCreated, this));
     },
 
     toggleScrobblingMode: function()
