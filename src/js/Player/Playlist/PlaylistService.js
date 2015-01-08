@@ -15,6 +15,16 @@ window.Player.PlaylistService = function(playlistRepo, playlistElementDetailsPro
 
 window.Player.PlaylistService.prototype =
 {
+    _onPlaylistCreated: function()
+    {
+        EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated);
+    },
+
+    _onPlaylistCleared: function()
+    {
+        EventBroker.getInstance().fireEvent(window.Player.PlaylistEvents.PlaylistCleared);
+    },
+
     _updatePlaylist: function(newItems)
     {
         var numberOfNewItems = newItems ? newItems.length() : 0;
@@ -32,7 +42,7 @@ window.Player.PlaylistService.prototype =
         this.playlist.set(playlist);
         if(!playlist.isEmpty())
         {
-            EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, this.playlist.length());
+            this._onPlaylistCreated();
         }
     },
 
@@ -59,8 +69,7 @@ window.Player.PlaylistService.prototype =
             this));
 
         this._setPlaylist(new window.Player.Playlist());
-        EventBroker.getInstance().fireEvent(window.Player.PlaylistEvents.PlaylistCleared);
-
+        this._onPlaylistCleared();
         this._updatePlaylist();
     },
 
@@ -70,7 +79,7 @@ window.Player.PlaylistService.prototype =
         var msg = "";
         if(!this.playlist.isEmpty())
         {
-            EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, this.playlist.length());
+            this._onPlaylistCreated();
             msg = this.playlist.length() + " item(s) have been read and added to the playlist.";
         }
         else
@@ -98,7 +107,7 @@ window.Player.PlaylistService.prototype =
         //if both playlist's length is equal it means that new playlist was created - so lets fire an event
         if(this.playlist.length() === playlist.length())
         {
-            EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated, playlist.length());
+            this._onPlaylistCreated();
         }
 
         var msg = playlist.length()+" new item(s) have been successfully added to the playlist";
@@ -110,7 +119,14 @@ window.Player.PlaylistService.prototype =
 
     insertIntoPlaylist: function(index, details)
     {
+        var playlistLengthBeforeChange = this.playlist.length();
+
         this.playlist.insert(index, details);
+
+        if(playlistLengthBeforeChange === 0)
+        {
+            this._onPlaylistCreated();
+        }
 
         var msg = "New item have been successfully added to the playlist, on position: "+(index+1);
         Logger.getInstance().info(msg);
@@ -142,19 +158,27 @@ window.Player.PlaylistService.prototype =
         var mediaDetails = this.playlist.get(index);
         this.playlist.remove(index);
 
+        //check if last item from the playlist has been removed
+        if(this.playlist.length() === 0)
+        {
+            this._onPlaylistCleared();
+        }
+
         var msg = "'"+mediaDetails.artist.name+" - "+mediaDetails.title+"' has been removed from the playlist.";
         Logger.getInstance().info(msg);
+
         UserNotifier.getInstance().info(msg, $.proxy(function()
         {
             this.insertIntoPlaylist(index, mediaDetails);
         }, this));
+
         EventBroker.getInstance().fireEventWithData(
             window.Player.PlaylistEvents.PlaylistItemRemoved,
             {
                 index: index,
                 isCurrentlyPlayingItemRemoved: index == currentItem
-            }
-        );
+            });
+
         this._updatePlaylist();
     },
 
