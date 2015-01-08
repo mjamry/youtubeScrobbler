@@ -39,9 +39,9 @@ window.ApplicationCore.OnlineScrobbler.prototype =
                     return true;
                 }
             }
-            var msg = "Cannot scrobble track, because playing time was to short: " + timeInSeconds + "s.";
+            var msg = "Cannot add track to the listening history, because playing time was to short: " + timeInSeconds + "s.";
             Logger.getInstance().warning("[Scrobbler] " + msg);
-            UserNotifier.getInstance().error("Cannot scrobble track, because playing time was to short: " + timeInSeconds + "s.");
+            UserNotifier.getInstance().error(msg);
         }
         return false;
     },
@@ -62,8 +62,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
                 {
                     success: function(mediaDetails)
                     {
-                        var msg = "'"+mediaDetails.artist.name+" - "+mediaDetails.title+"' has been scrobbled.";
-                        UserNotifier.getInstance().info(msg);
+                        UserNotifier.getInstance().info("'"+mediaDetails.artist.name+" - "+mediaDetails.title+"' has been added togit  listening history.");
                     },
                     error: function(){}
                 }
