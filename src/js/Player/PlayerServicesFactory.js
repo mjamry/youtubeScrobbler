@@ -19,8 +19,8 @@ window.Player.PlayerServicesFactory.prototype =
         return new window.Playlist.PlaylistFlowController(playlistService);
     },
 
-    createPlaylistDetailsProvider: function(playlistFlowController, playlistService)
+    createPlaylistDetailsProvider: function(playlistService)
     {
-        return new window.Playlist.PlaylistDetailsProvider(playlistFlowController, playlistService);
+        return new window.Playlist.PlaylistDetailsProvider(playlistService);
     }
 };

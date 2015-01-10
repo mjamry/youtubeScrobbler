@@ -6,7 +6,6 @@ window.Playlist.PlaylistFlowController = function(playlistProvider)
 {
     this.playlistProvider = playlistProvider;
     this.isLoopModeOn = false;
-    this.currentItemIndex = 0;
 };
 
 window.Playlist.PlaylistFlowController.prototype =
@@ -14,43 +13,43 @@ window.Playlist.PlaylistFlowController.prototype =
     getNext: function()
     {
         var playlist = this.playlistProvider.getPlaylist();
-        this.currentItemIndex++;
-        if(this.currentItemIndex == playlist.length())
+        playlist.currentItemIndex++;
+        if(playlist.currentItemIndex == playlist.length())
         {
             if( !this.isLoopModeOn)
             {
-                this.currentItemIndex = playlist.length() - 1;
+                playlist.currentItemIndex = playlist.length() - 1;
                 return null;
             }
             else
             {
                 //jump to the first one
-                this.currentItemIndex = 0;
+                playlist.currentItemIndex = 0;
             }
         }
 
-        return playlist.get(this.currentItemIndex);
+        return playlist.get(playlist.currentItemIndex);
     },
 
     getPrevious: function()
     {
         var playlist = this.playlistProvider.getPlaylist();
-        this.currentItemIndex--;
-        if(this.currentItemIndex < 0)
+        playlist.currentItemIndex--;
+        if(playlist.currentItemIndex < 0)
         {
             if( !this.isLoopModeOn)
             {
-                this.currentItemIndex = 0;
+                playlist.currentItemIndex = 0;
                 return null;
             }
             else
             {
                 //jump to the last one
-                this.currentItemIndex = playlist.length() - 1;
+                playlist.currentItemIndex = playlist.length() - 1;
             }
         }
 
-        return playlist.get(this.currentItemIndex);
+        return playlist.get(playlist.currentItemIndex);
     },
 
     shuffle: function()
@@ -64,7 +63,7 @@ window.Playlist.PlaylistFlowController.prototype =
         var playlist = this.playlistProvider.getPlaylist();
         if(index >= 0 && index < playlist.length())
         {
-            this.currentItemIndex = index;
+            playlist.currentItemIndex = index;
             return playlist.get(index);
         }
 
@@ -79,6 +78,6 @@ window.Playlist.PlaylistFlowController.prototype =
 
     getCurrentItemIndex: function()
     {
-        return this.currentItemIndex;
+        return this.playlistProvider.getPlaylist().currentItemIndex;
     }
 };

@@ -27,7 +27,7 @@ window.ApplicationCore.AppCore.prototype =
         this.searchService = coreServicesFactory.createSearchService(this.googleApiWrapper);
 
         this.playlistFlowController = playerServicesFactory.createPlaylistFlowController(this.playlistService);
-        this.playlistDetailsProvider = playerServicesFactory.createPlaylistDetailsProvider(this.playlistFlowController, this.playlistService);
+        this.playlistDetailsProvider = playerServicesFactory.createPlaylistDetailsProvider(this.playlistService);
         this.player = coreServicesFactory.createMediaPlayer(this.playlistDetailsProvider);
 
         this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService(this.player);

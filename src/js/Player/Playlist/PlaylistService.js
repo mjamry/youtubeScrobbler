@@ -182,7 +182,6 @@ window.Player.PlaylistService.prototype =
 
     getPlaylist: function()
     {
-        //TODO return playlistController instead of playlist - so playlist can be modified only by this service
         return this.playlist.getCurrentState();
     }
 };

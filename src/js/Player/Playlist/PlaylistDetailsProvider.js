@@ -1,8 +1,7 @@
 window.Playlist = window.Playlist || {};
 
-window.Playlist.PlaylistDetailsProvider = function(playlistControl, playlistService)
+window.Playlist.PlaylistDetailsProvider = function(playlistService)
 {
-    this.playlistControl = playlistControl;
     this.playlistService = playlistService;
 };
 
@@ -10,12 +9,12 @@ window.Playlist.PlaylistDetailsProvider.prototype =
 {
     getCurrentItemIndex: function()
     {
-        return this.playlistControl.getCurrentItemIndex();
+        return this.playlistService.getPlaylist().currentItemIndex;
     },
 
     getCurrentItemDetails: function()
     {
-        var index = this.playlistControl.getCurrentItemIndex();
+        var index = this.getCurrentItemIndex();
         return this.getItemDetails(index);
     },
 
