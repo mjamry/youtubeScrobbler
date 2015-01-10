@@ -53,7 +53,7 @@ window.ApplicationCore.AppCore.prototype =
     createViewControllers: function(uiFactory, lastFmServicesFactory)
     {
         this.playlistViewController = uiFactory.createPlaylistViewController(this.playlistService, this.playbackControlService, this.playlistFlowController);
-        this.playbackDetailsViewController = uiFactory.createPlaybackDetailsViewController(this.playbackDetailsService);
+        this.playbackDetailsViewController = uiFactory.createPlaybackDetailsViewController(this.playbackDetailsService, this.playlistDetailsProvider);
         this.playbackControlViewController = uiFactory.createPlaybackControlViewController(this.player, this.playbackControlService, this.playlistElementLoveStateModifier, this.playlistService);
         this.playlistControlViewController = uiFactory.createPlaylistControlViewController(this.playlistService, this.playlistFlowController);
         this.mediaLoadViewController = uiFactory.createMediaLoadViewController(this.playlistLoaderService, this.searchService);

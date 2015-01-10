@@ -34,10 +34,11 @@ window.UI.UIControllersFactory.prototype =
         );
     },
 
-    createPlaybackDetailsViewController: function(model)
+    createPlaybackDetailsViewController: function(playbackDetailsProvider, playlistDetailsProvider)
     {
         return new window.UI.PlaybackDetailsViewController(
-            model,
+            playbackDetailsProvider,
+            playlistDetailsProvider,
             $(this.config.PlaybackProgressView),
             window.UI.PLaybackDetailsViewConfiguration
         );
