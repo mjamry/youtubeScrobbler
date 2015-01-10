@@ -46,6 +46,9 @@ window.Player.MediaPlayer.prototype =
                     Logger.getInstance().info("Media player has been initialised");
                     that._load(mediaDetails);
                     that._updateCurrentMediaDetails(mediaDetails);
+
+                    that.playbackState.changeToStop();
+                    EventBroker.getInstance().fireEventWithData(window.Player.Events.PlayerCreated, that.currentlyLoadedMediaDetails);
                 };
             };
 

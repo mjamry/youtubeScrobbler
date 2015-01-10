@@ -77,7 +77,12 @@ window.UI.PlaybackDetailsViewController.prototype =
     _handleDetailsUpdateRequest: function()
     {
         var title = this.playbackDetails.getMediaDetails().artist.name + " - " + this.playbackDetails.getMediaDetails().title;
-        var time = this.playbackDetails.getPlaybackTime() + "/" + this.playbackDetails.getDuration();
+        var time = "";
+        if(this.playbackDetails.getDuration() !== TimeParser.getInstance().getHumanReadableTimeFormat(0))
+        {
+            //show time only when duration is properly set
+            time = this.playbackDetails.getPlaybackTime() + "/" + this.playbackDetails.getDuration();
+        }
 
         this._updateView(this.playbackDetails.getPlaybackState(), title, time);
         this._updatePageTitle(this.playbackDetails.getPlaybackState(), title, time);
@@ -139,12 +144,18 @@ window.UI.PlaybackDetailsViewController.prototype =
         }
     },
 
+    _handlePlayerCreated: function()
+    {
+        this._handleDetailsUpdateRequest();
+    },
+
     initialise: function()
     {
         EventBroker.getInstance().addListener(window.Player.Events.PlaybackDetailsUpdated, this._handleDetailsUpdateRequest, null, this);
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistItemUpdated, this._handleTrackDetailsEdited, null, this);
         EventBroker.getInstance().addListener(window.UI.Events.DisableControlButtonsRequested, $.proxy(this._handleControlsDisableRequest, this));
         EventBroker.getInstance().addListener(window.UI.Events.EnableControlButtonsRequested, $.proxy(this._handleControlsEnableRequest, this));
+        EventBroker.getInstance().addListener(window.Player.Events.PlayerCreated, this._handlePlayerCreated, null, this);
         //bind to mouse events
         var mouseEnterHandler = this._handleMouseEnter(this);
         var mouseLeaveHandler = this._handleMouseLeave(this);
