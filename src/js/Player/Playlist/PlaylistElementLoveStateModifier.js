@@ -1,18 +1,18 @@
 //namespace
 window.Playlist = window.Playlist || {};
 
-window.Playlist.PlaylistElementLoveStateModifier = function(innerModifier, playlistService)
+window.Playlist.PlaylistElementLoveStateModifier = function(innerModifier, playlistDetailsProvider)
 {
     this.innerModifier = innerModifier;
-    this.playlistService = playlistService;
+    this.playlistDetailsProvider = playlistDetailsProvider;
 };
 
 window.Playlist.PlaylistElementLoveStateModifier.prototype =
 {
     toggleTrackLoveState: function(callback)
     {
-        var currentItemIndex = this.playlistService.getPlaylist().currentItemIndex;
-        var currentItemDetails = this.playlistService.getPlaylist().get(currentItemIndex);
+        var currentItemIndex = this.playlistDetailsProvider.getCurrentItemIndex();
+        var currentItemDetails = this.playlistDetailsProvider.getCurrentItemDetails();
 
         if(currentItemDetails.loved)
         {

@@ -154,7 +154,6 @@ window.Player.PlaylistService.prototype =
 
     removeItem: function(index)
     {
-        var currentItem = this.playlist.currentItemIndex;
         var mediaDetails = this.playlist.get(index);
         this.playlist.remove(index);
 
@@ -175,8 +174,7 @@ window.Player.PlaylistService.prototype =
         EventBroker.getInstance().fireEventWithData(
             window.Player.PlaylistEvents.PlaylistItemRemoved,
             {
-                index: index,
-                isCurrentlyPlayingItemRemoved: index == currentItem
+                index: index
             });
 
         this._updatePlaylist();
@@ -186,11 +184,5 @@ window.Player.PlaylistService.prototype =
     {
         //TODO return playlistController instead of playlist - so playlist can be modified only by this service
         return this.playlist.getCurrentState();
-    },
-
-    getCurrentItemDetails: function()
-    {
-        var index = this.playlist.getCurrentState().currentItemIndex;
-        return this.playlist.get(index);
     }
 };

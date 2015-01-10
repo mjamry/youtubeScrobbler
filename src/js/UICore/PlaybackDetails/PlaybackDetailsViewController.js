@@ -130,9 +130,18 @@ window.UI.PlaybackDetailsViewController.prototype =
         this._updateDataProgress(0);
     },
 
+    _handleTrackDetailsEdited: function(eventArgs)
+    {
+        if(eventArgs.isCurrentItem)
+        {
+            this._handleDetailsUpdateRequest();
+        }
+    },
+
     initialise: function()
     {
         EventBroker.getInstance().addListener(window.Player.Events.PlaybackDetailsUpdated, this._handleDetailsUpdateRequest, null, this);
+        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistItemUpdated, this._handleTrackDetailsEdited, null, this);
         EventBroker.getInstance().addListener(window.UI.Events.DisableControlButtonsRequested, $.proxy(this._handleControlsDisableRequest, this));
         EventBroker.getInstance().addListener(window.UI.Events.EnableControlButtonsRequested, $.proxy(this._handleControlsEnableRequest, this));
         //bind to mouse events

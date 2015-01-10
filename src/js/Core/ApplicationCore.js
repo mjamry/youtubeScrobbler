@@ -26,13 +26,14 @@ window.ApplicationCore.AppCore.prototype =
         this.playlistLoaderService = coreServicesFactory.createPlaylistLoaderService(this.playlistService, this.googleApiWrapper);
         this.searchService = coreServicesFactory.createSearchService(this.googleApiWrapper);
 
-        this.player = coreServicesFactory.createMediaPlayer(this.playlistService);
+        this.playlistFlowController = playerServicesFactory.createPlaylistFlowController(this.playlistService);
+        this.playlistDetailsProvider = playerServicesFactory.createPlaylistDetailsProvider(this.playlistFlowController, this.playlistService);
+        this.player = coreServicesFactory.createMediaPlayer(this.playlistDetailsProvider);
+
         this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService(this.player);
 
         this.sessionService = coreServicesFactory.createSessionService(this.googleApiWrapper);
         this.sessionService.initialise();
-
-        this.playlistFlowController = playerServicesFactory.createPlaylistFlowController(this.playlistService);
 
         this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistFlowController);
 
