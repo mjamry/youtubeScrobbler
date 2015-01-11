@@ -3,14 +3,14 @@ window.Player = window.Player || {};
 
 window.Common = window.Common || {};
 
-window.Player.MediaPlayer = function(configuration, container, playlistService)
+window.Player.MediaPlayer = function(configuration, container, playlistDetailsProvider)
 {
     this.instance = null;
     this.currentlyLoadedMediaDetails = null;
 
     this.container = container;
     this.config = configuration;
-    this.playlistService = playlistService;
+    this.playlistDetailsProvider = playlistDetailsProvider;
     this.playbackState = new window.Player.PlaybackStateHolder();
 
     //these event handler definitions have to be here (not in _initialise method) as it is called after player creation
@@ -46,6 +46,9 @@ window.Player.MediaPlayer.prototype =
                     Logger.getInstance().info("Media player has been initialised");
                     that._load(mediaDetails);
                     that._updateCurrentMediaDetails(mediaDetails);
+
+                    that.playbackState.changeToStop();
+                    EventBroker.getInstance().fireEventWithData(window.Player.Events.PlayerCreated, that.currentlyLoadedMediaDetails);
                 };
             };
 
@@ -71,7 +74,7 @@ window.Player.MediaPlayer.prototype =
 
     _handlePlaylistCreated: function()
     {
-        this._createPlayerInstance(this.playlistService.getCurrentItemDetails());
+        this._createPlayerInstance(this.playlistDetailsProvider.getCurrentItemDetails());
     },
 
     _handlePlaylistCleared: function()

@@ -1,9 +1,8 @@
 //namespace
 window.UI = window.UI || {};
 
-window.UI.TestReportsViewController = function(reportSender, config)
+window.UI.TestReportsViewController = function(config)
 {
-    this._reportSender = reportSender || new window.UI.ReportSender();
     this._config = config;
     this._errorContainer = $(config.ErrorFormContainer);
     this._featureContainer = $(config.FeatureFormContainer);
@@ -81,7 +80,7 @@ window.UI.TestReportsViewController.prototype =
                     alert("Failure.\r\n\r\nSorry cannot send your error report.\r\n\r\nPleas try again.");
                 }
             };
-            this._reportSender.sendErrorReport(email, title, description, callbacks);
+            ReportSender.getInstance().sendErrorReport(email, title, description, callbacks);
             this._errorContainer.hide();
         }
     },
@@ -107,7 +106,7 @@ window.UI.TestReportsViewController.prototype =
                     alert("Failure.\r\n\r\nSorry cannot send your feature request.\r\n\r\nPleas try again.");
                 }
             };
-            this._reportSender.sendFeatureRequest(email, title, description, callbacks);
+            ReportSender.getInstance().sendFeatureRequest(email, title, description, callbacks);
             this._featureContainer.hide();
         }
     },

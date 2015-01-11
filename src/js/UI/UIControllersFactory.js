@@ -20,9 +20,7 @@ window.UI.UIControllersFactory.prototype =
 
     createTestReportViewController: function()
     {
-        var reportSender = new window.UI.ReportSender();
-        reportSender.initialise();
-        return new window.UI.TestReportsViewController(reportSender, window.UI.TestReportUIConfig);
+        return new window.UI.TestReportsViewController(window.UI.TestReportUIConfig);
     },
 
     createPlaylistViewController: function(playlistService, playbackControlService, playlistFlowController)
@@ -36,10 +34,11 @@ window.UI.UIControllersFactory.prototype =
         );
     },
 
-    createPlaybackDetailsViewController: function(model)
+    createPlaybackDetailsViewController: function(playbackDetailsProvider, playlistDetailsProvider)
     {
         return new window.UI.PlaybackDetailsViewController(
-            model,
+            playbackDetailsProvider,
+            playlistDetailsProvider,
             $(this.config.PlaybackProgressView),
             window.UI.PLaybackDetailsViewConfiguration
         );
@@ -135,5 +134,10 @@ window.UI.UIControllersFactory.prototype =
     createAccountsViewController: function(sessionService)
     {
         return new window.UI.AccountsViewController($(this.config.AccountsView), window.Accounts.AccountsNames, sessionService, window.UI.AccountsViewControllerConfiguration);
+    },
+
+    createScrobblingControlViewController: function(scrobbler)
+    {
+        return new window.UI.ScrobblingControlViewController($('#scrobbler-settings'), scrobbler, window.UI.ScrobblingControlConfiguration);
     }
 };

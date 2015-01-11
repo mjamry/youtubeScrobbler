@@ -12,6 +12,20 @@ window.UI.PlaylistEditorListItemBuilder = function(index, config)
 
 window.UI.PlaylistEditorListItemBuilder.prototype =
 {
+    //handles mouse over event on base item.
+    //mainly shows hidden elements such as additional buttons.
+    _onMouseEnter: function()
+    {
+        this._item.children().find(this._config.RemoveButtonContainer).show(this._config.AnimationTime);
+    },
+
+    //handles mouse leave event on base item.
+    //mainly hides previously shown elements such as additional buttons.
+    _onMouseLeave: function()
+    {
+        this._item.children().find(this._config.RemoveButtonContainer).hide(this._config.AnimationTime);
+    },
+
     _addIconIfPossible: function(item, iconStyle)
     {
         if(iconStyle)
@@ -20,6 +34,20 @@ window.UI.PlaylistEditorListItemBuilder.prototype =
             icon.className = iconStyle;
             this._item.find(item).append(icon);
         }
+    },
+
+    _setUpMouseClickAction: function(element, context, callback)
+    {
+        var onMouseClick = function(ctx, clb, itemIndex)
+        {
+            return function onMouseClicked(e)
+            {
+                e.stopPropagation();
+                clb.call(ctx, itemIndex);
+            };
+        };
+
+        element.click(onMouseClick(context, callback, this._index));
     },
 
     setUpArtistAndTrackName: function(artistName, trackName)
@@ -40,22 +68,24 @@ window.UI.PlaylistEditorListItemBuilder.prototype =
         }
     },
 
-    setUpMouseClickHandler: function(callbackContext, mouseClickCallback)
+    setUpMouseClickHandler: function(context, callback)
     {
-        var onMouseClick = function(context, callback, itemIndex)
-        {
-            return function onMouseClicked(e)
-            {
-                e.stopPropagation();
-                callback.call(context, itemIndex);
-            };
-        };
+        this._setUpMouseClickAction(this._item, context, callback);
+    },
 
-        this._item.click(onMouseClick(callbackContext, mouseClickCallback, this._index));
+    setUpRemoveAction: function(context, callback)
+    {
+        this._setUpMouseClickAction(this._item.find(this._config.RemoveButtonContainer), context, callback);
     },
 
     build: function()
     {
+        //hook up to mouse actions
+        this._item.mouseenter($.proxy(this._onMouseEnter, this));
+        this._item.mouseleave($.proxy(this._onMouseLeave, this));
+        //hide remove button
+        this._item.children().find(this._config.RemoveButtonContainer).hide();
+
         return this._item;
     }
 };

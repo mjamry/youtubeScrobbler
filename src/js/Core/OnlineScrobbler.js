@@ -11,7 +11,7 @@ window.ApplicationCore.OnlineScrobbler = function(scrobbler)
     this._scrobbler = scrobbler;
 
     this._trackStartPlayingTime = null;
-
+    this._isScrobblingEnabled = false;
     this._currentlyLoaded = null;
     Logger.getInstance().info("Scrobbler has been created.");
 };
@@ -22,7 +22,8 @@ window.ApplicationCore.OnlineScrobbler.prototype =
     _trackCanBeScrobbled: function(mediaDetails, startTime)
     {
         //check if there was any track previously played
-        if(startTime)
+        //and if scrobbling is enabled
+        if(startTime && this._isScrobblingEnabled)
         {
             var timeInSeconds = 0;
             //is track longer than 30s
@@ -39,9 +40,9 @@ window.ApplicationCore.OnlineScrobbler.prototype =
                     return true;
                 }
             }
-            var msg = "Cannot scrobble track, because playing time was to short: " + timeInSeconds + "s.";
+            var msg = "Cannot add track to the listening history, because playing time was to short: " + timeInSeconds + "s.";
             Logger.getInstance().warning("[Scrobbler] " + msg);
-            UserNotifier.getInstance().error("Cannot scrobble track, because playing time was to short: " + timeInSeconds + "s.");
+            UserNotifier.getInstance().error(msg);
         }
         return false;
     },
@@ -62,8 +63,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
                 {
                     success: function(mediaDetails)
                     {
-                        var msg = "'"+mediaDetails.artist.name+" - "+mediaDetails.title+"' has been scrobbled.";
-                        UserNotifier.getInstance().info(msg);
+                        UserNotifier.getInstance().info("'"+mediaDetails.artist.name+" - "+mediaDetails.title+"' has been added togit  listening history.");
                     },
                     error: function(){}
                 }
@@ -99,6 +99,11 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         this._trackStartPlayingTime = null;
     },
 
+    _handleSessionCreated: function()
+    {
+        this._isScrobblingEnabled = true;
+    },
+
     initialise: function()
     {
         EventBroker.getInstance().addListener(
@@ -120,5 +125,12 @@ window.ApplicationCore.OnlineScrobbler.prototype =
         //clear track playing timeout
         EventBroker.getInstance().addListener(window.Player.Events.MediaStopped, $.proxy(this._handleMediaStopped, this));
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCleared, $.proxy(this._handlePlaylistCleared, this));
+        EventBroker.getInstance().addListener(window.LastFm.Events.SessionObjectCreated, $.proxy(this._handleSessionCreated, this));
+    },
+
+    toggleScrobblingMode: function()
+    {
+        this._isScrobblingEnabled = !this._isScrobblingEnabled;
+        return this._isScrobblingEnabled;
     }
 };

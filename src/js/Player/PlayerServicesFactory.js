@@ -17,5 +17,10 @@ window.Player.PlayerServicesFactory.prototype =
     createPlaylistFlowController: function(playlistService)
     {
         return new window.Playlist.PlaylistFlowController(playlistService);
+    },
+
+    createPlaylistDetailsProvider: function(playlistService)
+    {
+        return new window.Playlist.PlaylistDetailsProvider(playlistService);
     }
 };

@@ -1,7 +1,7 @@
 //using
-window.UI = window.UI || {};
+window.Common = window.Common || {};
 
-window.UI.ReportSenderConstants =
+window.Common.ReportSenderConstants =
 {
     destinationEmail: "onlinescrobbler@gmail.com",
     emailScriptLocation: "php/EmailSender.php",
@@ -12,14 +12,39 @@ window.UI.ReportSenderConstants =
     logsContainer: "logger-content"
 };
 
-window.UI.ReportSender = function(){};
+ReportSender = function()
+{
+    ReportSender._instance = null;
+};
 
-window.UI.ReportSender.prototype =
+ReportSender.getInstance = function()
+{
+    if(ReportSender._instance === null)
+    {
+        throw "Instance of ReportSender has not been set yet!";
+    }
+
+    return ReportSender._instance;
+};
+
+ReportSender.setInstance = function(instance)
+{
+    if(ReportSender._instance !== null)
+    {
+        throw "Instance of ReportSender has been already set!";
+    }
+
+    ReportSender._instance = instance;
+};
+
+window.Common.ReportSenderImpl = function(){};
+
+window.Common.ReportSenderImpl.prototype =
 {
     _handleError: function(message)
     {
         this.sendErrorReport(
-            window.UI.ReportSenderConstants.destinationEmail,
+            window.Common.ReportSenderConstants.destinationEmail,
             "Automatically generated report",
             message);
     },
@@ -27,7 +52,7 @@ window.UI.ReportSender.prototype =
     _handleApplicationClosed: function()
     {
         this.sendUsageReport(
-            window.UI.ReportSenderConstants.destinationEmail,
+            window.Common.ReportSenderConstants.destinationEmail,
             "Application closed report");
     },
 
@@ -48,7 +73,7 @@ window.UI.ReportSender.prototype =
 
     _getLogs: function()
     {
-        var logEntries = $("#"+window.UI.ReportSenderConstants.logsContainer).children();
+        var logEntries = $("#"+window.Common.ReportSenderConstants.logsContainer).children();
         var logs = "";
 
         for(var i=0;i<logEntries.length;i++)
@@ -105,12 +130,12 @@ window.UI.ReportSender.prototype =
             }
         };
 
-        title = window.UI.ReportSenderConstants.errorTag+" "+title;
+        title = window.Common.ReportSenderConstants.errorTag+" "+title;
         var content = this._generateErrorReportContent(sender, description);
 
-        $.post(window.UI.ReportSenderConstants.emailScriptLocation,
+        $.post(window.Common.ReportSenderConstants.emailScriptLocation,
             {
-                recipient: window.UI.ReportSenderConstants.destinationEmail,
+                recipient: window.Common.ReportSenderConstants.destinationEmail,
                 sender: sender,
                 subject: title,
                 content: content
@@ -132,11 +157,11 @@ window.UI.ReportSender.prototype =
             }
         };
 
-        title = window.UI.ReportSenderConstants.featureTag+" "+title;
+        title = window.Common.ReportSenderConstants.featureTag+" "+title;
 
-        $.post(window.UI.ReportSenderConstants.emailScriptLocation,
+        $.post(window.Common.ReportSenderConstants.emailScriptLocation,
             {
-                recipient: window.UI.ReportSenderConstants.destinationEmail,
+                recipient: window.Common.ReportSenderConstants.destinationEmail,
                 sender: sender,
                 subject: title,
                 content: description
@@ -158,15 +183,20 @@ window.UI.ReportSender.prototype =
             }
         };
 
-        title = window.UI.ReportSenderConstants.usageTag+" "+title;
+        title = window.Common.ReportSenderConstants.usageTag+" "+title;
         var content = this._generateUsageReport();
 
-        $.post(window.UI.ReportSenderConstants.emailScriptLocation,
-            {
-                recipient: window.UI.ReportSenderConstants.destinationEmail,
+        $.ajax({
+            type: "POST",
+            url: window.Common.ReportSenderConstants.emailScriptLocation,
+            data: {
+                recipient: window.Common.ReportSenderConstants.destinationEmail,
                 sender: sender,
                 subject: title,
                 content: content
+            },
+            async: false
+
             })
             .fail(callbacks.fail)
             .done(callbacks.success);

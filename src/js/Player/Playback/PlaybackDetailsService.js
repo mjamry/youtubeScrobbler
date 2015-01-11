@@ -54,6 +54,9 @@ window.Player.PlaybackDetailsService.prototype =
         eventBroker.addListener(window.Player.Events.MediaStopped, this._handleMediaStopped, null, this);
         eventBroker.addListener(window.Player.Events.MediaChanged, this._handleMediaStopped, null, this);
         eventBroker.addListener(window.Player.Events.MediaPlay, this._handleMediaPlay, null, this);
+
+        this.clearData();
+
     },
 
     getPlaybackState: function()
