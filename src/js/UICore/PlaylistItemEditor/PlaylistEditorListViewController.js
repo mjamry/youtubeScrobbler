@@ -21,12 +21,18 @@ window.UI.PlaylistEditorListViewController.prototype =
         );
     },
 
+    _remove: function(index)
+    {
+        this.playlistService.removeItem(index);
+    },
+
     _createNewElement: function(mediaDetails, index)
     {
         var builder = new window.UI.PlaylistEditorListItemBuilder(index, this.config);
         builder.setUpAlbumName(mediaDetails.album.name);
         builder.setUpArtistAndTrackName(mediaDetails.artist.name, mediaDetails.title);
         builder.setUpMouseClickHandler(this, this._edit);
+        builder.setUpRemoveAction(this, this._remove);
 
         return builder.build();
     },
