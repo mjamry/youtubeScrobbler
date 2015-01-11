@@ -15,30 +15,6 @@ window.UI.PlaylistUIItemBuilder = function(index, config)
 
 window.UI.PlaylistUIItemBuilder.prototype =
 {
-    //handles mouse over event on base item.
-    //mainly shows hidden elements such as additional buttons.
-    _onMouseEnter: function(style, that)
-    {
-        return function()
-        {
-            $(this).addClass(style);
-            $(that._item).children().find(that._config.AdditionalButtonsContainer).slideDown(that._config.AnimationTime);
-            $(that._item).children().find(that._config.CoverContainer).slideUp(that._config.AnimationTime);
-        };
-    },
-
-    //handles mouse leave event on base item.
-    //mainly hides previously shown elements such as additional buttons.
-    _onMouseLeave: function(style, that)
-    {
-        return function()
-        {
-            $(this).removeClass(style);
-            $(that._item).children().find(that._config.AdditionalButtonsContainer).slideUp(that._config.AnimationTime);
-            $(that._item).children().find(that._config.CoverContainer).slideDown(that._config.AnimationTime);
-        };
-    },
-
     _createIcon: function(style)
     {
         var icon = document.createElement("i");
@@ -56,7 +32,6 @@ window.UI.PlaylistUIItemBuilder.prototype =
         this._item.find(this._config.AdditionalButtonsContainer).hide();
 
         this._cover = this._item.find(this._config.CoverContainer);
-        this._removeButton = this._item.find(this._config.RemoveButtonContainer);
     },
 
     //add styles to current element and its inner elements.
@@ -121,11 +96,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
         };
 
         var onClickHandler = handleEvent(callbackContext, clickHandler, this._index);
-        var onMouseEnterHandler = this._onMouseEnter(this._hoverStyle, this);
-        var onMouseLeaveHandler = this._onMouseLeave(this._hoverStyle, this);
         this._item.click(onClickHandler);
-        this._item.mouseenter(onMouseEnterHandler);
-        this._item.mouseleave(onMouseLeaveHandler);
     },
 
     //builds fully initialised playlist item.

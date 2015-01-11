@@ -12,6 +12,30 @@ window.UI.PlaylistEditorListItemBuilder = function(index, config)
 
 window.UI.PlaylistEditorListItemBuilder.prototype =
 {
+    //handles mouse over event on base item.
+    //mainly shows hidden elements such as additional buttons.
+    _onMouseEnter: function(style, that)
+    {
+        return function()
+        {
+            $(this).addClass(style);
+            $(that._item).children().find(that._config.AdditionalButtonsContainer).slideDown(that._config.AnimationTime);
+            $(that._item).children().find(that._config.CoverContainer).slideUp(that._config.AnimationTime);
+        };
+    },
+
+    //handles mouse leave event on base item.
+    //mainly hides previously shown elements such as additional buttons.
+    _onMouseLeave: function(style, that)
+    {
+        return function()
+        {
+            $(this).removeClass(style);
+            $(that._item).children().find(that._config.AdditionalButtonsContainer).slideUp(that._config.AnimationTime);
+            $(that._item).children().find(that._config.CoverContainer).slideDown(that._config.AnimationTime);
+        };
+    },
+
     _addIconIfPossible: function(item, iconStyle)
     {
         if(iconStyle)
@@ -62,6 +86,14 @@ window.UI.PlaylistEditorListItemBuilder.prototype =
     setUpRemoveAction: function(context, callback)
     {
         this._setUpMouseClickAction(this._item.find(this._config.RemoveButtonContainer), context, callback)
+    },
+
+    hookUpToMouseActions: function(context, editHandler, removeHandler)
+    {
+        var onMouseEnterHandler = this._onMouseEnter(this._hoverStyle, this);
+        var onMouseLeaveHandler = this._onMouseLeave(this._hoverStyle, this);
+        this._item.mouseenter(onMouseEnterHandler);
+        this._item.mouseleave(onMouseLeaveHandler);
     },
 
     build: function()
