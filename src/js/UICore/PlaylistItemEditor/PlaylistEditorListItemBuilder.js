@@ -22,6 +22,20 @@ window.UI.PlaylistEditorListItemBuilder.prototype =
         }
     },
 
+    _setUpMouseClickAction: function(element, context, callback)
+    {
+        var onMouseClick = function(ctx, clb, itemIndex)
+        {
+            return function onMouseClicked(e)
+            {
+                e.stopPropagation();
+                clb.call(ctx, itemIndex);
+            };
+        };
+
+        element.click(onMouseClick(context, callback, this._index));
+    },
+
     setUpArtistAndTrackName: function(artistName, trackName)
     {
         var field = this._item.find(this._config.ArtistAndTrackNameContainer);
@@ -40,18 +54,14 @@ window.UI.PlaylistEditorListItemBuilder.prototype =
         }
     },
 
-    setUpMouseClickHandler: function(callbackContext, mouseClickCallback)
+    setUpMouseClickHandler: function(context, callback)
     {
-        var onMouseClick = function(context, callback, itemIndex)
-        {
-            return function onMouseClicked(e)
-            {
-                e.stopPropagation();
-                callback.call(context, itemIndex);
-            };
-        };
+        this._setUpMouseClickAction(this._item, context, callback);
+    },
 
-        this._item.click(onMouseClick(callbackContext, mouseClickCallback, this._index));
+    setUpRemoveAction: function(context, callback)
+    {
+        this._setUpMouseClickAction(this._item.find(this._config.RemoveButtonContainer), context, callback)
     },
 
     build: function()

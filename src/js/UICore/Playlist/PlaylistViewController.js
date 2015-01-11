@@ -28,11 +28,6 @@ window.UI.PlaylistViewController.prototype =
         this.view.find(this.config.PlaylistItem).removeClass(this.config.CurrentElementStyle);
     },
 
-    _remove: function(index)
-    {
-        this.playlistService.removeItem(index);
-    },
-
     _play: function(index)
     {
         this._deselectAllItems();

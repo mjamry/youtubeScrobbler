@@ -11,6 +11,8 @@ window.UI.PlaylistEditorItemConfiguration =
     ArtistIconContainer: ".playlist-editor-list-item-artist-icon",
     AlbumIconContainer: ".playlist-editor-list-item-album-icon",
 
+    RemoveButtonContainer: ".playlist-item-remove",
+
     ArtistIcon: "fa fa-music",
     AlbumIcon: "fa fa-tag"
 };
