@@ -1,10 +1,11 @@
 //using
 window.UI = window.UI || {};
 
-window.UI.PlaybackDetailsViewController = function(model, view, config)
+window.UI.PlaybackDetailsViewController = function(playbackDetails, playlistDetails, view, config)
 {
     this.view = view;
-    this.model = model;
+    this.playbackDetails = playbackDetails;
+    this.playlistDetails = playlistDetails;
     this.config = config;
     this.areControlsEnabled = false;
 };
@@ -75,13 +76,18 @@ window.UI.PlaybackDetailsViewController.prototype =
 
     _handleDetailsUpdateRequest: function()
     {
-        var title = this.model.getMediaDetails().artist.name + " - " + this.model.getMediaDetails().title;
-        var time = this.model.getPlaybackTime() + "/" + this.model.getDuration();
+        var title = this.playbackDetails.getMediaDetails().artist.name + " - " + this.playbackDetails.getMediaDetails().title;
+        var time = "";
+        if(this.playbackDetails.getDuration() !== TimeParser.getInstance().getHumanReadableTimeFormat(0))
+        {
+            //show time only when duration is properly set
+            time = this.playbackDetails.getPlaybackTime() + "/" + this.playbackDetails.getDuration();
+        }
 
-        this._updateView(this.model.getPlaybackState(), title, time);
-        this._updatePageTitle(this.model.getPlaybackState(), title, time);
-        this._updatePlaybackProgress(this.model.getPlaybackProgress());
-        this._updateDataProgress(this.model.getDataProgress());
+        this._updateView(this.playbackDetails.getPlaybackState(), title, time);
+        this._updatePageTitle(this.playbackDetails.getPlaybackState(), title, time);
+        this._updatePlaybackProgress(this.playbackDetails.getPlaybackProgress());
+        this._updateDataProgress(this.playbackDetails.getDataProgress());
     },
 
     _updatePlaybackProgress: function(percentageProgress)
@@ -116,7 +122,7 @@ window.UI.PlaybackDetailsViewController.prototype =
         this.view.find(this.config.PlaybackTime).html("");
         this.view.addClass(this.config.DisabledClass);
         this.areControlsEnabled = false;
-        this.model.clearData();
+        this.playbackDetails.clearData();
         this._updatePlaybackProgress(0);
         this._updateDataProgress(0);
         this._setPageTitle(this.config.DefaultPageTitle);
@@ -130,11 +136,26 @@ window.UI.PlaybackDetailsViewController.prototype =
         this._updateDataProgress(0);
     },
 
+    _handleTrackDetailsEdited: function(eventArgs)
+    {
+        if(eventArgs.index === this.playlistDetails.getCurrentItemIndex())
+        {
+            this._handleDetailsUpdateRequest();
+        }
+    },
+
+    _handlePlayerCreated: function()
+    {
+        this._handleDetailsUpdateRequest();
+    },
+
     initialise: function()
     {
         EventBroker.getInstance().addListener(window.Player.Events.PlaybackDetailsUpdated, this._handleDetailsUpdateRequest, null, this);
+        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistItemUpdated, this._handleTrackDetailsEdited, null, this);
         EventBroker.getInstance().addListener(window.UI.Events.DisableControlButtonsRequested, $.proxy(this._handleControlsDisableRequest, this));
         EventBroker.getInstance().addListener(window.UI.Events.EnableControlButtonsRequested, $.proxy(this._handleControlsEnableRequest, this));
+        EventBroker.getInstance().addListener(window.Player.Events.PlayerCreated, this._handlePlayerCreated, null, this);
         //bind to mouse events
         var mouseEnterHandler = this._handleMouseEnter(this);
         var mouseLeaveHandler = this._handleMouseLeave(this);

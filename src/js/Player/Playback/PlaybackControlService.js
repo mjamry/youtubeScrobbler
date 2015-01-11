@@ -27,7 +27,7 @@ window.Player.PlaybackControlService.prototype =
 
     _handlePlaylistItemRemoved: function(eventArgs)
     {
-        if(eventArgs.isCurrentlyPlayingItemRemoved)
+        if(eventArgs.index === this.playlistController.getCurrentItemIndex())
         {
             this.playSpecific(eventArgs.index);
         }

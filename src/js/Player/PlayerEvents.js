@@ -5,6 +5,7 @@ window.Player = window.Player || {};
 window.Player.Events =
 {
     //media events
+    PlayerCreated: "PlayerCreated",
     MediaPaused: "MediaPaused",
     MediaPlay: "MediaStarted",
     MediaStopped: "MediaStopped",

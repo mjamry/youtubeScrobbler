@@ -26,13 +26,14 @@ window.ApplicationCore.AppCore.prototype =
         this.playlistLoaderService = coreServicesFactory.createPlaylistLoaderService(this.playlistService, this.googleApiWrapper);
         this.searchService = coreServicesFactory.createSearchService(this.googleApiWrapper);
 
-        this.player = coreServicesFactory.createMediaPlayer(this.playlistService);
+        this.playlistFlowController = playerServicesFactory.createPlaylistFlowController(this.playlistService);
+        this.playlistDetailsProvider = playerServicesFactory.createPlaylistDetailsProvider(this.playlistService);
+        this.player = coreServicesFactory.createMediaPlayer(this.playlistDetailsProvider);
+
         this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService(this.player);
 
         this.sessionService = coreServicesFactory.createSessionService(this.googleApiWrapper);
         this.sessionService.initialise();
-
-        this.playlistFlowController = playerServicesFactory.createPlaylistFlowController(this.playlistService);
 
         this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistFlowController);
 
@@ -52,7 +53,7 @@ window.ApplicationCore.AppCore.prototype =
     createViewControllers: function(uiFactory, lastFmServicesFactory)
     {
         this.playlistViewController = uiFactory.createPlaylistViewController(this.playlistService, this.playbackControlService, this.playlistFlowController);
-        this.playbackDetailsViewController = uiFactory.createPlaybackDetailsViewController(this.playbackDetailsService);
+        this.playbackDetailsViewController = uiFactory.createPlaybackDetailsViewController(this.playbackDetailsService, this.playlistDetailsProvider);
         this.playbackControlViewController = uiFactory.createPlaybackControlViewController(this.player, this.playbackControlService, this.playlistElementLoveStateModifier, this.playlistService);
         this.playlistControlViewController = uiFactory.createPlaylistControlViewController(this.playlistService, this.playlistFlowController);
         this.mediaLoadViewController = uiFactory.createMediaLoadViewController(this.playlistLoaderService, this.searchService);
