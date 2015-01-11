@@ -23,6 +23,11 @@ window.Player.Playlist.prototype =
 
     insert: function(index, mediaDetails)
     {
+        if(index < this.currentItemIndex)
+        {
+            this.currentItemIndex++;
+        }
+
         this.mediaList.splice(index, 0, mediaDetails);
     },
 
