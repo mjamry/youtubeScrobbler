@@ -1,3 +1,12 @@
+///////////VERSION 0.3.1////////////////
+ - added loading indicator, informing users about page loading progress - #36
+ - added setting to turn on/off scrobbling - #35
+ - fixed issue with no refreshed playback details after editing track data - #14
+ - fixed issue with not cleared playlist when last item has been removed - #27
+ - fixed updated playback details after loading new playlist - #44
+ - removed info about unsuccessful scrobbling when last fm session was not created - #40
+ - corrected notification about scrobbled track to be more readable for users - #38
+ - changes the place where remove button appears. Now it is available on the playlist editor list - #32
 ///////////VERSION 0.3.0////////////////
  - using google api to obtain information about user
  - changed ui - now there is an menu, on the left side

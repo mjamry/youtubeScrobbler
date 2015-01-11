@@ -26,7 +26,7 @@ window.UI.ScrobblingControlViewController.prototype =
                 that.view.find(that.config.ScrobblingButton).removeClass(that.config.SelectedButtonClass);
                 UserNotifier.getInstance().info("Scrobbling has been disabled.");
             }
-        }
+        };
     },
 
     _disableButtons: function()

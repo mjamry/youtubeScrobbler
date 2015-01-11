@@ -35,6 +35,12 @@ module.exports = function(grunt) {
                 src: 'src/index.html',
                 dest: 'build/index.html'
             },
+            copyPages:{
+                src: 'src/pages/*.html',
+                dest: "build/pages",
+                flatten: true,
+                expand:true
+            },
             copyThemes:{
                 src: 'src/css/themes/*.css',
                 dest: 'build/css/themes',
