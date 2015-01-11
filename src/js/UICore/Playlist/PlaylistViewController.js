@@ -57,7 +57,7 @@ window.UI.PlaylistViewController.prototype =
         }
 
         builder.fillBody(mediaDetails);
-        builder.hookUpToEvents(this, this._play, this._remove, this._edit);
+        builder.hookUpToEvents(this, this._play);
 
         return builder.build();
     },

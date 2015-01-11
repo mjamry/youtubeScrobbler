@@ -24,7 +24,6 @@ window.UI.PlaylistUIItemBuilder.prototype =
             $(this).addClass(style);
             $(that._item).children().find(that._config.AdditionalButtonsContainer).slideDown(that._config.AnimationTime);
             $(that._item).children().find(that._config.CoverContainer).slideUp(that._config.AnimationTime);
-
         };
     },
 
@@ -108,7 +107,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
     },
 
     //hooks up to UI events such as clock, mouse enter, mouse leave.
-    hookUpToEvents: function(callbackContext, clickHandler, removeHandler)
+    hookUpToEvents: function(callbackContext, clickHandler)
     {
         //event handler
         var handleEvent = function(context, handler, index)
@@ -127,10 +126,6 @@ window.UI.PlaylistUIItemBuilder.prototype =
         this._item.click(onClickHandler);
         this._item.mouseenter(onMouseEnterHandler);
         this._item.mouseleave(onMouseLeaveHandler);
-
-        var onRemove = handleEvent(callbackContext, removeHandler, this._index);
-
-        this._removeButton.click(onRemove);
     },
 
     //builds fully initialised playlist item.
