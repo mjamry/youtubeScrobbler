@@ -3,13 +3,9 @@ window.UI = window.UI || {};
 
 window.UI.PlaylistUIItemBuilder = function(index, config)
 {
-    this._eventBroker = EventBroker.getInstance();
-
     this._index = index;
     this._config = config;
     this._item = null;
-    this._removeButton = null;
-    this._hoverStyle = null;
     this._cover = null;
 };
 
@@ -84,19 +80,16 @@ window.UI.PlaylistUIItemBuilder.prototype =
     //hooks up to UI events such as clock, mouse enter, mouse leave.
     hookUpToEvents: function(callbackContext, clickHandler)
     {
-        //event handler
-        var handleEvent = function(context, handler, index)
+        var onMouseClick = function(context, handler, index)
         {
-            function handlePlaylistItemEvent(e)
+            return function handlePlaylistItemEvent(e)
             {
                 e.stopPropagation();
                 handler.call(context, index);
-            }
-            return handlePlaylistItemEvent;
+            };
         };
 
-        var onClickHandler = handleEvent(callbackContext, clickHandler, this._index);
-        this._item.click(onClickHandler);
+        this._item.click(onMouseClick(callbackContext, clickHandler, this._index));
     },
 
     //builds fully initialised playlist item.
