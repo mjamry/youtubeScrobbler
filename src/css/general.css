@@ -877,8 +877,8 @@ body
     position:absolute;
     overflow: hidden;
     top:70px;
-    bottom:73px;
-    left:0px;
+    bottom:0;
+    left:0;
 }
 
 .menu-item-container
