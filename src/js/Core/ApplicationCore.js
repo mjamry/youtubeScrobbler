@@ -89,7 +89,7 @@ window.ApplicationCore.AppCore.prototype =
 
         for(var item in menuItemsConfiguration)
         {
-            this.menuController.add(menuItemsConfiguration[item].Name, menuItemsConfiguration[item].Icon, menuItemsConfiguration[item].Page);
+            this.menuController.add(menuItemsConfiguration[item].Name, menuItemsConfiguration[item].Icon, menuItemsConfiguration[item].Page, menuItemsConfiguration[item].Position);
         }
 
         if(this.welcomeScreenService.isApplicationAlreadyActivated())

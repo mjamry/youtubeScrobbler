@@ -43,7 +43,15 @@ window.UI.MenuController.prototype =
         //if position is not set, use Top as default
         position = position || window.UI.MenuItemPosition.Top;
         var item = this._createNewMenuItem(name, icon, page, position);
-        this._view.append(item.getControl());
+        switch(position)
+        {
+            case window.UI.MenuItemPosition.Top:
+                this._view.find(this._config.MenuTop).append(item.getControl());
+                break;
+            case window.UI.MenuItemPosition.Bottom:
+                this._view.find(this._config.MenuBottom).append(item.getControl());
+                break;
+        }
     },
 
     _createNewMenuItem: function(name, icon, page, position)

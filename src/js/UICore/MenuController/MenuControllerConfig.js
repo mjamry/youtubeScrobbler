@@ -6,6 +6,8 @@ window.UI.MenuControllerConfig =
     MenuItemTitle: ".menu-item-title",
     MenuItemIcon: ".menu-item-icon",
     MenuItemContainer: ".menu-item-container",
+    MenuTop: ".menu-top",
+    MenuBottom: ".menu-bottom",
 
     MenuActiveWidth: "220px",
     MenuInactiveWidth: "50px"

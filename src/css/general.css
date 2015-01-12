@@ -889,7 +889,18 @@ body
     cursor:pointer;
     padding-top:10px;
     padding-bottom:10px;
+}
 
+.menu-top
+{
+    position: absolute;
+    top:0;
+}
+
+.menu-bottom
+{
+    position: absolute;
+    bottom:0;
 }
 
 .menu-item-button
