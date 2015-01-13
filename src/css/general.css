@@ -132,36 +132,6 @@ body
     margin-bottom: 10px;
 }
 
-/*----------------------------------------------FOOTER--------------------------------------------*/
-
-#footer
-{
-    font-size: 9pt;
-    width:100%;
-    position:absolute;
-    bottom:0;
-}
-
-#footer-content
-{
-    width: 800px;
-    margin:auto;
-    padding:10px;
-    text-align:center;
-}
-
-.footer-line
-{
-    border:0;
-    height:1px;
-}
-
-.footer-licencing
-{
-    text-align: center;
-    padding-top:15px;
-}
-
 /*------------------------------------------------HEADER------------------------------------------*/
 
 #header
