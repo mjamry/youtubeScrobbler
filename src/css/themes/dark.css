@@ -13,6 +13,11 @@ body A:hover
 {
     color: #DC3522;
 }
+/*-------WELCOME-SCREEN-----------*/
+#welcome-screen
+{
+    background-color: #2A2C2B;
+}
 
 /*-------HEADER-----------*/
 #header

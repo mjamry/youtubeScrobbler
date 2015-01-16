@@ -17,12 +17,13 @@ window.UI.WelcomeScreenController.prototype =
 
     showMainScreen: function()
     {
-        this.view.find(this.config.MainScreenId).show();
-        this.view.find(this.config.WelcomeScreenId).hide();
+        $(this.config.MainScreenId).show();
+        this.view.hide();
     },
 
     initialise: function()
     {
         this.view.find(this.config.WelcomeScreenButton).click(this._handleButtonClicked.bind(this));
+        this.view.show();
     }
 };
