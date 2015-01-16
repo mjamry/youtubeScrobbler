@@ -16,7 +16,7 @@ window.ApplicationCore.PageLoader.prototype =
         this._preInitialise(coreServicesFactory, uiFactory)
             .then(function preInitSuccess()
             {
-                LoadingIndicatorService.getInstance().show("Please wait, page is being loaded.");
+                LoadingIndicatorService.getInstance().show("Please wait, page is being loaded.", true);
                 LoadingIndicatorService.getInstance().updateContent("Loading page content");
                 return that._loadPagesContent(pagesConfiguration);
             })

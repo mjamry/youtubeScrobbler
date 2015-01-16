@@ -24,5 +24,6 @@ window.UI.WelcomeScreenController.prototype =
     initialise: function()
     {
         this.view.find(this.config.WelcomeScreenButton).click(this._handleButtonClicked.bind(this));
+        this.view.show();
     }
 };

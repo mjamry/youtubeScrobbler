@@ -55,7 +55,7 @@ body
 {
     position:absolute;
     opacity: 1;
-    z-index: 1;
+    z-index: 99;
 }
 
 #loading-indicator .loading-indicator-content
@@ -70,7 +70,7 @@ body
     text-align: center;
     position: relative;
     opacity:1;
-    z-index: 5;
+    z-index: 100;
 }
 /*----------------------------------------------WELCOME--SCREEN------------------------------------------*/
 #welcome-screen
@@ -81,7 +81,8 @@ body
     height: 100%;
 
     position: absolute;
-    z-index: 1;
+    z-index: 98;
+    display: none;
 }
 
 #welcome-screen-description
