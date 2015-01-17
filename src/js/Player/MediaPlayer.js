@@ -40,6 +40,7 @@ window.Player.MediaPlayer.prototype =
             {
                 return function mediaPlayerInitialisationSuccessCallback(mediaElement)
                 {
+                    LoadingIndicatorService.getInstance().show("Please be patient.<br>Player is being loaded.");
                     that.instance = mediaElement;
                     that._initialise(mediaElement);
 
@@ -49,6 +50,7 @@ window.Player.MediaPlayer.prototype =
 
                     that.playbackState.changeToStop();
                     EventBroker.getInstance().fireEventWithData(window.Player.Events.PlayerCreated, that.currentlyLoadedMediaDetails);
+                    LoadingIndicatorService.getInstance().hide();
                 };
             };
 
@@ -65,6 +67,7 @@ window.Player.MediaPlayer.prototype =
 
         //create new player - instance is set in success callback
         new MediaElement(this.container, config);
+
     },
 
     _handleTimeUpdated: function(timeDetails)

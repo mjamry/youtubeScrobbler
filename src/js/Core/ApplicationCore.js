@@ -18,17 +18,19 @@ window.ApplicationCore.AppCore.prototype =
 
     createAppServices: function(coreServicesFactory, lastFmServicesFactory, playerServicesFactory)
     {
+        var playlistElementDetailsProvider = playerServicesFactory.createPlaylistElementDetailsProvider(lastFmServicesFactory.createTrackInformationProvider());
+        this.playlistService = coreServicesFactory.createPlaylistService(playlistElementDetailsProvider);
+        this.playlistDetailsProvider = playerServicesFactory.createPlaylistDetailsProvider(this.playlistService);
+        this.player = coreServicesFactory.createMediaPlayer(this.playlistDetailsProvider);
         this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler(lastFmServicesFactory.createScrobbler());
 
-        var playlistElementDetailsProvider = playerServicesFactory.createPlaylistElementDetailsProvider(lastFmServicesFactory.createTrackInformationProvider());
         this.googleApiWrapper = coreServicesFactory.createGoogleApiWrapper();
-        this.playlistService = coreServicesFactory.createPlaylistService(playlistElementDetailsProvider);
+
         this.playlistLoaderService = coreServicesFactory.createPlaylistLoaderService(this.playlistService, this.googleApiWrapper);
         this.searchService = coreServicesFactory.createSearchService(this.googleApiWrapper);
 
         this.playlistFlowController = playerServicesFactory.createPlaylistFlowController(this.playlistService);
-        this.playlistDetailsProvider = playerServicesFactory.createPlaylistDetailsProvider(this.playlistService);
-        this.player = coreServicesFactory.createMediaPlayer(this.playlistDetailsProvider);
+
 
         this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService(this.player);
 
