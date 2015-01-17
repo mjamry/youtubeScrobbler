@@ -58,7 +58,7 @@ window.Player.MediaPlayer.prototype =
                 error: function ()
                 {
                     Logger.getInstance().error("Media player initialisation failed.");
-                    UserNotifier.getInstance().error("Media player initialisation failed. Please refresh page.");
+                    throw "Sorry, but your browser does not support Flash.<br>Please install appropriate plugin.";
                 }
             }, this.config
         );

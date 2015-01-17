@@ -65,6 +65,7 @@ window.ApplicationCore.PageLoader.prototype =
             })
             .catch(function(error)
             {
+                LoadingIndicatorService.getInstance().updateContent(error);
                 Logger.getInstance().error("[Init] Page initialisation error: "+error);
             });
     },
