@@ -65,7 +65,7 @@ window.ApplicationCore.PageLoader.prototype =
             })
             .catch(function(error)
             {
-                LoadingIndicatorService.getInstance().updateContent(error);
+                LoadingIndicatorService.getInstance().show("Error: <br>"+error, true);
                 Logger.getInstance().error("[Init] Page initialisation error: "+error);
             });
     },
@@ -212,7 +212,7 @@ window.ApplicationCore.PageLoader.prototype =
                 }
                 else
                 {
-                    reject("[Init] Page loading error: "+page.ContentLocation+" - "+xhr.statusText+" ("+xhr.status+")");
+                    reject(page.ContentLocation+"<br>"+xhr.statusText+" ("+xhr.status+")");
                 }
             };
         };
