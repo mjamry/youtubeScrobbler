@@ -9,20 +9,25 @@ window.UI.PlaylistItemDetailsEditorViewController = function(detailsProvider, pl
 
     this.index = null;
     this.mediaDetails = null;
+    this.view = $(this.config.Container);
 };
 
 window.UI.PlaylistItemDetailsEditorViewController.prototype =
 {
     _setVerificationCorrectStatus: function(item)
     {
-        $(item).children(this.config.VerificationOk).show();
-        $(item).children(this.config.VerificationError).hide();
+        var indicator = $(item);
+        indicator.show();
+        indicator.children(this.config.VerificationOk).show();
+        indicator.children(this.config.VerificationError).hide();
     },
 
     _setVerificationErrorStatus: function(item)
     {
-        $(item).children(this.config.VerificationOk).hide();
-        $(item).children(this.config.VerificationError).show();
+        var indicator = $(item);
+        indicator.show();
+        indicator.children(this.config.VerificationOk).hide();
+        indicator.children(this.config.VerificationError).show();
     },
 
     _verifyItems: function()
@@ -51,6 +56,7 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
     {
         this._show(args.mediaDetails, args.index);
         this.updateView();
+        this._enableButtons();
     },
 
     _handleDetailsObtained: function(that)
@@ -99,9 +105,17 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
 
     _clearView: function _clearView()
     {
+        //cleat inputs
         $(this.config.ArtistInput).val("");
         $(this.config.TitleInput).val("");
         $(this.config.AlbumInput).val("");
+
+        //hide indicators
+        $(this.config.ArtistVerification).hide();
+        $(this.config.TitleVerification).hide();
+        $(this.config.AlbumVerification).hide();
+
+        this._disableButtons();
     },
 
     //updated view with current media details
@@ -132,9 +146,21 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         this.mediaDetails = mediaDetails;
     },
 
+    _enableButtons: function()
+    {
+        this.view.find(this.config.Button).removeAttr(this.config.DisabledAttr);
+    },
+
+    _disableButtons: function()
+    {
+        this.view.find(this.config.Button).attr(this.config.DisabledAttr, true);
+    },
+
     initialise: function()
     {
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistItemEditionRequested, $.proxy(this._onItemEditionRequested, this));
+
+        this._disableButtons();
 
         $(this.config.SwapButton).click($.proxy(function swapItemDetails(e)
         {
