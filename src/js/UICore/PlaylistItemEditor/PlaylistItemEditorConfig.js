@@ -4,7 +4,7 @@ window.UI = window.UI || {};
 
 window.UI.PlaylistItemDetailsEditorConfig =
 {
-    Container: "#playlist-item-editor-container",
+    Container: "#playlist-item-editor",
 
     ArtistInput: "#playlist-item-editor-artist",
     TitleInput: "#playlist-item-editor-title",
@@ -20,5 +20,8 @@ window.UI.PlaylistItemDetailsEditorConfig =
     AlbumVerification: ".playlist-editor-album-check",
 
     VerificationOk: ".playlist-editor-verification-ok",
-    VerificationError: ".playlist-editor-verification-err"
+    VerificationError: ".playlist-editor-verification-err",
+
+    Button: ".playlist-editor-button",
+    DisabledAttr: "disabled"
 };

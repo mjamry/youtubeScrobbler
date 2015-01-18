@@ -151,7 +151,8 @@ body A:hover
 }
 
 .playback-control-button:disabled,
-.playlist-control-button:disabled
+.playlist-control-button:disabled,
+.playlist-editor-button:disabled
 {
     background-color:#374140 !important;
     color: #626e6d !important;

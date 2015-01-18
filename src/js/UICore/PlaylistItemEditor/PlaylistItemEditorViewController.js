@@ -9,6 +9,7 @@ window.UI.PlaylistItemDetailsEditorViewController = function(detailsProvider, pl
 
     this.index = null;
     this.mediaDetails = null;
+    this.view = $(this.config.Container);
 };
 
 window.UI.PlaylistItemDetailsEditorViewController.prototype =
@@ -51,6 +52,7 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
     {
         this._show(args.mediaDetails, args.index);
         this.updateView();
+        this._enableButtons();
     },
 
     _handleDetailsObtained: function(that)
@@ -102,6 +104,8 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         $(this.config.ArtistInput).val("");
         $(this.config.TitleInput).val("");
         $(this.config.AlbumInput).val("");
+
+        this._disableButtons();
     },
 
     //updated view with current media details
@@ -132,9 +136,21 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         this.mediaDetails = mediaDetails;
     },
 
+    _enableButtons: function()
+    {
+        this.view.find(this.config.Button).removeAttr(this.config.DisabledAttr);
+    },
+
+    _disableButtons: function()
+    {
+        this.view.find(this.config.Button).attr(this.config.DisabledAttr, true);
+    },
+
     initialise: function()
     {
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistItemEditionRequested, $.proxy(this._onItemEditionRequested, this));
+
+        this._disableButtons();
 
         $(this.config.SwapButton).click($.proxy(function swapItemDetails(e)
         {
