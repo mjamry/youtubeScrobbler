@@ -16,14 +16,18 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
 {
     _setVerificationCorrectStatus: function(item)
     {
-        $(item).children(this.config.VerificationOk).show();
-        $(item).children(this.config.VerificationError).hide();
+        var indicator = $(item);
+        indicator.show();
+        indicator.children(this.config.VerificationOk).show();
+        indicator.children(this.config.VerificationError).hide();
     },
 
     _setVerificationErrorStatus: function(item)
     {
-        $(item).children(this.config.VerificationOk).hide();
-        $(item).children(this.config.VerificationError).show();
+        var indicator = $(item);
+        indicator.show();
+        indicator.children(this.config.VerificationOk).hide();
+        indicator.children(this.config.VerificationError).show();
     },
 
     _verifyItems: function()
@@ -101,9 +105,15 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
 
     _clearView: function _clearView()
     {
+        //cleat inputs
         $(this.config.ArtistInput).val("");
         $(this.config.TitleInput).val("");
         $(this.config.AlbumInput).val("");
+
+        //hide indicators
+        $(this.config.ArtistVerification).hide();
+        $(this.config.TitleVerification).hide();
+        $(this.config.AlbumVerification).hide();
 
         this._disableButtons();
     },
