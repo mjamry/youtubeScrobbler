@@ -15,6 +15,8 @@ window.UI.MediaLoadConfig =
     SearchItemCover: ".search-result-cover",
     SearchResultsControls: "#search-result-controls",
 
+    EmptyPlaylistIndicator: ".empty-playlist-indicator",
+
     PlaylistIcon: "fa fa-th-list",
     YoutubeIcon: "fa fa-youtube"
 };
