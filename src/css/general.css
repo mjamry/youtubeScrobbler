@@ -353,6 +353,19 @@ body
     font-weight: bold;
     line-height:20px;
 }
+
+.empty-playlist-indicator
+{
+    text-align: center;
+    font-size: 16pt;
+    line-height: 30pt;
+    margin-top:50px;
+}
+
+.empty-playlist-indicator a
+{
+    font-size: 12pt;
+}
 /*------------------------------PLAYLIST--ITEM--EDITOR--LIST------------*/
 #playlist-editor-list-container
 {
