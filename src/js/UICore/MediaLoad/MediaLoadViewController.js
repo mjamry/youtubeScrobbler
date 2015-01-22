@@ -61,6 +61,16 @@ window.UI.MediaLoadViewController.prototype =
         }
     },
 
+    _handlePlaylistCleared: function()
+    {
+        $(this.config.EmptyPlaylistIndicator).show();
+    },
+
+    _handlePlaylistCreated: function()
+    {
+        $(this.config.EmptyPlaylistIndicator).hide();
+    },
+
     initialise: function initialise()
     {
         $(this.config.AddNewMediaButton).click($.proxy(function handleAddMediaClicked(e)
@@ -71,6 +81,8 @@ window.UI.MediaLoadViewController.prototype =
         this));
 
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistUpdated, $.proxy(this._handlePlaylistUpdated, this));
+        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCleared, $.proxy(this._handlePlaylistCleared, this));
+        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistCreated, $.proxy(this._handlePlaylistCreated, this));
         EventBroker.getInstance().addListener(window.Services.SearchResultEvents.SearchFinishedWithSuccess, $.proxy(this._handleSearchResult, this));
     }
 };
