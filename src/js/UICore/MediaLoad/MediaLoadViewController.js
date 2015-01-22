@@ -71,7 +71,7 @@ window.UI.MediaLoadViewController.prototype =
         $(this.config.EmptyPlaylistIndicator).hide();
     },
 
-    _handleInputGainFocus: function()
+    _handleInputGainedFocus: function()
     {
         //put a space just to remove placeholder.
         this.mediaInput.val(" ");
@@ -92,7 +92,7 @@ window.UI.MediaLoadViewController.prototype =
         },
         this));
 
-        this.mediaInput.focus(this._handleInputGainFocus.bind(this));
+        this.mediaInput.focus(this._handleInputGainedFocus.bind(this));
         this.mediaInput.blur(this._handleInputLostFocus.bind(this));
 
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistUpdated, $.proxy(this._handlePlaylistUpdated, this));
