@@ -698,7 +698,7 @@ body
 
 .playlist-add-input
 {
-
+    text-align:center;
     height:35px;
     font-size: 9pt;
     vertical-align: top;

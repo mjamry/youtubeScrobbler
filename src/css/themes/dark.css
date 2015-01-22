@@ -248,17 +248,17 @@ body A:hover
 
 .playlist-add-input
 {
-    border:1px solid #DC3522;
-    color: #1E1E20;
-    background-color: #D9CB9E;
+    border:1px solid #D9CB9E;
+    color: #D9CB9E;
+    background-color: #374140;
     padding-left:10px;
     font-size: 12pt;
 }
 
-::-webkit-input-placeholder { color:#DC3522; }
-::-moz-placeholder { color:#DC3522; } /* firefox 19+ */
-:-ms-input-placeholder { color:#DC3522; } /* ie */
-input:-moz-placeholder { color:#DC3522; }
+::-webkit-input-placeholder { color:#D9CB9E; }
+::-moz-placeholder { color:#D9CB9E; } /* firefox 19+ */
+:-ms-input-placeholder { color:#D9CB9E; } /* ie */
+input:-moz-placeholder { color:#D9CB9E; }
 
 /*--------PLAYBACK--PROGRESS----------*/
 .playback-progress-bar-container,
