@@ -65,6 +65,7 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         {
             that.mediaDetails = mediaDetails.clone();
             that.updateView();
+            LoadingIndicatorService.getInstance().hide();
         };
     },
 
@@ -193,12 +194,16 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         {
             e.preventDefault();
 
+            LoadingIndicatorService.getInstance().show("Verifying track details.<br>Please wait.");
             var mediaDetails = this._retrieveMediaDetails();
             this.detailsProvider.getTrackDetails(
                 mediaDetails,
                 {
                     done: this._handleDetailsObtained(this),
-                    fail: function(){}
+                    fail: function()
+                    {
+                        LoadingIndicatorService.getInstance().hide();
+                    }
                 }
             );
         },
