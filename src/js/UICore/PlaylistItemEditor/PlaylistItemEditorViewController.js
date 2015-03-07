@@ -65,6 +65,7 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         {
             that.mediaDetails = mediaDetails.clone();
             that.updateView();
+            LoadingIndicatorService.getInstance().hide();
         };
     },
 
@@ -89,10 +90,19 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
 
     _savePlaylistItemDetails: function(that)
     {
+        var undoCallback = function(that, index)
+        {
+            var detailsToRestore = that.playlistProvider.getPlaylist().get(index).clone();
+            return function undoTrackEdit()
+            {
+                that.playlistProvider.updateItem(index, detailsToRestore);
+            }
+        };
+
         that.mediaDetails = that._retrieveMediaDetails();
-        that.playlistProvider.updateItem(that.index, that.mediaDetails);
-        UserNotifier.getInstance().info("Details saved for '"+that.mediaDetails.artist.name+" - "+that.mediaDetails.title+"'");
+        UserNotifier.getInstance().info("Details saved for '"+that.mediaDetails.artist.name+" - "+that.mediaDetails.title+"'", undoCallback(this, this.index));
         Logger.getInstance().info("[Editor] Details saved for '"+that.mediaDetails.artist.name+" - "+that.mediaDetails.title+"'");
+        that.playlistProvider.updateItem(that.index, that.mediaDetails);
         that._hide();
     },
 
@@ -105,6 +115,12 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
 
     _clearView: function _clearView()
     {
+        this._clearEnteredValues();
+        this._disableButtons();
+    },
+
+    _clearEnteredValues: function()
+    {
         //cleat inputs
         $(this.config.ArtistInput).val("");
         $(this.config.TitleInput).val("");
@@ -114,14 +130,12 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         $(this.config.ArtistVerification).hide();
         $(this.config.TitleVerification).hide();
         $(this.config.AlbumVerification).hide();
-
-        this._disableButtons();
     },
 
     //updated view with current media details
     updateView: function updateView()
     {
-        this._clearView();
+        this._clearEnteredValues();
         if(this.mediaDetails.artist.name)
         {
             $(this.config.ArtistInput).val(this.mediaDetails.artist.name);
@@ -180,12 +194,16 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         {
             e.preventDefault();
 
+            LoadingIndicatorService.getInstance().show("Verifying track details.<br>Please wait.");
             var mediaDetails = this._retrieveMediaDetails();
             this.detailsProvider.getTrackDetails(
                 mediaDetails,
                 {
                     done: this._handleDetailsObtained(this),
-                    fail: function(){}
+                    fail: function()
+                    {
+                        LoadingIndicatorService.getInstance().hide();
+                    }
                 }
             );
         },
