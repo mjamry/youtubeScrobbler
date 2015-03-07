@@ -29,7 +29,7 @@ window.ApplicationCore.AppCore.prototype =
         this.sessionService = coreServicesFactory.createSessionService(this.googleApiWrapper);
         this.sessionService.initialise();
         this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistFlowController);
-        this.playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.playlistService, lastFmServicesFactory.createTrackLoveStateModifier());
+        this.playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.playlistDetailsProvider, lastFmServicesFactory.createTrackLoveStateModifier());
         this.welcomeScreenService = coreServicesFactory.createWelcomeService();
     },
 
