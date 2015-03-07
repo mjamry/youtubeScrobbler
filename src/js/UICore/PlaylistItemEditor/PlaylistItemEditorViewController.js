@@ -89,10 +89,19 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
 
     _savePlaylistItemDetails: function(that)
     {
+        var undoCallback = function(that, index)
+        {
+            var detailsToRestore = that.playlistProvider.getPlaylist().get(index).clone();
+            return function undoTrackEdit()
+            {
+                that.playlistProvider.updateItem(index, detailsToRestore);
+            }
+        };
+
         that.mediaDetails = that._retrieveMediaDetails();
-        that.playlistProvider.updateItem(that.index, that.mediaDetails);
-        UserNotifier.getInstance().info("Details saved for '"+that.mediaDetails.artist.name+" - "+that.mediaDetails.title+"'");
+        UserNotifier.getInstance().info("Details saved for '"+that.mediaDetails.artist.name+" - "+that.mediaDetails.title+"'", undoCallback(this, this.index));
         Logger.getInstance().info("[Editor] Details saved for '"+that.mediaDetails.artist.name+" - "+that.mediaDetails.title+"'");
+        that.playlistProvider.updateItem(that.index, that.mediaDetails);
         that._hide();
     },
 

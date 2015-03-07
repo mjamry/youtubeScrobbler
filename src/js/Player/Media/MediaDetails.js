@@ -39,21 +39,32 @@ window.Player.MediaDetails.prototype =
     loved: "",       //determine if track has been loved already
     tags: "",
 
-    clone: function()
+    _deepCopy: function(source)
     {
         var deepCopy = new window.Player.MediaDetails();
-
-        for(var prop in this)
+        for(var prop in source)
         {
             //check if property is not a function - as we need to copy only values
-            if(this.hasOwnProperty(prop))
+            if(source.hasOwnProperty(prop))
             {
-                //copy property value
-                deepCopy[prop] = this[prop];
+                //if is an object need to copy all elements
+                if(typeof(source[prop]) == "object")
+                {
+                    deepCopy[prop] = this._deepCopy(source[prop]);
+                }
+                else
+                {
+                    deepCopy[prop] = source[prop];
+                }
             }
         }
 
         return deepCopy;
+    },
+
+    clone: function()
+    {
+        return this._deepCopy(this);
     },
 
     deserialize: function(data)
