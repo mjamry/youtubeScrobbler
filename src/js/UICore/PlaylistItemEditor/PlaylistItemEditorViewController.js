@@ -105,6 +105,12 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
 
     _clearView: function _clearView()
     {
+        this._clearEnteredValues();
+        this._disableButtons();
+    },
+
+    _clearEnteredValues: function()
+    {
         //cleat inputs
         $(this.config.ArtistInput).val("");
         $(this.config.TitleInput).val("");
@@ -114,14 +120,12 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         $(this.config.ArtistVerification).hide();
         $(this.config.TitleVerification).hide();
         $(this.config.AlbumVerification).hide();
-
-        this._disableButtons();
     },
 
     //updated view with current media details
     updateView: function updateView()
     {
-        this._clearView();
+        this._clearEnteredValues();
         if(this.mediaDetails.artist.name)
         {
             $(this.config.ArtistInput).val(this.mediaDetails.artist.name);
