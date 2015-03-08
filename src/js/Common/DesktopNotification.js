@@ -41,7 +41,7 @@ window.Common.DesktopNotificationImpl.prototype =
         };
         if(url)
         {
-            $.extend(options, {url: url});
+            $.extend(options, {icon: url});
         }
 
         if (!("Notification" in window)) {

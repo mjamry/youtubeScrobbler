@@ -10,9 +10,17 @@ window.Player.PlaybackControlService = function(player, playlistController)
 
 window.Player.PlaybackControlService.prototype =
 {
+    _notifyUserAboutLoadedMedia: function(mediaDetails)
+    {
+        var notificationTitle = mediaDetails.artist.name + " - " +mediaDetails.title;
+        var notificationBody = mediaDetails.album.name;
+        DesktopNotification.getInstance().show(notificationTitle, notificationBody, mediaDetails.album.cover);
+    },
+
     _loadMedia: function(mediaDetails)
     {
         this.player.load(mediaDetails);
+        this._notifyUserAboutLoadedMedia(mediaDetails);
         if(this._autoplay)
         {
             this.player.play();
