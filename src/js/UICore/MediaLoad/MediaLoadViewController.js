@@ -80,7 +80,7 @@ window.UI.MediaLoadViewController.prototype =
     _handleInputLostFocus: function()
     {
         this._clearMediaInput();
-        this.searchControl.hide();
+        //this.searchControl.hide();
     },
 
     initialise: function initialise()
