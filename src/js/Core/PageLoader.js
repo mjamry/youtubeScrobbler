@@ -126,6 +126,9 @@ window.ApplicationCore.PageLoader.prototype =
             new ProgressbarService();
             ProgressbarService.setInstance(new window.Services.ProgressbarServiceImpl());
 
+            new DesktopNotification();
+            DesktopNotification.setInstance(new window.Common.DesktopNotificationImpl());
+
             //create loading indicator service
             new LoadingIndicatorService();
             LoadingIndicatorService.setInstance(new window.Services.LoadingIndicatorServiceImpl());
