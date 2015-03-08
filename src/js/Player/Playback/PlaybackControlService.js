@@ -12,7 +12,7 @@ window.Player.PlaybackControlService.prototype =
 {
     _notifyUserAboutLoadedMedia: function(mediaDetails)
     {
-        var notificationTitle = mediaDetails.artist.name + " - " +mediaDetails.title;
+        var notificationTitle = mediaDetails.artist.name + " - " +mediaDetails.title + " ("+mediaDetails.duration.getHumanReadable()+")";
         var notificationBody = mediaDetails.album.name;
         DesktopNotification.getInstance().show(notificationTitle, notificationBody, mediaDetails.album.cover);
     },

@@ -37,31 +37,28 @@ window.Common.DesktopNotificationImpl.prototype =
     {
         var options =
         {
-            body: body
+            body: body,
+            icon: url
         };
-        if(url)
-        {
-            $.extend(options, {icon: url});
-        }
 
-        if (!("Notification" in window)) {
+        if (!("Notification" in window))
+        {
             Logger.getInstance().warning("Desktop notifications are not supported.");
         }
-
-        // Let's check if the user is okay to get some notification
         else if (Notification.permission === "granted")
         {
-            var notification = new Notification(title, options);
+            //if the user is okay to get some notification
+            return new Notification(title, options);
         }
-
-        // Otherwise, we need to ask the user for permission
-        else if (Notification.permission !== 'denied') {
+        else if (Notification.permission !== 'denied')
+        {
+            // Otherwise, we need to ask the user for permission
             Notification.requestPermission(function (permission)
             {
                 // If the user is okay, let's create a notification
                 if (permission === "granted")
                 {
-                    var notification = new Notification(title, options);
+                    return new Notification(title, options);
                 }
             });
         }
