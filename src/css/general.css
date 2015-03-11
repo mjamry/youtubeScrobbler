@@ -529,13 +529,14 @@ body
     margin-left:auto;
     margin-right:auto;
 
-    position:relative;
+    position:fixed;
+
 }
 
 #media-player-controls
 {
     float:left;
-    width:200px;
+    width:204px;
     display:block;
 }
 
@@ -553,29 +554,29 @@ body
     text-align: center;
     float:left;
     border-style: none;
+    margin-right: 1px;
 }
 
 /*---------------------------VOLUME---CONTROL------------*/
 #playback-control-volume-container
 {
-    position:absolute;
-    right:0;
     width:130px;
+    float:right;
 }
 
 .volume-control-description
 {
     height:33px;
     position:absolute;
-    bottom:0;
-    width:100%;
+    float:right;
+    right:0;
+    width:130px;
     text-align: center;
 }
 
 .volume-control-indicator-container
 {
     height:35px;
-    position: relative;
     cursor:ew-resize;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -591,16 +592,15 @@ body
 .volume-control-indicator
 {
     height:100%;
-    position:absolute;
+    float: left;
     bottom:0;
 }
 /*----------------------------PROGRESS---BARS----------*/
 #media-player-playback
 {
-    position:absolute;
-    right:130px;
-    left:200px;
-
+    display: inline-block;
+    width:566px;
+    float: left;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
