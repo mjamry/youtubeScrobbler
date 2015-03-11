@@ -529,7 +529,8 @@ body
     margin-left:auto;
     margin-right:auto;
 
-    position:relative;
+    position:fixed;
+
 }
 
 #media-player-controls
@@ -559,9 +560,8 @@ body
 /*---------------------------VOLUME---CONTROL------------*/
 #playback-control-volume-container
 {
-    position:absolute;
-    right:0;
     width:130px;
+    float:right;
 }
 
 .volume-control-description
@@ -598,10 +598,9 @@ body
 /*----------------------------PROGRESS---BARS----------*/
 #media-player-playback
 {
-    position:absolute;
-    right:130px;
-    left:204px;
-
+    display: inline-block;
+    width:566px;
+    float: left;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
