@@ -145,6 +145,9 @@ window.ApplicationCore.PageLoader.prototype =
     {
         var lastFmApi = new window.LastFm.LastFmConstants();
         lastFmApi.obtainKeys();
+
+        var googleApi = new window.Google.ApiKeys();
+        googleApi.obtainKeys();
     },
 
     _createServices: function(coreServicesFactory, lastFmServicesFactory, playerServicesFactory)

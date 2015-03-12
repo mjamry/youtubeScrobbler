@@ -8,7 +8,24 @@ window.Google.GoogleApiConstants =
     API_KEY: "AIzaSyC4ABYBwDsCVEVcZG9KHSFqkAWINiSylQw"
 };
 
-//TODO: move client id and key to server side
+window.Google.ApiKeys = function()
+{
+    this.apiKeysPath = "php/GoogleApiKeys.php";
+};
+
+window.Google.ApiKeys.prototype =
+{
+    obtainKeys: function()
+    {
+        $.get(this.apiKeysPath, function(result)
+        {
+            result = JSON.parse(result);
+            window.Google.ApiKeys.API_KEY = result.api_key;
+            window.Google.ApiKeys.CLIENT_ID = result.client_id;
+        })
+    }
+};
+
 window.Google.AuthApi =
 {
     //url with keys/ids: https://console.developers.google.com/project/scrobbline-001/apiui/credential
