@@ -135,8 +135,16 @@ window.ApplicationCore.PageLoader.prototype =
             var loadingIndicatorView = new window.UI.LoadingIndicatorViewController(window.UI.LoadingIndicatorConfiguration);
             loadingIndicatorView.initialise();
 
+            that._getApiKeys();
+
             resolve();
         });
+    },
+
+    _getApiKeys: function()
+    {
+        var lastFmApi = new window.LastFm.LastFmConstants();
+        lastFmApi.obtainKeys();
     },
 
     _createServices: function(coreServicesFactory, lastFmServicesFactory, playerServicesFactory)

@@ -1,11 +1,26 @@
 window.LastFm = window.LastFm || {};
 
 //TODO move to server side.
-window.LastFm.LastFmConstants =
+window.LastFm.LastFmConstants = function()
 {
-    API_KEY: 'c6374de0b62e5b4a8776bf85a6b56801',
-    API_SECRET: '2584ffa53e3a1cbabded6a43fd9dc7c5'
+    this.apiKeysPath = "php/LastFmApiKeys.php";
 };
+
+window.LastFm.LastFmConstants.prototype =
+{
+    obtainKeys: function()
+    {
+        $.get(this.apiKeysPath, function(result)
+        {
+            result = JSON.parse(result);
+            window.LastFm.LastFmConstants.API_KEY = result.api_key;
+            window.LastFm.LastFmConstants.API_SECRET = result.api_secret;
+        });
+    }
+};
+
+window.LastFm.LastFmConstants.API_KEY = "";
+window.LastFm.LastFmConstants.API_SECRET = "";
 
 LastFmApiCommon =
 {
