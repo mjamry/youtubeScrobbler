@@ -4,8 +4,7 @@ window.Google = window.Google || {};
 window.Google.GoogleApiConstants =
 {
     MAX_NUMBER_OF_ITEMS_PER_REQUEST: 50,
-    MAX_NUMBER_OF_SEARCH_RESULTS_PER_REQUEST: 50,
-    API_KEY: "AIzaSyC4ABYBwDsCVEVcZG9KHSFqkAWINiSylQw"
+    MAX_NUMBER_OF_SEARCH_RESULTS_PER_REQUEST: 50
 };
 
 window.Google.ApiKeys = function()
@@ -26,10 +25,12 @@ window.Google.ApiKeys.prototype =
     }
 };
 
+window.Google.ApiKeys.API_KEY = "";
+window.Google.ApiKeys.CLIENT_ID = "";
+
 window.Google.AuthApi =
 {
     //url with keys/ids: https://console.developers.google.com/project/scrobbline-001/apiui/credential
-    CLIENT_ID: "545850510511-njg0onu8v94vgdqetnt1bhnptomevl74.apps.googleusercontent.com",
     SCOPE_PROFILE: "https://www.googleapis.com/auth/userinfo.profile",
     SCOPE_EMAIL: "https://www.googleapis.com/auth/userinfo.email",
     NAME: "oauth2",
