@@ -1,6 +1,5 @@
 window.LastFm = window.LastFm || {};
 
-//TODO move to server side.
 window.LastFm.LastFmConstants = function()
 {
     this.apiKeysPath = "php/LastFmApiKeys.php";
