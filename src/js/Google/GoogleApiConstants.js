@@ -21,7 +21,7 @@ window.Google.ApiKeys.prototype =
             result = JSON.parse(result);
             window.Google.ApiKeys.API_KEY = result.api_key;
             window.Google.ApiKeys.CLIENT_ID = result.client_id;
-        })
+        });
     }
 };
 
