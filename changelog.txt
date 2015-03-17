@@ -1,3 +1,10 @@
+///////////VERSION 0.3.2////////////////
+ - added desktop notification (HTML5) to inform users about currently played song - #53
+ - removed footer, and extended menu items - #37
+ - information about empty playlist - #45
+ - added small space between playback buttons - #43
+ - updated welcome screen - menu and header are hidden - #41
+ - added undo action to playlist editor - #42
 ///////////VERSION 0.3.1////////////////
  - added loading indicator, informing users about page loading progress - #36
  - added setting to turn on/off scrobbling - #35
