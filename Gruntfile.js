@@ -2,6 +2,13 @@ module.exports = function(grunt) {
 
     // Project configuration.
     grunt.initConfig({
+
+        dirs:
+        {
+            src: 'src',
+            dst: 'build/<%= pkg.name %>_<%= pkg.version %>'
+        },
+
         pkg: grunt.file.readJSON('package.json'),
         jasmine: {
             src: ['src/js/**/*.js', '!src/js/lib/*'],
@@ -20,54 +27,54 @@ module.exports = function(grunt) {
         },
 
         useminPrepare: {
-            html: 'src/index.html',
+            html: '<%= dirs.src %>/index.html',
             options: {
-                dest: 'build'
+                dest: '<%= dirs.dst %>'
             }
         },
 
         usemin: {
-            html: 'build/index.html'
+            html: '<%= dirs.dst %>/index.html'
         },
 
         copy: {
             copyIndex:{
-                src: 'src/index.html',
-                dest: 'build/index.html'
+                src: '<%= dirs.src %>/index.html',
+                dest: '<%= dirs.dst %>/index.html'
             },
             copyPages:{
-                src: 'src/pages/*.html',
-                dest: "build/pages",
+                src: '<%= dirs.src %>/pages/*.html',
+                dest: "<%= dirs.dst %>/pages",
                 flatten: true,
                 expand:true
             },
             copyThemes:{
-                src: 'src/css/themes/*.css',
-                dest: 'build/css/themes',
+                src: '<%= dirs.src %>/css/themes/*.css',
+                dest: '<%= dirs.dst %>/css/themes',
                 flatten: true,
                 expand:true
             },
             copyLibrariesStyles:{
-                src: 'src/css/lib/*.css',
-                dest: 'build/css/lib',
+                src: '<%= dirs.src %>/css/lib/*.css',
+                dest: '<%= dirs.dst %>/css/lib',
                 flatten: true,
                 expand:true
             },
             copyJSLibs:{
-                src:'src/js/lib/*.js',
-                dest:'build/js/lib',
+                src:'<%= dirs.src %>/js/lib/*.js',
+                dest:'<%= dirs.dst %>/js/lib',
                 flatten:true,
                 expand:true
             },
             copyMedia:{
-                src:'src/media/*',
-                dest:'build/media',
+                src:'<%= dirs.src %>/media/*',
+                dest:'<%= dirs.dst %>/media',
                 flatten:true,
                 expand:true
             },
             copyPhp:{
-                src:'src/php/*.php',
-                dest:'build/php',
+                src:'<%= dirs.src %>/php/*.php',
+                dest:'<%= dirs.dst %>/php',
                 flatten:true,
                 expand:true
             }
