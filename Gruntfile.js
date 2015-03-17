@@ -64,6 +64,12 @@ module.exports = function(grunt) {
                 dest:'build/media',
                 flatten:true,
                 expand:true
+            },
+            copyPhp:{
+                src:'src/php/*.php',
+                dest:'build/php',
+                flatten:true,
+                expand:true
             }
         }
     });
