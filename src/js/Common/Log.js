@@ -71,7 +71,7 @@ LoggerImpl.prototype =
 
     error: function(message)
     {
-        message = "[ERR]" + this._getFormatedTimestamp() + message;
+        message = "[ERR]" + this._getFormatedTimestamp() + message + new Error().stack;
         console.error(message);
         if(this._eventBroker)
         {

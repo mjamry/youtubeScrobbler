@@ -50,7 +50,7 @@ window.Google.GoogleApiWrapper.prototype =
 
     initialise: function()
     {
-        gapi.client.setApiKey(window.Google.GoogleApiConstants.API_KEY);
+        gapi.client.setApiKey(window.Google.ApiKeys.API_KEY);
 
         for(var service in this._services)
         {
@@ -81,7 +81,7 @@ window.Google.GoogleApiWrapper.prototype =
         {
             var options = $.extend(
                 {
-                    client_id: window.Google.AuthApi.CLIENT_ID,
+                    client_id: window.Google.ApiKeys.CLIENT_ID,
                     response_type: "token",
                     scope: [window.Google.AuthApi.SCOPE_PROFILE, window.Google.YoutubeApi.SCOPE]
                 },

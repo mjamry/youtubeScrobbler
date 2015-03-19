@@ -16,7 +16,7 @@ window.ApplicationCore.PageLoader.prototype =
         this._preInitialise(coreServicesFactory, uiFactory)
             .then(function preInitSuccess()
             {
-                LoadingIndicatorService.getInstance().show("Please wait, page is being loaded.");
+                LoadingIndicatorService.getInstance().show("Please wait, page is being loaded.", true);
                 LoadingIndicatorService.getInstance().updateContent("Loading page content");
                 return that._loadPagesContent(pagesConfiguration);
             })
@@ -65,6 +65,7 @@ window.ApplicationCore.PageLoader.prototype =
             })
             .catch(function(error)
             {
+                LoadingIndicatorService.getInstance().show("Error: <br>"+error, true);
                 Logger.getInstance().error("[Init] Page initialisation error: "+error);
             });
     },
@@ -125,14 +126,28 @@ window.ApplicationCore.PageLoader.prototype =
             new ProgressbarService();
             ProgressbarService.setInstance(new window.Services.ProgressbarServiceImpl());
 
+            new DesktopNotification();
+            DesktopNotification.setInstance(new window.Common.DesktopNotificationImpl());
+
             //create loading indicator service
             new LoadingIndicatorService();
             LoadingIndicatorService.setInstance(new window.Services.LoadingIndicatorServiceImpl());
             var loadingIndicatorView = new window.UI.LoadingIndicatorViewController(window.UI.LoadingIndicatorConfiguration);
             loadingIndicatorView.initialise();
 
+            that._getApiKeys();
+
             resolve();
         });
+    },
+
+    _getApiKeys: function()
+    {
+        var lastFmApi = new window.LastFm.LastFmConstants();
+        lastFmApi.obtainKeys();
+
+        var googleApi = new window.Google.ApiKeys();
+        googleApi.obtainKeys();
     },
 
     _createServices: function(coreServicesFactory, lastFmServicesFactory, playerServicesFactory)
@@ -211,7 +226,7 @@ window.ApplicationCore.PageLoader.prototype =
                 }
                 else
                 {
-                    reject("[Init] Page loading error: "+page.ContentLocation+" - "+xhr.statusText+" ("+xhr.status+")");
+                    reject(page.ContentLocation+"<br>"+xhr.statusText+" ("+xhr.status+")");
                 }
             };
         };

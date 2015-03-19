@@ -55,7 +55,7 @@ body
 {
     position:absolute;
     opacity: 1;
-    z-index: 1;
+    z-index: 99;
 }
 
 #loading-indicator .loading-indicator-content
@@ -70,9 +70,20 @@ body
     text-align: center;
     position: relative;
     opacity:1;
-    z-index: 5;
+    z-index: 100;
 }
 /*----------------------------------------------WELCOME--SCREEN------------------------------------------*/
+#welcome-screen
+{
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    z-index: 98;
+    display: none;
+}
 
 #welcome-screen-description
 {
@@ -130,36 +141,6 @@ body
 {
     font-size: 18pt;
     margin-bottom: 10px;
-}
-
-/*----------------------------------------------FOOTER--------------------------------------------*/
-
-#footer
-{
-    font-size: 9pt;
-    width:100%;
-    position:absolute;
-    bottom:0;
-}
-
-#footer-content
-{
-    width: 800px;
-    margin:auto;
-    padding:10px;
-    text-align:center;
-}
-
-.footer-line
-{
-    border:0;
-    height:1px;
-}
-
-.footer-licencing
-{
-    text-align: center;
-    padding-top:15px;
 }
 
 /*------------------------------------------------HEADER------------------------------------------*/
@@ -372,6 +353,19 @@ body
     font-weight: bold;
     line-height:20px;
 }
+
+.empty-playlist-indicator
+{
+    text-align: center;
+    font-size: 16pt;
+    line-height: 30pt;
+    margin-top:50px;
+}
+
+.empty-playlist-indicator a
+{
+    font-size: 12pt;
+}
 /*------------------------------PLAYLIST--ITEM--EDITOR--LIST------------*/
 #playlist-editor-list-container
 {
@@ -535,13 +529,14 @@ body
     margin-left:auto;
     margin-right:auto;
 
-    position:relative;
+    position:fixed;
+
 }
 
 #media-player-controls
 {
     float:left;
-    width:200px;
+    width:204px;
     display:block;
 }
 
@@ -559,29 +554,29 @@ body
     text-align: center;
     float:left;
     border-style: none;
+    margin-right: 1px;
 }
 
 /*---------------------------VOLUME---CONTROL------------*/
 #playback-control-volume-container
 {
-    position:absolute;
-    right:0;
     width:130px;
+    float:right;
 }
 
 .volume-control-description
 {
     height:33px;
     position:absolute;
-    bottom:0;
-    width:100%;
+    float:right;
+    right:0;
+    width:130px;
     text-align: center;
 }
 
 .volume-control-indicator-container
 {
     height:35px;
-    position: relative;
     cursor:ew-resize;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -597,16 +592,15 @@ body
 .volume-control-indicator
 {
     height:100%;
-    position:absolute;
+    float: left;
     bottom:0;
 }
 /*----------------------------PROGRESS---BARS----------*/
 #media-player-playback
 {
-    position:absolute;
-    right:130px;
-    left:200px;
-
+    display: inline-block;
+    width:566px;
+    float: left;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -704,7 +698,7 @@ body
 
 .playlist-add-input
 {
-
+    text-align:center;
     height:35px;
     font-size: 9pt;
     vertical-align: top;
@@ -877,8 +871,8 @@ body
     position:absolute;
     overflow: hidden;
     top:70px;
-    bottom:73px;
-    left:0px;
+    bottom:0;
+    left:0;
 }
 
 .menu-item-container
@@ -889,7 +883,18 @@ body
     cursor:pointer;
     padding-top:10px;
     padding-bottom:10px;
+}
 
+.menu-top
+{
+    position: absolute;
+    top:0;
+}
+
+.menu-bottom
+{
+    position: absolute;
+    bottom:0;
 }
 
 .menu-item-button

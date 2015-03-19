@@ -154,6 +154,7 @@ window.Player.PlaylistService.prototype =
 
     removeItem: function(index)
     {
+        var isCurrentlyPlayedItemRemoved = index == this.getPlaylist().currentItemIndex;
         var mediaDetails = this.playlist.get(index);
         this.playlist.remove(index);
 
@@ -174,6 +175,7 @@ window.Player.PlaylistService.prototype =
         EventBroker.getInstance().fireEventWithData(
             window.Player.PlaylistEvents.PlaylistItemRemoved,
             {
+                isCurrentlyPlayedItemRemoved: isCurrentlyPlayedItemRemoved,
                 index: index
             });
 

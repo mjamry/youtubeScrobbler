@@ -10,9 +10,17 @@ window.Player.PlaybackControlService = function(player, playlistController)
 
 window.Player.PlaybackControlService.prototype =
 {
+    _notifyUserAboutLoadedMedia: function(mediaDetails)
+    {
+        var notificationTitle = mediaDetails.artist.name + " - " +mediaDetails.title + " ("+mediaDetails.duration.getHumanReadable()+")";
+        var notificationBody = mediaDetails.album.name;
+        DesktopNotification.getInstance().show(notificationTitle, notificationBody, mediaDetails.album.cover);
+    },
+
     _loadMedia: function(mediaDetails)
     {
         this.player.load(mediaDetails);
+        this._notifyUserAboutLoadedMedia(mediaDetails);
         if(this._autoplay)
         {
             this.player.play();
@@ -27,7 +35,8 @@ window.Player.PlaybackControlService.prototype =
 
     _handlePlaylistItemRemoved: function(eventArgs)
     {
-        if(eventArgs.index === this.playlistController.getCurrentItemIndex())
+        Logger.getInstance().debug("Current index: "+this.playlistController.getCurrentItemIndex()+" removed index: "+eventArgs.index);
+        if(eventArgs.isCurrentlyPlayedItemRemoved)
         {
             this.playSpecific(eventArgs.index);
         }

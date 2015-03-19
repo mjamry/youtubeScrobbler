@@ -8,12 +8,6 @@ window.Common.PagesConfiguration =
         ContentLocation: "pages/header.html"
     },
 
-    Footer:
-    {
-        Container: "#footer",
-        ContentLocation: "pages/footer.html"
-    },
-
     Controls:
     {
         Container: "#controls-schemes",

@@ -4,43 +4,52 @@ window.UI.MenuItemsConfig =
 {
     Player:
     {
-        Name: "player",
+        Name: "Player",
         Icon: "fa fa-play-circle-o fa-2x",
         Page: "#player"
     },
 
     PlaylistManage:
     {
-        Name: "playlist manager",
+        Name: "Playlist Manager",
         Icon: "fa fa-list-ul fa-2x",
         Page: "#playlist-manager"
     },
 
     PlaylistEditor:
     {
-        Name: "playlist editor",
+        Name: "Playlist Editor",
         Icon: "fa fa-pencil fa-2x",
         Page: "#playlist-editor"
     },
 
     AccountManager:
     {
-        Name: "accounts",
+        Name: "Accounts",
         Icon: "fa fa-user fa-2x",
         Page: "#accounts"
     },
 
     Settings:
     {
-        Name: "settings",
+        Name: "Settings",
         Icon: "fa fa-gear fa-2x",
         Page: "#settings"
     },
 
     Logs:
     {
-        Name: 'app logs',
+        Name: 'App Logs',
         Icon: "fa fa-bug fa-2x",
-        Page: "#testing-environment"
+        Page: "#testing-environment",
+        Position: window.UI.MenuItemPosition.Bottom
+    },
+
+    Contact:
+    {
+        Name: "Contact",
+        Icon: "fa fa-envelope fa-2x",
+        Page: "#contact",
+        Position: window.UI.MenuItemPosition.Bottom
     }
 };

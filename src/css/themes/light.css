@@ -23,13 +23,6 @@ body A:hover
     color: #4A4A49;
 }
 
-/*--------FOOTER----------*/
-#footer
-{
-    border-top:1px solid #636363;
-    background-color: #309BBD;
-}
-
 /*-------HEADER-----------*/
 #header
 {
@@ -150,7 +143,8 @@ body A:hover
 }
 
 .playback-control-button:disabled,
-.playlist-control-button:disabled
+.playlist-control-button:disabled,
+.playlist-editor-button:disabled
 {
     background-color:#309BBD !important;
     color: #989083 !important;

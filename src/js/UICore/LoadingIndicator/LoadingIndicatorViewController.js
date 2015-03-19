@@ -8,46 +8,38 @@ window.UI.LoadingIndicatorViewController = function(config)
 
 window.UI.LoadingIndicatorViewController.prototype =
 {
-    _show: function(that)
+    //{title, fullScreen}
+    _show: function(data)
     {
-        //eventArgs: {title, fullScreen}
-        return function onIndicatorShown(eventArgs)
+        this._hide();
+        var opacity = this.config.NonFullScreenOpacity;
+        if(data.fullScreen)
         {
-            var opacity = that.config.NonFullScreenOpacity;
-            if(eventArgs.fullScreen)
-            {
-                opacity = that.config.FullScreenOpacity;
-            }
+            opacity = this.config.FullScreenOpacity;
+        }
 
-            that.view.find(that.config.IndicatorOverlay).css("opacity", opacity);
+        this.view.find(this.config.IndicatorOverlay).css("opacity", opacity);
 
-            that.view.find(that.config.IndicatorTitle).html(eventArgs.title);
-            that.view.show();
-        };
-
+        this.view.find(this.config.IndicatorTitle).html(data.title);
+        this.view.show();
     },
 
-    _hide: function(that)
+    _hide: function()
     {
-        return function onIndicatorHidden()
-        {
-            that.view.hide();
-        };
+        this.view.hide();
+        this.view.find(this.config.IndicatorTitle).html("");
+        this.view.find(this.config.IndicatorDescription).html("");
     },
 
-    _update: function(that)
+    _update: function(data)
     {
-        //eventArgs: {content}
-        return function onIndicatorContentUpdated(eventArgs)
-        {
-            that.view.find(that.config.IndicatorDescription).html(eventArgs.content);
-        };
+        this.view.find(this.config.IndicatorDescription).html(data.content);
     },
 
     initialise: function()
     {
-        EventBroker.getInstance().addListener(window.Services.LoadingIndicatorEvents.ShowIndicator, this._show(this));
-        EventBroker.getInstance().addListener(window.Services.LoadingIndicatorEvents.HideIndicator, this._hide(this));
-        EventBroker.getInstance().addListener(window.Services.LoadingIndicatorEvents.UpdateContent, this._update(this));
+        EventBroker.getInstance().addListener(window.Services.LoadingIndicatorEvents.ShowIndicator, this._show.bind(this));
+        EventBroker.getInstance().addListener(window.Services.LoadingIndicatorEvents.HideIndicator, this._hide.bind(this));
+        EventBroker.getInstance().addListener(window.Services.LoadingIndicatorEvents.UpdateContent, this._update.bind(this));
     }
 };

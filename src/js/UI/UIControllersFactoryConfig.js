@@ -9,7 +9,7 @@ window.UI.UIControllersFactoryConfig =
     PlaybackControlView: "#playback-control",
     UserNotificationView: "#user-notifications-container",
     ProgressbarView: "#progressbar-container",
-    WelcomeScreenView: "#page",
+    WelcomeScreenView: "#welcome-screen",
     MenuView: "#menu",
     PlaylistEditorListView: "#playlist-editor-list-container",
     AccountsView: "#accounts"

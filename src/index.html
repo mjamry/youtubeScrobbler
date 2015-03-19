@@ -21,158 +21,7 @@
     <script type="text/javascript" src="js/lib/lastfm.api.cache.js"></script>
     <script type="text/javascript" src="js/lib/lastfm.api.md5.js"></script>
     <script type="text/javascript" src="js/lib/jquery.cookie.js"></script>
-    <script type="text/javascript" src="js/lib/mediaelement-and-player.js"></script>
-
-    <!--JS_SCROBBLINE-->
-    <!--build:js js/scrobbline.min.js-->
-    <script type="text/javascript" src="js/Common/Log.js"></script>
-    <script type="text/javascript" src="js/Common/LoggerEvents.js"></script>
-    <script type="text/javascript" src="js/Common/UrlParser.js"></script>
-    <script type="text/javascript" src="js/Common/EventBroker.js"></script>
-    <script type="text/javascript" src="js/Common/CookieHandler.js"></script>
-    <script type="text/javascript" src="js/Common/CookieConstants.js"></script>
-    <script type="text/javascript" src="js/Common/TimeParser.js"></script>
-    <script type="text/javascript" src="js/Common/LocalStorage.js"></script>
-    <script type="text/javascript" src="js/Common/GlobalErrorHandler.js"></script>
-    <script type="text/javascript" src="js/Common/ApplicationEvents.js"></script>
-    <script type="text/javascript" src="js/Common/UserNotifier/UserNotifier.js"></script>
-    <script type="text/javascript" src="js/Common/UserNotifier/UserNotifierEvents.js"></script>
-    <script type="text/javascript" src="js/Common/ApplicationDetails.js"></script>
-
-    <script type="text/javascript" src="js/Core/PageLoader.js"></script>
-    <script type="text/javascript" src="js/Core/Main.js"></script>
-    <script type="text/javascript" src="js/Core/CoreServicesFactory.js"></script>
-    <script type="text/javascript" src="js/Core/ApplicationCore.js"></script>
-    <script type="text/javascript" src="js/Core/OnlineScrobbler.js"></script>
-    <script type="text/javascript" src="js/Core/PagesConfiguration.js"></script>
-
-    <script type="text/javascript" src="js/LastFm/LastFmEvents.js"></script>
-    <script type="text/javascript" src="js/LastFm/Common.js"></script>
-    <script type="text/javascript" src="js/LastFm/LastFmApiFactory.js"></script>
-    <script type="text/javascript" src="js/LastFm/Scrobbler.js"></script>
-    <script type="text/javascript" src="js/LastFm/LastFmTrackInformationProvider.js"></script>
-    <script type="text/javascript" src="js/LastFm/TrackLoveStateModifier.js"></script>
-
-    <script type="text/javascript" src="js/Player/PlayerServicesFactory.js"></script>
-    <script type="text/javascript" src="js/Player/MediaPlayer.js"></script>
-    <script type="text/javascript" src="js/Player/Media/MediaDetails.js"></script>
-    <script type="text/javascript" src="js/Player/Media/Duration.js"></script>
-    <script type="text/javascript" src="js/Player/Playback/PlaybackDetailsService.js"></script>
-    <script type="text/javascript" src="js/Player/Playback/PlaybackControlService.js"></script>
-    <script type="text/javascript" src="js/Player/Playback/PlaybackState.js"></script>
-    <script type="text/javascript" src="js/Player/Playback/PlaybackStateHolder.js"></script>
-    <script type="text/javascript" src="js/Player/Playlist/Playlist.js"></script>
-    <script type="text/javascript" src="js/Player/Playlist/PlaylistFlowController.js"></script>
-    <script type="text/javascript" src="js/Player/Playlist/PlaylistService.js"></script>
-    <script type="text/javascript" src="js/Player/Playlist/PlaylistEvents.js"></script>
-    <script type="text/javascript" src="js/Player/Playlist/PlaylistElementDetailsProvider.js"></script>
-    <script type="text/javascript" src="js/Player/Playlist/PlaylistElementLoveStateModifier.js"></script>
-    <script type="text/javascript" src="js/Player/Playlist/PlaylistDetailsProvider.js"></script>
-    <script type="text/javascript" src="js/Player/Playlist/Loaders/DefaultPlaylistLoader.js"></script>
-    <script type="text/javascript" src="js/Player/Playlist/Loaders/PlaylistLoaderService.js"></script>
-    <script type="text/javascript" src="js/Player/Playlist/Loaders/PlaylistLoadersFactory.js"></script>
-    <script type="text/javascript" src="js/Player/Playlist/Loaders/YouTubePlaylistLoader.js"></script>
-    <script type="text/javascript" src="js/Player/MediaPlayerConfiguration.js"></script>
-    <script type="text/javascript" src="js/Player/PlayerEvents.js"></script>
-    <script type="text/javascript" src="js/Player/VolumeControlService.js"></script>
-    <script type="text/javascript" src="js/Player/VideoSizeControlService.js"></script>
-    <script type="text/javascript" src="js/Player/Playlist/Repository/PlaylistLocalRepository.js"></script>
-    <script type="text/javascript" src="js/Player/Playlist/Repository/PlaylistRepository.js"></script>
-    <script type="text/javascript" src="js/Player/Playlist/PersistentPlaylist.js"></script>
-
-    <script type="text/javascript" src="js/Tracking/GoogleTracker.js"></script>
-    <script type="text/javascript" src="js/Tracking/GoogleTrackerConfig.js"></script>
-    <script type="text/javascript" src="js/Tracking/GoogleUiTracker.js"></script>
-
-    <script type="text/javascript" src="js/Services/WelcomeScreenService.js"></script>
-    <script type="text/javascript" src="js/Services/Search/SearchService.js"></script>
-    <script type="text/javascript" src="js/Services/Search/SearchResultParser.js"></script>
-    <script type="text/javascript" src="js/Services/Policies/DefaultTrackNamePolicy.js"></script>
-    <script type="text/javascript" src="js/Services/Policies/DefaultPlaylistNamePolicy.js"></script>
-    <script type="text/javascript" src="js/Services/Validators/SearchResultNameValidator.js"></script>
-    <script type="text/javascript" src="js/Services/Progressbar/ProgressbarService.js"></script>
-    <script type="text/javascript" src="js/Services/Progressbar/ProgressbarServiceEvents.js"></script>
-
-    <script type="text/javascript" src="js/Google/GoogleApiConstants.js"></script>
-    <script type="text/javascript" src="js/Google/GoogleApiWrapper.js"></script>
-
-    <script type="text/javascript" src="js/Services/Accounts/LastFm/LastFmSessionProvider.js"></script>
-    <script type="text/javascript" src="js/Services/Accounts/Google/GoogleApiWithSessionControl.js"></script>
-    <script type="text/javascript" src="js/Services/Accounts/Google/GoogleSessionCoordinator.js"></script>
-    <script type="text/javascript" src="js/Services/Accounts/LastFm/LastFmSessionCoordinator.js"></script>
-    <script type="text/javascript" src="js/Services/Accounts/SessionsService.js"></script>
-    <script type="text/javascript" src="js/Services/Accounts/AccountsNames.js"></script>
-    <script type="text/javascript" src="js/Services/Accounts/SessionDetails.js"></script>
-    <script type="text/javascript" src="js/Services/Accounts/LastFm/LastFmTokenHandler.js"></script>
-    <script type="text/javascript" src="js/Services/Accounts/LastFm/LastFmSessionConstants.js"></script>
-    <script type="text/javascript" src="js/Services/Accounts/SessionEvents.js"></script>
-    <script type="text/javascript" src="js/Services/LoadingIndicator/LoadingIndicatorService.js"></script>
-    <script type="text/javascript" src="js/Services/LoadingIndicator/LoadingIndicatorEvents.js"></script>
-
-    <script type="text/javascript" src="js/UICore/Accounts/AccountsViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/Accounts/AccountsViewControllerConfiguration.js"></script>
-    <script type="text/javascript" src="js/UICore/Accounts/AccountDetailsBuilder.js"></script>
-
-    <script type="text/javascript" src="js/UI/UIControllersFactory.js"></script>
-    <script type="text/javascript" src="js/UI/UIControllersFactoryConfig.js"></script>
-    <script type="text/javascript" src="js/UI/Logger/LoggerViewController.js"></script>
-    <script type="text/javascript" src="js/UI/Logger/LoggerUIConfiguration.js"></script>
-    <script type="text/javascript" src="js/UI/TestReports/TestReportsUIConfiguration.js"></script>
-    <script type="text/javascript" src="js/UI/TestReports/TestReportsViewController.js"></script>
-    <script type="text/javascript" src="js/Common/ReportSender.js"></script>
-    <script type="text/javascript" src="js/UI/Controls/VolumeControl/VolumeControl.js"></script>
-    <script type="text/javascript" src="js/UI/Controls/VolumeControl/VolumeControlConfiguration.js"></script>
-    <script type="text/javascript" src="js/UI/Controls/ProgressbarControl/ProgressbarControl.js"></script>
-    <script type="text/javascript" src="js/UI/Controls/ProgressbarControl/ProgressbarControlConfiguration.js"></script>
-    <script type="text/javascript" src="js/UI/Controls/PlaybackProgressControl.js"></script>
-
-    <script type="text/javascript" src="js/UICore/UIConstants.js"></script>
-    <script type="text/javascript" src="js/UICore/UICore.js"></script>
-    <script type="text/javascript" src="js/UICore/UIEvents.js"></script>
-    <script type="text/javascript" src="js/UICore/Playlist/PlaylistViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/Playlist/PlaylistUIConfiguration.js"></script>
-    <script type="text/javascript" src="js/UICore/Playlist/PlaylistUIItemBuilder.js"></script>
-    <script type="text/javascript" src="js/UICore/PlaybackDetails/PlaybackDetailsViewConfiguration.js"></script>
-    <script type="text/javascript" src="js/UICore/PlaybackDetails/PlaybackDetailsViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/PlaybackControl/PlaybackControlViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/PlaybackControl/PlaybackControlConfiguration.js"></script>
-    <script type="text/javascript" src="js/UICore/Settings/PlaylistControl/PlaylistControlViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/Settings/PlaylistControl/PlaylistControlConfiguration.js"></script>
-    <script type="text/javascript" src="js/UICore/Settings/LastFm/ScrobblingControlConfiguration.js"></script>
-    <script type="text/javascript" src="js/UICore/Settings/LastFm/ScrobblingControlViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/UserNotification/UserNotifierConfiguration.js"></script>
-    <script type="text/javascript" src="js/UICore/UserNotification/UserNotifierViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/UserNotification/UserNotificationBuilder.js"></script>
-    <script type="text/javascript" src="js/UICore/ProgressbarViewController/ProgressbarViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/ProgressbarViewController/ProgressbarViewControllerConfig.js"></script>
-    <script type="text/javascript" src="js/UICore/WelcomeScreenController/WelcomeScreenController.js"></script>
-    <script type="text/javascript" src="js/UICore/WelcomeScreenController/WelcomeScreenConfiguration.js"></script>
-    <script type="text/javascript" src="js/UICore/AppDetailsController/AppDetailsConfig.js"></script>
-    <script type="text/javascript" src="js/UICore/AppDetailsController/AppDetailsViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/MenuController/MenuController.js"></script>
-    <script type="text/javascript" src="js/UICore/MenuController/MenuControllerConfig.js"></script>
-    <script type="text/javascript" src="js/UICore/MenuController/MenuItem.js"></script>
-    <script type="text/javascript" src="js/UICore/MenuController/MenuItemsConfig.js"></script>
-    <script type="text/javascript" src="js/UICore/PageDisplayCoordinator.js"></script>
-
-    <script type="text/javascript" src="js/UICore/MediaLoad/MediaLoadConfig.js"></script>
-    <script type="text/javascript" src="js/UICore/MediaLoad/MediaLoadViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/MediaLoad/Search/SearchResultItemBuilder.js"></script>
-    <script type="text/javascript" src="js/Services/Search/SearchResultEvents.js"></script>
-    <script type="text/javascript" src="js/Services/Search/SearchResourceType.js"></script>
-    <script type="text/javascript" src="js/Services/Search/SearchServiceConstants.js"></script>
-    <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistItemEditorConfig.js"></script>
-    <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistItemEditorViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistEditorItemConfiguration.js"></script>
-    <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistEditorListViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistEditorListItemBuilder.js"></script>
-    <script type="text/javascript" src="js/UICore/ColorSchemeControl/ColorSchemeControlConfig.js"></script>
-    <script type="text/javascript" src="js/UICore/ColorSchemeControl/ColorSchemeControlViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/LoadingIndicator/LoadingIndicatorViewController.js"></script>
-    <script type="text/javascript" src="js/UICore/LoadingIndicator/LoadingIndicatorConfiguration.js"></script>
-
-    <!--endbuild-->
-    <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=onGoogleClientLoaded"></script>
+    <script type="text/javascript" src="js/lib/mediaelement-and-player.min.js"></script>
 
     <!--JS-GOOGLE-ANALYTICS-->
     <script>
@@ -195,11 +44,15 @@
         <div class="loading-indicator-description"></div>
     </div>
 </div>
+<div id="welcome-screen"></div>
 <div id="page">
     <div id="header"></div>
-    <div id="menu"></div>
+    <div id="menu">
+        <div class="menu-top"></div>
+        <div class="menu-bottom"></div>
+    </div>
     <div id="progressbar-container"></div>
-    <div id="welcome-screen"></div>
+
 
 
     <div id="page-content">
@@ -292,8 +145,158 @@
         </div>
         <div id="user-notifications-container"></div>
     </div>
-    <div id="footer"></div>
 </div>
+
+<!--JS_SCROBBLINE-->
+<!--build:js js/scrobbline.min.js-->
+<script type="text/javascript" src="js/Common/Log.js"></script>
+<script type="text/javascript" src="js/Common/LoggerEvents.js"></script>
+<script type="text/javascript" src="js/Common/UrlParser.js"></script>
+<script type="text/javascript" src="js/Common/EventBroker.js"></script>
+<script type="text/javascript" src="js/Common/CookieHandler.js"></script>
+<script type="text/javascript" src="js/Common/CookieConstants.js"></script>
+<script type="text/javascript" src="js/Common/TimeParser.js"></script>
+<script type="text/javascript" src="js/Common/LocalStorage.js"></script>
+<script type="text/javascript" src="js/Common/GlobalErrorHandler.js"></script>
+<script type="text/javascript" src="js/Common/ApplicationEvents.js"></script>
+<script type="text/javascript" src="js/Common/UserNotifier/UserNotifier.js"></script>
+<script type="text/javascript" src="js/Common/UserNotifier/UserNotifierEvents.js"></script>
+<script type="text/javascript" src="js/Common/ApplicationDetails.js"></script>
+<script type="text/javascript" src="js/Common/DesktopNotification.js"></script>
+
+<script type="text/javascript" src="js/Core/PageLoader.js"></script>
+<script type="text/javascript" src="js/Core/Main.js"></script>
+<script type="text/javascript" src="js/Core/CoreServicesFactory.js"></script>
+<script type="text/javascript" src="js/Core/ApplicationCore.js"></script>
+<script type="text/javascript" src="js/Core/OnlineScrobbler.js"></script>
+<script type="text/javascript" src="js/Core/PagesConfiguration.js"></script>
+
+<script type="text/javascript" src="js/LastFm/LastFmEvents.js"></script>
+<script type="text/javascript" src="js/LastFm/Common.js"></script>
+<script type="text/javascript" src="js/LastFm/LastFmApiFactory.js"></script>
+<script type="text/javascript" src="js/LastFm/Scrobbler.js"></script>
+<script type="text/javascript" src="js/LastFm/LastFmTrackInformationProvider.js"></script>
+<script type="text/javascript" src="js/LastFm/TrackLoveStateModifier.js"></script>
+
+<script type="text/javascript" src="js/Player/PlayerServicesFactory.js"></script>
+<script type="text/javascript" src="js/Player/MediaPlayer.js"></script>
+<script type="text/javascript" src="js/Player/Media/MediaDetails.js"></script>
+<script type="text/javascript" src="js/Player/Media/Duration.js"></script>
+<script type="text/javascript" src="js/Player/Playback/PlaybackDetailsService.js"></script>
+<script type="text/javascript" src="js/Player/Playback/PlaybackControlService.js"></script>
+<script type="text/javascript" src="js/Player/Playback/PlaybackState.js"></script>
+<script type="text/javascript" src="js/Player/Playback/PlaybackStateHolder.js"></script>
+<script type="text/javascript" src="js/Player/Playlist/Playlist.js"></script>
+<script type="text/javascript" src="js/Player/Playlist/PlaylistFlowController.js"></script>
+<script type="text/javascript" src="js/Player/Playlist/PlaylistService.js"></script>
+<script type="text/javascript" src="js/Player/Playlist/PlaylistEvents.js"></script>
+<script type="text/javascript" src="js/Player/Playlist/PlaylistElementDetailsProvider.js"></script>
+<script type="text/javascript" src="js/Player/Playlist/PlaylistElementLoveStateModifier.js"></script>
+<script type="text/javascript" src="js/Player/Playlist/PlaylistDetailsProvider.js"></script>
+<script type="text/javascript" src="js/Player/Playlist/Loaders/DefaultPlaylistLoader.js"></script>
+<script type="text/javascript" src="js/Player/Playlist/Loaders/PlaylistLoaderService.js"></script>
+<script type="text/javascript" src="js/Player/Playlist/Loaders/PlaylistLoadersFactory.js"></script>
+<script type="text/javascript" src="js/Player/Playlist/Loaders/YouTubePlaylistLoader.js"></script>
+<script type="text/javascript" src="js/Player/MediaPlayerConfiguration.js"></script>
+<script type="text/javascript" src="js/Player/PlayerEvents.js"></script>
+<script type="text/javascript" src="js/Player/VolumeControlService.js"></script>
+<script type="text/javascript" src="js/Player/VideoSizeControlService.js"></script>
+<script type="text/javascript" src="js/Player/Playlist/Repository/PlaylistLocalRepository.js"></script>
+<script type="text/javascript" src="js/Player/Playlist/Repository/PlaylistRepository.js"></script>
+<script type="text/javascript" src="js/Player/Playlist/PersistentPlaylist.js"></script>
+
+<script type="text/javascript" src="js/Tracking/GoogleTracker.js"></script>
+<script type="text/javascript" src="js/Tracking/GoogleTrackerConfig.js"></script>
+<script type="text/javascript" src="js/Tracking/GoogleUiTracker.js"></script>
+
+<script type="text/javascript" src="js/Services/WelcomeScreenService.js"></script>
+<script type="text/javascript" src="js/Services/Search/SearchService.js"></script>
+<script type="text/javascript" src="js/Services/Search/SearchResultParser.js"></script>
+<script type="text/javascript" src="js/Services/Policies/DefaultTrackNamePolicy.js"></script>
+<script type="text/javascript" src="js/Services/Policies/DefaultPlaylistNamePolicy.js"></script>
+<script type="text/javascript" src="js/Services/Validators/SearchResultNameValidator.js"></script>
+<script type="text/javascript" src="js/Services/Progressbar/ProgressbarService.js"></script>
+<script type="text/javascript" src="js/Services/Progressbar/ProgressbarServiceEvents.js"></script>
+
+<script type="text/javascript" src="js/Google/GoogleApiConstants.js"></script>
+<script type="text/javascript" src="js/Google/GoogleApiWrapper.js"></script>
+
+<script type="text/javascript" src="js/Services/Accounts/LastFm/LastFmSessionProvider.js"></script>
+<script type="text/javascript" src="js/Services/Accounts/Google/GoogleApiWithSessionControl.js"></script>
+<script type="text/javascript" src="js/Services/Accounts/Google/GoogleSessionCoordinator.js"></script>
+<script type="text/javascript" src="js/Services/Accounts/LastFm/LastFmSessionCoordinator.js"></script>
+<script type="text/javascript" src="js/Services/Accounts/SessionsService.js"></script>
+<script type="text/javascript" src="js/Services/Accounts/AccountsNames.js"></script>
+<script type="text/javascript" src="js/Services/Accounts/SessionDetails.js"></script>
+<script type="text/javascript" src="js/Services/Accounts/LastFm/LastFmTokenHandler.js"></script>
+<script type="text/javascript" src="js/Services/Accounts/LastFm/LastFmSessionConstants.js"></script>
+<script type="text/javascript" src="js/Services/Accounts/SessionEvents.js"></script>
+<script type="text/javascript" src="js/Services/LoadingIndicator/LoadingIndicatorService.js"></script>
+<script type="text/javascript" src="js/Services/LoadingIndicator/LoadingIndicatorEvents.js"></script>
+
+<script type="text/javascript" src="js/UICore/Accounts/AccountsViewController.js"></script>
+<script type="text/javascript" src="js/UICore/Accounts/AccountsViewControllerConfiguration.js"></script>
+<script type="text/javascript" src="js/UICore/Accounts/AccountDetailsBuilder.js"></script>
+
+<script type="text/javascript" src="js/UI/UIControllersFactory.js"></script>
+<script type="text/javascript" src="js/UI/UIControllersFactoryConfig.js"></script>
+<script type="text/javascript" src="js/UI/Logger/LoggerViewController.js"></script>
+<script type="text/javascript" src="js/UI/Logger/LoggerUIConfiguration.js"></script>
+<script type="text/javascript" src="js/UI/TestReports/TestReportsUIConfiguration.js"></script>
+<script type="text/javascript" src="js/UI/TestReports/TestReportsViewController.js"></script>
+<script type="text/javascript" src="js/Common/ReportSender.js"></script>
+<script type="text/javascript" src="js/UI/Controls/VolumeControl/VolumeControl.js"></script>
+<script type="text/javascript" src="js/UI/Controls/VolumeControl/VolumeControlConfiguration.js"></script>
+<script type="text/javascript" src="js/UI/Controls/ProgressbarControl/ProgressbarControl.js"></script>
+<script type="text/javascript" src="js/UI/Controls/ProgressbarControl/ProgressbarControlConfiguration.js"></script>
+<script type="text/javascript" src="js/UI/Controls/PlaybackProgressControl.js"></script>
+
+<script type="text/javascript" src="js/UICore/UIConstants.js"></script>
+<script type="text/javascript" src="js/UICore/UICore.js"></script>
+<script type="text/javascript" src="js/UICore/UIEvents.js"></script>
+<script type="text/javascript" src="js/UICore/Playlist/PlaylistViewController.js"></script>
+<script type="text/javascript" src="js/UICore/Playlist/PlaylistUIConfiguration.js"></script>
+<script type="text/javascript" src="js/UICore/Playlist/PlaylistUIItemBuilder.js"></script>
+<script type="text/javascript" src="js/UICore/PlaybackDetails/PlaybackDetailsViewConfiguration.js"></script>
+<script type="text/javascript" src="js/UICore/PlaybackDetails/PlaybackDetailsViewController.js"></script>
+<script type="text/javascript" src="js/UICore/PlaybackControl/PlaybackControlViewController.js"></script>
+<script type="text/javascript" src="js/UICore/PlaybackControl/PlaybackControlConfiguration.js"></script>
+<script type="text/javascript" src="js/UICore/Settings/PlaylistControl/PlaylistControlViewController.js"></script>
+<script type="text/javascript" src="js/UICore/Settings/PlaylistControl/PlaylistControlConfiguration.js"></script>
+<script type="text/javascript" src="js/UICore/Settings/LastFm/ScrobblingControlConfiguration.js"></script>
+<script type="text/javascript" src="js/UICore/Settings/LastFm/ScrobblingControlViewController.js"></script>
+<script type="text/javascript" src="js/UICore/UserNotification/UserNotifierConfiguration.js"></script>
+<script type="text/javascript" src="js/UICore/UserNotification/UserNotifierViewController.js"></script>
+<script type="text/javascript" src="js/UICore/UserNotification/UserNotificationBuilder.js"></script>
+<script type="text/javascript" src="js/UICore/ProgressbarViewController/ProgressbarViewController.js"></script>
+<script type="text/javascript" src="js/UICore/ProgressbarViewController/ProgressbarViewControllerConfig.js"></script>
+<script type="text/javascript" src="js/UICore/WelcomeScreenController/WelcomeScreenController.js"></script>
+<script type="text/javascript" src="js/UICore/WelcomeScreenController/WelcomeScreenConfiguration.js"></script>
+<script type="text/javascript" src="js/UICore/AppDetailsController/AppDetailsConfig.js"></script>
+<script type="text/javascript" src="js/UICore/AppDetailsController/AppDetailsViewController.js"></script>
+<script type="text/javascript" src="js/UICore/MenuController/MenuController.js"></script>
+<script type="text/javascript" src="js/UICore/MenuController/MenuControllerConfig.js"></script>
+<script type="text/javascript" src="js/UICore/MenuController/MenuItem.js"></script>
+<script type="text/javascript" src="js/UICore/MenuController/MenuItemsConfig.js"></script>
+<script type="text/javascript" src="js/UICore/PageDisplayCoordinator.js"></script>
+
+<script type="text/javascript" src="js/UICore/MediaLoad/MediaLoadConfig.js"></script>
+<script type="text/javascript" src="js/UICore/MediaLoad/MediaLoadViewController.js"></script>
+<script type="text/javascript" src="js/UICore/MediaLoad/Search/SearchResultItemBuilder.js"></script>
+<script type="text/javascript" src="js/Services/Search/SearchResultEvents.js"></script>
+<script type="text/javascript" src="js/Services/Search/SearchResourceType.js"></script>
+<script type="text/javascript" src="js/Services/Search/SearchServiceConstants.js"></script>
+<script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistItemEditorConfig.js"></script>
+<script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistItemEditorViewController.js"></script>
+<script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistEditorItemConfiguration.js"></script>
+<script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistEditorListViewController.js"></script>
+<script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistEditorListItemBuilder.js"></script>
+<script type="text/javascript" src="js/UICore/ColorSchemeControl/ColorSchemeControlConfig.js"></script>
+<script type="text/javascript" src="js/UICore/ColorSchemeControl/ColorSchemeControlViewController.js"></script>
+<script type="text/javascript" src="js/UICore/LoadingIndicator/LoadingIndicatorViewController.js"></script>
+<script type="text/javascript" src="js/UICore/LoadingIndicator/LoadingIndicatorConfiguration.js"></script>
+<!--endbuild-->
+<script type="text/javascript" src="https://apis.google.com/js/client.js?onload=onGoogleClientLoaded"></script>
 </body>
 </html>
 
