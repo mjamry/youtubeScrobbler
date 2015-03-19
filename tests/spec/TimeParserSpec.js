@@ -163,32 +163,4 @@ describe("TimeParser", function(){
             expect(timeParser.getSecondsFromDuration("PT1H1M1S")).toEqual(3661);
         });
     });
-
-    describe("_parseDuration method", function()
-    {
-        it("should return \"['PT', 0, 0, 0, 0, 0, 0]\" for PT", function ()
-        {
-            expect(timeParser._parseDuration("PT")).toEqual(['PT', 0, 0, 0, 0, 0, 0]);
-        });
-
-        it("should return \"['PT', 0, 0, 0, 0, 0, 0]\" for P12Y5M10W15DT", function ()
-        {
-            expect(timeParser._parseDuration("P12Y5M10W15DT")).toEqual(['P12Y5M10W15DT', 0, 0, 0, 0, 0, 0]);
-        });
-
-        it("should return \"['PT1H2M3S', '1H', '1', '2M', '2', '3S', '3']\" for PT1H2M3S", function ()
-        {
-            expect(timeParser._parseDuration("PT1H2M3S")).toEqual(['PT1H2M3S', '1H', '1', '2M', '2', '3S', '3']);
-        });
-
-        it("should return \"['PT2M3S', 0, 0, '2M', '2', '3S', '3']\" for PT2M3S", function ()
-        {
-            expect(timeParser._parseDuration("PT2M3S")).toEqual(['PT2M3S', 0, 0, '2M', '2', '3S', '3']);
-        });
-
-        it("should return \"['PT2H3S', '2H', '2', 0, 0, '3S', '3']\" for PT2H3S", function ()
-        {
-            expect(timeParser._parseDuration("PT2H3S")).toEqual(['PT2H3S', '2H', '2', 0, 0, '3S', '3']);
-        });
-    });
 });

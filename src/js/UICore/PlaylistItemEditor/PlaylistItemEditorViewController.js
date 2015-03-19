@@ -96,7 +96,7 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
             return function undoTrackEdit()
             {
                 that.playlistProvider.updateItem(index, detailsToRestore);
-            }
+            };
         };
 
         that.mediaDetails = that._retrieveMediaDetails();
