@@ -39,8 +39,12 @@ LoggerImpl.prototype =
 {
     _getFormatedTimestamp: function()
     {
+        //calculate elapsed time and format is as a date
         var timeFromAppInitialisation = new Date() - this.referenceTime;
-        var date = new Date(timeFromAppInitialisation);
+        var date = new Date(0, 0, 0, 0, 0, 0);
+        date.setMilliseconds(timeFromAppInitialisation);
+
+        console.log(timeFromAppInitialisation);
         var ms = date.getMilliseconds();
         var s = date.getSeconds();
 
