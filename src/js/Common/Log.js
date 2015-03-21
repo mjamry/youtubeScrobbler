@@ -32,13 +32,15 @@ Logger.setInstance = function(instance)
 LoggerImpl = function()
 {
     this._eventBroker = null;
+    this.referenceTime = new Date();
 };
 
 LoggerImpl.prototype =
 {
     _getFormatedTimestamp: function()
     {
-        var date = new Date();
+        var timeFromAppInitialisation = new Date() - this.referenceTime;
+        var date = new Date(timeFromAppInitialisation);
         var ms = date.getMilliseconds();
         var s = date.getSeconds();
 
