@@ -26,7 +26,7 @@ window.ApplicationCore.AppCore.prototype =
         this.searchService = coreServicesFactory.createSearchService(this.googleApiWrapper);
         this.playlistFlowController = playerServicesFactory.createPlaylistFlowController(this.playlistService);
         this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService(this.player);
-        this.sessionService = coreServicesFactory.createSessionService(this.googleApiWrapper);
+        this.sessionService = coreServicesFactory.createSessionService(this.googleApiWrapper, lastFmServicesFactory);
         this.sessionService.initialise();
         this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistFlowController);
         this.playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.playlistDetailsProvider, lastFmServicesFactory.createTrackLoveStateModifier());

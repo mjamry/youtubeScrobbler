@@ -42,12 +42,11 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new window.Common.CookieImpl();
     },
 
-    createSessionService: function(googleApi)
+    createSessionService: function(googleApi, lastFmFactory)
     {
-        var lastFmTokenHandler = new window.Accounts.LastFmTokenHandler(window.Accounts.LastFmSessionConstants);
         var sessionCoordinators = [];
         sessionCoordinators[window.Accounts.AccountsNames.Google] = new window.Accounts.GoogleSessionCoordinator(googleApi);
-        sessionCoordinators[window.Accounts.AccountsNames.LastFM] = new window.Accounts.LastFmSessionCoordinator(LastFmApiCommon.DATA_PROVIDER, lastFmTokenHandler);
+        sessionCoordinators[window.Accounts.AccountsNames.LastFM] = lastFmFactory.createSessionCoordinator();
 
         return new window.Accounts.SessionService(sessionCoordinators);
     },
