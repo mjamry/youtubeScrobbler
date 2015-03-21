@@ -113,6 +113,11 @@ window.UI.PlaybackDetailsViewController.prototype =
 
     _updatePageTitle: function(state, title, time)
     {
+        if(state == window.Player.PlaybackState.Playing)
+        {
+            title = "\u25b6 "+title;
+        }
+
         this._setPageTitle(title+" | "+time);
     },
 
