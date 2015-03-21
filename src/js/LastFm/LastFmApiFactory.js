@@ -5,9 +5,7 @@ window.LastFm.LastFmApiFactory = function()
 {
     this.sessionProvider = null;
     this.dataProvider = null;
-
 };
-
 
 window.LastFm.LastFmApiFactory.prototype =
 {

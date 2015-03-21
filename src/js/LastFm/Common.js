@@ -1,7 +1,5 @@
 window.LastFm = window.LastFm || {};
 
-
-
 window.LastFm.LastFmConstants = function()
 {
     this.apiKeysPath = "php/LastFmApiKeys.php";
