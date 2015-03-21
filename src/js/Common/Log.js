@@ -26,7 +26,6 @@ Logger.setInstance = function(instance)
     Logger._instance = instance;
 };
 
-//TODO move it to common namespace
 //simple implementation of Logger
 //it just write to console window.
 LoggerImpl = function()
@@ -44,7 +43,6 @@ LoggerImpl.prototype =
         var date = new Date(0, 0, 0, 0, 0, 0);
         date.setMilliseconds(timeFromAppInitialisation);
 
-        console.log(timeFromAppInitialisation);
         var ms = date.getMilliseconds();
         var s = date.getSeconds();
 
