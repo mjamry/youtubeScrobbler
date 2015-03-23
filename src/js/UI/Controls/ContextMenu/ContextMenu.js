@@ -1,3 +1,11 @@
-/**
- * Created by michal on 3/23/15.
- */
+window.UI = window.UI || {};
+
+window.UI.ContextMenu = function()
+{
+
+};
+
+window.UI.ContextMenu.prototype =
+{
+
+};
