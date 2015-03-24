@@ -11,6 +11,31 @@ window.UI.PlaylistUIItemBuilder = function(index, config)
 
 window.UI.PlaylistUIItemBuilder.prototype =
 {
+    _createContextMenu: function()
+    {
+        var contextMenuBuilder = new window.UI.ContextMenu(window.UI.ContextMenuConfiguration);
+        contextMenuBuilder.addItem("fa-trash-o", "test", function(){alert("menu works!")});
+
+        var menu = contextMenuBuilder.build();
+        $(menu).hide();
+        this._item.append(menu);
+        var fun = function (menu)
+        {
+            return function(e)
+            {
+                e.preventDefault();
+                $(menu).show();
+                var offset = $(this).offset();
+                var parentOffset = $(this).parent().offset();
+
+                menu.style.top = this.offsetTop + parentOffset.top - 120;
+                menu.style.left = e.pageX - offset.left + this.offsetLeft;
+            }
+        };
+
+        this._item.on("contextmenu", fun(menu));
+    },
+
     _createIcon: function(style)
     {
         var icon = document.createElement("i");
@@ -75,6 +100,8 @@ window.UI.PlaylistUIItemBuilder.prototype =
             this._item.find(this._config.IconsContainer).append(this._createIcon("fa fa-youtube"));
         }
         this._item.find(this._config.DetailsContainer).append(details);
+
+        this._createContextMenu();
     },
 
     //hooks up to UI events such as clock, mouse enter, mouse leave.

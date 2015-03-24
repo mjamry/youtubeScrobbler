@@ -11,7 +11,7 @@ window.UI.ContextMenu.prototype =
 {
     _hideMenu: function()
     {
-        this.body.hide();
+        $(this.body).hide();
     },
 
     _createIcon: function(iconClass)
@@ -24,7 +24,7 @@ window.UI.ContextMenu.prototype =
 
     _handleClickAction: function(that, handler)
     {
-        return new function (e)
+        return function handleContextMenuItemActioned(e)
         {
             e.stopPropagation();
             handler.call();
@@ -40,10 +40,10 @@ window.UI.ContextMenu.prototype =
 
         newMenuItem.click(this._handleClickAction(this, action));
 
-        this.body.appendChild(newMenuItem);
+        this.body.appendChild(newMenuItem[0]);
     },
 
-    buildMenu: function()
+    build: function()
     {
         return this.body;
     }

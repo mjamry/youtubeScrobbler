@@ -5,5 +5,5 @@ window.UI.ContextMenuConfiguration =
     ContextMenuItemTitle: ".context-menu-item-title",
     ContextMenuItemIcon: ".context-menu-item-icon",
 
-    ContextMenuBody: ".context-menu-body"
+    ContextMenuBody: "context-menu-body"
 };
