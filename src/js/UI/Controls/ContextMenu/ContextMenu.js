@@ -3,6 +3,7 @@ window.UI = window.UI || {};
 window.UI.ContextMenu = function(body)
 {
     this.body = $(body);
+    //needed to be able to set focus on the menu
     this.body.attr("tabindex", -1);
     this._initialise();
 };
