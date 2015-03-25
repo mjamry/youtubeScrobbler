@@ -23,6 +23,7 @@ window.UI.ContextMenuBuilder.prototype =
         {
             e.stopPropagation();
             handler.call();
+            $(that.body).hide();
         };
     },
 
