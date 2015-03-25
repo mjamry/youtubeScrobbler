@@ -260,6 +260,19 @@ body A:hover
 :-ms-input-placeholder { color:#D9CB9E; } /* ie */
 input:-moz-placeholder { color:#D9CB9E; }
 
+/*--------CONTEXT_MENU-------------*/
+.context-menu-item:hover
+{
+    background-color:#626e6d;
+    color: #D9CB9E;
+}
+
+.context-menu-body
+{
+    border:1px solid #626e6d;
+    background-color:#1E1E20;
+    color:#D9CB9E;
+}
 /*--------PLAYBACK--PROGRESS----------*/
 .playback-progress-bar-container,
 .playback-data-bar-container

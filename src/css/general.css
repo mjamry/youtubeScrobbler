@@ -234,29 +234,24 @@ body
 .context-menu-body
 {
     width:150px;
-    padding-top:5px;
-    padding-left:5px;
+}
+
+.context-menu-body:focus
+{
+    outline:0;
 }
 
 .context-menu-item
 {
-    height:40px;
-    background-color: red;
+    height:35px;
     width:100%;
-    line-height: 40px;
+    line-height: 35px;
     display:inline-block;
-    padding-left:5px;
-}
-
-.context-menu-item:hover
-{
-    background-color: blue;
-
 }
 
 .context-menu-item-icon
 {
-    padding-top:10px;
+    padding-top:12px;
     float:left;
 }
 
