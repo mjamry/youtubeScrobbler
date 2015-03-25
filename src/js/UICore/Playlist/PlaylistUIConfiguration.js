@@ -21,5 +21,8 @@ window.UI.PlaylistUIConfig =
 
     PlaylistProgressBar: "#playlist-progressbar",
 
+    DeleteIcon: "fa fa-trash-o",
+    EditIcon: "fa fa-pencil",
+
     AnimationTime: 0
 };

@@ -14,7 +14,8 @@ window.UI.PlaylistUIItemBuilder.prototype =
     _createContextMenu: function()
     {
         var contextMenuBuilder = new window.UI.ContextMenuBuilder(window.UI.ContextMenuConfiguration);
-        contextMenuBuilder.addItem("fa-trash-o", "test", function(){alert("menu works!")});
+        contextMenuBuilder.addItem(this._config.EditIcon, "Rename", function(){alert("rename")});
+        contextMenuBuilder.addItem(this._config.DeleteIcon, "Delete", function(){alert("delete")});
 
         var menu = contextMenuBuilder.build();
         menu.hide();
