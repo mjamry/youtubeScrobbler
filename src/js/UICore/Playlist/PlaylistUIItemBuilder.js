@@ -13,7 +13,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
 {
     _createContextMenu: function()
     {
-        var contextMenuBuilder = new window.UI.ContextMenu(window.UI.ContextMenuConfiguration);
+        var contextMenuBuilder = new window.UI.ContextMenuBuilder(window.UI.ContextMenuConfiguration);
         contextMenuBuilder.addItem("fa-trash-o", "test", function(){alert("menu works!")});
 
         var menu = contextMenuBuilder.build();

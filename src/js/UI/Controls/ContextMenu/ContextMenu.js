@@ -1,50 +1,29 @@
 window.UI = window.UI || {};
 
-window.UI.ContextMenu = function(config)
+window.UI.ContextMenu = function(body)
 {
-    this.config = config;
-    this.body = document.createElement('div');
-    this.body.className += this.config.ContextMenuBody;
+    this.body = body;
 };
 
 window.UI.ContextMenu.prototype =
 {
-    _hideMenu: function()
+    _handleLostFocus: function()
+    {
+
+    },
+
+    _initialise: function()
+    {
+
+    },
+
+    Hide: function()
     {
         $(this.body).hide();
     },
 
-    _createIcon: function(iconClass)
+    Show: function()
     {
-        var icon = document.createElement("i");
-        icon.className += iconClass;
 
-        return icon;
-    },
-
-    _handleClickAction: function(that, handler)
-    {
-        return function handleContextMenuItemActioned(e)
-        {
-            e.stopPropagation();
-            handler.call();
-            that._hideMenu();
-        };
-    },
-
-    addItem: function(icon, text, action)
-    {
-        var newMenuItem = $("#controls-schemes .context-menu-item").clone();
-        newMenuItem.find(this.config.ContextMenuItemIcon).append(this._createIcon(icon));
-        newMenuItem.find(this.config.ContextMenuItemTitle).append(text);
-
-        newMenuItem.click(this._handleClickAction(this, action));
-
-        this.body.appendChild(newMenuItem[0]);
-    },
-
-    build: function()
-    {
-        return this.body;
     }
 };
