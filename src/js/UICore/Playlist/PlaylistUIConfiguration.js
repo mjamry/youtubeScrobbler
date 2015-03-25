@@ -23,6 +23,7 @@ window.UI.PlaylistUIConfig =
 
     DeleteIcon: "fa fa-trash-o fa-lg",
     EditIcon: "fa fa-pencil fa-lg",
+    CopyIcon: "fa fa-copy fa-lg",
 
     AnimationTime: 0
 };

@@ -15,6 +15,8 @@ window.UI.PlaylistUIItemBuilder.prototype =
     {
         var contextMenuBuilder = new window.UI.ContextMenuBuilder(window.UI.ContextMenuConfiguration);
         contextMenuBuilder.addItem(this._config.EditIcon, "Rename", function(){alert("rename")});
+        contextMenuBuilder.addItem(this._config.CopyIcon, "Copy name", function(){alert("copied name")});
+        contextMenuBuilder.addItem(this._config.CopyIcon, "Copy url", function(){alert("copied url")});
         contextMenuBuilder.addItem(this._config.DeleteIcon, "Delete", function(){alert("delete")});
 
         var menu = contextMenuBuilder.build();

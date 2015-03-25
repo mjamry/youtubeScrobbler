@@ -234,6 +234,7 @@ body
 .context-menu-body
 {
     width:150px;
+    overflow: hidden;
 }
 
 .context-menu-body:focus
