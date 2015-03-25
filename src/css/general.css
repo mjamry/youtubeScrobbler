@@ -233,32 +233,36 @@ body
 /*-----------------------------CONTEXT-MENU------------------*/
 .context-menu-body
 {
-    width:200px;
-    height:100px;
-    border:1px solid black;
-    background-color: yellow;
-    position:absolute;
-    display:block;
+    width:150px;
+    padding-top:5px;
+    padding-left:5px;
 }
 
 .context-menu-item
 {
-    height:30px;
+    height:40px;
     background-color: red;
+    width:100%;
+    line-height: 40px;
+    display:inline-block;
+    padding-left:5px;
 }
 
 .context-menu-item:hover
 {
     background-color: blue;
+
 }
 
 .context-menu-item-icon
 {
-
+    padding-top:10px;
+    float:left;
 }
 
 .context-menu-item-text
 {
+    float:left;
 }
 /*-----------------------------PROGRESSBAR------------------*/
 #progressbar-container
