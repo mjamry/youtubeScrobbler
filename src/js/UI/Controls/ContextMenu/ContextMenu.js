@@ -2,7 +2,8 @@ window.UI = window.UI || {};
 
 window.UI.ContextMenu = function(body)
 {
-    this.body = body;
+    this.body = $(body);
+    this.body2 = body;
 };
 
 window.UI.ContextMenu.prototype =
@@ -14,16 +15,27 @@ window.UI.ContextMenu.prototype =
 
     _initialise: function()
     {
-
+        this.body.on("blur", this.hide);
     },
 
-    Hide: function()
+    getBody: function()
     {
-        $(this.body).hide();
+        return this.body2;
     },
 
-    Show: function()
+    hide: function()
     {
+        this.body.hide();
+    },
 
+    show: function(coordinates)
+    {
+        //have to show first to be able to set position
+        this.body.show();
+        this.body.offset(
+            {
+                top: coordinates.top,
+                left: coordinates.left
+            });
     }
 };

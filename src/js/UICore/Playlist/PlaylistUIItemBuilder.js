@@ -17,19 +17,14 @@ window.UI.PlaylistUIItemBuilder.prototype =
         contextMenuBuilder.addItem("fa-trash-o", "test", function(){alert("menu works!")});
 
         var menu = contextMenuBuilder.build();
-        $(menu).hide();
-        this._item.append(menu);
+        menu.hide();
+        this._item.append(menu.getBody());
         var fun = function (menu)
         {
             return function(e)
             {
                 e.preventDefault();
-                $(menu).show();
-                var offset = $(this).offset();
-                var parentOffset = $(this).parent().offset();
-
-                menu.style.top = this.offsetTop + parentOffset.top - 120;
-                menu.style.left = e.pageX - offset.left + this.offsetLeft;
+                menu.show({top: e.pageY, left: e.pageX});
             }
         };
 

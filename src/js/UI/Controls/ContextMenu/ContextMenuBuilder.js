@@ -39,6 +39,6 @@ window.UI.ContextMenuBuilder.prototype =
 
     build: function()
     {
-        return this.body;
+        return new window.UI.ContextMenu(this.body);
     }
 };
