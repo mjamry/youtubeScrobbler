@@ -3,24 +3,25 @@ window.UI = window.UI || {};
 window.UI.ContextMenu = function(body)
 {
     this.body = $(body);
-    this.body2 = body;
+    this.body.attr("tabindex", -1);
+    this._initialise();
 };
 
 window.UI.ContextMenu.prototype =
 {
     _handleLostFocus: function()
     {
-
+        this.hide();
     },
 
     _initialise: function()
     {
-        this.body.on("blur", this.hide);
+        this.body.on("blur", this._handleLostFocus.bind(this));
     },
 
     getBody: function()
     {
-        return this.body2;
+        return this.body[0];
     },
 
     hide: function()
@@ -37,5 +38,7 @@ window.UI.ContextMenu.prototype =
                 top: coordinates.top,
                 left: coordinates.left
             });
+
+        this.body.focus();
     }
 };
