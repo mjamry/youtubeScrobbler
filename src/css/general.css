@@ -230,6 +230,40 @@ body
     height:35px;
     width:35px;
 }
+/*-----------------------------CONTEXT-MENU------------------*/
+.context-menu-body
+{
+    width:150px;
+    list-style:none;
+    padding:0;
+    margin:0;
+    cursor:pointer;
+}
+
+.context-menu-body:focus
+{
+    outline:0;
+}
+
+.context-menu-item
+{
+    height:35px;
+    line-height: 35px;
+    padding-left:10px;
+}
+
+.context-menu-item-icon
+{
+    padding-top:12px;
+}
+
+.context-menu-separator hr
+{
+    border: 0;
+    height: 0;
+    margin:1px;
+    padding:0;
+}
 /*-----------------------------PROGRESSBAR------------------*/
 #progressbar-container
 {
