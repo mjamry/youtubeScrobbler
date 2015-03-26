@@ -53,6 +53,7 @@ window.UI.PlaylistViewController.prototype =
 
         builder.fillBody(mediaDetails);
         builder.hookUpToEvents(this, this._play);
+        builder.setupContextMenu();
 
         return builder.build();
     },
