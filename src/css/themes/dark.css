@@ -273,6 +273,11 @@ input:-moz-placeholder { color:#D9CB9E; }
     background-color:#1E1E20;
     color:#D9CB9E;
 }
+
+.context-menu-separator hr
+{
+    border-top:1px solid #626e6d;
+}
 /*--------PLAYBACK--PROGRESS----------*/
 .playback-progress-bar-container,
 .playback-data-bar-container

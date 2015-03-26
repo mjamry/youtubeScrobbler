@@ -42,7 +42,7 @@ window.UI.ContextMenuBuilder.prototype =
     {
         var separator = document.createElement(this.config.MenuSeparatorElement);
         var separatorLine = document.createElement("hr");
-        separatorLine.style = this.config.SeparatorLineClass;
+        separator.className += this.config.SeparatorLineClass;
         separator.appendChild(separatorLine);
 
         this.body.appendChild(separator);
