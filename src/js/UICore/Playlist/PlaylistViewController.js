@@ -53,9 +53,50 @@ window.UI.PlaylistViewController.prototype =
 
         builder.fillBody(mediaDetails);
         builder.hookUpToEvents(this, this._play);
-        builder.setupContextMenu();
+        builder.setupContextMenu(this._createContextMenuForItem(index));
 
         return builder.build();
+    },
+
+    _createContextMenuForItem: function(index)
+    {
+        var contextMenuBuilder = new window.UI.ContextMenuBuilder(window.UI.ContextMenuConfiguration);
+        contextMenuBuilder.addItem(
+            {
+                icon: this.config.EditIcon,
+                label: "Rename",
+                action: function(){alert("rename")}
+            });
+        contextMenuBuilder.addSeparator();
+        contextMenuBuilder.addItem(
+            {
+                icon: this.config.CopyIcon,
+                label: "Copy name",
+                action: function ()
+                {
+                    alert("copied name")
+                }
+            });
+        contextMenuBuilder.addItem(
+            {
+                icon: this.config.CopyIcon,
+                label: "Copy url",
+                action: function(){alert("copied url")}
+            });
+        contextMenuBuilder.addSeparator();
+        contextMenuBuilder.addItem(
+            {
+                icon: this.config.DeleteIcon,
+                label: "Delete",
+                action: function()
+                {
+                    this.playlistService.removeItem(index);
+                }.bind(this)
+            });
+
+        var menu = contextMenuBuilder.build();
+
+        return menu;
     },
 
     _refreshPlaylistView: function(numberOfNewItems)

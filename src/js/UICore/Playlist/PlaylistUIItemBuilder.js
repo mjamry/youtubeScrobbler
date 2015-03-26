@@ -77,19 +77,8 @@ window.UI.PlaylistUIItemBuilder.prototype =
         this._item.find(this._config.DetailsContainer).append(details);
     },
 
-    setupContextMenu: function()
+    setupContextMenu: function(menu)
     {
-        var contextMenuBuilder = new window.UI.ContextMenuBuilder(window.UI.ContextMenuConfiguration);
-        contextMenuBuilder.addItem(this._config.EditIcon, "Rename", function(){alert("rename")});
-        contextMenuBuilder.addSeparator();
-        contextMenuBuilder.addItem(this._config.CopyIcon, "Copy name", function(){alert("copied name")});
-        contextMenuBuilder.addItem(this._config.CopyIcon, "Copy url", function(){alert("copied url")});
-        contextMenuBuilder.addSeparator();
-        contextMenuBuilder.addItem(this._config.DeleteIcon, "Delete", function(){alert("delete")});
-
-        var menu = contextMenuBuilder.build();
-        this._item.append(menu.getBody());
-
         var contextMenuHandler = function (contextmenu)
         {
             return function onContextMenuRequested(e)
@@ -100,7 +89,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
         };
 
         this._item.on("contextmenu", contextMenuHandler(menu));
-
+        this._item.append(menu.getBody());
         menu.hide();
     },
 
