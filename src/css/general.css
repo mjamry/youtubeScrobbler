@@ -257,8 +257,11 @@ body
     padding-top:12px;
 }
 
-.context-menu-item-text
+.context-menu-separator
 {
+    height:1px;
+    background-color: red;
+
 }
 /*-----------------------------PROGRESSBAR------------------*/
 #progressbar-container

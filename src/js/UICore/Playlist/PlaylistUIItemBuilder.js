@@ -15,23 +15,27 @@ window.UI.PlaylistUIItemBuilder.prototype =
     {
         var contextMenuBuilder = new window.UI.ContextMenuBuilder(window.UI.ContextMenuConfiguration);
         contextMenuBuilder.addItem(this._config.EditIcon, "Rename", function(){alert("rename")});
+        contextMenuBuilder.addSeparator();
         contextMenuBuilder.addItem(this._config.CopyIcon, "Copy name", function(){alert("copied name")});
         contextMenuBuilder.addItem(this._config.CopyIcon, "Copy url", function(){alert("copied url")});
+        contextMenuBuilder.addSeparator();
         contextMenuBuilder.addItem(this._config.DeleteIcon, "Delete", function(){alert("delete")});
 
         var menu = contextMenuBuilder.build();
-        menu.hide();
         this._item.append(menu.getBody());
-        var fun = function (menu)
+
+        var contextMenuHandler = function (contextmenu)
         {
-            return function(e)
+            return function onContextMenuRequested(e)
             {
                 e.preventDefault();
-                menu.show({top: e.pageY, left: e.pageX});
+                contextmenu.show({top: e.pageY, left: e.pageX});
             }
         };
 
-        this._item.on("contextmenu", fun(menu));
+        this._item.on("contextmenu", contextMenuHandler(menu));
+
+        menu.hide();
     },
 
     _createIcon: function(style)
