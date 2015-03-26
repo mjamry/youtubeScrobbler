@@ -3,7 +3,7 @@ window.UI = window.UI || {};
 window.UI.ContextMenuBuilder = function(config)
 {
     this.config = config;
-    this.body = document.createElement('div');
+    this.body = document.createElement('ul');
     this.body.className += this.config.ContextMenuBody;
 };
 
