@@ -65,7 +65,17 @@ window.UI.PlaylistViewController.prototype =
             {
                 icon: this.config.EditIcon,
                 label: "Rename",
-                action: function(){alert("rename")}
+                action: function()
+                {
+                    var mediaElement = this.playlistService.getPlaylist().get(index);
+                    EventBroker.getInstance().fireEventWithData(
+                        window.Player.PlaylistEvents.PlaylistItemEditionRequested,
+                        {
+                            index: index,
+                            mediaDetails: mediaElement
+                        }
+                    );
+                }.bind(this)
             });
         contextMenuBuilder.addSeparator();
         contextMenuBuilder.addItem(
