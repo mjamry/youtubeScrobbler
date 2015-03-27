@@ -80,22 +80,6 @@ window.UI.PlaylistViewController.prototype =
         contextMenuBuilder.addSeparator();
         contextMenuBuilder.addItem(
             {
-                icon: this.config.CopyIcon,
-                label: "Copy name",
-                action: function ()
-                {
-                    alert("copied name")
-                }
-            });
-        contextMenuBuilder.addItem(
-            {
-                icon: this.config.CopyIcon,
-                label: "Copy url",
-                action: function(){alert("copied url")}
-            });
-        contextMenuBuilder.addSeparator();
-        contextMenuBuilder.addItem(
-            {
                 icon: this.config.DeleteIcon,
                 label: "Delete",
                 action: function()
