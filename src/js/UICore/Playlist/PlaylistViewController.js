@@ -1,9 +1,6 @@
 //namespace
 window.UI = window.UI || {};
-
-//using
 window.Player = window.Player || {};
-
 
 window.UI.PlaylistViewController = function(playlistService, playlistControlService, playlistFlowController, view, config)
 {
@@ -88,12 +85,10 @@ window.UI.PlaylistViewController.prototype =
                 }.bind(this)
             });
 
-        var menu = contextMenuBuilder.build();
-
-        return menu;
+        return contextMenuBuilder.build();
     },
 
-    _refreshPlaylistView: function(numberOfNewItems)
+    _refreshPlaylistView: function()
     {
         //clear view
         this.view.empty();
