@@ -38,6 +38,6 @@ window.Services.ModalsServiceImpl.protorype =
     //where content can be a html code, and source name of DOM element
     show: function(data)
     {
-        EventBroker.getInstance().fireEventWithData(window.Common.UserNotifierEvents.ErrorNotificationRequested, data);
+        EventBroker.getInstance().fireEventWithData(window.Services.ModalEvents.ModalDisplayRequested, data);
     }
 };
