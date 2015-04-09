@@ -29,7 +29,10 @@ ModalsService.getInstance = function()
     return ModalsService._instance;
 };
 
-window.Services.ModalsServiceImpl = function(){};
+window.Services.ModalsServiceImpl = function()
+{
+    this.modalId = 0;
+};
 
 window.Services.ModalsServiceImpl.protorype =
 {
@@ -38,6 +41,15 @@ window.Services.ModalsServiceImpl.protorype =
     //where content can be a html code, and source name of DOM element
     show: function(data)
     {
+        this.modalId++;
+        $.extend(data, {modalId: this.modalId});
         EventBroker.getInstance().fireEventWithData(window.Services.ModalEvents.ModalDisplayRequested, data);
+
+        return this.modalId;
+    },
+
+    close: function(id)
+    {
+        EventBroker.getInstance().fireEventWithData(window.Services.ModalEvents.ModalCloseRequested, {id: id});
     }
 };
