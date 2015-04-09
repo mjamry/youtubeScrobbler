@@ -143,6 +143,6 @@ window.UI.UIControllersFactory.prototype =
 
     createModalViewController: function ()
     {
-        return new window.UI.ModalViewController($(this.config.ModalView));
+        return new window.UI.ModalViewController($(this.config.ModalView), window.UI.ModalConfiguration);
     }
 };

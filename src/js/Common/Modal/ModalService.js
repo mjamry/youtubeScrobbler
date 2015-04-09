@@ -34,7 +34,7 @@ window.Services.ModalsServiceImpl = function()
     this.modalId = 0;
 };
 
-window.Services.ModalsServiceImpl.protorype =
+window.Services.ModalsServiceImpl.prototype =
 {
     //data:
     //{ content, source }
@@ -42,7 +42,7 @@ window.Services.ModalsServiceImpl.protorype =
     show: function(data)
     {
         this.modalId++;
-        $.extend(data, {modalId: this.modalId});
+        $.extend(data, {id: this.modalId});
         EventBroker.getInstance().fireEventWithData(window.Services.ModalEvents.ModalDisplayRequested, data);
 
         return this.modalId;
