@@ -11,7 +11,7 @@ window.UI.ModalViewController.prototype =
     _displayModalWithContent: function(content, id)
     {
         var newModal = $("#controls-schemes .modal-content-container").clone();
-        newModal.addClass(this.config.ModalIdClassName+id);
+        newModal.attr("id", this.config.ModalIdClassName+id);
 
         var cont = newModal.find(this.config.ModalContent);
         cont.append(content);
@@ -25,7 +25,7 @@ window.UI.ModalViewController.prototype =
 
     },
 
-    _onModalRequested: function(data)
+    _onModalShowRequested: function(data)
     {
         if(data.content)
         {
@@ -38,8 +38,14 @@ window.UI.ModalViewController.prototype =
         }
     },
 
+    _onModalCloseRequested: function(data)
+    {
+        $("#"+this.config.ModalIdClassName+data.id).remove();
+    },
+
     initialise: function()
     {
-        EventBroker.getInstance().addListener(window.Services.ModalEvents.ModalDisplayRequested, this._onModalRequested.bind(this));
+        EventBroker.getInstance().addListener(window.Services.ModalEvents.ModalDisplayRequested, this._onModalShowRequested.bind(this));
+        EventBroker.getInstance().addListener(window.Services.ModalEvents.ModalCloseRequested, this._onModalCloseRequested.bind(this));
     }
 };
