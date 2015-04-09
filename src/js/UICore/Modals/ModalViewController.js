@@ -13,9 +13,11 @@ window.UI.ModalViewController.prototype =
         var newModal = $("#controls-schemes .modal-content-container").clone();
         newModal.addClass(this.config.ModalIdClassName+id);
 
-        newModal.find(this.config.ModalContent).append(content);
+        var cont = newModal.find(this.config.ModalContent);
+        cont.append(content);
         $(this.config.ModalsContainer).append(newModal);
         newModal.show();
+        this.view.show();
     },
 
     _displayModalUsingSource: function(source, id)
