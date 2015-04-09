@@ -135,6 +135,9 @@ window.ApplicationCore.PageLoader.prototype =
             var loadingIndicatorView = new window.UI.LoadingIndicatorViewController(window.UI.LoadingIndicatorConfiguration);
             loadingIndicatorView.initialise();
 
+            new ModalsService();
+            ModalsService.setInstance(new window.Services.ModalsServiceImpl());
+
             that._getApiKeys();
 
             resolve();
