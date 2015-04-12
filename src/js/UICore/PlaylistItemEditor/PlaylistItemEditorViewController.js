@@ -213,6 +213,9 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         {
             e.preventDefault();
             this._hide();
+            var int = ModalsService.getInstance().show({content: "test"});
+            var int2 = ModalsService.getInstance().show({content: "test_23"});
+            ModalsService.getInstance().close(int2);
         },
         this));
     }
