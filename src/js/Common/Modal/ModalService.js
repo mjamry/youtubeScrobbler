@@ -1,40 +1,40 @@
 window.Services = window.Services || {};
 
-ModalsService = function()
+ModalService = function()
 {
-    ModalsService._instance = null;
+    ModalService._instance = null;
 };
 
-ModalsService.setInstance = function(instance)
+ModalService.setInstance = function(instance)
 {
-    if(ModalsService._instance !== null)
+    if(ModalService._instance !== null)
     {
-        var errorMsg = "Instance of ModalsService has been already set!";
+        var errorMsg = "Instance of ModalService has been already set!";
         Logger.getInstance().error(errorMsg);
         throw errorMsg;
     }
 
-    ModalsService._instance = instance;
+    ModalService._instance = instance;
 };
 
-ModalsService.getInstance = function()
+ModalService.getInstance = function()
 {
-    if(ModalsService._instance === null)
+    if(ModalService._instance === null)
     {
-        var errorMsg = "Instance of ModalsService has not been set yet!";
+        var errorMsg = "Instance of ModalService has not been set yet!";
         Logger.getInstance().error(errorMsg);
         throw errorMsg;
     }
 
-    return ModalsService._instance;
+    return ModalService._instance;
 };
 
-window.Services.ModalsServiceImpl = function()
+window.Services.ModalServiceImpl = function()
 {
     this.modalId = 0;
 };
 
-window.Services.ModalsServiceImpl.prototype =
+window.Services.ModalServiceImpl.prototype =
 {
     //data:
     //{ content, source }

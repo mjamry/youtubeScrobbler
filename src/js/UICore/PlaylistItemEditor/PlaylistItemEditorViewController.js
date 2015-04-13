@@ -109,7 +109,7 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         this.index = null;
         this.mediaDetails = null;
 
-        ModalsService.getInstance().close(this.modalId);
+        ModalService.getInstance().close(this.modalId);
         this.modalId = null;
     },
 
@@ -138,7 +138,7 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         this._show(args.mediaDetails, args.index);
         this.updateView();
 
-        this.modalId = ModalsService.getInstance().show({source: this.view});
+        this.modalId = ModalService.getInstance().show({source: this.view});
     },
 
     _handleDetailsObtained: function(that)
