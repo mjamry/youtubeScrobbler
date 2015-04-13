@@ -133,7 +133,7 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
 
     _onItemEditionRequested: function(args)
     {
-        this.view = $("#playlist-item-editor-container "+this.config.Container).clone();
+        this.view = $("#controls-schemes "+this.config.Container).clone();
         this._hookUpButtonsActions();
         this._show(args.mediaDetails, args.index);
         this.updateView();
