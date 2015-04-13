@@ -210,17 +210,17 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         this._clearEnteredValues();
         if(this.mediaDetails.artist.name)
         {
-            $(this.config.ArtistInput).val(this.mediaDetails.artist.name);
+            this.view.find(this.config.ArtistInput).val(this.mediaDetails.artist.name);
         }
 
         if(this.mediaDetails.title)
         {
-            $(this.config.TitleInput).val(this.mediaDetails.title);
+            this.view.find(this.config.TitleInput).val(this.mediaDetails.title);
         }
 
         if(this.mediaDetails.album.name)
         {
-            $(this.config.AlbumInput).val(this.mediaDetails.album.name);
+            this.view.find(this.config.AlbumInput).val(this.mediaDetails.album.name);
         }
 
         this._verifyItems();
