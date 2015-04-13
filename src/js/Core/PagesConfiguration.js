@@ -32,12 +32,6 @@ window.Common.PagesConfiguration =
         ContentLocation: "pages/playlistManager.html"
     },
 
-    PlaylistEditor:
-    {
-        Container: "#playlist-editor",
-        ContentLocation: "pages/playlistEditor.html"
-    },
-
     AccountManager:
     {
         Container: "#accounts",
