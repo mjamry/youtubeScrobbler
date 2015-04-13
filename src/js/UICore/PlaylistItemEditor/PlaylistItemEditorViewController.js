@@ -56,11 +56,13 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
 
     _onItemEditionRequested: function(args)
     {
+        this.view = $("#playlist-item-editor-container "+this.config.Container).clone();
+        this._hookUpButtonsActions();
         this._show(args.mediaDetails, args.index);
         this.updateView();
-        this._enableButtons();
+        //this._enableButtons();
 
-       // this.modalId = ModalsService.getInstance().show({source: this.view});
+        this.modalId = ModalsService.getInstance().show({source: this.view});
     },
 
     _handleDetailsObtained: function(that)
@@ -116,7 +118,7 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         this.index = null;
         this.mediaDetails = null;
 
-       // ModalsService.getInstance().close(this.modalId);
+        ModalsService.getInstance().close(this.modalId);
         this.modalId = null;
     },
 
@@ -195,7 +197,7 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
 
     _hookUpButtonsActions: function()
     {
-        this.view.find(this.config.SwapButton).click($.proxy(function swapItemDetails(e)
+        $(this.config.SwapButton).click($.proxy(function swapItemDetails(e)
             {
                 e.preventDefault();
                 this._swapArtistNameAndTitle(this);
@@ -228,8 +230,8 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
     {
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistItemEditionRequested, $.proxy(this._onItemEditionRequested, this));
 
-        this._disableButtons();
+       // this._disableButtons();
 
-         this._hookUpButtonsActions();
+         //this._hookUpButtonsActions();
     }
 };
