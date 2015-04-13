@@ -27,13 +27,13 @@ window.UI.ContextMenuBuilder.prototype =
         };
     },
 
-    addItem: function(icon, text, action)
+    addItem: function(menuItemDetails)
     {
         var newMenuItem = $("#controls-schemes .context-menu-item").clone();
-        newMenuItem.find(this.config.ContextMenuItemIcon).append(this._createIcon(icon));
-        newMenuItem.find(this.config.ContextMenuItemTitle).append(text);
+        newMenuItem.find(this.config.ContextMenuItemIcon).append(this._createIcon(menuItemDetails.icon));
+        newMenuItem.find(this.config.ContextMenuItemTitle).append(menuItemDetails.label);
 
-        newMenuItem.click(this._handleClickAction(this, action));
+        newMenuItem.click(this._handleClickAction(this, menuItemDetails.action));
 
         this.body.appendChild(newMenuItem[0]);
     },

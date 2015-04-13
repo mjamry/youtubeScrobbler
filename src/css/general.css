@@ -63,7 +63,7 @@ body
 .modal-overlay
 {
     opacity: 0.5;
-    z-index: 99;
+    z-index: 1;
 }
 
 .modal-overlay
@@ -83,9 +83,7 @@ body
     text-align: center;
     position: relative;
     opacity:1;
-    z-index: 100;
-
-    border:1px solid yellow;
+    z-index: 2;
 }
 
 /*----------------------------------------------LOADING-INDICATOR------------------------------------------*/
@@ -454,58 +452,13 @@ body
 {
     font-size: 12pt;
 }
-/*------------------------------PLAYLIST--ITEM--EDITOR--LIST------------*/
-#playlist-editor-list-container
-{
-    width:450px;
-    height:338px;
-    /*TODO do it with JS*/
-    overflow: auto;
-}
-
-.playlist-editor-list-item
-{
-    height:50px;
-}
-
-.playlist-editor-list-item:hover
-{
-    cursor:pointer;
-}
-
-.playlist-editor-list-item-artist-name,
-.playlist-editor-list-item-album-name,
-.playlist-editor-list-item-artist-icon,
-.playlist-editor-list-item-album-icon
-{
-    height:20px;
-}
-
-.playlist-editor-list-item-artist-icon,
-.playlist-editor-list-item-album-icon
-{
-    margin-top:5px;
-    margin-left:5px;
-}
 /*------------------------------PLAYLIST--ITEM--EDITOR------------------*/
-#playlist-editor
+.playlist-item-editor
 {
-    padding-top:85px;
-}
-
-#playlist-item-editor-container
-{
-    width:450px;
-    height:338px;
-}
-
-#playlist-item-editor
-{
-    position:relative;
     margin-left:auto;
     margin-right:auto;
-    width:370px;
     text-align: center;
+    padding:20px 70px 20px 70px;
 }
 
 .playlist-item-editor-form label

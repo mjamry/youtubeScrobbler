@@ -16,13 +16,6 @@ window.UI.MenuItemsConfig =
         Page: "#playlist-manager"
     },
 
-    PlaylistEditor:
-    {
-        Name: "Playlist Editor",
-        Icon: "fa fa-pencil fa-2x",
-        Page: "#playlist-editor"
-    },
-
     AccountManager:
     {
         Name: "Accounts",

@@ -104,21 +104,8 @@ body A:hover
     color: #D9CB9E;
     border:2px solid #2A2C2B;
 }
-
-/*--------PLAYLIST_ITEM_EDITOR_LIST----------*/
-.playlist-editor-list-item
-{
-    border-top:  1px solid #555756;
-    background-color: #374140;
-}
-
-.playlist-editor-list-item:hover
-{
-    background-color: #1E1E20;
-}
 /*--------PLAYLIST_ITEM_EDITOR----------*/
-
-#playlist-item-editor-container
+.playlist-item-editor
 {
     background-color: #374140;
     color:#D9CB9E;
@@ -141,8 +128,6 @@ body A:hover
 {
     color:yellow;
 }
-
-
 /*--------BUTTONS----------*/
 #color-scheme-control-light-button
 {

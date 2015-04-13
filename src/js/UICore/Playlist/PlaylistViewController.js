@@ -1,9 +1,6 @@
 //namespace
 window.UI = window.UI || {};
-
-//using
 window.Player = window.Player || {};
-
 
 window.UI.PlaylistViewController = function(playlistService, playlistControlService, playlistFlowController, view, config)
 {
@@ -53,11 +50,45 @@ window.UI.PlaylistViewController.prototype =
 
         builder.fillBody(mediaDetails);
         builder.hookUpToEvents(this, this._play);
+        builder.setupContextMenu(this._createContextMenuForItem(index));
 
         return builder.build();
     },
 
-    _refreshPlaylistView: function(numberOfNewItems)
+    _createContextMenuForItem: function(index)
+    {
+        var contextMenuBuilder = new window.UI.ContextMenuBuilder(window.UI.ContextMenuConfiguration);
+        contextMenuBuilder.addItem(
+            {
+                icon: this.config.EditIcon,
+                label: "Rename",
+                action: function()
+                {
+                    var mediaElement = this.playlistService.getPlaylist().get(index);
+                    EventBroker.getInstance().fireEventWithData(
+                        window.Player.PlaylistEvents.PlaylistItemEditionRequested,
+                        {
+                            index: index,
+                            mediaDetails: mediaElement
+                        }
+                    );
+                }.bind(this)
+            });
+        contextMenuBuilder.addSeparator();
+        contextMenuBuilder.addItem(
+            {
+                icon: this.config.DeleteIcon,
+                label: "Delete",
+                action: function()
+                {
+                    this.playlistService.removeItem(index);
+                }.bind(this)
+            });
+
+        return contextMenuBuilder.build();
+    },
+
+    _refreshPlaylistView: function()
     {
         //clear view
         this.view.empty();

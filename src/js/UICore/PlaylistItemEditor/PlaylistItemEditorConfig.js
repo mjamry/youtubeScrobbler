@@ -4,7 +4,7 @@ window.UI = window.UI || {};
 
 window.UI.PlaylistItemDetailsEditorConfig =
 {
-    Container: "#playlist-item-editor",
+    Container: ".playlist-item-editor",
 
     ArtistInput: "#playlist-item-editor-artist",
     TitleInput: "#playlist-item-editor-title",
