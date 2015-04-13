@@ -455,18 +455,7 @@ body
     font-size: 12pt;
 }
 /*------------------------------PLAYLIST--ITEM--EDITOR------------------*/
-#playlist-editor
-{
-    padding-top:85px;
-}
-
-#playlist-item-editor-container
-{
-    width:450px;
-    height:338px;
-}
-
-#playlist-item-editor
+.playlist-item-editor
 {
     position:relative;
     margin-left:auto;
