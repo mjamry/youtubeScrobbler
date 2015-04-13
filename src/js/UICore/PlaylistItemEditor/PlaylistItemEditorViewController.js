@@ -54,37 +54,6 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         }
     },
 
-    _onItemEditionRequested: function(args)
-    {
-        this.view = $("#playlist-item-editor-container "+this.config.Container).clone();
-        this._hookUpButtonsActions();
-        this._show(args.mediaDetails, args.index);
-        this.updateView();
-        //this._enableButtons();
-
-        this.modalId = ModalsService.getInstance().show({source: this.view});
-    },
-
-    _handleDetailsObtained: function(that)
-    {
-        return function _handleDetailsObtained(mediaDetails)
-        {
-            that.mediaDetails = mediaDetails.clone();
-            that.updateView();
-            LoadingIndicatorService.getInstance().hide();
-        };
-    },
-
-    _retrieveMediaDetails: function()
-    {
-        var mediaDetails = this.mediaDetails.clone();
-        mediaDetails.artist.name = $(this.config.ArtistInput).val();
-        mediaDetails.title = $(this.config.TitleInput).val();
-        mediaDetails.album.name = $(this.config.AlbumInput).val();
-
-        return mediaDetails;
-    },
-
     _swapArtistNameAndTitle: function(that)
     {
         that.mediaDetails = that._retrieveMediaDetails();
@@ -110,6 +79,28 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         Logger.getInstance().info("[Editor] Details saved for '"+that.mediaDetails.artist.name+" - "+that.mediaDetails.title+"'");
         that.playlistProvider.updateItem(that.index, that.mediaDetails);
         that._hide();
+    },
+
+    _validateEnteredData: function()
+    {
+        LoadingIndicatorService.getInstance().show("Verifying track details.<br>Please wait.");
+        var mediaDetails = this._retrieveMediaDetails();
+        this.detailsProvider.getTrackDetails(
+            mediaDetails,
+            {
+                done: this._handleDetailsObtained(this),
+                fail: function()
+                {
+                    LoadingIndicatorService.getInstance().hide();
+                }
+            }
+        );
+    },
+
+    _show: function showPlaylistItemEditor(mediaDetails, index)
+    {
+        this.index = index;
+        this.mediaDetails = mediaDetails;
     },
 
     _hide: function hidePlaylistItemEditor()
@@ -141,34 +132,6 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         $(this.config.AlbumVerification).hide();
     },
 
-    //updated view with current media details
-    updateView: function updateView()
-    {
-        this._clearEnteredValues();
-        if(this.mediaDetails.artist.name)
-        {
-            $(this.config.ArtistInput).val(this.mediaDetails.artist.name);
-        }
-
-        if(this.mediaDetails.title)
-        {
-            $(this.config.TitleInput).val(this.mediaDetails.title);
-        }
-
-        if(this.mediaDetails.album.name)
-        {
-            $(this.config.AlbumInput).val(this.mediaDetails.album.name);
-        }
-
-        this._verifyItems();
-    },
-
-    _show: function showPlaylistItemEditor(mediaDetails, index)
-    {
-        this.index = index;
-        this.mediaDetails = mediaDetails;
-    },
-
     _enableButtons: function()
     {
         this.view.find(this.config.Button).removeAttr(this.config.DisabledAttr);
@@ -179,20 +142,35 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         this.view.find(this.config.Button).attr(this.config.DisabledAttr, true);
     },
 
-    _validateEnteredData: function()
+    _onItemEditionRequested: function(args)
     {
-        LoadingIndicatorService.getInstance().show("Verifying track details.<br>Please wait.");
-        var mediaDetails = this._retrieveMediaDetails();
-        this.detailsProvider.getTrackDetails(
-            mediaDetails,
-            {
-                done: this._handleDetailsObtained(this),
-                fail: function()
-                {
-                    LoadingIndicatorService.getInstance().hide();
-                }
-            }
-        );
+        this.view = $("#playlist-item-editor-container "+this.config.Container).clone();
+        this._hookUpButtonsActions();
+        this._show(args.mediaDetails, args.index);
+        this.updateView();
+        //this._enableButtons();
+
+        this.modalId = ModalsService.getInstance().show({source: this.view});
+    },
+
+    _handleDetailsObtained: function(that)
+    {
+        return function _handleDetailsObtained(mediaDetails)
+        {
+            that.mediaDetails = mediaDetails.clone();
+            that.updateView();
+            LoadingIndicatorService.getInstance().hide();
+        };
+    },
+
+    _retrieveMediaDetails: function()
+    {
+        var mediaDetails = this.mediaDetails.clone();
+        mediaDetails.artist.name = $(this.config.ArtistInput).val();
+        mediaDetails.title = $(this.config.TitleInput).val();
+        mediaDetails.album.name = $(this.config.AlbumInput).val();
+
+        return mediaDetails;
     },
 
     _hookUpButtonsActions: function()
@@ -224,6 +202,28 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
                 this._hide();
             },
             this));
+    },
+
+    //updated view with current media details
+    updateView: function updateView()
+    {
+        this._clearEnteredValues();
+        if(this.mediaDetails.artist.name)
+        {
+            $(this.config.ArtistInput).val(this.mediaDetails.artist.name);
+        }
+
+        if(this.mediaDetails.title)
+        {
+            $(this.config.TitleInput).val(this.mediaDetails.title);
+        }
+
+        if(this.mediaDetails.album.name)
+        {
+            $(this.config.AlbumInput).val(this.mediaDetails.album.name);
+        }
+
+        this._verifyItems();
     },
 
     initialise: function()
