@@ -175,7 +175,7 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
 
     _hookUpButtonsActions: function()
     {
-        $(this.config.SwapButton).click($.proxy(function swapItemDetails(e)
+        this.view.find(this.config.SwapButton).click($.proxy(function swapItemDetails(e)
             {
                 e.preventDefault();
                 this._swapArtistNameAndTitle(this);
