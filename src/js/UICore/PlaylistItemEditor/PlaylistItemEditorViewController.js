@@ -138,7 +138,7 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         this._show(args.mediaDetails, args.index);
         this.updateView();
 
-        this.modalId = ModalService.getInstance().show({source: this.view});
+        this.modalId = ModalService.getInstance().show({content: this.view});
     },
 
     _handleDetailsObtained: function(that)

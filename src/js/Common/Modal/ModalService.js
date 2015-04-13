@@ -37,7 +37,7 @@ window.Services.ModalServiceImpl = function()
 window.Services.ModalServiceImpl.prototype =
 {
     //data:
-    //{ content, source }
+    //{ content, id }
     //where content can be a html code, and source name of DOM element
     show: function(data)
     {

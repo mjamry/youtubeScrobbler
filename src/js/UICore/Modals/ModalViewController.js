@@ -13,36 +13,13 @@ window.UI.ModalViewController.prototype =
         var newModal = $("#controls-schemes .modal-content-container").clone();
         newModal.attr("id", this.config.ModalIdClassName+id);
 
-        var cont = newModal.find(this.config.ModalContent);
-        cont.append(content);
+        newModal.find(this.config.ModalContent).append(content);
         $(this.config.ModalsContainer).append(newModal);
-        newModal.show();
-        this.view.show();
-    },
-
-    _displayModalUsingSource: function(source, id)
-    {
-        var newModal = $("#controls-schemes .modal-content-container").clone();
-        newModal.attr("id", this.config.ModalIdClassName+id);
-
-        var cont = newModal.find(this.config.ModalContent);
-        cont.append(source);
-        $(this.config.ModalsContainer).append(newModal);
-        newModal.show();
-        this.view.show();
     },
 
     _onModalShowRequested: function(data)
     {
-        if(data.content)
-        {
-            this._displayModalWithContent(data.content, data.id);
-        }
-
-        if(data.source)
-        {
-            this._displayModalUsingSource(data.source, data.id);
-        }
+        this._displayModalWithContent(data.content, data.id);
     },
 
     _onModalCloseRequested: function(data)
