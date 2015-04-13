@@ -454,39 +454,6 @@ body
 {
     font-size: 12pt;
 }
-/*------------------------------PLAYLIST--ITEM--EDITOR--LIST------------*/
-#playlist-editor-list-container
-{
-    width:450px;
-    height:338px;
-    /*TODO do it with JS*/
-    overflow: auto;
-}
-
-.playlist-editor-list-item
-{
-    height:50px;
-}
-
-.playlist-editor-list-item:hover
-{
-    cursor:pointer;
-}
-
-.playlist-editor-list-item-artist-name,
-.playlist-editor-list-item-album-name,
-.playlist-editor-list-item-artist-icon,
-.playlist-editor-list-item-album-icon
-{
-    height:20px;
-}
-
-.playlist-editor-list-item-artist-icon,
-.playlist-editor-list-item-album-icon
-{
-    margin-top:5px;
-    margin-left:5px;
-}
 /*------------------------------PLAYLIST--ITEM--EDITOR------------------*/
 #playlist-editor
 {
