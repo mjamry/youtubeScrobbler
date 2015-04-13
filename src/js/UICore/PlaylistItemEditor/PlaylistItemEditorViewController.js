@@ -116,7 +116,6 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
     _clearView: function _clearView()
     {
         this._clearEnteredValues();
-        this._disableButtons();
     },
 
     _clearEnteredValues: function()
@@ -132,23 +131,12 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         $(this.config.AlbumVerification).hide();
     },
 
-    _enableButtons: function()
-    {
-        this.view.find(this.config.Button).removeAttr(this.config.DisabledAttr);
-    },
-
-    _disableButtons: function()
-    {
-        this.view.find(this.config.Button).attr(this.config.DisabledAttr, true);
-    },
-
     _onItemEditionRequested: function(args)
     {
         this.view = $("#playlist-item-editor-container "+this.config.Container).clone();
         this._hookUpButtonsActions();
         this._show(args.mediaDetails, args.index);
         this.updateView();
-        //this._enableButtons();
 
         this.modalId = ModalsService.getInstance().show({source: this.view});
     },
@@ -229,9 +217,5 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
     initialise: function()
     {
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistItemEditionRequested, $.proxy(this._onItemEditionRequested, this));
-
-       // this._disableButtons();
-
-         //this._hookUpButtonsActions();
     }
 };
