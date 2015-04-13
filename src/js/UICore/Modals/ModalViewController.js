@@ -8,10 +8,21 @@ window.UI.ModalViewController = function(view, config)
 
 window.UI.ModalViewController.prototype =
 {
+    _close: function(id)
+    {
+        $("#"+this.config.ModalIdClassName+id).remove();
+    },
+
     _displayModalWithContent: function(content, id)
     {
         var newModal = $("#controls-schemes .modal-content-container").clone();
         newModal.attr("id", this.config.ModalIdClassName+id);
+
+        //close modal when user click outside of main form/control
+        newModal.find(this.config.ModalOverlay).click(function()
+        {
+            this._close(id);
+        }.bind(this));
 
         newModal.find(this.config.ModalContent).append(content);
         $(this.config.ModalsContainer).append(newModal);
@@ -24,12 +35,14 @@ window.UI.ModalViewController.prototype =
 
     _onModalCloseRequested: function(data)
     {
-        $("#"+this.config.ModalIdClassName+data.id).remove();
+        this._close(data.id);
     },
 
     initialise: function()
     {
         EventBroker.getInstance().addListener(window.Services.ModalEvents.ModalDisplayRequested, this._onModalShowRequested.bind(this));
         EventBroker.getInstance().addListener(window.Services.ModalEvents.ModalCloseRequested, this._onModalCloseRequested.bind(this));
+
+
     }
 };
