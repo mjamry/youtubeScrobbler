@@ -42,7 +42,5 @@ window.UI.ModalViewController.prototype =
     {
         EventBroker.getInstance().addListener(window.Services.ModalEvents.ModalDisplayRequested, this._onModalShowRequested.bind(this));
         EventBroker.getInstance().addListener(window.Services.ModalEvents.ModalCloseRequested, this._onModalCloseRequested.bind(this));
-
-
     }
 };
