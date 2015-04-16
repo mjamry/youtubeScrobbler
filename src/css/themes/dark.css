@@ -109,7 +109,6 @@ body A:hover
 {
     background-color: #374140;
     color:#D9CB9E;
-    border-right:1px solid #2A2C2B;
 }
 
 .playlist-item-editor-form input
@@ -338,6 +337,17 @@ input:-moz-placeholder { color:#D9CB9E; }
 {
     background-color: #374140;
     color:#D9CB9E;
+}
+/*--------MODAL----------*/
+.modal-content
+{
+    background-color: #374140;
+    border:1px solid #1E1E20;
+}
+
+.modal-overlay
+{
+    background-color: #010304;
 }
 /*--------LOGGER----------*/
 .logger-info
