@@ -48,7 +48,7 @@ body
 {
     position: absolute;
     left:0;
-    right:0;
+    top:0;
     width:100%;
     height:100%;
 }
@@ -66,21 +66,12 @@ body
     z-index: 1;
 }
 
-.modal-overlay
-{
-    background-color: #010304;
-}
-
 .modal-content
 {
-    width: 50%;
-    max-width: 400px;
-    min-width: 200px;
-    max-height: 400px;
-    min-height: 200px;
+    margin-left:auto;
+    margin-right:auto;
+    padding:20px 70px 20px 70px;
 
-    padding: 4em;
-    text-align: center;
     position: relative;
     opacity:1;
     z-index: 2;
@@ -455,10 +446,8 @@ body
 /*------------------------------PLAYLIST--ITEM--EDITOR------------------*/
 .playlist-item-editor
 {
-    margin-left:auto;
-    margin-right:auto;
+    width:450px;
     text-align: center;
-    padding:20px 70px 20px 70px;
 }
 
 .playlist-item-editor-form label
@@ -487,6 +476,12 @@ body
 .playlist-item-editor-form button
 {
     margin-top:20px;
+}
+
+.playlist-editor-description
+{
+    margin-left:auto;
+    margin-right:auto;
 }
 
 .playlist-editor-line
