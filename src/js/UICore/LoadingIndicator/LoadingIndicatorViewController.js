@@ -2,8 +2,8 @@ window.UI = window.UI || {};
 
 window.UI.LoadingIndicatorViewController = function(config)
 {
-    this.view = $(config.IndicatorContainer);
     this.config = config;
+    this.modalId;
 };
 
 window.UI.LoadingIndicatorViewController.prototype =
@@ -11,29 +11,20 @@ window.UI.LoadingIndicatorViewController.prototype =
     //{title, fullScreen}
     _show: function(data)
     {
-        this._hide();
-        var opacity = this.config.NonFullScreenOpacity;
-        if(data.fullScreen)
-        {
-            opacity = this.config.FullScreenOpacity;
-        }
-
-        this.view.find(this.config.IndicatorOverlay).css("opacity", opacity);
-
-        this.view.find(this.config.IndicatorTitle).html(data.title);
-        this.view.show();
+        var view = $("#controls-schemes .loading-indicator").clone();
+        view.find(this.config.IndicatorTitle).html(data.title);
+        this.modalId = ModalService.getInstance().show({content: view});
     },
 
     _hide: function()
     {
-        this.view.hide();
-        this.view.find(this.config.IndicatorTitle).html("");
-        this.view.find(this.config.IndicatorDescription).html("");
+       // ModalService.getInstance().close(this.modalId);
     },
 
     _update: function(data)
     {
-        this.view.find(this.config.IndicatorDescription).html(data.content);
+        //ModalService.getInstance().close(this.modalId);
+        this._show(data.content);
     },
 
     initialise: function()

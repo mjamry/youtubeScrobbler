@@ -16,8 +16,13 @@ window.ApplicationCore.PageLoader.prototype =
         this._preInitialise(coreServicesFactory, uiFactory)
             .then(function preInitSuccess()
             {
+                return that._loadPage(window.Common.ControlsSource);
+            })
+            .then(function controlsTemplateLoadingSuccess()
+            {
                 LoadingIndicatorService.getInstance().show("Please wait, page is being loaded.", true);
                 LoadingIndicatorService.getInstance().updateContent("Loading page content");
+                ModalService.getInstance().show({content: "test"});
                 return that._loadPagesContent(pagesConfiguration);
             })
             .then(function loadPagesContentSuccess()

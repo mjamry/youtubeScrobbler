@@ -3,7 +3,7 @@ window.UI = window.UI || {};
 window.UI.LoadingIndicatorConfiguration =
 {
     IndicatorOverlay: ".loading-indicator-overlay",
-    IndicatorContainer: "#loading-indicator",
+    IndicatorContainer: ".loading-indicator",
     IndicatorTitle: ".loading-indicator-title",
     IndicatorDescription: ".loading-indicator-description",
 
