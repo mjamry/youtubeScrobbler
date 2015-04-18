@@ -29,9 +29,10 @@ ModalService.getInstance = function()
     return ModalService._instance;
 };
 
-window.Services.ModalServiceImpl = function()
+window.Services.ModalServiceImpl = function(viewController)
 {
     this.modalId = 0;
+    this.viewController = viewController;
 };
 
 window.Services.ModalServiceImpl.prototype =
@@ -42,14 +43,17 @@ window.Services.ModalServiceImpl.prototype =
     show: function(data)
     {
         this.modalId++;
-        $.extend(data, {id: this.modalId});
-        EventBroker.getInstance().fireEventWithData(window.Services.ModalEvents.ModalDisplayRequested, data);
+        //$.extend(data, {id: this.modalId});
+
+        this.viewController._displayModalWithContent(data.content, this.modalId);
+        //EventBroker.getInstance().fireEventWithData(window.Services.ModalEvents.ModalDisplayRequested, data);
 
         return this.modalId;
     },
 
     close: function(id)
     {
-        EventBroker.getInstance().fireEventWithData(window.Services.ModalEvents.ModalCloseRequested, {id: id});
+        this.viewController._onModalCloseRequested(id);
+        //EventBroker.getInstance().fireEventWithData(window.Services.ModalEvents.ModalCloseRequested, {id: id});
     }
 };
