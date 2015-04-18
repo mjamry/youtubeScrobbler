@@ -17,13 +17,14 @@ window.UI.ModalViewController.prototype =
     {
         var newModal = $("#controls-schemes .modal-content-container").clone();
         newModal.attr("id", this.config.ModalIdClassName + data.id);
+        newModal.css("z-index", 999+data.id);
 
         if (data.canClose)
         {
         //close modal when user click outside of main form/control
             newModal.find(this.config.ModalOverlay).click(function ()
             {
-                this._close(id);
+                this._close(data.id);
             }.bind(this)
             );
         }
