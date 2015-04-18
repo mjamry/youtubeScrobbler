@@ -43,17 +43,12 @@ window.Services.ModalServiceImpl.prototype =
     show: function(data)
     {
         this.modalId++;
-        //$.extend(data, {id: this.modalId});
-
-        this.viewController._displayModalWithContent(data.content, this.modalId);
-        //EventBroker.getInstance().fireEventWithData(window.Services.ModalEvents.ModalDisplayRequested, data);
-
+        this.viewController.show(data.content, this.modalId);
         return this.modalId;
     },
 
     close: function(id)
     {
-        this.viewController._onModalCloseRequested(id);
-        //EventBroker.getInstance().fireEventWithData(window.Services.ModalEvents.ModalCloseRequested, {id: id});
+        this.viewController.close(id);
     }
 };
