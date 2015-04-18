@@ -144,5 +144,10 @@ window.UI.UIControllersFactory.prototype =
     createModalViewController: function ()
     {
         return new window.UI.ModalViewController($(this.config.ModalView), window.UI.ModalConfiguration);
+    },
+
+    createLoadingIndicatorViewController: function()
+    {
+        return new window.UI.LoadingIndicatorViewController(window.UI.LoadingIndicatorConfiguration);
     }
 };

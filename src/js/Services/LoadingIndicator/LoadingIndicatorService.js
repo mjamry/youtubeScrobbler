@@ -30,23 +30,27 @@ LoadingIndicatorService.getInstance = function()
 };
 
 
-window.Services.LoadingIndicatorServiceImpl = function(){};
+window.Services.LoadingIndicatorServiceImpl = function(viewController)
+{
+    this.viewCtrl = viewController;
+};
 
 window.Services.LoadingIndicatorServiceImpl.prototype =
 {
     show: function(title, fullScreen)
     {
-        fullScreen = fullScreen || false;
-        EventBroker.getInstance().fireEventWithData(window.Services.LoadingIndicatorEvents.ShowIndicator, {title: title, fullScreen: fullScreen});
+       // fullScreen = fullScreen || false;
+        this.viewCtrl._show({title: title});
+        //EventBroker.getInstance().fireEventWithData(window.Services.LoadingIndicatorEvents.ShowIndicator, {title: title, fullScreen: fullScreen});
     },
 
     hide: function()
     {
-        EventBroker.getInstance().fireEvent(window.Services.LoadingIndicatorEvents.HideIndicator);
+        this.viewCtrl._hide();
     },
 
     updateContent: function(newContent)
     {
-        EventBroker.getInstance().fireEventWithData(window.Services.LoadingIndicatorEvents.UpdateContent, {content: newContent});
+        this.viewCtrl._update({content: newContent});
     }
 };
