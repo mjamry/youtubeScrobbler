@@ -42,6 +42,11 @@ window.Services.ModalServiceImpl.prototype =
     //where content can be a html code, and source name of DOM element
     show: function(data)
     {
+        //determines if modal shoudl be set to fullscreen (overlay opacity = 1) or not
+        data.fullscreen = data.fullscreen || false;
+        //determines if it is possible to close modal by clicking outside
+        data.canClose = data.canClose || false;
+
         this.modalId++;
         $.extend(data, {id: this.modalId});
         this.viewController.show(data);
