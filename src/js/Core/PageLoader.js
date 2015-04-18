@@ -147,7 +147,7 @@ window.ApplicationCore.PageLoader.prototype =
 
             //create loading indicator service
             new LoadingIndicatorService();
-            LoadingIndicatorService.setInstance(new window.Services.LoadingIndicatorServiceImpl(uiFactory.createLoadingIndicatorViewController()));
+            LoadingIndicatorService.setInstance(new window.Services.LoadingIndicatorServiceImpl(window.UI.LoadingIndicatorConfiguration));
 
             new ModalService();
             ModalService.setInstance(new window.Services.ModalServiceImpl(uiFactory.createModalViewController()));

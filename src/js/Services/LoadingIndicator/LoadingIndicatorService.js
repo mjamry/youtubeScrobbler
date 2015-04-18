@@ -30,20 +30,27 @@ LoadingIndicatorService.getInstance = function()
 };
 
 
-window.Services.LoadingIndicatorServiceImpl = function(viewController)
+window.Services.LoadingIndicatorServiceImpl = function(config)
 {
-    this.viewCtrl = viewController;
+    this.config = config;
 };
 
 window.Services.LoadingIndicatorServiceImpl.prototype =
 {
     show: function(details)
     {
-        this.viewCtrl.show(details);
+        //in case if already displayed
+        this.hide();
+
+        var content = $("#controls-schemes .loading-indicator").clone();
+        content.find(this.config.IndicatorTitle).html(details.title);
+        content.find(this.config.IndicatorDescription).html(details.content);
+
+        this.modalId = ModalService.getInstance().show({content: content});
     },
 
     hide: function()
     {
-        this.viewCtrl.hide();
+        ModalService.getInstance().close(this.modalId);
     }
 };
