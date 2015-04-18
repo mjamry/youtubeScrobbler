@@ -6,6 +6,7 @@ window.UI.LoadingIndicatorConfiguration =
     IndicatorContainer: ".loading-indicator",
     IndicatorTitle: ".loading-indicator-title",
     IndicatorDescription: ".loading-indicator-description",
+    IndicatorId: "loadingIndicator",
 
     FullScreenOpacity: 1,
     NonFullScreenOpacity: 0.75,

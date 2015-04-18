@@ -39,11 +39,11 @@ window.Services.LoadingIndicatorServiceImpl.prototype =
 {
     show: function(details)
     {
-        this.viewCtrl._show(details);
+        this.viewCtrl.show(details);
     },
 
     hide: function()
     {
-        this.viewCtrl._hide();
+        this.viewCtrl.hide();
     }
 };

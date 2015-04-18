@@ -7,13 +7,13 @@ window.UI.LoadingIndicatorViewController = function(config)
 
 window.UI.LoadingIndicatorViewController.prototype =
 {
-    //{title, fullScreen}
-    _show: function(data)
+    //{title, content, fullScreen}
+    show: function(data)
     {
         //in case if already displayed
-        this._hide();
+        this.hide();
         var newModal = $("#controls-schemes .modal-content-container").clone();
-        newModal.attr("id", "loader");
+        newModal.attr("id", this.config.IndicatorId);
 
         var content = $("#controls-schemes .loading-indicator").clone();
         content.find(this.config.IndicatorTitle).html(data.title);
@@ -23,15 +23,8 @@ window.UI.LoadingIndicatorViewController.prototype =
         $(this.config.ModalsContainer).append(newModal);
     },
 
-    _hide: function()
+    hide: function()
     {
-        $("#loader").remove();
-    },
-
-    initialise: function()
-    {
-        EventBroker.getInstance().addListener(window.Services.LoadingIndicatorEvents.ShowIndicator, this._show.bind(this));
-        EventBroker.getInstance().addListener(window.Services.LoadingIndicatorEvents.HideIndicator, this._hide.bind(this));
-        EventBroker.getInstance().addListener(window.Services.LoadingIndicatorEvents.UpdateContent, this._update.bind(this));
+        $("#"+this.config.IndicatorId).remove();
     }
 };
