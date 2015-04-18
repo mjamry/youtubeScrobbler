@@ -37,20 +37,13 @@ window.Services.LoadingIndicatorServiceImpl = function(viewController)
 
 window.Services.LoadingIndicatorServiceImpl.prototype =
 {
-    show: function(title, fullScreen)
+    show: function(details)
     {
-       // fullScreen = fullScreen || false;
-        this.viewCtrl._show({title: title});
-        //EventBroker.getInstance().fireEventWithData(window.Services.LoadingIndicatorEvents.ShowIndicator, {title: title, fullScreen: fullScreen});
+        this.viewCtrl._show(details);
     },
 
     hide: function()
     {
         this.viewCtrl._hide();
-    },
-
-    updateContent: function(newContent)
-    {
-        this.viewCtrl._update({content: newContent});
     }
 };

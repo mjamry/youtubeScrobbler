@@ -12,6 +12,12 @@ window.ApplicationCore.PageLoader.prototype =
     {
         var startTime = new Date().getTime();
         var that = this;
+        var loadingIndicatorDetails =
+        {
+            title: "Please wait, loading...",
+            content: "",
+            fullscreen: true
+        };
 
         this._preInitialise(coreServicesFactory, uiFactory)
             .then(function preInitSuccess()
@@ -20,19 +26,22 @@ window.ApplicationCore.PageLoader.prototype =
             })
             .then(function controlsTemplateLoadingSuccess()
             {
-                LoadingIndicatorService.getInstance().show("Please wait, page is being loaded.", true);
-                LoadingIndicatorService.getInstance().updateContent("Loading page content");
+                LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
+                loadingIndicatorDetails.content = "Loading page content";
+                LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
                 ModalService.getInstance().show({content: "test"});
                 return that._loadPagesContent(pagesConfiguration);
             })
             .then(function loadPagesContentSuccess()
             {
-                LoadingIndicatorService.getInstance().updateContent("Creating page services");
+                loadingIndicatorDetails.content = "Creating page services";
+                LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
                 return that._createServices(coreServicesFactory, lastFmServicesFactory, playerServicesFactory);
             })
             .then(function createServicesSuccess()
             {
-                LoadingIndicatorService.getInstance().updateContent("Creating UI");
+                loadingIndicatorDetails.content = "Creating UI";
+                LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
                 return that._createUI(uiFactory, lastFmServicesFactory);
             })
             .then(function createUISuccess()
@@ -45,7 +54,8 @@ window.ApplicationCore.PageLoader.prototype =
             })
             .then(function initialiseServicesSuccess()
             {
-                LoadingIndicatorService.getInstance().updateContent("Almost everything loaded");
+                loadingIndicatorDetails.content = "Almost everything loaded";
+                LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
                 return that._postInitialise(uiFactory);
             })
             .then(function postInitialiseSuccess()
@@ -70,7 +80,9 @@ window.ApplicationCore.PageLoader.prototype =
             })
             .catch(function(error)
             {
-                LoadingIndicatorService.getInstance().show("Error: <br>"+error, true);
+                loadingIndicatorDetails.title = "Error occurs while loading page.";
+                loadingIndicatorDetails.content = error;
+                LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
                 Logger.getInstance().error("[Init] Page initialisation error: "+error);
             });
     },

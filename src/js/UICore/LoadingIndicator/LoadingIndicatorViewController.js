@@ -10,6 +10,8 @@ window.UI.LoadingIndicatorViewController.prototype =
     //{title, fullScreen}
     _show: function(data)
     {
+        //in case if already displayed
+        this._hide();
         var newModal = $("#controls-schemes .modal-content-container").clone();
         newModal.attr("id", "loader");
 
@@ -24,12 +26,6 @@ window.UI.LoadingIndicatorViewController.prototype =
     _hide: function()
     {
         $("#loader").remove();
-    },
-
-    _update: function(data)
-    {
-        this._hide();
-        this._show(data);
     },
 
     initialise: function()
