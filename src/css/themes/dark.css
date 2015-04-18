@@ -25,18 +25,6 @@ body A:hover
     border-bottom:1px solid #374140;
     background-color: #1E1E20;
 }
-/*--------LOADING-INDICATOR----------*/
-#loading-indicator .loading-indicator-content
-{
-    background: #2A2C2B;
-    color: #D9CB9E;
-}
-
-.loading-indicator-overlay
-{
-    background: #2A2C2B;
-}
-
 /*--------PLAYLIST----------*/
 .playlist-item-current
 {
