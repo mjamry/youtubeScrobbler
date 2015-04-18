@@ -29,7 +29,6 @@ window.ApplicationCore.PageLoader.prototype =
                 LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
                 loadingIndicatorDetails.content = "Loading page content";
                 LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
-                ModalService.getInstance().show({content: "test"});
                 return that._loadPagesContent(pagesConfiguration);
             })
             .then(function loadPagesContentSuccess()
@@ -151,7 +150,7 @@ window.ApplicationCore.PageLoader.prototype =
             LoadingIndicatorService.setInstance(new window.Services.LoadingIndicatorServiceImpl(uiFactory.createLoadingIndicatorViewController()));
 
             new ModalService();
-            ModalService.setInstance(new window.Services.ModalServiceImpl());
+            ModalService.setInstance(new window.Services.ModalServiceImpl(uiFactory.createModalViewController()));
 
             that._getApiKeys();
 
