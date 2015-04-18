@@ -3,7 +3,6 @@ window.UI = window.UI || {};
 window.UI.LoadingIndicatorViewController = function(config)
 {
     this.config = config;
-    this.modalId;
 };
 
 window.UI.LoadingIndicatorViewController.prototype =
@@ -11,20 +10,26 @@ window.UI.LoadingIndicatorViewController.prototype =
     //{title, fullScreen}
     _show: function(data)
     {
-        var view = $("#controls-schemes .loading-indicator").clone();
-        view.find(this.config.IndicatorTitle).html(data.title);
-        this.modalId = ModalService.getInstance().show({content: view});
+        var newModal = $("#controls-schemes .modal-content-container").clone();
+        newModal.attr("id", "loader");
+
+        var content = $("#controls-schemes .loading-indicator").clone();
+        content.find(this.config.IndicatorTitle).html(data.title);
+        content.find(this.config.IndicatorDescription).html(data.content);
+
+        newModal.find(this.config.ModalContent).append(content);
+        $(this.config.ModalsContainer).append(newModal);
     },
 
     _hide: function()
     {
-       // ModalService.getInstance().close(this.modalId);
+        $("#loader").remove();
     },
 
     _update: function(data)
     {
-        //ModalService.getInstance().close(this.modalId);
-        this._show(data.content);
+        this._hide();
+        this._show(data);
     },
 
     initialise: function()

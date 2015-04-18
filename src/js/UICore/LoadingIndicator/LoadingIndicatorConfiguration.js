@@ -8,5 +8,9 @@ window.UI.LoadingIndicatorConfiguration =
     IndicatorDescription: ".loading-indicator-description",
 
     FullScreenOpacity: 1,
-    NonFullScreenOpacity: 0.75
+    NonFullScreenOpacity: 0.75,
+
+    ModalsContainer: "#modals-container",
+    ModalOverlay: ".modal-overlay",
+    ModalContent: ".modal-content"
 };
