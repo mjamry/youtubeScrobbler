@@ -83,7 +83,7 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
 
     _validateEnteredData: function()
     {
-        LoadingIndicatorService.getInstance().show("Verifying track details.<br>Please wait.");
+        LoadingIndicatorService.getInstance().show({title: "Please wait.", content: "Verifying track details."});
         var mediaDetails = this._retrieveMediaDetails();
         this.detailsProvider.getTrackDetails(
             mediaDetails,
