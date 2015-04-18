@@ -13,10 +13,10 @@ window.UI.ModalViewController.prototype =
         $("#"+this.config.ModalIdClassName+id).remove();
     },
 
-    show: function(content, id)
+    show: function(data)
     {
         var newModal = $("#controls-schemes .modal-content-container").clone();
-        newModal.attr("id", this.config.ModalIdClassName+id);
+        newModal.attr("id", this.config.ModalIdClassName+data.id);
 
         //close modal when user click outside of main form/control
         newModal.find(this.config.ModalOverlay).click(function()
@@ -24,7 +24,7 @@ window.UI.ModalViewController.prototype =
             this._close(id);
         }.bind(this));
 
-        newModal.find(this.config.ModalContent).append(content);
+        newModal.find(this.config.ModalContent).append(data.content);
         $(this.config.ModalsContainer).append(newModal);
     },
 

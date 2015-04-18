@@ -38,12 +38,13 @@ window.Services.ModalServiceImpl = function(viewController)
 window.Services.ModalServiceImpl.prototype =
 {
     //data:
-    //{ content, id }
+    //{content, fullscreen, canClose}
     //where content can be a html code, and source name of DOM element
     show: function(data)
     {
         this.modalId++;
-        this.viewController.show(data.content, this.modalId);
+        $.extend(data, {id: this.modalId});
+        this.viewController.show(data);
         return this.modalId;
     },
 
