@@ -13,34 +13,33 @@ window.UI.ModalViewController.prototype =
         $("#"+this.config.ModalIdClassName+id).remove();
     },
 
-    _displayModalWithContent: function(content, id)
+    show: function(data)
     {
         var newModal = $("#controls-schemes .modal-content-container").clone();
-        newModal.attr("id", this.config.ModalIdClassName+id);
+        newModal.attr("id", this.config.ModalIdClassName + data.id);
+        newModal.css("z-index", data.id);
 
-        //close modal when user click outside of main form/control
-        newModal.find(this.config.ModalOverlay).click(function()
+        if (data.canClose)
         {
-            this._close(id);
-        }.bind(this));
+        //close modal when user click outside of main form/control
+            newModal.find(this.config.ModalOverlay).click(function ()
+            {
+                this._close(data.id);
+            }.bind(this));
+        }
 
-        newModal.find(this.config.ModalContent).append(content);
+        if(data.fullscreen)
+        {
+            newModal.find(this.config.ModalOverlay).css("opacity", 1);
+            newModal.find(this.config.ModalContent).css("border", "none");
+        }
+
+        newModal.find(this.config.ModalContent).append(data.content);
         $(this.config.ModalsContainer).append(newModal);
     },
 
-    _onModalShowRequested: function(data)
+    close: function(id)
     {
-        this._displayModalWithContent(data.content, data.id);
-    },
-
-    _onModalCloseRequested: function(data)
-    {
-        this._close(data.id);
-    },
-
-    initialise: function()
-    {
-        EventBroker.getInstance().addListener(window.Services.ModalEvents.ModalDisplayRequested, this._onModalShowRequested.bind(this));
-        EventBroker.getInstance().addListener(window.Services.ModalEvents.ModalCloseRequested, this._onModalCloseRequested.bind(this));
+        this._close(id);
     }
 };

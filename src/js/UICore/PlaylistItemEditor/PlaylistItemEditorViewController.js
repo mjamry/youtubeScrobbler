@@ -83,7 +83,7 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
 
     _validateEnteredData: function()
     {
-        LoadingIndicatorService.getInstance().show("Verifying track details.<br>Please wait.");
+        LoadingIndicatorService.getInstance().show({title: "Please wait.", description: "Verifying track details."});
         var mediaDetails = this._retrieveMediaDetails();
         this.detailsProvider.getTrackDetails(
             mediaDetails,
@@ -138,7 +138,7 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         this._show(args.mediaDetails, args.index);
         this.updateView();
 
-        this.modalId = ModalService.getInstance().show({content: this.view});
+        this.modalId = ModalService.getInstance().show({content: this.view, canClose: true});
     },
 
     _handleDetailsObtained: function(that)

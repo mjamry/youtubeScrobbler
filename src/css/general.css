@@ -76,44 +76,10 @@ body
     opacity:1;
     z-index: 2;
 }
-
 /*----------------------------------------------LOADING-INDICATOR------------------------------------------*/
-#loading-indicator, .loading-indicator-overlay
+.loading-indicator
 {
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-}
-
-#loading-indicator
-{
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.loading-indicator-overlay
-{
-    position:absolute;
-    opacity: 1;
-    z-index: 99;
-}
-
-#loading-indicator .loading-indicator-content
-{
-    width: 50%;
-    max-width: 400px;
-    min-width: 200px;
-    max-height: 400px;
-    min-height: 200px;
-
-    padding: 4em;
     text-align: center;
-    position: relative;
-    opacity:1;
-    z-index: 100;
 }
 /*----------------------------------------------WELCOME--SCREEN------------------------------------------*/
 #welcome-screen

@@ -30,23 +30,31 @@ LoadingIndicatorService.getInstance = function()
 };
 
 
-window.Services.LoadingIndicatorServiceImpl = function(){};
+window.Services.LoadingIndicatorServiceImpl = function(config)
+{
+    this.config = config;
+};
 
 window.Services.LoadingIndicatorServiceImpl.prototype =
 {
-    show: function(title, fullScreen)
+    show: function(details)
     {
-        fullScreen = fullScreen || false;
-        EventBroker.getInstance().fireEventWithData(window.Services.LoadingIndicatorEvents.ShowIndicator, {title: title, fullScreen: fullScreen});
+        //in case if already displayed
+        this.hide();
+
+        var content = $("#controls-schemes .loading-indicator").clone();
+        content.find(this.config.IndicatorTitle).html(details.title);
+        content.find(this.config.IndicatorDescription).html(details.description);
+
+        this.modalId = ModalService.getInstance().show({
+            content: content,
+            fullscreen: details.fullscreen,
+            canClose: details.canClose
+        });
     },
 
     hide: function()
     {
-        EventBroker.getInstance().fireEvent(window.Services.LoadingIndicatorEvents.HideIndicator);
-    },
-
-    updateContent: function(newContent)
-    {
-        EventBroker.getInstance().fireEventWithData(window.Services.LoadingIndicatorEvents.UpdateContent, {content: newContent});
+        ModalService.getInstance().close(this.modalId);
     }
 };

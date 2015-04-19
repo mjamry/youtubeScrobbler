@@ -29,27 +29,32 @@ ModalService.getInstance = function()
     return ModalService._instance;
 };
 
-window.Services.ModalServiceImpl = function()
+window.Services.ModalServiceImpl = function(viewController)
 {
     this.modalId = 0;
+    this.viewController = viewController;
 };
 
 window.Services.ModalServiceImpl.prototype =
 {
     //data:
-    //{ content, id }
+    //{content, fullscreen, canClose}
     //where content can be a html code, and source name of DOM element
     show: function(data)
     {
+        //determines if modal shoudl be set to fullscreen (overlay opacity = 1) or not
+        data.fullscreen = data.fullscreen || false;
+        //determines if it is possible to close modal by clicking outside
+        data.canClose = data.canClose || false;
+
         this.modalId++;
         $.extend(data, {id: this.modalId});
-        EventBroker.getInstance().fireEventWithData(window.Services.ModalEvents.ModalDisplayRequested, data);
-
+        this.viewController.show(data);
         return this.modalId;
     },
 
     close: function(id)
     {
-        EventBroker.getInstance().fireEventWithData(window.Services.ModalEvents.ModalCloseRequested, {id: id});
+        this.viewController.close(id);
     }
 };
