@@ -25,8 +25,13 @@ window.UI.ModalViewController.prototype =
             newModal.find(this.config.ModalOverlay).click(function ()
             {
                 this._close(data.id);
-            }.bind(this)
-            );
+            }.bind(this));
+        }
+
+        if(data.fullscreen)
+        {
+            newModal.find(this.config.ModalOverlay).css("opacity", 1);
+            newModal.find(this.config.ModalContent).css("border", "none");
         }
 
         newModal.find(this.config.ModalContent).append(data.content);

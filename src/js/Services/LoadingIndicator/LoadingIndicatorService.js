@@ -44,9 +44,13 @@ window.Services.LoadingIndicatorServiceImpl.prototype =
 
         var content = $("#controls-schemes .loading-indicator").clone();
         content.find(this.config.IndicatorTitle).html(details.title);
-        content.find(this.config.IndicatorDescription).html(details.content);
+        content.find(this.config.IndicatorDescription).html(details.description);
 
-        this.modalId = ModalService.getInstance().show({content: content});
+        this.modalId = ModalService.getInstance().show({
+            content: content,
+            fullscreen: details.fullscreen,
+            canClose: details.canClose
+        });
     },
 
     hide: function()

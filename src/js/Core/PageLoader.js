@@ -15,7 +15,7 @@ window.ApplicationCore.PageLoader.prototype =
         var loadingIndicatorDetails =
         {
             title: "Please wait, loading...",
-            content: "",
+            description: "",
             fullscreen: true
         };
 
@@ -27,19 +27,19 @@ window.ApplicationCore.PageLoader.prototype =
             .then(function controlsTemplateLoadingSuccess()
             {
                 LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
-                loadingIndicatorDetails.content = "Loading page content";
+                loadingIndicatorDetails.description = "Loading page content";
                 LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
                 return that._loadPagesContent(pagesConfiguration);
             })
             .then(function loadPagesContentSuccess()
             {
-                loadingIndicatorDetails.content = "Creating page services";
+                loadingIndicatorDetails.description = "Creating page services";
                 LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
                 return that._createServices(coreServicesFactory, lastFmServicesFactory, playerServicesFactory);
             })
             .then(function createServicesSuccess()
             {
-                loadingIndicatorDetails.content = "Creating UI";
+                loadingIndicatorDetails.description = "Creating UI";
                 LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
                 return that._createUI(uiFactory, lastFmServicesFactory);
             })
@@ -53,7 +53,7 @@ window.ApplicationCore.PageLoader.prototype =
             })
             .then(function initialiseServicesSuccess()
             {
-                loadingIndicatorDetails.content = "Almost everything loaded";
+                loadingIndicatorDetails.description = "Almost everything loaded";
                 LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
                 return that._postInitialise(uiFactory);
             })
@@ -80,7 +80,7 @@ window.ApplicationCore.PageLoader.prototype =
             .catch(function(error)
             {
                 loadingIndicatorDetails.title = "Error occurs while loading page.";
-                loadingIndicatorDetails.content = error;
+                loadingIndicatorDetails.description = error;
                 LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
                 Logger.getInstance().error("[Init] Page initialisation error: "+error);
             });
