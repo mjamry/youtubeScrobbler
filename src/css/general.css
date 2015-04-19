@@ -875,6 +875,7 @@ body
     top:70px;
     bottom:0;
     left:0;
+    z-index:1;
 }
 
 .menu-item-container
