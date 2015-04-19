@@ -54,16 +54,16 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         }
     },
 
-    _swapArtistNameAndTitle: function(that)
+    _swapArtistNameAndTitle: function()
     {
-        that.mediaDetails = that._retrieveMediaDetails();
-        var title = that.mediaDetails.title;
-        that.mediaDetails.title = that.mediaDetails.artist.name;
-        that.mediaDetails.artist.name = title;
-        that.updateView();
+        this.mediaDetails = this._retrieveMediaDetails();
+        var title = this.mediaDetails.title;
+        this.mediaDetails.title = this.mediaDetails.artist.name;
+        this.mediaDetails.artist.name = title;
+        this.updateView();
     },
 
-    _savePlaylistItemDetails: function(that)
+    _savePlaylistItemDetails: function()
     {
         var undoCallback = function(that, index)
         {
@@ -74,11 +74,11 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
             };
         };
 
-        that.mediaDetails = that._retrieveMediaDetails();
-        UserNotifier.getInstance().info("Details saved for '"+that.mediaDetails.artist.name+" - "+that.mediaDetails.title+"'", undoCallback(this, this.index));
-        Logger.getInstance().info("[Editor] Details saved for '"+that.mediaDetails.artist.name+" - "+that.mediaDetails.title+"'");
-        that.playlistProvider.updateItem(that.index, that.mediaDetails);
-        that._hide();
+        this.mediaDetails = this._retrieveMediaDetails();
+        UserNotifier.getInstance().info("Details saved for '"+this.mediaDetails.artist.name+" - "+this.mediaDetails.title+"'", undoCallback(this, this.index));
+        Logger.getInstance().info("[Editor] Details saved for '"+this.mediaDetails.artist.name+" - "+this.mediaDetails.title+"'");
+        this.playlistProvider.updateItem(this.index, this.mediaDetails);
+        this._hide();
     },
 
     _validateEnteredData: function()
@@ -166,21 +166,21 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         this.view.find(this.config.SwapButton).click($.proxy(function swapItemDetails(e)
             {
                 e.preventDefault();
-                this._swapArtistNameAndTitle(this);
+                this._swapArtistNameAndTitle();
             },
             this));
 
         this.view.find(this.config.SaveButton).click($.proxy(function saveEditedItem(e)
             {
                 e.preventDefault();
-                this._savePlaylistItemDetails(this);
+                this._savePlaylistItemDetails();
             },
             this));
 
         this.view.find(this.config.CheckButton).click($.proxy(function(e)
             {
                 e.preventDefault();
-                this._validateEnteredData().bind(this);
+                this._validateEnteredData();
             },
             this));
 
