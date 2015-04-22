@@ -45,6 +45,11 @@ window.Google.GoogleApiWrapper.prototype =
         Logger.getInstance().warning(this.LOG_ERROR_MSG);
     },
 
+    _handleResponseError: function(error)
+    {
+
+    },
+
     _initialiseYoutube: function(callback)
     {
         if(!this._services[window.Google.ServiceNames.Youtube].isReady)
@@ -75,6 +80,23 @@ window.Google.GoogleApiWrapper.prototype =
         }
     },
 
+    _obtainSessionToken: function(requestOptions, callback)
+    {
+        if(this._services[window.Google.ServiceNames.Auth].isReady)
+        {
+            var options = $.extend(
+                {
+                    client_id: window.Google.ApiKeys.CLIENT_ID,
+                    response_type: "token",
+                    scope: [window.Google.AuthApi.SCOPE_PROFILE, window.Google.YoutubeApi.SCOPE]
+                },
+                requestOptions
+            );
+
+            gapi.auth.authorize(options, callback);
+        }
+    },
+
     initialise: function()
     {
         gapi.client.setApiKey(window.Google.ApiKeys.API_KEY);
@@ -100,23 +122,6 @@ window.Google.GoogleApiWrapper.prototype =
                 callback: callback,
                 isReady: false
             };
-    },
-
-    _obtainSessionToken: function(requestOptions, callback)
-    {
-        if(this._services[window.Google.ServiceNames.Auth].isReady)
-        {
-            var options = $.extend(
-                {
-                    client_id: window.Google.ApiKeys.CLIENT_ID,
-                    response_type: "token",
-                    scope: [window.Google.AuthApi.SCOPE_PROFILE, window.Google.YoutubeApi.SCOPE]
-                },
-                requestOptions
-            );
-
-            gapi.auth.authorize(options, callback);
-        }
     },
 
     authorize: function(callback)
@@ -206,40 +211,33 @@ window.Google.GoogleApiWrapper.prototype =
 
     getSearchResults: function(requestOptions, callback)
     {
-        //if(this._services[window.Google.ServiceNames.Youtube].isReady)
-        //{
-            var options = $.extend(
-                {
-                    //TODO add country code here
-                    part: "snippet",
-                    fields: "items(id,snippet),nextPageToken,pageInfo",
-                    maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_SEARCH_RESULTS_PER_REQUEST
-                },
-                requestOptions);
+        var options = $.extend(
+            {
+                part: "snippet",
+                fields: "items(id,snippet),nextPageToken,pageInfo",
+                maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_SEARCH_RESULTS_PER_REQUEST
+            },
+            requestOptions);
 
-            return new Promise(function(resolve, reject)
+        return new Promise(function(resolve, reject)
+            {
+                try
                 {
-                    try
-                    {
-                        var request = gapi.client.youtube.search.list(options);
-                    }
-                    catch(e)
-                    {
-                        reject(this.LOG_ERROR_MSG);
-                    }
+                    var request = gapi.client.youtube.search.list(options);
                     request.execute(this._handleGoogleResponse(resolve, reject));
                 }
-                .bind(this)
-            )
-            .then(callback)
-            .catch(function(err)
-            {
-                alert("error");
-            });
-        //}
-        //else
-        //{
-        //    this._handleServiceError();
-        //}
+                catch(e)
+                {
+                    reject(this.LOG_ERROR_MSG);
+                }
+
+            }
+            .bind(this)
+        )
+        .then(callback)
+        .catch(function(error)
+        {
+            this._handleResponseError(error)
+        });
     }
 };
