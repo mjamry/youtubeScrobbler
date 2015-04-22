@@ -12,6 +12,33 @@ window.Google.GoogleApiWrapper = function()
 
 window.Google.GoogleApiWrapper.prototype =
 {
+    _handleGoogleResponse: function (resolve, reject)
+    {
+        var that = this;
+        return function onGoogleResponded(response)
+        {
+            if (that._checkForErrors(response))
+            {
+                resolve(response);
+            }
+            else
+            {
+                reject(response);
+            }
+        };
+    },
+
+    _checkForErrors: function (response)
+    {
+        if ("error" in response)
+        {
+            Logger.getInstance().warning("[Google] Error: " + response.error.message + " (" + response.error.code + ")");
+            return false;
+        }
+
+        return true;
+    },
+
     _handleServiceError: function()
     {
         UserNotifier.getInstance().error(this.USER_ERROR_MSG);
@@ -57,7 +84,7 @@ window.Google.GoogleApiWrapper.prototype =
             switch(service)
             {
                 case window.Google.ServiceNames.Youtube:
-                    this._initialiseYoutube(this._services[service].callback);
+                   // this._initialiseYoutube(this._services[service].callback);
                     break;
                 case window.Google.ServiceNames.Auth:
                     this._initialisesAuth(this._services[service].callback);
@@ -179,8 +206,8 @@ window.Google.GoogleApiWrapper.prototype =
 
     getSearchResults: function(requestOptions, callback)
     {
-        if(this._services[window.Google.ServiceNames.Youtube].isReady)
-        {
+        //if(this._services[window.Google.ServiceNames.Youtube].isReady)
+        //{
             var options = $.extend(
                 {
                     //TODO add country code here
@@ -189,12 +216,30 @@ window.Google.GoogleApiWrapper.prototype =
                     maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_SEARCH_RESULTS_PER_REQUEST
                 },
                 requestOptions);
-            var request = gapi.client.youtube.search.list(options);
-            request.execute(callback);
-        }
-        else
-        {
-            this._handleServiceError();
-        }
+
+            return new Promise(function(resolve, reject)
+                {
+                    try
+                    {
+                        var request = gapi.client.youtube.search.list(options);
+                    }
+                    catch(e)
+                    {
+                        reject(this.LOG_ERROR_MSG);
+                    }
+                    request.execute(this._handleGoogleResponse(resolve, reject));
+                }
+                .bind(this)
+            )
+            .then(callback)
+            .catch(function(err)
+            {
+                alert("error");
+            });
+        //}
+        //else
+        //{
+        //    this._handleServiceError();
+        //}
     }
 };
