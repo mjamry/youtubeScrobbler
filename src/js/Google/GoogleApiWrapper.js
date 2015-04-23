@@ -190,23 +190,33 @@ window.Google.GoogleApiWrapper.prototype =
 
     getVideoDetails: function(requestOptions, callback)
     {
-        if(this._services[window.Google.ServiceNames.Youtube].isReady)
-        {
-            var options = $.extend(
-                {
-                    part: 'contentDetails, snippet',
-                    fields: 'items(contentDetails,id,snippet)'
-                },
-                requestOptions
-            );
+        var that = this;
+        var options = $.extend(
+            {
+                part: 'contentDetails, snippet',
+                fields: 'items(contentDetails,id,snippet)'
+            },
+            requestOptions
+        );
 
-            var request = gapi.client.youtube.videos.list(options);
-            request.execute(callback);
-        }
-        else
+        return new Promise(function(resolve, reject)
+            {
+                try
+                {
+                    var request = gapi.client.youtube.videos.list(options);
+                    request.execute(that._handleGoogleResponse(resolve, reject));
+                }
+                catch(e)
+                {
+                    reject({message: that.LOG_ERROR_MSG});
+                }
+            }
+        )
+        .then(callback)
+        .catch(function(error)
         {
-            this._handleServiceError();
-        }
+            that._handleResponseError(error);
+        });
     },
 
     getSearchResults: function(requestOptions, callback)
