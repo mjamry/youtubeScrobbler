@@ -50,6 +50,29 @@ window.Google.GoogleApiWrapper.prototype =
         Logger.getInstance().warning(error.message);
     },
 
+    _requestData: function(dataSource, options, callback)
+    {
+        var that = this;
+        return new Promise(function(resolve, reject)
+            {
+                try
+                {
+                    var request = dataSource(options);
+                    request.execute(that._handleGoogleResponse(resolve, reject));
+                }
+                catch(e)
+                {
+                    reject({message: that.LOG_ERROR_MSG});
+                }
+            }
+        )
+            .then(callback)
+            .catch(function(error)
+            {
+                that._handleResponseError(error)
+            });
+    },
+
     _initialiseYoutube: function(callback)
     {
         if(!this._services[window.Google.ServiceNames.Youtube].isReady)
@@ -138,12 +161,7 @@ window.Google.GoogleApiWrapper.prototype =
 
     getUserInfo: function(callback)
     {
-        //this._requestData(gapi.client.oauth2.userinfo.get, null, callback);
-        if(this._services[window.Google.ServiceNames.Auth].isReady)
-        {
-            var request = gapi.client.oauth2.userinfo.get();
-            request.execute(callback);
-        }
+        this._requestData(gapi.client.oauth2.userinfo.get, null, callback);
     },
 
     getUserPlaylists: function(callback)
@@ -197,28 +215,5 @@ window.Google.GoogleApiWrapper.prototype =
             requestOptions);
 
         return this._requestData(gapi.client.youtube.search.list, options, callback);
-    },
-
-    _requestData: function(dataSource, options, callback)
-    {
-        var that = this;
-        return new Promise(function(resolve, reject)
-            {
-                try
-                {
-                    var request = dataSource(options);
-                    request.execute(that._handleGoogleResponse(resolve, reject));
-                }
-                catch(e)
-                {
-                    reject({message: that.LOG_ERROR_MSG});
-                }
-            }
-        )
-        .then(callback)
-        .catch(function(error)
-        {
-            that._handleResponseError(error)
-        });
     }
 };
