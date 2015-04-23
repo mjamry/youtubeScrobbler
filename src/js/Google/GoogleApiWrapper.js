@@ -41,13 +41,13 @@ window.Google.GoogleApiWrapper.prototype =
 
     _handleServiceError: function()
     {
-        UserNotifier.getInstance().error(this.USER_ERROR_MSG);
-        Logger.getInstance().warning(this.LOG_ERROR_MSG);
+
     },
 
     _handleResponseError: function(error)
     {
-
+        UserNotifier.getInstance().error(this.USER_ERROR_MSG);
+        Logger.getInstance().warning(error.message);
     },
 
     _initialiseYoutube: function(callback)
@@ -106,7 +106,7 @@ window.Google.GoogleApiWrapper.prototype =
             switch(service)
             {
                 case window.Google.ServiceNames.Youtube:
-                   // this._initialiseYoutube(this._services[service].callback);
+                    this._initialiseYoutube(this._services[service].callback);
                     break;
                 case window.Google.ServiceNames.Auth:
                     this._initialisesAuth(this._services[service].callback);
@@ -211,6 +211,7 @@ window.Google.GoogleApiWrapper.prototype =
 
     getSearchResults: function(requestOptions, callback)
     {
+        var that = this;
         var options = $.extend(
             {
                 part: "snippet",
@@ -224,20 +225,18 @@ window.Google.GoogleApiWrapper.prototype =
                 try
                 {
                     var request = gapi.client.youtube.search.list(options);
-                    request.execute(this._handleGoogleResponse(resolve, reject));
+                    request.execute(that._handleGoogleResponse(resolve, reject));
                 }
                 catch(e)
                 {
-                    reject(this.LOG_ERROR_MSG);
+                    reject({message: that.LOG_ERROR_MSG});
                 }
-
             }
-            .bind(this)
         )
         .then(callback)
         .catch(function(error)
         {
-            this._handleResponseError(error)
+            that._handleResponseError(error)
         });
     }
 };
