@@ -230,11 +230,17 @@ window.Google.GoogleApiWrapper.prototype =
             },
             requestOptions);
 
+        return that._requestData(gapi.client.youtube.search.list, options, callback);
+    },
+
+    _requestData: function(dataSource, options, callback)
+    {
+        var that = this;
         return new Promise(function(resolve, reject)
             {
                 try
                 {
-                    var request = gapi.client.youtube.search.list(options);
+                    var request = dataSource(options);
                     request.execute(that._handleGoogleResponse(resolve, reject));
                 }
                 catch(e)
@@ -243,10 +249,10 @@ window.Google.GoogleApiWrapper.prototype =
                 }
             }
         )
-        .then(callback)
-        .catch(function(error)
-        {
-            that._handleResponseError(error)
-        });
+            .then(callback)
+            .catch(function(error)
+            {
+                that._handleResponseError(error)
+            });
     }
 };
