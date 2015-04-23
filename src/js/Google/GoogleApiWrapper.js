@@ -138,6 +138,7 @@ window.Google.GoogleApiWrapper.prototype =
 
     getUserInfo: function(callback)
     {
+        //this._requestData(gapi.client.oauth2.userinfo.get, null, callback);
         if(this._services[window.Google.ServiceNames.Auth].isReady)
         {
             var request = gapi.client.oauth2.userinfo.get();
@@ -147,50 +148,33 @@ window.Google.GoogleApiWrapper.prototype =
 
     getUserPlaylists: function(callback)
     {
-        if(this._services[window.Google.ServiceNames.Youtube].isReady)
-        {
-            var options =
-                {
-                    part: 'snippet',
-                    fields: 'items,nextPageToken,pageInfo',
-                    mine: true,
-                    maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_ITEMS_PER_REQUEST
-                };
+        var options =
+            {
+                part: 'snippet',
+                fields: 'items,nextPageToken,pageInfo',
+                mine: true,
+                maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_ITEMS_PER_REQUEST
+            };
 
-            var request = gapi.client.youtube.playlists.list(options);
-            request.execute(callback);
-        }
-        else
-        {
-            this._handleServiceError();
-        }
+        this._requestData(gapi.client.youtube.playlists.list, options, callback);
     },
 
     getPlaylistDetails: function(requestOptions, callback)
     {
-        if(this._services[window.Google.ServiceNames.Youtube].isReady)
-        {
-            var options = $.extend(
-                {
-                    part: 'contentDetails',
-                    fields: 'items/contentDetails,nextPageToken,pageInfo',
-                    maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_ITEMS_PER_REQUEST
-                },
-                requestOptions
-            );
+        var options = $.extend(
+            {
+                part: 'contentDetails',
+                fields: 'items/contentDetails,nextPageToken,pageInfo',
+                maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_ITEMS_PER_REQUEST
+            },
+            requestOptions
+        );
 
-            var request = gapi.client.youtube.playlistItems.list(options);
-            request.execute(callback);
-        }
-        else
-        {
-            this._handleServiceError();
-        }
+        this._requestData(gapi.client.youtube.playlistItems.list, options, callback);
     },
 
     getVideoDetails: function(requestOptions, callback)
     {
-        var that = this;
         var options = $.extend(
             {
                 part: 'contentDetails, snippet',
@@ -199,29 +183,11 @@ window.Google.GoogleApiWrapper.prototype =
             requestOptions
         );
 
-        return new Promise(function(resolve, reject)
-            {
-                try
-                {
-                    var request = gapi.client.youtube.videos.list(options);
-                    request.execute(that._handleGoogleResponse(resolve, reject));
-                }
-                catch(e)
-                {
-                    reject({message: that.LOG_ERROR_MSG});
-                }
-            }
-        )
-        .then(callback)
-        .catch(function(error)
-        {
-            that._handleResponseError(error);
-        });
+        this._requestData(gapi.client.youtube.videos.list, options, callback);
     },
 
     getSearchResults: function(requestOptions, callback)
     {
-        var that = this;
         var options = $.extend(
             {
                 part: "snippet",
@@ -230,7 +196,7 @@ window.Google.GoogleApiWrapper.prototype =
             },
             requestOptions);
 
-        return that._requestData(gapi.client.youtube.search.list, options, callback);
+        return this._requestData(gapi.client.youtube.search.list, options, callback);
     },
 
     _requestData: function(dataSource, options, callback)
@@ -249,10 +215,10 @@ window.Google.GoogleApiWrapper.prototype =
                 }
             }
         )
-            .then(callback)
-            .catch(function(error)
-            {
-                that._handleResponseError(error)
-            });
+        .then(callback)
+        .catch(function(error)
+        {
+            that._handleResponseError(error)
+        });
     }
 };
