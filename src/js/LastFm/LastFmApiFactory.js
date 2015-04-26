@@ -11,7 +11,7 @@ window.LastFm.LastFmApiFactory.prototype =
 {
     _getDataProvider: function()
     {
-        if(this.dataProvider == null)
+        if(this.dataProvider === null)
         {
             var cache = new LastFMCache();
 

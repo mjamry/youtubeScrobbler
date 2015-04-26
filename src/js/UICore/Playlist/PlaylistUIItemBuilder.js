@@ -85,7 +85,7 @@ window.UI.PlaylistUIItemBuilder.prototype =
             {
                 e.preventDefault();
                 contextmenu.show({top: e.pageY, left: e.pageX});
-            }
+            };
         };
 
         this._item.on("contextmenu", contextMenuHandler(menu));

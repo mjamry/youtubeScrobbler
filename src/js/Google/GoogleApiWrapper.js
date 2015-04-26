@@ -64,7 +64,7 @@ window.Google.GoogleApiWrapper.prototype =
         .then(callback)
         .catch(function(error)
         {
-            that._handleResponseError(error)
+            that._handleResponseError(error);
         });
     },
 
