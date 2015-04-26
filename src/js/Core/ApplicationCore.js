@@ -26,7 +26,7 @@ window.ApplicationCore.AppCore.prototype =
         this.searchService = coreServicesFactory.createSearchService(this.googleApiWrapper);
         this.playlistFlowController = playerServicesFactory.createPlaylistFlowController(this.playlistService);
         this.playbackDetailsService = coreServicesFactory.createPlaybackDetailsService(this.player);
-        this.sessionService = coreServicesFactory.createSessionService(this.googleApiWrapper);
+        this.sessionService = coreServicesFactory.createSessionService(this.googleApiWrapper, lastFmServicesFactory);
         this.sessionService.initialise();
         this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistFlowController);
         this.playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.playlistDetailsProvider, lastFmServicesFactory.createTrackLoveStateModifier());
@@ -49,7 +49,6 @@ window.ApplicationCore.AppCore.prototype =
         this.playlistControlViewController = uiFactory.createPlaylistControlViewController(this.playlistService, this.playlistFlowController);
         this.mediaLoadViewController = uiFactory.createMediaLoadViewController(this.playlistLoaderService, this.searchService);
         this.playlistItemEditorViewController = uiFactory.createPlaylistItemEditorViewController(this.playlistService, lastFmServicesFactory.createTrackInformationProvider());
-        this.playlistItemEditorListViewController = uiFactory.createPlaylistEditorListViewController(this.playlistService);
         this.colorSchemeControlViewController = uiFactory.createColorSchemeControlViewController();
         this.userNotificationViewController = uiFactory.createUserNotificationViewController();
         this.progressbarViewController = uiFactory.createProgressbarViewController();
@@ -70,7 +69,6 @@ window.ApplicationCore.AppCore.prototype =
         this.playlistControlViewController.initialise();
         this.mediaLoadViewController.initialise();
         this.playlistItemEditorViewController.initialise();
-        this.playlistItemEditorListViewController.initialise();
         this.colorSchemeControlViewController.initialise();
         this.progressbarViewController.initialise();
         this.welcomeScreenController.initialise();

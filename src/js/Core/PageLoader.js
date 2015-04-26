@@ -12,22 +12,35 @@ window.ApplicationCore.PageLoader.prototype =
     {
         var startTime = new Date().getTime();
         var that = this;
+        var loadingIndicatorDetails =
+        {
+            title: "Please wait, loading...",
+            description: "",
+            fullscreen: true
+        };
 
         this._preInitialise(coreServicesFactory, uiFactory)
             .then(function preInitSuccess()
             {
-                LoadingIndicatorService.getInstance().show("Please wait, page is being loaded.", true);
-                LoadingIndicatorService.getInstance().updateContent("Loading page content");
+                return that._loadPage(window.Common.ControlsSource);
+            })
+            .then(function controlsTemplateLoadingSuccess()
+            {
+                LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
+                loadingIndicatorDetails.description = "Loading page content";
+                LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
                 return that._loadPagesContent(pagesConfiguration);
             })
             .then(function loadPagesContentSuccess()
             {
-                LoadingIndicatorService.getInstance().updateContent("Creating page services");
+                loadingIndicatorDetails.description = "Creating page services";
+                LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
                 return that._createServices(coreServicesFactory, lastFmServicesFactory, playerServicesFactory);
             })
             .then(function createServicesSuccess()
             {
-                LoadingIndicatorService.getInstance().updateContent("Creating UI");
+                loadingIndicatorDetails.description = "Creating UI";
+                LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
                 return that._createUI(uiFactory, lastFmServicesFactory);
             })
             .then(function createUISuccess()
@@ -40,7 +53,8 @@ window.ApplicationCore.PageLoader.prototype =
             })
             .then(function initialiseServicesSuccess()
             {
-                LoadingIndicatorService.getInstance().updateContent("Almost everything loaded");
+                loadingIndicatorDetails.description = "Almost everything loaded";
+                LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
                 return that._postInitialise(uiFactory);
             })
             .then(function postInitialiseSuccess()
@@ -65,7 +79,9 @@ window.ApplicationCore.PageLoader.prototype =
             })
             .catch(function(error)
             {
-                LoadingIndicatorService.getInstance().show("Error: <br>"+error, true);
+                loadingIndicatorDetails.title = "Error occurs while loading page.";
+                loadingIndicatorDetails.description = error;
+                LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
                 Logger.getInstance().error("[Init] Page initialisation error: "+error);
             });
     },
@@ -131,9 +147,10 @@ window.ApplicationCore.PageLoader.prototype =
 
             //create loading indicator service
             new LoadingIndicatorService();
-            LoadingIndicatorService.setInstance(new window.Services.LoadingIndicatorServiceImpl());
-            var loadingIndicatorView = new window.UI.LoadingIndicatorViewController(window.UI.LoadingIndicatorConfiguration);
-            loadingIndicatorView.initialise();
+            LoadingIndicatorService.setInstance(new window.Services.LoadingIndicatorServiceImpl(window.UI.LoadingIndicatorConfiguration));
+
+            new ModalService();
+            ModalService.setInstance(new window.Services.ModalServiceImpl(uiFactory.createModalViewController()));
 
             that._getApiKeys();
 

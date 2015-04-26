@@ -12,40 +12,108 @@ window.Google.GoogleApiWrapper = function()
 
 window.Google.GoogleApiWrapper.prototype =
 {
-    _handleServiceError: function()
+    _handleGoogleResponse: function (resolve, reject)
+    {
+        var that = this;
+        return function onGoogleResponded(response)
+        {
+            if (that._checkForErrors(response))
+            {
+                resolve(response);
+            }
+            else
+            {
+                reject(response);
+            }
+        };
+    },
+
+    _checkForErrors: function (response)
+    {
+        if ("error" in response)
+        {
+            Logger.getInstance().warning("[Google] Error: " + response.error.message + " (" + response.error.code + ")");
+            return false;
+        }
+
+        return true;
+    },
+
+    _handleResponseError: function(error)
     {
         UserNotifier.getInstance().error(this.USER_ERROR_MSG);
-        Logger.getInstance().warning(this.LOG_ERROR_MSG);
+        Logger.getInstance().warning(error.message);
+    },
+
+    _requestData: function(dataSource, options, callback)
+    {
+        var that = this;
+        return new Promise(function(resolve, reject)
+            {
+                try
+                {
+                    var request = dataSource(options);
+                    request.execute(that._handleGoogleResponse(resolve, reject));
+                }
+                catch(e)
+                {
+                    reject({message: that.LOG_ERROR_MSG});
+                }
+            }
+        )
+        .then(callback)
+        .catch(function(error)
+        {
+            that._handleResponseError(error);
+        });
     },
 
     _initialiseYoutube: function(callback)
     {
-        if(!this._services[window.Google.ServiceNames.Youtube].isReady)
+        var onServiceInitialised = function ()
         {
-            var onServiceInitialised = function ()
-            {
-                Logger.getInstance().info("[Google Api] Youtube service loaded.");
-                this._services[window.Google.ServiceNames.Youtube].isReady = true;
-                callback();
-            }.bind(this);
+            Logger.getInstance().info("[Google Api] Youtube service loaded.");
+            callback();
+        };
 
-            gapi.client.load(window.Google.YoutubeApi.NAME, window.Google.YoutubeApi.VERSION, onServiceInitialised);
-        }
+        gapi.client.load(window.Google.YoutubeApi.NAME, window.Google.YoutubeApi.VERSION, onServiceInitialised);
     },
 
     _initialisesAuth: function(callback)
     {
-        if(!this._services[window.Google.ServiceNames.Auth].isReady)
+        var onServiceInitialised = function ()
         {
-            var onServiceInitialised = function ()
-            {
-                Logger.getInstance().info("[Google Api] OAuth2 service loaded.");
-                this._services[window.Google.ServiceNames.Auth].isReady = true;
-                callback();
-            }.bind(this);
+            Logger.getInstance().info("[Google Api] OAuth2 service loaded.");
+            callback();
+        };
 
-            gapi.client.load(window.Google.AuthApi.NAME, window.Google.AuthApi.VERSION, onServiceInitialised);
-        }
+        gapi.client.load(window.Google.AuthApi.NAME, window.Google.AuthApi.VERSION, onServiceInitialised);
+    },
+
+    _obtainSessionToken: function(requestOptions)
+    {
+        var that = this;
+        var options = $.extend(
+            {
+                client_id: window.Google.ApiKeys.CLIENT_ID,
+                response_type: "token",
+                scope: [window.Google.AuthApi.SCOPE_PROFILE, window.Google.YoutubeApi.SCOPE]
+            },
+            requestOptions
+        );
+
+        return new Promise(function(resolve, reject)
+        {
+            try
+            {
+                gapi.auth.authorize(options, that._handleGoogleResponse(resolve, reject));
+            }
+            catch(e)
+            {
+                Logger.getInstance().warning(that.LOG_ERROR_MSG);
+                reject();
+            }
+        });
     },
 
     initialise: function()
@@ -70,131 +138,77 @@ window.Google.GoogleApiWrapper.prototype =
     {
         this._services[serviceName] =
             {
-                callback: callback,
-                isReady: false
+                callback: callback
             };
     },
 
-    _obtainSessionToken: function(requestOptions, callback)
-    {
-        if(this._services[window.Google.ServiceNames.Auth].isReady)
-        {
-            var options = $.extend(
-                {
-                    client_id: window.Google.ApiKeys.CLIENT_ID,
-                    response_type: "token",
-                    scope: [window.Google.AuthApi.SCOPE_PROFILE, window.Google.YoutubeApi.SCOPE]
-                },
-                requestOptions
-            );
-
-            gapi.auth.authorize(options, callback);
-        }
-    },
-
-    authorize: function(callback)
+    authorize: function()
     {
         //show sign on dialog
-        this._obtainSessionToken({immediate:false}, callback);
+        return this._obtainSessionToken({immediate:false});
     },
 
-    refreshSessionToken: function(callback)
+    refreshSessionToken: function()
     {
         //without sign on dialog
-        this._obtainSessionToken({immediate:true}, callback);
+        return this._obtainSessionToken({immediate:true});
     },
 
     getUserInfo: function(callback)
     {
-        if(this._services[window.Google.ServiceNames.Auth].isReady)
-        {
-            var request = gapi.client.oauth2.userinfo.get();
-            request.execute(callback);
-        }
+        return this._requestData(gapi.client.oauth2.userinfo.get, null, callback);
     },
 
     getUserPlaylists: function(callback)
     {
-        if(this._services[window.Google.ServiceNames.Youtube].isReady)
-        {
-            var options =
-                {
-                    part: 'snippet',
-                    fields: 'items,nextPageToken,pageInfo',
-                    mine: true,
-                    maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_ITEMS_PER_REQUEST
-                };
+        var options =
+            {
+                part: 'snippet',
+                fields: 'items,nextPageToken,pageInfo',
+                mine: true,
+                maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_ITEMS_PER_REQUEST
+            };
 
-            var request = gapi.client.youtube.playlists.list(options);
-            request.execute(callback);
-        }
-        else
-        {
-            this._handleServiceError();
-        }
+        this._requestData(gapi.client.youtube.playlists.list, options, callback);
     },
 
     getPlaylistDetails: function(requestOptions, callback)
     {
-        if(this._services[window.Google.ServiceNames.Youtube].isReady)
-        {
-            var options = $.extend(
-                {
-                    part: 'contentDetails',
-                    fields: 'items/contentDetails,nextPageToken,pageInfo',
-                    maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_ITEMS_PER_REQUEST
-                },
-                requestOptions
-            );
+        var options = $.extend(
+            {
+                part: 'contentDetails',
+                fields: 'items/contentDetails,nextPageToken,pageInfo',
+                maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_ITEMS_PER_REQUEST
+            },
+            requestOptions
+        );
 
-            var request = gapi.client.youtube.playlistItems.list(options);
-            request.execute(callback);
-        }
-        else
-        {
-            this._handleServiceError();
-        }
+        this._requestData(gapi.client.youtube.playlistItems.list, options, callback);
     },
 
     getVideoDetails: function(requestOptions, callback)
     {
-        if(this._services[window.Google.ServiceNames.Youtube].isReady)
-        {
-            var options = $.extend(
-                {
-                    part: 'contentDetails, snippet',
-                    fields: 'items(contentDetails,id,snippet)'
-                },
-                requestOptions
-            );
+        var options = $.extend(
+            {
+                part: 'contentDetails, snippet',
+                fields: 'items(contentDetails,id,snippet)'
+            },
+            requestOptions
+        );
 
-            var request = gapi.client.youtube.videos.list(options);
-            request.execute(callback);
-        }
-        else
-        {
-            this._handleServiceError();
-        }
+        this._requestData(gapi.client.youtube.videos.list, options, callback);
     },
 
     getSearchResults: function(requestOptions, callback)
     {
-        if(this._services[window.Google.ServiceNames.Youtube].isReady)
-        {
-            var options = $.extend(
-                {
-                    //TODO add country code here
-                    part: "snippet",
-                    fields: "items(id,snippet),nextPageToken,pageInfo",
-                    maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_SEARCH_RESULTS_PER_REQUEST
-                },
-                requestOptions);
-            var request = gapi.client.youtube.search.list(options);
-            request.execute(callback);
-        }
-        else
-        {
-            this._handleServiceError();
-        }
+        var options = $.extend(
+            {
+                part: "snippet",
+                fields: "items(id,snippet),nextPageToken,pageInfo",
+                maxResults: window.Google.GoogleApiConstants.MAX_NUMBER_OF_SEARCH_RESULTS_PER_REQUEST
+            },
+            requestOptions);
+
+        return this._requestData(gapi.client.youtube.search.list, options, callback);
     }
 };

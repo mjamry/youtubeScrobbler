@@ -8,12 +8,6 @@ window.Common.PagesConfiguration =
         ContentLocation: "pages/header.html"
     },
 
-    Controls:
-    {
-        Container: "#controls-schemes",
-        ContentLocation: "pages/controls.html"
-    },
-
     WelcomeScreen:
     {
         Container: "#welcome-screen",
@@ -32,12 +26,6 @@ window.Common.PagesConfiguration =
         ContentLocation: "pages/playlistManager.html"
     },
 
-    PlaylistEditor:
-    {
-        Container: "#playlist-editor",
-        ContentLocation: "pages/playlistEditor.html"
-    },
-
     AccountManager:
     {
         Container: "#accounts",
@@ -49,4 +37,10 @@ window.Common.PagesConfiguration =
         Container: "#settings",
         ContentLocation: "pages/settings.html"
     }
+};
+
+window.Common.ControlsSource =
+{
+    Container: "#controls-schemes",
+    ContentLocation: "pages/controls.html"
 };

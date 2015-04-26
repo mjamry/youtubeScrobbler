@@ -77,6 +77,22 @@ window.UI.PlaylistUIItemBuilder.prototype =
         this._item.find(this._config.DetailsContainer).append(details);
     },
 
+    setupContextMenu: function(menu)
+    {
+        var contextMenuHandler = function (contextmenu)
+        {
+            return function onContextMenuRequested(e)
+            {
+                e.preventDefault();
+                contextmenu.show({top: e.pageY, left: e.pageX});
+            };
+        };
+
+        this._item.on("contextmenu", contextMenuHandler(menu));
+        this._item.append(menu.getBody());
+        menu.hide();
+    },
+
     //hooks up to UI events such as clock, mouse enter, mouse leave.
     hookUpToEvents: function(callbackContext, clickHandler)
     {

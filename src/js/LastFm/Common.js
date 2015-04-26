@@ -21,16 +21,6 @@ window.LastFm.LastFmConstants.prototype =
 window.LastFm.LastFmConstants.API_KEY = "";
 window.LastFm.LastFmConstants.API_SECRET = "";
 
-LastFmApiCommon =
-{
-    CACHE: new LastFMCache(),
-    DATA_PROVIDER: new LastFM({
-        apiKey: window.LastFm.LastFmConstants.API_KEY,
-        apiSecret: window.LastFm.LastFmConstants.API_SECRET,
-        cache: this.CACHE
-    })
-};
-
 window.LastFm.Errors =
 {
     2 : "Invalid service - This service does not exist",

@@ -12,5 +12,6 @@ window.UI.UIControllersFactoryConfig =
     WelcomeScreenView: "#welcome-screen",
     MenuView: "#menu",
     PlaylistEditorListView: "#playlist-editor-list-container",
-    AccountsView: "#accounts"
+    AccountsView: "#accounts",
+    ModalView: "#modals-container"
 };

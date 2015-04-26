@@ -8,22 +8,22 @@ window.UI.UIControllersFactory = function(config)
 
 window.UI.UIControllersFactory.prototype =
 {
-    createUICore: function()
+    createUICore: function ()
     {
         return new window.UI.UICore();
     },
 
-    createLoggerViewController: function()
+    createLoggerViewController: function ()
     {
         return new window.UI.LoggerViewController($(this.config.LoggerView), window.UI.LoggerUIConfig);
     },
 
-    createTestReportViewController: function()
+    createTestReportViewController: function ()
     {
         return new window.UI.TestReportsViewController(window.UI.TestReportUIConfig);
     },
 
-    createPlaylistViewController: function(playlistService, playbackControlService, playlistFlowController)
+    createPlaylistViewController: function (playlistService, playbackControlService, playlistFlowController)
     {
         return new window.UI.PlaylistViewController(
             playlistService,
@@ -34,7 +34,7 @@ window.UI.UIControllersFactory.prototype =
         );
     },
 
-    createPlaybackDetailsViewController: function(playbackDetailsProvider, playlistDetailsProvider)
+    createPlaybackDetailsViewController: function (playbackDetailsProvider, playlistDetailsProvider)
     {
         return new window.UI.PlaybackDetailsViewController(
             playbackDetailsProvider,
@@ -44,7 +44,7 @@ window.UI.UIControllersFactory.prototype =
         );
     },
 
-    createPlaybackControlViewController: function(player, playbackControlService, loveStateModifier, playlistService)
+    createPlaybackControlViewController: function (player, playbackControlService, loveStateModifier, playlistService)
     {
         var volumeControlService = new window.Player.VolumeControlService(player);
 
@@ -63,7 +63,7 @@ window.UI.UIControllersFactory.prototype =
         );
     },
 
-    createPlaylistControlViewController: function(playlistService, playlistFlowController)
+    createPlaylistControlViewController: function (playlistService, playlistFlowController)
     {
         return new window.UI.PlaylistControlViewController(
             playlistService,
@@ -73,12 +73,12 @@ window.UI.UIControllersFactory.prototype =
         );
     },
 
-    createSessionViewController: function(sessionHandler)
+    createSessionViewController: function (sessionHandler)
     {
         return new window.UI.SessionViewController(sessionHandler, window.UI.SessionUIConfiguration);
     },
 
-    createMediaLoadViewController: function(playlistLoaderService, searchService)
+    createMediaLoadViewController: function (playlistLoaderService, searchService)
     {
         var searchResultValidator = new window.Services.SearchResultNameValidator(new window.Services.DefaultTrackNamePolicy(), new window.Services.DefaultPlaylistNamePolicy());
         var searchResultParser = new window.Services.SearchResultParser(searchResultValidator);
@@ -91,53 +91,63 @@ window.UI.UIControllersFactory.prototype =
         );
     },
 
-    createPlaylistItemEditorViewController: function(playlistProvider, trackDetailsProvider)
+    createPlaylistItemEditorViewController: function (playlistProvider, trackDetailsProvider)
     {
         return new window.UI.PlaylistItemDetailsEditorViewController(trackDetailsProvider, playlistProvider, window.UI.PlaylistItemDetailsEditorConfig);
     },
 
-    createPlaylistEditorListViewController: function(playlistProvider)
+    createPlaylistEditorListViewController: function (playlistProvider)
     {
         return new window.UI.PlaylistEditorListViewController($(this.config.PlaylistEditorListView), playlistProvider, window.UI.PlaylistEditorItemConfiguration);
     },
 
-    createColorSchemeControlViewController: function()
+    createColorSchemeControlViewController: function ()
     {
         return new window.UI.ColorSchemeControlViewController(window.UI.ColorSchemeControlConfig);
     },
 
-    createUserNotificationViewController: function()
+    createUserNotificationViewController: function ()
     {
         return new window.UI.UserNotifierViewController($(this.config.UserNotificationView), window.UI.UserNotifierConfiguration);
     },
 
-    createProgressbarViewController: function()
+    createProgressbarViewController: function ()
     {
         return new window.UI.ProgressbarViewController(window.UI.ProgressbarViewControllerConfiguration, $(this.config.ProgressbarView));
     },
 
-    createWelcomeScreenController: function(welcomeScreenService)
+    createWelcomeScreenController: function (welcomeScreenService)
     {
         return new window.UI.WelcomeScreenController(window.UI.WelcomeScreenConfiguration, $(this.config.WelcomeScreenView), welcomeScreenService);
     },
 
-    createAppDetailsViewController: function()
+    createAppDetailsViewController: function ()
     {
         return new window.UI.AppDetailsViewController(window.UI.AppDetailsConfig);
     },
 
-    createMenuViewController: function()
+    createMenuViewController: function ()
     {
         return new window.UI.MenuController($(this.config.MenuView), window.UI.MenuControllerConfig, new window.UI.PageDisplayCoordinator("#player"));
     },
 
-    createAccountsViewController: function(sessionService)
+    createAccountsViewController: function (sessionService)
     {
         return new window.UI.AccountsViewController($(this.config.AccountsView), window.Accounts.AccountsNames, sessionService, window.UI.AccountsViewControllerConfiguration);
     },
 
-    createScrobblingControlViewController: function(scrobbler)
+    createScrobblingControlViewController: function (scrobbler)
     {
         return new window.UI.ScrobblingControlViewController($('#scrobbler-settings'), scrobbler, window.UI.ScrobblingControlConfiguration);
+    },
+
+    createModalViewController: function ()
+    {
+        return new window.UI.ModalViewController($(this.config.ModalView), window.UI.ModalConfiguration);
+    },
+
+    createLoadingIndicatorViewController: function()
+    {
+        return new window.UI.LoadingIndicatorViewController(window.UI.LoadingIndicatorConfiguration);
     }
 };

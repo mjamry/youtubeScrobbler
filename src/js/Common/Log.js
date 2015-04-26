@@ -26,19 +26,23 @@ Logger.setInstance = function(instance)
     Logger._instance = instance;
 };
 
-//TODO move it to common namespace
 //simple implementation of Logger
 //it just write to console window.
 LoggerImpl = function()
 {
     this._eventBroker = null;
+    this.referenceTime = new Date();
 };
 
 LoggerImpl.prototype =
 {
     _getFormatedTimestamp: function()
     {
-        var date = new Date();
+        //calculate elapsed time and format is as a date
+        var timeFromAppInitialisation = new Date() - this.referenceTime;
+        var date = new Date(0, 0, 0, 0, 0, 0);
+        date.setMilliseconds(timeFromAppInitialisation);
+
         var ms = date.getMilliseconds();
         var s = date.getSeconds();
 

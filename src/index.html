@@ -36,14 +36,7 @@
 
 </head>
 <body class="pure-skin-sc">
-<div id="loading-indicator">
-    <div class="loading-indicator-overlay"></div>
-    <div class="loading-indicator-content">
-        <div class="loading-indicator-spite"><i class="fa fa-play-circle-o fa-2x"></i></div>
-        <div class="loading-indicator-title">Page loading</div>
-        <div class="loading-indicator-description"></div>
-    </div>
-</div>
+<div id="modals-container"></div>
 <div id="welcome-screen"></div>
 <div id="page">
     <div id="header"></div>
@@ -52,14 +45,10 @@
         <div class="menu-bottom"></div>
     </div>
     <div id="progressbar-container"></div>
-
-
-
     <div id="page-content">
         <div id="accounts" class="application-page"></div>
         <div id="settings" class="application-page"></div>
         <div id="player" class="application-page"></div>
-        <div id="playlist-editor" class="application-page"></div>
         <div id="playlist-manager" class="application-page"></div>
         <div id="testing-environment">
             <div id="testing-helper">
@@ -163,6 +152,7 @@
 <script type="text/javascript" src="js/Common/UserNotifier/UserNotifierEvents.js"></script>
 <script type="text/javascript" src="js/Common/ApplicationDetails.js"></script>
 <script type="text/javascript" src="js/Common/DesktopNotification.js"></script>
+<script type="text/javascript" src="js/Services/ModalService.js"></script>
 
 <script type="text/javascript" src="js/Core/PageLoader.js"></script>
 <script type="text/javascript" src="js/Core/Main.js"></script>
@@ -222,7 +212,6 @@
 <script type="text/javascript" src="js/Google/GoogleApiWrapper.js"></script>
 
 <script type="text/javascript" src="js/Services/Accounts/LastFm/LastFmSessionProvider.js"></script>
-<script type="text/javascript" src="js/Services/Accounts/Google/GoogleApiWithSessionControl.js"></script>
 <script type="text/javascript" src="js/Services/Accounts/Google/GoogleSessionCoordinator.js"></script>
 <script type="text/javascript" src="js/Services/Accounts/LastFm/LastFmSessionCoordinator.js"></script>
 <script type="text/javascript" src="js/Services/Accounts/SessionsService.js"></script>
@@ -232,11 +221,12 @@
 <script type="text/javascript" src="js/Services/Accounts/LastFm/LastFmSessionConstants.js"></script>
 <script type="text/javascript" src="js/Services/Accounts/SessionEvents.js"></script>
 <script type="text/javascript" src="js/Services/LoadingIndicator/LoadingIndicatorService.js"></script>
-<script type="text/javascript" src="js/Services/LoadingIndicator/LoadingIndicatorEvents.js"></script>
 
 <script type="text/javascript" src="js/UICore/Accounts/AccountsViewController.js"></script>
 <script type="text/javascript" src="js/UICore/Accounts/AccountsViewControllerConfiguration.js"></script>
 <script type="text/javascript" src="js/UICore/Accounts/AccountDetailsBuilder.js"></script>
+<script type="text/javascript" src="js/UICore/Modals/ModalConfiguration.js"></script>
+<script type="text/javascript" src="js/UICore/Modals/ModalViewController.js"></script>
 
 <script type="text/javascript" src="js/UI/UIControllersFactory.js"></script>
 <script type="text/javascript" src="js/UI/UIControllersFactoryConfig.js"></script>
@@ -250,6 +240,9 @@
 <script type="text/javascript" src="js/UI/Controls/ProgressbarControl/ProgressbarControl.js"></script>
 <script type="text/javascript" src="js/UI/Controls/ProgressbarControl/ProgressbarControlConfiguration.js"></script>
 <script type="text/javascript" src="js/UI/Controls/PlaybackProgressControl.js"></script>
+<script type="text/javascript" src="js/UI/Controls/ContextMenu/ContextMenuConfiguration.js"></script>
+<script type="text/javascript" src="js/UI/Controls/ContextMenu/ContextMenu.js"></script>
+<script type="text/javascript" src="js/UI/Controls/ContextMenu/ContextMenuBuilder.js"></script>
 
 <script type="text/javascript" src="js/UICore/UIConstants.js"></script>
 <script type="text/javascript" src="js/UICore/UICore.js"></script>
@@ -288,13 +281,9 @@
 <script type="text/javascript" src="js/Services/Search/SearchServiceConstants.js"></script>
 <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistItemEditorConfig.js"></script>
 <script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistItemEditorViewController.js"></script>
-<script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistEditorItemConfiguration.js"></script>
-<script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistEditorListViewController.js"></script>
-<script type="text/javascript" src="js/UICore/PlaylistItemEditor/PlaylistEditorListItemBuilder.js"></script>
 <script type="text/javascript" src="js/UICore/ColorSchemeControl/ColorSchemeControlConfig.js"></script>
 <script type="text/javascript" src="js/UICore/ColorSchemeControl/ColorSchemeControlViewController.js"></script>
-<script type="text/javascript" src="js/UICore/LoadingIndicator/LoadingIndicatorViewController.js"></script>
-<script type="text/javascript" src="js/UICore/LoadingIndicator/LoadingIndicatorConfiguration.js"></script>
+<script type="text/javascript" src="js/Services/LoadingIndicator/LoadingIndicatorConfiguration.js"></script>
 <!--endbuild-->
 <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=onGoogleClientLoaded"></script>
 </body>

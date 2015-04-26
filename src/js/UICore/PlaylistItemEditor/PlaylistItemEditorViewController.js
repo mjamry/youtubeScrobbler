@@ -10,6 +10,8 @@ window.UI.PlaylistItemDetailsEditorViewController = function(detailsProvider, pl
     this.index = null;
     this.mediaDetails = null;
     this.view = $(this.config.Container);
+
+    this.modalId = null;
 };
 
 window.UI.PlaylistItemDetailsEditorViewController.prototype =
@@ -52,11 +54,91 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         }
     },
 
+    _swapArtistNameAndTitle: function()
+    {
+        this.mediaDetails = this._retrieveMediaDetails();
+        var title = this.mediaDetails.title;
+        this.mediaDetails.title = this.mediaDetails.artist.name;
+        this.mediaDetails.artist.name = title;
+        this.updateView();
+    },
+
+    _savePlaylistItemDetails: function()
+    {
+        var undoCallback = function(that, index)
+        {
+            var detailsToRestore = that.playlistProvider.getPlaylist().get(index).clone();
+            return function undoTrackEdit()
+            {
+                that.playlistProvider.updateItem(index, detailsToRestore);
+            };
+        };
+
+        this.mediaDetails = this._retrieveMediaDetails();
+        UserNotifier.getInstance().info("Details saved for '"+this.mediaDetails.artist.name+" - "+this.mediaDetails.title+"'", undoCallback(this, this.index));
+        Logger.getInstance().info("[Editor] Details saved for '"+this.mediaDetails.artist.name+" - "+this.mediaDetails.title+"'");
+        this.playlistProvider.updateItem(this.index, this.mediaDetails);
+        this._hide();
+    },
+
+    _validateEnteredData: function()
+    {
+        LoadingIndicatorService.getInstance().show({title: "Please wait.", description: "Verifying track details."});
+        var mediaDetails = this._retrieveMediaDetails();
+        this.detailsProvider.getTrackDetails(
+            mediaDetails,
+            {
+                done: this._handleDetailsObtained(this),
+                fail: function()
+                {
+                    LoadingIndicatorService.getInstance().hide();
+                }
+            }
+        );
+    },
+
+    _show: function showPlaylistItemEditor(mediaDetails, index)
+    {
+        this.index = index;
+        this.mediaDetails = mediaDetails;
+    },
+
+    _hide: function hidePlaylistItemEditor()
+    {
+        this._clearView();
+        this.index = null;
+        this.mediaDetails = null;
+
+        ModalService.getInstance().close(this.modalId);
+        this.modalId = null;
+    },
+
+    _clearView: function _clearView()
+    {
+        this._clearEnteredValues();
+    },
+
+    _clearEnteredValues: function()
+    {
+        //cleat inputs
+        $(this.config.ArtistInput).val("");
+        $(this.config.TitleInput).val("");
+        $(this.config.AlbumInput).val("");
+
+        //hide indicators
+        $(this.config.ArtistVerification).hide();
+        $(this.config.TitleVerification).hide();
+        $(this.config.AlbumVerification).hide();
+    },
+
     _onItemEditionRequested: function(args)
     {
+        this.view = $("#controls-schemes "+this.config.Container).clone();
+        this._hookUpButtonsActions();
         this._show(args.mediaDetails, args.index);
         this.updateView();
-        this._enableButtons();
+
+        this.modalId = ModalService.getInstance().show({content: this.view, canClose: true});
     },
 
     _handleDetailsObtained: function(that)
@@ -79,57 +161,35 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         return mediaDetails;
     },
 
-    _swapArtistNameAndTitle: function(that)
+    _hookUpButtonsActions: function()
     {
-        that.mediaDetails = that._retrieveMediaDetails();
-        var title = that.mediaDetails.title;
-        that.mediaDetails.title = that.mediaDetails.artist.name;
-        that.mediaDetails.artist.name = title;
-        that.updateView();
-    },
-
-    _savePlaylistItemDetails: function(that)
-    {
-        var undoCallback = function(that, index)
-        {
-            var detailsToRestore = that.playlistProvider.getPlaylist().get(index).clone();
-            return function undoTrackEdit()
+        this.view.find(this.config.SwapButton).click($.proxy(function swapItemDetails(e)
             {
-                that.playlistProvider.updateItem(index, detailsToRestore);
-            };
-        };
+                e.preventDefault();
+                this._swapArtistNameAndTitle();
+            },
+            this));
 
-        that.mediaDetails = that._retrieveMediaDetails();
-        UserNotifier.getInstance().info("Details saved for '"+that.mediaDetails.artist.name+" - "+that.mediaDetails.title+"'", undoCallback(this, this.index));
-        Logger.getInstance().info("[Editor] Details saved for '"+that.mediaDetails.artist.name+" - "+that.mediaDetails.title+"'");
-        that.playlistProvider.updateItem(that.index, that.mediaDetails);
-        that._hide();
-    },
+        this.view.find(this.config.SaveButton).click($.proxy(function saveEditedItem(e)
+            {
+                e.preventDefault();
+                this._savePlaylistItemDetails();
+            },
+            this));
 
-    _hide: function hidePlaylistItemEditor()
-    {
-        this._clearView();
-        this.index = null;
-        this.mediaDetails = null;
-    },
+        this.view.find(this.config.CheckButton).click($.proxy(function(e)
+            {
+                e.preventDefault();
+                this._validateEnteredData();
+            },
+            this));
 
-    _clearView: function _clearView()
-    {
-        this._clearEnteredValues();
-        this._disableButtons();
-    },
-
-    _clearEnteredValues: function()
-    {
-        //cleat inputs
-        $(this.config.ArtistInput).val("");
-        $(this.config.TitleInput).val("");
-        $(this.config.AlbumInput).val("");
-
-        //hide indicators
-        $(this.config.ArtistVerification).hide();
-        $(this.config.TitleVerification).hide();
-        $(this.config.AlbumVerification).hide();
+        this.view.find(this.config.CloseButton).click($.proxy(function closePlaylistItemEditor(e)
+            {
+                e.preventDefault();
+                this._hide();
+            },
+            this));
     },
 
     //updated view with current media details
@@ -138,82 +198,24 @@ window.UI.PlaylistItemDetailsEditorViewController.prototype =
         this._clearEnteredValues();
         if(this.mediaDetails.artist.name)
         {
-            $(this.config.ArtistInput).val(this.mediaDetails.artist.name);
+            this.view.find(this.config.ArtistInput).val(this.mediaDetails.artist.name);
         }
 
         if(this.mediaDetails.title)
         {
-            $(this.config.TitleInput).val(this.mediaDetails.title);
+            this.view.find(this.config.TitleInput).val(this.mediaDetails.title);
         }
 
         if(this.mediaDetails.album.name)
         {
-            $(this.config.AlbumInput).val(this.mediaDetails.album.name);
+            this.view.find(this.config.AlbumInput).val(this.mediaDetails.album.name);
         }
 
         this._verifyItems();
     },
 
-    _show: function showPlaylistItemEditor(mediaDetails, index)
-    {
-        this.index = index;
-        this.mediaDetails = mediaDetails;
-    },
-
-    _enableButtons: function()
-    {
-        this.view.find(this.config.Button).removeAttr(this.config.DisabledAttr);
-    },
-
-    _disableButtons: function()
-    {
-        this.view.find(this.config.Button).attr(this.config.DisabledAttr, true);
-    },
-
     initialise: function()
     {
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistItemEditionRequested, $.proxy(this._onItemEditionRequested, this));
-
-        this._disableButtons();
-
-        $(this.config.SwapButton).click($.proxy(function swapItemDetails(e)
-        {
-            e.preventDefault();
-            this._swapArtistNameAndTitle(this);
-        },
-        this));
-
-        $(this.config.SaveButton).click($.proxy(function saveEditedItem(e)
-        {
-            e.preventDefault();
-            this._savePlaylistItemDetails(this);
-        },
-        this));
-
-        $(this.config.CheckButton).click($.proxy(function(e)
-        {
-            e.preventDefault();
-
-            LoadingIndicatorService.getInstance().show("Verifying track details.<br>Please wait.");
-            var mediaDetails = this._retrieveMediaDetails();
-            this.detailsProvider.getTrackDetails(
-                mediaDetails,
-                {
-                    done: this._handleDetailsObtained(this),
-                    fail: function()
-                    {
-                        LoadingIndicatorService.getInstance().hide();
-                    }
-                }
-            );
-        },
-        this));
-
-        $(this.config.CloseButton).click($.proxy(function closePlaylistItemEditor(e)
-        {
-            e.preventDefault();
-            this._hide();
-        },
-        this));
     }
 };
