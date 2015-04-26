@@ -39,11 +39,6 @@ window.Google.GoogleApiWrapper.prototype =
         return true;
     },
 
-    _handleServiceError: function()
-    {
-
-    },
-
     _handleResponseError: function(error)
     {
         UserNotifier.getInstance().error(this.USER_ERROR_MSG);
@@ -75,32 +70,24 @@ window.Google.GoogleApiWrapper.prototype =
 
     _initialiseYoutube: function(callback)
     {
-        if(!this._services[window.Google.ServiceNames.Youtube].isReady)
+        var onServiceInitialised = function ()
         {
-            var onServiceInitialised = function ()
-            {
-                Logger.getInstance().info("[Google Api] Youtube service loaded.");
-                this._services[window.Google.ServiceNames.Youtube].isReady = true;
-                callback();
-            }.bind(this);
+            Logger.getInstance().info("[Google Api] Youtube service loaded.");
+            callback();
+        };
 
-            gapi.client.load(window.Google.YoutubeApi.NAME, window.Google.YoutubeApi.VERSION, onServiceInitialised);
-        }
+        gapi.client.load(window.Google.YoutubeApi.NAME, window.Google.YoutubeApi.VERSION, onServiceInitialised);
     },
 
     _initialisesAuth: function(callback)
     {
-        if(!this._services[window.Google.ServiceNames.Auth].isReady)
+        var onServiceInitialised = function ()
         {
-            var onServiceInitialised = function ()
-            {
-                Logger.getInstance().info("[Google Api] OAuth2 service loaded.");
-                this._services[window.Google.ServiceNames.Auth].isReady = true;
-                callback();
-            }.bind(this);
+            Logger.getInstance().info("[Google Api] OAuth2 service loaded.");
+            callback();
+        };
 
-            gapi.client.load(window.Google.AuthApi.NAME, window.Google.AuthApi.VERSION, onServiceInitialised);
-        }
+        gapi.client.load(window.Google.AuthApi.NAME, window.Google.AuthApi.VERSION, onServiceInitialised);
     },
 
     _obtainSessionToken: function(requestOptions)
