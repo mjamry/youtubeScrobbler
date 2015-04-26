@@ -138,8 +138,7 @@ window.Google.GoogleApiWrapper.prototype =
     {
         this._services[serviceName] =
             {
-                callback: callback,
-                isReady: false
+                callback: callback
             };
     },
 
