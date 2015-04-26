@@ -7,35 +7,6 @@ window.Accounts.GoogleSessionCoordinator = function(googleApiWrapper)
 
 window.Accounts.GoogleSessionCoordinator.prototype =
 {
-    //TODO: these two methods, are copied from google api wrapper, and should be rather shared
-    _handleGoogleResponse: function (resolve, reject)
-    {
-        var that = this;
-        return function onGoogleResponded(response)
-        {
-            if (that._checkForErrors(response))
-            {
-                resolve(response);
-            }
-            else
-            {
-                reject();
-            }
-        };
-    },
-
-    _checkForErrors: function (response)
-    {
-        if ("error" in response)
-        {
-            //check for unauthorized (401) error
-            Logger.getInstance().warning("[Google] Communication error: " + response.error.message + " (" + response.error.code + ")");
-            return false;
-        }
-
-        return true;
-    },
-
     _handleSessionEstablished: function(callback)
     {
         var that = this;
@@ -75,22 +46,11 @@ window.Accounts.GoogleSessionCoordinator.prototype =
     _refreshToken: function ()
     {
         return this._innerApiWrapper.refreshSessionToken();
-        //var that = this;
-        //return new Promise(function (resolve, reject)
-        //    {
-        //        that._innerApiWrapper.refreshSessionToken(that._handleGoogleResponse(resolve, reject));
-        //    }
-        //);
     },
 
     _authorizeUser: function ()
     {
-        var that = this;
-        return new Promise(function (resolve, reject)
-            {
-                that._innerApiWrapper.authorize(that._handleGoogleResponse(resolve, reject));
-            }
-        );
+        return this._innerApiWrapper.authorize();
     },
 
     _refreshSession: function(errorHandler, callback)
@@ -112,11 +72,7 @@ window.Accounts.GoogleSessionCoordinator.prototype =
 
     _getUserDetails: function()
     {
-        var that = this;
-        return new Promise(function(resolve, reject)
-        {
-            that._innerApiWrapper.getUserInfo(that._handleGoogleResponse(resolve, reject));
-        });
+        return this._innerApiWrapper.getUserInfo();
     },
 
     initialise: function(callback)

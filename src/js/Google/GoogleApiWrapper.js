@@ -170,7 +170,7 @@ window.Google.GoogleApiWrapper.prototype =
 
     getUserInfo: function(callback)
     {
-        this._requestData(gapi.client.oauth2.userinfo.get, null, callback);
+        return this._requestData(gapi.client.oauth2.userinfo.get, null, callback);
     },
 
     getUserPlaylists: function(callback)
