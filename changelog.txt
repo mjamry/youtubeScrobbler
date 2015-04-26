@@ -1,3 +1,7 @@
+///////////VERSION 0.3.3////////////////
+ - introduced modals - #79, #83
+ - track details editor is now available as a modal instead of separate page - #83,
+ - added context menu to the playlist items - #66
 ///////////VERSION 0.3.2////////////////
  - added desktop notification (HTML5) to inform users about currently played song - #53
  - removed footer, and extended menu items - #37
