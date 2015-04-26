@@ -66,11 +66,11 @@ window.Google.GoogleApiWrapper.prototype =
                 }
             }
         )
-            .then(callback)
-            .catch(function(error)
-            {
-                that._handleResponseError(error)
-            });
+        .then(callback)
+        .catch(function(error)
+        {
+            that._handleResponseError(error)
+        });
     },
 
     _initialiseYoutube: function(callback)
@@ -103,21 +103,30 @@ window.Google.GoogleApiWrapper.prototype =
         }
     },
 
-    _obtainSessionToken: function(requestOptions, callback)
+    _obtainSessionToken: function(requestOptions)
     {
-        if(this._services[window.Google.ServiceNames.Auth].isReady)
-        {
-            var options = $.extend(
-                {
-                    client_id: window.Google.ApiKeys.CLIENT_ID,
-                    response_type: "token",
-                    scope: [window.Google.AuthApi.SCOPE_PROFILE, window.Google.YoutubeApi.SCOPE]
-                },
-                requestOptions
-            );
+        var that = this;
+        var options = $.extend(
+            {
+                client_id: window.Google.ApiKeys.CLIENT_ID,
+                response_type: "token",
+                scope: [window.Google.AuthApi.SCOPE_PROFILE, window.Google.YoutubeApi.SCOPE]
+            },
+            requestOptions
+        );
 
-            gapi.auth.authorize(options, callback);
-        }
+        return new Promise(function(resolve, reject)
+        {
+            try
+            {
+                gapi.auth.authorize(options, that._handleGoogleResponse(resolve, reject));
+            }
+            catch(e)
+            {
+                Logger.getInstance().warning(that.LOG_ERROR_MSG);
+                reject();
+            }
+        });
     },
 
     initialise: function()
@@ -147,16 +156,16 @@ window.Google.GoogleApiWrapper.prototype =
             };
     },
 
-    authorize: function(callback)
+    authorize: function()
     {
         //show sign on dialog
-        this._obtainSessionToken({immediate:false}, callback);
+        return this._obtainSessionToken({immediate:false});
     },
 
-    refreshSessionToken: function(callback)
+    refreshSessionToken: function()
     {
         //without sign on dialog
-        this._obtainSessionToken({immediate:true}, callback);
+        return this._obtainSessionToken({immediate:true});
     },
 
     getUserInfo: function(callback)

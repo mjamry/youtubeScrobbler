@@ -74,12 +74,13 @@ window.Accounts.GoogleSessionCoordinator.prototype =
 
     _refreshToken: function ()
     {
-        var that = this;
-        return new Promise(function (resolve, reject)
-            {
-                that._innerApiWrapper.refreshSessionToken(that._handleGoogleResponse(resolve, reject));
-            }
-        );
+        return this._innerApiWrapper.refreshSessionToken();
+        //var that = this;
+        //return new Promise(function (resolve, reject)
+        //    {
+        //        that._innerApiWrapper.refreshSessionToken(that._handleGoogleResponse(resolve, reject));
+        //    }
+        //);
     },
 
     _authorizeUser: function ()
