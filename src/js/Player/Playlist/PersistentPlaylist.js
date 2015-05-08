@@ -3,7 +3,7 @@ window.Playlist = window.Playlist || {};
 window.Playlist.PersistentPlaylist = function(storage)
 {
     this.innerPlaylist = new window.Player.Playlist();
-    this.repository = new window.Playlist.PlaylistRepository(storage);
+    this.repository = new window.Playlist.PlaylistRepositoryService(storage);
     this.persistentPlaylistName = "lastPlaylistState";
 };
 

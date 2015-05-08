@@ -8,7 +8,7 @@ window.Common = window.Common || {};
 window.Player.PlaylistService = function(playlistRepo, playlistElementDetailsProvider)
 {
     this.playlist = new window.Playlist.PersistentPlaylist(playlistRepo);
-    this.playlistRepository = new window.Playlist.PlaylistRepository(playlistRepo);
+    this.playlistRepository = playlistRepo;
     this.detailsProvider = playlistElementDetailsProvider;
     Logger.getInstance().info("Playlist service has been created.");
 };

@@ -17,7 +17,8 @@ window.ApplicationCore.AppCore.prototype =
     createAppServices: function(coreServicesFactory, lastFmServicesFactory, playerServicesFactory)
     {
         var playlistElementDetailsProvider = playerServicesFactory.createPlaylistElementDetailsProvider(lastFmServicesFactory.createTrackInformationProvider());
-        this.playlistService = coreServicesFactory.createPlaylistService(playlistElementDetailsProvider);
+        this.playlistRepositoryService = coreServicesFactory.createPlaylistRepositoryService();
+        this.playlistService = coreServicesFactory.createPlaylistService(this.playlistRepositoryService, playlistElementDetailsProvider);
         this.playlistDetailsProvider = playerServicesFactory.createPlaylistDetailsProvider(this.playlistService);
         this.player = coreServicesFactory.createMediaPlayer(this.playlistDetailsProvider);
         this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler(lastFmServicesFactory.createScrobbler());

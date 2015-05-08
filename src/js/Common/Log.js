@@ -80,6 +80,7 @@ LoggerImpl.prototype =
         if(this._eventBroker)
         {
             this._eventBroker.fireEventWithData(window.Common.LoggerEvents.LoggerError, message);
+            console.trace();
         }
     },
 
