@@ -31,11 +31,11 @@ window.Playlist.PlaylistRepositoryService.prototype =
         return playlist;
     },
 
-    save: function(id, data, repository)
+    save: function(id, playlist, repository)
     {
-        this.innerRepository.save(id, data);
+        this.innerRepository.save(id, playlist);
 
-        var msg = "Playlist has been saved with "+this.playlist.length()+" element(s).";
+        var msg = "Playlist has been saved with "+playlist.length()+" element(s).";
         Logger.getInstance().info(msg);
         UserNotifier.getInstance().info(msg);
     },
