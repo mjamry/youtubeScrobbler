@@ -10,6 +10,11 @@ window.UI.PlaylistSaveViewController = function(config, playlistRepositoryServic
 
 window.UI.PlaylistSaveViewController.prototype =
 {
+    _handlePlaylistSaveRequested: function()
+    {
+        this.show();
+    },
+
     _savePlaylist: function()
     {
         var name = this.view.find(this.config.PlaylistName).val();
@@ -35,5 +40,6 @@ window.UI.PlaylistSaveViewController.prototype =
 
     initialise: function()
     {
+        EventBroker.getInstance().addListener(window.UI.PlaylistSaveEvents.PlaylistSaveRequested, this._handlePlaylistSaveRequested.bind(this));
     }
 };

@@ -18,8 +18,7 @@ window.UI.PlaylistControlViewController.prototype =
 
     _savePlaylist: function()
     {
-        //TODO: show playlist save form
-        alert("playlist saved");
+        EventBroker.getInstance().fireEvent(window.UI.PlaylistSaveEvents.PlaylistSaveRequested);
     },
 
     _changeLoopModeState: function(that)
