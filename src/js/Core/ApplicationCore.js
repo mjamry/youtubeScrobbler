@@ -59,7 +59,7 @@ window.ApplicationCore.AppCore.prototype =
         appDetailsViewController.setupDetails(window.Common.ApplicationDetails);
         this.menuController = uiFactory.createMenuViewController();
         this.scrobblingControlViewController = uiFactory.createScrobblingControlViewController(this.onlineScrobbler);
-        this.playlistSaveViewController = uiFactory.createPlaylistSaveViewController(this.playlistRepositoryService);
+        this.playlistSaveViewController = uiFactory.createPlaylistSaveViewController(this.playlistRepositoryService, this.playlistService);
     },
 
     initialiseViewControllers: function(menuConfig)

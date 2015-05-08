@@ -151,8 +151,8 @@ window.UI.UIControllersFactory.prototype =
         return new window.UI.LoadingIndicatorViewController(window.UI.LoadingIndicatorConfiguration);
     },
 
-    createPlaylistSaveViewController: function(playlistRepositoryService)
+    createPlaylistSaveViewController: function(playlistRepositoryService, playlistService)
     {
-        return new window.UI.PlaylistSaveViewController(window.UI.PlaylistSaveConfiguration, playlistRepositoryService);
+        return new window.UI.PlaylistSaveViewController(window.UI.PlaylistSaveConfiguration, playlistRepositoryService, playlistService);
     }
 };

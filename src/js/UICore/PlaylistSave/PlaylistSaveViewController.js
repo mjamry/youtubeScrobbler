@@ -1,11 +1,12 @@
 window.UI = window.UI || {};
 
-window.UI.PlaylistSaveViewController = function(config, playlistRepositoryService)
+window.UI.PlaylistSaveViewController = function(config, playlistRepositoryService, playlistService)
 {
     this.config = config;
     this.view = null;
     this.modalId;
     this.repository = playlistRepositoryService;
+    this.playlistService = playlistService;
 };
 
 window.UI.PlaylistSaveViewController.prototype =
@@ -20,7 +21,8 @@ window.UI.PlaylistSaveViewController.prototype =
         var name = this.view.find(this.config.PlaylistName).val();
         var descr = this.view.find(this.config.PlaylistDescription).val();
 
-        alert("Name: "+name+" Desc: "+descr);
+        this.repository.save(name, this.playlistService.getPlaylist());
+        this._close();
     },
 
     _close: function()
