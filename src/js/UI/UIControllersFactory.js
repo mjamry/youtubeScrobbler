@@ -149,5 +149,10 @@ window.UI.UIControllersFactory.prototype =
     createLoadingIndicatorViewController: function()
     {
         return new window.UI.LoadingIndicatorViewController(window.UI.LoadingIndicatorConfiguration);
+    },
+
+    createPlaylistSaveViewController: function()
+    {
+        return new window.UI.PlaylistSaveViewController(window.UI.PlaylistSaveConfiguration);
     }
 };
