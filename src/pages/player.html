@@ -1,7 +1,20 @@
 <div id="input-form">
     <form class="playlist-add-container">
-        <input class="playlist-add-input" type="text" id="media-location" placeholder="type to search or paste youtube link" title="start typing to search for music or paste link for youtube video/playlist to add new items to the playlist"/>
-        <button id="add-to-playlist" class="playlist-add-button" title="add new items to playlist"><i class="fa fa-plus fa-2x"></i></button>
+        <div class="row">
+            <div class="columns large-12">
+                <div class="row collapse">
+                    <div class="columns small-10">
+                        <input class="playlist-add-input" type="text" id="media-location" placeholder="type to search or paste youtube link" title="start typing to search for music or paste link for youtube video/playlist to add new items to the playlist"/>
+                    </div>
+                    <div class="columns small-2">
+                        <a id="add-to-playlist" class="playlist-add-button postfix" title="add new items to playlist"><i class="fa fa-plus fa-2x"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--<button id="add-to-playlist" class="playlist-add-button" title="add new items to playlist"><i class="fa fa-plus fa-2x"></i></button>-->
     </form>
     <div id="search-results">
         <div id="search-results-container"></div>
