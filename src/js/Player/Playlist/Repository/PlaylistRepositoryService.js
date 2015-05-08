@@ -13,12 +13,31 @@ window.Playlist.PlaylistRepositoryService.prototype =
 {
     load: function(id, repository)
     {
-        return this.innerRepository.load(id);
+        var playlist = this.innerRepository.load(id);
+
+        var msg = "";
+        if(!playlist.isEmpty())
+        {
+            //this._onPlaylistCreated();
+            msg = playlist.length() + " item(s) have been read and added to the playlist.";
+        }
+        else
+        {
+            msg = "There is no playlist saved. Please create a new one.";
+        }
+
+        Logger.getInstance().info(msg);
+        UserNotifier.getInstance().info(msg);
+        return playlist;
     },
 
     save: function(id, data, repository)
     {
         this.innerRepository.save(id, data);
+
+        var msg = "Playlist has been saved with "+this.playlist.length()+" element(s).";
+        Logger.getInstance().info(msg);
+        UserNotifier.getInstance().info(msg);
     },
 
     delete: function(id, repository)

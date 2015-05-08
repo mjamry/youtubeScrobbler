@@ -7,7 +7,7 @@ window.Common = window.Common || {};
 
 window.Player.PlaylistService = function(playlistRepo, playlistElementDetailsProvider)
 {
-    this.playlist = new window.Playlist.PersistentPlaylist(playlistRepo);
+    this.playlist = new window.Playlist.PersistentPlaylist(new window.Playlist.PlaylistLocalRepository());
     this.playlistRepository = playlistRepo;
     this.detailsProvider = playlistElementDetailsProvider;
     Logger.getInstance().info("Playlist service has been created.");
@@ -75,29 +75,14 @@ window.Player.PlaylistService.prototype =
 
     loadPlaylist: function()
     {
-        this.playlist.set(this.playlistRepository.load("tempPl"));
-        var msg = "";
-        if(!this.playlist.isEmpty())
-        {
-            this._onPlaylistCreated();
-            msg = this.playlist.length() + " item(s) have been read and added to the playlist.";
-        }
-        else
-        {
-            msg = "There is no playlist saved. Please create a new one.";
-        }
-
-        Logger.getInstance().info(msg);
-        UserNotifier.getInstance().info(msg);
+        var playlist = this.playlistRepository.load("tempPl");
+        this.playlist.set(playlist);
+        this._onPlaylistCreated();
     },
 
     savePlaylist: function()
     {
         this.playlistRepository.save("tempPl", this.playlist.getCurrentState());
-
-        var msg = "Playlist has been saved with "+this.playlist.length()+" element(s).";
-        Logger.getInstance().info(msg);
-        UserNotifier.getInstance().info(msg);
     },
 
     //adds new playlist (or single media) to existing playlist.
