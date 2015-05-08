@@ -54,5 +54,11 @@ window.Playlist.PlaylistRepositoryService.prototype =
         };
 
         return exampleRepos;
+    },
+
+    //TODO: remove it is temporarly only
+    clearCurrentPlaylist: function()
+    {
+        alert("current playlist cleared");
     }
 };

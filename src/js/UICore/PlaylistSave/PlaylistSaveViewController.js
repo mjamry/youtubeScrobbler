@@ -1,10 +1,11 @@
 window.UI = window.UI || {};
 
-window.UI.PlaylistSaveViewController = function(config)
+window.UI.PlaylistSaveViewController = function(config, playlistRepositoryService)
 {
     this.config = config;
     this.view = null;
     this.modalId;
+    this.repository = playlistRepositoryService;
 };
 
 window.UI.PlaylistSaveViewController.prototype =

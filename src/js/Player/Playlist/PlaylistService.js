@@ -73,18 +73,6 @@ window.Player.PlaylistService.prototype =
         this._updatePlaylist();
     },
 
-    loadPlaylist: function()
-    {
-        var playlist = this.playlistRepository.load("tempPl");
-        this.playlist.set(playlist);
-        this._onPlaylistCreated();
-    },
-
-    savePlaylist: function()
-    {
-        this.playlistRepository.save("tempPl", this.playlist.getCurrentState());
-    },
-
     //adds new playlist (or single media) to existing playlist.
     addToPlaylist: function(playlist)
     {
