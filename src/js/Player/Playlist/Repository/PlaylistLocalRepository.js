@@ -6,9 +6,9 @@ window.Playlist.PlaylistLocalRepository = function(){};
 
 window.Playlist.PlaylistLocalRepository.prototype =
 {
-    load: function(name)
+    load: function(id)
     {
-        var storedData = LocalStorage.getInstance().getData(name);
+        var storedData = LocalStorage.getInstance().getData(id);
         var playlist = new window.Player.Playlist();
         if(storedData !== null && storedData.mediaList.length > 0)
         {
@@ -18,8 +18,13 @@ window.Playlist.PlaylistLocalRepository.prototype =
         return playlist;
     },
 
-    save: function(name, playlist)
+    delete: function(id)
     {
-        LocalStorage.getInstance().setData(name, playlist);
+
+    },
+
+    save: function(id, playlist)
+    {
+        LocalStorage.getInstance().setData(id, playlist);
     }
 };
