@@ -11,13 +11,18 @@ window.Playlist.PlaylistRepository = function(repository)
 
 window.Playlist.PlaylistRepository.prototype =
 {
-    load: function(name)
+    load: function(id)
     {
-        return this.innerRepository.load(name);
+        return this.innerRepository.load(id);
     },
 
-    save: function(name, data)
+    save: function(id, data)
     {
-        this.innerRepository.save(name, data);
+        this.innerRepository.save(id, data);
+    },
+
+    delete: function(id)
+    {
+
     }
 };
