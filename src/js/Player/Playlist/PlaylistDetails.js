@@ -8,7 +8,7 @@ window.Playlist.PlaylistDetails.prototype =
     name: "",
     description: "",
     count: "",
-    source: "",
+    storageType: "",
     tags: "",
     playlist: new window.Player.Playlist()
 };

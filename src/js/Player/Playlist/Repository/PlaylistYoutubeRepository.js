@@ -7,7 +7,7 @@ window.Playlist.PlaylistYoutubeRepository = function(api)
 
 window.Playlist.PlaylistYoutubeRepository.prototype =
 {
-    save: function(id, playlist)
+    load: function(id)
     {
 
     },
@@ -17,7 +17,12 @@ window.Playlist.PlaylistYoutubeRepository.prototype =
 
     },
 
-    load: function(id)
+    save: function(id, playlist)
+    {
+
+    },
+
+    getAllPlaylists: function()
     {
 
     }

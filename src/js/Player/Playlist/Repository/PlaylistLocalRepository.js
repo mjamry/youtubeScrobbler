@@ -23,6 +23,7 @@ window.Playlist.PlaylistLocalRepository.prototype =
         {
             playlistDetails = new window.Playlist.PlaylistDetails();
             playlistDetails.name = name;
+            playlistDetails.storageType = this.storageName;
         }
 
         playlistDetails.playlist = data;
@@ -58,5 +59,10 @@ window.Playlist.PlaylistLocalRepository.prototype =
     save: function(name, playlist)
     {
         this._storeData(name, playlist);
+    },
+
+    getAllPlaylists: function()
+    {
+        return this._getData();
     }
 };
