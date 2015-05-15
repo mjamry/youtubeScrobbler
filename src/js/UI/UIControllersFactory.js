@@ -158,6 +158,6 @@ window.UI.UIControllersFactory.prototype =
 
     createPlaylistManageViewController: function(playlistManager)
     {
-        return new window.UI.PlaylistManageViewController(window.UI.PlaylistManageConfiguration, playlistManager);
+        return new window.UI.PlaylistManageViewController(window.UI.PlaylistManageConfiguration, $(this.config.PlaylistManagerView), playlistManager);
     }
 };

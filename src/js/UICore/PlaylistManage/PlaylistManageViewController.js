@@ -1,7 +1,8 @@
 window.UI = window.UI || {};
 
-window.UI.PlaylistManageViewController = function(config, playlistManager)
+window.UI.PlaylistManageViewController = function(config, view, playlistManager)
 {
+    this.view = view;
     this.config = config;
     this.playlistManager = playlistManager;
 };
