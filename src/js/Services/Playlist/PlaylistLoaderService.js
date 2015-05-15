@@ -1,12 +1,12 @@
-window.Playlist = window.Playlist || {};
+window.Services = window.Services || {};
 
-window.Playlist.PlaylistLoaderService = function(playlistService, factory)
+window.Services.PlaylistLoaderService = function(playlistService, factory)
 {
     this.playlisService = playlistService;
     this.loaderFactory = factory;
 };
 
-window.Playlist.PlaylistLoaderService.prototype =
+window.Services.PlaylistLoaderService.prototype =
 {
     _handlePlaylistLoaded: function(playlist)
     {

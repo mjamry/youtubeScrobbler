@@ -1,11 +1,11 @@
 //namespace
-window.Player = window.Player || {};
+window.Services = window.Services || {};
 
 //using
 window.Common = window.Common || {};
 
 
-window.Player.PlaylistService = function(playlistRepo, playlistElementDetailsProvider)
+window.Services.PlaylistService = function(playlistRepo, playlistElementDetailsProvider)
 {
     this.playlist = new window.Playlist.PersistentPlaylist(new window.Playlist.PlaylistLocalRepository());
     this.currentPlaylistDetails = new window.Playlist.PlaylistDetails();
@@ -14,7 +14,7 @@ window.Player.PlaylistService = function(playlistRepo, playlistElementDetailsPro
     Logger.getInstance().info("Playlist service has been created.");
 };
 
-window.Player.PlaylistService.prototype =
+window.Services.PlaylistService.prototype =
 {
     _onPlaylistCreated: function()
     {
