@@ -4,7 +4,7 @@ window.UI.PlaylistSaveViewController = function(config, playlistRepositoryServic
 {
     this.config = config;
     this.view = null;
-    this.modalId;
+    this.modalId = null;
     this.repository = playlistRepositoryService;
     this.playlistService = playlistService;
 };
@@ -47,7 +47,7 @@ window.UI.PlaylistSaveViewController.prototype =
 
         var currentPlaylist = this.playlistService.getPlaylistDetails();
 
-        if(currentPlaylist.name != null && currentPlaylist.id != null)
+        if(currentPlaylist.name !== null && currentPlaylist.id !== null)
         {
             this.view.find(this.config.PlaylistName).val(currentPlaylist.name);
             this.view.find(this.config.PlaylistDescription).val(currentPlaylist.description);
