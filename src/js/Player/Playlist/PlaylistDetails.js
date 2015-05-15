@@ -4,8 +4,8 @@ window.Playlist.PlaylistDetails = function(){};
 
 window.Playlist.PlaylistDetails.prototype =
 {
-    id: "",
-    name: "",
+    id: null,
+    name: null,
     description: "",
     count: "",
     storageType: "",

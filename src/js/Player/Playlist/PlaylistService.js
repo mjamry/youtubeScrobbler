@@ -8,6 +8,7 @@ window.Common = window.Common || {};
 window.Player.PlaylistService = function(playlistRepo, playlistElementDetailsProvider)
 {
     this.playlist = new window.Playlist.PersistentPlaylist(new window.Playlist.PlaylistLocalRepository());
+    this.currentPlaylistDetails = new window.Playlist.PlaylistDetails();
     this.playlistRepository = playlistRepo;
     this.detailsProvider = playlistElementDetailsProvider;
     Logger.getInstance().info("Playlist service has been created.");
@@ -17,12 +18,19 @@ window.Player.PlaylistService.prototype =
 {
     _onPlaylistCreated: function()
     {
+        //new playlist has been created
+        this.currentPlaylistDetails = new window.Playlist.PlaylistDetails();
         EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated);
     },
 
     _onPlaylistCleared: function()
     {
         EventBroker.getInstance().fireEvent(window.Player.PlaylistEvents.PlaylistCleared);
+    },
+
+    _onPlaylistSaved: function(playlistDetails)
+    {
+        this.currentPlaylistDetails = playlistDetails;
     },
 
     _updatePlaylist: function(newItems)
@@ -49,6 +57,8 @@ window.Player.PlaylistService.prototype =
     initialise: function()
     {
         this._setPlaylist(this.playlist.getStoredState());
+
+        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistSaved, this._onPlaylistSaved.bind(this));
     },
 
     refreshPlaylist: function()
@@ -158,5 +168,12 @@ window.Player.PlaylistService.prototype =
     getPlaylist: function()
     {
         return this.playlist.getCurrentState();
+    },
+
+    getPlaylistDetails: function()
+    {
+        //updates playlist first
+        this.currentPlaylistDetails.playlist = this.getPlaylist();
+        return this.currentPlaylistDetails;
     }
 };

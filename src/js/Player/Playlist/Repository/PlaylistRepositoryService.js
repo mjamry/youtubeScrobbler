@@ -33,7 +33,11 @@ window.Playlist.PlaylistRepositoryService.prototype =
 
     save: function(id, playlist, repository)
     {
+
+
         this.innerRepository.save(id, playlist);
+
+
 
         var msg = "Playlist has been saved with "+playlist.length()+" element(s).";
         Logger.getInstance().info(msg);
@@ -55,6 +59,8 @@ window.Playlist.PlaylistRepositoryService.prototype =
 
         return exampleRepos;
     },
+
+    //restore
 
     //TODO: remove it is temporarly only
     clearCurrentPlaylist: function()
