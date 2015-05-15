@@ -32,6 +32,7 @@ window.ApplicationCore.AppCore.prototype =
         this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistFlowController);
         this.playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.playlistDetailsProvider, lastFmServicesFactory.createTrackLoveStateModifier());
         this.welcomeScreenService = coreServicesFactory.createWelcomeService();
+        this.playlistManagementService = coreServicesFactory.createPlaylistManagementService(this.playlistRepositoryService);
     },
 
     initialiseAppServices: function()
@@ -40,6 +41,7 @@ window.ApplicationCore.AppCore.prototype =
         this.playbackControlService.initialise();
         this.onlineScrobbler.initialise();
         this.playlistService.initialise();
+        this.playlistManagementService.initialise();
     },
 
     createViewControllers: function(uiFactory, lastFmServicesFactory)

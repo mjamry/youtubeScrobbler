@@ -101,6 +101,11 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         searchDetailsProviders[window.Google.ServiceNames.Youtube] = dataProvider;
 
         return new window.Services.SearchService(searchDetailsProviders);
+    },
+
+    createPlaylistManagementService: function(playlistRepoService)
+    {
+        return new window.Services.PlaylistManagementService(playlistRepoService);
     }
 };
 
