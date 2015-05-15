@@ -64,5 +64,10 @@ window.Playlist.PlaylistLocalRepository.prototype =
     getAllPlaylists: function()
     {
         return this._getData();
+    },
+
+    getRepoName: function()
+    {
+        return this.storageName;
     }
 };

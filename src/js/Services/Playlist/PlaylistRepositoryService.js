@@ -33,11 +33,7 @@ window.Services.PlaylistRepositoryService.prototype =
 
     save: function(id, playlist, repository)
     {
-
-
         this.innerRepository.save(id, playlist);
-
-
 
         var msg = "Playlist has been saved with "+playlist.length()+" element(s).";
         Logger.getInstance().info(msg);
@@ -52,10 +48,8 @@ window.Services.PlaylistRepositoryService.prototype =
     //returns a hash table containing repo name (for UI) and its instance
     availableRepositories: function()
     {
-        var exampleRepos = {
-            name: "",
-            instance: ""
-        };
+        var exampleRepos = [];
+        exampleRepos[this.innerRepository.getRepoName()] = this.innerRepository;
 
         return exampleRepos;
     },

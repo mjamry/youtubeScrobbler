@@ -21,6 +21,6 @@ window.Services.PlaylistManagementService.prototype =
 
     initialise: function()
     {
-       // var pl = this.loadPlaylistDetailsForAllPlaylists("local");
+        var pl = this.loadPlaylistDetailsForAllPlaylists("Local");
     }
 };
