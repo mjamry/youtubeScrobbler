@@ -17,7 +17,8 @@ window.ApplicationCore.AppCore.prototype =
     createAppServices: function(coreServicesFactory, lastFmServicesFactory, playerServicesFactory)
     {
         var playlistElementDetailsProvider = playerServicesFactory.createPlaylistElementDetailsProvider(lastFmServicesFactory.createTrackInformationProvider());
-        this.playlistService = coreServicesFactory.createPlaylistService(playlistElementDetailsProvider);
+        this.playlistRepositoryService = coreServicesFactory.createPlaylistRepositoryService();
+        this.playlistService = coreServicesFactory.createPlaylistService(this.playlistRepositoryService, playlistElementDetailsProvider);
         this.playlistDetailsProvider = playerServicesFactory.createPlaylistDetailsProvider(this.playlistService);
         this.player = coreServicesFactory.createMediaPlayer(this.playlistDetailsProvider);
         this.onlineScrobbler = coreServicesFactory.createOnlineScrobbler(lastFmServicesFactory.createScrobbler());
@@ -46,7 +47,7 @@ window.ApplicationCore.AppCore.prototype =
         this.playlistViewController = uiFactory.createPlaylistViewController(this.playlistService, this.playbackControlService, this.playlistFlowController);
         this.playbackDetailsViewController = uiFactory.createPlaybackDetailsViewController(this.playbackDetailsService, this.playlistDetailsProvider);
         this.playbackControlViewController = uiFactory.createPlaybackControlViewController(this.player, this.playbackControlService, this.playlistElementLoveStateModifier, this.playlistService);
-        this.playlistControlViewController = uiFactory.createPlaylistControlViewController(this.playlistService, this.playlistFlowController);
+        this.playlistControlViewController = uiFactory.createPlaylistControlViewController(this.playlistRepositoryService, this.playlistFlowController);
         this.mediaLoadViewController = uiFactory.createMediaLoadViewController(this.playlistLoaderService, this.searchService);
         this.playlistItemEditorViewController = uiFactory.createPlaylistItemEditorViewController(this.playlistService, lastFmServicesFactory.createTrackInformationProvider());
         this.colorSchemeControlViewController = uiFactory.createColorSchemeControlViewController();
@@ -58,7 +59,7 @@ window.ApplicationCore.AppCore.prototype =
         appDetailsViewController.setupDetails(window.Common.ApplicationDetails);
         this.menuController = uiFactory.createMenuViewController();
         this.scrobblingControlViewController = uiFactory.createScrobblingControlViewController(this.onlineScrobbler);
-        this.playlistSaveViewController = uiFactory.createPlaylistSaveViewController();
+        this.playlistSaveViewController = uiFactory.createPlaylistSaveViewController(this.playlistRepositoryService, this.playlistService);
     },
 
     initialiseViewControllers: function(menuConfig)

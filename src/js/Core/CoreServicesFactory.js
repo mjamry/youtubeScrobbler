@@ -56,10 +56,14 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new window.Player.MediaPlayer(window.Player.MediaPlayerConfig, window.UI.UIConstants.PlayerContainer, playlistService);
     },
 
-    createPlaylistService: function(playlistElementDetailsProvider)
+    createPlaylistService: function(repositoryService, playlistElementDetailsProvider)
     {
-        var playlistRepo = new window.Playlist.PlaylistLocalRepository();
-        return new window.Player.PlaylistService(playlistRepo, playlistElementDetailsProvider);
+        return new window.Player.PlaylistService(repositoryService, playlistElementDetailsProvider);
+    },
+
+    createPlaylistRepositoryService: function()
+    {
+        return new window.Playlist.PlaylistRepositoryService(new window.Playlist.PlaylistLocalRepository());
     },
 
     createPlaybackDetailsService: function(player)
