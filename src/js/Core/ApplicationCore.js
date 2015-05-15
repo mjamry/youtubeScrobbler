@@ -41,7 +41,6 @@ window.ApplicationCore.AppCore.prototype =
         this.playbackControlService.initialise();
         this.onlineScrobbler.initialise();
         this.playlistService.initialise();
-        this.playlistManagementService.initialise();
     },
 
     createViewControllers: function(uiFactory, lastFmServicesFactory)
@@ -62,7 +61,7 @@ window.ApplicationCore.AppCore.prototype =
         this.menuController = uiFactory.createMenuViewController();
         this.scrobblingControlViewController = uiFactory.createScrobblingControlViewController(this.onlineScrobbler);
         this.playlistSaveViewController = uiFactory.createPlaylistSaveViewController(this.playlistRepositoryService, this.playlistService);
-        this.playlistManageViewController = uiFactory.createPlaylistManageViewController();
+        this.playlistManageViewController = uiFactory.createPlaylistManageViewController(this.playlistManagementService);
     },
 
     initialiseViewControllers: function(menuConfig)

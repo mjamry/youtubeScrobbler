@@ -156,8 +156,8 @@ window.UI.UIControllersFactory.prototype =
         return new window.UI.PlaylistSaveViewController(window.UI.PlaylistSaveConfiguration, playlistRepositoryService, playlistService);
     },
 
-    createPlaylistManageViewController: function()
+    createPlaylistManageViewController: function(playlistManager)
     {
-        return new window.UI.PlaylistManageViewController(window.UI.PlaylistManageConfiguration);
+        return new window.UI.PlaylistManageViewController(window.UI.PlaylistManageConfiguration, playlistManager);
     }
 };

@@ -17,10 +17,5 @@ window.Services.PlaylistManagementService.prototype =
     {
         //load playlist - using playlist service ?
         this.playlistRepoService.load(playlistDetails.id, playlistDetails.repository);
-    },
-
-    initialise: function()
-    {
-        var pl = this.loadPlaylistDetailsForAllPlaylists("Local");
     }
 };
