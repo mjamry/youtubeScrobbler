@@ -35,7 +35,13 @@ window.Playlist.PlaylistLocalRepository.prototype =
     //returns window.Playlist.PlaylistDetails
     _getData: function()
     {
-        return LocalStorage.getInstance().getData(this.playlistStorageName);
+        var data = LocalStorage.getInstance().getData(this.playlistStorageName);
+        if(!data)
+        {
+            data = {};
+        }
+
+        return data;
     },
 
     load: function(name)
@@ -63,7 +69,20 @@ window.Playlist.PlaylistLocalRepository.prototype =
 
     getAllPlaylists: function()
     {
-        return this._getData();
+        var playlistsDetails = [];
+        var storedPlaylists = this._getData();
+        var plNames = Object.keys(storedPlaylists);
+        plNames.forEach(function(item)
+        {
+            //deserialize to get appropriate playlist
+            var playlist = new window.Player.Playlist();
+            playlist.deserialize(storedPlaylists[item].playlist.mediaList);
+            storedPlaylists[item].playlist = playlist;
+
+            playlistsDetails.push(storedPlaylists[item]);
+        });
+
+        return playlistsDetails;
     },
 
     getRepoName: function()
