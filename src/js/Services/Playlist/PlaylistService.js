@@ -7,7 +7,7 @@ window.Common = window.Common || {};
 
 window.Services.PlaylistService = function(playlistRepo, playlistElementDetailsProvider)
 {
-    this.playlist = new window.Playlist.PersistentPlaylist(new window.Playlist.PlaylistLocalRepository());
+    this.playlist = new window.Playlist.PersistentPlaylist(new window.Playlist.PlaylistLocalRepository(), "currentPlaylistState");
     this.currentPlaylistDetails = new window.Playlist.PlaylistDetails();
     this.playlistRepository = playlistRepo;
     this.detailsProvider = playlistElementDetailsProvider;

@@ -5,33 +5,10 @@ window.Playlist = window.Playlist || {};
 window.Playlist.PlaylistLocalRepository = function()
 {
     this.playlistStorageName = "playlists";
-    this.storageName = "Local";
 };
 
 window.Playlist.PlaylistLocalRepository.prototype =
 {
-    _storeData: function(name, data)
-    {
-        var storedData = this._getData();
-        if(storedData === null)
-        {
-            storedData = {};
-        }
-
-        var playlistDetails = storedData[name];
-        if(!playlistDetails)
-        {
-            playlistDetails = new window.Playlist.PlaylistDetails();
-            playlistDetails.name = name;
-            playlistDetails.storageType = this.storageName;
-        }
-
-        playlistDetails.playlist = data;
-        storedData[name] = playlistDetails;
-
-        LocalStorage.getInstance().setData(this.playlistStorageName, storedData);
-    },
-
     //returns window.Playlist.PlaylistDetails
     _getData: function()
     {
@@ -62,9 +39,26 @@ window.Playlist.PlaylistLocalRepository.prototype =
 
     },
 
-    save: function(name, playlist)
+    save: function(playlistDetails)
     {
-        this._storeData(name, playlist);
+        var storedData = this._getData();
+        if(storedData === null)
+        {
+            storedData = {};
+        }
+
+        //var playlistDetails = storedData[name];
+        //if(!playlistDetails)
+        //{
+        //    playlistDetails = new window.Playlist.PlaylistDetails();
+        //    playlistDetails.name = name;
+        //    playlistDetails.storageType = this.storageName;
+        //}
+        //
+        //playlistDetails.playlist = data;
+        storedData[playlistDetails.name] = playlistDetails;
+
+        LocalStorage.getInstance().setData(this.playlistStorageName, storedData);
     },
 
     getAllPlaylists: function()
@@ -87,6 +81,6 @@ window.Playlist.PlaylistLocalRepository.prototype =
 
     getRepoName: function()
     {
-        return this.storageName;
+        return window.Playlist.PlaylistRepositoryNames.Local;
     }
 };

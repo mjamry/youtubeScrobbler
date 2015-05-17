@@ -18,17 +18,14 @@ window.UI.PlaylistSaveViewController.prototype =
 
     _savePlaylist: function()
     {
-        var name = this.view.find(this.config.PlaylistName).val();
-        var description = this.view.find(this.config.PlaylistDescription).val();
-        var playlist = this.playlistService.getPlaylist();
-
         var playlistDetails = new window.Playlist.PlaylistDetails();
-        playlistDetails.playlist = playlist;
-        playlistDetails.name = name;
-        playlistDetails.id = name;
-        playlistDetails.description = description;
+        playlistDetails.playlist = this.playlistService.getPlaylist();
+        playlistDetails.name = this.view.find(this.config.PlaylistName).val();
+        playlistDetails.id = this.view.find(this.config.PlaylistName).val();
+        playlistDetails.description = this.view.find(this.config.PlaylistDescription).val();
+        playlistDetails.storageType = this.view.find(this.config.PlaylistStorage).val();
 
-        this.repository.save(name, playlist);
+        this.repository.save(playlistDetails);
         EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistSaved, playlistDetails);
         this._close();
     },
