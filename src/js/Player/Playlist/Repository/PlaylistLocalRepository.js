@@ -21,14 +21,14 @@ window.Playlist.PlaylistLocalRepository.prototype =
         return data;
     },
 
-    load: function(name)
+    load: function(playlistDetails)
     {
         var storedData = this._getData();
         var playlist = new window.Player.Playlist();
 
-        if(storedData !== null && storedData[name])
+        if(storedData !== null && storedData[playlistDetails.name])
         {
-            playlist.deserialize(storedData[name].playlist.mediaList);
+            playlist.deserialize(storedData[playlistDetails.name].playlist.mediaList);
         }
 
         return playlist;
@@ -47,17 +47,7 @@ window.Playlist.PlaylistLocalRepository.prototype =
             storedData = {};
         }
 
-        //var playlistDetails = storedData[name];
-        //if(!playlistDetails)
-        //{
-        //    playlistDetails = new window.Playlist.PlaylistDetails();
-        //    playlistDetails.name = name;
-        //    playlistDetails.storageType = this.storageName;
-        //}
-        //
-        //playlistDetails.playlist = data;
         storedData[playlistDetails.name] = playlistDetails;
-
         LocalStorage.getInstance().setData(this.playlistStorageName, storedData);
     },
 

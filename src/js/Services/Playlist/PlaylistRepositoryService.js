@@ -11,9 +11,9 @@ window.Services.PlaylistRepositoryService = function(repository)
 
 window.Services.PlaylistRepositoryService.prototype =
 {
-    load: function(id, repository)
+    load: function(playlistDetails)
     {
-        var playlist = this.innerRepository.load(id);
+        var playlist = this.innerRepository.load(playlistDetails);
 
         var msg = "";
         if(!playlist.isEmpty())

@@ -1,11 +1,13 @@
 window.Playlist = window.Playlist || {};
 
-window.Playlist.PersistentPlaylist = function(storage, persistentName)
+window.Playlist.PersistentPlaylist = function(repositoryService, storageType, persistentName)
 {
     this.innerPlaylist = new window.Player.Playlist();
-    this.repository = new window.Services.PlaylistRepositoryService(storage);
+    this.repository = repositoryService;
+
     this.persistentPlaylistDetails = new window.Playlist.PlaylistDetails();
     this.persistentPlaylistDetails.name = persistentName;
+    this.persistentPlaylistDetails.storageType = storageType;
 };
 
 window.Playlist.PersistentPlaylist.prototype =
@@ -60,7 +62,7 @@ window.Playlist.PersistentPlaylist.prototype =
 
     getStoredState: function()
     {
-        return this.repository.load(this.persistentPlaylistName);
+        return this.repository.load(this.persistentPlaylistDetails);
     },
 
     set: function(playlist)
