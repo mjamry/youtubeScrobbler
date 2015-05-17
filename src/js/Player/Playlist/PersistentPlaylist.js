@@ -2,7 +2,6 @@ window.Playlist = window.Playlist || {};
 
 window.Playlist.PersistentPlaylist = function(repositoryService, storageType, persistentName)
 {
-    this.innerPlaylist = new window.Player.Playlist();
     this.repository = repositoryService;
 
     this.persistentPlaylistDetails = new window.Playlist.PlaylistDetails();
@@ -14,50 +13,50 @@ window.Playlist.PersistentPlaylist.prototype =
 {
     _saveState: function()
     {
-        this.persistentPlaylistDetails.playlist = this.innerPlaylist;
-        this.repository.save(this.persistentPlaylistDetails);        
+        this.repository.save(this.persistentPlaylistDetails);
     },
     
     addItem: function(mediaDetails)
     {
+        this.persistentPlaylistDetails.playlist.addItem(mediaDetails);
         this._saveState();
-        this.innerPlaylist.addItem(mediaDetails);
     },
 
     addPlaylist: function(playlist)
     {
+
+        this.persistentPlaylistDetails.playlist.addPlaylist(playlist);
         this._saveState();
-        this.innerPlaylist.addPlaylist(playlist);
     },
 
     insert: function(index, mediaDetails)
     {
+        this.persistentPlaylistDetails.playlist.insert(index, mediaDetails);
         this._saveState();
-        this.innerPlaylist.insert(index, mediaDetails);
     },
 
     remove: function(index)
     {
+        this.persistentPlaylistDetails.playlist.remove(index);
         this._saveState();
-        this.innerPlaylist.remove(index);
     },
 
     replace: function(index, mediaDetails)
     {
+        this.persistentPlaylistDetails.playlist.replace(index, mediaDetails);
         this._saveState();
-        this.innerPlaylist.replace(index, mediaDetails);
     },
 
     shuffle: function()
     {
+        this.persistentPlaylistDetails.playlist.shuffle();
         this._saveState();
-        this.innerPlaylist.shuffle();
     },
 
     //non persistent methods
     getCurrentState: function()
     {
-        return this.innerPlaylist;
+        return this.persistentPlaylistDetails.playlist;
     },
 
     getStoredState: function()
@@ -67,31 +66,32 @@ window.Playlist.PersistentPlaylist.prototype =
 
     set: function(playlist)
     {
-        this.innerPlaylist = playlist;
+        this.persistentPlaylistDetails.playlist = playlist;
+        this._saveState();
     },
 
     get: function(index)
     {
-        return this.innerPlaylist.get(index);
+        return this.persistentPlaylistDetails.playlist.get(index);
     },
 
     first: function()
     {
-        return this.innerPlaylist.first();
+        return this.persistentPlaylistDetails.playlist.first();
     },
 
     last: function()
     {
-        return this.innerPlaylist.last();
+        return this.persistentPlaylistDetails.playlist.last();
     },
 
     length: function()
     {
-        return this.innerPlaylist.length();
+        return this.persistentPlaylistDetails.playlist.length();
     },
 
     isEmpty: function()
     {
-        return this.innerPlaylist.isEmpty();
+        return this.persistentPlaylistDetails.playlist.isEmpty();
     }
 };
