@@ -58,7 +58,8 @@ window.ApplicationCore.CoreServicesFactory.prototype =
 
     createPlaylistService: function(repositoryService, playlistElementDetailsProvider)
     {
-        return new window.Services.PlaylistService(repositoryService, playlistElementDetailsProvider);
+        var initialPlaylist = new window.Playlist.PersistentPlaylist(repositoryService, window.Playlist.PlaylistRepositoryNames.Local, "currentPlaylistState");
+        return new window.Services.PlaylistService(playlistElementDetailsProvider, initialPlaylist);
     },
 
     createPlaylistRepositoryService: function()

@@ -5,11 +5,10 @@ window.Services = window.Services || {};
 window.Common = window.Common || {};
 
 
-window.Services.PlaylistService = function(playlistRepo, playlistElementDetailsProvider)
+window.Services.PlaylistService = function(playlistElementDetailsProvider, initialPlaylist)
 {
-    this.playlist = new window.Playlist.PersistentPlaylist(playlistRepo, window.Playlist.PlaylistRepositoryNames.Local, "currentPlaylistState");
+    this.playlist = initialPlaylist;
     this.currentPlaylistDetails = new window.Playlist.PlaylistDetails();
-    this.playlistRepository = playlistRepo;
     this.detailsProvider = playlistElementDetailsProvider;
     Logger.getInstance().info("Playlist service has been created.");
 };
@@ -48,6 +47,7 @@ window.Services.PlaylistService.prototype =
     _setPlaylist: function(playlist)
     {
         this.playlist.set(playlist);
+        //TODO this should be in other place
         if(!playlist.isEmpty())
         {
             this._onPlaylistCreated();
