@@ -736,8 +736,6 @@ body
     border:1px solid darkgray;
     background-color: lightgray;
     color:black;
-
-
 }
 
 .playlist-details-name
@@ -745,6 +743,11 @@ body
     background-color: lightskyblue;
     text-align: center;
     height:25px;
+}
+
+.playlist-details-id
+{
+    display: none;
 }
 
 .playlist-details-tags
