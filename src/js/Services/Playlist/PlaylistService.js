@@ -54,6 +54,12 @@ window.Services.PlaylistService.prototype =
         }
     },
 
+    setPlaylist: function(playlistDetails)
+    {
+        this.currentPlaylistDetails = playlistDetails;
+        this._setPlaylist(this.currentPlaylistDetails.playlist);
+    },
+
     initialise: function()
     {
         this._setPlaylist(this.playlist.getStoredState());

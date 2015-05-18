@@ -32,7 +32,7 @@ window.ApplicationCore.AppCore.prototype =
         this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistFlowController);
         this.playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.playlistDetailsProvider, lastFmServicesFactory.createTrackLoveStateModifier());
         this.welcomeScreenService = coreServicesFactory.createWelcomeService();
-        this.playlistManagementService = coreServicesFactory.createPlaylistManagementService(this.playlistRepositoryService);
+        this.playlistManagementService = coreServicesFactory.createPlaylistManagementService(this.playlistRepositoryService, this.playlistService);
     },
 
     initialiseAppServices: function()

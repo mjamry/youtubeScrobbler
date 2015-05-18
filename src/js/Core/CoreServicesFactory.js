@@ -104,9 +104,9 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new window.Services.SearchService(searchDetailsProviders);
     },
 
-    createPlaylistManagementService: function(playlistRepoService)
+    createPlaylistManagementService: function(playlistRepoService, playlistService)
     {
-        return new window.Services.PlaylistManagementService(playlistRepoService);
+        return new window.Services.PlaylistManagementService(playlistRepoService, playlistService);
     }
 };
 

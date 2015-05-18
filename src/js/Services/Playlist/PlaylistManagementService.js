@@ -1,8 +1,9 @@
 window.Services = window.Services || {};
 
-window.Services.PlaylistManagementService = function(playlistRepositoryService)
+window.Services.PlaylistManagementService = function(playlistRepositoryService, playlistService)
 {
     this.playlistRepoService = playlistRepositoryService;
+    this.playlistService = playlistService;
 };
 
 window.Services.PlaylistManagementService.prototype =
@@ -15,7 +16,7 @@ window.Services.PlaylistManagementService.prototype =
 
     loadPlaylist: function(playlistDetails)
     {
-        //load playlist - using playlist service ?
-        this.playlistRepoService.load(playlistDetails.id, playlistDetails.repository);
+        var loadedPlaylistDetails = this.playlistRepoService.load(playlistDetails);
+        this.playlistService.setPlaylist(loadedPlaylistDetails);
     }
 };
