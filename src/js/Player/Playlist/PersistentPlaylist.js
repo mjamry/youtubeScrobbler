@@ -6,6 +6,7 @@ window.Playlist.PersistentPlaylist = function(repositoryService, storageType, pe
 
     this.persistentPlaylistDetails = new window.Playlist.PlaylistDetails();
     this.persistentPlaylistDetails.name = persistentName;
+    this.persistentPlaylistDetails.id = persistentName;
     this.persistentPlaylistDetails.storageType = storageType;
 };
 
@@ -61,7 +62,7 @@ window.Playlist.PersistentPlaylist.prototype =
 
     getStoredState: function()
     {
-        return this.repository.load(this.persistentPlaylistDetails);
+        return this.repository.load(this.persistentPlaylistDetails.name, this.persistentPlaylistDetails.storageType);
     },
 
     set: function(playlist)

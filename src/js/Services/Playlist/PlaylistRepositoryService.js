@@ -11,15 +11,16 @@ window.Services.PlaylistRepositoryService = function(repository)
 
 window.Services.PlaylistRepositoryService.prototype =
 {
-    load: function(playlistDetails)
+    load: function(id, repo)
     {
-        var playlist = this.innerRepository.load(playlistDetails);
+        //TODO select appropriate repository using repo value
+        var playlistDetails = this.innerRepository.load(id);
 
         var msg = "";
-        if(!playlist.isEmpty())
+        if(!playlistDetails.playlist.isEmpty())
         {
             //this._onPlaylistCreated();
-            msg = playlist.length() + " item(s) have been read and added to the playlist.";
+            msg = playlistDetails.playlist.length() + " item(s) have been read and added to the playlist.";
         }
         else
         {
@@ -28,7 +29,7 @@ window.Services.PlaylistRepositoryService.prototype =
 
         Logger.getInstance().info(msg);
         UserNotifier.getInstance().info(msg);
-        return playlist;
+        return playlistDetails;
     },
 
     save: function(playlistDetails)

@@ -14,9 +14,9 @@ window.Services.PlaylistManagementService.prototype =
         return playlistRepos[repo].getAllPlaylists();
     },
 
-    loadPlaylist: function(playlistDetails)
+    loadPlaylist: function(id, repo)
     {
-        var loadedPlaylistDetails = this.playlistRepoService.load(playlistDetails);
+        var loadedPlaylistDetails = this.playlistRepoService.load(id, repo);
         this.playlistService.setPlaylist(loadedPlaylistDetails);
     }
 };

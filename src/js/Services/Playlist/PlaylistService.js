@@ -46,6 +46,7 @@ window.Services.PlaylistService.prototype =
 
     _setPlaylist: function(playlist)
     {
+        //TODO use playlistDetails instead of playlist
         this.playlist.set(playlist);
         //TODO this should be in other place
         if(!playlist.isEmpty())
@@ -62,7 +63,7 @@ window.Services.PlaylistService.prototype =
 
     initialise: function()
     {
-        this._setPlaylist(this.playlist.getStoredState());
+        this._setPlaylist(this.playlist.getStoredState().playlist);
 
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistSaved, this._onPlaylistSaved.bind(this));
     },

@@ -21,17 +21,20 @@ window.Playlist.PlaylistLocalRepository.prototype =
         return data;
     },
 
-    load: function(playlistDetails)
+    load: function(name)
     {
         var storedData = this._getData();
-        var playlist = new window.Player.Playlist();
+        var plDetails = new window.Playlist.PlaylistDetails();
 
-        if(storedData !== null && storedData[playlistDetails.name])
+        if(storedData !== null && storedData[name])
         {
-            playlist.deserialize(storedData[playlistDetails.name].playlist.mediaList);
+            plDetails = storedData[name];
+            var playlist = new window.Player.Playlist();
+            playlist.deserialize(plDetails.playlist.mediaList);
+            plDetails.playlist = playlist;
         }
 
-        return playlist;
+        return plDetails;
     },
 
     delete: function(name)
