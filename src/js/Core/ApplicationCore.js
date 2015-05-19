@@ -32,6 +32,7 @@ window.ApplicationCore.AppCore.prototype =
         this.playbackControlService = coreServicesFactory.createPlaybackControlService(this.player, this.playlistFlowController);
         this.playlistElementLoveStateModifier = playerServicesFactory.createPlaylistElementLoveStateModifier(this.playlistDetailsProvider, lastFmServicesFactory.createTrackLoveStateModifier());
         this.welcomeScreenService = coreServicesFactory.createWelcomeService();
+        this.playlistManagementService = coreServicesFactory.createPlaylistManagementService(this.playlistRepositoryService, this.playlistService);
     },
 
     initialiseAppServices: function()
@@ -60,6 +61,7 @@ window.ApplicationCore.AppCore.prototype =
         this.menuController = uiFactory.createMenuViewController();
         this.scrobblingControlViewController = uiFactory.createScrobblingControlViewController(this.onlineScrobbler);
         this.playlistSaveViewController = uiFactory.createPlaylistSaveViewController(this.playlistRepositoryService, this.playlistService);
+        this.playlistManageViewController = uiFactory.createPlaylistManageViewController(this.playlistManagementService);
     },
 
     initialiseViewControllers: function(menuConfig)
@@ -78,6 +80,7 @@ window.ApplicationCore.AppCore.prototype =
         this.menuController.initialise();
         this.scrobblingControlViewController.initialise();
         this.playlistSaveViewController.initialise();
+        this.playlistManageViewController.initialise();
 
         this._initialiseMenu(menuConfig);
 

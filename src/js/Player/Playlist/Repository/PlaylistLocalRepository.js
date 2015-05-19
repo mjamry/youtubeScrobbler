@@ -5,50 +5,36 @@ window.Playlist = window.Playlist || {};
 window.Playlist.PlaylistLocalRepository = function()
 {
     this.playlistStorageName = "playlists";
-    this.storageName = "Local";
 };
 
 window.Playlist.PlaylistLocalRepository.prototype =
 {
-    _storeData: function(name, data)
-    {
-        var storedData = this._getData();
-        if(storedData === null)
-        {
-            storedData = {};
-        }
-
-        var playlistDetails = storedData[name];
-        if(!playlistDetails)
-        {
-            playlistDetails = new window.Playlist.PlaylistDetails();
-            playlistDetails.name = name;
-            playlistDetails.storageType = this.storageName;
-        }
-
-        playlistDetails.playlist = data;
-        storedData[name] = playlistDetails;
-
-        LocalStorage.getInstance().setData(this.playlistStorageName, storedData);
-    },
-
     //returns window.Playlist.PlaylistDetails
     _getData: function()
     {
-        return LocalStorage.getInstance().getData(this.playlistStorageName);
+        var data = LocalStorage.getInstance().getData(this.playlistStorageName);
+        if(!data)
+        {
+            data = {};
+        }
+
+        return data;
     },
 
     load: function(name)
     {
         var storedData = this._getData();
-        var playlist = new window.Player.Playlist();
+        var plDetails = new window.Playlist.PlaylistDetails();
 
         if(storedData !== null && storedData[name])
         {
-            playlist.deserialize(storedData[name].playlist.mediaList);
+            plDetails = storedData[name];
+            var playlist = new window.Player.Playlist();
+            playlist.deserialize(plDetails.playlist.mediaList);
+            plDetails.playlist = playlist;
         }
 
-        return playlist;
+        return plDetails;
     },
 
     delete: function(name)
@@ -56,13 +42,38 @@ window.Playlist.PlaylistLocalRepository.prototype =
 
     },
 
-    save: function(name, playlist)
+    save: function(playlistDetails)
     {
-        this._storeData(name, playlist);
+        var storedData = this._getData();
+        if(storedData === null)
+        {
+            storedData = {};
+        }
+
+        storedData[playlistDetails.name] = playlistDetails;
+        LocalStorage.getInstance().setData(this.playlistStorageName, storedData);
     },
 
     getAllPlaylists: function()
     {
-        return this._getData();
+        var playlistsDetails = [];
+        var storedPlaylists = this._getData();
+        var plNames = Object.keys(storedPlaylists);
+        plNames.forEach(function(item)
+        {
+            //deserialize to get appropriate playlist
+            var playlist = new window.Player.Playlist();
+            playlist.deserialize(storedPlaylists[item].playlist.mediaList);
+            storedPlaylists[item].playlist = playlist;
+
+            playlistsDetails.push(storedPlaylists[item]);
+        });
+
+        return playlistsDetails;
+    },
+
+    getRepoName: function()
+    {
+        return window.Playlist.PlaylistRepositoryNames.Local;
     }
 };

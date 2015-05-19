@@ -715,7 +715,50 @@ body
     vertical-align: middle;
 }
 
-/*------------------------------SEARCH---RESULTS--------------------------------------------*/
+/*------------------------------PLAYLIST--DETAILS--------------------------------------------*/
+#playlist-manager
+{
+    display: inline;
+    float: left;
+}
+
+.playlist-details-view
+{
+    width:300px;
+    margin-left:10px;
+    margin-bottom:10px;
+
+    display: inline;
+    float: left;
+
+    cursor: pointer;
+
+    border:1px solid darkgray;
+    background-color: lightgray;
+    color:black;
+}
+
+.playlist-details-name
+{
+    background-color: lightskyblue;
+    text-align: center;
+    height:25px;
+}
+
+.playlist-details-id
+{
+    display: none;
+}
+
+.playlist-details-tags
+{
+    padding-left:5px;
+    padding-right:5px;
+    max-height: 25px;
+    overflow: hidden;
+}
+
+    /*------------------------------SEARCH---RESULTS--------------------------------------------*/
 #search-results
 {
     width:500px;

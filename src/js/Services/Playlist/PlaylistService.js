@@ -1,20 +1,19 @@
 //namespace
-window.Player = window.Player || {};
+window.Services = window.Services || {};
 
 //using
 window.Common = window.Common || {};
 
 
-window.Player.PlaylistService = function(playlistRepo, playlistElementDetailsProvider)
+window.Services.PlaylistService = function(playlistElementDetailsProvider, initialPlaylist)
 {
-    this.playlist = new window.Playlist.PersistentPlaylist(new window.Playlist.PlaylistLocalRepository());
+    this.playlist = initialPlaylist;
     this.currentPlaylistDetails = new window.Playlist.PlaylistDetails();
-    this.playlistRepository = playlistRepo;
     this.detailsProvider = playlistElementDetailsProvider;
     Logger.getInstance().info("Playlist service has been created.");
 };
 
-window.Player.PlaylistService.prototype =
+window.Services.PlaylistService.prototype =
 {
     _onPlaylistCreated: function()
     {
@@ -47,16 +46,27 @@ window.Player.PlaylistService.prototype =
 
     _setPlaylist: function(playlist)
     {
+        var wasPreviousPlaylistEmpty = this.playlist.isEmpty();
         this.playlist.set(playlist);
-        if(!playlist.isEmpty())
+        if(wasPreviousPlaylistEmpty && !playlist.isEmpty())
         {
             this._onPlaylistCreated();
         }
+        else
+        {
+            this._updatePlaylist();
+        }
+    },
+
+    setPlaylist: function(playlistDetails)
+    {
+        this.currentPlaylistDetails = playlistDetails;
+        this._setPlaylist(this.currentPlaylistDetails.playlist);
     },
 
     initialise: function()
     {
-        this._setPlaylist(this.playlist.getStoredState());
+        this._setPlaylist(this.playlist.getStoredState().playlist);
 
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistSaved, this._onPlaylistSaved.bind(this));
     },

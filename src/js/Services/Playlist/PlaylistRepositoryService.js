@@ -1,25 +1,26 @@
 //namepasce
-window.Playlist = window.Playlist || {};
+window.Services = window.Services || {};
 
 ///It is a container/wrapper for playlist repository.
 ///It can use different types of storage - depending on passed data provider.
 ///Responsibility is to pass queries to inner data provider and be an access point to playlist data.
-window.Playlist.PlaylistRepositoryService = function(repository)
+window.Services.PlaylistRepositoryService = function(repository)
 {
     this.innerRepository = repository;
 };
 
-window.Playlist.PlaylistRepositoryService.prototype =
+window.Services.PlaylistRepositoryService.prototype =
 {
-    load: function(id, repository)
+    load: function(id, repo)
     {
-        var playlist = this.innerRepository.load(id);
+        //TODO select appropriate repository using repo value
+        var playlistDetails = this.innerRepository.load(id);
 
         var msg = "";
-        if(!playlist.isEmpty())
+        if(!playlistDetails.playlist.isEmpty())
         {
             //this._onPlaylistCreated();
-            msg = playlist.length() + " item(s) have been read and added to the playlist.";
+            msg = playlistDetails.playlist.length() + " item(s) have been read and added to the playlist.";
         }
         else
         {
@@ -28,18 +29,15 @@ window.Playlist.PlaylistRepositoryService.prototype =
 
         Logger.getInstance().info(msg);
         UserNotifier.getInstance().info(msg);
-        return playlist;
+        return playlistDetails;
     },
 
-    save: function(id, playlist, repository)
+    save: function(playlistDetails)
     {
+        //TODO check playlistDetails.storageType and choose right repository
+        this.innerRepository.save(playlistDetails);
 
-
-        this.innerRepository.save(id, playlist);
-
-
-
-        var msg = "Playlist has been saved with "+playlist.length()+" element(s).";
+        var msg = "Playlist has been saved with "+playlistDetails.playlist.length()+" element(s).";
         Logger.getInstance().info(msg);
         UserNotifier.getInstance().info(msg);
     },
@@ -52,10 +50,8 @@ window.Playlist.PlaylistRepositoryService.prototype =
     //returns a hash table containing repo name (for UI) and its instance
     availableRepositories: function()
     {
-        var exampleRepos = {
-            name: "",
-            instance: ""
-        };
+        var exampleRepos = [];
+        exampleRepos[this.innerRepository.getRepoName()] = this.innerRepository;
 
         return exampleRepos;
     },

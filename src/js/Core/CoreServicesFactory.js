@@ -58,12 +58,13 @@ window.ApplicationCore.CoreServicesFactory.prototype =
 
     createPlaylistService: function(repositoryService, playlistElementDetailsProvider)
     {
-        return new window.Player.PlaylistService(repositoryService, playlistElementDetailsProvider);
+        var initialPlaylist = new window.Playlist.PersistentPlaylist(repositoryService, window.Playlist.PlaylistRepositoryNames.Local, "currentPlaylistState");
+        return new window.Services.PlaylistService(playlistElementDetailsProvider, initialPlaylist);
     },
 
     createPlaylistRepositoryService: function()
     {
-        return new window.Playlist.PlaylistRepositoryService(new window.Playlist.PlaylistLocalRepository());
+        return new window.Services.PlaylistRepositoryService(new window.Playlist.PlaylistLocalRepository());
     },
 
     createPlaybackDetailsService: function(player)
@@ -87,7 +88,7 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         dataProvides[window.Playlist.PlaylistLoaderTypes.Youtube] = dataProvider;
         var playlistLoadersFactory = new window.Playlist.PlaylistLoadersFactory(dataProvides);
 
-        return new window.Playlist.PlaylistLoaderService(playlistService, playlistLoadersFactory);
+        return new window.Services.PlaylistLoaderService(playlistService, playlistLoadersFactory);
     },
 
     createWelcomeService: function()
@@ -101,6 +102,11 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         searchDetailsProviders[window.Google.ServiceNames.Youtube] = dataProvider;
 
         return new window.Services.SearchService(searchDetailsProviders);
+    },
+
+    createPlaylistManagementService: function(playlistRepoService, playlistService)
+    {
+        return new window.Services.PlaylistManagementService(playlistRepoService, playlistService);
     }
 };
 
