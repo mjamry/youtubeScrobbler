@@ -559,6 +559,11 @@ body
     margin-right: 1px;
 }
 
+.playback-control-button > i
+{
+    line-height: 35px;
+}
+
 /*---------------------------VOLUME---CONTROL------------*/
 #playback-control-volume-container
 {
