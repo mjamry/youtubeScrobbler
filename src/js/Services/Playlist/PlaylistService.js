@@ -46,14 +46,16 @@ window.Services.PlaylistService.prototype =
 
     _setPlaylist: function(playlist)
     {
-        //new playlist overwrites empty one
-        if(this.playlist.isEmpty() && !playlist.isEmpty())
+        var wasPreviousPlaylistEmpty = this.playlist.isEmpty();
+        this.playlist.set(playlist);
+        if(wasPreviousPlaylistEmpty && !playlist.isEmpty())
         {
             this._onPlaylistCreated();
         }
-
-        //TODO use playlistDetails instead of playlist
-        this.playlist.set(playlist);
+        else
+        {
+            this._updatePlaylist();
+        }
     },
 
     setPlaylist: function(playlistDetails)
