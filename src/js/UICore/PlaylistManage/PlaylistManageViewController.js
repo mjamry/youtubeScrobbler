@@ -23,6 +23,13 @@ window.UI.PlaylistManageViewController.prototype =
 
     _updateView: function()
     {
+        //clear the view
+        this.view.empty();
+        this._setUpView();
+    },
+
+    _setUpView: function()
+    {
         var playlistsDetails = this.playlistManager.loadPlaylistDetailsForAllPlaylists("Local");
 
         playlistsDetails.forEach(function(plDetails)
@@ -43,6 +50,7 @@ window.UI.PlaylistManageViewController.prototype =
 
     initialise: function()
     {
-        this._updateView();
+        this._setUpView();
+        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistSaved, this._updateView.bind(this));
     }
 };
