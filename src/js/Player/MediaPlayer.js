@@ -40,7 +40,7 @@ window.Player.MediaPlayer.prototype =
             {
                 return function mediaPlayerInitialisationSuccessCallback(mediaElement)
                 {
-                    LoadingIndicatorService.getInstance().show("Please be patient.<br>Player is being loaded.");
+                    LoadingIndicatorService.getInstance().show({title: "Please be patient.<br>Player is being loaded."});
                     that.instance = mediaElement;
                     that._initialise(mediaElement);
 
