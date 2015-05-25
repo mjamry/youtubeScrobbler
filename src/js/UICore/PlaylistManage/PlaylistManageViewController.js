@@ -53,7 +53,7 @@ window.UI.PlaylistManageViewController.prototype =
             item[this.config.values.name] = plDetails.name;
             item[this.config.values.id] = plDetails.id;
             item[this.config.values.description] = plDetails.description;
-            item[this.config.values.count] = plDetails.playlist.length();
+            item[this.config.values.count] = plDetails.playlist.length() + " item(s)";
             item[this.config.values.storage] = plDetails.storageType;
 
             this.list.add(item);
