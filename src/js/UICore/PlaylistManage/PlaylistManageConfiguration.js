@@ -8,6 +8,14 @@ window.UI.PlaylistManageConfiguration =
     PlaylistDescr: ".playlist-details-description",
     PlaylistItemsCount: ".playlist-details-items-count",
     PlaylistStorage: ".playlist-details-storage",
-    PlaylistTags: ".playlist-details-tags"
+    PlaylistTags: ".playlist-details-tags",
 
+    values:
+    {
+        name: "name",
+        id: "id",
+        description: "description",
+        count: "count",
+        storage: "storage"
+    }
 };
