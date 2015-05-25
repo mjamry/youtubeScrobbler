@@ -760,17 +760,11 @@ body
     height:50px;
     background-image: url("../img/playlistBg.png");
     border-radius: 4px 4px 0 0;
-    line-height: 70px;
 
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 
-    font-size: 22px;
-    font-weight: bold;
-    color: #fff;
-
-    padding: 0 10px 0 10px;
 
 }
 
@@ -804,10 +798,25 @@ body
     margin:0 5px 0 5px;
 }
 
+.playlist-details-name
+{
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+
+    line-height: 50px;
+}
+
 .playlist-details-description
 {
-    font-size: 10pt;
-    color:gray;
+    font-size: 11pt;
+    margin:10px 5px 0 5px;
+}
+
+.playlist-details-count, .playlist-details-storage
+{
+    margin: 5px !important;
+    line-height:15px !important;
 }
 
 .playlist-details-id
