@@ -10,6 +10,9 @@ window.UI.PlaylistManageConfiguration =
     PlaylistStorage: ".playlist-details-storage",
     PlaylistTags: ".playlist-details-tags",
 
+    PlaylistSearch: "playlist-list-search",
+    PlaylistSort: "playlist-list-sort",
+
     values:
     {
         name: "name",

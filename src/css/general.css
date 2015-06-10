@@ -727,6 +727,7 @@ body
 {
     display: inline;
     float: left;
+    width:100%;
 }
 
 .playlist-details-view

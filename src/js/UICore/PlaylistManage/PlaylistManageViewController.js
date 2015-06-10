@@ -16,7 +16,9 @@ window.UI.PlaylistManageViewController = function(config, view, playlistManager)
             this.config.values.storage
         ],
         //html() returns only inside of element, to there is a need to wrap everything in div and get parent's html
-        item: $("#controls-schemes "+this.config.PlaylistDetailsContainer).clone().wrap("<div />").parent().html()
+        item: $("#controls-schemes "+this.config.PlaylistDetailsContainer).clone().wrap("<div />").parent().html(),
+        searchClass: this.config.PlaylistSearch,
+        sortClass: this.config.PlaylistSort
     };
 
     this.list = new List("playlist-manager", options);
