@@ -12,6 +12,7 @@ window.UI.PlaylistManageConfiguration =
 
     PlaylistSearch: "playlist-list-search",
     PlaylistSort: "playlist-list-sort",
+    PlaylistSortClass: ".playlist-list-sort",
 
     values:
     {

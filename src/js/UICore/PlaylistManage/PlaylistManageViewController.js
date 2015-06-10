@@ -65,6 +65,19 @@ window.UI.PlaylistManageViewController.prototype =
     initialise: function()
     {
         this._setUpView();
+
+        var sortCtrl = this.view.find(this.config.PlaylistSortClass);
+        for(var val in this.config.values)
+        {
+            if(val !== this.config.values.id)
+            {
+                var sortOption = document.createElement("option");
+                sortOption.value = val;
+                sortOption.innerHTML = val;
+                sortCtrl.append(sortOption);
+            }
+        }
+
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistSaved, this._updateView.bind(this));
     }
 };

@@ -993,7 +993,12 @@ body
     clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
     clip: rect(1px, 1px, 1px, 1px);
 }
-/*----------------------------MENU----------------------*/
+
+.app-page-header
+{
+    height: 80px;
+}
+    /*----------------------------MENU----------------------*/
 #menu
 {
     width:200px;
