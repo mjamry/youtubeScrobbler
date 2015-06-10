@@ -24,22 +24,18 @@ window.UI.PlaylistManageViewController = function(config, view, playlistManager)
 
 window.UI.PlaylistManageViewController.prototype =
 {
-    _hookUpToClickAction: function(that)
+    _hookUpToClickAction: function(item)
     {
         return function()
         {
-            var playlistDetailsItem = $(this);
-            var id = playlistDetailsItem.find(that.config.PlaylistName).text();
-            var storageType = playlistDetailsItem.find(that.config.PlaylistStorage).text();
-
-            that.playlistManager.loadPlaylist(id, storageType);
+            this.playlistManager.loadPlaylist(item[this.config.values.id], item[this.config.values.storage]);
         }
     },
 
     _updateView: function()
     {
         //clear the view
-        this.view.empty();
+        this.list.clear();
         this._setUpView();
     },
 
@@ -57,6 +53,10 @@ window.UI.PlaylistManageViewController.prototype =
             item[this.config.values.storage] = plDetails.storageType;
 
             this.list.add(item);
+
+            var plItem = this.list.get(this.config.values.id, plDetails.id)[0].elm;
+            $(plItem).click(this._hookUpToClickAction(item).bind(this));
+
         }.bind(this));
     },
 
