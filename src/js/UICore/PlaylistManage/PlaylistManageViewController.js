@@ -17,8 +17,7 @@ window.UI.PlaylistManageViewController = function(config, view, playlistManager)
         ],
         //html() returns only inside of element, to there is a need to wrap everything in div and get parent's html
         item: $("#controls-schemes "+this.config.PlaylistDetailsContainer).clone().wrap("<div />").parent().html(),
-        searchClass: this.config.PlaylistSearch,
-        sortClass: this.config.PlaylistSort
+        searchClass: this.config.PlaylistSearch
     };
 
     this.list = new List("playlist-manager", options);
@@ -62,6 +61,12 @@ window.UI.PlaylistManageViewController.prototype =
         }.bind(this));
     },
 
+    _handleSortSelected: function()
+    {
+        var selection = this.view.find(this.config.PlaylistSortClass).find(":selected").text();
+        this.list.sort(selection);
+    },
+
     initialise: function()
     {
         this._setUpView();
@@ -77,6 +82,8 @@ window.UI.PlaylistManageViewController.prototype =
                 sortCtrl.append(sortOption);
             }
         }
+
+        sortCtrl.on("change", this._handleSortSelected.bind(this));
 
         EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistSaved, this._updateView.bind(this));
     }
