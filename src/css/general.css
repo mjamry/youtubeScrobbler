@@ -1015,7 +1015,7 @@ body
 {
     /*display: inline;*/
     width:220px;
-    height:35px;
+    height:50px;
     cursor:pointer;
     padding-top:10px;
     padding-bottom:10px;
@@ -1035,18 +1035,14 @@ body
 
 .menu-item-button
 {
-    width: 35px;
-    height: 35px;
-    margin-left:10px;
+    padding-left:10px !important;
 }
 
 .menu-item-title
 {
-    width: 150px;
-    height:35px;
-    line-height: 35px;
+    line-height: 30px;
     font-size:13pt;
-    margin-left:15px;
+    padding-left:1px;
 }
 /*----------------------------LOGGER----------------------*/
 #logger-content
