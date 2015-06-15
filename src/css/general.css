@@ -298,7 +298,6 @@ body
 #media-location
 {
     width: 400px;
-    height: 40px;
     padding:0;
 }
 
@@ -693,7 +692,6 @@ body
 /*----------------------------PLAYLIST--ADD---------------*/
 .playlist-add-container
 {
-    height:40px;
     width:500px;
     margin-left:auto;
     margin-right:auto;
@@ -702,20 +700,8 @@ body
 .playlist-add-input
 {
     text-align:center;
-    height:35px;
     font-size: 9pt;
     vertical-align: top;
-}
-
-.playlist-add-button
-{
-    height:40px !important;
-    border-style:none;
-}
-
-.playlist-add-button > i
-{
-    line-height: 40px;
 }
 
 /*------------------------------PLAYLIST--DETAILS--------------------------------------------*/
