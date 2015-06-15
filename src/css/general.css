@@ -28,12 +28,9 @@ body
 
 #page-content
 {
-    min-height:300px;
-    width: 90%;
     padding-bottom: 100px;
-    padding-left:50px;
-    margin-left:auto;
-    margin-right:auto;
+    width:90%;
+    margin:auto;
     display:none;
 }
 
@@ -503,7 +500,7 @@ body
 /*------------------------------MEDIA------------------*/
 #player
 {
-    width:900px;
+    max-width:970px;
     margin:auto;
     position:relative;
 }
@@ -726,7 +723,6 @@ body
 {
     display: inline;
     float: left;
-    width:100%;
 }
 
 .playlist-details-view
@@ -981,7 +977,7 @@ body
 /*----------------------------PAGES----------------------*/
 .application-page
 {
-    padding:15px;
+    padding:15px 15px 15px 55px;
 }
 
 .application-page-hidden
