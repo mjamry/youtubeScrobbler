@@ -288,13 +288,6 @@ body
     width:100%;
 }
 /*-----------------------------INPUT------------------------*/
-#input-form
-{
-    width: 800px;
-    height: 70px;
-    margin:auto;
-}
-
 #media-location
 {
     width: 400px;
@@ -499,9 +492,9 @@ body
 /*------------------------------MEDIA------------------*/
 #player
 {
-    max-width:970px;
-    margin:auto;
-    position:relative;
+    width:100%;
+    display: inline;
+    float: left;
 }
 
 #media-player
@@ -707,6 +700,7 @@ body
 /*------------------------------PLAYLIST--DETAILS--------------------------------------------*/
 #playlist-manager
 {
+    width:100%;
     display: inline;
     float: left;
 }
