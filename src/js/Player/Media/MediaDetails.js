@@ -24,6 +24,15 @@ window.Player.AlbumDetails = function(details)
     };
 };
 
+window.Player.TagDetails = function(details)
+{
+    return details ||
+    {
+        name: "",
+        url: ""
+    }
+};
+
 window.Player.MediaDetails = function(){};
 
 window.Player.MediaDetails.prototype =
@@ -37,7 +46,7 @@ window.Player.MediaDetails.prototype =
     id: "",       //media id from portal e.g lastFm - used to indicate if details has been already obtained
     album: new window.Player.AlbumDetails(),
     loved: "",       //determine if track has been loved already
-    tags: "",
+    tags: [],
 
     _deepCopy: function(source)
     {
