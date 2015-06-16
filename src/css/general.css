@@ -821,9 +821,7 @@ body
 #search-results
 {
     width:500px;
-    margin-left:145px;
     position: absolute;
-
     display: none;
 }
 
