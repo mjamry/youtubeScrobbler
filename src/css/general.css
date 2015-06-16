@@ -28,12 +28,9 @@ body
 
 #page-content
 {
-    min-height:300px;
-    width: 90%;
     padding-bottom: 100px;
-    padding-left:50px;
-    margin-left:auto;
-    margin-right:auto;
+    width:90%;
+    margin:auto;
     display:none;
 }
 
@@ -291,17 +288,9 @@ body
     width:100%;
 }
 /*-----------------------------INPUT------------------------*/
-#input-form
-{
-    width: 800px;
-    height: 70px;
-    margin:auto;
-}
-
 #media-location
 {
     width: 400px;
-    height: 40px;
     padding:0;
 }
 
@@ -503,9 +492,9 @@ body
 /*------------------------------MEDIA------------------*/
 #player
 {
-    width:900px;
-    margin:auto;
-    position:relative;
+    width:100%;
+    display: inline;
+    float: left;
 }
 
 #media-player
@@ -696,7 +685,6 @@ body
 /*----------------------------PLAYLIST--ADD---------------*/
 .playlist-add-container
 {
-    height:40px;
     width:500px;
     margin-left:auto;
     margin-right:auto;
@@ -705,28 +693,16 @@ body
 .playlist-add-input
 {
     text-align:center;
-    height:35px;
     font-size: 9pt;
     vertical-align: top;
-}
-
-.playlist-add-button
-{
-    height:40px !important;
-    border-style:none;
-}
-
-.playlist-add-button > i
-{
-    line-height: 40px;
 }
 
 /*------------------------------PLAYLIST--DETAILS--------------------------------------------*/
 #playlist-manager
 {
+    width:100%;
     display: inline;
     float: left;
-    width:100%;
 }
 
 .playlist-details-view
@@ -845,9 +821,7 @@ body
 #search-results
 {
     width:500px;
-    margin-left:145px;
     position: absolute;
-
     display: none;
 }
 
@@ -981,7 +955,7 @@ body
 /*----------------------------PAGES----------------------*/
 .application-page
 {
-    padding:15px;
+    padding:15px 15px 15px 55px;
 }
 
 .application-page-hidden
@@ -1008,14 +982,14 @@ body
     top:70px;
     bottom:0;
     left:0;
-    z-index:1;
+    z-index:99;
 }
 
 .menu-item-container
 {
     /*display: inline;*/
     width:220px;
-    height:35px;
+    height:50px;
     cursor:pointer;
     padding-top:10px;
     padding-bottom:10px;
@@ -1035,18 +1009,14 @@ body
 
 .menu-item-button
 {
-    width: 35px;
-    height: 35px;
-    margin-left:10px;
+    padding-left:10px !important;
 }
 
 .menu-item-title
 {
-    width: 150px;
-    height:35px;
-    line-height: 35px;
+    line-height: 30px;
     font-size:13pt;
-    margin-left:15px;
+    padding-left:1px;
 }
 /*----------------------------LOGGER----------------------*/
 #logger-content
