@@ -24,15 +24,6 @@ window.Player.AlbumDetails = function(details)
     };
 };
 
-window.Player.TagDetails = function(details)
-{
-    return details ||
-    {
-        name: "",
-        url: ""
-    }
-};
-
 window.Player.MediaDetails = function(){};
 
 window.Player.MediaDetails.prototype =
