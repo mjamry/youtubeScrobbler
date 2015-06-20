@@ -105,6 +105,16 @@ window.UI.PlaylistSaveViewController.prototype =
         }
 
         var tags =  this._getPlaylistTopTags(currentPlaylist.playlist);
+
+        var tagsContainer = this.view.find(this.config.PlaylistTagsContainer);
+        tags.forEach(function(tag)
+        {
+            var tagLabel = document.createElement("div");
+            tagLabel.className += this.config.PlaylistTagItem;
+            tagLabel.innerHTML = tag.name;
+            tagsContainer.append(tagLabel);
+        }.bind(this));
+
         this.modalId = ModalService.getInstance().show({content: this.view});
     },
 
