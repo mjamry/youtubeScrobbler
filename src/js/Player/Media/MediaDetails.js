@@ -78,5 +78,6 @@ window.Player.MediaDetails.prototype =
         this.mediaType = data.mediaType;
         this.id = data.id;
         this.loved = data.loved;
+        this.tags = data.tags || [];
     }
 };
