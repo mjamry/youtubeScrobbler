@@ -79,7 +79,7 @@ window.LastFm.LastFmTrackInformationProvider.prototype =
             );
         }
 
-        if(trackDetails.track.toptags)
+        if(trackDetails.track.toptags.tag)
         {
             mediaDetails.tags = trackDetails.track.toptags.tag;
         }

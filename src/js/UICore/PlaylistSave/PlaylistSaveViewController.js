@@ -24,6 +24,7 @@ window.UI.PlaylistSaveViewController.prototype =
         playlistDetails.id = this.view.find(this.config.PlaylistName).val();
         playlistDetails.description = this.view.find(this.config.PlaylistDescription).val();
         playlistDetails.storageType = this.view.find(this.config.PlaylistStorage).val();
+      //  playlistDetails.tags = this.view.find(this.config.Playlist)
 
         this.repository.save(playlistDetails);
         EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistSaved, playlistDetails);
@@ -33,6 +34,88 @@ window.UI.PlaylistSaveViewController.prototype =
     _close: function()
     {
         ModalService.getInstance().close(this.modalId);
+    },
+
+    _test: function()
+    {
+        function sort(a,b)
+        {
+            console.log("a");
+            if(a.count < b.count)
+                return -1;
+            if(a.count > b.count)
+                return 1;
+            return 0;
+        }
+
+
+        var arr1 = [];
+        var arrSrc = ['1','2','1','3','2','1','3','2','4','2'];
+
+        for(var i=0;i<arrSrc.length;i++)
+        {
+            if(!arr1.hasOwnProperty(arrSrc[i]))
+                arr1[arrSrc[i]] = {name: arrSrc[i], count: 0};
+            arr1[arrSrc[i]].count += 1;
+        }
+
+        console.log(arr1);
+        console.log(arr1.keys);
+        arr1.sort(sort);
+        console.log(arr1);
+    },
+
+    _getPlaylistTopTags: function(playlist)
+    {
+        var NB_OF_TOP_TAGS = 5;
+
+        function sort(a,b)
+        {
+            console.log(";");
+            if(a.count < b.count)
+                return 1;
+            if(a.count > b.count)
+                return -1;
+            return 0;
+        }
+
+        var allTags = [];
+
+        for(var i=0;i<playlist.length();i++)
+        {
+            var trackTags = playlist.get(i).tags;
+
+            for(var j=0;j<trackTags.length;j++)
+            {
+                if(!allTags.hasOwnProperty(trackTags[j].name))
+                {
+                    allTags[trackTags[j].name] = {tag: trackTags[j], count: 0};
+                }
+
+                allTags[trackTags[j].name].count++;
+            }
+        }
+
+        var allTagsToSort = [];
+        var i = 0;
+        for(var key in allTags)
+        {
+            allTagsToSort[i] = allTags[key];
+            i++;
+        }
+
+        allTagsToSort.sort(sort);
+        console.log(allTagsToSort);
+
+        var topTags = allTagsToSort.slice(0, NB_OF_TOP_TAGS);
+
+        var output = [];
+        for(var i=0;i<topTags.length;i++)
+        {
+            output[i] = topTags[i].tag;
+        }
+
+        return output;
     },
 
     show: function()
@@ -48,9 +131,10 @@ window.UI.PlaylistSaveViewController.prototype =
         {
             this.view.find(this.config.PlaylistName).val(currentPlaylist.name);
             this.view.find(this.config.PlaylistDescription).val(currentPlaylist.description);
-            //TODO add repository and tags to the save dialog
-        }
 
+        }
+         this._test();
+        var tags =  this._getPlaylistTopTags(currentPlaylist.playlist);
         this.modalId = ModalService.getInstance().show({content: this.view});
     },
 
