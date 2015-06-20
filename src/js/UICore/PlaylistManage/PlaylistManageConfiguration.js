@@ -20,6 +20,7 @@ window.UI.PlaylistManageConfiguration =
         id: "id",
         description: "description",
         count: "count",
-        storage: "storage"
+        storage: "storage",
+        tags: "tags"
     }
 };

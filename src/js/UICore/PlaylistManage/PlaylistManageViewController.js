@@ -13,7 +13,8 @@ window.UI.PlaylistManageViewController = function(config, view, playlistManager)
             this.config.values.id,
             this.config.values.description,
             this.config.values.count,
-            this.config.values.storage
+            this.config.values.storage,
+            this.config.values.tags
         ],
         //html() returns only inside of element, to there is a need to wrap everything in div and get parent's html
         item: $("#controls-schemes "+this.config.PlaylistDetailsContainer).clone().wrap("<div />").parent().html(),
@@ -52,6 +53,13 @@ window.UI.PlaylistManageViewController.prototype =
             item[this.config.values.description] = plDetails.description;
             item[this.config.values.count] = plDetails.playlist.length() + " item(s)";
             item[this.config.values.storage] = plDetails.storageType;
+            var tags = [];
+            plDetails.tags.forEach(function(tag)
+            {
+                tags.push(tag.name);
+            });
+
+            item[this.config.values.tags] = tags;
 
             this.list.add(item);
 
