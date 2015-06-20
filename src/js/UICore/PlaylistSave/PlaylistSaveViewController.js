@@ -7,6 +7,8 @@ window.UI.PlaylistSaveViewController = function(config, playlistRepositoryServic
     this.modalId = null;
     this.repository = playlistRepositoryService;
     this.playlistService = playlistService;
+
+    this.tagList;
 };
 
 window.UI.PlaylistSaveViewController.prototype =
@@ -24,7 +26,9 @@ window.UI.PlaylistSaveViewController.prototype =
         playlistDetails.id = this.view.find(this.config.PlaylistName).val();
         playlistDetails.description = this.view.find(this.config.PlaylistDescription).val();
         playlistDetails.storageType = this.view.find(this.config.PlaylistStorage).val();
-      //  playlistDetails.tags = this.view.find(this.config.Playlist)
+
+
+        playlistDetails.tags =
 
         this.repository.save(playlistDetails);
         EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistSaved, playlistDetails);
@@ -71,7 +75,7 @@ window.UI.PlaylistSaveViewController.prototype =
         var i = 0;
         for(var key in allTags)
         {
-            allTagsToSort[i] = allTags[key];
+            allTagsToSort[i] = allTags[key].tag;
             i++;
         }
 
@@ -80,13 +84,7 @@ window.UI.PlaylistSaveViewController.prototype =
 
         var topTags = allTagsToSort.slice(0, NB_OF_TOP_TAGS);
 
-        var output = [];
-        for(var i=0;i<topTags.length;i++)
-        {
-            output[i] = topTags[i].tag;
-        }
-
-        return output;
+        return topTags;
     },
 
     show: function()
@@ -104,18 +102,12 @@ window.UI.PlaylistSaveViewController.prototype =
             this.view.find(this.config.PlaylistDescription).val(currentPlaylist.description);
         }
 
-        var tags =  this._getPlaylistTopTags(currentPlaylist.playlist);
-
-        var tagsContainer = this.view.find(this.config.PlaylistTagsContainer);
-        tags.forEach(function(tag)
-        {
-            var tagLabel = document.createElement("div");
-            tagLabel.className += this.config.PlaylistTagItem;
-            tagLabel.innerHTML = tag.name;
-            tagsContainer.append(tagLabel);
-        }.bind(this));
 
         this.modalId = ModalService.getInstance().show({content: this.view});
+        this.tagList = new List("playlist-save-tags", {item: '<div class="label playlist-save-tag"><div class="name"></div></div>'});
+        var tags =  this._getPlaylistTopTags(currentPlaylist.playlist);
+        this.tagList.add(tags);
+
     },
 
     initialise: function()

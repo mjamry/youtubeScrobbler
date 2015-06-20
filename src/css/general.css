@@ -882,6 +882,17 @@ body
     height:25px;
     width:25px;
 }
+/*----------------------------PLAYLIST--SAVE----------------------*/
+#playlist-save-tags
+{
+    display: block;
+}
+
+.playlist-save-tag
+{
+    color:white;
+    margin:2px;
+}
 /*----------------------------NOTIFICATIONS----------------------*/
 #user-notifications-container
 {
