@@ -36,35 +36,6 @@ window.UI.PlaylistSaveViewController.prototype =
         ModalService.getInstance().close(this.modalId);
     },
 
-    _test: function()
-    {
-        function sort(a,b)
-        {
-            console.log("a");
-            if(a.count < b.count)
-                return -1;
-            if(a.count > b.count)
-                return 1;
-            return 0;
-        }
-
-
-        var arr1 = [];
-        var arrSrc = ['1','2','1','3','2','1','3','2','4','2'];
-
-        for(var i=0;i<arrSrc.length;i++)
-        {
-            if(!arr1.hasOwnProperty(arrSrc[i]))
-                arr1[arrSrc[i]] = {name: arrSrc[i], count: 0};
-            arr1[arrSrc[i]].count += 1;
-        }
-
-        console.log(arr1);
-        console.log(arr1.keys);
-        arr1.sort(sort);
-        console.log(arr1);
-    },
-
     _getPlaylistTopTags: function(playlist)
     {
         var NB_OF_TOP_TAGS = 5;
@@ -131,9 +102,8 @@ window.UI.PlaylistSaveViewController.prototype =
         {
             this.view.find(this.config.PlaylistName).val(currentPlaylist.name);
             this.view.find(this.config.PlaylistDescription).val(currentPlaylist.description);
-
         }
-         this._test();
+
         var tags =  this._getPlaylistTopTags(currentPlaylist.playlist);
         this.modalId = ModalService.getInstance().show({content: this.view});
     },
