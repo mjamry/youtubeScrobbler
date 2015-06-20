@@ -26,9 +26,13 @@ window.UI.PlaylistSaveViewController.prototype =
         playlistDetails.id = this.view.find(this.config.PlaylistName).val();
         playlistDetails.description = this.view.find(this.config.PlaylistDescription).val();
         playlistDetails.storageType = this.view.find(this.config.PlaylistStorage).val();
+        var tags = [];
+        this.tagList.items.forEach(function(item)
+        {
+            tags.push(item._values);
+        });
 
-
-        playlistDetails.tags =
+        playlistDetails.tags = tags;
 
         this.repository.save(playlistDetails);
         EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistSaved, playlistDetails);
