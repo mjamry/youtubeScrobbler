@@ -65,6 +65,12 @@ window.Services.PlaylistService.prototype =
 
     setPlaylist: function(playlistDetails)
     {
+        if(!this.currentPlaylistDetails.isAlreadySaved)
+        {
+            //TODO: ask user if is sure to clear unsaved playlist
+            Logger.getInstance().info("Current playlist has not been saved yet.");
+        }
+
         this._clearPlaylist();
         this.currentPlaylistDetails = playlistDetails;
         this._setPlaylist(this.currentPlaylistDetails.playlist);
