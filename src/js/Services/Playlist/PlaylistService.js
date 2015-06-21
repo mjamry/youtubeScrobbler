@@ -58,8 +58,14 @@ window.Services.PlaylistService.prototype =
         }
     },
 
+    _clearPlaylist: function()
+    {
+        this._setPlaylist(new window.Player.Playlist());
+    },
+
     setPlaylist: function(playlistDetails)
     {
+        this._clearPlaylist();
         this.currentPlaylistDetails = playlistDetails;
         this._setPlaylist(this.currentPlaylistDetails.playlist);
     },
@@ -88,7 +94,7 @@ window.Services.PlaylistService.prototype =
             },
             this));
 
-        this._setPlaylist(new window.Player.Playlist());
+        this._clearPlaylist();
         this._onPlaylistCleared();
         this._updatePlaylist();
     },

@@ -12,6 +12,8 @@ window.Playlist.PlaylistDetails.prototype =
     tags: [],
     playlist: new window.Player.Playlist(),
 
+    isAlreadySaved: false,
+
     deserialize: function(data)
     {
         this.id = data.id;
