@@ -886,6 +886,7 @@ body
 #playlist-save-tags
 {
     display: block;
+    overflow: hidden;
 }
 
 .playlist-save-tag

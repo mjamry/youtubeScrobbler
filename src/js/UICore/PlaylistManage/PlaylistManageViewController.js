@@ -53,16 +53,20 @@ window.UI.PlaylistManageViewController.prototype =
             item[this.config.values.description] = plDetails.description;
             item[this.config.values.count] = plDetails.playlist.length() + " item(s)";
             item[this.config.values.storage] = plDetails.storageType;
-            var tags = [];
-            plDetails.tags.forEach(function(tag)
-            {
-                tags.push(tag.name);
-            });
-
-            item[this.config.values.tags] = tags;
 
             this.list.add(item);
 
+            //get tags container for current playlist - need to get an list element of ID the same as previously created item.
+            var tagsContainer = $(this.list.get(this.config.values.id, plDetails.id)[0].elm).find(this.config.PlaylistTags)[0];
+            var tagsList = new List(tagsContainer,
+                {
+                    valueNames: this.config.values.name,
+                    item: this.config.PlaylistTagTemplate
+                });
+
+            tagsList.add(plDetails.tags);
+
+            //add click actions to the playlist
             var plItem = this.list.get(this.config.values.id, plDetails.id)[0].elm;
             $(plItem).click(this._hookUpToClickAction(item).bind(this));
 
