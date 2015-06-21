@@ -106,9 +106,10 @@ window.UI.PlaylistSaveViewController.prototype =
             this.view.find(this.config.PlaylistDescription).val(currentPlaylist.description);
         }
 
-        this.modalId = ModalService.getInstance().show({content: this.view});
-        this.tagList = new List(this.config.PlaylistTagsContainer, {item: this.config.PlaylistTagTemplate});
         var tags =  this._getPlaylistTopTags(currentPlaylist.playlist);
+        this.modalId = ModalService.getInstance().show({content: this.view});
+
+        this.tagList = new List(this.config.PlaylistTagsContainer, {item: this.config.PlaylistTagTemplate});
         this.tagList.add(tags);
     },
 
