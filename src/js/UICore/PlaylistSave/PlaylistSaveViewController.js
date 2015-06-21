@@ -8,6 +8,8 @@ window.UI.PlaylistSaveViewController = function(config, playlistRepositoryServic
     this.repository = playlistRepositoryService;
     this.playlistService = playlistService;
 
+    this.topTagsGenerator = new window.UI.PlaylistTagsGenerator();
+
     this.tagList;
 };
 
@@ -44,53 +46,6 @@ window.UI.PlaylistSaveViewController.prototype =
         ModalService.getInstance().close(this.modalId);
     },
 
-    _getPlaylistTopTags: function(playlist)
-    {
-        var NB_OF_TOP_TAGS = 5;
-
-        function sort(a,b)
-        {
-            console.log(";");
-            if(a.count < b.count)
-                return 1;
-            if(a.count > b.count)
-                return -1;
-            return 0;
-        }
-
-        var allTags = [];
-
-        for(var i=0;i<playlist.length();i++)
-        {
-            var trackTags = playlist.get(i).tags;
-
-            for(var j=0;j<trackTags.length;j++)
-            {
-                if(!allTags.hasOwnProperty(trackTags[j].name))
-                {
-                    allTags[trackTags[j].name] = {tag: trackTags[j], count: 0};
-                }
-
-                allTags[trackTags[j].name].count++;
-            }
-        }
-
-        var allTagsToSort = [];
-        var i = 0;
-        for(var key in allTags)
-        {
-            allTagsToSort[i] = allTags[key].tag;
-            i++;
-        }
-
-        allTagsToSort.sort(sort);
-        console.log(allTagsToSort);
-
-        var topTags = allTagsToSort.slice(0, NB_OF_TOP_TAGS);
-
-        return topTags;
-    },
-
     show: function()
     {
         this.view = $("#controls-schemes "+this.config.Container).clone();
@@ -106,7 +61,7 @@ window.UI.PlaylistSaveViewController.prototype =
             this.view.find(this.config.PlaylistDescription).val(currentPlaylist.description);
         }
 
-        var tags =  this._getPlaylistTopTags(currentPlaylist.playlist);
+        var tags =  this.topTagsGenerator.generate(currentPlaylist.playlist);
         this.modalId = ModalService.getInstance().show({content: this.view});
 
         this.tagList = new List(this.config.PlaylistTagsContainer, {item: this.config.PlaylistTagTemplate});
