@@ -893,6 +893,12 @@ body
     color:white;
     margin:2px;
 }
+
+.playlist-save
+{
+    max-width:500px;
+    min-width:350px;
+}
 /*----------------------------NOTIFICATIONS----------------------*/
 #user-notifications-container
 {
