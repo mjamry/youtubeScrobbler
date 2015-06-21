@@ -37,7 +37,7 @@ window.Player.MediaDetails.prototype =
     id: "",       //media id from portal e.g lastFm - used to indicate if details has been already obtained
     album: new window.Player.AlbumDetails(),
     loved: "",       //determine if track has been loved already
-    tags: "",
+    tags: [],
 
     _deepCopy: function(source)
     {
@@ -78,5 +78,6 @@ window.Player.MediaDetails.prototype =
         this.mediaType = data.mediaType;
         this.id = data.id;
         this.loved = data.loved;
+        this.tags = data.tags || [];
     }
 };

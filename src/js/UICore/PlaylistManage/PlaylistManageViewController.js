@@ -13,7 +13,8 @@ window.UI.PlaylistManageViewController = function(config, view, playlistManager)
             this.config.values.id,
             this.config.values.description,
             this.config.values.count,
-            this.config.values.storage
+            this.config.values.storage,
+            this.config.values.tags
         ],
         //html() returns only inside of element, to there is a need to wrap everything in div and get parent's html
         item: $("#controls-schemes "+this.config.PlaylistDetailsContainer).clone().wrap("<div />").parent().html(),
@@ -55,6 +56,17 @@ window.UI.PlaylistManageViewController.prototype =
 
             this.list.add(item);
 
+            //get tags container for current playlist - need to get an list element of ID the same as previously created item.
+            var tagsContainer = $(this.list.get(this.config.values.id, plDetails.id)[0].elm).find(this.config.PlaylistTags)[0];
+            var tagsList = new List(tagsContainer,
+                {
+                    valueNames: this.config.values.name,
+                    item: this.config.PlaylistTagTemplate
+                });
+
+            tagsList.add(plDetails.tags);
+
+            //add click actions to the playlist
             var plItem = this.list.get(this.config.values.id, plDetails.id)[0].elm;
             $(plItem).click(this._hookUpToClickAction(item).bind(this));
 

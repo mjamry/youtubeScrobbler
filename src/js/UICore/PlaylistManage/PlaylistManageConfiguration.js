@@ -14,12 +14,15 @@ window.UI.PlaylistManageConfiguration =
     PlaylistSort: "playlist-list-sort",
     PlaylistSortClass: ".playlist-list-sort",
 
+    PlaylistTagTemplate: '<div class="label playlist-save-tag"><div class="name"></div></div>',
+
     values:
     {
         name: "name",
         id: "id",
         description: "description",
         count: "count",
-        storage: "storage"
+        storage: "storage",
+        tags: "tags"
     }
 };

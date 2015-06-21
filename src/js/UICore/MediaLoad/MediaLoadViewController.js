@@ -74,12 +74,12 @@ window.UI.MediaLoadViewController.prototype =
     _handleInputGainedFocus: function()
     {
         //put a space just to remove placeholder.
-        this.mediaInput.val(" ");
+        //this.mediaInput.val(" ");
     },
 
     _handleInputLostFocus: function()
     {
-        this.searchControl.hide();
+       // this.searchControl.hide();
     },
 
     _submitForm: function()

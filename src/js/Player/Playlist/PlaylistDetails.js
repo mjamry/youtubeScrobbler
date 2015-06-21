@@ -9,6 +9,17 @@ window.Playlist.PlaylistDetails.prototype =
     description: "",
     count: "",
     storageType: "",
-    tags: "",
-    playlist: new window.Player.Playlist()
+    tags: [],
+    playlist: new window.Player.Playlist(),
+
+    deserialize: function(data)
+    {
+        this.id = data.id;
+        this.name = data.name;
+        this.description = data.description || "";
+        this.count = data.count;
+        this.storageType = data.storageType;
+        this.tags = data.tags || [];
+        this.playlist = data.playlist || new window.Player.Playlist();
+    }
 };

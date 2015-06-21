@@ -7,6 +7,10 @@ window.UI.PlaylistSaveViewController = function(config, playlistRepositoryServic
     this.modalId = null;
     this.repository = playlistRepositoryService;
     this.playlistService = playlistService;
+
+    this.topTagsGenerator = new window.UI.PlaylistTagsGenerator();
+
+    this.tagList;
 };
 
 window.UI.PlaylistSaveViewController.prototype =
@@ -24,6 +28,13 @@ window.UI.PlaylistSaveViewController.prototype =
         playlistDetails.id = this.view.find(this.config.PlaylistName).val();
         playlistDetails.description = this.view.find(this.config.PlaylistDescription).val();
         playlistDetails.storageType = this.view.find(this.config.PlaylistStorage).val();
+        var tags = [];
+        this.tagList.items.forEach(function(item)
+        {
+            tags.push(item._values);
+        });
+
+        playlistDetails.tags = tags;
 
         this.repository.save(playlistDetails);
         EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistSaved, playlistDetails);
@@ -48,10 +59,13 @@ window.UI.PlaylistSaveViewController.prototype =
         {
             this.view.find(this.config.PlaylistName).val(currentPlaylist.name);
             this.view.find(this.config.PlaylistDescription).val(currentPlaylist.description);
-            //TODO add repository and tags to the save dialog
         }
 
+        var tags =  this.topTagsGenerator.generate(currentPlaylist.playlist);
         this.modalId = ModalService.getInstance().show({content: this.view});
+
+        this.tagList = new List(this.config.PlaylistTagsContainer, {item: this.config.PlaylistTagTemplate});
+        this.tagList.add(tags);
     },
 
     initialise: function()

@@ -61,12 +61,14 @@ window.Playlist.PlaylistLocalRepository.prototype =
         var plNames = Object.keys(storedPlaylists);
         plNames.forEach(function(item)
         {
-            //deserialize to get appropriate playlist
+            var plDetails = new window.Playlist.PlaylistDetails();
+            plDetails.deserialize(storedPlaylists[item]);
+
             var playlist = new window.Player.Playlist();
             playlist.deserialize(storedPlaylists[item].playlist.mediaList);
-            storedPlaylists[item].playlist = playlist;
+            plDetails.playlist = playlist;
 
-            playlistsDetails.push(storedPlaylists[item]);
+            playlistsDetails.push(plDetails);
         });
 
         return playlistsDetails;
