@@ -35,6 +35,7 @@ window.UI.PlaylistSaveViewController.prototype =
         });
 
         playlistDetails.tags = tags;
+        playlistDetails.isAlreadySaved = true;
 
         this.repository.save(playlistDetails);
         EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistSaved, playlistDetails);
@@ -55,7 +56,7 @@ window.UI.PlaylistSaveViewController.prototype =
 
         var currentPlaylist = this.playlistService.getPlaylistDetails();
 
-        if(currentPlaylist.name !== null && currentPlaylist.id !== null)
+        if(currentPlaylist.isAlreadySaved)
         {
             this.view.find(this.config.PlaylistName).val(currentPlaylist.name);
             this.view.find(this.config.PlaylistDescription).val(currentPlaylist.description);
