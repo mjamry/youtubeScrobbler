@@ -39,8 +39,7 @@ window.Services.PlaylistRepositoryService.prototype =
 
         var msg = "Playlist has been saved with "+playlistDetails.playlist.length()+" element(s).";
         Logger.getInstance().info(msg);
-        UserNotifier.getInstance().info(msg);
-    },
+g    },
 
     delete: function(id, repository)
     {
