@@ -19,8 +19,7 @@ window.Services.PlaylistRepositoryService.prototype =
         var msg = "";
         if(!playlistDetails.playlist.isEmpty())
         {
-            //this._onPlaylistCreated();
-            msg = playlistDetails.playlist.length() + " item(s) have been read and added to the playlist.";
+            msg = "Playlist '"+playlistDetails.name+"' loaded. You have now " + playlistDetails.playlist.length() + " tracks in your playlist.";
         }
         else
         {
@@ -36,10 +35,6 @@ window.Services.PlaylistRepositoryService.prototype =
     {
         //TODO check playlistDetails.storageType and choose right repository
         this.innerRepository.save(playlistDetails);
-
-        var msg = "Playlist has been saved with "+playlistDetails.playlist.length()+" element(s).";
-        Logger.getInstance().info(msg);
-        UserNotifier.getInstance().info(msg);
     },
 
     delete: function(id, repository)
@@ -55,8 +50,6 @@ window.Services.PlaylistRepositoryService.prototype =
 
         return exampleRepos;
     },
-
-    //restore
 
     //TODO: remove it is temporarly only
     clearCurrentPlaylist: function()

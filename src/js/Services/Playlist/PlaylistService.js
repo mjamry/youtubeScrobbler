@@ -115,7 +115,7 @@ window.Services.PlaylistService.prototype =
             this._onPlaylistCreated();
         }
 
-        var msg = playlist.length()+" new item(s) have been successfully added to the playlist";
+        var msg = playlist.length()+" new item(s) have been successfully added to the playlist.";
         Logger.getInstance().info(msg);
         UserNotifier.getInstance().info(msg);
 
@@ -133,7 +133,7 @@ window.Services.PlaylistService.prototype =
             this._onPlaylistCreated();
         }
 
-        var msg = "New item have been successfully added to the playlist, on position: "+(index+1);
+        var msg = "Item '"+details.artist.name+" - "+details.title+"' have been successfully added to the playlist.";
         Logger.getInstance().info(msg);
         UserNotifier.getInstance().info(msg);
 
