@@ -917,7 +917,6 @@ body
 .user-notification-error
 {
     height:35px;
-    width:750px;
     margin-right:auto;
     margin-left:auto;
     margin-bottom:5px;
@@ -928,33 +927,21 @@ body
     text-align: center;
 }
 
-.user-notification-icon > i
+.user-notification-button,.user-notification-icon > i
 {
     margin-top:10px;
+}
+
+.user-notification-button
+{
+    padding:2px;
+    line-height:35px;
 }
 
 .user-notification-message
 {
     font-size: 12pt;
     line-height:35px;
-}
-
-.user-notification-undo
-{
-    right:0;
-}
-.user-notification-undo > button
-{
-    height:35px;
-    border-style: none;
-    background-color: transparent;
-}
-
-.user-notification-close > button
-{
-    border-style: none;
-    background-color: transparent;
-    margin-top:5px;
 }
 
 .user-notification-icon,
