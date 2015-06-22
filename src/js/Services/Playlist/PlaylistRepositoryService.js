@@ -49,11 +49,5 @@ window.Services.PlaylistRepositoryService.prototype =
         exampleRepos[this.innerRepository.getRepoName()] = this.innerRepository;
 
         return exampleRepos;
-    },
-
-    //TODO: remove it is temporarly only
-    clearCurrentPlaylist: function()
-    {
-        alert("current playlist cleared");
     }
 };
