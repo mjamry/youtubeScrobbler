@@ -912,12 +912,15 @@ body
     text-align: center;
 }
 
-.user-notification-button,.user-notification-icon > i
+.user-notification-close-button,
+.user-notification-undo-button,
+.user-notification-icon > i
 {
     margin-top:10px;
 }
 
-.user-notification-button
+.user-notification-close-button,
+.user-notification-undo-button,
 {
     padding:2px;
     line-height:35px;
