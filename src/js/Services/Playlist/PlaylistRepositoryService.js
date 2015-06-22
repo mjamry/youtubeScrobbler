@@ -36,10 +36,7 @@ window.Services.PlaylistRepositoryService.prototype =
     {
         //TODO check playlistDetails.storageType and choose right repository
         this.innerRepository.save(playlistDetails);
-
-        var msg = "Playlist has been saved with "+playlistDetails.playlist.length()+" element(s).";
-        Logger.getInstance().info(msg);
-g    },
+    },
 
     delete: function(id, repository)
     {
@@ -54,8 +51,6 @@ g    },
 
         return exampleRepos;
     },
-
-    //restore
 
     //TODO: remove it is temporarly only
     clearCurrentPlaylist: function()
