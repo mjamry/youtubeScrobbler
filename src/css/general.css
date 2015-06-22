@@ -29,8 +29,6 @@ body
 #page-content
 {
     padding-bottom: 100px;
-    width:90%;
-    margin:auto;
     display:none;
 }
 
@@ -490,13 +488,6 @@ body
 }
 
 /*------------------------------MEDIA------------------*/
-#player
-{
-    width:100%;
-    display: inline;
-    float: left;
-}
-
 #media-player
 {
     width: 450px;
@@ -961,7 +952,7 @@ body
 /*----------------------------PAGES----------------------*/
 .application-page
 {
-    padding:15px 15px 15px 55px;
+    padding: 25px 40px 15px 80px;
 }
 
 .application-page-hidden
