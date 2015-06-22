@@ -202,7 +202,6 @@ body
 #color-scheme-control
 {
     height:50px;
-    float: left;
     margin-left:20px;
     margin-top:10px;
 }
@@ -211,11 +210,6 @@ body
 {
     border-style:none;
     font-size: 10pt;
-}
-
-#settings-control-buttons-container
-{
-    float:right;
 }
 
 .settings-control-button
