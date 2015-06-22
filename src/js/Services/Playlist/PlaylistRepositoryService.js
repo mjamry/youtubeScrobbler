@@ -19,8 +19,7 @@ window.Services.PlaylistRepositoryService.prototype =
         var msg = "";
         if(!playlistDetails.playlist.isEmpty())
         {
-            //this._onPlaylistCreated();
-            msg = playlistDetails.playlist.length() + " item(s) have been read and added to the playlist.";
+            msg = "Playlist '"+playlistDetails.name+"' loaded. You have now " + playlistDetails.playlist.length() + " tracks in your playlist.";
         }
         else
         {
