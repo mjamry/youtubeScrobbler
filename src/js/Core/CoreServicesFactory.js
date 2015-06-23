@@ -8,6 +8,8 @@ window.ApplicationCore.CoreServicesFactory = function()
 {
     this._sessionProvider = null;
     this._googleApiWrapper = null;
+
+    this._currentPlaylistStateName = "sc_currentPlaylistState"
 };
 
 window.ApplicationCore.CoreServicesFactory.prototype =
@@ -58,13 +60,18 @@ window.ApplicationCore.CoreServicesFactory.prototype =
 
     createPlaylistService: function(repositoryService, playlistElementDetailsProvider)
     {
-        var initialPlaylist = new window.Playlist.PersistentPlaylist(repositoryService, window.Playlist.PlaylistRepositoryNames.Local, "currentPlaylistState");
+        var initialPlaylist = new window.Playlist.PersistentPlaylist(repositoryService, window.Playlist.PlaylistRepositoryNames.Local, this._currentPlaylistStateName);
         return new window.Services.PlaylistService(playlistElementDetailsProvider, initialPlaylist);
     },
 
     createPlaylistRepositoryService: function()
     {
-        return new window.Services.PlaylistRepositoryService(new window.Playlist.PlaylistLocalRepository());
+        var repos = {};
+        repos[window.Playlist.PlaylistRepositoryNames.Local] = new window.Playlist.PlaylistLocalRepository(this._currentPlaylistStateName);
+        //TODO: add api instead of null value
+        repos[window.Playlist.PlaylistRepositoryNames.Youtube] = new window.Playlist.PlaylistYoutubeRepository(null);
+
+        return new window.Services.PlaylistRepositoryService(repos);
     },
 
     createPlaybackDetailsService: function(player)
