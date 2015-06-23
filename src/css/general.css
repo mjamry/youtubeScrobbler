@@ -872,6 +872,7 @@ body
 {
     display: block;
     overflow: hidden;
+    min-width:250px;
 }
 
 .playlist-save-tag
