@@ -43,7 +43,7 @@ window.UI.PlaylistManageViewController.prototype =
 
     _setUpView: function()
     {
-        var playlistsDetails = this.playlistManager.loadPlaylistDetailsForAllPlaylists("Local");
+        var playlistsDetails = this.playlistManager.loadPlaylistDetailsForAllPlaylists(window.Playlist.PlaylistRepositoryNames.Local);
 
         playlistsDetails.forEach(function(plDetails)
         {
