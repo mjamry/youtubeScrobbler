@@ -2,9 +2,10 @@ window.Playlist = window.Playlist || {};
 
 ///Local repository to store playlists.
 ///It is basing on local storage - browser's cache.
-window.Playlist.PlaylistLocalRepository = function()
+window.Playlist.PlaylistLocalRepository = function(currentPlaylistName)
 {
     this.playlistStorageName = "playlists";
+    this.currentPlaylistStateName = currentPlaylistName;
 };
 
 window.Playlist.PlaylistLocalRepository.prototype =
@@ -61,15 +62,19 @@ window.Playlist.PlaylistLocalRepository.prototype =
         var plNames = Object.keys(storedPlaylists);
         plNames.forEach(function(item)
         {
-            var plDetails = new window.Playlist.PlaylistDetails();
-            plDetails.deserialize(storedPlaylists[item]);
+            //do not include current state of the playlist
+            if(storedPlaylists[item].name != this.currentPlaylistStateName)
+            {
+                var plDetails = new window.Playlist.PlaylistDetails();
+                plDetails.deserialize(storedPlaylists[item]);
 
-            var playlist = new window.Player.Playlist();
-            playlist.deserialize(storedPlaylists[item].playlist.mediaList);
-            plDetails.playlist = playlist;
+                var playlist = new window.Player.Playlist();
+                playlist.deserialize(storedPlaylists[item].playlist.mediaList);
+                plDetails.playlist = playlist;
 
-            playlistsDetails.push(plDetails);
-        });
+                playlistsDetails.push(plDetails);
+            }
+        }.bind(this));
 
         return playlistsDetails;
     },
