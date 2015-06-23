@@ -920,9 +920,9 @@ body
 }
 
 .user-notification-close-button,
-.user-notification-undo-button,
+.user-notification-undo-button
 {
-    padding:2px;
+    padding:4px;
     line-height:35px;
 }
 
