@@ -7,7 +7,8 @@ window.UI.PlaylistSaveConfiguration =
     PlaylistName: ".playlist-save-name",
     PlaylistDescription: ".playlist-save-description",
     PlaylistStorage: ".playlist-save-storage",
-    PlaylistTagsContainer: "playlist-save-tags",
+    PlaylistTagsContainer: ".playlist-save-tags-container",
+    PlaylistTagsList: "playlist-save-tags",
     PlaylistTagItem: "label",
 
     PlaylistTagTemplate: '<div class="label playlist-save-tag"><div class="name"></div></div>',

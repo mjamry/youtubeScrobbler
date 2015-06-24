@@ -868,11 +868,14 @@ body
     width:25px;
 }
 /*----------------------------PLAYLIST--SAVE----------------------*/
-#playlist-save-tags
+.playlist-save-tags-container
 {
-    display: block;
-    overflow: hidden;
-    min-width:250px;
+    display: none;
+}
+
+.playlist-save > form
+{
+    min-height:300px;
 }
 
 .playlist-save-tag
@@ -883,8 +886,8 @@ body
 
 .playlist-save
 {
-    max-width:500px;
-    min-width:350px;
+    max-width:550px;
+    min-width:450px;
 }
 /*----------------------------NOTIFICATIONS----------------------*/
 #user-notifications-container
