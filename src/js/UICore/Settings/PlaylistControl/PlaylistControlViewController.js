@@ -1,10 +1,11 @@
 //namespace
 window.UI = window.UI || {};
 
-window.UI.PlaylistControlViewController = function(playlistRepositoryService, playlistController, view, config)
+window.UI.PlaylistControlViewController = function(playlistRepositoryService, playlistController, playlistService, view, config)
 {
     this.playlistController = playlistController;
     this.playlistRepository = playlistRepositoryService;
+    this.playlistService = playlistService;
     this.config = config;
     this.view = view;
 };
@@ -13,7 +14,7 @@ window.UI.PlaylistControlViewController.prototype =
 {
     _clearPlaylist: function()
     {
-        this.playlistRepository.clearCurrentPlaylist();
+        this.playlistService.clearPlaylist();
     },
 
     _savePlaylist: function()

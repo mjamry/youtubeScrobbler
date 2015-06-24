@@ -91,14 +91,19 @@ window.Services.PlaylistService.prototype =
     //creates new empty playlist replacing existing one.
     clearPlaylist: function()
     {
+        var playlistToRestore = this.playlist.getCurrentState();
         var msg = "Playlist has been cleared. "+ this.playlist.length() +" item(s) removed.";
         Logger.getInstance().info(msg);
-        UserNotifier.getInstance().info(msg, $.proxy(
-            function()
+
+        var undoFunction = function(that, plToRestore)
+        {
+            return function()
             {
-                this._setPlaylist(this.playlist.getStoredState());
-            },
-            this));
+                that._setPlaylist(plToRestore);
+            }
+        };
+
+        UserNotifier.getInstance().info(msg, undoFunction(this, playlistToRestore));
 
         this._clearPlaylist();
         this._onPlaylistCleared();

@@ -43,7 +43,7 @@ window.UI.PlaylistManageViewController.prototype =
 
     _setUpView: function()
     {
-        var playlistsDetails = this.playlistManager.loadPlaylistDetailsForAllPlaylists("Local");
+        var playlistsDetails = this.playlistManager.loadPlaylistDetailsForAllPlaylists(window.Playlist.PlaylistRepositoryNames.Local);
 
         playlistsDetails.forEach(function(plDetails)
         {
@@ -57,6 +57,7 @@ window.UI.PlaylistManageViewController.prototype =
             this.list.add(item);
 
             //get tags container for current playlist - need to get an list element of ID the same as previously created item.
+
             var tagsContainer = $(this.list.get(this.config.values.id, plDetails.id)[0].elm).find(this.config.PlaylistTags)[0];
             var tagsList = new List(tagsContainer,
                 {
@@ -64,7 +65,10 @@ window.UI.PlaylistManageViewController.prototype =
                     item: this.config.PlaylistTagTemplate
                 });
 
-            tagsList.add(plDetails.tags);
+            if(plDetails.tags.length > 0)
+            {
+                tagsList.add(plDetails.tags);
+            }
 
             //add click actions to the playlist
             var plItem = this.list.get(this.config.values.id, plDetails.id)[0].elm;

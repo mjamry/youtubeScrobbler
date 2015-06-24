@@ -34,14 +34,14 @@
 </div>
 
 <!--USER NOTIFICATION-->
-<div class="pure-g user-notification">
-    <div class="pure-u-1-12 user-notification-icon"></div>
-    <div class="pure-u-3-4 user-notification-message"></div>
-    <div class="pure-u-1-8 user-notification-undo">
-        <button class="user-notification-undo-button"><i class="fa fa-reply"></i> undo</button>
+<div class="row user-notification">
+    <div class="columns large-1 user-notification-icon"></div>
+    <div class="columns large-8 user-notification-message"></div>
+    <div class="columns large-2 user-notification-undo">
+        <a class="user-notification-undo-button"><i class="fa fa-reply"></i> undo</a>
     </div>
-    <div class="pure-u-1-24 user-notification-close">
-        <button class="user-notification-close-button"><i class="fa fa-times"></i></button>
+    <div class="columns large-1 user-notification-close">
+        <a class="user-notification-close-button"><i class="fa fa-times"></i></a>
     </div>
 </div>
 
@@ -128,15 +128,16 @@
                 </label>
                 <label>Storage:
                     <select class="playlist-save-storage">
-                        <option value="local">Local (browser cache)</option>
-                        <option value="youtube">Youtube</option>
+                        <!--TODO remove static values and add dynamic ones using window.Playlist.PlaylistRepositoryNames-->
+                        <option value="Local">Local (browser cache)</option>
+                        <option value="Youtube">Youtube</option>
                     </select>
                 </label>
                 <a class="button left playlist-save-cancel-btn">Cancel</a>
                 <a class="button right playlist-save-btn">Save</a>
             </form>
         </div>
-        <div class="columns large-4 panel">
+        <div class="columns large-4 panel playlist-save-tags-container">
             <label>Tags:
                 <div class="row" id="playlist-save-tags">
                     <ul class="list"></ul>
@@ -154,18 +155,15 @@
     <div class="row playlist-details-header">
         <div class="playlist-details-name name"></div>
     </div>
-
     <div class="row">
-
         <div class="playlist-details-description description"></div>
     </div>
-
     <div class="row playlist-details-storage">
-        <div class="columns large-2"><i class="fa fa-pencil"></i></div>
+        <div class="columns large-2"><i class="fa fa-hdd-o"></i></div>
         <div class="columns large-10 storage"></div>
     </div>
     <div class="row playlist-details-count">
-        <div class="columns large-2"><i class="fa fa-pencil"></i></div>
+        <div class="columns large-2"><i class="fa fa-list-ol"></i></div>
         <div class="columns large-10  count"></div>
     </div>
     <div class="row">

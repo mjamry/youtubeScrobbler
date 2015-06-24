@@ -29,8 +29,6 @@ body
 #page-content
 {
     padding-bottom: 100px;
-    width:90%;
-    margin:auto;
     display:none;
 }
 
@@ -86,7 +84,7 @@ body
     height: 100%;
 
     position: absolute;
-    z-index: 98;
+    z-index: 100;
     display: none;
 }
 
@@ -204,7 +202,6 @@ body
 #color-scheme-control
 {
     height:50px;
-    float: left;
     margin-left:20px;
     margin-top:10px;
 }
@@ -213,11 +210,6 @@ body
 {
     border-style:none;
     font-size: 10pt;
-}
-
-#settings-control-buttons-container
-{
-    float:right;
 }
 
 .settings-control-button
@@ -490,13 +482,6 @@ body
 }
 
 /*------------------------------MEDIA------------------*/
-#player
-{
-    width:100%;
-    display: inline;
-    float: left;
-}
-
 #media-player
 {
     width: 450px;
@@ -708,7 +693,7 @@ body
 .playlist-details-view
 {
     width:280px;
-    height:250px;
+    height:200px;
     margin-left:20px;
     margin-bottom:20px;
 
@@ -883,10 +868,14 @@ body
     width:25px;
 }
 /*----------------------------PLAYLIST--SAVE----------------------*/
-#playlist-save-tags
+.playlist-save-tags-container
 {
-    display: block;
-    overflow: hidden;
+    display: none;
+}
+
+.playlist-save > form
+{
+    min-height:300px;
 }
 
 .playlist-save-tag
@@ -897,8 +886,8 @@ body
 
 .playlist-save
 {
-    max-width:500px;
-    min-width:350px;
+    max-width:550px;
+    min-width:450px;
 }
 /*----------------------------NOTIFICATIONS----------------------*/
 #user-notifications-container
@@ -907,16 +896,16 @@ body
     margin-left:auto;
     margin-right:auto;
     height:auto;
-    width:900px;
-    position: fixed;
+    width:100%;
+    position: absolute;
     bottom: 90px;
+    z-index:90;
 }
 
 .user-notification-info,
 .user-notification-error
 {
     height:35px;
-    width:750px;
     margin-right:auto;
     margin-left:auto;
     margin-bottom:5px;
@@ -927,33 +916,24 @@ body
     text-align: center;
 }
 
+.user-notification-close-button,
+.user-notification-undo-button,
 .user-notification-icon > i
 {
     margin-top:10px;
+}
+
+.user-notification-close-button,
+.user-notification-undo-button
+{
+    padding:4px;
+    line-height:35px;
 }
 
 .user-notification-message
 {
     font-size: 12pt;
     line-height:35px;
-}
-
-.user-notification-undo
-{
-    right:0;
-}
-.user-notification-undo > button
-{
-    height:35px;
-    border-style: none;
-    background-color: transparent;
-}
-
-.user-notification-close > button
-{
-    border-style: none;
-    background-color: transparent;
-    margin-top:5px;
 }
 
 .user-notification-icon,
@@ -973,7 +953,7 @@ body
 /*----------------------------PAGES----------------------*/
 .application-page
 {
-    padding:15px 15px 15px 55px;
+    padding: 25px 40px 15px 80px;
 }
 
 .application-page-hidden

@@ -63,11 +63,12 @@ window.UI.UIControllersFactory.prototype =
         );
     },
 
-    createPlaylistControlViewController: function (playlistRepositoryService, playlistFlowController)
+    createPlaylistControlViewController: function (playlistRepositoryService, playlistFlowController, playlistService)
     {
         return new window.UI.PlaylistControlViewController(
             playlistRepositoryService,
             playlistFlowController,
+            playlistService,
             $(this.config.PlaylistControlView),
             window.UI.PlaylistControlConfiguration
         );
