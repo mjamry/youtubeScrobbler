@@ -71,7 +71,7 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         //TODO: add api instead of null value
         repos[window.Playlist.PlaylistRepositoryNames.Youtube] = new window.Playlist.PlaylistYoutubeRepository(null);
 
-        return new window.Services.PlaylistRepositoryService(repos);
+        return new window.Services.PlaylistRepositoryService(repos, this._currentPlaylistStateName);
     },
 
     createPlaybackDetailsService: function(player)

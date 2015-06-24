@@ -4,9 +4,10 @@ window.Services = window.Services || {};
 ///It is a container/wrapper for playlist repository.
 ///It can use different types of storage - depending on passed data provider.
 ///Responsibility is to pass queries to inner data provider and be an access point to playlist data.
-window.Services.PlaylistRepositoryService = function(repos)
+window.Services.PlaylistRepositoryService = function(repos, currentPlaylistState)
 {
     this.repositories = repos;
+    this.currentPlaylistStateName = currentPlaylistState;
 };
 
 window.Services.PlaylistRepositoryService.prototype =
@@ -18,7 +19,14 @@ window.Services.PlaylistRepositoryService.prototype =
         var msg = "";
         if(!playlistDetails.playlist.isEmpty())
         {
-            msg = "Playlist '"+playlistDetails.name+"' loaded. You have now " + playlistDetails.playlist.length() + " tracks in your playlist.";
+            if(playlistDetails.name == this.currentPlaylistStateName)
+            {
+                msg = "Last playlist state has been restored."
+            }
+            else
+            {
+                msg = "Playlist '" + playlistDetails.name + "' loaded. You have now " + playlistDetails.playlist.length() + " tracks in your playlist.";
+            }
         }
         else
         {
@@ -34,6 +42,14 @@ window.Services.PlaylistRepositoryService.prototype =
     {
         var repo = this.repositories[playlistDetails.storageType];
         repo.save(playlistDetails);
+
+        //show info only about playlists saved by user
+        if(playlistDetails.name != this.currentPlaylistStateName)
+        {
+            var msg = "Playlist '"+playlistDetails.name+"' has been saved on the "+playlistDetails.storageType+" repository.";
+            Logger.getInstance().info(msg);
+            UserNotifier.getInstance().info(msg);
+        }
     },
 
     delete: function(id, repository)
