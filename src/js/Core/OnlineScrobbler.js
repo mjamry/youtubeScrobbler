@@ -63,7 +63,7 @@ window.ApplicationCore.OnlineScrobbler.prototype =
                 {
                     success: function(mediaDetails)
                     {
-                        UserNotifier.getInstance().info("'"+mediaDetails.artist.name+" - "+mediaDetails.title+"' has been added togit  listening history.");
+                        UserNotifier.getInstance().info("'"+mediaDetails.artist.name+" - "+mediaDetails.title+"' has been added to the listening history.");
                     },
                     error: function(){}
                 }
