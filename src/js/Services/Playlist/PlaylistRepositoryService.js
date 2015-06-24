@@ -7,14 +7,12 @@ window.Services = window.Services || {};
 window.Services.PlaylistRepositoryService = function(repos)
 {
     this.repositories = repos;
-    this.innerRepository = repos["Local"];
 };
 
 window.Services.PlaylistRepositoryService.prototype =
 {
     load: function(id, repo)
     {
-        //TODO select appropriate repository using repo value
         var playlistDetails = this.repositories[repo].load(id);
 
         var msg = "";
@@ -34,7 +32,6 @@ window.Services.PlaylistRepositoryService.prototype =
 
     save: function(playlistDetails)
     {
-        //TODO check playlistDetails.storageType and choose right repository
         var repo = this.repositories[playlistDetails.storageType];
         repo.save(playlistDetails);
     },
