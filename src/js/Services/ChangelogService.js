@@ -1,8 +1,8 @@
 window.Services = window.Services || {};
 
-window.Services.ChangelogService = function()
+window.Services.ChangelogService = function(filePath)
 {
-    this.changelogeFilePath = "changelog.txt";
+    this.changelogeFilePath = filePath;
 };
 
 window.Services.ChangelogService.prototype =
