@@ -902,6 +902,13 @@ body
 {
     margin:auto;
 }
+
+.changelog-details-version
+{
+    text-align: center;
+    border-bottom: 1px solid;
+    margin-bottom: 5px;
+}
 /*----------------------------NOTIFICATIONS----------------------*/
 #user-notifications-container
 {
