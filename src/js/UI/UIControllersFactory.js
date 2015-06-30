@@ -164,6 +164,6 @@ window.UI.UIControllersFactory.prototype =
 
     createChangelogViewController: function()
     {
-        return new window.UI.ChangelogViewController(new window.UI.ChangelogConfiguration);
+        return new window.UI.ChangelogViewController(window.UI.ChangelogConfiguration);
     }
 };

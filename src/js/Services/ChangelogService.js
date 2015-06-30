@@ -14,7 +14,7 @@ window.Services.ChangelogService.prototype =
 
     isNeedToDisplayChangelog: function()
     {
-        var appVersionCookieValue = Cookie.getInstance.getCookie(window.Common.CookiesNames.AppVersionCookie);
+        var appVersionCookieValue = Cookie.getInstance().getCookie(window.Common.CookiesNames.AppVersionCookie);
 
         if(appVersionCookieValue && appVersionCookieValue == window.Common.ApplicationDetails.Version)
         {

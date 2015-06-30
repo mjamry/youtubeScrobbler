@@ -90,6 +90,11 @@ window.ApplicationCore.AppCore.prototype =
         {
             this.welcomeScreenController.showMainScreen();
         }
+
+        if(this.changelogService.isNeedToDisplayChangelog())
+        {
+            this.changelogService.getChangelogData(this.changelogViewController.show);
+        }
     },
 
     _initialiseMenu: function(menuItemsConfiguration)
