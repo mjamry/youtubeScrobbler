@@ -17,7 +17,8 @@
     "grunt-contrib-cssmin": "~0.12.2",
     "grunt-usemin": "~3.0.0",
     "grunt-install-dependencies": "~0.2.0",
-    "grunt-contrib-copy": "~0.8.0"
+    "grunt-contrib-copy": "~0.8.0",
+    "grunt-shell": "~1.1.2"
   },
   "scripts": {
     "test": "grunt tests --verbose"
