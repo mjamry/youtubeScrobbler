@@ -1,8 +1,8 @@
 window.UI = window.UI || {};
 
-window.UI.ChangelogViewController = function()
+window.UI.ChangelogViewController = function(config)
 {
-
+    this.config = config;
 };
 
 window.UI.ChangelogViewController.prototype =
