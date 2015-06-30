@@ -83,6 +83,7 @@ window.ApplicationCore.AppCore.prototype =
         this.scrobblingControlViewController.initialise();
         this.playlistSaveViewController.initialise();
         this.playlistManageViewController.initialise();
+        this.changelogViewController.initialise();
 
         this._initialiseMenu(menuConfig);
 
@@ -93,7 +94,7 @@ window.ApplicationCore.AppCore.prototype =
 
         if(this.changelogService.isNeedToDisplayChangelog())
         {
-            this.changelogService.getChangelogData(this.changelogViewController.show);
+            this.changelogService.getChangelogData();
         }
     },
 

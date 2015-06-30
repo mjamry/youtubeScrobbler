@@ -9,7 +9,7 @@ window.Services.ChangelogService.prototype =
 {
     _handleChangelogDataRecieved: function(data)
     {
-        ModalService.getInstance().show({content: data});
+        EventBroker.getInstance().fireEventWithData(window.Services.ChangelogEvents.ChangelogDataReceived, data);
     },
 
     isNeedToDisplayChangelog: function()
@@ -24,12 +24,12 @@ window.Services.ChangelogService.prototype =
         return true;
     },
 
-    getChangelogData: function(callback)
+    getChangelogData: function()
     {
         $.ajax({
             url : this.changelogeFilePath,
             dataType: "text",
-            success : callback
+            success : this._handleChangelogDataRecieved
         });
     }
 };
