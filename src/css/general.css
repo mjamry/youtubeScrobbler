@@ -889,6 +889,19 @@ body
     max-width:550px;
     min-width:450px;
 }
+/*----------------------------CHANGELOG----------------------*/
+.changelog-data-container
+{
+    max-width:400px;
+    max-height:400px;
+    overflow-y: scroll;
+    margin-bottom:20px;
+}
+
+.changelog-close-button
+{
+    margin:auto;
+}
 /*----------------------------NOTIFICATIONS----------------------*/
 #user-notifications-container
 {
