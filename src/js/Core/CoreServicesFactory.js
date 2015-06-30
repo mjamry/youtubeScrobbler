@@ -10,7 +10,7 @@ window.ApplicationCore.CoreServicesFactory = function()
     this._googleApiWrapper = null;
 
     this._currentPlaylistStateName = "sc_currentPlaylistState";
-    this._changelogFilePath = "../changelog.txt";
+    this._changelogFilePath = "../CHANGELOG.html";
 };
 
 window.ApplicationCore.CoreServicesFactory.prototype =
