@@ -9,7 +9,8 @@ window.ApplicationCore.CoreServicesFactory = function()
     this._sessionProvider = null;
     this._googleApiWrapper = null;
 
-    this._currentPlaylistStateName = "sc_currentPlaylistState"
+    this._currentPlaylistStateName = "sc_currentPlaylistState";
+    this._changelogFilePath = "../CHANGELOG.html";
 };
 
 window.ApplicationCore.CoreServicesFactory.prototype =
@@ -114,6 +115,11 @@ window.ApplicationCore.CoreServicesFactory.prototype =
     createPlaylistManagementService: function(playlistRepoService, playlistService)
     {
         return new window.Services.PlaylistManagementService(playlistRepoService, playlistService);
+    },
+
+    createChangelogService: function()
+    {
+        return new window.Services.ChangelogService(this._changelogFilePath);
     }
 };
 

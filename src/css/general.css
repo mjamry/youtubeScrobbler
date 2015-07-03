@@ -45,6 +45,7 @@ body
     top:0;
     width:100%;
     height:100%;
+    z-index:92;
 }
 
 .modal-content-container
@@ -57,7 +58,7 @@ body
 .modal-overlay
 {
     opacity: 0.5;
-    z-index: 1;
+    z-index: 92;
 }
 
 .modal-content
@@ -68,7 +69,7 @@ body
 
     position: relative;
     opacity:1;
-    z-index: 2;
+    z-index: 93;
 }
 /*----------------------------------------------LOADING-INDICATOR------------------------------------------*/
 .loading-indicator
@@ -815,7 +816,7 @@ body
     height:300px;
     overflow: auto;
     position: relative;
-    z-index: 9999;
+    z-index: 100;
 }
 
 #search-result-pagination
@@ -888,6 +889,26 @@ body
 {
     max-width:550px;
     min-width:450px;
+}
+/*----------------------------CHANGELOG----------------------*/
+.changelog-data-container
+{
+    max-width:400px;
+    max-height:400px;
+    overflow-y: scroll;
+    margin-bottom:20px;
+}
+
+.changelog-close-button
+{
+    margin:auto;
+}
+
+.changelog-details-version
+{
+    text-align: center;
+    border-bottom: 1px solid;
+    margin-bottom: 5px;
 }
 /*----------------------------NOTIFICATIONS----------------------*/
 #user-notifications-container
@@ -980,7 +1001,7 @@ body
     top:70px;
     bottom:0;
     left:0;
-    z-index:99;
+    z-index:91;
 }
 
 .menu-item-container
