@@ -26,7 +26,7 @@ window.Services.ChangelogService.prototype =
 
     setVersionCookie: function()
     {
-        Cookie.getInstance().setCookie(window.Common.CookiesNames.AppVersionCookie, window.Common.ApplicationDetails.Version);
+        Cookie.getInstance().setCookie(window.Common.CookiesNames.AppVersionCookie, window.Common.ApplicationDetails.Version, window.Common.CookiesNames.OneYearValid);
     },
 
     getChangelogData: function()
