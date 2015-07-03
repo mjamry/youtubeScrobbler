@@ -24,6 +24,11 @@ window.Services.ChangelogService.prototype =
         return true;
     },
 
+    setVersionCookie: function()
+    {
+        Cookie.getInstance().setCookie(window.Common.CookiesNames.AppVersionCookie, window.Common.ApplicationDetails.Version);
+    },
+
     getChangelogData: function()
     {
         $.ajax({

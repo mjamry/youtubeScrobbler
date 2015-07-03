@@ -94,6 +94,7 @@ window.ApplicationCore.AppCore.prototype =
 
         if(this.changelogService.isNeedToDisplayChangelog())
         {
+            this.changelogService.setVersionCookie();
             this.changelogService.getChangelogData();
         }
     },
