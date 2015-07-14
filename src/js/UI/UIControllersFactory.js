@@ -63,11 +63,12 @@ window.UI.UIControllersFactory.prototype =
         );
     },
 
-    createPlaylistControlViewController: function (playlistService, playlistFlowController)
+    createPlaylistControlViewController: function (playlistRepositoryService, playlistFlowController, playlistService)
     {
         return new window.UI.PlaylistControlViewController(
-            playlistService,
+            playlistRepositoryService,
             playlistFlowController,
+            playlistService,
             $(this.config.PlaylistControlView),
             window.UI.PlaylistControlConfiguration
         );
@@ -149,5 +150,20 @@ window.UI.UIControllersFactory.prototype =
     createLoadingIndicatorViewController: function()
     {
         return new window.UI.LoadingIndicatorViewController(window.UI.LoadingIndicatorConfiguration);
+    },
+
+    createPlaylistSaveViewController: function(playlistRepositoryService, playlistService)
+    {
+        return new window.UI.PlaylistSaveViewController(window.UI.PlaylistSaveConfiguration, playlistRepositoryService, playlistService);
+    },
+
+    createPlaylistManageViewController: function(playlistManager)
+    {
+        return new window.UI.PlaylistManageViewController(window.UI.PlaylistManageConfiguration, $(this.config.PlaylistManagerView), playlistManager);
+    },
+
+    createChangelogViewController: function()
+    {
+        return new window.UI.ChangelogViewController(window.UI.ChangelogConfiguration);
     }
 };

@@ -17,7 +17,6 @@ window.UI.ModalViewController.prototype =
     {
         var newModal = $("#controls-schemes .modal-content-container").clone();
         newModal.attr("id", this.config.ModalIdClassName + data.id);
-        newModal.css("z-index", data.id);
 
         if (data.canClose)
         {

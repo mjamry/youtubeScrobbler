@@ -82,7 +82,7 @@ window.ApplicationCore.PageLoader.prototype =
                 loadingIndicatorDetails.title = "Error occurs while loading page.";
                 loadingIndicatorDetails.description = error;
                 LoadingIndicatorService.getInstance().show(loadingIndicatorDetails);
-                Logger.getInstance().error("[Init] Page initialisation error: "+error);
+                Logger.getInstance().error("[Init] Page initialisation error: "+error.stack);
             });
     },
 

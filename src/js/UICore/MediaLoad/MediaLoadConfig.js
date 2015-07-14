@@ -17,6 +17,8 @@ window.UI.MediaLoadConfig =
 
     EmptyPlaylistIndicator: ".empty-playlist-indicator",
 
+    AddForm: "#playlist-add-form",
+
     PlaylistIcon: "fa fa-th-list",
     YoutubeIcon: "fa fa-youtube"
 };

@@ -1,88 +1,98 @@
 window.Playlist = window.Playlist || {};
 
-window.Playlist.PersistentPlaylist = function(storage)
+window.Playlist.PersistentPlaylist = function(repositoryService, storageType, persistentName)
 {
-    this.innerPlaylist = new window.Player.Playlist();
-    this.repository = new window.Playlist.PlaylistRepository(storage);
-    this.persistentPlaylistName = "lastPlaylistState";
+    this.repository = repositoryService;
+
+    this.persistentPlaylistDetails = new window.Playlist.PlaylistDetails();
+    this.persistentPlaylistDetails.name = persistentName;
+    this.persistentPlaylistDetails.id = persistentName;
+    this.persistentPlaylistDetails.storageType = storageType;
 };
 
 window.Playlist.PersistentPlaylist.prototype =
 {
+    _saveState: function()
+    {
+        this.repository.save(this.persistentPlaylistDetails);
+    },
+    
     addItem: function(mediaDetails)
     {
-        this.repository.save(this.persistentPlaylistName, this.innerPlaylist);
-        this.innerPlaylist.addItem(mediaDetails);
+        this.persistentPlaylistDetails.playlist.addItem(mediaDetails);
+        this._saveState();
     },
 
     addPlaylist: function(playlist)
     {
-        this.repository.save(this.persistentPlaylistName, this.innerPlaylist);
-        this.innerPlaylist.addPlaylist(playlist);
+
+        this.persistentPlaylistDetails.playlist.addPlaylist(playlist);
+        this._saveState();
     },
 
     insert: function(index, mediaDetails)
     {
-        this.repository.save(this.persistentPlaylistName, this.innerPlaylist);
-        this.innerPlaylist.insert(index, mediaDetails);
+        this.persistentPlaylistDetails.playlist.insert(index, mediaDetails);
+        this._saveState();
     },
 
     remove: function(index)
     {
-        this.repository.save(this.persistentPlaylistName, this.innerPlaylist);
-        this.innerPlaylist.remove(index);
+        this.persistentPlaylistDetails.playlist.remove(index);
+        this._saveState();
     },
 
     replace: function(index, mediaDetails)
     {
-        this.repository.save(this.persistentPlaylistName, this.innerPlaylist);
-        this.innerPlaylist.replace(index, mediaDetails);
+        this.persistentPlaylistDetails.playlist.replace(index, mediaDetails);
+        this._saveState();
     },
 
     shuffle: function()
     {
-        this.repository.save(this.persistentPlaylistName, this.innerPlaylist);
-        this.innerPlaylist.shuffle();
+        this.persistentPlaylistDetails.playlist.shuffle();
+        this._saveState();
     },
 
     //non persistent methods
     getCurrentState: function()
     {
-        return this.innerPlaylist;
+        return this.persistentPlaylistDetails.playlist;
     },
 
     getStoredState: function()
     {
-        return this.repository.load(this.persistentPlaylistName);
+        return this.repository.load(this.persistentPlaylistDetails.name, this.persistentPlaylistDetails.storageType);
     },
 
     set: function(playlist)
     {
-        this.innerPlaylist = playlist;
+        this.persistentPlaylistDetails.playlist = playlist;
+        this._saveState();
     },
 
     get: function(index)
     {
-        return this.innerPlaylist.get(index);
+        return this.persistentPlaylistDetails.playlist.get(index);
     },
 
     first: function()
     {
-        return this.innerPlaylist.first();
+        return this.persistentPlaylistDetails.playlist.first();
     },
 
     last: function()
     {
-        return this.innerPlaylist.last();
+        return this.persistentPlaylistDetails.playlist.last();
     },
 
     length: function()
     {
-        return this.innerPlaylist.length();
+        return this.persistentPlaylistDetails.playlist.length();
     },
 
     isEmpty: function()
     {
-        return this.innerPlaylist.isEmpty();
+        return this.persistentPlaylistDetails.playlist.isEmpty();
     }
 };

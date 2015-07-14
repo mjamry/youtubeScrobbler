@@ -1,7 +1,7 @@
 body
 {
     color: #D9CB9E;
-    background-color: #2A2C2B;
+    background-color: #2A2C2B !important;
 }
 
 body A
@@ -133,7 +133,6 @@ body A:hover
 
 .playback-control-button,
 .playlist-control-button,
-.playlist-add-button,
 .playlist-editor-button
 {
     background-color:#374140;
@@ -145,9 +144,8 @@ body A:hover
     background-color: #2A2C2B;
 }
 
-.playback-control-button:hover,
+
 .playlist-control-button:hover,
-.playlist-add-button:hover,
 .playlist-editor-button:hover
 {
     background-color: #1E1E20;
@@ -185,6 +183,7 @@ body A:hover
 
 #search-results-container
 {
+    color:#D9CB9E;
     background-color: #1E1E20;
     border: 2px solid #374140;
     border-bottom-width: 0;

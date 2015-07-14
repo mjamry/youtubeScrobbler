@@ -42,9 +42,20 @@ module.exports = function(grunt) {
                 src: '<%= dirs.src %>/index.html',
                 dest: '<%= dirs.dst %>/index.html'
             },
+            copyChangelog:{
+                src: '<%= dirs.src %>/CHANGELOG.html',
+                dest: '<%= dirs.dst %>/CHANGELOG.html'
+            },
             copyPages:{
                 src: '<%= dirs.src %>/pages/*.html',
                 dest: "<%= dirs.dst %>/pages",
+                flatten: true,
+                expand:true
+            },
+            copyImg:
+            {
+                src: '<%= dirs.src %>/img/*',
+                dest: "<%= dirs.dst %>/img",
                 flatten: true,
                 expand:true
             },
@@ -78,6 +89,12 @@ module.exports = function(grunt) {
                 flatten:true,
                 expand:true
             }
+        },
+
+        shell: {
+            updateChangelog: {
+                command: 'python updateChangelogIssues.py'
+            }
         }
     });
 
@@ -89,12 +106,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-usemin');
-
+    grunt.loadNpmTasks('grunt-shell');
 
     //Tasks
-    grunt.registerTask('build', ['copy', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin']);
+    grunt.registerTask('build', ['copy', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin', 'shell:updateChangelog']);
     grunt.registerTask('tests', ['jshint', 'jasmine']);
 
     grunt.registerTask('default', ['tests']);
-
+    grunt.registerTask('changelog', ['shell:updateChangelog']);
 };

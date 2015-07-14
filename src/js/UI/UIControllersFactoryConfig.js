@@ -13,5 +13,6 @@ window.UI.UIControllersFactoryConfig =
     MenuView: "#menu",
     PlaylistEditorListView: "#playlist-editor-list-container",
     AccountsView: "#accounts",
-    ModalView: "#modals-container"
+    ModalView: "#modals-container",
+    PlaylistManagerView: "#playlist-manager"
 };

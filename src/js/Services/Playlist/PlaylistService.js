@@ -1,28 +1,35 @@
 //namespace
-window.Player = window.Player || {};
+window.Services = window.Services || {};
 
 //using
 window.Common = window.Common || {};
 
 
-window.Player.PlaylistService = function(playlistRepo, playlistElementDetailsProvider)
+window.Services.PlaylistService = function(playlistElementDetailsProvider, initialPlaylist)
 {
-    this.playlist = new window.Playlist.PersistentPlaylist(playlistRepo);
-    this.playlistRepository = new window.Playlist.PlaylistRepository(playlistRepo);
+    this.playlist = initialPlaylist;
+    this.currentPlaylistDetails = new window.Playlist.PlaylistDetails();
     this.detailsProvider = playlistElementDetailsProvider;
     Logger.getInstance().info("Playlist service has been created.");
 };
 
-window.Player.PlaylistService.prototype =
+window.Services.PlaylistService.prototype =
 {
     _onPlaylistCreated: function()
     {
+        //new playlist has been created
+        this.currentPlaylistDetails = new window.Playlist.PlaylistDetails();
         EventBroker.getInstance().fireEventWithData(window.Player.PlaylistEvents.PlaylistCreated);
     },
 
     _onPlaylistCleared: function()
     {
         EventBroker.getInstance().fireEvent(window.Player.PlaylistEvents.PlaylistCleared);
+    },
+
+    _onPlaylistSaved: function(playlistDetails)
+    {
+        this.currentPlaylistDetails = playlistDetails;
     },
 
     _updatePlaylist: function(newItems)
@@ -39,16 +46,41 @@ window.Player.PlaylistService.prototype =
 
     _setPlaylist: function(playlist)
     {
+        var wasPreviousPlaylistEmpty = this.playlist.isEmpty();
         this.playlist.set(playlist);
-        if(!playlist.isEmpty())
+        if(wasPreviousPlaylistEmpty && !playlist.isEmpty())
         {
             this._onPlaylistCreated();
         }
+        else
+        {
+            this._updatePlaylist();
+        }
+    },
+
+    _clearPlaylist: function()
+    {
+        this._setPlaylist(new window.Player.Playlist());
+    },
+
+    setPlaylist: function(playlistDetails)
+    {
+        if(!this.currentPlaylistDetails.isAlreadySaved)
+        {
+            //TODO: ask user if is sure to clear unsaved playlist
+            Logger.getInstance().info("Current playlist has not been saved yet.");
+        }
+
+        this._clearPlaylist();
+        this.currentPlaylistDetails = playlistDetails;
+        this._setPlaylist(this.currentPlaylistDetails.playlist);
     },
 
     initialise: function()
     {
-        this._setPlaylist(this.playlist.getStoredState());
+        this._setPlaylist(this.playlist.getStoredState().playlist);
+
+        EventBroker.getInstance().addListener(window.Player.PlaylistEvents.PlaylistSaved, this._onPlaylistSaved.bind(this));
     },
 
     refreshPlaylist: function()
@@ -59,45 +91,23 @@ window.Player.PlaylistService.prototype =
     //creates new empty playlist replacing existing one.
     clearPlaylist: function()
     {
+        var playlistToRestore = this.playlist.getCurrentState();
         var msg = "Playlist has been cleared. "+ this.playlist.length() +" item(s) removed.";
         Logger.getInstance().info(msg);
-        UserNotifier.getInstance().info(msg, $.proxy(
-            function()
-            {
-                this._setPlaylist(this.playlist.getStoredState());
-            },
-            this));
 
-        this._setPlaylist(new window.Player.Playlist());
+        var undoFunction = function(that, plToRestore)
+        {
+            return function()
+            {
+                that._setPlaylist(plToRestore);
+            };
+        };
+
+        UserNotifier.getInstance().info(msg, undoFunction(this, playlistToRestore));
+
+        this._clearPlaylist();
         this._onPlaylistCleared();
         this._updatePlaylist();
-    },
-
-    loadPlaylist: function()
-    {
-        this.playlist.set(this.playlistRepository.load("tempPl"));
-        var msg = "";
-        if(!this.playlist.isEmpty())
-        {
-            this._onPlaylistCreated();
-            msg = this.playlist.length() + " item(s) have been read and added to the playlist.";
-        }
-        else
-        {
-            msg = "There is no playlist saved. Please create a new one.";
-        }
-
-        Logger.getInstance().info(msg);
-        UserNotifier.getInstance().info(msg);
-    },
-
-    savePlaylist: function()
-    {
-        this.playlistRepository.save("tempPl", this.playlist.getCurrentState());
-
-        var msg = "Playlist has been saved with "+this.playlist.length()+" element(s).";
-        Logger.getInstance().info(msg);
-        UserNotifier.getInstance().info(msg);
     },
 
     //adds new playlist (or single media) to existing playlist.
@@ -110,7 +120,7 @@ window.Player.PlaylistService.prototype =
             this._onPlaylistCreated();
         }
 
-        var msg = playlist.length()+" new item(s) have been successfully added to the playlist";
+        var msg = playlist.length()+" new item(s) have been successfully added to the playlist.";
         Logger.getInstance().info(msg);
         UserNotifier.getInstance().info(msg);
 
@@ -128,7 +138,7 @@ window.Player.PlaylistService.prototype =
             this._onPlaylistCreated();
         }
 
-        var msg = "New item have been successfully added to the playlist, on position: "+(index+1);
+        var msg = "Item '"+details.artist.name+" - "+details.title+"' have been successfully added to the playlist.";
         Logger.getInstance().info(msg);
         UserNotifier.getInstance().info(msg);
 
@@ -185,5 +195,12 @@ window.Player.PlaylistService.prototype =
     getPlaylist: function()
     {
         return this.playlist.getCurrentState();
+    },
+
+    getPlaylistDetails: function()
+    {
+        //updates playlist first
+        this.currentPlaylistDetails.playlist = this.getPlaylist();
+        return this.currentPlaylistDetails;
     }
 };

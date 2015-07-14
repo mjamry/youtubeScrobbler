@@ -8,6 +8,9 @@ window.ApplicationCore.CoreServicesFactory = function()
 {
     this._sessionProvider = null;
     this._googleApiWrapper = null;
+
+    this._currentPlaylistStateName = "sc_currentPlaylistState";
+    this._changelogFilePath = "CHANGELOG.html";
 };
 
 window.ApplicationCore.CoreServicesFactory.prototype =
@@ -56,10 +59,20 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         return new window.Player.MediaPlayer(window.Player.MediaPlayerConfig, window.UI.UIConstants.PlayerContainer, playlistService);
     },
 
-    createPlaylistService: function(playlistElementDetailsProvider)
+    createPlaylistService: function(repositoryService, playlistElementDetailsProvider)
     {
-        var playlistRepo = new window.Playlist.PlaylistLocalRepository();
-        return new window.Player.PlaylistService(playlistRepo, playlistElementDetailsProvider);
+        var initialPlaylist = new window.Playlist.PersistentPlaylist(repositoryService, window.Playlist.PlaylistRepositoryNames.Local, this._currentPlaylistStateName);
+        return new window.Services.PlaylistService(playlistElementDetailsProvider, initialPlaylist);
+    },
+
+    createPlaylistRepositoryService: function()
+    {
+        var repos = {};
+        repos[window.Playlist.PlaylistRepositoryNames.Local] = new window.Playlist.PlaylistLocalRepository(this._currentPlaylistStateName);
+        //TODO: add api instead of null value
+        repos[window.Playlist.PlaylistRepositoryNames.Youtube] = new window.Playlist.PlaylistYoutubeRepository(null);
+
+        return new window.Services.PlaylistRepositoryService(repos, this._currentPlaylistStateName);
     },
 
     createPlaybackDetailsService: function(player)
@@ -83,7 +96,7 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         dataProvides[window.Playlist.PlaylistLoaderTypes.Youtube] = dataProvider;
         var playlistLoadersFactory = new window.Playlist.PlaylistLoadersFactory(dataProvides);
 
-        return new window.Playlist.PlaylistLoaderService(playlistService, playlistLoadersFactory);
+        return new window.Services.PlaylistLoaderService(playlistService, playlistLoadersFactory);
     },
 
     createWelcomeService: function()
@@ -97,6 +110,16 @@ window.ApplicationCore.CoreServicesFactory.prototype =
         searchDetailsProviders[window.Google.ServiceNames.Youtube] = dataProvider;
 
         return new window.Services.SearchService(searchDetailsProviders);
+    },
+
+    createPlaylistManagementService: function(playlistRepoService, playlistService)
+    {
+        return new window.Services.PlaylistManagementService(playlistRepoService, playlistService);
+    },
+
+    createChangelogService: function()
+    {
+        return new window.Services.ChangelogService(this._changelogFilePath);
     }
 };
 

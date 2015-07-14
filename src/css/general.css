@@ -24,17 +24,11 @@ body
     min-height:100%;
     position:relative;
     display: none;
-
-
 }
 
 #page-content
 {
-    min-height:300px;
-    width: 930px;
     padding-bottom: 100px;
-    margin-left:auto;
-    margin-right:auto;
     display:none;
 }
 
@@ -63,7 +57,7 @@ body
 .modal-overlay
 {
     opacity: 0.5;
-    z-index: 1;
+    z-index: 92;
 }
 
 .modal-content
@@ -74,7 +68,7 @@ body
 
     position: relative;
     opacity:1;
-    z-index: 2;
+    z-index: 93;
 }
 /*----------------------------------------------LOADING-INDICATOR------------------------------------------*/
 .loading-indicator
@@ -90,7 +84,7 @@ body
     height: 100%;
 
     position: absolute;
-    z-index: 98;
+    z-index: 100;
     display: none;
 }
 
@@ -208,7 +202,6 @@ body
 #color-scheme-control
 {
     height:50px;
-    float: left;
     margin-left:20px;
     margin-top:10px;
 }
@@ -217,11 +210,6 @@ body
 {
     border-style:none;
     font-size: 10pt;
-}
-
-#settings-control-buttons-container
-{
-    float:right;
 }
 
 .settings-control-button
@@ -292,17 +280,9 @@ body
     width:100%;
 }
 /*-----------------------------INPUT------------------------*/
-#input-form
-{
-    width: 800px;
-    height: 70px;
-    margin:auto;
-}
-
 #media-location
 {
     width: 400px;
-    height: 40px;
     padding:0;
 }
 
@@ -502,13 +482,6 @@ body
 }
 
 /*------------------------------MEDIA------------------*/
-#player
-{
-    width:900px;
-    margin:auto;
-    position:relative;
-}
-
 #media-player
 {
     width: 450px;
@@ -557,6 +530,11 @@ body
     float:left;
     border-style: none;
     margin-right: 1px;
+}
+
+.playback-control-button > i
+{
+    line-height: 35px;
 }
 
 /*---------------------------VOLUME---CONTROL------------*/
@@ -692,7 +670,6 @@ body
 /*----------------------------PLAYLIST--ADD---------------*/
 .playlist-add-container
 {
-    height:40px;
     width:500px;
     margin-left:auto;
     margin-right:auto;
@@ -701,26 +678,135 @@ body
 .playlist-add-input
 {
     text-align:center;
-    height:35px;
     font-size: 9pt;
     vertical-align: top;
 }
 
-.playlist-add-button
+/*------------------------------PLAYLIST--DETAILS--------------------------------------------*/
+#playlist-manager
 {
-    height:40px;
-    width:70px;
-    padding-top:5px;
-    border-style:none;
+    width:100%;
+    display: inline;
+    float: left;
 }
 
-/*------------------------------SEARCH---RESULTS--------------------------------------------*/
+.playlist-details-view
+{
+    width:280px;
+    height:200px;
+    margin-left:20px;
+    margin-bottom:20px;
+
+    font-size:14px;
+
+    display: inline;
+    float: left;
+
+    cursor: pointer;
+
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 1px 7px 0 rgba(0, 0, 0, 0.2);
+    color:black;
+}
+
+.playlist-details-view:hover
+{
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.playlist-details-header
+{
+    text-align: center;
+    height:50px;
+    background-image: url("../img/playlistBg.png");
+    border-radius: 4px 4px 0 0;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+
+}
+
+.playlist-details-items-count
+{
+    color:#fff;
+    font-size: 22px;
+    font-weight: bold;
+
+    text-align: center;
+    height:60px;
+    width:60px;
+    line-height: 50px;
+
+    border:3px solid #fff;
+    border-radius: 50%;
+
+    margin: -20px auto 0;
+    display: block;
+    background-image: url("../img/playlistCountBg.jpg");
+}
+
+.playlist-details-name, .playlist-details-description
+{
+    text-align: center;
+    font-size: 14pt;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin:0 5px 0 5px;
+}
+
+.playlist-details-name
+{
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+
+    line-height: 50px;
+}
+
+.playlist-details-description
+{
+    font-size: 11pt;
+    margin:10px 5px 0 5px;
+}
+
+.playlist-details-count, .playlist-details-storage
+{
+    margin: 5px !important;
+    line-height:15px !important;
+}
+
+.playlist-details-id
+{
+    display: none;
+}
+
+.playlist-details-tags
+{
+    padding: 5px 10px 5px 10px;
+    border-top: 1px solid lightgray;
+    margin-top:5px;
+}
+
+
+.playlist-details-button
+{
+    border-radius: 0 0 4px 4px;
+    bottom:0;
+    position:relative;
+    background-image: url("../img/playlistBg.png");
+    width:100%;
+}
+
+    /*------------------------------SEARCH---RESULTS--------------------------------------------*/
 #search-results
 {
     width:500px;
-    margin-left:145px;
     position: absolute;
-
     display: none;
 }
 
@@ -729,7 +815,7 @@ body
     height:300px;
     overflow: auto;
     position: relative;
-    z-index: 9999;
+    z-index: 100;
 }
 
 #search-result-pagination
@@ -781,6 +867,48 @@ body
     height:25px;
     width:25px;
 }
+/*----------------------------PLAYLIST--SAVE----------------------*/
+.playlist-save-tags-container
+{
+    display: none;
+}
+
+.playlist-save > form
+{
+    min-height:300px;
+}
+
+.playlist-save-tag
+{
+    color:white;
+    margin:2px;
+}
+
+.playlist-save
+{
+    max-width:550px;
+    min-width:450px;
+}
+/*----------------------------CHANGELOG----------------------*/
+.changelog-data-container
+{
+    max-width:400px;
+    max-height:400px;
+    overflow-y: scroll;
+    margin-bottom:20px;
+}
+
+.changelog-close-button
+{
+    margin:auto;
+}
+
+.changelog-details-version
+{
+    text-align: center;
+    border-bottom: 1px solid;
+    margin-bottom: 5px;
+}
 /*----------------------------NOTIFICATIONS----------------------*/
 #user-notifications-container
 {
@@ -788,16 +916,16 @@ body
     margin-left:auto;
     margin-right:auto;
     height:auto;
-    width:900px;
-    position: fixed;
+    width:100%;
+    position: absolute;
     bottom: 90px;
+    z-index:90;
 }
 
 .user-notification-info,
 .user-notification-error
 {
     height:35px;
-    width:750px;
     margin-right:auto;
     margin-left:auto;
     margin-bottom:5px;
@@ -808,33 +936,24 @@ body
     text-align: center;
 }
 
+.user-notification-close-button,
+.user-notification-undo-button,
 .user-notification-icon > i
 {
     margin-top:10px;
+}
+
+.user-notification-close-button,
+.user-notification-undo-button
+{
+    padding:4px;
+    line-height:35px;
 }
 
 .user-notification-message
 {
     font-size: 12pt;
     line-height:35px;
-}
-
-.user-notification-undo
-{
-    right:0;
-}
-.user-notification-undo > button
-{
-    height:35px;
-    border-style: none;
-    background-color: transparent;
-}
-
-.user-notification-close > button
-{
-    border-style: none;
-    background-color: transparent;
-    margin-top:5px;
 }
 
 .user-notification-icon,
@@ -854,7 +973,7 @@ body
 /*----------------------------PAGES----------------------*/
 .application-page
 {
-    padding:15px;
+    padding: 25px 40px 15px 80px;
 }
 
 .application-page-hidden
@@ -865,7 +984,13 @@ body
     clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
     clip: rect(1px, 1px, 1px, 1px);
 }
-/*----------------------------MENU----------------------*/
+
+.app-page-header
+{
+    height: 60px;
+    padding:10px !important;
+}
+    /*----------------------------MENU----------------------*/
 #menu
 {
     width:200px;
@@ -875,14 +1000,14 @@ body
     top:70px;
     bottom:0;
     left:0;
-    z-index:1;
+    z-index:91;
 }
 
 .menu-item-container
 {
     /*display: inline;*/
     width:220px;
-    height:35px;
+    height:50px;
     cursor:pointer;
     padding-top:10px;
     padding-bottom:10px;
@@ -902,18 +1027,14 @@ body
 
 .menu-item-button
 {
-    width: 35px;
-    height: 35px;
-    margin-left:10px;
+    padding-left:10px !important;
 }
 
 .menu-item-title
 {
-    width: 150px;
-    height:35px;
-    line-height: 35px;
+    line-height: 30px;
     font-size:13pt;
-    margin-left:15px;
+    padding-left:1px;
 }
 /*----------------------------LOGGER----------------------*/
 #logger-content

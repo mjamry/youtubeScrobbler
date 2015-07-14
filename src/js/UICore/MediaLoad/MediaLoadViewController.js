@@ -74,23 +74,32 @@ window.UI.MediaLoadViewController.prototype =
     _handleInputGainedFocus: function()
     {
         //put a space just to remove placeholder.
-        this.mediaInput.val(" ");
+        //this.mediaInput.val(" ");
     },
 
     _handleInputLostFocus: function()
     {
+       // this.searchControl.hide();
+    },
+
+    _submitForm: function()
+    {
+
+        this._handleInputValue(this.mediaInput.val());
         this._clearMediaInput();
-        //this.searchControl.hide();
     },
 
     initialise: function initialise()
     {
-        $(this.config.AddNewMediaButton).click($.proxy(function handleAddMediaClicked(e)
+        var submitHandler = function(e)
         {
             e.preventDefault();
-            this._handleInputValue(this.mediaInput.val());
-        },
-        this));
+            this._submitForm();
+
+        }.bind(this);
+
+        $(this.config.AddNewMediaButton).click(submitHandler);
+        $(this.config.AddForm).submit(submitHandler);
 
         this.mediaInput.focus(this._handleInputGainedFocus.bind(this));
         this.mediaInput.blur(this._handleInputLostFocus.bind(this));

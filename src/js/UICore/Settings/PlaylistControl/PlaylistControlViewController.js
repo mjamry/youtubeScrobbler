@@ -1,9 +1,10 @@
 //namespace
 window.UI = window.UI || {};
 
-window.UI.PlaylistControlViewController = function(playlistService, playlistController, view, config)
+window.UI.PlaylistControlViewController = function(playlistRepositoryService, playlistController, playlistService, view, config)
 {
     this.playlistController = playlistController;
+    this.playlistRepository = playlistRepositoryService;
     this.playlistService = playlistService;
     this.config = config;
     this.view = view;
@@ -11,20 +12,14 @@ window.UI.PlaylistControlViewController = function(playlistService, playlistCont
 
 window.UI.PlaylistControlViewController.prototype =
 {
-    _clearPlaylist: function(model)
+    _clearPlaylist: function()
     {
-        return function()
-        {
-            model.clearPlaylist();
-        };
+        this.playlistService.clearPlaylist();
     },
 
-    _savePlaylist: function(model)
+    _savePlaylist: function()
     {
-        return function()
-        {
-            model.savePlaylist();
-        };
+        EventBroker.getInstance().fireEvent(window.UI.PlaylistSaveEvents.PlaylistSaveRequested);
     },
 
     _changeLoopModeState: function(that)
@@ -68,8 +63,8 @@ window.UI.PlaylistControlViewController.prototype =
     initialise: function()
     {
         //bind to Ui events
-        this.view.find(this.config.ClearButton).click(this._clearPlaylist(this.playlistService));
-        this.view.find(this.config.SaveButton).click(this._savePlaylist(this.playlistService));
+        this.view.find(this.config.ClearButton).click(this._clearPlaylist.bind(this));
+        this.view.find(this.config.SaveButton).click(this._savePlaylist.bind(this));
         this.view.find(this.config.ShuffleButton).click(this._shufflePlaylist(this.playlistController));
         this.view.find(this.config.LoopButton).click(this._changeLoopModeState(this));
 

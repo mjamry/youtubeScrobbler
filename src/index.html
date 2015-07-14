@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/general.css">
     <!--endbuild-->
     <link rel="stylesheet" href="css/themes/dark.css">
+    <link rel="stylesheet" href="css/lib/foundation.min.css">
 
     <!--JS-LIBRARIES-->
     <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
@@ -22,6 +23,8 @@
     <script type="text/javascript" src="js/lib/lastfm.api.md5.js"></script>
     <script type="text/javascript" src="js/lib/jquery.cookie.js"></script>
     <script type="text/javascript" src="js/lib/mediaelement-and-player.min.js"></script>
+    <script type="text/javascript" src="js/lib/foundation.min.js"></script>
+    <script type="text/javascript" src="js/lib/list.js"></script>
 
     <!--JS-GOOGLE-ANALYTICS-->
     <script>
@@ -38,6 +41,7 @@
 <body class="pure-skin-sc">
 <div id="modals-container"></div>
 <div id="welcome-screen"></div>
+<div id="user-notifications-container"></div>
 <div id="page">
     <div id="header"></div>
     <div id="menu">
@@ -132,7 +136,7 @@
                 <div id="logger-content"></div>
             </div>
         </div>
-        <div id="user-notifications-container"></div>
+
     </div>
 </div>
 
@@ -177,14 +181,15 @@
 <script type="text/javascript" src="js/Player/Playback/PlaybackState.js"></script>
 <script type="text/javascript" src="js/Player/Playback/PlaybackStateHolder.js"></script>
 <script type="text/javascript" src="js/Player/Playlist/Playlist.js"></script>
+<script type="text/javascript" src="js/Player/Playlist/PlaylistDetails.js"></script>
 <script type="text/javascript" src="js/Player/Playlist/PlaylistFlowController.js"></script>
-<script type="text/javascript" src="js/Player/Playlist/PlaylistService.js"></script>
+<script type="text/javascript" src="js/Services/Playlist/PlaylistService.js"></script>
 <script type="text/javascript" src="js/Player/Playlist/PlaylistEvents.js"></script>
 <script type="text/javascript" src="js/Player/Playlist/PlaylistElementDetailsProvider.js"></script>
 <script type="text/javascript" src="js/Player/Playlist/PlaylistElementLoveStateModifier.js"></script>
 <script type="text/javascript" src="js/Player/Playlist/PlaylistDetailsProvider.js"></script>
 <script type="text/javascript" src="js/Player/Playlist/Loaders/DefaultPlaylistLoader.js"></script>
-<script type="text/javascript" src="js/Player/Playlist/Loaders/PlaylistLoaderService.js"></script>
+<script type="text/javascript" src="js/Services/Playlist/PlaylistLoaderService.js"></script>
 <script type="text/javascript" src="js/Player/Playlist/Loaders/PlaylistLoadersFactory.js"></script>
 <script type="text/javascript" src="js/Player/Playlist/Loaders/YouTubePlaylistLoader.js"></script>
 <script type="text/javascript" src="js/Player/MediaPlayerConfiguration.js"></script>
@@ -192,7 +197,9 @@
 <script type="text/javascript" src="js/Player/VolumeControlService.js"></script>
 <script type="text/javascript" src="js/Player/VideoSizeControlService.js"></script>
 <script type="text/javascript" src="js/Player/Playlist/Repository/PlaylistLocalRepository.js"></script>
-<script type="text/javascript" src="js/Player/Playlist/Repository/PlaylistRepository.js"></script>
+<script type="text/javascript" src="js/Player/Playlist/Repository/PlaylistYoutubeRepository.js"></script>
+<script type="text/javascript" src="js/Player/Playlist/Repository/PlaylistRepositoriesNames.js"></script>
+<script type="text/javascript" src="js/Services/Playlist/PlaylistRepositoryService.js"></script>
 <script type="text/javascript" src="js/Player/Playlist/PersistentPlaylist.js"></script>
 
 <script type="text/javascript" src="js/Tracking/GoogleTracker.js"></script>
@@ -207,6 +214,7 @@
 <script type="text/javascript" src="js/Services/Validators/SearchResultNameValidator.js"></script>
 <script type="text/javascript" src="js/Services/Progressbar/ProgressbarService.js"></script>
 <script type="text/javascript" src="js/Services/Progressbar/ProgressbarServiceEvents.js"></script>
+<script type="text/javascript" src="js/Services/Playlist/PlaylistManagementService.js"></script>
 
 <script type="text/javascript" src="js/Google/GoogleApiConstants.js"></script>
 <script type="text/javascript" src="js/Google/GoogleApiWrapper.js"></script>
@@ -221,12 +229,16 @@
 <script type="text/javascript" src="js/Services/Accounts/LastFm/LastFmSessionConstants.js"></script>
 <script type="text/javascript" src="js/Services/Accounts/SessionEvents.js"></script>
 <script type="text/javascript" src="js/Services/LoadingIndicator/LoadingIndicatorService.js"></script>
+<script type="text/javascript" src="js/Services/Changelog/ChangelogService.js"></script>
+<script type="text/javascript" src="js/Services/Changelog/ChangelogEvents.js"></script>
 
 <script type="text/javascript" src="js/UICore/Accounts/AccountsViewController.js"></script>
 <script type="text/javascript" src="js/UICore/Accounts/AccountsViewControllerConfiguration.js"></script>
 <script type="text/javascript" src="js/UICore/Accounts/AccountDetailsBuilder.js"></script>
 <script type="text/javascript" src="js/UICore/Modals/ModalConfiguration.js"></script>
 <script type="text/javascript" src="js/UICore/Modals/ModalViewController.js"></script>
+<script type="text/javascript" src="js/UICore/ChangelogController/ChangelogConfiguration.js"></script>
+<script type="text/javascript" src="js/UICore/ChangelogController/ChangelogViewController.js"></script>
 
 <script type="text/javascript" src="js/UI/UIControllersFactory.js"></script>
 <script type="text/javascript" src="js/UI/UIControllersFactoryConfig.js"></script>
@@ -272,6 +284,12 @@
 <script type="text/javascript" src="js/UICore/MenuController/MenuItem.js"></script>
 <script type="text/javascript" src="js/UICore/MenuController/MenuItemsConfig.js"></script>
 <script type="text/javascript" src="js/UICore/PageDisplayCoordinator.js"></script>
+<script type="text/javascript" src="js/UICore/PlaylistSave/PlaylistSaveViewController.js"></script>
+<script type="text/javascript" src="js/UICore/PlaylistSave/PlaylistSaveConfiguration.js"></script>
+<script type="text/javascript" src="js/UICore/PlaylistSave/PlaylistSaveEvents.js"></script>
+<script type="text/javascript" src="js/UICore/PlaylistSave/PlaylistTagsGenerator.js"></script>
+<script type="text/javascript" src="js/UICore/PlaylistManage/PlaylistManageConfiguration.js"></script>
+<script type="text/javascript" src="js/UICore/PlaylistManage/PlaylistManageViewController.js"></script>
 
 <script type="text/javascript" src="js/UICore/MediaLoad/MediaLoadConfig.js"></script>
 <script type="text/javascript" src="js/UICore/MediaLoad/MediaLoadViewController.js"></script>

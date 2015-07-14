@@ -40,7 +40,7 @@ window.Player.MediaPlayer.prototype =
             {
                 return function mediaPlayerInitialisationSuccessCallback(mediaElement)
                 {
-                    LoadingIndicatorService.getInstance().show("Please be patient.<br>Player is being loaded.");
+                    LoadingIndicatorService.getInstance().show({title: "Please be patient.<br>Player is being loaded."});
                     that.instance = mediaElement;
                     that._initialise(mediaElement);
 
@@ -77,7 +77,7 @@ window.Player.MediaPlayer.prototype =
 
     _handlePlaylistCreated: function()
     {
-        this._createPlayerInstance(this.playlistDetailsProvider.getCurrentItemDetails());
+        this.load(this.playlistDetailsProvider.getCurrentItemDetails());
     },
 
     _handlePlaylistCleared: function()
@@ -159,7 +159,9 @@ window.Player.MediaPlayer.prototype =
         if(mediaDetails !== null)
         {
             //when media type has been changed - recreate plugin
-            if(this.currentlyLoadedMediaDetails.mediaType != mediaDetails.mediaType && this.instance !== null)
+            if(this.currentlyLoadedMediaDetails !== null &&
+                this.currentlyLoadedMediaDetails.mediaType != mediaDetails.mediaType &&
+                this.instance !== null)
             {
                 this.instance.remove();
                 this.instance = null;
