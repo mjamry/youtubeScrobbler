@@ -42,9 +42,20 @@ module.exports = function(grunt) {
                 src: '<%= dirs.src %>/index.html',
                 dest: '<%= dirs.dst %>/index.html'
             },
+            copyChangelog:{
+                src: '<%= dirs.src %>/CHANGELOG.html',
+                dest: '<%= dirs.dst %>/CHANGELOG.html'
+            },
             copyPages:{
                 src: '<%= dirs.src %>/pages/*.html',
                 dest: "<%= dirs.dst %>/pages",
+                flatten: true,
+                expand:true
+            },
+            copyImg:
+            {
+                src: '<%= dirs.src %>/img/*',
+                dest: "<%= dirs.dst %>/img",
                 flatten: true,
                 expand:true
             },
