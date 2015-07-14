@@ -22,7 +22,8 @@ describe("PlaylistService", function(){
 
     beforeEach(function()
     {
-        playlistService = new window.Player.PlaylistService(new window.Tests.MockPlaylistRepo(), new window.Tests.MockDetailsProvider());
+        var persistentPlaylist = new window.Playlist.PersistentPlaylist(new window.Tests.MockPlaylistRepository(), "", "");
+        playlistService = new window.Services.PlaylistService(new window.Tests.MockDetailsProvider(), persistentPlaylist);
     });
 
     it("should return the same playlist as created one", function(){

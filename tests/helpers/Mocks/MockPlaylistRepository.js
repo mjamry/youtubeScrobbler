@@ -1,8 +1,8 @@
 window.Tests = window.Tests || {};
 
-window.Tests.MockPlaylistRepo = function(){};
+window.Tests.MockPlaylistRepository = function(){};
 
-window.Tests.MockPlaylistRepo.prototype =
+window.Tests.MockPlaylistRepository.prototype =
 {
     load: function(name)
     {
