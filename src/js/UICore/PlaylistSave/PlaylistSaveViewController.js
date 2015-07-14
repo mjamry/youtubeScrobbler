@@ -10,7 +10,7 @@ window.UI.PlaylistSaveViewController = function(config, playlistRepositoryServic
 
     this.topTagsGenerator = new window.UI.PlaylistTagsGenerator();
 
-    this.tagList;
+    this.tagList = null;
 };
 
 window.UI.PlaylistSaveViewController.prototype =

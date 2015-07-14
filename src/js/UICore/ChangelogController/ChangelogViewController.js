@@ -29,7 +29,7 @@ window.UI.ChangelogViewController.prototype =
             return function()
             {
                 ModalService.getInstance().close(modalId);
-            }
+            };
         };
 
         changelog.find(this.config.CloseButton).click(closeChangelog(modalId));

@@ -100,7 +100,7 @@ window.Services.PlaylistService.prototype =
             return function()
             {
                 that._setPlaylist(plToRestore);
-            }
+            };
         };
 
         UserNotifier.getInstance().info(msg, undoFunction(this, playlistToRestore));

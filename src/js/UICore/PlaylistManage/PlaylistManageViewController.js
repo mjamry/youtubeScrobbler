@@ -31,7 +31,7 @@ window.UI.PlaylistManageViewController.prototype =
         return function()
         {
             this.playlistManager.loadPlaylist(item[this.config.values.id], item[this.config.values.storage]);
-        }
+        };
     },
 
     _updateView: function()

@@ -21,7 +21,7 @@ window.Services.PlaylistRepositoryService.prototype =
         {
             if(playlistDetails.name == this.currentPlaylistStateName)
             {
-                msg = "Last playlist state has been restored."
+                msg = "Last playlist state has been restored.";
             }
             else
             {
