@@ -52,6 +52,13 @@ module.exports = function(grunt) {
                 flatten: true,
                 expand:true
             },
+            copyImg:
+            {
+                src: '<%= dirs.src %>/img/*',
+                dest: "<%= dirs.dst %>/img",
+                flatten: true,
+                expand:true
+            },
             copyThemes:{
                 src: '<%= dirs.src %>/css/themes/*.css',
                 dest: '<%= dirs.dst %>/css/themes',
